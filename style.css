@@ -54,7 +54,7 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 	vertical-align: baseline;
 }
 html {
-	font-size: 62.5%; /* Corrects text resizing oddly in IE6/7 when body font-size is set using em units http://clagnut.com/blog/348/#c790 */
+	font-size: 75%;  /* Corrects text resizing oddly in IE6/7 when body font-size is set using em units http://clagnut.com/blog/348/#c790 */
 	height: 100%;
 	overflow-y: scroll; /* Keeps page centred in all browsers regardless of content height */
 	-webkit-text-size-adjust: 100%; /* Prevents iOS text size adjust after orientation change, without disabling user zoom */
@@ -116,6 +116,10 @@ textarea {
 	color: #404040;
 	font-family: 'Open Sans', sans-serif;
 }
+.clear{
+	float: none;
+	clear:both;
+}
 
 /* Headings */
 h1,h2,h3,h4,h5,h6 {
@@ -136,10 +140,10 @@ ul, ol {
 	margin: 0 0 1.5em 3em;
 }
 ul {
-	list-style: disc;
+	list-style: disc inside;
 }
 ol {
-	list-style: decimal;
+	list-style: decimal inside;
 }
 ul ul, ol ol, ul ol, ol ul {
 	margin-bottom: 0;
@@ -166,8 +170,7 @@ address {
 pre {
 	background: #eee;
 	font-family: "Courier 10 Pitch", Courier, monospace;
-	font-size: 15px;
-	font-size: 1.5rem;
+	font-size: 0.9375em;
 	line-height: 1.6;
 	margin-bottom: 1.6em;
 	padding: 1.6em;
@@ -175,7 +178,7 @@ pre {
 	max-width: 100%;
 }
 code, kbd, tt, var {
-	font: 15px Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+	font: 0.9375em Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
 }
 abbr, acronym {
 	border-bottom: 1px dotted #666;
@@ -276,6 +279,7 @@ input[type="radio"] {
 	box-sizing: border-box; /* Addresses box sizing set to content-box in IE8/9 */
 	padding: 0; /* Addresses excess padding in IE8/9 */
 }
+}
 input[type="search"] {
 	-webkit-appearance: textfield; /* Addresses appearance set to searchfield in S5, Chrome */
 	-moz-box-sizing: content-box;
@@ -293,7 +297,9 @@ input::-moz-focus-inner { /* Corrects inner padding and border displayed oddly i
 input[type=text],
 input[type=email],
 textarea {
+	float: right;
 	color: #666;
+	margin: 10px 0px 0px;
 	border: 1px solid #ccc;
 	border-radius: 3px;
 }
@@ -326,6 +332,14 @@ a:focus,
 a:active {
 	color: #00aeef;
 	text-decoration: underline;
+}
+
+/* Highlight Color */
+::selection {
+	background: #6dcff6; /* Safari */
+	}
+::-moz-selection {
+	background: #6dcff6; /* Firefox */
 }
 
 /* Alignment */
@@ -545,6 +559,9 @@ h3 {
 }
 .main-navigation ul ul li {
 }
+.main-navigation ul li {
+	background: #fafafa;
+}
 .main-navigation li:hover > a {
 }
 .main-navigation ul ul :hover > a {
@@ -552,6 +569,7 @@ h3 {
 .main-navigation ul ul a:hover {
 }
 .main-navigation ul li:hover > ul {
+	margin-top: 0.8em;
 	display: block;
 }
 .main-navigation li.current_page_item a,
@@ -679,7 +697,7 @@ object {
 ----------------------------------------------- */
 
 .site-content .site-navigation {
-	margin: 0 0 1.5em;
+	margin: 1.5em 0;
 	overflow: hidden;
 }
 .site-content .nav-previous {
@@ -713,4 +731,8 @@ object {
 /* Search widget */
 #searchsubmit {
 	display: none;
+}
+#secondary ul {
+	list-style: none;
+	margin: 0;
 }
