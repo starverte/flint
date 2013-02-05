@@ -12,7 +12,7 @@ Author: starverte
 
 Author URI: http://starverte.com/
 
-License: GPLv3
+License: GPLv2 or later
 
 License URI: http://www.gnu.org/licenses/
 
@@ -21,17 +21,20 @@ the creative process of website development within WordPress. Often times to sta
 With the Sparks Framework it is the same way. 'Flint' (the core theme) and 'Steel' (the core plugin) makeup the foundation
 of the framework. Then, additional child themes and plugins extend the functionality and user experience.
 
-This file is part of Flint.
-
-   	Flint is free software: you can redistribute it and/or modify
-   	it under the terms of the GNU General Public License as published by
-   	the Free Software Foundation, either version 3 of the License, or
-   	(at your option) any later version.
-
-   	Flint is distributed in the hope that it will be useful,
-   	but WITHOUT ANY WARRANTY; without even the implied warranty of
-   	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   	GNU General Public License for more details.
-
-   	You should have received a copy of the GNU General Public License
-   	along with Flint.  If not, see <http://www.gnu.org/licenses/>.
+    Copyright 2013  Star Verte LLC  (email : info@starverte.com)
+    
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License, version 2, as 
+    published by the Free Software Foundation.
+    
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+    
+    You should have received a copy of the GNU General Public License
+    along with Flint.  If not, see <http://www.gnu.org/licenses/>.
