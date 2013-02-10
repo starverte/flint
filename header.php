@@ -25,6 +25,21 @@
 </head>
 
 <body <?php body_class(); ?>>
+<?php $options = get_option('sparks_options'); ?>
+<?php if (isset($options['fb_app_id'])) {
+		$fb_app_id = $options["fb_app_id"];
+	}
+	else {
+		$fb_app_id = '';
+	} ?>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=<?php echo $fb_app_id; ?>";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 <div id="page" class="hfeed site">
 	<?php do_action( 'before' ); ?>
 	<header id="masthead" class="site-header wrapper" role="banner">
