@@ -5,12 +5,12 @@
  */
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> itemscope itemtype="http://schema.org/Product">
 	<header class="entry-header">
-		<h1 class="entry-title"><?php the_title(); ?></h1>
+		<h1 class="entry-title" itemprop="name"><?php the_title(); ?></h1>
 
-		<div class="entry-meta">
-			
+		<div class="entry-meta" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+			<?php item_price( '<div class="item-price">Price: <span itemprop="price">$' , '</span></div>' ); ?>
 		</div><!-- .entry-meta -->
 	</header><!-- .entry-header -->
 
@@ -20,10 +20,12 @@
 	</div><!-- .entry-content -->
 
 	<footer class="entry-meta">
-    	<?php item_ref(); ?>
-       	<?php item_price(); ?>
-        <?php item_shipping(); ?>
-        <?php item_dimensions(); ?>
+    	<p>
+		<?php item_ref(); ?>
+        	<?php item_shipping(); ?>
+        	<?php item_dimensions( array ( 'before' => '<div class="item-dimensions">Dimensions: <span itemprop="width">', 'sep1' => '</span> x <span itemprop="height">', 'sep2' => '</span> x <span itemprop="depth">' ) ); ?>
+	</p>
+
 		<?php
 			/* translators: used between list items, there is a space after the comma */
 			$department_list = get_the_term_list( $post->ID, 'department', '', ', ', '' );
