@@ -1,6 +1,6 @@
 <?php
 /**
- * The Template for displaying all single sp_items.
+ * The Template for displaying all single sp_products.
  *
  * @package Flint
  * @since Flint 1.0
@@ -15,7 +15,7 @@ get_header(); ?>
 
 				<?php flint_content_nav( 'nav-above' ); ?>
 
-				<?php get_template_part( 'content', 'sp_item' ); ?>
+				<?php get_template_part( 'content', 'sp_product' ); ?>
 
 				<?php flint_content_nav( 'nav-below' ); ?>
 
