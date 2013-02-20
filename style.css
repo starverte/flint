@@ -249,7 +249,7 @@ input[type="submit"] {
 	font-size: 12px;
 	font-size: 1.4rem;
 	line-height: 1;
-	padding: 1.12em 1.5em 1em;
+	padding: 0.25em 0.5em;
 	text-shadow: 0 1px 0 rgba(255,255,255,.8);
 }
 button:hover,
@@ -299,9 +299,9 @@ input[type=email],
 textarea {
 	float: right;
 	color: #666;
-	margin: 10px 0px 0px;
 	border: 1px solid #ccc;
 	border-radius: 3px;
+	width: 90%;
 }
 input[type=text]:focus,
 input[type=email]:focus,
@@ -346,17 +346,20 @@ a:active {
 .alignleft {
 	display: inline;
 	float: left;
-	margin-right: 1.5em;
+	margin: 1em 1.5em 1em 0;
 }
 .alignright {
 	display: inline;
 	float: right;
-	margin-left: 1.5em;
+	margin: 1em 0 1em 1.5em;
 }
 .aligncenter {
 	clear: both;
 	display: block;
-	margin: 0 auto;
+	margin: 1em auto;
+}
+.alignnone {
+	margin: 1em;
 }
 
 /* Text meant only for screen readers */
@@ -378,11 +381,11 @@ body {
 	font-size: 0.8125em;
 	line-height: 1.3846153846153846em;
 }
-.normal, h3 {
+.normal {
 	font-size: 1em;
 	line-height: 1.5em;
 }
-.large, h2, h1 {
+.large {
 	font-size: 1.625em;
 	line-height: 1.3846153846153846em;
 }
@@ -399,13 +402,27 @@ body {
 	line-height: 1.0909090909090908em;
 }
 h1, h2 {
+	font-size: 1.625em;
 	margin: 0.9230769230769231em 0 1.3846153846153846em;
 }
 h2 {
 	font-weight: normal;
 }
 h3 {
+	font-size: 1.5em;
 	margin: 1.5em 0 1.5em;
+}
+h4 {
+	font-size: 1.375em;
+	line-height: 1.5em;
+}
+h5 {
+	font-size: 1.25em;
+	line-height: 1.375em;
+}
+h6 {
+	font-size: 1.125em;
+	line-height: 1.25em;
 }
 .wrapper {
 	padding: 0 0.75em;
@@ -433,6 +450,17 @@ h3 {
 .columns-5 {
 	float: none;
 	clear: both;
+}
+#gallery-2 .gallery-item,
+#gallery-3 .gallery-item,
+#gallery-4 .gallery-item,
+#gallery-5 .gallery-item,
+#gallery-6 .gallery-item,
+#gallery-7 .gallery-item,
+#gallery-8 .gallery-item,
+#gallery-9 .gallery-item,
+#gallery-10 .gallery-item {
+	width: 50%!important;
 }
 @media screen and (min-width: 40em) {
 	body {
@@ -467,6 +495,15 @@ h3 {
 		margin: 0 4.3333333333%;
 		width: 24.6666666667%;
 	}
+	#gallery-3 .gallery-item,
+	#gallery-6 .gallery-item,
+	#gallery-9 .gallery-item {
+		width: 33%!important;
+	}
+	#gallery-4 .gallery-item,
+	#gallery-8 .gallery-item {
+		width: 25%!important;
+	}
 	#primary, #secondary {
 		float: left;
 		padding: 0 0.75em;
@@ -490,6 +527,13 @@ h3 {
 		margin: 0 3.5%;
 		width: 18%;
 	}
+	#gallery-5 .gallery-item,
+	#gallery-10 .gallery-item {
+		width: 20%!important;
+	}
+	#gallery-6 .gallery-item {
+		width: 16%!important;
+	}
 }
 /* @media screen and (min-width: 984px) */
 @media screen and (min-width: 61.5em) {
@@ -500,11 +544,23 @@ h3 {
 		margin: 0 2%;
 		width: 16%;
 	}
+	#gallery-7 .gallery-item {
+		width: 14%!important;
+	}
+	#gallery-8 .gallery-item {
+		width: 12%!important;
+	}
 }
 /* @media screen and (min-width: 1200px) */
 @media screen and (min-width: 75em) {
 	body {
 		font-size: 1.0625em;
+	}
+	#gallery-9 .gallery-item {
+		width: 11%!important;
+	}
+	#gallery-10 .gallery-item {
+		width: 10%!important;
 	}
 }
 /* @media screen and (min-width: 1392px) */
@@ -693,6 +749,10 @@ img[class*="wp-image-"] {
 .entry-content img,
 img.size-full {
 	max-width: 100%;
+}
+.ie .site-header img,
+.ie .entry-content img,
+.ie img.size-full {
 	width: auto; /* Prevent stretching of full-size images with height and width attributes in IE8 */
 }
 .entry-content img.wp-smiley,
@@ -764,8 +824,42 @@ object {
 /* =Comments
 ----------------------------------------------- */
 
+.avatar {
+	float: left;
+	margin: 1em 1em 1em 0;
+}
 .bypostauthor {
 }
+.commentlist,
+.commentlist .children {
+	list-style: none;
+}
+article.comment {
+	margin-bottom: 0.5em;
+	padding: 1em;
+}
+.commentlist .thread-odd {
+	background: #fafafa;
+}
+.commentlist .thread-even {
+	background: #fbfdff;
+}
+.commentlist .depth-2 {
+	background: #fff;
+}
+.commentlist .thread-odd .depth-3 {
+	background: #f8f8f8;
+}
+.commentlist .thread-even .depth-3 {
+	background: #f7fcfe;
+}
+.commentlist .thread-odd .depth-4 {
+	background: #eee;
+}
+.commentlist .thread-even .depth-4 {
+	background: #e1f4fd;
+}
+
 
 /* =Widgets
 ----------------------------------------------- */
