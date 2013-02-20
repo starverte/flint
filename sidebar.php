@@ -32,3 +32,4 @@
 
 			<?php endif; // end sidebar widget area ?>
 		</div><!-- #secondary .widget-area -->
+        <div class="clear"></div>
