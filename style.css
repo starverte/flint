@@ -1,6 +1,6 @@
 /*
 Theme Name: Flint
-Theme URI: //Not yet developed
+Theme URI: http://sparks.starverte.com
 Author: starverte
 Author URI: http://www.starverte.com/
 Description: Core theme of the Sparks Framework. Showcases all "sparks."
@@ -732,25 +732,21 @@ h6 {
 /* =Media
 ----------------------------------------------- */
 
-.site-header img,
 .entry-content img,
 .comment-content img,
 .widget img {
 	max-width: 100%; /* Fluid images for posts, comments, and widgets */
 }
-.site-header img,
 .entry-content img,
 .comment-content img[height],
 img[class*="align"],
 img[class*="wp-image-"] {
 	height: auto; /* Make sure images with WordPress-added height and width attributes are scaled correctly */
 }
-.site-header img,
 .entry-content img,
 img.size-full {
 	max-width: 100%;
 }
-.ie .site-header img,
 .ie .entry-content img,
 .ie img.size-full {
 	width: auto; /* Prevent stretching of full-size images with height and width attributes in IE8 */
