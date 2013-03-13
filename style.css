@@ -313,6 +313,8 @@ input[type=email] {
 	padding: 3px;
 }
 textarea {
+	display: block;
+	float: none;
 	overflow: auto; /* Removes default vertical scrollbar in IE6/7/8/9 */
 	padding-left: 3px;
 	vertical-align: top; /* Improves readability and alignment in all browsers */
@@ -587,7 +589,11 @@ h6 {
 		max-width: 160em;
 	}
 }
-
+#primary.full-width {
+	clear: both;
+	float: none;
+	width: 100%;
+}
 
 /* =Menu
 ----------------------------------------------- */
