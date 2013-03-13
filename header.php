@@ -24,10 +24,10 @@
 <?php wp_head(); ?>
 </head>
 
+<?php $sparks_options = get_option('sparks_options'); ?>
 <body <?php body_class(); ?>>
-<?php $options = get_option('sparks_options'); ?>
-<?php if (isset($options['fb_app_id'])) {
-		$fb_app_id = $options["fb_app_id"];
+<?php if (isset($sparks_options['fb_app_id'])) {
+		$fb_app_id = $sparks_options["fb_app_id"];
 	}
 	else {
 		$fb_app_id = '';
