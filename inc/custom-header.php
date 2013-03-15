@@ -34,11 +34,12 @@
  * @package Flint
  */
 function flint_custom_header_setup() {
+	$default_image = get_template_directory_uri();
 	$args = array(
-		'default-image'          => '',
-		'default-text-color'     => '000',
-		'width'                  => 150,
-		'height'                 => 150,
+		'default-image'          => $default_image.'/inc/default-header.png',
+		'default-text-color'     => '00a6e5',
+		'width'                  => 300,
+		'height'                 => 300,
 		'flex-height'            => true,
 		'wp-head-callback'       => 'flint_header_style',
 		'admin-head-callback'    => 'flint_admin_header_style',
