@@ -449,9 +449,11 @@ h6 {
 .site-title, .site-description {
 	clear: right;
 }
-#logo {
+.logo {
 	float: left;
+	height: auto;
 	margin: 0 1em 1em 0;
+	max-width: 150px;
 }
 .columns-2,
 .columns-3,
