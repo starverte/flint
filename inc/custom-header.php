@@ -37,8 +37,8 @@ function flint_custom_header_setup() {
 	$args = array(
 		'default-image'          => '',
 		'default-text-color'     => '000',
-		'width'                  => 1000,
-		'height'                 => 250,
+		'width'                  => 150,
+		'height'                 => 150,
 		'flex-height'            => true,
 		'wp-head-callback'       => 'flint_header_style',
 		'admin-head-callback'    => 'flint_admin_header_style',

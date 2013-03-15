@@ -446,6 +446,13 @@ h6 {
 	margin: 1em 0;
 	width: 100%;
 }
+.site-title, .site-description {
+	clear: right;
+}
+#logo {
+	float: left;
+	margin: 0 1em 1em 0;
+}
 .columns-2,
 .columns-3,
 .columns-4,
