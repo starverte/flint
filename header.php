@@ -43,10 +43,28 @@
 <div id="page" class="hfeed site">
 	<?php do_action( 'before' ); ?>
 	<header id="masthead" class="site-header wrapper" role="banner">
-		<hgroup>
+    
+    <?php if (current_theme_supports('custom-header')) { ?>
+          
+		
+        <hgroup>
+            <a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home" ><img id="logo" src="<?php header_image(); ?>" height="<?php echo get_custom_header()->height; ?>" width="<?php echo get_custom_header()->width; ?>" alt="" /></a>
+            
+        <?php if (display_header_text()) { ?>
+            <h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home" style="color: #<?php header_textcolor(); ?> !important;" ><?php bloginfo( 'name' ); ?></a></h1>
+            <h2 class="site-description"><?php bloginfo( 'description' ); ?></h2>
+        <?php } ?>
+        
+        </hgroup>
+        
+  	<?php } else { ?>
+	
+        <hgroup>
 			<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
 			<h2 class="site-description"><?php bloginfo( 'description' ); ?></h2>
 		</hgroup>
+        
+   	<?php } ?>
 
 		<nav role="navigation" class="site-navigation main-navigation">
 			<h1 class="assistive-text"><?php _e( 'Menu', 'flint' ); ?></h1>
