@@ -70,6 +70,15 @@ function flint_setup() {
 	 * Enable support for Post Formats
 	 */
 	add_theme_support( 'post-formats', array( 'aside', 'image', 'video', 'quote', 'link' ) );
+	
+	/**
+	 * Implement the Custom Background feature
+	 */
+	$defaults = array(
+		'default-color'          => 'ffffff',
+		'default-image'          => '',
+	);
+	add_theme_support( 'custom-background', $defaults );
 }
 endif; // flint_setup
 add_action( 'after_setup_theme', 'flint_setup' );
