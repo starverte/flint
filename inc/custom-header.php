@@ -33,6 +33,7 @@
  *
  * @package Flint
  */
+if ( ! function_exists( 'flint_custom_header_setup' ) ) :
 function flint_custom_header_setup() {
 	$default_image = get_template_directory_uri();
 	$args = array(
@@ -59,6 +60,7 @@ function flint_custom_header_setup() {
 		add_custom_image_header( $args['wp-head-callback'], $args['admin-head-callback'], $args['admin-preview-callback'] );
 	}
 }
+endif;
 add_action( 'after_setup_theme', 'flint_custom_header_setup' );
 
 /**
