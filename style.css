@@ -638,7 +638,7 @@ h6 {
 	float: left;
 	position: relative;
 }
-.main-small-navigation li {
+.main-small-navigation a {
 	background: #fcfcfc;
 	clear: both;
 	color: #00a6e5;
