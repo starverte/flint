@@ -443,6 +443,7 @@ h6 {
 	margin: 0 5.555555555555555%;
 }
 #masthead hgroup, .site-navigation, #primary, #secondary, .site-info {
+	clear: both;
 	margin: 1em 0;
 	width: 100%;
 }
@@ -493,6 +494,10 @@ h6 {
 		line-height: 1.1428571428571428em;
 		margin: 1.1428571428571428em 0 0.5714285714285714em;
 	}
+	.entry-title,
+	.widget-title {
+		margin: 0 0 0.5714285714285714em;
+	}
 }
 /* Eight column grid active */
 /* @media screen and (min-width: 720px) */
@@ -516,8 +521,9 @@ h6 {
 		width: 25%!important;
 	}
 	#primary, #secondary {
+		clear: none;
 		float: left;
-		padding: 0 0.75em;
+		padding: 0 1.5em;
 		-webkit-box-sizing: border-box;
 		-moz-box-sizing: border-box;
 		box-sizing: border-box;
@@ -710,6 +716,9 @@ h6 {
 /* =Content
 ----------------------------------------------- */
 
+article {
+	padding: 1em;
+}
 .sticky {
 }
 .hentry {
@@ -877,6 +886,7 @@ article.comment {
 
 .widget {
 	margin: 0 0 1.5em;
+	padding: 1em;
 }
 
 /* Make sure select elements fit in widgets */
