@@ -908,6 +908,21 @@ article.comment {
 	list-style: none;
 	margin: 0;
 }
+.link-widget {
+	background: #fafafa;
+	color: #404040;
+}
+.link-widget-link:active,
+.link-widget-link:hover {
+	text-decoration: none;
+}
+.link-widget-link:hover .link-widget {
+	background: #fdfdfd;
+	color: #404040;
+}
+.link-widget .widget-title {
+	margin: 0;
+}
 
 
 /* =Sparks Store
