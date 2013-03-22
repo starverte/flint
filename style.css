@@ -169,6 +169,7 @@ address {
 }
 pre {
 	background: #eee;
+	color: #404040;
 	font-family: "Courier 10 Pitch", Courier, monospace;
 	font-size: 0.9375em;
 	line-height: 1.6;
@@ -186,6 +187,7 @@ abbr, acronym {
 }
 mark, ins {
 	background: #fff9c0;
+	color: #404040;
 	text-decoration: none;
 }
 sup,
@@ -727,6 +729,10 @@ article {
 .entry-meta {
 	clear: both;
 }
+.entry-title,
+.entry-content {
+	overflow-y: auto;
+}
 .byline {
 	display: none;
 }
@@ -759,7 +765,7 @@ article {
 .entry-content img,
 .comment-content img,
 .widget img {
-	max-width: 100%; /* Fluid images for posts, comments, and widgets */
+	max-width: 95%; /* Fluid images for posts, comments, and widgets */
 }
 .entry-content img,
 .comment-content img[height],
@@ -769,7 +775,7 @@ img[class*="wp-image-"] {
 }
 .entry-content img,
 img.size-full {
-	max-width: 100%;
+	max-width: 95%;
 }
 .ie .entry-content img,
 .ie img.size-full {
@@ -858,25 +864,26 @@ article.comment {
 	margin-bottom: 0.5em;
 	padding: 1em;
 }
-.commentlist .thread-odd {
+.commentlist .thread-odd article {
 	background: #fafafa;
 }
-.commentlist .thread-even {
+.commentlist .thread-even article {
 	background: #fbfdff;
 }
-.commentlist .depth-2 {
+.commentlist .thread-odd .depth-2 article,
+.commentlist .thread-even .depth-2 article {
 	background: #fff;
 }
-.commentlist .thread-odd .depth-3 {
+.commentlist .thread-odd .depth-3 article {
 	background: #f8f8f8;
 }
-.commentlist .thread-even .depth-3 {
+.commentlist .thread-even .depth-3 article {
 	background: #f7fcfe;
 }
-.commentlist .thread-odd .depth-4 {
+.commentlist .thread-odd .depth-4 article {
 	background: #eee;
 }
-.commentlist .thread-even .depth-4 {
+.commentlist .thread-even .depth-4 article {
 	background: #e1f4fd;
 }
 
