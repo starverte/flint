@@ -1,7 +1,7 @@
 /*
 Theme Name: Flint
 Theme URI: http://sparks.starverte.com
-Author: starverte
+Author: Star Verte LLC
 Author URI: http://www.starverte.com/
 Description: Core theme of the Sparks Framework. Showcases all "sparks."
 Version: 1.0
@@ -457,6 +457,10 @@ h6 {
 	height: auto;
 	margin: 0 1em 1em 0;
 	max-width: 150px;
+}
+.entry-title,
+.widget-title {
+	min-height: 1.3em;
 }
 .columns-2,
 .columns-3,
