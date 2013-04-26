@@ -180,3 +180,81 @@ function flint_category_transient_flusher() {
 }
 add_action( 'edit_category', 'flint_category_transient_flusher' );
 add_action( 'save_post', 'flint_category_transient_flusher' );
+
+/**
+ *
+ *
+ *
+ * @since Flint 1.0
+ */
+function flint_link_pages($args = '') {
+	$defaults = array(
+		'before' => '<p>' . __('Pages:'), 'after' => '</p>',
+		'link_before' => '', 'link_after' => '',
+		'next_or_number' => 'number', 'nextpagelink' => __('Next page'),
+		'previouspagelink' => __('Previous page'), 'pagelink' => '%',
+		'echo' => 1
+	);
+
+	$r = wp_parse_args( $args, $defaults );
+	$r = apply_filters( 'wp_link_pages_args', $r );
+	extract( $r, EXTR_SKIP );
+
+	global $page, $numpages, $multipage, $more, $pagenow;
+
+	$output = '';
+	if ( $multipage ) {
+		if ( 'number' == $next_or_number ) {
+			$output .= $before;
+			for ( $i = 1; $i < ($numpages+1); $i = $i + 1 ) {
+				$j = str_replace('%',$i,$pagelink);
+				$output .= ' ';
+				if ( ($i != $page) || ((!$more) && ($page==1)) ) {
+					$output .= flint_link_page($i);
+				}
+				else {
+					$output .= '<li class="active"><a>';
+				}
+				$output .= $link_before . $j . $link_after . '</a></li>';
+			}
+			$output .= $after;
+		} else {
+			if ( $more ) {
+				$output .= $before;
+				$i = $page - 1;
+				if ( $i && $more ) {
+					$output .= _wp_link_page($i);
+					$output .= $link_before. $previouspagelink . $link_after . '</a>';
+				}
+				$i = $page + 1;
+				if ( $i <= $numpages && $more ) {
+					$output .= _wp_link_page($i);
+					$output .= $link_before. $nextpagelink . $link_after . '</a>';
+				}
+				$output .= $after;
+			}
+		}
+	}
+
+	if ( $echo )
+		echo $output;
+
+	return $output;
+}
+function flint_link_page( $i ) {
+	global $wp_rewrite;
+	$post = get_post();
+
+	if ( 1 == $i ) {
+		$url = get_permalink();
+	} else {
+		if ( '' == get_option('permalink_structure') || in_array($post->post_status, array('draft', 'pending')) )
+			$url = add_query_arg( 'page', $i, get_permalink() );
+		elseif ( 'page' == get_option('show_on_front') && get_option('page_on_front') == $post->ID )
+			$url = trailingslashit(get_permalink()) . user_trailingslashit("$wp_rewrite->pagination_base/" . $i, 'single_paged');
+		else
+			$url = trailingslashit(get_permalink()) . user_trailingslashit($i, 'single_paged');
+	}
+
+	return '<li><a href="' . esc_url( $url ) . '">';
+}
