@@ -15,8 +15,11 @@
 			}?></h1>
 
 		<div class="entry-meta">
-			<?php cause_goal();
-			cause_raised( $args, 'percent'); ?>
+			<?php cause_goal(); ?>
+            <div class="progress progress-striped active">
+            <?php $percent = cause_raised( array( 'before' => '', 'after' => '' ) , 'percent');
+			echo '<div class="bar" style="width: ' . $percent . ';"></div>';
+			?>
 		</div><!-- .entry-meta -->
 	</header><!-- .entry-header -->
 
