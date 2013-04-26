@@ -23,7 +23,7 @@
 	<?php else : ?>
 	<div class="entry-content">
 		<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'flint' ) ); ?>
-		<?php wp_link_pages( array( 'before' => '<div class="page-links">' . __( 'Pages:', 'flint' ), 'after' => '</div>' ) ); ?>
+		<?php flint_link_pages( array( 'before' => '<div class="pagination"><ul>', 'after' => '</ul></div>' ) ); ?>
 	</div><!-- .entry-content -->
 	<?php endif; ?>
 

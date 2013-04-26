@@ -39,19 +39,26 @@ function flint_content_nav( $nav_id ) {
 		<h1 class="assistive-text"><?php _e( 'Post navigation', 'flint' ); ?></h1>
 
 	<?php if ( is_single() ) : // navigation links for single posts ?>
+    
+    	<ul class="pager">
 
-		<?php previous_post_link( '<div class="nav-previous">%link</div>', '<span class="meta-nav">' . _x( '&larr;', 'Previous post link', 'flint' ) . '</span> %title' ); ?>
-		<?php next_post_link( '<div class="nav-next">%link</div>', '%title <span class="meta-nav">' . _x( '&rarr;', 'Next post link', 'flint' ) . '</span>' ); ?>
+		<?php previous_post_link( '<li class="previous">%link</li>', '%title' ); ?>
+		<?php next_post_link( '<li class="next">%link</li>', '%title' ); ?>
+        
+        </ul>
 
 	<?php elseif ( $wp_query->max_num_pages > 1 && ( is_home() || is_archive() || is_search() ) ) : // navigation links for home, archive, and search pages ?>
+    	<ul class="pager">
 
 		<?php if ( get_next_posts_link() ) : ?>
-		<div class="nav-previous"><?php next_posts_link( __( '<span class="meta-nav">&larr;</span> Older posts', 'flint' ) ); ?></div>
+		<li class="previous"><?php next_posts_link( __( 'Older posts', 'flint' ) ); ?></li>
 		<?php endif; ?>
 
 		<?php if ( get_previous_posts_link() ) : ?>
-		<div class="nav-next"><?php previous_posts_link( __( 'Newer posts <span class="meta-nav">&rarr;</span>', 'flint' ) ); ?></div>
+		<li class="next"><?php previous_posts_link( __( 'Newer posts', 'flint' ) ); ?></li>
 		<?php endif; ?>
+        
+        </ul>
 
 	<?php endif; ?>
 
@@ -173,3 +180,81 @@ function flint_category_transient_flusher() {
 }
 add_action( 'edit_category', 'flint_category_transient_flusher' );
 add_action( 'save_post', 'flint_category_transient_flusher' );
+
+/**
+ *
+ *
+ *
+ * @since Flint 1.0
+ */
+function flint_link_pages($args = '') {
+	$defaults = array(
+		'before' => '<p>' . __('Pages:'), 'after' => '</p>',
+		'link_before' => '', 'link_after' => '',
+		'next_or_number' => 'number', 'nextpagelink' => __('Next page'),
+		'previouspagelink' => __('Previous page'), 'pagelink' => '%',
+		'echo' => 1
+	);
+
+	$r = wp_parse_args( $args, $defaults );
+	$r = apply_filters( 'wp_link_pages_args', $r );
+	extract( $r, EXTR_SKIP );
+
+	global $page, $numpages, $multipage, $more, $pagenow;
+
+	$output = '';
+	if ( $multipage ) {
+		if ( 'number' == $next_or_number ) {
+			$output .= $before;
+			for ( $i = 1; $i < ($numpages+1); $i = $i + 1 ) {
+				$j = str_replace('%',$i,$pagelink);
+				$output .= ' ';
+				if ( ($i != $page) || ((!$more) && ($page==1)) ) {
+					$output .= flint_link_page($i);
+				}
+				else {
+					$output .= '<li class="active"><a>';
+				}
+				$output .= $link_before . $j . $link_after . '</a></li>';
+			}
+			$output .= $after;
+		} else {
+			if ( $more ) {
+				$output .= $before;
+				$i = $page - 1;
+				if ( $i && $more ) {
+					$output .= _wp_link_page($i);
+					$output .= $link_before. $previouspagelink . $link_after . '</a>';
+				}
+				$i = $page + 1;
+				if ( $i <= $numpages && $more ) {
+					$output .= _wp_link_page($i);
+					$output .= $link_before. $nextpagelink . $link_after . '</a>';
+				}
+				$output .= $after;
+			}
+		}
+	}
+
+	if ( $echo )
+		echo $output;
+
+	return $output;
+}
+function flint_link_page( $i ) {
+	global $wp_rewrite;
+	$post = get_post();
+
+	if ( 1 == $i ) {
+		$url = get_permalink();
+	} else {
+		if ( '' == get_option('permalink_structure') || in_array($post->post_status, array('draft', 'pending')) )
+			$url = add_query_arg( 'page', $i, get_permalink() );
+		elseif ( 'page' == get_option('show_on_front') && get_option('page_on_front') == $post->ID )
+			$url = trailingslashit(get_permalink()) . user_trailingslashit("$wp_rewrite->pagination_base/" . $i, 'single_paged');
+		else
+			$url = trailingslashit(get_permalink()) . user_trailingslashit($i, 'single_paged');
+	}
+
+	return '<li><a href="' . esc_url( $url ) . '">';
+}

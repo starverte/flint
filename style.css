@@ -5,7 +5,7 @@ Author: Star Verte LLC
 Author URI: http://www.starverte.com/
 Description: Core theme of the Sparks Framework. Showcases all "sparks."
 Version: 1.0
-License: GPLv2 or later
+License: GPLv3
 License URI: license.txt
 Tags: sparks
 
@@ -31,6 +31,7 @@ A spark sets a fire ablaze, and similarly the Sparks Framework is made up of 'sp
 */
 
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300); /* Loads Open Sans font from Google */
+@import url(inc/bootstrap.min.css); /* Loads bootstrap */
 
 /* =Reset
 -------------------------------------------------------------- */

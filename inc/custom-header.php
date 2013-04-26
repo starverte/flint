@@ -37,7 +37,7 @@ if ( ! function_exists( 'flint_custom_header_setup' ) ) :
 function flint_custom_header_setup() {
 	$default_image = get_template_directory_uri();
 	$args = array(
-		'default-image'          => $default_image.'/inc/default-header.png',
+		'default-image'          => $default_image.'/img/default-header.png',
 		'default-text-color'     => '00a6e5',
 		'width'                  => 300,
 		'height'                 => 300,
