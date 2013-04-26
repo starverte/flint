@@ -39,19 +39,26 @@ function flint_content_nav( $nav_id ) {
 		<h1 class="assistive-text"><?php _e( 'Post navigation', 'flint' ); ?></h1>
 
 	<?php if ( is_single() ) : // navigation links for single posts ?>
+    
+    	<ul class="pager">
 
-		<?php previous_post_link( '<div class="nav-previous">%link</div>', '<span class="meta-nav">' . _x( '&larr;', 'Previous post link', 'flint' ) . '</span> %title' ); ?>
-		<?php next_post_link( '<div class="nav-next">%link</div>', '%title <span class="meta-nav">' . _x( '&rarr;', 'Next post link', 'flint' ) . '</span>' ); ?>
+		<?php previous_post_link( '<li class="previous">%link</li>', '%title' ); ?>
+		<?php next_post_link( '<li class="next">%link</li>', '%title' ); ?>
+        
+        </ul>
 
 	<?php elseif ( $wp_query->max_num_pages > 1 && ( is_home() || is_archive() || is_search() ) ) : // navigation links for home, archive, and search pages ?>
+    	<ul class="pager">
 
 		<?php if ( get_next_posts_link() ) : ?>
-		<div class="nav-previous"><?php next_posts_link( __( '<span class="meta-nav">&larr;</span> Older posts', 'flint' ) ); ?></div>
+		<li class="previous"><?php next_posts_link( __( 'Older posts', 'flint' ) ); ?></li>
 		<?php endif; ?>
 
 		<?php if ( get_previous_posts_link() ) : ?>
-		<div class="nav-next"><?php previous_posts_link( __( 'Newer posts <span class="meta-nav">&rarr;</span>', 'flint' ) ); ?></div>
+		<li class="next"><?php previous_posts_link( __( 'Newer posts', 'flint' ) ); ?></li>
 		<?php endif; ?>
+        
+        </ul>
 
 	<?php endif; ?>
 
