@@ -13,7 +13,9 @@ get_header(); ?>
 		<section id="primary" class="content-area">
 			<div id="content" class="site-content" role="main">
 
-			<?php if ( have_posts() ) : ?>
+			<?php global $query_string;
+			query_posts( $query_string . '&orderby=rand' );
+			if ( have_posts() ) : ?>
 
 				<header class="page-header">
 					<h1 class="page-title">Beneficiaries</h1>
