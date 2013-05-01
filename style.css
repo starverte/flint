@@ -117,6 +117,7 @@ textarea {
 	color: #404040;
 	font-family: 'Open Sans', sans-serif;
 }
+.btn { margin-bottom: 0.5em; }
 .clear{
 	float: none;
 	clear:both;
