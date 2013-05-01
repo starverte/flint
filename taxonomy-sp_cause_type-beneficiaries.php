@@ -14,7 +14,7 @@ get_header(); ?>
 			<div id="content" class="site-content" role="main">
 
 			<?php global $query_string;
-			query_posts( $query_string . '&orderby=rand' );
+			query_posts( $query_string . '&orderby=rand&posts_per_page=100' );
 			if ( have_posts() ) : ?>
 
 				<header class="page-header">
