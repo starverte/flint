@@ -15,38 +15,42 @@ get_header(); ?>
 		<div id="primary" class="content-area">
 			<div id="content" class="site-content" role="main">
             
-            <div id="aCarousel" class="carousel slide">
-                <ol class="carousel-indicators">
-                    <li data-target="#aCarousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#aCarousel" data-slide-to="1" class=""></li>
-                    <li data-target="#aCarousel" data-slide-to="2" class=""></li>
-                </ol>
-                <div class="carousel-inner">
-                    <div class="item active">
-                        <img src="http://twitter.github.io/bootstrap/assets/img/bootstrap-mdo-sfmoma-01.jpg" alt="">
-                        <div class="carousel-caption">
-                            <h4>First Thumbnail label</h4>
-                            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                <div id="myCarousel" class="carousel slide">
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                    </ol>
+                    
+                    <!-- Carousel items -->
+                    <div class="carousel-inner">
+                        <div class="active item">
+                        	<img src="http://starverte.com/wp-content/uploads/2013/05/fire-e1367701622373.jpg" />
+                            <div class="carousel-caption">
+                                <h4>First Thumbnail label</h4>
+                                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                            </div>
+                        </div>
+                        <div class="item">
+                        	<img src="http://starverte.com/wp-content/uploads/2013/05/fire2-e1367701712712.jpg" />
+                            <div class="carousel-caption">
+                                <h4>Second Thumbnail label</h4>
+                                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                            </div>
+                        </div>
+                        <div class="item">
+                        	<img src="http://i0.wp.com/starverte.com/wp-content/uploads/2013/05/fire3-e1367701409396.jpg?fit=1200%2C1200" />
+                            <div class="carousel-caption">
+                                <h4>Third Thumbnail label</h4>
+                                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="item">
-                        <img src="http://twitter.github.io/bootstrap/assets/img/bootstrap-mdo-sfmoma-02.jpg" alt="">
-                        <div class="carousel-caption">
-                            <h4>Second Thumbnail label</h4>
-                            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src="http://twitter.github.io/bootstrap/assets/img/bootstrap-mdo-sfmoma-03.jpg" alt="">
-                        <div class="carousel-caption">
-                            <h4>Third Thumbnail label</h4>
-                            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                        </div>
-                    </div>
+                    
+                    <!-- Carousel nav -->
+                    <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+                    <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
                 </div>
-                <a class="left carousel-control" href="#aCarousel" data-slide="prev">‹</a>
-                <a class="right carousel-control" href="#aCarousel" data-slide="next">›</a>
-            </div>
 
 				<?php while ( have_posts() ) : the_post(); ?>
 
