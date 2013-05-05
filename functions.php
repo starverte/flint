@@ -105,9 +105,8 @@ add_action( 'widgets_init', 'flint_widgets_init' );
  */
 function flint_scripts() {
 	wp_enqueue_style( 'style', get_stylesheet_uri() );
-	
-	if (is_plugin_active('steel/steel.php')) {}
-    else {
+	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+	if (is_plugin_inactive('steel/steel.php')) {
 		// Load scripts and styles for Twitter Bootstrap
 		wp_register_script( 'bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js' , array('jquery') , '2.3.1', true );
 		wp_register_style( 'bootstrap-style', get_template_directory_uri() . '/css/bootstrap.min.css' );
