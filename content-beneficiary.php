@@ -26,8 +26,8 @@
                     }?></h1>
         
                 <div class="entry-meta">
-                    <?php cause_gender('<div class="cause-gender"><i class="icon-user icon-white"></i> ','</div>'); ?>
-                    <?php cause_age('<div class="cause-age"><i class="icon-time icon-white"></i> ','</div>'); ?>
+                    <?php cause_gender('<div class="cause-gender"><i class="icon-user"></i> ','</div>'); ?>
+                    <?php cause_age('<div class="cause-age"><i class="icon-time"></i> ','</div>'); ?>
                 </div><!-- .entry-meta -->
             </header><!-- .entry-header -->
         
