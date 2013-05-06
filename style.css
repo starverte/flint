@@ -43,6 +43,9 @@ textarea {
 	color: #404040;
 	font-family: 'Open Sans', sans-serif;
 }
+h1, h2, h3, h4, h5, h6 {
+	font-weight: normal;
+}
 .btn { margin-bottom: 0.5em; }
 .clear{
 	float: none;
@@ -142,10 +145,6 @@ article {
 }
 .entry-meta {
 	clear: both;
-}
-.entry-title,
-.entry-content {
-	overflow-y: auto;
 }
 .byline {
 	display: none;
