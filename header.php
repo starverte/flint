@@ -48,23 +48,19 @@
           
 		
         <hgroup class="row-fluid">
-	<div id="left" class="span9">
-        	<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
-            	<img class="logo" src="<?php echo get_stylesheet_directory_uri(); ?>/img/logo.png" alt="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" />
-            </a>
+	<?php $header_image = get_header_image();
+		if ( ! empty( $header_image ) ) { ?>
+            <img class="header span2 hidden-phone" src="<?php header_image(); ?>" alt="" />
+        <?php } // if ( ! empty( $header_image ) ) ?>
             
         <?php if (display_header_text()) { ?>
-        	<div class="bastard-title">
+        	<div class="bastard-title span10">
                 <h1 class="site-title hidden-phone"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home" ><?php bloginfo( 'name' ); ?></a></h1>
                 <h2 class="site-description visible-desktop"><?php bloginfo( 'description' ); ?></h2>
             </div>
         <?php } ?>
-	</div><!-- #left -->
         
-        <?php $header_image = get_header_image();
-		if ( ! empty( $header_image ) ) { ?>
-            <img class="header span3 visible-desktop" src="<?php header_image(); ?>" alt="" />
-        <?php } // if ( ! empty( $header_image ) ) ?>
+        
         
         </hgroup>
         
