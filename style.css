@@ -32,6 +32,79 @@ A spark sets a fire ablaze, and similarly the Sparks Framework is made up of 'sp
 
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300); /* Loads Open Sans font from Google */
 
+/* =Reset
+-------------------------------------------------------------- */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	border: 0;
+	font-family: inherit;
+	font-size: 100%;
+	font-style: inherit;
+	font-weight: inherit;
+	margin: 0;
+	outline: 0;
+	padding: 0;
+	vertical-align: baseline;
+}
+html {
+	font-size: 75%;  /* Corrects text resizing oddly in IE6/7 when body font-size is set using em units http://clagnut.com/blog/348/#c790 */
+	height: 100%;
+	overflow-y: scroll; /* Keeps page centred in all browsers regardless of content height */
+	-webkit-text-size-adjust: 100%; /* Prevents iOS text size adjust after orientation change, without disabling user zoom */
+	-ms-text-size-adjust: 100%; /* www.456bereastreet.com/archive/201012/controlling_text_size_in_safari_for_ios_without_disabling_user_zoom/ */
+}
+body {
+	background: #fff;
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section {
+	display: block;
+}
+ol, ul {
+	list-style: none;
+}
+table { /* tables still need 'cellspacing="0"' in the markup */
+	border-collapse: separate;
+	border-spacing: 0;
+}
+caption, th, td {
+	font-weight: normal;
+	text-align: left;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: "";
+}
+blockquote, q {
+	quotes: "" "";
+}
+a:focus {
+	outline: thin dotted;
+}
+a:hover,
+a:active { /* Improves readability when focused and also mouse hovered in all browsers people.opera.com/patrickl/experiments/keyboard/test */
+	outline: 0;
+}
+a img {
+	border: 0;
+}
+
+
 /* =Global
 ----------------------------------------------- */
 
@@ -43,13 +116,111 @@ textarea {
 	color: #404040;
 	font-family: 'Open Sans', sans-serif;
 }
-h1, h2, h3, h4, h5, h6 {
-	font-weight: normal;
-}
 .btn { margin-bottom: 0.5em; }
 .clear{
 	float: none;
 	clear:both;
+}
+
+/* Headings */
+h1,h2,h3,h4,h5,h6 {
+	clear: both;
+	font-weight: normal;
+}
+hr {
+	background-color: #ccc;
+	border: 0;
+	height: 1px;
+	margin-bottom: 1.5em;
+}
+
+/* Text elements */
+p {
+	margin-bottom: 1.5em;
+}
+ul, ol {
+	margin: 0 0 1.5em 3em;
+}
+ul {
+	list-style: disc inside;
+}
+ol {
+	list-style: decimal inside;
+}
+ul ul, ol ol, ul ol, ol ul {
+	margin-bottom: 0;
+	margin-left: 1.5em;
+}
+dt {
+	font-weight: bold;
+}
+dd {
+	margin: 0 1.5em 1.5em;
+}
+b, strong {
+	font-weight: bold;
+}
+dfn, cite, em, i {
+	font-style: italic;
+}
+blockquote {
+	margin: 0 1.5em;
+}
+address {
+	margin: 0 0 1.5em;
+}
+pre {
+	background: #eee;
+	color: #404040;
+	font-family: "Courier 10 Pitch", Courier, monospace;
+	font-size: 0.9375em;
+	line-height: 1.6;
+	margin-bottom: 1.6em;
+	padding: 1.6em;
+	overflow: auto;
+	max-width: 100%;
+}
+code, kbd, tt, var {
+	font: 0.9375em Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+}
+abbr, acronym {
+	border-bottom: 1px dotted #666;
+	cursor: help;
+}
+mark, ins {
+	background: #fff9c0;
+	color: #404040;
+	text-decoration: none;
+}
+sup,
+sub {
+	font-size: 75%;
+	height: 0;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+sup {
+	bottom: 1ex;
+}
+sub {
+	top: .5ex;
+}
+small {
+	font-size: 75%;
+}
+big {
+	font-size: 125%;
+}
+figure {
+	margin: 0;
+}
+table {
+	margin: 0 0 1.5em;
+	width: 100%;
+}
+th {
+	font-weight: bold;
 }
 
 /* Links */
@@ -99,6 +270,20 @@ h1, h2, h3, h4, h5, h6 {
 .alignnone {
 	margin: 1em;
 }
+#masthead hgroup, .navbar, #primary, #secondary, .site-info {
+  margin-bottom: 1em;
+}
+.logo {
+  float: left;
+  height: auto;
+  margin: 0 1em 1em 0;
+  max-width: 150px;
+}
+#primary.full-width {
+  clear: both;
+  float: none;
+  width: 100%;
+}
 
 /* Text meant only for screen readers */
 .assistive-text {
@@ -107,30 +292,6 @@ h1, h2, h3, h4, h5, h6 {
 	position: absolute !important;
 }
 
-
-/* =Golden Grid System
------------------------------------------------ */
-
-/* Fix for IE6-8 - http://jonikorpi.com/leaving-old-IE-behind/ */
-.ie body {
-	width: 40em;
-	margin: 0 auto;
-	font-size: 1.0625em;
-}
-#masthead hgroup, .navbar, #primary, #secondary, .site-info {
-	margin-bottom: 1em;
-}
-.logo {
-	float: left;
-	height: auto;
-	margin: 0 1em 1em 0;
-	max-width: 150px;
-}
-#primary.full-width {
-	clear: both;
-	float: none;
-	width: 100%;
-}
 
 /* =Content
 ----------------------------------------------- */
@@ -145,6 +306,7 @@ article {
 }
 .entry-meta {
 	clear: both;
+}
 }
 .byline {
 	display: none;
