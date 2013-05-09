@@ -115,6 +115,7 @@ select,
 textarea {
 	color: #404040;
 	font-family: 'Open Sans', sans-serif;
+	font-size: 0.875em;
 }
 .btn { margin-bottom: 0.5em; }
 .clear{
@@ -126,6 +127,24 @@ textarea {
 h1,h2,h3,h4,h5,h6 {
 	clear: both;
 	font-weight: normal;
+}
+h1 {
+	font-size: 1.625em;
+}
+h2 {
+	font-size: 1.5em;
+}
+h3 {
+	font-size: 1.375em;
+}
+h4 {
+	font-size: 1.25em;
+}
+h5 {
+	font-size: 1.125em;
+}
+h6 {
+	font-size: 1em;
 }
 hr {
 	background-color: #ccc;
