@@ -224,10 +224,15 @@ th {
 }
 
 /* Links */
+a {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
 #content a,
 #colophon a {
 	color: #00a6e5;
-	text-decoration: none;
 }
 #content a:visited,
 #colophon a:visited {
@@ -240,7 +245,6 @@ th {
 #colophon a:focus,
 #colophon a:active {
 	color: #00aeef;
-	text-decoration: underline;
 }
 
 /* Highlight Color */
