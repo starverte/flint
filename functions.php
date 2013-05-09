@@ -115,6 +115,11 @@ function flint_scripts() {
 		wp_enqueue_style( 'bootstrap-style' );
 		wp_enqueue_script( 'bootstrap-run' );
 	}
+	else {
+		wp_enqueue_script( 'bootstrap' );
+		wp_enqueue_style( 'bootstrap-style' );
+		wp_enqueue_script( 'bootstrap-run' );
+	}
 
 	wp_register_style( 'font-awesome', get_template_directory_uri() . '/inc/css/font-awesome.min.css' );
 	wp_enqueue_style( 'font-awesome' );
