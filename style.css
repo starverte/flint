@@ -411,17 +411,10 @@ a:active {
 /* =Content
 ----------------------------------------------- */
 
-article {
-	padding: 1em;
-}
 .sticky {
 }
 .hentry {
 	margin: 0 0 1.5em;
-}
-.entry-meta {
-	clear: both;
-}
 }
 .byline {
 	display: none;
