@@ -565,7 +565,6 @@ article.comment {
 
 .widget {
 	margin: 0 0 1.5em;
-	padding: 1em;
 }
 
 /* Make sure select elements fit in widgets */
@@ -574,13 +573,11 @@ article.comment {
 }
 
 /* Search widget */
-#searchsubmit {
+.widget_search .submit {
 	display: none;
 }
-#secondary ul {
-	list-style: none;
-	margin: 0;
-}
+
+/* Link widget (Legacy) */
 .link-widget {
 	background: #fafafa;
 	color: #404040;
@@ -595,6 +592,21 @@ article.comment {
 }
 .link-widget .widget-title {
 	margin: 0;
+}
+
+
+/* =Infinite Scroll
+----------------------------------------------- */
+
+/* Globally hidden elements when Infinite Scroll is supported and in use. */
+.infinite-scroll .navigation-paging, /* Older / Newer Posts Navigation (always hidden) */
+.infinite-scroll.neverending .site-footer { /* Theme Footer (when set to scrolling) */
+	display: none;
+}
+
+/* When Infinite Scroll has reached its end we need to re-display elements that were hidden (via .neverending) before */
+.infinity-end.neverending .site-footer {
+	display: block;
 }
 
 
