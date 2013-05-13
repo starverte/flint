@@ -525,6 +525,9 @@ object {
 }
 .bypostauthor {
 }
+.comment-content a {
+	word-wrap: break-word;
+}
 .commentlist,
 .commentlist .children {
 	list-style: none;
