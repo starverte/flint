@@ -1,14 +1,13 @@
 <?php
 /**
  * @package Flint
- * @since Flint 1.0
  */
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
-		<h1 class="entry-title"><a href="<?php the_permalink(); ?>" title="<?php echo esc_attr( sprintf( __( 'Permalink to %s', 'flint' ), the_title_attribute( 'echo=0' ) ) ); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
-
+		<h1 class="entry-title"><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
+		
 		<?php if ( 'post' == get_post_type() ) : ?>
 		<div class="entry-meta">
 			<?php flint_posted_on(); ?>
@@ -23,7 +22,12 @@
 	<?php else : ?>
 	<div class="entry-content">
 		<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'flint' ) ); ?>
-		<?php flint_link_pages( array( 'before' => '<div class="pagination"><ul>', 'after' => '</ul></div>' ) ); ?>
+		<?php
+			flint_link_pages( array(
+				'before' => '<div class="pagination"><ul>' . __( 'Pages:', 'flint' ),
+				'after'  => '</ul></div>',
+			) );
+		?>
 	</div><!-- .entry-content -->
 	<?php endif; ?>
 
