@@ -3,7 +3,6 @@
  * The template used for displaying page content in page.php
  *
  * @package Flint
- * @since Flint 1.0
  */
 ?>
 
@@ -14,7 +13,12 @@
 
 	<div class="entry-content">
 		<?php the_content(); ?>
-		<?php flint_link_pages( array( 'before' => '<div class="pagination"><ul>', 'after' => '</ul></div>' ) ); ?>
-		<?php edit_post_link( __( 'Edit', 'flint' ), '<span class="edit-link">', '</span>' ); ?>
+		<?php
+			flint_link_pages( array(
+				'before' => '<div class="pagination"><ul>' . __( 'Pages:', 'flint' ),
+				'after'  => '</ul></div>',
+			) );
+		?>
 	</div><!-- .entry-content -->
+	<?php edit_post_link( __( 'Edit', 'flint' ), '<footer class="entry-meta"><span class="edit-link">', '</span></footer>' ); ?>
 </article><!-- #post-<?php the_ID(); ?> -->
