@@ -6,6 +6,13 @@
  */
 ?>
 
+<?php if ( is_user_logged_in() ) { ?>
+	<div class="container-fluid">
+		<div class="row-fluid">
+                	<a class="btn btn-info btn-small" href="<?php echo get_edit_post_link(); ?>" style="color:#fff;float:right;"><i class="icon-edit icon-white"></i> Edit</a>
+		</div>
+	</div>
+<?php } ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
 		<h1 class="entry-title"><?php the_title(); ?></h1>
@@ -20,5 +27,4 @@
 			) );
 		?>
 	</div><!-- .entry-content -->
-	<?php edit_post_link( __( 'Edit', 'flint' ), '<footer class="entry-meta"><span class="edit-link">', '</span></footer>' ); ?>
 </article><!-- #post-<?php the_ID(); ?> -->
