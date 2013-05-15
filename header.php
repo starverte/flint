@@ -61,8 +61,8 @@ else {
 		</hgroup>
 
 		<nav role="navigation" class="navbar">
-			<h1 class="assistive-text"><?php _e( 'Menu', 'flint' ); ?></h1>
-			<div class="assistive-text skip-link"><a href="#content" title="<?php esc_attr_e( 'Skip to content', 'flint' ); ?>"><?php _e( 'Skip to content', 'flint' ); ?></a></div>
+			<h1 class="screen-reader-text"><?php _e( 'Menu', 'flint' ); ?></h1>
+			<div class="screen-reader-text skip-link"><a href="#content" title="<?php esc_attr_e( 'Skip to content', 'flint' ); ?>"><?php _e( 'Skip to content', 'flint' ); ?></a></div>
 			<div class="navbar-inner">
 				<div class="container">
                 
