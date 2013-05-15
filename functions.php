@@ -133,14 +133,17 @@ function flint_scripts() {
 	if (is_plugin_inactive('steel/steel.php')) {
 		wp_register_script( 'bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js' , array('jquery') , '2.3.1', true );
 		wp_register_style( 'bootstrap-style', get_template_directory_uri() . '/inc/css/bootstrap.min.css' );
+		wp_register_style( 'bootstrap-responsive-style', get_template_directory_uri() . '/inc/css/bootstrap-responsive.min.css' );
 		wp_register_script( 'bootstrap-run', get_template_directory_uri() . '/js/run.js' , array('bootstrap') , '' , true );
 		wp_enqueue_script( 'bootstrap' );
 		wp_enqueue_style( 'bootstrap-style' );
+		wp_enqueue_style( 'bootstrap-responsive-style' );
 		wp_enqueue_script( 'bootstrap-run' );
 	}
 	else {
 		wp_enqueue_script( 'bootstrap' );
 		wp_enqueue_style( 'bootstrap-style' );
+		wp_enqueue_style( 'bootstrap-responsive-style' );
 		wp_enqueue_script( 'bootstrap-run' );
 	}
 	
