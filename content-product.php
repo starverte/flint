@@ -23,7 +23,12 @@
 
 	<div class="entry-content">
 		<?php the_content(); ?>
-		<?php flint_link_pages( array( 'before' => '<div class="pagination"><ul>', 'after' => '</ul></div>' ) ); ?>
+		<?php
+			flint_link_pages( array(
+				'before' => '<div class="pagination"><ul>',
+				'after'  => '</ul></div>',
+			) );
+		?>
 	</div><!-- .entry-content -->
 
 	<footer class="entry-meta">
