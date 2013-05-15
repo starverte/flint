@@ -24,7 +24,7 @@
 		<?php the_content(); ?>
 		<?php
 			flint_link_pages( array(
-				'before' => '<div class="pagination"><ul>' . __( 'Pages:', 'flint' ),
+				'before' => '<div class="pagination"><ul>',
 				'after'  => '</ul></div>',
 			) );
 		?>
