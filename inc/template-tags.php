@@ -178,7 +178,7 @@ add_action( 'save_post', 'flint_category_transient_flusher' );
  */
 function flint_link_pages($args = '') {
 	$defaults = array(
-		'before' => '<p>' . __('Pages:'), 'after' => '</p>',
+		'before' => '<p>', 'after' => '</p>',
 		'link_before' => '', 'link_after' => '',
 		'next_or_number' => 'number', 'nextpagelink' => __('Next page'),
 		'previouspagelink' => __('Previous page'), 'pagelink' => '%',
