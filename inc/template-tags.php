@@ -37,7 +37,7 @@ function flint_content_nav( $nav_id ) {
 	
 	<ul class="pager">
 
-		<?php previous_post_link( 'li class="previous">%link</li>' ); ?>
+		<?php previous_post_link( '<li class="previous">%link</li>' ); ?>
 		<?php next_post_link( '<li class="next">%link</li>' ); ?>
 		
 	</ul>
