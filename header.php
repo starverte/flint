@@ -20,7 +20,6 @@
 <script src="<?php echo get_template_directory_uri(); ?>/js/html5.js" type="text/javascript"></script>
 <![endif]-->
 
-<?php steel_head(); ?>
 <?php wp_head(); ?>
 </head>
 
@@ -59,6 +58,7 @@ else {
 		</div>
 		<?php } /* if ( display_header_text() ) */ ?>
 		</hgroup>
+	<?php } /* if (current_theme_supports('custom-header')) */ ?>
 
 		<nav role="navigation" class="navbar">
 			<h1 class="screen-reader-text"><?php _e( 'Menu', 'flint' ); ?></h1>
