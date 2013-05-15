@@ -5,14 +5,11 @@
  * Eventually, some of the functionality here could be replaced by core features
  *
  * @package Flint
- * @since Flint 1.0
  */
 
 if ( ! function_exists( 'flint_content_nav' ) ) :
 /**
  * Display navigation to next/previous pages when applicable
- *
- * @since Flint 1.0
  */
 function flint_content_nav( $nav_id ) {
 	global $wp_query, $post;
@@ -30,26 +27,25 @@ function flint_content_nav( $nav_id ) {
 	if ( $wp_query->max_num_pages < 2 && ( is_home() || is_archive() || is_search() ) )
 		return;
 
-	$nav_class = 'site-navigation paging-navigation';
-	if ( is_single() )
-		$nav_class = 'site-navigation post-navigation';
+	$nav_class = ( is_single() ) ? 'navigation-post' : 'navigation-paging';
 
 	?>
-	<nav role="navigation" id="<?php echo $nav_id; ?>" class="<?php echo $nav_class; ?>">
-		<h1 class="assistive-text"><?php _e( 'Post navigation', 'flint' ); ?></h1>
+	<nav role="navigation" id="<?php echo esc_attr( $nav_id ); ?>" class="<?php echo $nav_class; ?>">
+		<h1 class="screen-reader-text"><?php _e( 'Post navigation', 'flint' ); ?></h1>
 
 	<?php if ( is_single() ) : // navigation links for single posts ?>
-    
-    	<ul class="pager">
+	
+	<ul class="pager">
 
-		<?php previous_post_link( '<li class="previous">%link</li>', '%title' ); ?>
-		<?php next_post_link( '<li class="next">%link</li>', '%title' ); ?>
-        
-        </ul>
+		<?php previous_post_link( 'li class="previous">%link</li>' ); ?>
+		<?php next_post_link( '<li class="next">%link</li>' ); ?>
+		
+	</ul>
 
 	<?php elseif ( $wp_query->max_num_pages > 1 && ( is_home() || is_archive() || is_search() ) ) : // navigation links for home, archive, and search pages ?>
-    	<ul class="pager">
-
+	
+	<ul class="pager">
+		
 		<?php if ( get_next_posts_link() ) : ?>
 		<li class="previous"><?php next_posts_link( __( 'Older posts', 'flint' ) ); ?></li>
 		<?php endif; ?>
@@ -57,12 +53,12 @@ function flint_content_nav( $nav_id ) {
 		<?php if ( get_previous_posts_link() ) : ?>
 		<li class="next"><?php previous_posts_link( __( 'Newer posts', 'flint' ) ); ?></li>
 		<?php endif; ?>
-        
-        </ul>
-
+		
+	</ul>
+	
 	<?php endif; ?>
 
-	</nav><!-- #<?php echo $nav_id; ?> -->
+	</nav><!-- #<?php echo esc_html( $nav_id ); ?> -->
 	<?php
 }
 endif; // flint_content_nav
@@ -72,8 +68,6 @@ if ( ! function_exists( 'flint_comment' ) ) :
  * Template for comments and pingbacks.
  *
  * Used as a callback by wp_list_comments() for displaying the comments.
- *
- * @since Flint 1.0
  */
 function flint_comment( $comment, $args, $depth ) {
 	$GLOBALS['comment'] = $comment;
@@ -82,7 +76,7 @@ function flint_comment( $comment, $args, $depth ) {
 		case 'trackback' :
 	?>
 	<li class="post pingback">
-		<p><?php _e( 'Pingback:', 'flint' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __( '(Edit)', 'flint' ), ' ' ); ?></p>
+		<p><?php _e( 'Pingback:', 'flint' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __( 'Edit', 'flint' ), '<span class="edit-link">', '<span>' ); ?></p>
 	<?php
 			break;
 		default :
@@ -101,19 +95,21 @@ function flint_comment( $comment, $args, $depth ) {
 
 				<div class="comment-meta commentmetadata">
 					<a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>"><time datetime="<?php comment_time( 'c' ); ?>">
-					<?php
-						/* translators: 1: date, 2: time */
-						printf( __( '%1$s at %2$s', 'flint' ), get_comment_date(), get_comment_time() ); ?>
+					<?php printf( _x( '%1$s at %2$s', '1: date, 2: time', 'flint' ), get_comment_date(), get_comment_time() ); ?>
 					</time></a>
-					<?php edit_comment_link( __( '(Edit)', 'flint' ), ' ' );
-					?>
+					<?php edit_comment_link( __( 'Edit', 'flint' ), '<span class="edit-link">', '<span>' ); ?>
 				</div><!-- .comment-meta .commentmetadata -->
 			</footer>
 
 			<div class="comment-content"><?php comment_text(); ?></div>
 
 			<div class="reply">
-				<?php comment_reply_link( array_merge( $args, array( 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
+			<?php
+				comment_reply_link( array_merge( $args,array(
+					'depth'     => $depth,
+					'max_depth' => $args['max_depth'],
+				) ) );
+			?>
 			</div><!-- .reply -->
 		</article><!-- #comment-## -->
 
@@ -126,8 +122,6 @@ endif; // ends check for flint_comment()
 if ( ! function_exists( 'flint_posted_on' ) ) :
 /**
  * Prints HTML with meta information for the current post-date/time and author.
- *
- * @since Flint 1.0
  */
 function flint_posted_on() {
 	printf( __( 'Posted on <a href="%1$s" title="%2$s" rel="bookmark"><time class="entry-date" datetime="%3$s">%4$s</time></a><span class="byline"> by <span class="author vcard"><a class="url fn n" href="%5$s" title="%6$s" rel="author">%7$s</a></span></span>', 'flint' ),
@@ -141,11 +135,8 @@ function flint_posted_on() {
 	);
 }
 endif;
-
 /**
  * Returns true if a blog has more than 1 category
- *
- * @since Flint 1.0
  */
 function flint_categorized_blog() {
 	if ( false === ( $all_the_cool_cats = get_transient( 'all_the_cool_cats' ) ) ) {
@@ -171,8 +162,6 @@ function flint_categorized_blog() {
 
 /**
  * Flush out the transients used in flint_categorized_blog
- *
- * @since Flint 1.0
  */
 function flint_category_transient_flusher() {
 	// Like, beat it. Dig?
