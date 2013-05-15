@@ -31,7 +31,7 @@
 		<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'flint' ) ); ?>
 		<?php
 			flint_link_pages( array(
-				'before' => '<div class="pagination"><ul>' . __( 'Pages:', 'flint' ),
+				'before' => '<div class="pagination"><ul>',
 				'after'  => '</ul></div>',
 			) );
 		?>
