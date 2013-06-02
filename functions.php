@@ -128,21 +128,14 @@ add_action( 'widgets_init', 'flint_widgets_init' );
 function flint_scripts() {
 	wp_enqueue_style( 'flint-style', get_stylesheet_uri() );
 	
-	// Load scripts and styles for Twitter Bootstrap
-	wp_register_script( 'bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js' , array('jquery') , '2.3.1', true );
-	wp_register_style( 'bootstrap-style', get_template_directory_uri() . '/inc/css/bootstrap.min.css' );
-	wp_register_style( 'bootstrap-responsive-style', get_template_directory_uri() . '/inc/css/bootstrap-responsive.min.css' );
-	wp_register_style( 'bootstrap-override', get_template_directory_uri() . '/inc/css/bootstrap-override.css' );
-	wp_register_script( 'bootstrap-run', get_template_directory_uri() . '/js/run.js' , array('bootstrap') , '' , true );
-	wp_enqueue_script( 'bootstrap' );
-	wp_enqueue_style( 'bootstrap-style' );
-	wp_enqueue_style( 'bootstrap-responsive-style' );
-	wp_enqueue_style( 'bootstrap-override' );
-	wp_enqueue_script( 'bootstrap-run' );
+	// Load Twitter Bootstrap 2.3.2
+	wp_enqueue_script( 'bootstrap', '//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js', array('jquery'), '2.3.2', true );
+	wp_enqueue_style( 'bootstrap-css', '//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css', array('jquery') , '2.3.2' );
+	wp_enqueue_style( 'bootstrap-override', get_template_directory_uri() . '/inc/css/bootstrap-override.css', array('bootstrap-css') , '20130514' );
+	wp_enqueue_script( 'bootstrap-run', get_template_directory_uri() . '/js/run.js' , array('bootstrap') , '20130505' , true );
 	
-	//Load Font Awesome
-	wp_register_style( 'font-awesome', get_template_directory_uri() . '/inc/css/font-awesome.min.css' );
-	wp_enqueue_style( 'font-awesome' );
+	//Load Font Awesome 3.1.1
+	wp_enqueue_style( 'font-awesome', '//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css', array('bootstrap'), '3.1.1' );
 
 	wp_enqueue_script( 'flint-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20120206', true );
 
