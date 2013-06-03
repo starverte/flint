@@ -28,7 +28,7 @@
 	</div><!-- .entry-summary -->
 	<?php else : ?>
 	<div class="entry-content">
-		<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'flint' ) ); ?>
+		<?php flint_the_content(); ?>
 		<?php
 			flint_link_pages( array(
 				'before' => '<div class="pagination"><ul>',
@@ -38,7 +38,7 @@
 	</div><!-- .entry-content -->
 	<?php endif; ?>
 
-	<footer class="entry-meta">
+	<footer class="entry-meta clearfix">
 		<?php if ( 'post' == get_post_type() ) : // Hide category and tag text for pages on Search ?>
 			<?php
 				/* translators: used between list items, there is a space after the comma */
