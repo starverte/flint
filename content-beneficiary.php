@@ -42,7 +42,7 @@
 		?>
             </div><!-- .entry-content -->
         
-            <footer class="entry-meta">
+            <footer class="entry-meta clearfix">
 		
             </footer><!-- .entry-meta -->
         </div><!-- .span8 -->

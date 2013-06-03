@@ -13,7 +13,7 @@
 <?php } ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
-		<h1 class="entry-title"><?php the_title(); ?></h1>
+  	<h1 class="entry-title"><?php the_title(); ?></h1>
 
 		<div class="entry-meta">
 			<?php flint_posted_on(); ?>
@@ -30,7 +30,7 @@
 		?>
 	</div><!-- .entry-content -->
 
-	<footer class="entry-meta">
+	<footer class="entry-meta clearfix">
 		<?php
 			/* translators: used between list items, there is a space after the comma */
 			$category_list = get_the_category_list( __( ', ', 'flint' ) );

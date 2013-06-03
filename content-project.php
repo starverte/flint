@@ -40,7 +40,7 @@
 		?>
 	</div><!-- .entry-content -->
 
-	<footer class="entry-meta">
+	<footer class="entry-meta clearfix">
 		<?php
 			/* translators: used between list items, there is a space after the comma */
 			$category_list = get_the_category_list( __( ', ', 'flint' ) );

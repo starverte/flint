@@ -31,7 +31,7 @@
 		?>
 	</div><!-- .entry-content -->
 
-	<footer class="entry-meta">
+	<footer class="entry-meta clearfix">
     	<p>
 		<?php item_ref(); ?>
         	<?php item_shipping(); ?>
