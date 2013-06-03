@@ -68,6 +68,6 @@ if ( post_password_required() )
 		<p class="no-comments"><?php _e( 'Comments are closed.', 'flint' ); ?></p>
 	<?php endif; ?>
 
-	<?php comment_form(); ?>
+	<?php flint_comment_form(); ?>
 
 </div><!-- #comments -->
