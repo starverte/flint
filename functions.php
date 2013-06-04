@@ -135,8 +135,6 @@ function flint_scripts() {
 	//Load Font Awesome 3.1.1
 	wp_enqueue_style( 'font-awesome', '//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css', array('bootstrap'), '3.1.1' );
 
-	wp_enqueue_script( 'flint-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20120206', true );
-
 	wp_enqueue_script( 'flint-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
