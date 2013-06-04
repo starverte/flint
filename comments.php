@@ -32,11 +32,10 @@ if ( post_password_required() )
 		</h2>
 
 		<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // are there comments to navigate through ?>
-		<nav id="comment-nav-above" class="navigation-comment" role="navigation">
-			<h1 class="screen-reader-text"><?php _e( 'Comment navigation', 'flint' ); ?></h1>
-			<div class="nav-previous"><?php previous_comments_link( __( '&larr; Older Comments', 'flint' ) ); ?></div>
-			<div class="nav-next"><?php next_comments_link( __( 'Newer Comments &rarr;', 'flint' ) ); ?></div>
-		</nav><!-- #comment-nav-before -->
+		<ul class="pager comments-nav-above">
+			<li class="previous"><?php previous_comments_link( __( 'Older Comments', 'flint' ) ); ?></li>
+			<li class="next"><?php next_comments_link( __( 'Newer Comments', 'flint' ) ); ?></li>
+		</ul><!-- .pager -->
 		<?php endif; // check for comment navigation ?>
 
 		<ol class="comment-list">
@@ -52,11 +51,10 @@ if ( post_password_required() )
 		</ol><!-- .comment-list -->
 
 		<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // are there comments to navigate through ?>
-		<nav id="comment-nav-below" class="navigation-comment" role="navigation">
-			<h1 class="screen-reader-text"><?php _e( 'Comment navigation', 'flint' ); ?></h1>
-			<div class="nav-previous"><?php previous_comments_link( __( '&larr; Older Comments', 'flint' ) ); ?></div>
-			<div class="nav-next"><?php next_comments_link( __( 'Newer Comments &rarr;', 'flint' ) ); ?></div>
-		</nav><!-- #comment-nav-below -->
+		<ul class="pager comments-nav-below">
+			<li class="previous"><?php previous_comments_link( __( 'Older Comments', 'flint' ) ); ?></li>
+			<li class="next"><?php next_comments_link( __( 'Newer Comments', 'flint' ) ); ?></li>
+		</ul><!-- .pager -->
 		<?php endif; // check for comment navigation ?>
 
 	<?php endif; // have_comments() ?>
