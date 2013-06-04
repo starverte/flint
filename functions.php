@@ -131,7 +131,6 @@ function flint_scripts() {
 	wp_enqueue_script( 'bootstrap', '//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js', array('jquery'), '2.3.2', true );
 	wp_enqueue_script( 'bootstrap-run', get_template_directory_uri() . '/js/run.js' , array('bootstrap') , '20130505' , true );
 	wp_enqueue_style( 'bootstrap-css', '//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css', array() , '2.3.2' );
-	wp_enqueue_style( 'bootstrap-override', get_template_directory_uri() . '/inc/css/bootstrap-override.css', array('bootstrap-css') , '20130514' );
 	
 	//Load Font Awesome 3.1.1
 	wp_enqueue_style( 'font-awesome', '//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css', array('bootstrap'), '3.1.1' );
