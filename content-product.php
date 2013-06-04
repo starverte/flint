@@ -8,7 +8,7 @@
 <?php if ( is_user_logged_in() ) { ?>
 	<div class="container-fluid">
 		<div class="row-fluid">
-                	<a class="btn btn-info btn-small" href="<?php echo get_edit_post_link(); ?>" style="color:#fff;float:right;"><i class="icon-edit icon-white"></i> Edit</a>
+                	<a class="btn btn-small" href="<?php echo get_edit_post_link(); ?>" style="float:right;">Edit</a>
 		</div>
 	</div>
 <?php } ?>
