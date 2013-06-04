@@ -147,6 +147,9 @@ function flint_scripts() {
 		wp_enqueue_script( 'flint-keyboard-image-navigation', get_template_directory_uri() . '/js/keyboard-image-navigation.js', array( 'jquery' ), '20120202' );
 	}
 	
+	//Load Google Font 'Open Sans'
+	wp_enqueue_style( 'open-sans', 'http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700', array(), '' );
+	
 	//Load theme stylesheet
 	wp_enqueue_style( 'flint-style', get_stylesheet_uri() );
 }
