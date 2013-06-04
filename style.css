@@ -63,9 +63,6 @@ a {
 	color: #00a6e5;
 	text-decoration: none;
 }
-a:visited {
-	color: #00b3f0;
-}
 a:hover,
 a:focus,
 a:active {
@@ -349,44 +346,16 @@ object {
 /* =Comments
 ----------------------------------------------- */
 
-.avatar {
-	float: left;
-	margin: 1em 1em 1em 0;
-}
-.bypostauthor {
-}
 .comment-content a {
 	word-wrap: break-word;
 }
-.commentlist,
-.commentlist .children {
+.comment-list,
+.comment-list .children {
 	list-style: none;
 }
 article.comment {
 	margin-bottom: 0.5em;
 	padding: 1em;
-}
-.commentlist .thread-odd article {
-	background: #fafafa;
-}
-.commentlist .thread-even article {
-	background: #fbfdff;
-}
-.commentlist .thread-odd .depth-2 article,
-.commentlist .thread-even .depth-2 article {
-	background: #fff;
-}
-.commentlist .thread-odd .depth-3 article {
-	background: #f8f8f8;
-}
-.commentlist .thread-even .depth-3 article {
-	background: #f7fcfe;
-}
-.commentlist .thread-odd .depth-4 article {
-	background: #eee;
-}
-.commentlist .thread-even .depth-4 article {
-	background: #e1f4fd;
 }
 
 

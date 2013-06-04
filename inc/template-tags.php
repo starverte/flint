@@ -58,8 +58,9 @@ function flint_content_nav( $nav_id ) {
 	
 	<?php endif; ?>
 
-	</nav><!-- #<?php echo esc_html( $nav_id ); ?> -->
-	<?php
+	</nav>
+	<!-- #<?php echo esc_html( $nav_id ); ?> -->
+<?php
 }
 endif; // flint_content_nav
 
@@ -73,49 +74,42 @@ if ( ! function_exists( 'flint_comment' ) ) :
 function flint_comment( $comment, $args, $depth ) {
 	$GLOBALS['comment'] = $comment;
 	switch ( $comment->comment_type ) :
-		case 'pingback' :
-		case 'trackback' :
+	case 'pingback' :
+	case 'trackback' :
 	?>
 	<li class="post pingback">
-		<p><?php _e( 'Pingback:', 'flint' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __( 'Edit', 'flint' ), '<span class="edit-link">', '<span>' ); ?></p>
-	<?php
-			break;
-		default :
-	?>
+    <p><?php _e( 'Pingback:', 'flint' ); ?> <?php comment_author_link(); ?></p>
+    <?php
+    	break;
+    default :
+    ?>
 	<li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
-		<article id="comment-<?php comment_ID(); ?>" class="comment">
-			<footer>
-				<div class="comment-author vcard">
-					<?php echo get_avatar( $comment, 40 ); ?>
-					<?php printf( __( '%s <span class="says">says:</span>', 'flint' ), sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?>
-				</div><!-- .comment-author .vcard -->
-				<?php if ( $comment->comment_approved == '0' ) : ?>
-					<em><?php _e( 'Your comment is awaiting moderation.', 'flint' ); ?></em>
-					<br />
-				<?php endif; ?>
-
-				<div class="comment-meta commentmetadata">
-					<a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>"><time datetime="<?php comment_time( 'c' ); ?>">
-					<?php printf( _x( '%1$s at %2$s', '1: date, 2: time', 'flint' ), get_comment_date(), get_comment_time() ); ?>
-					</time></a>
-					<?php edit_comment_link( __( 'Edit', 'flint' ), '<span class="edit-link">', '<span>' ); ?>
-				</div><!-- .comment-meta .commentmetadata -->
-			</footer>
-
-			<div class="comment-content"><?php comment_text(); ?></div>
-
-			<div class="reply">
-			<?php
-				comment_reply_link( array_merge( $args,array(
-					'depth'     => $depth,
-					'max_depth' => $args['max_depth'],
-				) ) );
-			?>
-			</div><!-- .reply -->
-		</article><!-- #comment-## -->
-
+    <article id="comment-<?php comment_ID(); ?>" class="comment media">
+      <div class="pull-left">
+      	<?php echo flint_avatar( $comment ); ?>
+      </div>
+      <div class="pull-right">
+        <a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>"><time datetime="<?php comment_time( 'c' ); ?>">
+        <?php printf( _x( '%1$s at %2$s', '1: date, 2: time', 'flint' ), get_comment_date(), get_comment_time() ); ?>
+        </time></a>
+      </div>
+      <div class="media-body">
+        <h4 class="media-heading"><?php printf( __( '%s <span class="says">says:</span>', 'flint' ), sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?></h4>
+        <?php if ( $comment->comment_approved == '0' ) : ?>
+        <em><?php _e( 'Your comment is awaiting moderation.', 'flint' ); ?></em>
+        <br>
+        <?php endif; ?>
+        <?php comment_text(); ?>
+        
+      </div>
+      <div class="pull-right">
+				<?php flint_reply_link(array_merge( $args, array( 'depth' => $depth, 'max_depth' => $args['max_depth'] ) )); ?>
+        <a class="btn btn-small" href="<?php echo get_edit_comment_link(); ?>" >Edit</a>
+      </div>
+    </article>
+    
 	<?php
-			break;
+		break;
 	endswitch;
 }
 endif; // ends check for flint_comment()
@@ -383,40 +377,198 @@ function flint_comment_form( $args = array(), $post_id = null ) {
 	?>
 		<?php if ( comments_open( $post_id ) ) : ?>
 			<?php do_action( 'comment_form_before' ); ?>
-			<div id="respond">
-				<h3 id="reply-title"><?php comment_form_title( $args['title_reply'], $args['title_reply_to'] ); ?> <small><?php cancel_comment_reply_link( $args['cancel_reply_link'] ); ?></small></h3>
-				<?php if ( get_option( 'comment_registration' ) && !is_user_logged_in() ) : ?>
-					<?php echo $args['must_log_in']; ?>
-					<?php do_action( 'comment_form_must_log_in_after' ); ?>
-				<?php else : ?>
-					<form action="<?php echo site_url( '/wp-comments-post.php' ); ?>" method="post" id="<?php echo esc_attr( $args['id_form'] ); ?>">
-						<?php do_action( 'comment_form_top' ); ?>
-						<?php if ( is_user_logged_in() ) : ?>
-							<?php echo apply_filters( 'comment_form_logged_in', $args['logged_in_as'], $commenter, $user_identity ); ?>
-							<?php do_action( 'comment_form_logged_in_after', $commenter, $user_identity ); ?>
-						<?php else : ?>
-							<?php echo $args['comment_notes_before']; ?>
-							<?php
+		<div id="respond">
+			<h3 id="reply-title"><?php comment_form_title( $args['title_reply'], $args['title_reply_to'] ); ?> <small><?php cancel_comment_reply_link( $args['cancel_reply_link'] ); ?></small></h3>
+			<?php if ( get_option( 'comment_registration' ) && !is_user_logged_in() ) : ?>
+				<?php echo $args['must_log_in']; ?>
+				<?php do_action( 'comment_form_must_log_in_after' ); ?>
+			<?php else : ?>
+				<form action="<?php echo site_url( '/wp-comments-post.php' ); ?>" method="post" id="<?php echo esc_attr( $args['id_form'] ); ?>">
+					<?php do_action( 'comment_form_top' ); ?>
+					<?php if ( is_user_logged_in() ) : ?>
+						<?php echo apply_filters( 'comment_form_logged_in', $args['logged_in_as'], $commenter, $user_identity ); ?>
+						<?php do_action( 'comment_form_logged_in_after', $commenter, $user_identity ); ?>
+					<?php else : ?>
+						<?php echo $args['comment_notes_before']; ?>
+						<?php
 							do_action( 'comment_form_before_fields' );
 							foreach ( (array) $args['fields'] as $name => $field ) {
 								echo apply_filters( "comment_form_field_{$name}", $field ) . "\n";
 							}
 							do_action( 'comment_form_after_fields' );
 							?>
-						<?php endif; ?>
-						<?php echo apply_filters( 'comment_form_field_comment', $args['comment_field'] ); ?>
-						<?php echo $args['comment_notes_after']; ?>
-						<p class="form-submit">
-							<button class="btn" name="submit" type="submit" id="<?php echo esc_attr( $args['id_submit'] ); ?>"><?php echo esc_attr( $args['label_submit'] ); ?></button>
-							<?php comment_id_fields( $post_id ); ?>
-						</p>
-						<?php do_action( 'comment_form', $post_id ); ?>
-					</form>
-				<?php endif; ?>
+					<?php endif; ?>
+					<?php echo apply_filters( 'comment_form_field_comment', $args['comment_field'] ); ?>
+					<?php echo $args['comment_notes_after']; ?>
+					<p class="form-submit">
+						<button class="btn" name="submit" type="submit" id="<?php echo esc_attr( $args['id_submit'] ); ?>"><?php echo esc_attr( $args['label_submit'] ); ?></button>
+						<?php comment_id_fields( $post_id ); ?>
+					</p>
+					<?php do_action( 'comment_form', $post_id ); ?>
+				</form>
+			<?php endif; ?>
 			</div><!-- #respond -->
 			<?php do_action( 'comment_form_after' ); ?>
 		<?php else : ?>
 			<?php do_action( 'comment_form_comments_closed' ); ?>
 		<?php endif; ?>
 	<?php
+}
+
+/**
+ * Retrieve the avatar for a user who provided a user ID or email address.
+ *
+ * @since 2.5
+ * @param int|string|object $id_or_email A user ID,  email address, or comment object
+ * @param int $size Size of the avatar image
+ * @param string $default URL to a default image to use if no avatar is available
+ * @param string $alt Alternative text to use in image tag. Defaults to blank
+ * @return string <img> tag for the user's avatar
+*/
+function flint_avatar( $id_or_email, $size = '96', $default = '', $alt = false ) {
+	if ( ! get_option('show_avatars') )
+		return false;
+
+	if ( false === $alt)
+		$safe_alt = '';
+	else
+		$safe_alt = esc_attr( $alt );
+
+	if ( !is_numeric($size) )
+		$size = '96';
+
+	$email = '';
+	if ( is_numeric($id_or_email) ) {
+		$id = (int) $id_or_email;
+		$user = get_userdata($id);
+		if ( $user )
+			$email = $user->user_email;
+	} elseif ( is_object($id_or_email) ) {
+		// No avatar for pingbacks or trackbacks
+		$allowed_comment_types = apply_filters( 'get_avatar_comment_types', array( 'comment' ) );
+		if ( ! empty( $id_or_email->comment_type ) && ! in_array( $id_or_email->comment_type, (array) $allowed_comment_types ) )
+			return false;
+
+		if ( !empty($id_or_email->user_id) ) {
+			$id = (int) $id_or_email->user_id;
+			$user = get_userdata($id);
+			if ( $user)
+				$email = $user->user_email;
+		} elseif ( !empty($id_or_email->comment_author_email) ) {
+			$email = $id_or_email->comment_author_email;
+		}
+	} else {
+		$email = $id_or_email;
+	}
+
+	if ( empty($default) ) {
+		$avatar_default = get_option('avatar_default');
+		if ( empty($avatar_default) )
+			$default = 'mystery';
+		else
+			$default = $avatar_default;
+	}
+
+	if ( !empty($email) )
+		$email_hash = md5( strtolower( trim( $email ) ) );
+
+	if ( is_ssl() ) {
+		$host = 'https://secure.gravatar.com';
+	} else {
+		if ( !empty($email) )
+			$host = sprintf( "http://%d.gravatar.com", ( hexdec( $email_hash[0] ) % 2 ) );
+		else
+			$host = 'http://0.gravatar.com';
+	}
+
+	if ( 'mystery' == $default )
+		$default = "$host/avatar/ad516503a11cd5ca435acc9bb6523536?s={$size}"; // ad516503a11cd5ca435acc9bb6523536 == md5('unknown@gravatar.com')
+	elseif ( 'blank' == $default )
+		$default = $email ? 'blank' : includes_url( 'images/blank.gif' );
+	elseif ( !empty($email) && 'gravatar_default' == $default )
+		$default = '';
+	elseif ( 'gravatar_default' == $default )
+		$default = "$host/avatar/?s={$size}";
+	elseif ( empty($email) )
+		$default = "$host/avatar/?d=$default&amp;s={$size}";
+	elseif ( strpos($default, 'http://') === 0 )
+		$default = add_query_arg( 's', $size, $default );
+
+	if ( !empty($email) ) {
+		$out = "$host/avatar/";
+		$out .= $email_hash;
+		$out .= '?s='.$size;
+		$out .= '&amp;d=' . urlencode( $default );
+
+		$rating = get_option('avatar_rating');
+		if ( !empty( $rating ) )
+			$out .= "&amp;r={$rating}";
+
+		$avatar = "<img alt='{$safe_alt}' src='{$out}' class='avatar avatar-{$size} media-object' height='{$size}' width='{$size}' />";
+	} else {
+		$avatar = "<img alt='{$safe_alt}' src='{$default}' class='avatar avatar-{$size} media-object avatar-default' height='{$size}' width='{$size}' />";
+	}
+
+	return apply_filters('get_avatar', $avatar, $id_or_email, $size, $default, $alt);
+}
+
+/**
+ * Retrieve HTML content for reply to comment link.
+ *
+ * The default arguments that can be override are 'add_below', 'respond_id',
+ * 'reply_text', 'login_text', and 'depth'. The 'login_text' argument will be
+ * used, if the user must log in or register first before posting a comment. The
+ * 'reply_text' will be used, if they can post a reply. The 'add_below' and
+ * 'respond_id' arguments are for the JavaScript moveAddCommentForm() function
+ * parameters.
+ *
+ * @since 2.7.0
+ *
+ * @param array $args Optional. Override default options.
+ * @param int $comment Optional. Comment being replied to.
+ * @param int $post Optional. Post that the comment is going to be displayed on.
+ * @return string|bool|null Link to show comment form, if successful. False, if comments are closed.
+ */
+function get_flint_reply_link($args = array(), $comment = null, $post = null) {
+	global $user_ID;
+
+	$defaults = array('add_below' => 'comment', 'respond_id' => 'respond', 'reply_text' => __('Reply'),
+		'login_text' => __('Log in to Reply'), 'depth' => 0, 'before' => '', 'after' => '');
+
+	$args = wp_parse_args($args, $defaults);
+
+	if ( 0 == $args['depth'] || $args['max_depth'] <= $args['depth'] )
+		return;
+
+	extract($args, EXTR_SKIP);
+
+	$comment = get_comment($comment);
+	if ( empty($post) )
+		$post = $comment->comment_post_ID;
+	$post = get_post($post);
+
+	if ( !comments_open($post->ID) )
+		return false;
+
+	$link = '';
+
+	if ( get_option('comment_registration') && !$user_ID )
+		$link = '<a rel="nofollow" class="comment-reply-login btn btn-primary btn-small" href="' . esc_url( wp_login_url( get_permalink() ) ) . '">' . $login_text . '</a>';
+	else
+		$link = "<a class='comment-reply-link btn btn-primary btn-small' href='" . esc_url( add_query_arg( 'replytocom', $comment->comment_ID ) ) . "#" . $respond_id . "' onclick='return addComment.moveForm(\"$add_below-$comment->comment_ID\", \"$comment->comment_ID\", \"$respond_id\", \"$post->ID\")'>$reply_text</a>";
+	return apply_filters('comment_reply_link', $before . $link . $after, $args, $comment, $post);
+}
+/**
+ * Displays the HTML content for reply to comment link.
+ *
+ * @since 2.7.0
+ * @see get_comment_reply_link() Echoes result
+ *
+ * @param array $args Optional. Override default options.
+ * @param int $comment Optional. Comment being replied to.
+ * @param int $post Optional. Post that the comment is going to be displayed on.
+ * @return string|bool|null Link to show comment form, if successful. False, if comments are closed.
+ */
+function flint_reply_link($args = array(), $comment = null, $post = null) {
+	echo get_flint_reply_link($args, $comment, $post);
 }
