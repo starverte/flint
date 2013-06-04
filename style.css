@@ -30,8 +30,6 @@ A spark sets a fire ablaze, and similarly the Sparks Framework is made up of 'sp
     along with Flint.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300); /* Loads Open Sans font from Google */
-
 /* =Global
 ----------------------------------------------- */
 
@@ -42,6 +40,7 @@ select,
 textarea {
 	color: #404040;
 	font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
 }
 h1,
 h2,
@@ -49,7 +48,10 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: normal;
+  font-weight: 600;
+}
+b, strong {
+  font-weight: 700;
 }
 img {
   padding-top: 5px;
