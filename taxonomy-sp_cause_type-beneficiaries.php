@@ -5,7 +5,7 @@
  * Learn more: http://codex.wordpress.org/Template_Hierarchy
  *
  * @package Flint
- * @since Flint 1.0
+ *
  */
 
 get_header(); ?>

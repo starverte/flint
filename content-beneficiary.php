@@ -1,7 +1,7 @@
 <?php
 /**
  * @package Flint
- * @since Flint 1.0
+ *
  */
 ?>
 <?php if ( is_user_logged_in() ) { ?>
