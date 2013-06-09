@@ -417,13 +417,6 @@ function flint_comment_form( $args = array(), $post_id = null ) {
 
 /**
  * Retrieve the avatar for a user who provided a user ID or email address.
- *
- * @since 2.5
- * @param int|string|object $id_or_email A user ID,  email address, or comment object
- * @param int $size Size of the avatar image
- * @param string $default URL to a default image to use if no avatar is available
- * @param string $alt Alternative text to use in image tag. Defaults to blank
- * @return string <img> tag for the user's avatar
 */
 function flint_avatar( $id_or_email, $size = '96', $default = '', $alt = false ) {
 	if ( ! get_option('show_avatars') )
@@ -521,13 +514,6 @@ function flint_avatar( $id_or_email, $size = '96', $default = '', $alt = false )
  * 'reply_text' will be used, if they can post a reply. The 'add_below' and
  * 'respond_id' arguments are for the JavaScript moveAddCommentForm() function
  * parameters.
- *
- * @since 2.7.0
- *
- * @param array $args Optional. Override default options.
- * @param int $comment Optional. Comment being replied to.
- * @param int $post Optional. Post that the comment is going to be displayed on.
- * @return string|bool|null Link to show comment form, if successful. False, if comments are closed.
  */
 function get_flint_reply_link($args = array(), $comment = null, $post = null) {
 	global $user_ID;
@@ -560,14 +546,6 @@ function get_flint_reply_link($args = array(), $comment = null, $post = null) {
 }
 /**
  * Displays the HTML content for reply to comment link.
- *
- * @since 2.7.0
- * @see get_comment_reply_link() Echoes result
- *
- * @param array $args Optional. Override default options.
- * @param int $comment Optional. Comment being replied to.
- * @param int $post Optional. Post that the comment is going to be displayed on.
- * @return string|bool|null Link to show comment form, if successful. False, if comments are closed.
  */
 function flint_reply_link($args = array(), $comment = null, $post = null) {
 	echo get_flint_reply_link($args, $comment, $post);
