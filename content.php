@@ -4,16 +4,12 @@
  */
 ?>
 
-<?php if ( is_user_logged_in() ) { ?>
-	<div class="container-fluid">
-		<div class="row-fluid">
-                	<a class="btn btn-small" href="<?php echo get_edit_post_link(); ?>" style="float:right;">Edit</a>
-		</div>
-	</div>
+<?php if ( is_user_logged_in() & is_single() ) { ?>
+	<div class="container-fluid"><div class="row-fluid"><a class="btn btn-small" href="<?php echo get_edit_post_link(); ?>" style="float:right;">Edit</a></div></div>
 <?php } ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
-		<h1 class="entry-title"><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
+		<h1 class="entry-title"><?php if (is_single()) { echo the_title(); } else { $permalink = get_permalink(); $title = get_the_title(); echo '<a href="' . $permalink .'" rel="bookmark">' . $title . '</a>'; } ?></h1>
 		
 		<?php if ( 'post' == get_post_type() ) : ?>
 		<div class="entry-meta">
@@ -40,26 +36,35 @@
 
 	<footer class="entry-meta clearfix">
 		<?php if ( 'post' == get_post_type() ) : // Hide category and tag text for pages on Search ?>
-			<?php
-				/* translators: used between list items, there is a space after the comma */
-				$categories_list = get_the_category_list( __( ', ', 'flint' ) );
-				if ( $categories_list && flint_categorized_blog() ) :
-			?>
 			<span class="cat-links">
-				<?php printf( __( 'Posted in %1$s', 'flint' ), $categories_list ); ?>
+      	Posted in
+				<?php if ( flint_categorized_blog() ) {
+					$categories = get_the_category();
+					$separator = ' ';
+					$output = '';
+					if($categories){
+						foreach($categories as $category) {
+							$output .= '<a class="badge" href="'.get_category_link( $category->term_id ).'" title="' . esc_attr( sprintf( __( "View all posts in %s" ), $category->name ) ) . '">'.$category->cat_name.'</a>'.$separator;
+						}
+						echo trim($output, $separator);
+					}
+				} ?>
 			</span>
-			<?php endif; // End if categories ?>
-
-			<?php
-				/* translators: used between list items, there is a space after the comma */
-				$tags_list = get_the_tag_list( '', __( ', ', 'flint' ) );
-				if ( $tags_list ) :
-			?>
+      
 			<span class="sep"> | </span>
 			<span class="tags-links">
-				<?php printf( __( 'Tagged %1$s', 'flint' ), $tags_list ); ?>
+				Tagged
+				<?php
+        $tags = get_the_tags();
+				$separator = ' ';
+				$output = '';
+				if($tags){
+					foreach($tags as $tag) {
+						$output .= '<a class="badge badge-inverse" href="'.get_tag_link( $tag->term_id ).'" title="' . esc_attr( sprintf( __( "View all posts in %s" ), $tag->name ) ) . '">'.$tag->name.'</a>'.$separator;
+					}
+					echo trim($output, $separator);
+				}?>
 			</span>
-			<?php endif; // End if $tags_list ?>
 		<?php endif; // End if 'post' == get_post_type() ?>
 
 		<?php if ( ! post_password_required() && ( comments_open() || '0' != get_comments_number() ) ) : ?>
