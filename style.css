@@ -4,7 +4,7 @@ Theme URI: https://github.com/starverte/flint.git
 Author: Star Verte LLC
 Author URI: http://www.starverte.com/
 Description: Core theme of the Sparks Framework. Showcases all "sparks."
-Version: 0.11.0
+Version: 0.11.1
 License: GPLv3
 License URI: license.txt
 Tags: sparks
@@ -126,6 +126,14 @@ a:active {
 	z-index: 100000; /* Above WP toolbar */
 }
 
+blockquote cite {
+	float: right;
+	clear: left;
+	padding-top: 0.75em;
+	padding-bottom: 0.75em;
+	font-size: 0.75em;
+}
+
 /* Tables */
 table {
 width: 100%;
@@ -238,6 +246,11 @@ background-color: #d9edf7;
 .entry-title {
   -ms-word-wrap: break-word;
 	    word-wrap: break-word;
+}
+.archive article {
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 0.5em;
 }
 .sticky {
 }
