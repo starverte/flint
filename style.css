@@ -1,10 +1,10 @@
 /*
 Theme Name: Flint
-Theme URI: http://sparks.starverte.com
+Theme URI: https://github.com/starverte/flint.git
 Author: Star Verte LLC
 Author URI: http://www.starverte.com/
 Description: Core theme of the Sparks Framework. Showcases all "sparks."
-Version: 1.0
+Version: 0.11.0
 License: GPLv3
 License URI: license.txt
 Tags: sparks
@@ -30,81 +30,6 @@ A spark sets a fire ablaze, and similarly the Sparks Framework is made up of 'sp
     along with Flint.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300); /* Loads Open Sans font from Google */
-
-/* =Reset
--------------------------------------------------------------- */
-
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, font, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td {
-	border: 0;
-	font-family: inherit;
-	font-size: 100%;
-	font-style: inherit;
-	font-weight: inherit;
-	margin: 0;
-	outline: 0;
-	padding: 0;
-	vertical-align: baseline;
-}
-html {
-	font-size: 75%;  /* Corrects text resizing oddly in IE6/7 when body font-size is set using em units http://clagnut.com/blog/348/#c790 */
-	height: 100%;
-	overflow-y: scroll; /* Keeps page centred in all browsers regardless of content height */
-	-webkit-text-size-adjust: 100%; /* Prevents iOS text size adjust after orientation change, without disabling user zoom */
-	-ms-text-size-adjust: 100%; /* www.456bereastreet.com/archive/201012/controlling_text_size_in_safari_for_ios_without_disabling_user_zoom/ */
-}
-body {
-	background: #fff;
-}
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-nav,
-section {
-	display: block;
-}
-ol, ul {
-	list-style: none;
-}
-table { /* tables still need 'cellspacing="0"' in the markup */
-	border-collapse: separate;
-	border-spacing: 0;
-}
-caption, th, td {
-	font-weight: normal;
-	text-align: left;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: "";
-}
-blockquote, q {
-	quotes: "" "";
-}
-a:focus {
-	outline: thin dotted;
-}
-a:hover,
-a:active { /* Improves readability when focused and also mouse hovered in all browsers people.opera.com/patrickl/experiments/keyboard/test */
-	outline: 0;
-}
-a img {
-	border: 0;
-}
-
-
 /* =Global
 ----------------------------------------------- */
 
@@ -115,162 +40,40 @@ select,
 textarea {
 	color: #404040;
 	font-family: 'Open Sans', sans-serif;
-	font-size: 0.875em;
+  font-weight: 300;
 }
-.btn { margin-bottom: 0.5em; }
-.clear{
-	float: none;
-	clear:both;
-}
-
-/* Headings */
-h1,h2,h3,h4,h5,h6 {
-	clear: both;
-	font-weight: normal;
-	line-height: 1.5em;
-}
-h1 {
-	font-size: 2.5em;
-}
-h2 {
-	font-size: 2em;
-}
-h3 {
-	font-size: 1.75em;
-}
-h4 {
-	font-size: 1.5em;
-}
-h5 {
-	font-size: 1.25em;
-}
+h1,
+h2,
+h3,
+h4,
+h5,
 h6 {
-	font-size: 1em;
-}
-hr {
-	background-color: #ccc;
-	border: 0;
-	height: 1px;
-	margin-bottom: 1.5em;
-}
-
-/* Text elements */
-p {
-	margin-bottom: 1.5em;
-}
-ul, ol {
-	margin: 0 0 1.5em 3em;
-}
-ul {
-	list-style: disc inside;
-}
-ol {
-	list-style: decimal inside;
-}
-ul ul, ol ol, ul ol, ol ul {
-	margin-bottom: 0;
-	margin-left: 1.5em;
-}
-dt {
-	font-weight: bold;
-}
-dd {
-	margin: 0 1.5em 1.5em;
+  font-weight: 600;
 }
 b, strong {
-	font-weight: bold;
+  font-weight: 700;
 }
-dfn, cite, em, i {
-	font-style: italic;
-}
-blockquote {
-	margin: 0 1.5em;
-}
-address {
-	margin: 0 0 1.5em;
-}
-pre {
-	background: #eee;
-	color: #404040;
-	font-family: "Courier 10 Pitch", Courier, monospace;
-	font-size: 0.9375em;
-	line-height: 1.6;
-	margin-bottom: 1.6em;
-	padding: 1.6em;
-	overflow: auto;
-	max-width: 100%;
-}
-code, kbd, tt, var {
-	font: 0.9375em Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
-}
-abbr, acronym {
-	border-bottom: 1px dotted #666;
-	cursor: help;
-}
-mark, ins {
-	background: #fff9c0;
-	color: #404040;
-	text-decoration: none;
-}
-sup,
-sub {
-	font-size: 75%;
-	height: 0;
-	line-height: 0;
-	position: relative;
-	vertical-align: baseline;
-}
-sup {
-	bottom: 1ex;
-}
-sub {
-	top: .5ex;
-}
-small {
-	font-size: 75%;
-}
-big {
-	font-size: 125%;
-}
-figure {
-	margin: 0;
-}
-table {
-	margin: 0 0 1.5em;
-	width: 100%;
-}
-th {
-	font-weight: bold;
+img {
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 /* Links */
 a {
+	color: #00a6e5;
 	text-decoration: none;
 }
-a:hover {
-	text-decoration: underline;
-}
-#content a,
-#colophon a {
-	color: #00a6e5;
-}
-#content a:visited,
-#colophon a:visited {
-	color: #00b3f0;
-}
-#content a:hover,
-#content a:focus,
-#content a:active,
-#colophon a:hover,
-#colophon a:focus,
-#colophon a:active {
+a:hover,
+a:focus,
+a:active {
 	color: #00aeef;
+	text-decoration: underline;
 }
 
 /* Highlight Color */
 ::selection {
 	background: #6dcff6; /* Safari */
-	}
+}
 ::-moz-selection {
 	background: #6dcff6; /* Firefox */
 }
@@ -279,58 +82,167 @@ a:hover {
 .alignleft {
 	display: inline;
 	float: left;
-	margin: 1em 1.5em 1em 0;
+	margin-right: 1.5em;
 }
 .alignright {
 	display: inline;
 	float: right;
-	margin: 1em 0 1em 1.5em;
+	margin-left: 1.5em;
 }
 .aligncenter {
 	clear: both;
 	display: block;
-	margin: 1em auto;
+	margin-left: auto;
+  margin-right: auto;
 }
 .alignnone {
-	margin: 1em;
-}
-#masthead hgroup, .navbar, #primary, #secondary, .site-info {
-  margin-bottom: 1em;
-}
-.logo {
-  float: left;
-  height: auto;
-  margin: 0 1em 1em 0;
-  max-width: 150px;
-}
-#primary.full-width {
   clear: both;
-  float: none;
-  width: 100%;
 }
 
 /* Text meant only for screen readers */
-.assistive-text {
-	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+.screen-reader-text {
 	clip: rect(1px, 1px, 1px, 1px);
 	position: absolute !important;
+}
+
+.screen-reader-text:hover,
+.screen-reader-text:active,
+.screen-reader-text:focus {
+	background-color: #f1f1f1;
+	border-radius: 3px;
+	box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+	clip: auto !important;
+	color: #21759b;
+	display: block;
+	font-size: 14px;
+	font-weight: bold;
+	height: auto;
+	left: 5px;
+	line-height: normal;
+	padding: 15px 23px 14px;
+	text-decoration: none;
+	top: 5px;
+	width: auto;
+	z-index: 100000; /* Above WP toolbar */
+}
+
+/* Tables */
+table {
+width: 100%;
+margin-bottom: 20px;
+}
+table th,table td {
+padding: 8px;
+line-height: 20px;
+text-align: left;
+vertical-align: top;
+border-top: 1px solid #dddddd;
+}
+table th {
+font-weight: bold;
+}
+table thead th {
+vertical-align: bottom;
+}
+table caption+thead tr: first-child th,table caption+thead tr: first-child td,table colgroup+thead tr: first-child th,table colgroup+thead tr: first-child td,table thead: first-child tr: first-child th,table thead: first-child tr: first-child td {
+border-top: 0;
+}
+table tbody+tbody {
+border-top: 2px solid #dddddd;
+}
+table table {
+background-color: #ffffff;
+}
+table td[class*="span"],table th[class*="span"],.row-fluid table td[class*="span"],.row-fluid table th[class*="span"] {
+display: table-cell;
+float: none;
+margin-left: 0;
+}
+table td.span1,table th.span1 {
+float: none;
+width: 44px;
+margin-left: 0;
+}
+table td.span2,table th.span2 {
+float: none;
+width: 124px;
+margin-left: 0;
+}
+table td.span3,table th.span3 {
+float: none;
+width: 204px;
+margin-left: 0;
+}
+table td.span4,table th.span4 {
+float: none;
+width: 284px;
+margin-left: 0;
+}
+table td.span5,table th.span5 {
+float: none;
+width: 364px;
+margin-left: 0;
+}
+table td.span6,table th.span6 {
+float: none;
+width: 444px;
+margin-left: 0;
+}
+table td.span7,table th.span7 {
+float: none;
+width: 524px;
+margin-left: 0;
+}
+table td.span8,table th.span8 {
+float: none;
+width: 604px;
+margin-left: 0;
+}
+table td.span9,table th.span9 {
+float: none;
+width: 684px;
+margin-left: 0;
+}
+table td.span10,table th.span10 {
+float: none;
+width: 764px;
+margin-left: 0;
+}
+table td.span11,table th.span11 {
+float: none;
+width: 844px;
+margin-left: 0;
+}
+table td.span12,table th.span12 {
+float: none;
+width: 924px;
+margin-left: 0;
+}
+table tbody tr.success>td {
+background-color: #dff0d8;
+}
+table tbody tr.error>td {
+background-color: #f2dede;
+}
+table tbody tr.warning>td {
+background-color: #fcf8e3;
+}
+table tbody tr.info>td {
+background-color: #d9edf7;
 }
 
 
 /* =Content
 ----------------------------------------------- */
 
-article {
-	padding: 1em;
+.entry-title {
+  -ms-word-wrap: break-word;
+	    word-wrap: break-word;
 }
 .sticky {
 }
 .hentry {
 	margin: 0 0 1.5em;
-}
-.entry-meta {
-	clear: both;
-}
 }
 .byline {
 	display: none;
@@ -342,10 +254,20 @@ article {
 .entry-content,
 .entry-summary {
 	margin: 1.5em 0 0;
+  -ms-word-wrap: break-word;
+	    word-wrap: break-word;
+}
+a.more-link {
+  color: #fff;
 }
 .page-links {
 	clear: both;
 	margin: 0 0 1.5em;
+}
+#primary.full-width {
+	clear: both;
+	float: none;
+	width: 100%;
 }
 
 
@@ -361,25 +283,6 @@ article {
 /* =Media
 ----------------------------------------------- */
 
-.entry-content img,
-.comment-content img,
-.widget img {
-	max-width: 95%; /* Fluid images for posts, comments, and widgets */
-}
-.entry-content img,
-.comment-content img[height],
-img[class*="align"],
-img[class*="wp-image-"] {
-	height: auto; /* Make sure images with WordPress-added height and width attributes are scaled correctly */
-}
-.entry-content img,
-img.size-full {
-	max-width: 95%;
-}
-.ie .entry-content img,
-.ie img.size-full {
-	width: auto; /* Prevent stretching of full-size images with height and width attributes in IE8 */
-}
 .entry-content img.wp-smiley,
 .comment-content img.wp-smiley {
 	border: none;
@@ -428,44 +331,44 @@ object {
 	max-width: 100%;
 }
 
+/* =Navigation
+----------------------------------------------- */
+
+.site-content [class*="navigation"] {
+	margin: 0 0 1.5em;
+	overflow: hidden;
+}
+[class*="navigation"] .nav-previous {
+	float: left;
+	width: 50%;
+}
+[class*="navigation"] .nav-next {
+	float: right;
+	text-align: right;
+	width: 50%;
+}
+.previous a,
+.next a {
+  max-width: 50%;
+  -ms-word-wrap: break-word;
+	    word-wrap: break-word;
+}
+
+
 /* =Comments
 ----------------------------------------------- */
 
-.avatar {
-	float: left;
-	margin: 1em 1em 1em 0;
+.comment-content a {
+  -ms-word-wrap: break-word;
+	    word-wrap: break-word;
 }
-.bypostauthor {
-}
-.commentlist,
-.commentlist .children {
+.comment-list,
+.comment-list .children {
 	list-style: none;
 }
 article.comment {
 	margin-bottom: 0.5em;
 	padding: 1em;
-}
-.commentlist .thread-odd article {
-	background: #fafafa;
-}
-.commentlist .thread-even article {
-	background: #fbfdff;
-}
-.commentlist .thread-odd .depth-2 article,
-.commentlist .thread-even .depth-2 article {
-	background: #fff;
-}
-.commentlist .thread-odd .depth-3 article {
-	background: #f8f8f8;
-}
-.commentlist .thread-even .depth-3 article {
-	background: #f7fcfe;
-}
-.commentlist .thread-odd .depth-4 article {
-	background: #eee;
-}
-.commentlist .thread-even .depth-4 article {
-	background: #e1f4fd;
 }
 
 
@@ -474,7 +377,6 @@ article.comment {
 
 .widget {
 	margin: 0 0 1.5em;
-	padding: 1em;
 }
 
 /* Make sure select elements fit in widgets */
@@ -483,13 +385,11 @@ article.comment {
 }
 
 /* Search widget */
-#searchsubmit {
+.widget_search .submit {
 	display: none;
 }
-#secondary ul {
-	list-style: none;
-	margin: 0;
-}
+
+/* Link widget (Legacy) */
 .link-widget {
 	background: #fafafa;
 	color: #404040;
@@ -507,17 +407,16 @@ article.comment {
 }
 
 
-/* =Sparks Store
+/* =Infinite Scroll
 ----------------------------------------------- */
-.item-ref,
-.item-price,
-.item-shipping,
-.item-dimensions {
-	font-weight: bold;
+
+/* Globally hidden elements when Infinite Scroll is supported and in use. */
+.infinite-scroll .navigation-paging, /* Older / Newer Posts Navigation (always hidden) */
+.infinite-scroll.neverending .site-footer { /* Theme Footer (when set to scrolling) */
+	display: none;
 }
-.item-ref span,
-.item-price span,
-.item-shipping span,
-.item-dimensions span {
-	font-weight: normal;
+
+/* When Infinite Scroll has reached its end we need to re-display elements that were hidden (via .neverending) before */
+.infinity-end.neverending .site-footer {
+	display: block;
 }
