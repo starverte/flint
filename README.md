@@ -1,4 +1,4 @@
-Flint 0.11.0
+Flint 0.11.1
 =====
 Theme Name: Flint
 
