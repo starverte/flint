@@ -8,23 +8,14 @@
 	<div class="container-fluid"><div class="row-fluid"><a class="btn btn-small" href="<?php echo get_edit_post_link(); ?>" style="float:right;">Edit</a></div></div>
 <?php } ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header">
-		<h1 class="entry-title"><?php if (is_single()) { echo the_title(); } else { $permalink = get_permalink(); $title = get_the_title(); echo '<a href="' . $permalink .'" rel="bookmark">' . $title . '</a>'; } ?></h1>
-		
-		<?php if ( 'post' == get_post_type() ) : ?>
-		<div class="entry-meta">
-			<?php flint_posted_on(); ?>
-		</div><!-- .entry-meta -->
-		<?php endif; ?>
-	</header><!-- .entry-header -->
 
 	<?php if ( is_search() ) : // Only display Excerpts for Search ?>
 	<div class="entry-summary">
-		<?php the_excerpt(); ?>
+		<h3><?php the_excerpt(); ?></h3>
 	</div><!-- .entry-summary -->
 	<?php else : ?>
 	<div class="entry-content">
-		<?php flint_the_content(); ?>
+		<h3><?php flint_the_content(); ?></h3>
 		<?php
 			flint_link_pages( array(
 				'before' => '<div class="pagination"><ul>',
@@ -35,6 +26,11 @@
 	<?php endif; ?>
 
 	<footer class="entry-meta clearfix">
+  	<?php if ( 'post' == get_post_type() ) : ?>
+		<div class="entry-meta">
+			<?php flint_posted_on(); ?>
+		</div><!-- .entry-meta -->
+		<?php endif; ?>
 		<?php if ( 'post' == get_post_type() ) : // Hide category and tag text for pages on Search ?>
 			<span class="cat-links">
       	Posted in
@@ -66,11 +62,6 @@
 				}?>
 			</span>
 		<?php endif; // End if 'post' == get_post_type() ?>
-
-		<?php if ( ! post_password_required() && ( comments_open() || '0' != get_comments_number() ) ) : ?>
-		<span class="sep"> | </span>
-		<span class="comments-link"><?php comments_popup_link( __( 'Leave a comment', 'flint' ), __( '1 Comment', 'flint' ), __( '% Comments', 'flint' ) ); ?></span>
-		<?php endif; ?>
 
 	</footer><!-- .entry-meta -->
 </article><!-- #post-<?php the_ID(); ?> -->

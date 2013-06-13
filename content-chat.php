@@ -20,11 +20,11 @@
 
 	<?php if ( is_search() ) : // Only display Excerpts for Search ?>
 	<div class="entry-summary">
-		<?php the_excerpt(); ?>
+  	<div class="well"><?php the_excerpt(); ?></div>
 	</div><!-- .entry-summary -->
 	<?php else : ?>
 	<div class="entry-content">
-		<?php flint_the_content(); ?>
+		<div class="well"><?php flint_the_content(); ?></div>
 		<?php
 			flint_link_pages( array(
 				'before' => '<div class="pagination"><ul>',

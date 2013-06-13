@@ -3,16 +3,18 @@
  * Flint functions and definitions
  *
  * @package Flint
- * @since Flint 1.0
  */
 
 /**
  * Set the content width based on the theme's design and stylesheet.
- *
- * @since Flint 1.0
  */
 if ( ! isset( $content_width ) )
 	$content_width = 640; /* pixels */
+
+/*
+ * Load Jetpack compatibility file.
+ */
+require( get_template_directory() . '/inc/jetpack.php' );
 
 if ( ! function_exists( 'flint_setup' ) ) :
 /**
@@ -21,8 +23,6 @@ if ( ! function_exists( 'flint_setup' ) ) :
  * Note that this function is hooked into the after_setup_theme hook, which runs
  * before the init hook. The init hook is too late for some features, such as indicating
  * support post thumbnails.
- *
- * @since Flint 1.0
  */
 function flint_setup() {
 
@@ -55,7 +55,9 @@ function flint_setup() {
 	add_theme_support( 'automatic-feed-links' );
 
 	/**
-	 * Enable support for Post Thumbnails
+	 * Enable support for Post Thumbnails on posts and pages
+	 *
+	 * @link http://codex.wordpress.org/Function_Reference/add_theme_support#Post_Thumbnails
 	 */
 	add_theme_support( 'post-thumbnails' );
 
@@ -70,32 +72,52 @@ function flint_setup() {
 	 * Enable support for Post Formats
 	 */
 	add_theme_support( 'post-formats', array( 'aside', 'image', 'video', 'quote', 'link' ) );
-	
-	/**
-	 * Implement the Custom Background feature
-	 */
-	$defaults = array(
-		'default-color'          => 'ffffff',
-		'default-image'          => '',
-	);
-	add_theme_support( 'custom-background', $defaults );
 }
 endif; // flint_setup
 add_action( 'after_setup_theme', 'flint_setup' );
 
 /**
- * Register widgetized area and update sidebar with default widgets
+ * Setup the WordPress core custom background feature.
  *
- * @since Flint 1.0
+ * Use add_theme_support to register support for WordPress 3.4+
+ * as well as provide backward compatibility for WordPress 3.3
+ * using feature detection of wp_get_theme() which was introduced
+ * in WordPress 3.4.
+ *
+ * @todo Remove the 3.3 support when WordPress 3.6 is released.
+ *
+ * Hooks into the after_setup_theme action.
+ */
+function flint_register_custom_background() {
+	$args = array(
+		'default-color' => 'ffffff',
+		'default-image' => '',
+	);
+
+	$args = apply_filters( 'flint_custom_background_args', $args );
+
+	if ( function_exists( 'wp_get_theme' ) ) {
+		add_theme_support( 'custom-background', $args );
+	} else {
+		define( 'BACKGROUND_COLOR', $args['default-color'] );
+		if ( ! empty( $args['default-image'] ) )
+			define( 'BACKGROUND_IMAGE', $args['default-image'] );
+		add_custom_background();
+	}
+}
+add_action( 'after_setup_theme', 'flint_register_custom_background' );
+
+/**
+ * Register widgetized area and update sidebar with default widgets
  */
 function flint_widgets_init() {
 	register_sidebar( array(
-		'name' => __( 'Sidebar', 'flint' ),
-		'id' => 'sidebar-1',
+		'name'          => __( 'Sidebar', 'flint' ),
+		'id'            => 'sidebar-1',
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget' => '</aside>',
-		'before_title' => '<h4 class="widget-title">',
-		'after_title' => '</h4>',
+		'after_widget'  => '</aside>',
+		'before_title'  => '<h1 class="widget-title">',
+		'after_title'   => '</h1>',
 	) );
 }
 add_action( 'widgets_init', 'flint_widgets_init' );
@@ -104,33 +126,30 @@ add_action( 'widgets_init', 'flint_widgets_init' );
  * Enqueue scripts and styles
  */
 function flint_scripts() {
-	wp_enqueue_style( 'style', get_stylesheet_uri() );
-	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-	if (is_plugin_inactive('steel/steel.php')) {
-		// Load scripts and styles for Twitter Bootstrap
-		wp_register_script( 'bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js' , array('jquery') , '2.3.1', true );
-		wp_register_style( 'bootstrap-style', get_template_directory_uri() . '/inc/css/bootstrap.min.css' );
-		wp_register_script( 'bootstrap-run', get_template_directory_uri() . '/js/run.js' , array('bootstrap') , '' , true );
-		wp_enqueue_script( 'bootstrap' );
-		wp_enqueue_style( 'bootstrap-style' );
-		wp_enqueue_script( 'bootstrap-run' );
-	}
-	else {
-		wp_enqueue_script( 'bootstrap' );
-		wp_enqueue_style( 'bootstrap-style' );
-		wp_enqueue_script( 'bootstrap-run' );
-	}
+	
+	// Load Twitter Bootstrap 2.3.2
+	wp_enqueue_script( 'bootstrap', '//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js', array('jquery'), '2.3.2', true );
+	wp_enqueue_script( 'bootstrap-run', get_template_directory_uri() . '/js/run.js' , array('bootstrap') , '20130505' , true );
+	wp_enqueue_style( 'bootstrap-css', '//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css', array() , '2.3.2' );
+	
+	//Load Font Awesome 3.1.1
+	wp_enqueue_style( 'font-awesome', '//netdna.bootstrapcdn.com/font-awesome/3.2.0/css/font-awesome.css', array(), '3.2.0' );
 
-	wp_register_style( 'font-awesome', get_template_directory_uri() . '/inc/css/font-awesome.min.css' );
-	wp_enqueue_style( 'font-awesome' );
+	wp_enqueue_script( 'flint-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
 
 	if ( is_singular() && wp_attachment_is_image() ) {
-		wp_enqueue_script( 'keyboard-image-navigation', get_template_directory_uri() . '/js/keyboard-image-navigation.js', array( 'jquery' ), '20120202' );
+		wp_enqueue_script( 'flint-keyboard-image-navigation', get_template_directory_uri() . '/js/keyboard-image-navigation.js', array( 'jquery' ), '20120202' );
 	}
+	
+	//Load Google Font 'Open Sans'
+	wp_enqueue_style( 'open-sans', 'http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700', array(), '' );
+	
+	//Load theme stylesheet
+	wp_enqueue_style( 'flint-style', get_stylesheet_uri() );
 }
 add_action( 'wp_enqueue_scripts', 'flint_scripts' );
 

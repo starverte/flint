@@ -1,20 +1,20 @@
-Flint
+Flint 0.11.0
 =====
 Theme Name: Flint
 
-Theme URI: //Not yet developed
+Theme URI: https://github.com/starverte/flint.git
 
-GitHub URI: https://github.com/starverte/flint.git
+Author: Star Verte LLC
+
+Author URI: http://www.starverte.com/
 
 Description: Core theme of the Sparks Framework. Showcases all "sparks."
 
-Author: starverte
+Version: 0.11.0
 
-Author URI: http://starverte.com/
+License: GPLv3
 
-License: GPLv2 or later
-
-License URI: http://www.gnu.org/licenses/
+License URI: license.txt
 
 A spark sets a fire ablaze, and similarly the Sparks Framework is made up of 'sparks' that help initiate
 the creative process of website development within WordPress. Often times to start a fire, a person uses flint and steel.
