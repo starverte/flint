@@ -104,7 +104,7 @@ function flint_comment( $comment, $args, $depth ) {
       </div>
       <div class="pull-right">
 				<?php flint_reply_link(array_merge( $args, array( 'depth' => $depth, 'max_depth' => $args['max_depth'] ) )); ?>
-        <a class="btn btn-small" href="<?php echo get_edit_comment_link(); ?>" >Edit</a>
+        <?php if ( current_user_can('moderate_comments') ) { ?><a class="btn btn-small" href="<?php echo get_edit_comment_link(); ?>" >Edit</a><?php } ?>
       </div>
     </article>
     
