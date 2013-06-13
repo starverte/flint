@@ -235,6 +235,10 @@ background-color: #d9edf7;
 /* =Content
 ----------------------------------------------- */
 
+.entry-title {
+  -ms-word-wrap: break-word;
+	    word-wrap: break-word;
+}
 .sticky {
 }
 .hentry {
@@ -250,6 +254,8 @@ background-color: #d9edf7;
 .entry-content,
 .entry-summary {
 	margin: 1.5em 0 0;
+  -ms-word-wrap: break-word;
+	    word-wrap: break-word;
 }
 a.more-link {
   color: #fff;
@@ -341,13 +347,20 @@ object {
 	text-align: right;
 	width: 50%;
 }
+.previous a,
+.next a {
+  max-width: 50%;
+  -ms-word-wrap: break-word;
+	    word-wrap: break-word;
+}
 
 
 /* =Comments
 ----------------------------------------------- */
 
 .comment-content a {
-	word-wrap: break-word;
+  -ms-word-wrap: break-word;
+	    word-wrap: break-word;
 }
 .comment-list,
 .comment-list .children {
@@ -406,20 +419,4 @@ article.comment {
 /* When Infinite Scroll has reached its end we need to re-display elements that were hidden (via .neverending) before */
 .infinity-end.neverending .site-footer {
 	display: block;
-}
-
-
-/* =Sparks Store
------------------------------------------------ */
-.item-ref,
-.item-price,
-.item-shipping,
-.item-dimensions {
-	font-weight: bold;
-}
-.item-ref span,
-.item-price span,
-.item-shipping span,
-.item-dimensions span {
-	font-weight: normal;
 }
