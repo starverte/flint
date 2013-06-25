@@ -74,7 +74,7 @@ else {
 					</a>
                     
 					<!-- Be sure to leave the brand out there if you want it shown -->
-					<a class="brand hidden-desktop" href="#"><?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?></a>
+					<a class="brand hidden-desktop" href="<?php echo home_url(); ?>"><?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?></a>
                     
 					<div class="nav-collapse collapse">
 						<?php wp_nav_menu( array( 'menu_class' => 'nav', 'container' => false, 'theme_location' => 'primary', 'walker' => new Flint_Bootstrap_Menu ) ); ?>
