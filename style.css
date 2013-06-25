@@ -279,7 +279,7 @@ a.more-link {
 	float: none;
 	width: 100%;
 }
-
+.pager a { color: #333!important; }
 
 /* =Asides
 ----------------------------------------------- */
