@@ -248,8 +248,8 @@ function flint_link_page( $i ) {
 /**
  * Modifies the_content to allow for more tag to be a bootstrap button
  */
-function flint_the_content($more_link_text = 'Read more', $stripteaser = false, $flint_more_before = ' <a href="', $flint_more_class = ' class="more-link btn btn-primary">', $flint_more_after = '</a>') {
-	$content = flint_get_the_content($more_link_text, $stripteaser);
+function flint_the_content($more_link_text = 'Read more', $stripteaser = false, $flint_more_class = 'btn btn-primary', $flint_more_before = ' <a href="', $flint_more_after = '</a>') {
+	$content = flint_get_the_content($more_link_text, $stripteaser, $flint_more_class, $flint_more_before, $flint_more_after);
 	$content = apply_filters('the_content', $content);
 	$content = str_replace(']]>', ']]&gt;', $content);
 	echo $content;
@@ -259,7 +259,7 @@ function flint_the_content($more_link_text = 'Read more', $stripteaser = false, 
 /**
  * Modifies get_the_content to allow for more tag to be a bootstrap button
  */
-function flint_get_the_content($more_link_text = 'Read more', $stripteaser = false, $flint_more_before = ' <a href="', $flint_more_class = ' class="more-link btn btn-primary">', $flint_more_after = '</a>') {
+function flint_get_the_content($more_link_text = 'Read more', $stripteaser = false, $flint_more_class = 'btn btn-primary', $flint_more_before = ' <a href="', $flint_more_after = '</a>') {
 	global $more, $page, $pages, $multipage, $preview;
 
 	$post = get_post();
@@ -298,7 +298,7 @@ function flint_get_the_content($more_link_text = 'Read more', $stripteaser = fal
 			$output .= '<span id="more-' . $post->ID . '"></span>' . $content[1];
 		} else {
 			if ( ! empty($more_link_text) )
-				$output .= apply_filters( 'the_content_more_link', $flint_more_before . get_permalink() . "#more-{$post->ID}\"" . $flint_more_class . $more_link_text . $flint_more_after );
+				$output .= apply_filters( 'the_content_more_link', $flint_more_before . get_permalink() . "#more-{$post->ID}\"" . 'class="more-link ' . $flint_more_class . '">' . $more_link_text . $flint_more_after );
 			$output = force_balance_tags($output);
 		}
 
