@@ -300,7 +300,7 @@ function flint_admin_init(){
 	add_settings_field('org_addr', 'Street Address', 'org_addr_setting', 'flint', 'flint_schema_organization' );
 	add_settings_field('org_desc', 'Description', 'org_desc_setting', 'flint', 'flint_schema_organization' );
 }
-function flint_schema_org() { echo 'For use in header by search engines'; }
+function flint_schema_org() { echo 'For search engine optimization. Must be used by theme to work.'; }
 function org_desc_setting() {
 	$options = get_option('flint_options');
 	if (isset($options['org_desc'])) { echo '<textarea id="org_desc" name="flint_options[org_desc]" rows="5" cols="50">' . $options["org_desc"] . '</textarea>'; }
