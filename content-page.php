@@ -6,7 +6,7 @@
  */
 ?>
 
-<?php if ( is_user_logged_in() ) { ?>
+<?php if ( current_user_can('edit_pages') ) { ?>
 	<div class="container-fluid">
 		<div class="row-fluid">
                 	<a class="btn btn-small" href="<?php echo get_edit_post_link(); ?>" style="float:right;">Edit</a>
