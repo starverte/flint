@@ -47,14 +47,14 @@ else {
 		<hgroup class="row">
 		<?php $header_image = get_header_image();
 		if ( ! empty( $header_image ) ) { ?>
-			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home" <?php if ( display_header_text() ) { ?> class="span2 hidden-phone"<?php } ?>>
+			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home" <?php if ( display_header_text() ) { ?> class="col-lg-2 hidden-sm"<?php } ?>>
 				<img src="<?php header_image(); ?>" width="<?php echo get_custom_header()->width; ?>" height="<?php echo get_custom_header()->height; ?>" alt="" />
 			</a>
 		<?php } /* if ( ! empty( $header_image ) ) */
 		if ( display_header_text() ) { ?>
-		<div class="site-branding <?php if ( ! empty( $header_image ) ) { ?>span10<?php } ?>">
-			<h1 class="site-title hidden-phone"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-			<h2 class="site-description visible-desktop"><?php bloginfo( 'description' ); ?></h2>
+		<div class="site-branding <?php if ( ! empty( $header_image ) ) { ?>col-lg-10<?php } ?>">
+			<h1 class="site-title hidden-sm"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+			<h2 class="site-description visible-lg"><?php bloginfo( 'description' ); ?></h2>
 		</div>
 		<?php } /* if ( display_header_text() ) */ ?>
 		</hgroup>
@@ -77,7 +77,7 @@ else {
                   
         <div class="nav-collapse collapse navbar-responsive-collapse">
           <?php wp_nav_menu( array( 'menu_class' => 'nav navbar-nav', 'container' => false, 'theme_location' => 'primary', 'walker' => new Flint_Bootstrap_Menu ) ); ?>
-          <form method="get" class="navbar-search pull-right visible-desktop" action="<?php echo esc_url( home_url( '/' ) ); ?>" role="search">
+          <form method="get" class="navbar-search pull-right visible-lg" action="<?php echo esc_url( home_url( '/' ) ); ?>" role="search">
             <input type="text" class="search-query" name="s" value="<?php echo esc_attr( get_search_query() ); ?>" placeholder="Search">
           </form>
         </div><!-- .nav-collapse -->
