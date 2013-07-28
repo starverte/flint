@@ -347,3 +347,11 @@ function remove_admin_bar() {
 		show_admin_bar(false);
 	}
 }
+
+/**
+ * Returns current theme version.
+ */
+function theme_version() {
+    $theme = wp_get_theme();
+    return $theme->Version;
+}
