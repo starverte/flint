@@ -5,7 +5,7 @@
 ?>
 
 <?php if ( is_user_logged_in() & is_single() ) { ?>
-	<div class="container-fluid"><div class="row-fluid"><a class="btn btn-small" href="<?php echo get_edit_post_link(); ?>" style="float:right;">Edit</a></div></div>
+	<div class="container"><div class="row"><a class="btn btn-small" href="<?php echo get_edit_post_link(); ?>" style="float:right;">Edit</a></div></div>
 <?php } ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
