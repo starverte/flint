@@ -317,7 +317,7 @@ function flint_password_form() {
     global $post;
     $label = 'pwbox-'.( empty( $post->ID ) ? rand() : $post->ID );
     $o = __( "To view this protected post, enter the password below:" ) . '
-    <form action="' . esc_url( site_url( 'wp-login.php?action=postpass', 'login_post' ) ) . '" method="post" class="input-append"><input class="span2' . $label . '" name="post_password" id="appendedInputButton" type="password" placeholder="Password" /><button class="btn" type="submit" name="Submit">Submit</button>
+    <form action="' . esc_url( site_url( 'wp-login.php?action=postpass', 'login_post' ) ) . '" method="post" class="input-append"><input class="col-lg-2' . $label . '" name="post_password" id="appendedInputButton" type="password" placeholder="Password" /><button class="btn" type="submit" name="Submit">Submit</button>
     </form>
     ';
     return $o;
