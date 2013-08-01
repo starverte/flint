@@ -35,8 +35,8 @@ button,
 input,
 select,
 textarea {
-	color: #404040;
-	font-family: 'Open Sans', sans-serif;
+  color: #404040;
+  font-family: 'Open Sans', sans-serif;
   font-weight: 300;
 }
 h1,
@@ -53,43 +53,45 @@ b, strong {
 img {
   padding-top: 5px;
   padding-bottom: 5px;
+  max-width: 100%;
+  height: auto;
 }
 
 /* Links */
 a {
-	color: #00a6e5;
-	text-decoration: none;
+  color: #e93b8c;
+  text-decoration: none;
 }
 a:hover,
 a:focus,
 a:active {
-	color: #00aeef;
-	text-decoration: underline;
+  color: #f23d91;
+  text-decoration: underline;
 }
 
 /* Highlight Color */
 ::selection {
-	background: #6dcff6; /* Safari */
+  background: #f797c4; /* Safari */
 }
 ::-moz-selection {
-	background: #6dcff6; /* Firefox */
+  background: #f797c4; /* Firefox */
 }
 
 /* Alignment */
 .alignleft {
-	display: inline;
-	float: left;
-	margin-right: 1.5em;
+  display: inline;
+  float: left;
+  margin-right: 1.5em;
 }
 .alignright {
-	display: inline;
-	float: right;
-	margin-left: 1.5em;
+  display: inline;
+  float: right;
+  margin-left: 1.5em;
 }
 .aligncenter {
-	clear: both;
-	display: block;
-	margin-left: auto;
+  clear: both;
+  display: block;
+  margin-left: auto;
   margin-right: auto;
 }
 .alignnone {
@@ -98,37 +100,37 @@ a:active {
 
 /* Text meant only for screen readers */
 .screen-reader-text {
-	clip: rect(1px, 1px, 1px, 1px);
-	position: absolute !important;
+  clip: rect(1px, 1px, 1px, 1px);
+  position: absolute !important;
 }
 
 .screen-reader-text:hover,
 .screen-reader-text:active,
 .screen-reader-text:focus {
-	background-color: #f1f1f1;
-	border-radius: 3px;
-	box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
-	clip: auto !important;
-	color: #21759b;
-	display: block;
-	font-size: 14px;
-	font-weight: bold;
-	height: auto;
-	left: 5px;
-	line-height: normal;
-	padding: 15px 23px 14px;
-	text-decoration: none;
-	top: 5px;
-	width: auto;
-	z-index: 100000; /* Above WP toolbar */
+  background-color: #f1f1f1;
+  border-radius: 3px;
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+  clip: auto !important;
+  color: #21759b;
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  height: auto;
+  left: 5px;
+  line-height: normal;
+  padding: 15px 23px 14px;
+  text-decoration: none;
+  top: 5px;
+  width: auto;
+  z-index: 100000; /* Above WP toolbar */
 }
 
 blockquote cite {
-	float: right;
-	clear: left;
-	padding-top: 0.75em;
-	padding-bottom: 0.75em;
-	font-size: 0.75em;
+  float: right;
+  clear: left;
+  padding-top: 0.75em;
+  padding-bottom: 0.75em;
+  font-size: 0.75em;
 }
 
 /* Tables */
@@ -243,7 +245,7 @@ table > tfoot > tr.warning > th {
 
 .entry-title {
   -ms-word-wrap: break-word;
-	    word-wrap: break-word;
+      word-wrap: break-word;
 }
 .archive article {
     padding-bottom: 0.5em;
@@ -253,32 +255,32 @@ table > tfoot > tr.warning > th {
 .sticky {
 }
 .hentry {
-	margin: 0 0 1.5em;
+  margin: 0 0 1.5em;
 }
 .byline {
-	display: none;
+  display: none;
 }
 .single .byline,
 .group-blog .byline {
-	display: inline;
+  display: inline;
 }
 .entry-content,
 .entry-summary {
-	margin: 1.5em 0 0;
+  margin: 1.5em 0 0;
   -ms-word-wrap: break-word;
-	    word-wrap: break-word;
+      word-wrap: break-word;
 }
 a.more-link {
   color: #fff;
 }
 .page-links {
-	clear: both;
-	margin: 0 0 1.5em;
+  clear: both;
+  margin: 0 0 1.5em;
 }
 #primary.full-width {
-	clear: both;
-	float: none;
-	width: 100%;
+  clear: both;
+  float: none;
+  width: 100%;
 }
 .pager a { color: #333!important; }
 
@@ -287,7 +289,7 @@ a.more-link {
 
 .blog .format-aside .entry-title,
 .archive .format-aside .entry-title {
-	display: none;
+  display: none;
 }
 
 
@@ -296,39 +298,39 @@ a.more-link {
 
 .entry-content img.wp-smiley,
 .comment-content img.wp-smiley {
-	border: none;
-	margin-bottom: 0;
-	margin-top: 0;
-	padding: 0;
+  border: none;
+  margin-bottom: 0;
+  margin-top: 0;
+  padding: 0;
 }
 .wp-caption {
-	border: 1px solid #ccc;
-	margin-bottom: 1.5em;
-	max-width: 100%;
+  border: 1px solid #ccc;
+  margin-bottom: 1.5em;
+  max-width: 100%;
 }
 .wp-caption img[class*="wp-image-"] {
-	display: block;
-	margin: 1.2% auto 0;
-	max-width: 98%;
+  display: block;
+  margin: 1.2% auto 0;
+  max-width: 98%;
 }
 .wp-caption-text {
-	text-align: center;
+  text-align: center;
 }
 .wp-caption .wp-caption-text {
-	margin: 0.8075em 0;
+  margin: 0.8075em 0;
 }
 .site-content .gallery {
-	margin-bottom: 1.5em;
+  margin-bottom: 1.5em;
 }
 .gallery-caption {
 }
 .site-content .gallery a img {
-	border: none;
-	height: auto;
-	max-width: 90%;
+  border: none;
+  height: auto;
+  max-width: 90%;
 }
 .site-content .gallery dd {
-	margin: 0;
+  margin: 0;
 }
 .site-content .gallery-columns-4 .gallery-item {
 }
@@ -339,30 +341,30 @@ a.more-link {
 embed,
 iframe,
 object {
-	max-width: 100%;
+  max-width: 100%;
 }
 
 /* =Navigation
 ----------------------------------------------- */
 
 .site-content [class*="navigation"] {
-	margin: 0 0 1.5em;
-	overflow: hidden;
+  margin: 0 0 1.5em;
+  overflow: hidden;
 }
 [class*="navigation"] .nav-previous {
-	float: left;
-	width: 50%;
+  float: left;
+  width: 50%;
 }
 [class*="navigation"] .nav-next {
-	float: right;
-	text-align: right;
-	width: 50%;
+  float: right;
+  text-align: right;
+  width: 50%;
 }
 .previous a,
 .next a {
   max-width: 50%;
   -ms-word-wrap: break-word;
-	    word-wrap: break-word;
+      word-wrap: break-word;
 }
 
 
@@ -371,15 +373,15 @@ object {
 
 .comment-content a {
   -ms-word-wrap: break-word;
-	    word-wrap: break-word;
+      word-wrap: break-word;
 }
 .comment-list,
 .comment-list .children {
-	list-style: none;
+  list-style: none;
 }
 article.comment {
-	margin-bottom: 0.5em;
-	padding: 1em;
+  margin-bottom: 0.5em;
+  padding: 1em;
 }
 
 
@@ -387,34 +389,34 @@ article.comment {
 ----------------------------------------------- */
 
 .widget {
-	margin: 0 0 1.5em;
+  margin: 0 0 1.5em;
 }
 
 /* Make sure select elements fit in widgets */
 .widget select {
-	max-width: 100%;
+  max-width: 100%;
 }
 
 /* Search widget */
 .widget_search .submit {
-	display: none;
+  display: none;
 }
 
 /* Link widget (Legacy) */
 .link-widget {
-	background: #fafafa;
-	color: #404040;
+  background: #fafafa;
+  color: #404040;
 }
 .link-widget-link:active,
 .link-widget-link:hover {
-	text-decoration: none;
+  text-decoration: none;
 }
 .link-widget-link:hover .link-widget {
-	background: #fdfdfd;
-	color: #404040;
+  background: #fdfdfd;
+  color: #404040;
 }
 .link-widget .widget-title {
-	margin: 0;
+  margin: 0;
 }
 
 
@@ -424,10 +426,10 @@ article.comment {
 /* Globally hidden elements when Infinite Scroll is supported and in use. */
 .infinite-scroll .navigation-paging, /* Older / Newer Posts Navigation (always hidden) */
 .infinite-scroll.neverending .site-footer { /* Theme Footer (when set to scrolling) */
-	display: none;
+  display: none;
 }
 
 /* When Infinite Scroll has reached its end we need to re-display elements that were hidden (via .neverending) before */
 .infinity-end.neverending .site-footer {
-	display: block;
+  display: block;
 }
