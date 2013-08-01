@@ -6,9 +6,9 @@
  */
 ?>
 
-<?php if ( is_user_logged_in() ) { ?>
-	<div class="container-fluid">
-		<div class="row-fluid">
+<?php if ( current_user_can('edit_pages') ) { ?>
+	<div class="container">
+		<div class="row">
                 	<a class="btn btn-small" href="<?php echo get_edit_post_link(); ?>" style="float:right;">Edit</a>
 		</div>
 	</div>

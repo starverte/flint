@@ -248,8 +248,8 @@ function flint_link_page( $i ) {
 /**
  * Modifies the_content to allow for more tag to be a bootstrap button
  */
-function flint_the_content($more_link_text = 'Read more', $stripteaser = false, $flint_more_before = ' <a href="', $flint_more_class = ' class="more-link btn btn-primary">', $flint_more_after = '</a>') {
-	$content = flint_get_the_content($more_link_text, $stripteaser);
+function flint_the_content($more_link_text = 'Read more', $stripteaser = false, $flint_more_class = 'btn btn-primary', $flint_more_before = ' <a href="', $flint_more_after = '</a>') {
+	$content = flint_get_the_content($more_link_text, $stripteaser, $flint_more_class, $flint_more_before, $flint_more_after);
 	$content = apply_filters('the_content', $content);
 	$content = str_replace(']]>', ']]&gt;', $content);
 	echo $content;
@@ -259,7 +259,7 @@ function flint_the_content($more_link_text = 'Read more', $stripteaser = false, 
 /**
  * Modifies get_the_content to allow for more tag to be a bootstrap button
  */
-function flint_get_the_content($more_link_text = 'Read more', $stripteaser = false, $flint_more_before = ' <a href="', $flint_more_class = ' class="more-link btn btn-primary">', $flint_more_after = '</a>') {
+function flint_get_the_content($more_link_text = 'Read more', $stripteaser = false, $flint_more_class = 'btn btn-primary', $flint_more_before = ' <a href="', $flint_more_after = '</a>') {
 	global $more, $page, $pages, $multipage, $preview;
 
 	$post = get_post();
@@ -298,7 +298,7 @@ function flint_get_the_content($more_link_text = 'Read more', $stripteaser = fal
 			$output .= '<span id="more-' . $post->ID . '"></span>' . $content[1];
 		} else {
 			if ( ! empty($more_link_text) )
-				$output .= apply_filters( 'the_content_more_link', $flint_more_before . get_permalink() . "#more-{$post->ID}\"" . $flint_more_class . $more_link_text . $flint_more_after );
+				$output .= apply_filters( 'the_content_more_link', $flint_more_before . get_permalink() . "#more-{$post->ID}\"" . 'class="more-link ' . $flint_more_class . '">' . $more_link_text . $flint_more_after );
 			$output = force_balance_tags($output);
 		}
 
@@ -317,7 +317,7 @@ function flint_password_form() {
     global $post;
     $label = 'pwbox-'.( empty( $post->ID ) ? rand() : $post->ID );
     $o = __( "To view this protected post, enter the password below:" ) . '
-    <form action="' . esc_url( site_url( 'wp-login.php?action=postpass', 'login_post' ) ) . '" method="post" class="input-append"><input class="span2' . $label . '" name="post_password" id="appendedInputButton" type="password" placeholder="Password" /><button class="btn" type="submit" name="Submit">Submit</button>
+    <form action="' . esc_url( site_url( 'wp-login.php?action=postpass', 'login_post' ) ) . '" method="post" class="input-append"><input class="col-lg-2' . $label . '" name="post_password" id="appendedInputButton" type="password" placeholder="Password" /><button class="btn" type="submit" name="Submit">Submit</button>
     </form>
     ';
     return $o;
@@ -385,7 +385,7 @@ function flint_comment_form( $args = array(), $post_id = null ) {
 			<?php else : ?>
 				<form action="<?php echo site_url( '/wp-comments-post.php' ); ?>" method="post" id="<?php echo esc_attr( $args['id_form'] ); ?>">
 					<?php do_action( 'comment_form_top' ); ?>
-					<?php if ( is_user_logged_in() ) : ?>
+					<?php if ( current_user_can('moderate_comments') ) : ?>
 						<?php echo apply_filters( 'comment_form_logged_in', $args['logged_in_as'], $commenter, $user_identity ); ?>
 						<?php do_action( 'comment_form_logged_in_after', $commenter, $user_identity ); ?>
 					<?php else : ?>
