@@ -73,12 +73,12 @@ else {
         </button>
                   
         <!-- Be sure to leave the brand out there if you want it shown -->
-        <a class="navbar-brand hidden-desktop" href="<?php echo home_url(); ?>"><?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?></a>
+        <a class="navbar-brand hidden-lg" href="<?php echo home_url(); ?>"><?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?></a>
                   
         <div class="nav-collapse collapse navbar-responsive-collapse">
           <?php wp_nav_menu( array( 'menu_class' => 'nav navbar-nav', 'container' => false, 'theme_location' => 'primary', 'walker' => new Flint_Bootstrap_Menu ) ); ?>
-          <form method="get" class="navbar-search pull-right visible-lg" action="<?php echo esc_url( home_url( '/' ) ); ?>" role="search">
-            <input type="text" class="search-query" name="s" value="<?php echo esc_attr( get_search_query() ); ?>" placeholder="Search">
+          <form method="get" class="navbar-form pull-right" action="<?php echo esc_url( home_url( '/' ) ); ?>" role="search">
+            <input type="text" class="form-control" name="s" value="<?php echo esc_attr( get_search_query() ); ?>" placeholder="Search" style="width: 200px;">
           </form>
         </div><!-- .nav-collapse -->
       </div><!-- .container -->
