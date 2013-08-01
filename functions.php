@@ -128,8 +128,8 @@ add_action( 'widgets_init', 'flint_widgets_init' );
 function flint_scripts() {
 	
 	// Load Twitter Bootstrap 2.3.2
-	wp_enqueue_script( 'bootstrap', '//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js', array('jquery'), '2.3.2', true );
-	wp_enqueue_style( 'bootstrap-css', '//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css', array() , '2.3.2' );
+	wp_enqueue_script( 'bootstrap', '//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js', array('jquery'), '3.0.0-rc1', true );
+	wp_enqueue_style( 'bootstrap-css', '//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css', array() , '3.0.0-rc1' );
 	
 	//Load Font Awesome 3.1.1
 	wp_enqueue_style( 'font-awesome', '//netdna.bootstrapcdn.com/font-awesome/3.2.0/css/font-awesome.css', array(), '3.2.0' );
@@ -151,6 +151,11 @@ function flint_scripts() {
 	wp_enqueue_style( 'flint-style', get_stylesheet_uri() );
 }
 add_action( 'wp_enqueue_scripts', 'flint_scripts' );
+
+function flint_admin_scripts() {
+	wp_enqueue_style( 'flint-admin', get_template_directory_uri() . '/css/flint-admin.css', array(), '3.0.0' );
+}
+add_action( 'admin_enqueue_scripts', 'flint_admin_scripts' );
 
 /**
  * Implement the Custom Header feature
