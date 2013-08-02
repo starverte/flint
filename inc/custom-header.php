@@ -37,7 +37,7 @@ function flint_custom_header_setup() {
 	$default_image = get_template_directory_uri();
 	$args = array(
 		'default-image'          => $default_image.'/img/default-header.png',
-		'default-text-color'     => '00a6e5',
+		'default-text-color'     => 'e93b8c',
 		'width'                  => 300,
 		'height'                 => 300,
 		'flex-height'            => true,
@@ -50,13 +50,6 @@ function flint_custom_header_setup() {
 
 	if ( function_exists( 'wp_get_theme' ) ) {
 		add_theme_support( 'custom-header', $args );
-	} else {
-		// Compat: Versions of WordPress prior to 3.4.
-		define( 'HEADER_TEXTCOLOR',    $args['default-text-color'] );
-		define( 'HEADER_IMAGE',        $args['default-image'] );
-		define( 'HEADER_IMAGE_WIDTH',  $args['width'] );
-		define( 'HEADER_IMAGE_HEIGHT', $args['height'] );
-		add_custom_image_header( $args['wp-head-callback'], $args['admin-head-callback'], $args['admin-preview-callback'] );
 	}
 }
 endif;
@@ -135,19 +128,12 @@ if ( ! function_exists( 'flint_admin_header_style' ) ) :
 function flint_admin_header_style() {
 ?>
 	<style type="text/css">
-	.appearance_page_custom-header #headimg {
+	.appearance_page_custom-header #heading {
 		border: none;
 	}
-	#headimg h1,
-	#desc {
-	}
-	#headimg h1 {
-	}
-	#headimg h1 a {
-	}
-	#desc {
-	}
-	#headimg img {
+	img {
+    height:auto;
+    max-width: 100%;
 	}
 	</style>
 <?php
@@ -161,19 +147,25 @@ if ( ! function_exists( 'flint_admin_header_image' ) ) :
  * @see flint_custom_header_setup().
  */
 function flint_admin_header_image() { ?>
-	<div id="headimg">
+	<div id="heading" class="row">
 		<?php
 		if ( 'blank' == get_header_textcolor() || '' == get_header_textcolor() )
 			$style = ' style="display:none;"';
 		else
 			$style = ' style="color:#' . get_header_textcolor() . ';"';
 		?>
-		<h1 class="displaying-header-text"><a id="name"<?php echo $style; ?> onclick="return false;" href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php bloginfo( 'name' ); ?></a></h1>
-		<div class="displaying-header-text" id="desc"<?php echo $style; ?>><?php bloginfo( 'description' ); ?></div>
 		<?php $header_image = get_header_image();
-		if ( ! empty( $header_image ) ) : ?>
-			<img src="<?php echo esc_url( $header_image ); ?>" alt="" />
-		<?php endif; ?>
+		if ( ! empty( $header_image ) ) { ?>
+			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home" <?php if ( display_header_text() ) { ?> class="col-2"<?php } ?>>
+				<img src="<?php header_image(); ?>" width="<?php echo get_custom_header()->width; ?>" height="<?php echo get_custom_header()->height; ?>" alt="" />
+			</a>
+		<?php } /* if ( ! empty( $header_image ) ) */
+		if ( display_header_text() ) { ?>
+		<div class="site-branding <?php if ( ! empty( $header_image ) ) { ?>col-8<?php } ?>">
+			<h1 class="site-title" style="font-size: 27px;font-weight:bold;text-shadow:none;"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home" style="color:#<?php echo get_header_textcolor() ?>;text-decoration: none;"><?php bloginfo( 'name' ); ?></a></h1>
+			<h2 class="site-description" style="font-weight:bold;text-shadow:none;color:#<?php echo get_header_textcolor() ?>"><?php bloginfo( 'description' ); ?></h2>
+		</div>
+		<?php } /* if ( display_header_text() ) */ ?>
 	</div>
 <?php }
 endif; // flint_admin_header_image

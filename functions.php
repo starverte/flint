@@ -72,6 +72,11 @@ function flint_setup() {
 	 * Enable support for Post Formats
 	 */
 	add_theme_support( 'post-formats', array( 'aside', 'image', 'video', 'quote', 'link' ) );
+	
+	/**
+	 * Add theme support for custom CSS in the TinyMCE visual editor
+	 */
+	add_editor_style( 'editor-style.css' );
 }
 endif; // flint_setup
 add_action( 'after_setup_theme', 'flint_setup' );
@@ -98,11 +103,6 @@ function flint_register_custom_background() {
 
 	if ( function_exists( 'wp_get_theme' ) ) {
 		add_theme_support( 'custom-background', $args );
-	} else {
-		define( 'BACKGROUND_COLOR', $args['default-color'] );
-		if ( ! empty( $args['default-image'] ) )
-			define( 'BACKGROUND_IMAGE', $args['default-image'] );
-		add_custom_background();
 	}
 }
 add_action( 'after_setup_theme', 'flint_register_custom_background' );
@@ -169,7 +169,7 @@ require( get_template_directory() . '/inc/custom-header.php' );
  * @author johnmegahan https://gist.github.com/1597994, Emanuele 'Tex' Tessore https://gist.github.com/3765640
  */
 class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
-	function start_lvl( &$output, $depth ) {
+	function start_lvl( &$output, $depth = 0, $args = array() ) {
 
 		$indent = str_repeat( "\t", $depth );
 		$submenu = ($depth > 0) ? ' sub-menu' : '';
@@ -287,9 +287,9 @@ function flint_schema() { ?>
 		<?php settings_fields('flint_options'); ?>
 		<?php do_settings_sections('flint'); ?>
 		<?php settings_errors(); ?>
-		<p class="submit"><input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" /></p>
+		<p class="submit"><input type="submit" class="button-primary" value="<?php _e('Save Changes', 'flint') ?>" /></p>
 	</form>
-	</div><?
+	</div><?php
 }
 
 /*
@@ -359,4 +359,17 @@ function remove_admin_bar() {
 function theme_version() {
     $theme = wp_get_theme();
     return $theme->Version;
+}
+
+/**
+ * Returns true if featured image is vertical
+ */
+function featured_image_vertical() {
+	if (has_post_thumbnail()) {
+    $thumb_id = get_post_thumbnail_id();
+    $thumb_meta = wp_get_attachment_metadata( $thumb_id );
+		if ($thumb_meta['width'] > $thumb_meta['height'] ) { $orientation = 'horizontal'; return false; }
+		if ($orientation = 'vertical') { return true; }
+	}
+	return false;
 }

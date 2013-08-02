@@ -176,8 +176,8 @@ function flint_link_pages($args = '') {
 	$defaults = array(
 		'before' => '<p>', 'after' => '</p>',
 		'link_before' => '', 'link_after' => '',
-		'next_or_number' => 'number', 'nextpagelink' => __('Next page'),
-		'previouspagelink' => __('Previous page'), 'pagelink' => '%',
+		'next_or_number' => 'number', 'nextpagelink' => __('Next page', 'flint'),
+		'previouspagelink' => __('Previous page', 'flint'), 'pagelink' => '%',
 		'echo' => 1
 	);
 
@@ -265,7 +265,7 @@ function flint_get_the_content($more_link_text = 'Read more', $stripteaser = fal
 	$post = get_post();
 
 	if ( null === $more_link_text )
-		$more_link_text = __( '(more...)' );
+		$more_link_text = __( '(more...)', 'flint' );
 
 	$output = '';
 	$hasTeaser = false;
@@ -316,8 +316,8 @@ function flint_get_the_content($more_link_text = 'Read more', $stripteaser = fal
 function flint_password_form() {
     global $post;
     $label = 'pwbox-'.( empty( $post->ID ) ? rand() : $post->ID );
-    $o = __( "To view this protected post, enter the password below:" ) . '
-    <form action="' . esc_url( site_url( 'wp-login.php?action=postpass', 'login_post' ) ) . '" method="post" class="input-append"><input class="col-lg-2' . $label . '" name="post_password" id="appendedInputButton" type="password" placeholder="Password" /><button class="btn" type="submit" name="Submit">Submit</button>
+    $o = __( 'To view this protected post, enter the password below:', 'flint' ) . '
+    <form action="' . esc_url( site_url( 'wp-login.php?action=postpass', 'login_post' ) ) . '" method="post" class="form-inline"><input class="form-control pw ' . $label . '" name="post_password" type="password" placeholder="Password"><button class="btn btn-default" type="submit" name="Submit">Submit</button>
     </form>
     ';
     return $o;
@@ -349,27 +349,27 @@ function flint_comment_form( $args = array(), $post_id = null ) {
 	$aria_req = ( $req ? " aria-required='true' required" : '' );
 	$fields =  array(
 		'author' => '<p class="comment-form-author">' .
-		            '<input id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" ' . $aria_req . ' placeholder="Name" required /></p>',
+		            '<input class="form-control required" id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" ' . $aria_req . ' placeholder="Name" required></p>',
 		'email'  => '<p class="comment-form-email">' .
-		            '<input id="email" name="email" type="text" value="' . esc_attr(  $commenter['comment_author_email'] ) . '" ' . $aria_req . ' placeholder="Email Address" required /></p>',
+		            '<input class="form-control" id="email" name="email" type="text" value="' . esc_attr(  $commenter['comment_author_email'] ) . '" ' . $aria_req . ' placeholder="Email Address"></p>',
 		'url'    => '<p class="comment-form-url">' .
-		            '<input id="url" name="url" type="text" value="' . esc_attr( $commenter['comment_author_url'] ) . '" placeholder="Website URL" /></p>',
+		            '<input class="form-control" id="url" name="url" type="text" value="' . esc_attr( $commenter['comment_author_url'] ) . '" placeholder="Website URL" /></p>',
 	);
 
-	$required_text = sprintf( ' ' . __('Required fields are marked %s'), '<span class="required">*</span>' );
+	$required_text = sprintf( ' ' . __('Required fields are marked %s', 'flint'), '<span class="required">*</span>' );
 	$defaults = array(
 		'fields'               => apply_filters( 'comment_form_default_fields', $fields ),
-		'comment_field'        => '<p class="comment-form-comment"><label for="comment">' . _x( 'Comment', 'noun' ) . '</label><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea></p>',
+		'comment_field'        => '<p class="comment-form-comment"><label for="comment">' . _x( 'Comment', 'noun', 'flint' ) . '</label><textarea class="form-control" id="comment" name="comment" cols="45" rows="8" aria-required="true" required></textarea></p>',
 		'must_log_in'          => '<p class="must-log-in">' . sprintf( __( 'You must be <a href="%s">logged in</a> to post a comment.' ), wp_login_url( apply_filters( 'the_permalink', get_permalink( $post_id ) ) ) ) . '</p>',
 		'logged_in_as'         => '<p class="logged-in-as">' . sprintf( __( 'Logged in as <a href="%1$s">%2$s</a>. <a href="%3$s" title="Log out of this account">Log out?</a>' ), get_edit_user_link(), $user_identity, wp_logout_url( apply_filters( 'the_permalink', get_permalink( $post_id ) ) ) ) . '</p>',
-		'comment_notes_before' => '<p class="comment-notes">' . __( 'Your email address will not be published.' ) . ( $req ? $required_text : '' ) . '</p>',
-		'comment_notes_after'  => '<p class="form-allowed-tags">' . sprintf( __( 'You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: %s' ), ' <code>' . allowed_tags() . '</code>' ) . '</p>',
+		'comment_notes_before' => '<p class="comment-notes">' . __( 'Your email address will not be published.', 'flint' ) . ( $req ? $required_text : '' ) . '</p>',
+		'comment_notes_after'  => '<p class="form-allowed-tags">' . sprintf( __( 'You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: %s' ), ' <code style="white-space:normal;">' . allowed_tags() . '</code>' ) . '</p>',
 		'id_form'              => 'commentform',
 		'id_submit'            => 'submit',
-		'title_reply'          => __( 'Leave a Reply' ),
-		'title_reply_to'       => __( 'Leave a Reply to %s' ),
-		'cancel_reply_link'    => __( 'Cancel reply' ),
-		'label_submit'         => __( 'Post Comment' ),
+		'title_reply'          => __( 'Leave a Reply', 'flint' ),
+		'title_reply_to'       => __( 'Leave a Reply to %s', 'flint' ),
+		'cancel_reply_link'    => __( 'Cancel reply', 'flint' ),
+		'label_submit'         => __( 'Post Comment', 'flint' ),
 	);
 
 	$args = wp_parse_args( $args, apply_filters( 'comment_form_defaults', $defaults ) );
@@ -383,7 +383,7 @@ function flint_comment_form( $args = array(), $post_id = null ) {
 				<?php echo $args['must_log_in']; ?>
 				<?php do_action( 'comment_form_must_log_in_after' ); ?>
 			<?php else : ?>
-				<form action="<?php echo site_url( '/wp-comments-post.php' ); ?>" method="post" id="<?php echo esc_attr( $args['id_form'] ); ?>">
+				<form class="form-horizontal" action="<?php echo site_url( '/wp-comments-post.php' ); ?>" method="post" id="<?php echo esc_attr( $args['id_form'] ); ?>">
 					<?php do_action( 'comment_form_top' ); ?>
 					<?php if ( current_user_can('moderate_comments') ) : ?>
 						<?php echo apply_filters( 'comment_form_logged_in', $args['logged_in_as'], $commenter, $user_identity ); ?>
@@ -401,7 +401,7 @@ function flint_comment_form( $args = array(), $post_id = null ) {
 					<?php echo apply_filters( 'comment_form_field_comment', $args['comment_field'] ); ?>
 					<?php echo $args['comment_notes_after']; ?>
 					<p class="form-submit">
-						<button class="btn" name="submit" type="submit" id="<?php echo esc_attr( $args['id_submit'] ); ?>"><?php echo esc_attr( $args['label_submit'] ); ?></button>
+						<button class="btn btn-default" name="submit" type="submit" id="<?php echo esc_attr( $args['id_submit'] ); ?>"><?php echo esc_attr( $args['label_submit'] ); ?></button>
 						<?php comment_id_fields( $post_id ); ?>
 					</p>
 					<?php do_action( 'comment_form', $post_id ); ?>
@@ -518,8 +518,8 @@ function flint_avatar( $id_or_email, $size = '96', $default = '', $alt = false )
 function get_flint_reply_link($args = array(), $comment = null, $post = null) {
 	global $user_ID;
 
-	$defaults = array('add_below' => 'comment', 'respond_id' => 'respond', 'reply_text' => __('Reply'),
-		'login_text' => __('Log in to Reply'), 'depth' => 0, 'before' => '', 'after' => '');
+	$defaults = array('add_below' => 'comment', 'respond_id' => 'respond', 'reply_text' => __('Reply', 'flint'),
+		'login_text' => __('Log in to Reply', 'flint'), 'depth' => 0, 'before' => '', 'after' => '');
 
 	$args = wp_parse_args($args, $defaults);
 

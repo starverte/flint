@@ -4,8 +4,8 @@
  */
 ?>
 
-<?php if ( is_user_logged_in() & is_single() ) { ?>
-	<div class="container"><div class="row"><a class="btn btn-small" href="<?php echo get_edit_post_link(); ?>" style="float:right;">Edit</a></div></div>
+<?php if ( current_user_can('edit_posts') ) { ?>
+  	<div class="row"><a class="btn btn-default btn-small" href="<?php echo get_edit_post_link(); ?>" style="float:right;">Edit</a></div>
 <?php } ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
@@ -44,7 +44,7 @@
 					$output = '';
 					if($categories){
 						foreach($categories as $category) {
-							$output .= '<a class="badge" href="'.get_category_link( $category->term_id ).'" title="' . esc_attr( sprintf( __( "View all posts in %s" ), $category->name ) ) . '">'.$category->cat_name.'</a>'.$separator;
+							$output .= '<a class="badge" href="'.get_category_link( $category->term_id ).'" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $category->name ) ) . '">'.$category->cat_name.'</a>'.$separator;
 						}
 						echo trim($output, $separator);
 					}
@@ -60,7 +60,7 @@
 				$output = '';
 				if($tags){
 					foreach($tags as $tag) {
-						$output .= '<a class="badge badge-inverse" href="'.get_tag_link( $tag->term_id ).'" title="' . esc_attr( sprintf( __( "View all posts in %s" ), $tag->name ) ) . '">'.$tag->name.'</a>'.$separator;
+						$output .= '<a class="badge badge-inverse" href="'.get_tag_link( $tag->term_id ).'" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $tag->name ) ) . '">'.$tag->name.'</a>'.$separator;
 					}
 					echo trim($output, $separator);
 				}?>

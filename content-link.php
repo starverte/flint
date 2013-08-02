@@ -18,8 +18,8 @@
 		<h3><?php flint_the_content(); ?></h3>
 		<?php
 			flint_link_pages( array(
-				'before' => '<div class="pagination"><ul>',
-				'after'  => '</ul></div>',
+				'before' => '<ul class="pagination">',
+				'after'  => '</ul>',
 			) );
 		?>
 	</div><!-- .entry-content -->
@@ -40,7 +40,7 @@
 					$output = '';
 					if($categories){
 						foreach($categories as $category) {
-							$output .= '<a class="badge" href="'.get_category_link( $category->term_id ).'" title="' . esc_attr( sprintf( __( "View all posts in %s" ), $category->name ) ) . '">'.$category->cat_name.'</a>'.$separator;
+							$output .= '<a class="badge" href="'.get_category_link( $category->term_id ).'" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $category->name ) ) . '">'.$category->cat_name.'</a>'.$separator;
 						}
 						echo trim($output, $separator);
 					}
@@ -56,7 +56,7 @@
 				$output = '';
 				if($tags){
 					foreach($tags as $tag) {
-						$output .= '<a class="badge badge-inverse" href="'.get_tag_link( $tag->term_id ).'" title="' . esc_attr( sprintf( __( "View all posts in %s" ), $tag->name ) ) . '">'.$tag->name.'</a>'.$separator;
+						$output .= '<a class="badge badge-inverse" href="'.get_tag_link( $tag->term_id ).'" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $tag->name ) ) . '">'.$tag->name.'</a>'.$separator;
 					}
 					echo trim($output, $separator);
 				}?>
