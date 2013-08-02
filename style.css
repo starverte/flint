@@ -4,10 +4,10 @@ Theme URI: https://github.com/starverte/flint.git
 Author: Star Verte LLC
 Author URI: http://www.starverte.com/
 Description: Core theme of the Sparks Framework. Showcases all "sparks."
-Version: 0.12.0
+Version: 1.0.0-rc1
 License: GPLv3
 License URI: license.txt
-Tags: sparks
+Tags: flexible-width, custom-background, custom-header, custom-menu, flexible-header, full-width-template, post-formats, theme-options, threaded-comments
 
 A spark sets a fire ablaze, and similarly the Sparks Framework is made up of 'sparks' that help initiate the creative process of website development within WordPress. Often times to start a fire, a person uses flint and steel. With the Sparks Framework it is the same way. 'Flint' (the core theme) and 'Steel' (the core plugin) makeup the foundation of the framework. Then, additional child themes and plugins extend the functionality and user experience.
 
@@ -243,6 +243,8 @@ table > tfoot > tr.warning > th {
 /* =Content
 ----------------------------------------------- */
 
+.bypostauthor {
+}
 .entry-title {
   -ms-word-wrap: break-word;
       word-wrap: break-word;
@@ -283,6 +285,14 @@ a.more-link {
   width: 100%;
 }
 .pager a { color: #333!important; }
+.pw {
+  width: 200px;
+  margin-right: 5px;
+}
+.featured-horizontal img {
+  max-height: 200px;
+  width: auto;
+}
 
 /* =Asides
 ----------------------------------------------- */
