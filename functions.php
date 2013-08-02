@@ -360,3 +360,16 @@ function theme_version() {
     $theme = wp_get_theme();
     return $theme->Version;
 }
+
+/**
+ * Returns true if featured image is vertical
+ */
+function featured_image_vertical() {
+	if (has_post_thumbnail()) {
+    $thumb_id = get_post_thumbnail_id();
+    $thumb_meta = wp_get_attachment_metadata( $thumb_id );
+		if ($thumb_meta['width'] > $thumb_meta['height'] ) { $orientation = 'horizontal'; return false; }
+		if ($orientation = 'vertical') { return true; }
+	}
+	return false;
+}
