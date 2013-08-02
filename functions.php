@@ -169,7 +169,7 @@ require( get_template_directory() . '/inc/custom-header.php' );
  * @author johnmegahan https://gist.github.com/1597994, Emanuele 'Tex' Tessore https://gist.github.com/3765640
  */
 class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
-	function start_lvl( &$output, $depth ) {
+	function start_lvl( &$output, $depth = 0, $args = array() ) {
 
 		$indent = str_repeat( "\t", $depth );
 		$submenu = ($depth > 0) ? ' sub-menu' : '';
