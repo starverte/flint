@@ -287,9 +287,9 @@ function flint_schema() { ?>
 		<?php settings_fields('flint_options'); ?>
 		<?php do_settings_sections('flint'); ?>
 		<?php settings_errors(); ?>
-		<p class="submit"><input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" /></p>
+		<p class="submit"><input type="submit" class="button-primary" value="<?php _e('Save Changes', 'flint') ?>" /></p>
 	</form>
-	</div><?
+	</div><?php
 }
 
 /*
