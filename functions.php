@@ -72,6 +72,11 @@ function flint_setup() {
 	 * Enable support for Post Formats
 	 */
 	add_theme_support( 'post-formats', array( 'aside', 'image', 'video', 'quote', 'link' ) );
+	
+	/**
+	 * Add theme support for custom CSS in the TinyMCE visual editor
+	 */
+	add_editor_style( 'editor-style.css' );
 }
 endif; // flint_setup
 add_action( 'after_setup_theme', 'flint_setup' );
