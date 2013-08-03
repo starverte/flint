@@ -377,6 +377,10 @@ object {
   -ms-word-wrap: break-word;
       word-wrap: break-word;
 }
+.navbar-brand {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 
 /* =Comments
