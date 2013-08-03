@@ -44,7 +44,7 @@ else {
 	<?php do_action( 'before' ); ?>
 	<header id="masthead" class="site-header" role="banner">
 	<?php if (current_theme_supports('custom-header')) { ?>
-		<hgroup class="row">
+		<div class="row">
 		<?php $header_image = get_header_image();
 		if ( ! empty( $header_image ) ) { ?>
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home" <?php if ( display_header_text() ) { ?> class="col-lg-2 hidden-sm"<?php } ?>>
@@ -57,7 +57,7 @@ else {
 			<h2 class="site-description visible-lg"><?php bloginfo( 'description' ); ?></h2>
 		</div>
 		<?php } /* if ( display_header_text() ) */ ?>
-		</hgroup>
+		</div>
 	<?php } /* if (current_theme_supports('custom-header')) */ ?>
 
 		<nav role="navigation" class="navbar">
