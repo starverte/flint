@@ -15,7 +15,7 @@
 			<?php do_action( 'flint_credits' ); ?>
 			Proudly powered by <a href="http://wordpress.org/" title="<?php esc_attr_e( 'A Semantic Personal Publishing Platform', 'flint' ); ?>">WordPress</a>
 			<span class="sep"> | </span>
-			<?php $theme = wp_get_theme(); printf( __( 'Theme: %1$s by %2$s.', 'flint' ), $theme, '<a href="'.$theme->{'Author URI'}.'">'.$theme->{'Author'}.'</a>' ); ?>
+			<?php $theme = wp_get_theme(); printf( __( 'Theme: %1$s by %2$s.', 'flint' ), '<a href="'.$theme->{'Theme URI'}.'">'.$theme.'</a>', $theme->{'Author'} ); ?>
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->
 </div><!-- #page -->
