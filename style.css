@@ -4,7 +4,7 @@ Theme URI: https://github.com/starverte/flint.git
 Author: Star Verte LLC
 Author URI: http://www.starverte.com/
 Description: Core theme of the Sparks Framework. Showcases all "sparks."
-Version: 1.0.0-rc1
+Version: 1.0.0-rc2
 License: GPLv3
 License URI: license.txt
 Tags: flexible-width, custom-background, custom-header, custom-menu, flexible-header, full-width-template, post-formats, theme-options, threaded-comments
@@ -46,6 +46,7 @@ h4,
 h5,
 h6 {
   font-weight: 600;
+  font-family: 'Open Sans', sans-serif;
 }
 b, strong {
   font-weight: 700;
@@ -375,6 +376,10 @@ object {
   max-width: 50%;
   -ms-word-wrap: break-word;
       word-wrap: break-word;
+}
+.navbar-brand {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 

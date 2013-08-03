@@ -44,7 +44,7 @@ else {
 	<?php do_action( 'before' ); ?>
 	<header id="masthead" class="site-header" role="banner">
 	<?php if (current_theme_supports('custom-header')) { ?>
-		<hgroup class="row">
+		<div class="row">
 		<?php $header_image = get_header_image();
 		if ( ! empty( $header_image ) ) { ?>
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home" <?php if ( display_header_text() ) { ?> class="col-lg-2 hidden-sm"<?php } ?>>
@@ -57,7 +57,7 @@ else {
 			<h2 class="site-description visible-lg"><?php bloginfo( 'description' ); ?></h2>
 		</div>
 		<?php } /* if ( display_header_text() ) */ ?>
-		</hgroup>
+		</div>
 	<?php } /* if (current_theme_supports('custom-header')) */ ?>
 
 		<nav role="navigation" class="navbar">
@@ -76,7 +76,7 @@ else {
         <a class="navbar-brand hidden-lg" href="<?php echo home_url(); ?>"><?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?></a>
                   
         <div class="nav-collapse collapse navbar-responsive-collapse">
-          <?php wp_nav_menu( array( 'menu_class' => 'nav navbar-nav', 'container' => false, 'theme_location' => 'primary', 'walker' => new Flint_Bootstrap_Menu ) ); ?>
+          <?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_class' => 'nav navbar-nav', 'fallback_cb' => false, 'walker' => new Flint_Bootstrap_Menu ) ); ?>
           <form method="get" class="navbar-form pull-right" action="<?php echo esc_url( home_url( '/' ) ); ?>" role="search">
             <input type="text" class="form-control" name="s" value="<?php echo esc_attr( get_search_query() ); ?>" placeholder="Search" style="width: 200px;">
           </form>

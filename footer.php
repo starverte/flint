@@ -12,10 +12,9 @@
 
 	<footer id="colophon" class="site-footer" role="contentinfo">
 		<div class="site-info">
-			<?php do_action( 'flint_credits' ); ?>
-			Proudly powered by <a href="http://wordpress.org/" rel="generator" title="<?php esc_attr_e( 'A Semantic Personal Publishing Platform', 'flint' ); ?>">WordPress</a> and the <a href="http://sparks.starverte.com/" rel="generator" title="<?php esc_attr_e( 'A WordPress Development Framework', 'flint' ); ?>">Sparks Framework</a>
+			Proudly powered by <a href="http://wordpress.org/" title="<?php esc_attr_e( 'A Semantic Personal Publishing Platform', 'flint' ); ?>">WordPress</a>
 			<span class="sep"> | </span>
-			<?php $theme = wp_get_theme(); printf( __( 'Theme: %1$s by %2$s.', 'flint' ), $theme, '<a href="'.$theme->{'Author URI'}.'" rel="designer">'.$theme->{'Author'}.'</a>' ); ?>
+			<?php $theme = wp_get_theme(); printf( __( 'Theme: %1$s by %2$s.', 'flint' ), '<a href="'.$theme->get( 'ThemeURI' ).'">'.$theme.'</a>', $theme->get( 'Author' ) ); ?>
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->
 </div><!-- #page -->

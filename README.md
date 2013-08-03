@@ -1,4 +1,4 @@
-Flint 1.0.0 RC 1
+Flint 1.0.0 RC 2
 =====
 Theme Name: Flint
 
@@ -10,7 +10,7 @@ Author URI: http://www.starverte.com/
 
 Description: Core theme of the Sparks Framework. Showcases all "sparks."
 
-Version: 1.0.0-rc1
+Version: 1.0.0-rc2
 
 License: GPLv3
 
