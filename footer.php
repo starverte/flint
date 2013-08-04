@@ -8,8 +8,6 @@
  */
 ?>
 
-	</div><!-- #main -->
-
 	<footer id="colophon" class="site-footer" role="contentinfo">
 		<div class="site-info container">
 			Proudly powered by <a href="http://wordpress.org/" title="<?php esc_attr_e( 'A Semantic Personal Publishing Platform', 'flint' ); ?>">WordPress</a>
