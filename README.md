@@ -8,7 +8,7 @@ Author: Star Verte LLC
 
 Author URI: http://www.starverte.com/
 
-Description: Core theme of the Sparks Framework. Showcases all "sparks."
+Description: A responsive, minimalist theme built on Bootstrap 3
 
 Version: 1.0.0-rc2
 
