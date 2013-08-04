@@ -39,6 +39,9 @@ textarea {
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
 }
+body {
+  padding-top: 50px;
+}
 h1,
 h2,
 h3,
@@ -70,12 +73,26 @@ a:active {
   text-decoration: underline;
 }
 
-/* Highlight Color */
-::selection {
-  background: #f797c4; /* Safari */
+/* Buttons */
+.btn-primary{
+  background-color:#e93b8c;
+  border-color: #f23d91;
 }
-::-moz-selection {
-  background: #f797c4; /* Firefox */
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.btn-primary.disabled,
+.btn-primary[disabled] {
+  color: #ffffff;
+  background-color: #f23d91;
+  border-color: #f23d91;
+}
+
+/* Highlight Color */
+::selection, /* Safari */
+::-moz-selection /* Firefox */ {
+  background: #f797c4; 
 }
 
 /* Alignment */
@@ -241,6 +258,28 @@ table > tfoot > tr.warning > th {
 }
 
 
+/* =Header
+----------------------------------------------- */
+
+.site-branding h1 a {
+  color: #fff;
+  font-size: 56px;
+}
+.site-branding h2 {
+  color: #fff;
+  font-size: 18px;
+}
+#masthead {
+	background: #222;
+  margin-bottom: 2em;
+}
+@media (min-width: 768px) {
+  #masthead {
+    padding: 1em 0;
+  }
+}
+
+
 /* =Content
 ----------------------------------------------- */
 
@@ -295,9 +334,7 @@ a.more-link {
   width: auto;
 }
 
-/* =Asides
------------------------------------------------ */
-
+/* Asides  */
 .blog .format-aside .entry-title,
 .archive .format-aside .entry-title {
   display: none;
@@ -307,6 +344,72 @@ a.more-link {
 /* =Media
 ----------------------------------------------- */
 
+.entry-content img {
+	max-width: 98%;
+	padding: 1%;
+	padding: 4px;
+  line-height: 1.428571429;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-transition: all 0.2s ease-in-out;
+          transition: all 0.2s ease-in-out;
+}
+.gallery {
+	clear: both;
+	overflow: hidden;
+	margin: 0 auto;
+}
+.gallery .gallery-item {
+	overflow: hidden;
+	float: left;
+	margin: 10px 0 0;
+	text-align: center;
+	list-style: none;
+}
+.gallery-caption {
+	padding: 9px;
+  color: #333333;
+}
+.gallery-columns-0 .gallery-item {
+	width: 100%;
+}
+.gallery-columns-1 .gallery-item {
+	width: 100%;
+}
+.gallery-columns-2 .gallery-item {
+	width: 50%;
+}
+.gallery-columns-3 .gallery-item {
+	width: 33.33%;
+}
+.gallery-columns-4 .gallery-item {
+	width: 25%;
+}
+.gallery-columns-5 .gallery-item {
+	width: 20%;
+}
+.gallery-columns-6 .gallery-item {
+	width: 16.66%;
+}
+.gallery-columns-7 .gallery-item {
+	width: 14.28%;
+}
+.gallery-columns-8 .gallery-item {
+	width: 12.5%;
+}
+.gallery-columns-9 .gallery-item {
+	width: 11.11%;
+}
+.gallery-columns-10 .gallery-item {
+	width: 10%;
+}
+.gallery-columns-11 .gallery-item {
+	width: 9.09%;
+}
+.gallery-columns-12 .gallery-item {
+	width: 8.33%;
+}
 .entry-content img.wp-smiley,
 .comment-content img.wp-smiley {
   border: none;
@@ -315,11 +418,16 @@ a.more-link {
   padding: 0;
 }
 .wp-caption {
-  border: 1px solid #ccc;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-transition: all 0.2s ease-in-out;
+          transition: all 0.2s ease-in-out;
   margin-bottom: 1.5em;
   max-width: 100%;
 }
 .wp-caption img[class*="wp-image-"] {
+  border: 0;
+  border-radius: 6px;
   display: block;
   margin: 1.2% auto 0;
   max-width: 98%;
@@ -336,9 +444,13 @@ a.more-link {
 .gallery-caption {
 }
 .site-content .gallery a img {
-  border: none;
-  height: auto;
-  max-width: 90%;
+  padding: 4px;
+  line-height: 1.428571429;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-transition: all 0.2s ease-in-out;
+          transition: all 0.2s ease-in-out;
 }
 .site-content .gallery dd {
   margin: 0;
@@ -354,6 +466,7 @@ iframe,
 object {
   max-width: 100%;
 }
+
 
 /* =Navigation
 ----------------------------------------------- */
@@ -403,8 +516,15 @@ article.comment {
 /* =Widgets
 ----------------------------------------------- */
 
+#secondary {
+  background: #444;
+  color: #fff;
+}
+#secondary a {
+  color: #999;
+}
 .widget {
-  margin: 0 0 1.5em;
+  margin: 0.75em 0;
 }
 
 /* Make sure select elements fit in widgets */
@@ -432,6 +552,21 @@ article.comment {
 }
 .link-widget .widget-title {
   margin: 0;
+}
+
+
+/* =Footer
+----------------------------------------------- */
+
+#colophon {
+  background: #222;
+  color: #fff;
+}
+#colophon a {
+  color: #999;
+}
+.site-info {
+  padding: 1em 0;
 }
 
 

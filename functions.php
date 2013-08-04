@@ -210,11 +210,11 @@ class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
 
 		$output .= $indent . '<li' . $id . $value . $class_names . $li_attributes . '>';
 
-		$attributes  = ! empty( $item->attr_title ) ? ' title="'  . esc_attr( $item->attr_title ) .'"' : '';
-		$attributes .= ! empty( $item->target )     ? ' target="' . esc_attr( $item->target     ) .'"' : '';
-		$attributes .= ! empty( $item->xfn )        ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
-		$attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
-		$attributes .= ($args->has_children) 	    ? ' class="dropdown-toggle" data-toggle="dropdown"' : '';
+		$attributes  = ! empty( $item->attr_title ) 				? ' title="'  . esc_attr( $item->attr_title ) .'"' : '';
+		$attributes .= ! empty( $item->target )     				? ' target="' . esc_attr( $item->target     ) .'"' : '';
+		$attributes .= ! empty( $item->xfn )        				? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
+		$attributes .= ! empty( $item->url )        				? ' href="'   . esc_attr( $item->url        ) .'"' : '';
+		$attributes .= ($depth == 0 && $args->has_children)	? ' class="dropdown-toggle" data-toggle="dropdown"' : '';
 
 		$item_output = $args->before;
 		$item_output .= '<a'. $attributes .'>';
@@ -281,15 +281,4 @@ function theme_version() {
     return $theme->Version;
 }
 
-/**
- * Returns true if featured image is vertical
- */
-function featured_image_vertical() {
-	if (has_post_thumbnail()) {
-    $thumb_id = get_post_thumbnail_id();
-    $thumb_meta = wp_get_attachment_metadata( $thumb_id );
-		if ($thumb_meta['width'] > $thumb_meta['height'] ) { $orientation = 'horizontal'; return false; }
-		if ($orientation = 'vertical') { return true; }
-	}
-	return false;
-}
+add_filter( 'use_default_gallery_style', '__return_false' );

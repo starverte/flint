@@ -104,7 +104,7 @@ function flint_comment( $comment, $args, $depth ) {
       </div>
       <div class="pull-right">
 				<?php flint_reply_link(array_merge( $args, array( 'depth' => $depth, 'max_depth' => $args['max_depth'] ) )); ?>
-        <?php if ( current_user_can('moderate_comments') ) { ?><a class="btn btn-small" href="<?php echo get_edit_comment_link(); ?>" >Edit</a><?php } ?>
+        <?php if ( current_user_can('moderate_comments') ) { ?><a class="btn btn-default btn-small" href="<?php echo get_edit_comment_link(); ?>" >Edit</a><?php } ?>
       </div>
     </article>
     
@@ -349,9 +349,9 @@ function flint_comment_form( $args = array(), $post_id = null ) {
 	$aria_req = ( $req ? " aria-required='true' required" : '' );
 	$fields =  array(
 		'author' => '<p class="comment-form-author">' .
-		            '<input class="form-control required" id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" ' . $aria_req . ' placeholder="Name" required></p>',
+		            '<input class="form-control required" id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" ' . $aria_req . ' placeholder="Name*"></p>',
 		'email'  => '<p class="comment-form-email">' .
-		            '<input class="form-control" id="email" name="email" type="text" value="' . esc_attr(  $commenter['comment_author_email'] ) . '" ' . $aria_req . ' placeholder="Email Address"></p>',
+		            '<input class="form-control" id="email" name="email" type="text" value="' . esc_attr(  $commenter['comment_author_email'] ) . '" ' . $aria_req . ' placeholder="Email Address*"></p>',
 		'url'    => '<p class="comment-form-url">' .
 		            '<input class="form-control" id="url" name="url" type="text" value="' . esc_attr( $commenter['comment_author_url'] ) . '" placeholder="Website URL" /></p>',
 	);
@@ -359,7 +359,7 @@ function flint_comment_form( $args = array(), $post_id = null ) {
 	$required_text = sprintf( ' ' . __('Required fields are marked %s', 'flint'), '<span class="required">*</span>' );
 	$defaults = array(
 		'fields'               => apply_filters( 'comment_form_default_fields', $fields ),
-		'comment_field'        => '<p class="comment-form-comment"><label for="comment">' . _x( 'Comment', 'noun', 'flint' ) . '</label><textarea class="form-control" id="comment" name="comment" cols="45" rows="8" aria-required="true" required></textarea></p>',
+		'comment_field'        => '<p class="comment-form-comment"><label for="comment">' . _x( 'Comment*', 'noun', 'flint' ) . '</label><textarea class="form-control" id="comment" name="comment" cols="45" rows="8" aria-required="true" required></textarea></p>',
 		'must_log_in'          => '<p class="must-log-in">' . sprintf( __( 'You must be <a href="%s">logged in</a> to post a comment.' ), wp_login_url( apply_filters( 'the_permalink', get_permalink( $post_id ) ) ) ) . '</p>',
 		'logged_in_as'         => '<p class="logged-in-as">' . sprintf( __( 'Logged in as <a href="%1$s">%2$s</a>. <a href="%3$s" title="Log out of this account">Log out?</a>' ), get_edit_user_link(), $user_identity, wp_logout_url( apply_filters( 'the_permalink', get_permalink( $post_id ) ) ) ) . '</p>',
 		'comment_notes_before' => '<p class="comment-notes">' . __( 'Your email address will not be published.', 'flint' ) . ( $req ? $required_text : '' ) . '</p>',
