@@ -12,29 +12,29 @@
         
         <?php if ( 'post' == get_post_type() ) : ?>
           <div class="entry-meta">
-          	<?php flint_posted_on(); ?>
+            <?php flint_posted_on(); ?>
           </div><!-- .entry-meta -->
         <?php endif; ?>
       </header><!-- .entry-header -->
       
       <?php if ( is_search() ) : // Only display Excerpts for Search ?>
       <div class="entry-summary">
-      	<?php the_excerpt(); ?>
+        <?php the_excerpt(); ?>
       </div><!-- .entry-summary -->
       <?php else : ?>
       <div class="entry-content">
-				<?php flint_the_content(); ?>
+        <?php flint_the_content(); ?>
         <?php
         flint_link_pages( array(
-					'before' => '<ul class="pagination">',
-					'after'  => '</ul>',
+          'before' => '<ul class="pagination">',
+          'after'  => '</ul>',
         ) );
         ?>
       </div><!-- .entry-content -->
       <?php endif; ?>
       
       <footer class="entry-meta clearfix">
-				<?php if ( 'post' == get_post_type() ) : // Hide category and tag text for pages on Search ?>
+        <?php if ( 'post' == get_post_type() ) : // Hide category and tag text for pages on Search ?>
           <span class="cat-links">
             Posted in
             <?php if ( flint_categorized_blog() ) {

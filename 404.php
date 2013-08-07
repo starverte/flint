@@ -7,8 +7,8 @@
 
 get_header(); ?>
 
-	<div id="primary" class="content-area container">
-		<div id="content" class="site-content" role="main">      
+  <div id="primary" class="content-area container">
+    <div id="content" class="site-content" role="main">      
       <div class="row">
         <div class="col-lg-2 col-sm-2"></div>
         <article id="post-0" class="post error404 not-found col-lg-8 col-sm-8">
@@ -24,7 +24,7 @@ get_header(); ?>
           <div class="entry-content">
             <p><?php _e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'flint' ); ?></p>
 
-						<?php get_search_form(); ?>
+            <?php get_search_form(); ?>
   
             <?php the_widget( 'WP_Widget_Recent_Posts' ); ?>
   
@@ -65,7 +65,7 @@ get_header(); ?>
         </article><!-- #page-<?php the_ID(); ?> -->
         <div class="col-lg-2 col-sm-2"></div>
       </div><!-- .row -->
-		</div><!-- #content -->
-	</div><!-- #primary -->
+    </div><!-- #content -->
+  </div><!-- #primary -->
 
 <?php get_footer(); ?>

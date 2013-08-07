@@ -8,13 +8,13 @@
     <div class="col-lg-2 col-sm-2"><?php if (has_post_thumbnail()) { the_post_thumbnail(); } ?></div>
     <article id="post-<?php the_ID(); ?>" <?php post_class('col-lg-8 col-sm-8'); ?>>      
       <div class="entry-content">
-				<blockquote><?php flint_the_content(); ?></blockquote>
+        <blockquote><?php flint_the_content(); ?></blockquote>
       </div><!-- .entry-content -->
       
       <footer class="entry-meta clearfix">
-      	<?php flint_posted_on(); ?>
+        <?php flint_posted_on(); ?>
         <span class="sep"> | </span>
-				<?php if ( 'post' == get_post_type() ) : // Hide category and tag text for pages on Search ?>
+        <?php if ( 'post' == get_post_type() ) : // Hide category and tag text for pages on Search ?>
           <span class="cat-links">
             Posted in
             <?php if ( flint_categorized_blog() ) {

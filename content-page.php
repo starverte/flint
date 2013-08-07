@@ -15,15 +15,15 @@
       
       <?php if ( is_search() ) : // Only display Excerpts for Search ?>
       <div class="entry-summary">
-      	<?php the_excerpt(); ?>
+        <?php the_excerpt(); ?>
       </div><!-- .entry-summary -->
       <?php else : ?>
       <div class="entry-content">
-				<?php flint_the_content(); ?>
+        <?php flint_the_content(); ?>
         <?php
         flint_link_pages( array(
-					'before' => '<ul class="pagination">',
-					'after'  => '</ul>',
+          'before' => '<ul class="pagination">',
+          'after'  => '</ul>',
         ) );
         ?>
       </div><!-- .entry-content -->

@@ -5,8 +5,8 @@
  * @package Flint
  */
 ?>
-	<div id="secondary" role="complementary">
-  	<div class="container">
+  <div id="secondary" role="complementary">
+    <div class="container">
       <div class="col-lg-2 col-sm-2"></div>
       <div id="secondary-inner" class="widget-area col-lg-8 col-sm-8" >
         <?php do_action( 'before_sidebar' ); ?>
