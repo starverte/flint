@@ -66,18 +66,20 @@
           </div><!-- .nav-collapse -->
         </div><!-- .container -->
       </nav><!-- .navbar -->
-      <div class="container hidden-sm">
-        <?php $header_image = get_header_image();
-        if ( ! empty( $header_image ) ) { ?>
-          <a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home" <?php if ( display_header_text() ) { ?> class="col-lg-2 visible-lg"<?php } ?>>
-            <img src="<?php header_image(); ?>" width="<?php echo get_custom_header()->width; ?>" height="<?php echo get_custom_header()->height; ?>" alt="" />
-          </a>
-        <?php } /* if ( ! empty( $header_image ) ) */
-        if ( display_header_text() ) { ?>
-          <div class="site-branding <?php if ( ! empty( $header_image ) ) { ?>col-lg-10<?php } ?>">
-            <h1 class="site-title hidden-sm"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-            <h2 class="site-description hidden-sm"><?php bloginfo( 'description' ); ?></h2>
-          </div><!-- .site-branding -->
-        <?php } /* if ( display_header_text() ) */ ?>
-      </div><!-- .container -->
+      <?php if (current_theme_supports('custom-header')) { ?>
+        <div class="container hidden-sm">
+          <?php $header_image = get_header_image();
+          if ( ! empty( $header_image ) ) { ?>
+            <a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home" <?php if ( display_header_text() ) { ?> class="col-lg-2 visible-lg"<?php } ?>>
+              <img src="<?php header_image(); ?>" width="<?php echo get_custom_header()->width; ?>" height="<?php echo get_custom_header()->height; ?>" alt="" />
+            </a>
+          <?php } /* if ( ! empty( $header_image ) ) */
+          if ( display_header_text() ) { ?>
+            <div class="site-branding <?php if ( ! empty( $header_image ) ) { ?>col-lg-10<?php } ?>">
+              <h1 class="site-title hidden-sm"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+              <h2 class="site-description hidden-sm"><?php bloginfo( 'description' ); ?></h2>
+            </div><!-- .site-branding -->
+          <?php } /* if ( display_header_text() ) */ ?>
+        </div><!-- .container -->
+      <?php } /* if (current_theme_supports('custom-header')) */ ?>
     </header><!-- #masthead -->
