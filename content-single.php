@@ -4,7 +4,7 @@
  */
 ?>
 
-	<div class="col-lg-1 col-sm-1"><?php if (has_post_thumbnail()) { the_post_thumbnail(); } ?></div>
+  <div class="col-lg-1 col-sm-1"><?php if (has_post_thumbnail()) { the_post_thumbnail(); } ?></div>
   <article id="post-<?php the_ID(); ?>" <?php post_class('col-lg-10 col-sm-10 col-10'); ?>>
     <header class="entry-header">
       <h1 class="entry-title"><?php the_title(); ?></h1>

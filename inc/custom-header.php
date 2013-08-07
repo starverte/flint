@@ -5,12 +5,12 @@
  *
  * You can add an optional custom header image to header.php like so ...
 
-	<?php $header_image = get_header_image();
-	if ( ! empty( $header_image ) ) { ?>
-		<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
-			<img src="<?php header_image(); ?>" width="<?php echo get_custom_header()->width; ?>" height="<?php echo get_custom_header()->height; ?>" alt="" />
-		</a>
-	<?php } // if ( ! empty( $header_image ) ) ?>
+  <?php $header_image = get_header_image();
+  if ( ! empty( $header_image ) ) { ?>
+    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
+      <img src="<?php header_image(); ?>" width="<?php echo get_custom_header()->width; ?>" height="<?php echo get_custom_header()->height; ?>" alt="" />
+    </a>
+  <?php } // if ( ! empty( $header_image ) ) ?>
 
  *
  * @package Flint
@@ -34,23 +34,23 @@
  */
 if ( ! function_exists( 'flint_custom_header_setup' ) ) :
 function flint_custom_header_setup() {
-	$default_image = get_template_directory_uri();
-	$args = array(
-		'default-image'          => $default_image.'/img/default-header.png',
-		'default-text-color'     => 'e93b8c',
-		'width'                  => 300,
-		'height'                 => 300,
-		'flex-height'            => true,
-		'wp-head-callback'       => 'flint_header_style',
-		'admin-head-callback'    => 'flint_admin_header_style',
-		'admin-preview-callback' => 'flint_admin_header_image',
-	);
+  $default_image = get_template_directory_uri();
+  $args = array(
+    'default-image'          => $default_image.'/img/default-header.png',
+    'default-text-color'     => 'e93b8c',
+    'width'                  => 300,
+    'height'                 => 300,
+    'flex-height'            => true,
+    'wp-head-callback'       => 'flint_header_style',
+    'admin-head-callback'    => 'flint_admin_header_style',
+    'admin-preview-callback' => 'flint_admin_header_image',
+  );
 
-	$args = apply_filters( 'flint_custom_header_args', $args );
+  $args = apply_filters( 'flint_custom_header_args', $args );
 
-	if ( function_exists( 'wp_get_theme' ) ) {
-		add_theme_support( 'custom-header', $args );
-	}
+  if ( function_exists( 'wp_get_theme' ) ) {
+    add_theme_support( 'custom-header', $args );
+  }
 }
 endif;
 add_action( 'after_setup_theme', 'flint_custom_header_setup' );
@@ -70,14 +70,14 @@ add_action( 'after_setup_theme', 'flint_custom_header_setup' );
  */
 
 if ( ! function_exists( 'get_custom_header' ) ) {
-	function get_custom_header() {
-		return (object) array(
-			'url'           => get_header_image(),
-			'thumbnail_url' => get_header_image(),
-			'width'         => HEADER_IMAGE_WIDTH,
-			'height'        => HEADER_IMAGE_HEIGHT,
-		);
-	}
+  function get_custom_header() {
+    return (object) array(
+      'url'           => get_header_image(),
+      'thumbnail_url' => get_header_image(),
+      'width'         => HEADER_IMAGE_WIDTH,
+      'height'        => HEADER_IMAGE_HEIGHT,
+    );
+  }
 }
 
 if ( ! function_exists( 'flint_header_style' ) ) :
@@ -88,34 +88,34 @@ if ( ! function_exists( 'flint_header_style' ) ) :
  */
 function flint_header_style() {
 
-	// If no custom options for text are set, let's bail
-	// get_header_textcolor() options: HEADER_TEXTCOLOR is default, hide text (returns 'blank') or any hex value
-	if ( HEADER_TEXTCOLOR == get_header_textcolor() )
-		return;
-	// If we get this far, we have custom styles. Let's do this.
-	?>
-	<style type="text/css">
-	<?php
-		// Has the text been hidden?
-		if ( 'blank' == get_header_textcolor() ) :
-	?>
-		.site-title,
-		.site-description {
-			position: absolute !important;
-			clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
-			clip: rect(1px, 1px, 1px, 1px);
-		}
-	<?php
-		// If the user has set a custom color for the text use that
-		else :
-	?>
-		.site-title a,
-		.site-description {
-			color: #<?php echo get_header_textcolor(); ?>;
-		}
-	<?php endif; ?>
-	</style>
-	<?php
+  // If no custom options for text are set, let's bail
+  // get_header_textcolor() options: HEADER_TEXTCOLOR is default, hide text (returns 'blank') or any hex value
+  if ( HEADER_TEXTCOLOR == get_header_textcolor() )
+    return;
+  // If we get this far, we have custom styles. Let's do this.
+  ?>
+  <style type="text/css">
+  <?php
+    // Has the text been hidden?
+    if ( 'blank' == get_header_textcolor() ) :
+  ?>
+    .site-title,
+    .site-description {
+      position: absolute !important;
+      clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+      clip: rect(1px, 1px, 1px, 1px);
+    }
+  <?php
+    // If the user has set a custom color for the text use that
+    else :
+  ?>
+    .site-title a,
+    .site-description {
+      color: #<?php echo get_header_textcolor(); ?>;
+    }
+  <?php endif; ?>
+  </style>
+  <?php
 }
 endif; // flint_header_style
 
@@ -127,15 +127,15 @@ if ( ! function_exists( 'flint_admin_header_style' ) ) :
  */
 function flint_admin_header_style() {
 ?>
-	<style type="text/css">
-	.appearance_page_custom-header #heading {
-		border: none;
-	}
-	img {
+  <style type="text/css">
+  .appearance_page_custom-header #heading {
+    border: none;
+  }
+  img {
     height:auto;
     max-width: 100%;
-	}
-	</style>
+  }
+  </style>
 <?php
 }
 endif; // flint_admin_header_style
@@ -147,25 +147,25 @@ if ( ! function_exists( 'flint_admin_header_image' ) ) :
  * @see flint_custom_header_setup().
  */
 function flint_admin_header_image() { ?>
-	<div id="heading" class="row">
-		<?php
-		if ( 'blank' == get_header_textcolor() || '' == get_header_textcolor() )
-			$style = ' style="display:none;"';
-		else
-			$style = ' style="color:#' . get_header_textcolor() . ';"';
-		?>
-		<?php $header_image = get_header_image();
-		if ( ! empty( $header_image ) ) { ?>
-			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home" <?php if ( display_header_text() ) { ?> class="col-2"<?php } ?>>
-				<img src="<?php header_image(); ?>" width="<?php echo get_custom_header()->width; ?>" height="<?php echo get_custom_header()->height; ?>" alt="" />
-			</a>
-		<?php } /* if ( ! empty( $header_image ) ) */
-		if ( display_header_text() ) { ?>
-		<div class="site-branding <?php if ( ! empty( $header_image ) ) { ?>col-8<?php } ?>">
-			<h1 class="site-title" style="font-size: 27px;font-weight:bold;text-shadow:none;"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home" style="color:#<?php echo get_header_textcolor() ?>;text-decoration: none;"><?php bloginfo( 'name' ); ?></a></h1>
-			<h2 class="site-description" style="font-weight:bold;text-shadow:none;color:#<?php echo get_header_textcolor() ?>"><?php bloginfo( 'description' ); ?></h2>
-		</div>
-		<?php } /* if ( display_header_text() ) */ ?>
-	</div>
+  <div id="heading" class="row">
+    <?php
+    if ( 'blank' == get_header_textcolor() || '' == get_header_textcolor() )
+      $style = ' style="display:none;"';
+    else
+      $style = ' style="color:#' . get_header_textcolor() . ';"';
+    ?>
+    <?php $header_image = get_header_image();
+    if ( ! empty( $header_image ) ) { ?>
+      <a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home" <?php if ( display_header_text() ) { ?> class="col-2"<?php } ?>>
+        <img src="<?php header_image(); ?>" width="<?php echo get_custom_header()->width; ?>" height="<?php echo get_custom_header()->height; ?>" alt="" />
+      </a>
+    <?php } /* if ( ! empty( $header_image ) ) */
+    if ( display_header_text() ) { ?>
+    <div class="site-branding <?php if ( ! empty( $header_image ) ) { ?>col-8<?php } ?>">
+      <h1 class="site-title" style="font-size: 27px;font-weight:bold;text-shadow:none;"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home" style="color:#<?php echo get_header_textcolor() ?>;text-decoration: none;"><?php bloginfo( 'name' ); ?></a></h1>
+      <h2 class="site-description" style="font-weight:bold;text-shadow:none;color:#<?php echo get_header_textcolor() ?>"><?php bloginfo( 'description' ); ?></h2>
+    </div>
+    <?php } /* if ( display_header_text() ) */ ?>
+  </div>
 <?php }
 endif; // flint_admin_header_image

@@ -12,18 +12,18 @@
 
 get_header(); ?>
 
-		<div id="primary" class="content-area container">
-			<div id="content" class="site-content" role="main">
+    <div id="primary" class="content-area container">
+      <div id="content" class="site-content" role="main">
 
-				<?php while ( have_posts() ) : the_post(); ?>
+        <?php while ( have_posts() ) : the_post(); ?>
 
-					<?php get_template_part( 'content', get_post_format() ); ?>
+          <?php get_template_part( 'content', get_post_format() ); ?>
 
-				<?php endwhile; // end of the loop. ?>
+        <?php endwhile; // end of the loop. ?>
         
         <?php flint_content_nav( 'nav-below' ); ?>
 
-			</div><!-- #content .site-content -->
-		</div><!-- #primary .content-area -->
+      </div><!-- #content .site-content -->
+    </div><!-- #primary .content-area -->
     
 <?php get_footer(); ?>
