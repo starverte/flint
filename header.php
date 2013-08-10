@@ -22,24 +22,7 @@
   <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
-  <?php $steel_options = get_option('steel_options');
-  
-  if (isset($steel_options['fb_app_id'])) {
-    $fb_app_id = $steel_options["fb_app_id"];
-  }
-  else {
-    $fb_app_id = '';
-  } ?>
-  <div id="fb-root"></div>
-  <script>
-    (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=<?php echo $fb_app_id; ?>";
-    fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-  </script>
+  <?php if (plugin_exists('steel/steel.php')) { steel_open(); } ?>
   <div id="page" class="hfeed site">
     <?php do_action( 'before' ); ?>
     <header id="masthead" class="site-header" role="banner">
@@ -66,18 +49,20 @@
           </div><!-- .nav-collapse -->
         </div><!-- .container -->
       </nav><!-- .navbar -->
-      <div class="container hidden-sm">
-        <?php $header_image = get_header_image();
-        if ( ! empty( $header_image ) ) { ?>
-          <a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home" <?php if ( display_header_text() ) { ?> class="col-lg-2 visible-lg"<?php } ?>>
-            <img src="<?php header_image(); ?>" width="<?php echo get_custom_header()->width; ?>" height="<?php echo get_custom_header()->height; ?>" alt="" />
-          </a>
-        <?php } /* if ( ! empty( $header_image ) ) */
-        if ( display_header_text() ) { ?>
-          <div class="site-branding <?php if ( ! empty( $header_image ) ) { ?>col-lg-10<?php } ?>">
-            <h1 class="site-title hidden-sm"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-            <h2 class="site-description hidden-sm"><?php bloginfo( 'description' ); ?></h2>
-          </div><!-- .site-branding -->
-        <?php } /* if ( display_header_text() ) */ ?>
-      </div><!-- .container -->
+      <?php if (current_theme_supports('custom-header')) { ?>
+        <div class="container hidden-sm">
+          <?php $header_image = get_header_image();
+          if ( ! empty( $header_image ) ) { ?>
+            <a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home" <?php if ( display_header_text() ) { ?> class="col-lg-2 visible-lg"<?php } ?>>
+              <img src="<?php header_image(); ?>" width="<?php echo get_custom_header()->width; ?>" height="<?php echo get_custom_header()->height; ?>" alt="" />
+            </a>
+          <?php } /* if ( ! empty( $header_image ) ) */
+          if ( display_header_text() ) { ?>
+            <div class="site-branding <?php if ( ! empty( $header_image ) ) { ?>col-lg-10<?php } ?>">
+              <h1 class="site-title hidden-sm"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+              <h2 class="site-description hidden-sm"><?php bloginfo( 'description' ); ?></h2>
+            </div><!-- .site-branding -->
+          <?php } /* if ( display_header_text() ) */ ?>
+        </div><!-- .container -->
+      <?php } /* if (current_theme_supports('custom-header')) */ ?>
     </header><!-- #masthead -->
