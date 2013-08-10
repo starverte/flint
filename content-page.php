@@ -7,7 +7,10 @@
 ?>
 
   <div class="row">
-    <div class="col-lg-2 col-sm-2"><?php if (has_post_thumbnail()) { the_post_thumbnail(); } ?></div>
+    <div class="col-lg-2 col-sm-2">
+			<?php if (has_post_thumbnail()) { the_post_thumbnail(); } ?>
+      <?php if (has_download_btn()) { the_download_btn(); } ?>
+    </div>
     <article id="post-<?php the_ID(); ?>" <?php post_class('col-lg-8 col-sm-8'); ?>>
       <header class="entry-header">
         <h1 class="entry-title"><?php if (is_single()) { echo the_title(); } else { $permalink = get_permalink(); $title = get_the_title(); echo '<a href="' . $permalink .'" rel="bookmark">' . $title . '</a>'; } ?></h1>
