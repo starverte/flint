@@ -5,7 +5,10 @@
 ?>
 
   <div class="row">
-    <div class="col-lg-2 col-sm-2"><?php if (has_post_thumbnail()) { the_post_thumbnail(); } ?></div>
+    <div class="col-lg-2 col-sm-2">
+			<?php if (has_post_thumbnail()) { the_post_thumbnail(); } ?>
+      <?php if (has_download_btn()) { the_download_btn(); } ?>
+    </div>
     <article id="post-<?php the_ID(); ?>" <?php post_class('col-lg-8 col-sm-8'); ?>>      
       <div class="entry-content">
         <blockquote><?php flint_the_content(); ?></blockquote>
@@ -48,5 +51,6 @@
         <?php endif; ?>
       </footer><!-- .entry-meta -->
     </article><!-- #post-<?php the_ID(); ?> -->
+    <div class="col-lg-1 col-sm-1"></div>
     <?php if ( current_user_can('edit_posts') ) { ?><a class="btn btn-default btn-small col-lg-1 col-sm-1" href="<?php echo get_edit_post_link(); ?>">Edit</a><?php } ?>
   </div><!-- .row -->

@@ -286,6 +286,7 @@ table > tfoot > tr.warning > th {
 .bypostauthor {
 }
 .entry-title {
+  margin-top: 0;
   -ms-word-wrap: break-word;
       word-wrap: break-word;
 }
