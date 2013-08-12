@@ -128,20 +128,20 @@ add_action( 'widgets_init', 'flint_widgets_init' );
 function flint_scripts() {
   
   // Load Twitter Bootstrap
-  wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', array('jquery'), '3.0.0-rc1', true );
-  wp_enqueue_style( 'bootstrap-css', get_template_directory_uri() . '/css/bootstrap.min.css', array() , '3.0.0-rc1' );
+  wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', array('jquery'), '8bdffec', true );
+  wp_enqueue_style( 'bootstrap-css', get_template_directory_uri() . '/css/bootstrap.min.css', array() , '8bdffec' );
   
   //Load Font Awesome
-  wp_enqueue_style( 'font-awesome', get_template_directory_uri() . '/css/font-awesome.css', array('bootstrap-css'), '3.2.1' );
+  wp_enqueue_style( 'font-awesome', get_template_directory_uri() . '/css/font-awesome.css', array(), '3.2.1' );
 
-  wp_enqueue_script( 'flint-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );
+  wp_enqueue_script( 'flint-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '9f3e2cd', true );
 
   if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
     wp_enqueue_script( 'comment-reply' );
   }
 
   if ( is_singular() && wp_attachment_is_image() ) {
-    wp_enqueue_script( 'flint-keyboard-image-navigation', get_template_directory_uri() . '/js/keyboard-image-navigation.js', array( 'jquery' ), '20120202' );
+    wp_enqueue_script( 'flint-keyboard-image-navigation', get_template_directory_uri() . '/js/keyboard-image-navigation.js', array( 'jquery' ), '4c99b2a' );
   }
   
   //Load Google Font 'Open Sans'
@@ -153,7 +153,7 @@ function flint_scripts() {
 add_action( 'wp_enqueue_scripts', 'flint_scripts' );
 
 function flint_admin_scripts() {
-  wp_enqueue_style( 'flint-admin', get_template_directory_uri() . '/css/flint-admin.css', array(), '1.0.0-rc3' );
+  wp_enqueue_style( 'flint-admin', get_template_directory_uri() . '/css/flint-admin.css', array(), theme_version() );
 }
 add_action( 'admin_enqueue_scripts', 'flint_admin_scripts' );
 
@@ -282,45 +282,3 @@ function theme_version() {
 }
 
 add_filter( 'use_default_gallery_style', '__return_false' );
-
-/*
- * Create custom meta boxes for download button
- */
-add_action( 'add_meta_boxes', 'flint_download_meta_boxes' );
-function flint_download_meta_boxes() { add_meta_box('flint_download_meta', 'Download Button', 'flint_download_meta', 'post', 'side', 'high'); }
-function flint_download_meta() {
-  global $post;
-	$custom = get_post_custom($post->ID); ?>
-  
-	<p><label>Link </label><input type="text" size="20" name="download_link" value="<?php if (isset($custom['download_link'])) { echo $custom["download_link"] [0]; } ?>" /></p>
-	<p><label>Label </label><input type="text" size="20" name="download_label" value="<?php if (isset($custom['download_label'])) { echo $custom["download_label"] [0]; } ?>" /></p><?php
-}
-// Save data from meta boxes
-add_action('save_post', 'save_flint_download');
-function save_flint_download() {
-	global $post;
-	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE && (isset($post_id))) { return $post_id; }
-	if(defined('DOING_AJAX') && DOING_AJAX && (isset($post_id))) { return $post_id; } //Prevent the metaboxes from being overwritten while quick editing.
-	if(preg_match('/\edit\.php/', $_SERVER['REQUEST_URI']) && (isset($post_id))) { return $post_id; } //Detects if the save action is coming from a quick edit/batch edit.
-	if (isset($_POST['download_link']) & $_POST['download_link'][0] != '') { update_post_meta($post->ID, "download_link", $_POST["download_link"]); }
-		elseif (isset($_POST['download_link']) & $_POST['download_link'][0] == '') {delete_post_meta($post->ID, "download_link");}
-	if (!empty($_POST['download_label'])) { update_post_meta($post->ID, "download_label", $_POST["download_label"]); }
-		elseif (!empty($_POST['download_link'])) { update_post_meta($post->ID, "download_label", 'Download'); }
-		else { delete_post_meta($post->ID, "download_label"); }
-}
-
-/*
- * Create theme functions for download button
- */
-function has_download_btn() {
-	global $post;
-	$custom = get_post_custom($post->ID);
-	if (!empty($custom['download_link'])) {return true;}
-	else {return false;}
-}
-function the_download_btn() {
-	global $post;
-	$custom = get_post_custom($post->ID);
-	isset($custom['download_label']) ? $label = $custom['download_label'][0] : $label = 'Download';
-	echo '<a class="btn btn-primary btn-block visible-lg" href="' . $custom['download_link'][0] . '"><i class="icon-download"></i> ' . $label . '</a>';
-}
