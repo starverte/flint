@@ -15,6 +15,9 @@
       <header class="entry-header">
         <h1 class="entry-title"><?php if (is_single()) { echo the_title(); } else { $permalink = get_permalink(); $title = get_the_title(); echo '<a href="' . $permalink .'" rel="bookmark">' . $title . '</a>'; } ?></h1>
         <?php if (is_single()) {} else { ?><a class="btn btn-info btn-block visible-sm" href="<?php echo get_permalink(); ?>">View gallery</a><?php } ?>
+        <div class="entry-meta">
+          <?php flint_posted_on(); ?>
+        </div><!-- .entry-meta -->
       </header><!-- .entry-header -->
       
       <?php if ( is_search() ) : // Only display Excerpts for Search ?>
