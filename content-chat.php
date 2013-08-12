@@ -44,7 +44,7 @@
               $separator = ' ';
               $output = '';
               if($categories){
-                foreach($categories as $category) { $output .= '<a class="badge" href="'.get_category_link( $category->term_id ).'" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $category->name ) ) . '">'.$category->cat_name.'</a>'.$separator;}
+                foreach($categories as $category) { $output .= '<a class="label label-default" href="'.get_category_link( $category->term_id ).'" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $category->name ) ) . '">'.$category->cat_name.'</a>'.$separator;}
                 echo trim($output, $separator);
               }
             } //if ( flint_categorized_blog() ) ?>
@@ -58,7 +58,7 @@
             $separator = ' ';
             $output = '';
             if($tags){
-              foreach($tags as $tag) {$output .= '<a class="badge badge-inverse" href="'.get_tag_link( $tag->term_id ).'" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $tag->name ) ) . '">'.$tag->name.'</a>'.$separator; }
+              foreach($tags as $tag) {$output .= '<a class="label label-info" href="'.get_tag_link( $tag->term_id ).'" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $tag->name ) ) . '">'.$tag->name.'</a>'.$separator; }
               echo trim($output, $separator);
             } ?>
           </span><!-- .tags-links -->
