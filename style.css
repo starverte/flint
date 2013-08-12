@@ -61,40 +61,6 @@ img {
   height: auto;
 }
 
-/* Links */
-a {
-  color: #e93b8c;
-  text-decoration: none;
-}
-a:hover,
-a:focus,
-a:active {
-  color: #f23d91;
-  text-decoration: underline;
-}
-
-/* Buttons */
-.btn-primary{
-  background-color:#e93b8c;
-  border-color: #f23d91;
-}
-.btn-primary:hover,
-.btn-primary:focus,
-.btn-primary:active,
-.btn-primary.active,
-.btn-primary.disabled,
-.btn-primary[disabled] {
-  color: #ffffff;
-  background-color: #f23d91;
-  border-color: #f23d91;
-}
-
-/* Highlight Color */
-::selection, /* Safari */
-::-moz-selection /* Firefox */ {
-  background: #f797c4; 
-}
-
 /* Alignment */
 .alignleft {
   display: inline;
