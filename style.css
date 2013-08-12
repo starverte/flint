@@ -4,10 +4,10 @@ Theme URI: https://github.com/starverte/flint.git
 Author: Star Verte LLC
 Author URI: http://www.starverte.com/
 Description: A responsive, minimalist theme built on Twitter's Bootstrap 3 (http://getbootstrap.com) and based on Automattic's _s theme (http://underscores.me).
-Version: 1.0.0-rc4
+Version: 1.0.0-rc5
 License: GPLv3
 License URI: license.txt
-Tags: flexible-width, custom-background, custom-header, custom-menu, flexible-header, full-width-template, post-formats, theme-options, threaded-comments
+Tags: custom-background, custom-header, custom-menu, flexible-header, one-column, post-formats, threaded-comments
 
 A spark sets a fire ablaze, and similarly the Sparks Framework is made up of 'sparks' that help initiate the creative process of website development within WordPress. Often times to start a fire, a person uses flint and steel. With the Sparks Framework it is the same way. 'Flint' (the core theme) and 'Steel' (the core plugin) makeup the foundation of the framework. Then, additional child themes and plugins extend the functionality and user experience.
 
@@ -59,40 +59,6 @@ img {
   padding-bottom: 5px;
   max-width: 100%;
   height: auto;
-}
-
-/* Links */
-a {
-  color: #e93b8c;
-  text-decoration: none;
-}
-a:hover,
-a:focus,
-a:active {
-  color: #f23d91;
-  text-decoration: underline;
-}
-
-/* Buttons */
-.btn-primary{
-  background-color:#e93b8c;
-  border-color: #f23d91;
-}
-.btn-primary:hover,
-.btn-primary:focus,
-.btn-primary:active,
-.btn-primary.active,
-.btn-primary.disabled,
-.btn-primary[disabled] {
-  color: #ffffff;
-  background-color: #f23d91;
-  border-color: #f23d91;
-}
-
-/* Highlight Color */
-::selection, /* Safari */
-::-moz-selection /* Firefox */ {
-  background: #f797c4; 
 }
 
 /* Alignment */
