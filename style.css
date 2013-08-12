@@ -256,15 +256,10 @@ table > tfoot > tr.warning > th {
   -ms-word-wrap: break-word;
       word-wrap: break-word;
 }
-.archive article {
-    padding-bottom: 0.5em;
-    border-bottom: 1px solid #ccc;
-    margin-bottom: 0.5em;
-}
 .sticky {
 }
 .hentry {
-  margin: 0 0 1.5em;
+  margin: 0 0 6em;
 }
 .byline {
   display: none;
