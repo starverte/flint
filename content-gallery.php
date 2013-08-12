@@ -9,11 +9,12 @@
   <div class="row">
     <div class="col-lg-2 col-sm-2">
       <?php if (has_post_thumbnail()) { the_post_thumbnail(); } ?>
-      <a class="btn btn-info btn-block" href="<?php echo get_permalink(); ?>">View gallery</a>
+      <?php if (is_single()) {} else { ?><a class="btn btn-info btn-block hidden-sm" href="<?php echo get_permalink(); ?>">View gallery</a><?php } ?>
     </div>
     <article id="post-<?php the_ID(); ?>" <?php post_class('col-lg-8 col-sm-8'); ?>>
       <header class="entry-header">
         <h1 class="entry-title"><?php if (is_single()) { echo the_title(); } else { $permalink = get_permalink(); $title = get_the_title(); echo '<a href="' . $permalink .'" rel="bookmark">' . $title . '</a>'; } ?></h1>
+        <?php if (is_single()) {} else { ?><a class="btn btn-info btn-block visible-sm" href="<?php echo get_permalink(); ?>">View gallery</a><?php } ?>
       </header><!-- .entry-header -->
       
       <?php if ( is_search() ) : // Only display Excerpts for Search ?>
@@ -46,7 +47,7 @@
             $total_images = count( $images );
             $image        = array_shift( $images ); ?>
             
-            <p><a class="gallery-thumb" href="<?php the_permalink(); ?>"><?php echo wp_get_attachment_image( $image, 'large' ); ?></a></p>
+            <p><a class="gallery-thumb hidden-sm" href="<?php the_permalink(); ?>"><?php echo wp_get_attachment_image( $image, 'large' ); ?></a></p>
             
             <p class="gallery-info">
               <?php
