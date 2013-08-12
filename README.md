@@ -1,4 +1,4 @@
-Flint 1.0.0 RC 3
+Flint 1.0.0 RC 4
 =====
 Theme Name: Flint
 
@@ -10,7 +10,7 @@ Author URI: http://www.starverte.com/
 
 Description: A responsive, minimalist theme built on Twitter's Bootstrap 3 (http://getbootstrap.com) and based on Automattic's _s theme (http://underscores.me).
 
-Version: 1.0.0-rc3
+Version: 1.0.0-rc4
 
 License: GPLv3
 
