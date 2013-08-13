@@ -22,7 +22,7 @@
   <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
-  <?php include_once( ABSPATH . 'wp-admin/includes/plugin.php' ); if (is_plugin_active('steel/steel.php')) { steel_open(); } ?>
+  <?php if ( function_exists( 'steel_open' ) ) { steel_open(); } ?>
   <div id="page" class="hfeed site">
     <?php do_action( 'before' ); ?>
     <header id="masthead" class="site-header" role="banner">
