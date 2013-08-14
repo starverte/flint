@@ -300,7 +300,8 @@ html {
 }
 
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
   font-size: 14px;
   line-height: 1.428571429;
   color: #333333;
@@ -442,8 +443,8 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 500;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
   line-height: 1.1;
 }
 
@@ -3353,6 +3354,10 @@ button.close {
   }
   .navbar-right {
     float: right !important;
+  }
+  .navbar-right .dropdown-menu {
+    right: 0;
+    left: auto;
   }
 }
 

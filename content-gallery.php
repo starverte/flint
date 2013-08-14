@@ -7,14 +7,14 @@
 ?>
 
   <div class="row">
-    <div class="col-lg-2 col-sm-2">
+    <div class="col-lg-2 col-md-2 col-sm-2">
       <?php if (has_post_thumbnail()) { the_post_thumbnail(); } ?>
-      <?php if (is_single()) {} else { ?><a class="btn btn-info btn-block hidden-sm" href="<?php echo get_permalink(); ?>">View gallery</a><?php } ?>
+      <?php if (is_single()) {} else { ?><a class="btn btn-info btn-block hidden-xs" href="<?php echo get_permalink(); ?>">View gallery</a><?php } ?>
     </div>
-    <article id="post-<?php the_ID(); ?>" <?php post_class('col-lg-8 col-sm-8'); ?>>
+    <article id="post-<?php the_ID(); ?>" <?php post_class('col-lg-8 col-md-8 col-sm-8'); ?>>
       <header class="entry-header">
         <h1 class="entry-title"><?php if (is_single()) { echo the_title(); } else { $permalink = get_permalink(); $title = get_the_title(); echo '<a href="' . $permalink .'" rel="bookmark">' . $title . '</a>'; } ?></h1>
-        <?php if (is_single()) {} else { ?><a class="btn btn-info btn-block visible-sm" href="<?php echo get_permalink(); ?>">View gallery</a><?php } ?>
+        <?php if (is_single()) {} else { ?><a class="btn btn-info btn-block visible-xs" href="<?php echo get_permalink(); ?>">View gallery</a><?php } ?>
         <div class="entry-meta">
           <?php flint_posted_on(); ?>
         </div><!-- .entry-meta -->
@@ -50,7 +50,7 @@
             $total_images = count( $images );
             $image        = array_shift( $images ); ?>
             
-            <p><a class="gallery-thumb hidden-sm" href="<?php the_permalink(); ?>"><?php echo wp_get_attachment_image( $image, 'large' ); ?></a></p>
+            <p><a class="gallery-thumb hidden-xs" href="<?php the_permalink(); ?>"><?php echo wp_get_attachment_image( $image, 'large' ); ?></a></p>
             
             <p class="gallery-info">
               <?php
@@ -107,6 +107,6 @@
         <?php endif; ?>
       </footer><!-- .entry-meta -->
     </article><!-- #page-<?php the_ID(); ?> -->
-    <div class="col-lg-1 col-sm-1"></div>
-    <?php if ( current_user_can('edit_posts') ) { ?><a class="btn btn-default btn-small col-lg-1 col-sm-1" href="<?php echo get_edit_post_link(); ?>">Edit</a><?php } ?>
+    <div class="col-lg-1 col-md-1 col-sm-1"></div>
+    <?php if ( current_user_can('edit_posts') ) { ?><a class="btn btn-default btn-sm col-lg-1 col-md-1 col-sm-1" href="<?php echo get_edit_post_link(); ?>">Edit</a><?php } ?>
   </div><!-- .row -->

@@ -37,7 +37,7 @@ function flint_custom_header_setup() {
   $default_image = get_template_directory_uri();
   $args = array(
     'default-image'          => $default_image.'/img/default-header.png',
-    'default-text-color'     => 'e93b8c',
+    'default-text-color'     => 'ffffff',
     'width'                  => 300,
     'height'                 => 300,
     'flex-height'            => true,
@@ -128,13 +128,58 @@ if ( ! function_exists( 'flint_admin_header_style' ) ) :
 function flint_admin_header_style() {
 ?>
   <style type="text/css">
-  .appearance_page_custom-header #heading {
-    border: none;
-  }
-  img {
-    height:auto;
-    max-width: 100%;
-  }
+    @import url("http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700");
+    .row::before, .row::after {
+      display: table;
+      content: " ";
+    }
+    .row::after {
+      clear: both;
+    }
+    .appearance_page_custom-header #heading {
+      background: #222;
+      border: none;
+    }
+    img {
+      height:auto;
+      max-width: 160px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      vertical-align: middle;
+      border: 0;
+    }
+    .col-xs-2, .col-xs-8 {
+      float: left;
+      position: relative;
+      min-height: 1px;
+      padding-right: 15px;
+      padding-left: 15px;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+    .col-xs-2 {
+      width: 16.666666666666664%;
+    }
+    .col-xs-8 {
+      width: 66.66666666666666%;
+    }
+    h1 {
+      font-size: 56px!important;
+      margin: .67em 0;
+    }
+    h2 {
+      font-size: 18px!important;
+    }
+    h1, h2 {
+      font-family: "Open Sans", sans-serif;
+      font-weight: 600!important;
+      line-height: 1.1;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+    
+    
   </style>
 <?php
 }
@@ -156,12 +201,12 @@ function flint_admin_header_image() { ?>
     ?>
     <?php $header_image = get_header_image();
     if ( ! empty( $header_image ) ) { ?>
-      <a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home" <?php if ( display_header_text() ) { ?> class="col-2"<?php } ?>>
+      <a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home" <?php if ( display_header_text() ) { ?> class="col-xs-2"<?php } ?>>
         <img src="<?php header_image(); ?>" width="<?php echo get_custom_header()->width; ?>" height="<?php echo get_custom_header()->height; ?>" alt="" />
       </a>
     <?php } /* if ( ! empty( $header_image ) ) */
     if ( display_header_text() ) { ?>
-    <div class="site-branding <?php if ( ! empty( $header_image ) ) { ?>col-8<?php } ?>">
+    <div class="site-branding <?php if ( ! empty( $header_image ) ) { ?>col-xs-8<?php } ?>">
       <h1 class="site-title" style="font-size: 27px;font-weight:bold;text-shadow:none;"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home" style="color:#<?php echo get_header_textcolor() ?>;text-decoration: none;"><?php bloginfo( 'name' ); ?></a></h1>
       <h2 class="site-description" style="font-weight:bold;text-shadow:none;color:#<?php echo get_header_textcolor() ?>"><?php bloginfo( 'description' ); ?></h2>
     </div>
