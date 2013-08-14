@@ -4,11 +4,11 @@
  */
 ?>
 
-  <div class="col-lg-2 col-sm-2">
-		<?php if (has_post_thumbnail()) { the_post_thumbnail(); } ?>
+  <div class="col-lg-2 col-md-2 col-sm-2">
+    <?php if (has_post_thumbnail()) { the_post_thumbnail(); } ?>
     <?php if (has_download_btn()) { the_download_btn(); } ?>
   </div>
-  <article id="post-<?php the_ID(); ?>" <?php post_class('col-lg-10 col-sm-10 col-10'); ?>>
+  <article id="post-<?php the_ID(); ?>" <?php post_class('col-lg-1 col-lg-10 col-md-10 col-sm-10 col-xs-10'); ?>>
     <header class="entry-header">
       <h1 class="entry-title"><?php the_title(); ?></h1>
   
