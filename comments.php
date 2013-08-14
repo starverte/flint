@@ -18,8 +18,8 @@
 if ( post_password_required() )
   return;
 ?>
-  <div class="col-lg-2 col-sm-2"></div>
-  <div id="comments" class="comments-area col-lg-8 col-sm-8">
+  <div class="col-lg-2 col-md-2 col-sm-2"></div>
+  <div id="comments" class="comments-area col-lg-8 col-md-8 col-sm-8">
 
     <?php // You can start editing here -- including this comment! ?>
   
@@ -69,4 +69,4 @@ if ( post_password_required() )
     <?php flint_comment_form(); ?>
 
   </div><!-- #comments -->
-  <div class="col-lg-2 col-sm-2"></div>
+  <div class="col-lg-2 col-md-2 col-sm-2"></div>

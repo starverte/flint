@@ -104,7 +104,7 @@ function flint_comment( $comment, $args, $depth ) {
       </div>
       <div class="pull-right">
         <?php flint_reply_link(array_merge( $args, array( 'depth' => $depth, 'max_depth' => $args['max_depth'] ) )); ?>
-        <?php if ( current_user_can('moderate_comments') ) { ?><a class="btn btn-default btn-small" href="<?php echo get_edit_comment_link(); ?>" >Edit</a><?php } ?>
+        <?php if ( current_user_can('moderate_comments') ) { ?><a class="btn btn-default btn-sm" href="<?php echo get_edit_comment_link(); ?>" >Edit</a><?php } ?>
       </div>
     </article>
     
@@ -120,11 +120,15 @@ if ( ! function_exists( 'flint_posted_on' ) ) :
  * Prints HTML with meta information for the current post-date/time and author.
  */
 function flint_posted_on() {
-  printf( __( 'Posted on <a href="%1$s" title="%2$s" rel="bookmark"><time class="entry-date" datetime="%3$s">%4$s</time></a><span class="byline"> by <span class="author vcard"><a class="url fn n" href="%5$s" title="%6$s" rel="author">%7$s</a></span></span>', 'flint' ),
+  if (get_the_date('Y') != date('Y')) :
+    $postdate = esc_html( get_the_date('F j, Y') );
+  else :
+    $postdate = esc_html( get_the_date('F j') );
+  endif;
+  printf( __( 'Posted on <a href="%1$s" rel="bookmark"><time class="entry-date" datetime="%2$s">%3$s</time></a><span class="byline"> by <span class="author vcard"><a class="url fn n" href="%4$s" title="%5$s" rel="author">%6$s</a></span></span>', 'flint' ),
     esc_url( get_permalink() ),
-    esc_attr( get_the_time() ),
     esc_attr( get_the_date( 'c' ) ),
-    esc_html( get_the_date() ),
+    $postdate,
     esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
     esc_attr( sprintf( __( 'View all posts by %s', 'flint' ), get_the_author() ) ),
     get_the_author()
@@ -539,9 +543,9 @@ function get_flint_reply_link($args = array(), $comment = null, $post = null) {
   $link = '';
 
   if ( get_option('comment_registration') && !$user_ID )
-    $link = '<a rel="nofollow" class="comment-reply-login btn btn-primary btn-small" href="' . esc_url( wp_login_url( get_permalink() ) ) . '">' . $login_text . '</a>';
+    $link = '<a rel="nofollow" class="comment-reply-login btn btn-primary btn-sm" href="' . esc_url( wp_login_url( get_permalink() ) ) . '">' . $login_text . '</a>';
   else
-    $link = "<a class='comment-reply-link btn btn-primary btn-small' href='" . esc_url( add_query_arg( 'replytocom', $comment->comment_ID ) ) . "#" . $respond_id . "' onclick='return addComment.moveForm(\"$add_below-$comment->comment_ID\", \"$comment->comment_ID\", \"$respond_id\", \"$post->ID\")'>$reply_text</a>";
+    $link = "<a class='comment-reply-link btn btn-primary btn-sm' href='" . esc_url( add_query_arg( 'replytocom', $comment->comment_ID ) ) . "#" . $respond_id . "' onclick='return addComment.moveForm(\"$add_below-$comment->comment_ID\", \"$comment->comment_ID\", \"$respond_id\", \"$post->ID\")'>$reply_text</a>";
   return apply_filters('comment_reply_link', $before . $link . $after, $args, $comment, $post);
 }
 /**
