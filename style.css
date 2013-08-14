@@ -1,6 +1,7 @@
 /*
 Theme Name: Flint
 Theme URI: https://github.com/starverte/flint.git
+Author: Star Verte LLC
 Description: A responsive, minimalist theme built on Twitter's Bootstrap 3 (http://getbootstrap.com) and based on Automattic's _s theme (http://underscores.me).
 Version: 1.0.0-rc5
 License: GPLv3
@@ -34,20 +35,9 @@ input,
 select,
 textarea {
   color: #404040;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 300;
 }
 body {
   padding-top: 50px;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 600;
-  font-family: 'Open Sans', sans-serif;
 }
 b, strong {
   font-weight: 700;
