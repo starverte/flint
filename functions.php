@@ -153,7 +153,6 @@ function flint_scripts() {
 add_action( 'wp_enqueue_scripts', 'flint_scripts' );
 
 function flint_admin_scripts() {
-  wp_enqueue_style( 'flint-admin', get_template_directory_uri() . '/css/flint-admin.css', array(), theme_version() );
 }
 add_action( 'admin_enqueue_scripts', 'flint_admin_scripts' );
 
