@@ -1,4 +1,4 @@
-Flint 1.0.0 RC 5
+Flint 1.0.0 RC 6
 =====
 Theme Name: Flint
 
@@ -6,7 +6,7 @@ Theme URI: https://github.com/starverte/flint.git
 
 Description: A responsive, minimalist theme built using Automattic's _s theme (http://underscores.me), Twitter's Bootstrap (http://getbootstrap.com) and Font Awesome (http://fortawesome.github.io/Font-Awesome/)
 
-Version: 1.0.0-rc5
+Version: 1.0.0-rc6
 
 License: GNU General Public License v3 or later
 
