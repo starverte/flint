@@ -68,8 +68,7 @@
         flint_link_pages( array(
           'before' => '<ul class="pagination">',
           'after'  => '</ul>',
-        ) );
-        ?>
+        ) ); ?>
       </div><!-- .entry-content -->
       <?php endif; ?>
       <footer class="entry-meta clearfix">
