@@ -1,6 +1,6 @@
 <?php
 /**
- * The template used for displaying page content in page.php
+ * The template used for displaying page content in page.php and search.php
  *
  * @package Flint
  */
@@ -26,8 +26,7 @@
         flint_link_pages( array(
           'before' => '<ul class="pagination">',
           'after'  => '</ul>',
-        ) );
-        ?>
+        ) ); ?>
       </div><!-- .entry-content -->
       <?php endif; ?>
       
