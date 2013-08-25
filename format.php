@@ -21,17 +21,16 @@
       
       <?php if ( is_search() ) : // Only display Excerpts for Search ?>
       <div class="entry-summary">
-        <div class="well"><?php the_excerpt(); ?></div>
+        <?php the_excerpt(); ?>
       </div><!-- .entry-summary -->
       <?php else : ?>
       <div class="entry-content">
-        <div class="well"><?php flint_the_content(); ?></div>
+        <?php flint_the_content(); ?>
         <?php
         flint_link_pages( array(
           'before' => '<ul class="pagination">',
           'after'  => '</ul>',
-        ) );
-        ?>
+        ) ); ?>
       </div><!-- .entry-content -->
       <?php endif; ?>
       
