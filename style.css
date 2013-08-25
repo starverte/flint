@@ -2,10 +2,10 @@
 Theme Name: Flint
 Theme URI: http://sparks.starverte.com/flint
 Author: Star Verte LLC
-Description: A responsive, minimalist theme built on Twitter's Bootstrap 3 (http://getbootstrap.com) and based on Automattic's _s theme (http://underscores.me).
-Version: 1.0.0-rc6
+Description: A responsive, minimalist theme built on Twitter's Bootstrap 3 and based on Automattic's _s theme. Make it your own with a custom background, custom header, and custom menus. More customization options coming soon.
+Version: 1.0.1
 License: GPLv3
-License URI: license.txt
+License URI: LICENSE.md
 Tags: custom-background, custom-header, custom-menu, flexible-header, one-column, post-formats, threaded-comments
 
 A spark sets a fire ablaze, and similarly the Sparks Framework is made up of 'sparks' that help initiate the creative process of website development within WordPress. Often times to start a fire, a person uses flint and steel. With the Sparks Framework it is the same way. 'Flint' (the core theme) and 'Steel' (the core plugin) makeup the foundation of the framework. Then, additional child themes and plugins extend the functionality and user experience.
@@ -240,6 +240,7 @@ table > tfoot > tr.warning > th {
 .bypostauthor {
 }
 .entry-title {
+  font-size: 2.4em;
   margin-top: 0;
   -ms-word-wrap: break-word;
       word-wrap: break-word;
