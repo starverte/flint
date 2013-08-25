@@ -1,11 +1,8 @@
 Flint 1.0.0
 =====
-A responsive, minimalist theme built using _s and Twitter's Bootstrap 3.
-http://sparks.starverte.com/flint
+A responsive, minimalist theme built on Twitter's Bootstrap 3 and based on Automattic's _s theme. Make it your own with a custom background, custom header, and custom menus. More customization options coming soon.
 
-License: GNU General Public License v3 or later
-
-License URI: http://www.gnu.org/licenses/gpl-3.0.html
+Learn more at http://sparks.starverte.com/flint.
 
 A spark sets a fire ablaze, and similarly the Sparks Framework is made up of 'sparks' that help initiate
 the creative process of website development within WordPress. Often times to start a fire, a person uses flint and steel.
