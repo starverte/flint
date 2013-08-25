@@ -240,6 +240,7 @@ table > tfoot > tr.warning > th {
 .bypostauthor {
 }
 .entry-title {
+  font-size: 2.4em;
   margin-top: 0;
   -ms-word-wrap: break-word;
       word-wrap: break-word;
