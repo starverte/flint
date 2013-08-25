@@ -1,12 +1,7 @@
-Flint 1.0.0 RC 6
+Flint 1.0.0
 =====
-Theme Name: Flint
-
-Theme URI: http://sparks.starverte.com/flint
-
-Description: A responsive, minimalist theme built using Automattic's _s theme (http://underscores.me) and Twitter's Bootstrap (http://getbootstrap.com)
-
-Version: 1.0.0-rc6
+A responsive, minimalist theme built using _s and Twitter's Bootstrap 3.
+http://sparks.starverte.com/flint
 
 License: GNU General Public License v3 or later
 
@@ -16,9 +11,6 @@ A spark sets a fire ablaze, and similarly the Sparks Framework is made up of 'sp
 the creative process of website development within WordPress. Often times to start a fire, a person uses flint and steel.
 With the Sparks Framework it is the same way. 'Flint' (the core theme) and 'Steel' (the core plugin) makeup the foundation
 of the framework. Then, additional child themes and plugins extend the functionality and user experience.
-
-This theme, like WordPress, is licensed under the GPL.
-Use it to make something cool, have fun, and share what you've learned with others.
 
 ```
 Flint is based on Underscores http://underscores.me/
