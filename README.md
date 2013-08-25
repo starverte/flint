@@ -2,9 +2,9 @@ Flint 1.0.0 RC 6
 =====
 Theme Name: Flint
 
-Theme URI: https://github.com/starverte/flint.git
+Theme URI: http://sparks.starverte.com/flint
 
-Description: A responsive, minimalist theme built using Automattic's _s theme (http://underscores.me), Twitter's Bootstrap (http://getbootstrap.com) and Font Awesome (http://fortawesome.github.io/Font-Awesome/)
+Description: A responsive, minimalist theme built using Automattic's _s theme (http://underscores.me) and Twitter's Bootstrap (http://getbootstrap.com)
 
 Version: 1.0.0-rc6
 
@@ -30,13 +30,6 @@ Licensed under the GNU General Public License v2.0, http://www.gnu.org/licenses/
 Flint uses Bootstrap http://getbootstrap.com/
 (C) 2013 Twitter, Inc
 Licensed under the Apache License v2.0, http://www.apache.org/licenses/LICENSE-2.0
-```
-
-```
-Flint uses Font Awesome http://fontawesome.io
-(C) 2013 Dave Gandy
-Font licensed under SIL OFL v1.1, http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL
-Code licensed under MIT License, http://opensource.org/licenses/mit-license.html
 ```
 
 ```
