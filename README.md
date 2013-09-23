@@ -1,4 +1,4 @@
-Flint 1.0.2
+Flint 1.1.0
 =====
 A responsive, minimalist theme built on Twitter's Bootstrap 3 and based on Automattic's _s theme. Make it your own with a custom background, custom header, and custom menus. More customization options coming soon.
 
