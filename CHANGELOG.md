@@ -1,4 +1,8 @@
-###Flint 1.0.4
+###Flint 1.0.5
+- Update branding
+- Add bottom margin to articles
+
+###Flint 1.0.4 - October 3, 2013
 - Add `get_sidebar()` to `front-page.php` to display sidebar on front page
 - Change sidebar display name from "Sidebar" to "Footer" for clarity
 - Change sidebar functional name from `sidebar-1` to `footer` for clarity
