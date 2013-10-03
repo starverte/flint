@@ -10,7 +10,7 @@
       <div class="col-lg-2 col-md-2 col-sm-2"></div>
       <div id="secondary-inner" class="widget-area col-lg-8 col-md-8 col-sm-8" >
         <?php do_action( 'before_sidebar' ); ?>
-        <?php if ( ! dynamic_sidebar( 'sidebar-1' ) ) : ?>
+        <?php if ( ! dynamic_sidebar( 'footer' ) ) : ?>
         <?php endif; // end sidebar widget area ?>
       </div><!-- #secondary-inner -->
       <div class="col-lg-2 col-md-2 col-sm-2"></div>
