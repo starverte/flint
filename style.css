@@ -42,6 +42,15 @@ body {
 b, strong {
   font-weight: 700;
 }
+h1 {
+  font-size: 30px;
+}
+h2 {
+  font-size: 26px;
+}
+h3 {
+  font-size: 22px;
+}
 img, video {
   padding-top: 5px;
   padding-bottom: 5px;
@@ -240,7 +249,7 @@ table > tfoot > tr.warning > th {
 .bypostauthor {
 }
 .entry-title {
-  font-size: 2.4em;
+  font-size: 34px;
   margin-top: 0;
   -ms-word-wrap: break-word;
       word-wrap: break-word;
