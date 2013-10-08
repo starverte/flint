@@ -43,13 +43,16 @@ b, strong {
   font-weight: 700;
 }
 h1 {
-  font-size: 30px;
+  font-size: 28px;
 }
 h2 {
-  font-size: 26px;
+  font-size: 24px;
 }
 h3 {
-  font-size: 22px;
+  font-size: 20px;
+}
+h4 {
+  font-size: 16px;
 }
 img, video {
   padding-top: 5px;
@@ -249,7 +252,7 @@ table > tfoot > tr.warning > th {
 .bypostauthor {
 }
 .entry-title {
-  font-size: 34px;
+  font-size: 32px;
   margin-top: 0;
   -ms-word-wrap: break-word;
       word-wrap: break-word;
