@@ -283,6 +283,7 @@ add_filter( 'use_default_gallery_style', '__return_false' );
  * Returns breadcrumbs for pages
  */
 function flint_breadcrumbs() {
+	global $post;
   $anc = get_post_ancestors( $post->ID );
   $anc = array_reverse( $anc );
   echo '<ol class="breadcrumb">';
