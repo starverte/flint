@@ -6,6 +6,6 @@
 *
 * @package Flint
 */
-get_template_part( 'header', 'head' );
-get_template_part( 'header', 'nav' );
-get_template_part( 'header', 'branding' ); ?>
+get_header( 'head' );
+get_header( 'nav' );
+get_header( 'branding' ); ?>
