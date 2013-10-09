@@ -21,7 +21,7 @@
   <![endif]-->
   <?php wp_head(); ?>
 </head>
-<body <?php body_class(); ?>>
+<body <?php if ( is_page_template('template-clear.php') ) { body_class('clear'); } else { body_class(); } ?>>
   <?php if ( function_exists( 'steel_open' ) ) { steel_open(); } ?>
   <div id="page" class="hfeed site">
     <?php do_action( 'before' ); ?>

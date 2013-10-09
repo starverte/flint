@@ -39,6 +39,9 @@ textarea {
 body {
   padding-top: 50px;
 }
+body.clear {
+  padding-top: 20px;
+}
 b, strong {
   font-weight: 700;
 }
