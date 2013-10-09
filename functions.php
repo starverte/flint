@@ -273,8 +273,22 @@ class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
  * Returns current theme version.
  */
 function theme_version() {
-    $theme = wp_get_theme();
-    return $theme->Version;
+  $theme = wp_get_theme();
+  return $theme->Version;
 }
 
 add_filter( 'use_default_gallery_style', '__return_false' );
+
+/**
+ * Returns breadcrumbs for pages
+ */
+function flint_breadcrumbs() {
+	global $post;
+  $anc = get_post_ancestors( $post->ID );
+  $anc = array_reverse( $anc );
+  echo '<ol class="breadcrumb">';
+  echo '<li><a href="' . get_home_url() . '">Home</a></li>';
+  foreach ( $anc as $ancestor ) { echo '<li><a href="#">' . get_the_title( $ancestor ) . '</a></li>'; }
+  echo '<li class="active">' . get_the_title() . '</li>';
+  echo '</ol>';
+}
