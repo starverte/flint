@@ -14,7 +14,7 @@ get_header('head'); ?>
       
         <?php flint_breadcrumbs(); ?>
         
-        <article id="post-<?php the_ID(); ?>" <?php post_class('col-lg-8 col-md-8 col-sm-8'); ?>>
+        <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
           <header class="entry-header">
             <h1 class="entry-title"><?php if (is_singular()) { echo the_title(); } else { $permalink = get_permalink(); $title = get_the_title(); echo '<a href="' . $permalink .'" rel="bookmark">' . $title . '</a>'; } ?></h1>
           </header><!-- .entry-header -->
@@ -35,11 +35,6 @@ get_header('head'); ?>
           <?php endif; ?>
           
         </article><!-- #page-<?php the_ID(); ?> -->
-  
-        <?php
-          // If comments are open or we have at least one comment, load up the comment template
-          if ( comments_open() || '0' != get_comments_number() )
-            comments_template(); ?>
 
       <?php endwhile; // end of the loop. ?>
 
