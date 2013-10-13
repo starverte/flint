@@ -40,6 +40,11 @@ function flint_setup() {
    * Customizer additions
    */
   require( get_template_directory() . '/inc/customizer.php' );
+	
+	/**
+	 * Theme Options
+	 */
+	require_once( get_template_directory() . '/theme-options.php' );
 
   /**
    * Make theme available for translation
