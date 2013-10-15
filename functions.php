@@ -40,6 +40,11 @@ function flint_setup() {
    * Customizer additions
    */
   require( get_template_directory() . '/inc/customizer.php' );
+  
+  /**
+   * Theme Options
+   */
+  require_once( get_template_directory() . '/theme-options.php' );
 
   /**
    * Make theme available for translation
@@ -283,7 +288,7 @@ add_filter( 'use_default_gallery_style', '__return_false' );
  * Returns breadcrumbs for pages
  */
 function flint_breadcrumbs() {
-	global $post;
+  global $post;
   $anc = get_post_ancestors( $post->ID );
   $anc = array_reverse( $anc );
   echo '<ol class="breadcrumb">';
@@ -291,4 +296,36 @@ function flint_breadcrumbs() {
   foreach ( $anc as $ancestor ) { echo '<li><a href="#">' . get_the_title( $ancestor ) . '</a></li>'; }
   echo '<li class="active">' . get_the_title() . '</li>';
   echo '</ol>';
+}
+
+/**
+ * Creates custom footer from theme options
+ */
+function flint_custom_footer() {
+  $options = get_option( 'flint_footer' );
+  $patterns = array(
+    '/{site title}/',
+    '/{site description}/',
+    '/{year}/',
+    '/{company}/',
+    '/{telephone}/',
+    '/{email}/',
+    '/{fax}/',
+    '/{address}/'
+  );
+  $replacements = array(
+    get_bloginfo( 'name' ),
+    get_bloginfo( 'description' ),
+    date('Y'),
+    '<span itemprop="name">'      . $options['company'] . '</span>',
+    '<span itemprop="telephone">' . $options['tel']     . '</span>',
+    '<span itemprop="email">'     . $options['email']   . '</span>',
+    '<span itemprop="faxNumber">' . $options['fax']     . '</span>',
+    '<span id="address" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><span id="street" itemprop="streetAddress">' . $options['address'] . '</span><span class="comma">, </span><span id="locality" itemprop="addressLocality">' . $options['locality'] . '</span> <span id="postal-code" itemprop="postalCode">' . $options['postal_code'] . '</span></span>'
+  );
+  $footer = stripslashes($options['text']);
+  $footer = preg_replace( $patterns, $replacements, $footer);
+  echo '<div id="org" itemscope itemtype="http://schema.org/Organization">';
+  echo $footer;
+  echo '</div>';
 }
