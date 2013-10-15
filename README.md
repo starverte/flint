@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/starverte/flint.png?label=ready)](https://waffle.io/starverte/flint)  
 Flint 1.0.5
 =====
 A responsive, minimalist theme built on Twitter's Bootstrap 3 and based on Automattic's _s theme. Make it your own with a custom background, custom header, and custom menus. More customization options coming soon.
