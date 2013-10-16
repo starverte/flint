@@ -146,8 +146,8 @@ function flint_scripts() {
     wp_enqueue_script( 'flint-keyboard-image-navigation', get_template_directory_uri() . '/js/keyboard-image-navigation.js', array( 'jquery' ), '4c99b2a' );
   }
   
-  //Load Google Font 'Open Sans'
-  wp_enqueue_style( 'open-sans', 'http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700', array(), '' );
+  //Load Google Font
+  flint_font_load();
   
   //Load theme stylesheet
   wp_enqueue_style( 'flint-style', get_stylesheet_uri() );
@@ -328,4 +328,60 @@ function flint_custom_footer() {
   echo '<div id="org" itemscope itemtype="http://schema.org/Organization">';
   echo $footer;
   echo '</div>';
+}
+
+function flint_font_css() {
+	$options = get_option( 'flint_general' );
+	echo '<style type="text/css">'; 
+	switch ($options['font']) {
+		case 'open-sans':
+			echo 'body { font-family: "Open Sans", sans-serif; font-weight: 300; }';
+			echo 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Open Sans", sans-serif; font-weight: 600}';
+			echo 'b, strong { font-weight: 700; }';
+			break;
+		case 'oswald':
+			echo 'body { font-family: "Oswald", sans-serif; font-weight: 300; }';
+			echo 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Oswald", sans-serif; font-weight: 400}';
+			echo 'b, strong { font-weight: 700; }';
+			break;
+		case 'roboto':
+			echo 'body { font-family: "Roboto", sans-serif; font-weight: 300; }';
+			echo 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Roboto", sans-serif; font-weight: 400}';
+			echo 'b, strong { font-weight: 700; }';
+			break;
+		case 'droid-sans':
+			echo 'body { font-family: "Droid Sans", sans-serif; font-weight: 400; }';
+			echo 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Droid Sans", sans-serif; font-weight: 700}';
+			echo 'b, strong { font-weight: 700; }';
+			break;
+		case 'lato':
+			echo 'body { font-family: "Lato", sans-serif; font-weight: 300; }';
+			echo 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Lato", sans-serif; font-weight: 400}';
+			echo 'b, strong { font-weight: 700; }';
+			break;
+	}
+	echo '</style>';
+}
+
+function flint_font_load() {
+	$options = get_option( 'flint_general' );
+	echo '<style type="text/css">'; 
+	switch ($options['font']) {
+		case 'open-sans':
+			wp_enqueue_style( 'open-sans', 'http://fonts.googleapis.com/css?family=Open+Sans:300,600,300,700,300italic,600italic,700italic', array(), '' );
+			break;
+		case 'oswald':
+			wp_enqueue_style( 'oswald', 'http://fonts.googleapis.com/css?family=Oswald:300,400,700', array(), '' );
+			break;
+		case 'roboto':
+			wp_enqueue_style( 'roboto', 'http://fonts.googleapis.com/css?family=Roboto:300,300italic,400,400italic,700,700italic', array(), '' );
+			break;
+		case 'droid-sans':
+			wp_enqueue_style( 'droid-sans', 'http://fonts.googleapis.com/css?family=Droid+Sans:400,700', array(), '' );
+			break;
+		case 'lato':
+			wp_enqueue_style( 'lato', 'http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic', array(), '' );
+			break;
+	}
+	echo '</style>';
 }
