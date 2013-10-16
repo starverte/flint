@@ -8,7 +8,9 @@
  */
 
 // Default options values
-$flint_general = array();
+$flint_general = array(
+  'font' => 'Open Sans'
+);
 
 $flint_footer = array(
   'company' => '',
@@ -25,7 +27,7 @@ if ( is_admin() ) {
 
   add_action( 'admin_menu', 'flint_section_options' );
   function flint_section_options() {
-    add_theme_page( 'Theme Options', 'Theme Options', 'edit_theme_options', 'theme_options', 'flint_options_page' );
+    add_theme_page( 'Flint Options', 'Flint Options', 'edit_theme_options', 'theme_options', 'flint_options_page' );
   }
   function flint_options_page() {
     global $pagenow;
@@ -78,7 +80,21 @@ if ( is_admin() ) {
       
       <p>Currently, there are no general theme options. But check out the Footer tab.</p>
       
-      <table class="form-table"></table>
+      <table class="form-table">
+      
+        <tr valign="top"><th scope="row"><?php _e( 'Font', 'flint' ); ?></th>
+          <td>
+            <select name="flint_general[font]">
+              <option value="open-sans"  <?php selected( $options['font'], 'open-sans'  ); ?>>Open Sans</option>
+              <option value="oswald"     <?php selected( $options['font'], 'oswald'     ); ?>>Oswald</option>
+              <option value="roboto"     <?php selected( $options['font'], 'roboto'     ); ?>>Roboto</option>
+              <option value="droid-sans" <?php selected( $options['font'], 'droid-sans' ); ?>>Droid Sans</option>
+              <option value="lato"       <?php selected( $options['font'], 'lato'       ); ?>>Lato</option>
+            </select>
+          </td>
+        </tr>
+      
+      </table>
       
       <p class="submit"><input type="submit" class="button-primary" value="Save Options" /></p>
     
