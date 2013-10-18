@@ -22,4 +22,20 @@
       $( '.site-title a, .site-description' ).css( 'color', to );
     } );
   } );
+  // Canvas colors
+  wp.customize( 'flint_colors[canvas]', function( value ) {
+    value.bind( function( to ) {
+      $( '.navbar-inverse, #masthead, #colophon' ).css( 'background-color', to );
+    } );
+  } );
+	wp.customize( 'flint_colors[canvas-text]', function( value ) {
+    value.bind( function( to ) {
+      $( '.navbar-inverse, #masthead, #colophon' ).css( 'color', to );
+    } );
+  } );
+	wp.customize( 'flint_colors[canvas-link]', function( value ) {
+    value.bind( function( to ) {
+      $( '.navbar-inverse a, #masthead a, #colophon a' ).css( 'color', to );
+    } );
+  } );
 } )( jQuery );
