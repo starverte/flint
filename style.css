@@ -43,6 +43,9 @@ body.clear {
   padding-top: 20px;
   padding-bottom: 20px;
 }
+article {
+    margin-bottom: 3em;
+}
 h1 {
   font-size: 28px;
 }
