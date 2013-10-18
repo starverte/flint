@@ -240,7 +240,6 @@ table > tfoot > tr.warning > th {
   font-size: 18px;
 }
 #masthead {
-  background: #222;
   margin-bottom: 2em;
 }
 @media (min-width: 768px) {
@@ -528,11 +527,8 @@ article.comment {
 ----------------------------------------------- */
 
 #colophon {
-  background: #222;
-  color: #fff;
 }
 #colophon a {
-  color: #999;
 }
 .site-info {
   padding: 1em;
