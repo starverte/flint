@@ -232,11 +232,9 @@ table > tfoot > tr.warning > th {
 ----------------------------------------------- */
 
 .site-branding h1 a {
-  color: #fff;
   font-size: 56px;
 }
 .site-branding h2 {
-  color: #fff;
   font-size: 18px;
 }
 #masthead {
