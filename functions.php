@@ -430,7 +430,8 @@ function flint_options_css() {
   }
   $canvas_alt = darkenHex($colors['canvas'],10);
   echo '.navbar-inverse, #masthead, #colophon { background: ' . $colors['canvas'] . '; color: ' . $colors['canvas-text'] . '; }';
-  echo '.navbar-inverse .navbar-nav > li > a, #masthead a, #colophon a, #masthead a:hover, #colophon a:hover { color: ' . $colors['canvas-link'] . '; }';
+  echo '.navbar-inverse .navbar-nav > li > a, #colophon a { color: ' . $colors['canvas-link'] . '; }';
+	echo '#masthead a, #masthead a:hover { color: ' . $colors['canvas-text'] . '; }';
   echo '.navbar-inverse .navbar-nav > .dropdown > a .caret { border-top-color: ' . $colors['canvas-link'] . '; border-bottom-color: ' . $colors['canvas-link'] . '; }';
   if ($colors['canvas'] != '#222222') { echo '.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus { color: ' . $colors['canvas-text'] . '; background-color: ' . $canvas_alt . ';
 }';
