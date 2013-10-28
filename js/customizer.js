@@ -22,20 +22,33 @@
       $( '.site-title a, .site-description' ).css( 'color', to );
     } );
   } );
+  
   // Canvas colors
   wp.customize( 'flint_colors[canvas]', function( value ) {
     value.bind( function( to ) {
       $( '.navbar-inverse, #masthead, #colophon' ).css( 'background-color', to );
     } );
   } );
-	wp.customize( 'flint_colors[canvas-text]', function( value ) {
+  wp.customize( 'flint_colors[canvas-text]', function( value ) {
     value.bind( function( to ) {
       $( '.navbar-inverse, #masthead, #colophon' ).css( 'color', to );
     } );
   } );
-	wp.customize( 'flint_colors[canvas-link]', function( value ) {
+  wp.customize( 'flint_colors[canvas-link]', function( value ) {
     value.bind( function( to ) {
       $( '.navbar-inverse a, #masthead a, #colophon a' ).css( 'color', to );
+    } );
+  } );
+  
+  // Fonts
+  wp.customize( 'flint_fonts[heading-font]', function( value ) {
+    value.bind( function( to ) {
+      $( 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6' ).css( 'font-family', to );
+    } );
+  } );
+  wp.customize( 'flint_fonts[body-font]', function( value ) {
+    value.bind( function( to ) {
+      $( 'body' ).css( 'font-family', to );
     } );
   } );
 } )( jQuery );
