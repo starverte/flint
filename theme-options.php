@@ -9,18 +9,22 @@
 
 // Default options values
 $flint_general = array(
-  'font' => 'Open Sans'
 );
 
 $flint_footer = array(
-  'company' => '',
-  'address' => '',
-  'locality' => '',
+  'company'     => '',
+  'address'     => '',
+  'locality'    => '',
   'postal_code' => '',
-  'tel' => '',
-  'fax' => '',
-  'email' => '',
-  'text' => '',
+  'tel'         => '',
+  'fax'         => '',
+  'email'       => '',
+  'text'        => '',
+);
+
+$flint_templates = array(
+  'clear_nav'   => 'breadcrumbs',
+  'clear_width' => 'full',
 );
 
 if ( is_admin() ) {
@@ -43,7 +47,10 @@ if ( is_admin() ) {
           break;
         case 'footer' : 
           flint_footer_options(); 
-          break; 
+          break;
+        case 'templates' : 
+          flint_templates_options(); 
+          break;
       endswitch; 
     }
   }
@@ -51,7 +58,7 @@ if ( is_admin() ) {
     echo '<div class="wrap"><img style="float: left;height: 34px;margin: 7px 8px 0 0;width: 34px;" src="' . get_template_directory_uri() . '/img/sparks.png"><h2 class="nav-tab-wrapper">';
     if ( isset ( $_GET['tab'] ) ) { $tab = $_GET['tab']; }
     else { $tab = 'general'; }
-    $flint_tabs = array( 'general' => 'Flint Options', 'footer' => 'Footer' ); 
+    $flint_tabs = array( 'general' => 'Flint Options', 'footer' => 'Footer', 'templates' => 'Page Templates' ); 
     $links = array(); 
     foreach( $flint_tabs as $flint_tab => $name ) { $links[] = $flint_tab == $tab ? '<a class="nav-tab nav-tab-active" href="?page=theme_options&tab=' . $flint_tab . '">' . $name . '</a>' : '<a class="nav-tab" href="?page=theme_options&tab=' . $flint_tab . '">' . $name . '</a>'; }
     foreach ( $links as $link ) { echo $link; }
@@ -62,6 +69,7 @@ if ( is_admin() ) {
   function flint_register_settings() {
     register_setting( 'flint_section_general', 'flint_general', 'flint_validate_general');
     register_setting( 'flint_section_footer', 'flint_footer', 'flint_validate_footer');
+    register_setting( 'flint_section_templates', 'flint_templates', 'flint_validate_templates');
   }
   
   function flint_general_options() {
@@ -78,21 +86,8 @@ if ( is_admin() ) {
       
       <?php settings_fields( 'flint_section_general' ); ?>
       
-      <p>Currently, there are no general theme options. But check out the Footer tab.</p>
-      
       <table class="form-table">
       
-        <tr valign="top"><th scope="row"><?php _e( 'Font', 'flint' ); ?></th>
-          <td>
-            <select name="flint_general[font]">
-              <option value="open-sans"  <?php selected( $options['font'], 'open-sans'  ); ?>>Open Sans</option>
-              <option value="oswald"     <?php selected( $options['font'], 'oswald'     ); ?>>Oswald</option>
-              <option value="roboto"     <?php selected( $options['font'], 'roboto'     ); ?>>Roboto</option>
-              <option value="droid-sans" <?php selected( $options['font'], 'droid-sans' ); ?>>Droid Sans</option>
-              <option value="lato"       <?php selected( $options['font'], 'lato'       ); ?>>Lato</option>
-            </select>
-          </td>
-        </tr>
       
       </table>
       
@@ -163,6 +158,53 @@ if ( is_admin() ) {
     </div><?php
   }
   
+  function flint_templates_options() {
+    global $flint_templates;
+    
+    if ( ! isset( $_REQUEST['updated'] ) ) { $_REQUEST['updated'] = false; }
+    if ( false !== $_REQUEST['updated'] ) { ?>
+      <div class="updated fade"><p><strong><?php _e( 'Options saved' ); ?></strong></p></div><?php
+    } ?>
+    
+    <form method="post" action="options.php">
+    
+      <?php $options = get_option( 'flint_templates', $flint_templates ); ?>
+      
+      <?php settings_fields( 'flint_section_templates' ); ?>
+      
+      <table class="form-table">
+      
+        <tr valign="top"><th scope="row"><h3>Clear</h3></th></tr>
+      
+        <tr valign="top"><th scope="row"><?php _e( 'Navigation', 'flint' ); ?></th>
+          <td>
+            <select name="flint_templates[clear_nav]">
+              <option value="breadcrumbs" <?php selected( $options['clear_nav'], 'breadcrumbs' ); ?>>Breadcrumbs</option>
+              <option value="navbar"      <?php selected( $options['clear_nav'], 'navbar'      ); ?>>Navigation Bar</option>
+            </select>
+          </td>
+        </tr>
+        
+        <tr valign="top"><th scope="row"><?php _e( 'Page Width', 'flint' ); ?></th>
+          <td>
+            <select name="flint_templates[clear_width]">
+              <option value="slim"   <?php selected( $options['clear_width'], 'slim'   ); ?>>Slim</option>
+              <option value="narrow" <?php selected( $options['clear_width'], 'narrow' ); ?>>Narrow</option>
+              <option value="full"   <?php selected( $options['clear_width'], 'full'   ); ?>>Full</option>
+              <option value="wide"   <?php selected( $options['clear_width'], 'wide'   ); ?>>Wide</option>
+            </select>
+          </td>
+        </tr>
+      
+      </table>
+      
+      <p class="submit"><input type="submit" class="button-primary" value="Save Options" /></p>
+    
+    </form>
+  
+    </div><?php
+  }
+  
   function flint_validate_general( $input ) {
     global $flint_general;
     $options = get_option( 'flint_general', $flint_general );  
@@ -174,6 +216,12 @@ if ( is_admin() ) {
     $options = get_option( 'flint_footer', $flint_footer );
     
     $input['text'] = wp_filter_post_kses( $input['text'] );
+    return $input;
+  }
+  
+  function flint_validate_templates( $input ) {
+    global $flint_templates;
+    $options = get_option( 'flint_templates', $flint_templates );  
     return $input;
   }
 
