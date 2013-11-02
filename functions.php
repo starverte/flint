@@ -428,14 +428,20 @@ function flint_options_css() {
     echo 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Open Sans", sans-serif; font-weight: 600}';
     echo 'b, strong { font-weight: 700; }';
   }
-  $canvas_alt = darkenHex($colors['canvas'],10);
+  $canvas_dark = darkenHex($colors['canvas'],10);
+	$canvas_light = lightenHex($colors['canvas'],10);
+	$canvas_link = darkenHex($colors['canvas-text'],20);
+	$link_hover = darkenHex($colors['link'],20);
+	echo 'a {color:' . $colors['link'] . ';}';
+	echo 'a:hover, a:focus {color:' . $link_hover . ';}';
   echo '.navbar-inverse, #masthead, #colophon { background: ' . $colors['canvas'] . '; color: ' . $colors['canvas-text'] . '; }';
-  echo '.navbar-inverse .navbar-nav > li > a, #colophon a { color: ' . $colors['canvas-link'] . '; }';
+  echo '.navbar-inverse .navbar-nav > li > a, #colophon a, #secondary a { color: ' . $canvas_link . '; }';
 	echo '#masthead a, #masthead a:hover { color: ' . $colors['canvas-text'] . '; }';
-  echo '.navbar-inverse .navbar-nav > .dropdown > a .caret { border-top-color: ' . $colors['canvas-link'] . '; border-bottom-color: ' . $colors['canvas-link'] . '; }';
-  if ($colors['canvas'] != '#222222') { echo '.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus { color: ' . $colors['canvas-text'] . '; background-color: ' . $canvas_alt . ';
+  echo '.navbar-inverse .navbar-nav > .dropdown > a .caret { border-top-color: ' . $canvas_link . '; border-bottom-color: ' . $canvas_link . '; }';
+  if ($colors['canvas'] != '#222222') { echo '.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus { color: ' . $colors['canvas-text'] . '; background-color: ' . $canvas_dark . ';
 }';
-  echo '.navbar-inverse { border-color: ' . $canvas_alt . ';}'; }
+  echo '.navbar-inverse { border-color: ' . $canvas_dark . ';}'; }
+	echo '#secondary { background: ' . $canvas_light . '; color: ' . $colors['canvas-text'] . '; }';
   echo '</style>';
 }
 
@@ -507,19 +513,19 @@ function HSLHex( $Hue = 0, $Saturation = 0, $Luminance = 0 ) {
     $Value    = $Value > 255 ? 255 : ( $Value < 0 ? 0 : $Value );
     $ValuePct = round( $Value / 255, 6 );
     
-    define( "{$Name}", $ValuePct );
+    ${'the_'.$Name} = $ValuePct;
   }
   
-  $RGBColor['Red']   = Luminance;
-  $RGBColor['Green'] = Luminance;
-  $RGBColor['Blue']  = Luminance;
+  $RGBColor['Red']   = $the_Luminance;
+  $RGBColor['Green'] = $the_Luminance;
+  $RGBColor['Blue']  = $the_Luminance;
   
-  $Radial  = Luminance <= 0.5 ? Luminance * ( 1.0 + Saturation ) : Luminance + Saturation - ( Luminance * Saturation );
+  $Radial  = $the_Luminance <= 0.5 ? $the_Luminance * ( 1.0 + $the_Saturation ) : $the_Luminance + $the_Saturation - ( $the_Luminance * $the_Saturation );
   
   if( $Radial > 0 ) {
-    $Ma   = Luminance + ( Luminance - $Radial );
+    $Ma   = $the_Luminance + ( $the_Luminance - $Radial );
     $Sv   = round( ( $Radial - $Ma ) / $Radial, 6 );
-    $Th   = Hue * 6;
+    $Th   = $the_Hue * 6;
     $Wg   = floor( $Th );
     $Fr   = $Th - $Wg;
     $Vs   = $Radial * $Sv * $Fr;

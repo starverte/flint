@@ -18,6 +18,22 @@ function flint_customize_register( $wp_customize ) {
     'Droid Sans' => 'Droid Sans',
     'Lato'       => 'Lato',
   );
+  
+  $wp_customize->add_setting('flint_colors[link]', array(
+    'default'           => '#428bca',
+    'sanitize_callback' => 'sanitize_hex_color',
+    'capability'        => 'edit_theme_options',
+    'type'              => 'option',
+    'transport'         => 'postMessage',
+  ));
+  
+  $wp_customize->add_control( new WP_Customize_Color_Control($wp_customize, 'link', array(
+    'label'    => __('Links', 'flint'),
+    'section'  => 'colors',
+    'settings' => 'flint_colors[link]',
+    'priority' => '60',
+  )));
+	
   $wp_customize->add_setting('flint_colors[canvas]', array(
     'default'           => '#222222',
     'sanitize_callback' => 'sanitize_hex_color',
@@ -30,7 +46,7 @@ function flint_customize_register( $wp_customize ) {
     'label'    => __('Canvas', 'flint'),
     'section'  => 'colors',
     'settings' => 'flint_colors[canvas]',
-    'priority' => '60',
+    'priority' => '70',
   )));
   
   $wp_customize->add_setting('flint_colors[canvas-text]', array(
@@ -45,21 +61,6 @@ function flint_customize_register( $wp_customize ) {
     'label'    => __('Canvas Text', 'flint'),
     'section'  => 'colors',
     'settings' => 'flint_colors[canvas-text]',
-    'priority' => '70',
-  )));
-  
-  $wp_customize->add_setting('flint_colors[canvas-link]', array(
-    'default'           => '#999999',
-    'sanitize_callback' => 'sanitize_hex_color',
-    'capability'        => 'edit_theme_options',
-    'type'              => 'option',
-    'transport'         => 'postMessage',
-  ));
-  
-  $wp_customize->add_control( new WP_Customize_Color_Control($wp_customize, 'canvas-link', array(
-    'label'    => __('Canvas Link', 'flint'),
-    'section'  => 'colors',
-    'settings' => 'flint_colors[canvas-link]',
     'priority' => '80',
   )));
   
