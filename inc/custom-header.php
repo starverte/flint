@@ -41,6 +41,7 @@ function flint_custom_header_setup() {
     'width'                  => 300,
     'height'                 => 300,
     'flex-height'            => true,
+    'flex-width'             => true,
     'wp-head-callback'       => 'flint_header_style',
     'admin-head-callback'    => 'flint_admin_header_style',
     'admin-preview-callback' => 'flint_admin_header_image',
@@ -54,31 +55,6 @@ function flint_custom_header_setup() {
 }
 endif;
 add_action( 'after_setup_theme', 'flint_custom_header_setup' );
-
-/**
- * Shiv for get_custom_header().
- *
- * get_custom_header() was introduced to WordPress
- * in version 3.4. To provide backward compatibility
- * with previous versions, we will define our own version
- * of this function.
- *
- * @todo Remove this function when WordPress 3.6 is released.
- * @return stdClass All properties represent attributes of the curent header image.
- *
- * @package Flint
- */
-
-if ( ! function_exists( 'get_custom_header' ) ) {
-  function get_custom_header() {
-    return (object) array(
-      'url'           => get_header_image(),
-      'thumbnail_url' => get_header_image(),
-      'width'         => HEADER_IMAGE_WIDTH,
-      'height'        => HEADER_IMAGE_HEIGHT,
-    );
-  }
-}
 
 if ( ! function_exists( 'flint_header_style' ) ) :
 /**
