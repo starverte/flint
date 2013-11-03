@@ -9,9 +9,6 @@
 
 // Default options values
 $flint_general = array(
-);
-
-$flint_footer = array(
   'company'     => '',
   'address'     => '',
   'locality'    => '',
@@ -45,9 +42,6 @@ if ( is_admin() ) {
         case 'general' : 
           flint_general_options(); 
           break;
-        case 'footer' : 
-          flint_footer_options(); 
-          break;
         case 'templates' : 
           flint_templates_options(); 
           break;
@@ -58,7 +52,7 @@ if ( is_admin() ) {
     echo '<div class="wrap"><img style="float: left;height: 34px;margin: 7px 8px 0 0;width: 34px;" src="' . get_template_directory_uri() . '/img/sparks.png"><h2 class="nav-tab-wrapper">';
     if ( isset ( $_GET['tab'] ) ) { $tab = $_GET['tab']; }
     else { $tab = 'general'; }
-    $flint_tabs = array( 'general' => 'Flint Options', 'footer' => 'Footer', 'templates' => 'Page Templates' ); 
+    $flint_tabs = array( 'general' => 'Flint Options', 'templates' => 'Page Templates' ); 
     $links = array(); 
     foreach( $flint_tabs as $flint_tab => $name ) { $links[] = $flint_tab == $tab ? '<a class="nav-tab nav-tab-active" href="?page=theme_options&tab=' . $flint_tab . '">' . $name . '</a>' : '<a class="nav-tab" href="?page=theme_options&tab=' . $flint_tab . '">' . $name . '</a>'; }
     foreach ( $links as $link ) { echo $link; }
@@ -68,7 +62,6 @@ if ( is_admin() ) {
   add_action( 'admin_init', 'flint_register_settings' );
   function flint_register_settings() {
     register_setting( 'flint_section_general', 'flint_general', 'flint_validate_general');
-    register_setting( 'flint_section_footer', 'flint_footer', 'flint_validate_footer');
     register_setting( 'flint_section_templates', 'flint_templates', 'flint_validate_templates');
   }
   
@@ -85,68 +78,48 @@ if ( is_admin() ) {
       <?php $options = get_option( 'flint_general', $flint_general ); ?>
       
       <?php settings_fields( 'flint_section_general' ); ?>
-      
-      <table class="form-table">
-      
-      
-      </table>
-      
-      <p class="submit"><input type="submit" class="button-primary" value="Save Options" /></p>
-    
-    </form>
-    
-    </div><?php
-  }
   
-  function flint_footer_options() {
-    global $flint_footer;
-    
-    if ( ! isset( $_REQUEST['updated'] ) ) { $_REQUEST['updated'] = false; }
-    if ( false !== $_REQUEST['updated'] ) { ?>
-      <div class="updated fade"><p><strong><?php _e( 'Options saved' ); ?></strong></p></div><?php
-    } ?>
-    
-    <form method="post" action="options.php">
-    
-      <?php $options = get_option( 'flint_footer', $flint_footer ); ?>
       
-      <?php settings_fields( 'flint_section_footer' ); ?>
-  
-      <p>Customize the footer using template tags. For example, type in <code>ABC Company</code> in as "Company Name" and then in "Footer Text" type <code>Copyright {company}</code> and the Footer will output as <code>Copyright ABC Company</code>.</p>
-      <p>Available tags: <code>{site title}</code>, <code>{site description}</code>, <code>{year}</code>, <code>{company}</code>, <code>{address}</code>, <code>{telephone}</code>, <code>{email}</code>, and <code>{fax}</code></p>
       
       <table class="form-table">
       
         <tr valign="top"><th scope="row"><?php _e( 'Company Name', 'flint' ); ?></th>
-          <td><input id="flint_footer[company]" class="regular-text" type="text" name="flint_footer[company]" value="<?php esc_attr_e( $options['company'] ); ?>" /></td>
+          <td><input id="flint_general[company]" class="regular-text" type="text" name="flint_general[company]" value="<?php esc_attr_e( $options['company'] ); ?>" /></td>
         </tr>
         
         <tr valign="top"><th scope="row"><?php _e( 'Street Address', 'flint' ); ?></th>
-          <td><input id="flint_footer[address]" class="regular-text" type="text" name="flint_footer[address]" value="<?php esc_attr_e( $options['address'] ); ?>" /></td>
+          <td><input id="flint_general[address]" class="regular-text" type="text" name="flint_general[address]" value="<?php esc_attr_e( $options['address'] ); ?>" /></td>
         </tr>
         
         <tr valign="top"><th scope="row"><?php _e( 'City, State', 'flint' ); ?></th>
-          <td><input id="flint_footer[locality]" class="regular-text" type="text" name="flint_footer[locality]" value="<?php esc_attr_e( $options['locality'] ); ?>" /></td>
+          <td><input id="flint_general[locality]" class="regular-text" type="text" name="flint_general[locality]" value="<?php esc_attr_e( $options['locality'] ); ?>" /></td>
         </tr>
         
         <tr valign="top"><th scope="row"><?php _e( 'Zip Code', 'flint' ); ?></th>
-          <td><input id="flint_footer[postal_code]" class="regular-text" type="text" name="flint_footer[postal_code]" value="<?php esc_attr_e( $options['postal_code'] ); ?>" /></td>
+          <td><input id="flint_general[postal_code]" class="regular-text" type="text" name="flint_general[postal_code]" value="<?php esc_attr_e( $options['postal_code'] ); ?>" /></td>
         </tr>
         
-        <tr valign="top"><th scope="row"><?php _e( 'Telephone Number', 'flint' ); ?></th>
-          <td><input id="flint_footer[tel]" class="regular-text" type="text" name="flint_footer[tel]" value="<?php esc_attr_e( $options['tel'] ); ?>" /></td>
+        <tr valign="top"><th scope="row"><?php _e( 'Phone Number', 'flint' ); ?></th>
+          <td><input id="flint_general[tel]" class="regular-text" type="text" name="flint_general[tel]" value="<?php esc_attr_e( $options['tel'] ); ?>" /></td>
         </tr>
         
         <tr valign="top"><th scope="row"><?php _e( 'Fax Number', 'flint' ); ?></th>
-          <td><input id="flint_footer[fax]" class="regular-text" type="text" name="flint_footer[fax]" value="<?php esc_attr_e( $options['fax'] ); ?>" /></td>
+          <td><input id="flint_general[fax]" class="regular-text" type="text" name="flint_general[fax]" value="<?php esc_attr_e( $options['fax'] ); ?>" /></td>
         </tr>
         
         <tr valign="top"><th scope="row"><?php _e( 'Email Address', 'flint' ); ?></th>
-          <td><input id="flint_footer[email]" class="regular-text" type="text" name="flint_footer[email]" value="<?php esc_attr_e( $options['email'] ); ?>" /></td>
+          <td><input id="flint_general[email]" class="regular-text" type="text" name="flint_general[email]" value="<?php esc_attr_e( $options['email'] ); ?>" /></td>
         </tr>
         
+       </table>
+        
+      <p>Customize the footer using template tags. For example, type in <code>ABC Company</code> in as "Company Name" and then in "Footer Text" type <code><?php _e( '&<span></span>copy;'); ?> {year} {company}</code> and the Footer will output as <code>&copy; <?php echo date('Y'); ?> ABC Company</code>.</p>
+      <p>Available tags: <code>{site title}</code>, <code>{site description}</code>, <code>{year}</code>, <code>{company}</code>, <code>{address}</code>, <code>{phone}</code>, <code>{email}</code>, and <code>{fax}</code></p>
+      
+      <table class="form-table">
+        
         <tr valign="top"><th scope="row"><?php _e( 'Footer Text', 'flint' ); ?></th>
-          <td><textarea id="flint_footer[text]" class="text-field" name="flint_footer[text]" rows="5" style="width:80%;max-width:400px;"><?php echo stripslashes($options['text']); ?></textarea></td>
+          <td><textarea id="flint_general[text]" class="text-field" name="flint_general[text]" rows="5" style="width:80%;max-width:400px;"><?php echo stripslashes($options['text']); ?></textarea></td>
         </tr>
       
       </table>
@@ -207,13 +180,7 @@ if ( is_admin() ) {
   
   function flint_validate_general( $input ) {
     global $flint_general;
-    $options = get_option( 'flint_general', $flint_general );  
-    return $input;
-  }
-  
-  function flint_validate_footer( $input ) {
-    global $flint_footer;
-    $options = get_option( 'flint_footer', $flint_footer );
+    $options = get_option( 'flint_general', $flint_general );
     
     $input['text'] = wp_filter_post_kses( $input['text'] );
     return $input;
