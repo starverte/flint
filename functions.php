@@ -343,13 +343,13 @@ function flint_breadcrumbs() {
  * Creates custom footer from theme options
  */
 function flint_custom_footer() {
-  $options = get_option( 'flint_footer' );
+  $options = get_option( 'flint_general' );
   $patterns = array(
     '/{site title}/',
     '/{site description}/',
     '/{year}/',
     '/{company}/',
-    '/{telephone}/',
+    '/{phone}/',
     '/{email}/',
     '/{fax}/',
     '/{address}/'

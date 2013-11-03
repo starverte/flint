@@ -5,6 +5,12 @@
  */
 
 ( function( $ ) {
+	wp.customize( 'flint_colors[link]', function( value ) {
+    value.bind( function( to ) {
+      $( 'a, a:hover, a:focus' ).css( 'color', to );
+    } );
+  } );
+	
   // Site title and description.
   wp.customize( 'blogname', function( value ) {
     value.bind( function( to ) {
@@ -32,11 +38,6 @@
   wp.customize( 'flint_colors[canvas-text]', function( value ) {
     value.bind( function( to ) {
       $( '.navbar-inverse, #masthead, #colophon' ).css( 'color', to );
-    } );
-  } );
-  wp.customize( 'flint_colors[canvas-link]', function( value ) {
-    value.bind( function( to ) {
-      $( '.navbar-inverse a, #masthead a, #colophon a' ).css( 'color', to );
     } );
   } );
   
