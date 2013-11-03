@@ -16,7 +16,7 @@
         </a>
       <?php } /* if ( ! empty( $header_image ) ) */
       if ( display_header_text() ) { ?>
-        <div class="site-branding <?php if ( ! empty( $header_image ) ) { ?>col-lg-1 col-lg-10 col-md-10<?php } ?>">
+        <div class="site-branding <?php if ( ! empty( $header_image ) ) { ?>col-lg-10 col-lg-10 col-md-10<?php } ?>">
           <h1 class="site-title hidden-xs"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
           <h2 class="site-description hidden-xs"><?php bloginfo( 'description' ); ?></h2>
         </div><!-- .site-branding -->
