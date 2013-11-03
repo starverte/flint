@@ -401,7 +401,6 @@ function flint_options_css() {
   }
   else {
     echo 'body { font-family: "Open Sans", sans-serif; font-weight: 300; }';
-    echo 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Open Sans", sans-serif; font-weight: 600}';
     echo 'b, strong { font-weight: 700; }';
   }
   if (isset($fonts['heading-font'])) {
@@ -424,24 +423,36 @@ function flint_options_css() {
     }
   }
   else {
-    echo 'body { font-family: "Open Sans", sans-serif; font-weight: 300; }';
     echo 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Open Sans", sans-serif; font-weight: 600}';
-    echo 'b, strong { font-weight: 700; }';
   }
-  $canvas_dark = darkenHex($colors['canvas'],10);
-	$canvas_light = lightenHex($colors['canvas'],10);
-	$canvas_link = darkenHex($colors['canvas-text'],20);
-	$link_hover = darkenHex($colors['link'],20);
-	echo 'a {color:' . $colors['link'] . ';}';
+	$canvas_text = isset($colors['canvas-text']) ? $colors['canvas-text'] : '#fff' ;
+	$canvas_link = isset($colors['canvas-text']) ? darkenHex($canvas_text,15) : '#d9d9d9' ;
+	if (isset($colors['canvas'])) {
+		$canvas = $colors['canvas'];
+		$canvas_dark = darkenHex($canvas,10);
+		$canvas_light = lightenHex($canvas,5);
+	}
+  else {
+		$canvas = '#222222';
+		$canvas_dark = '#000000';
+		$canvas_light = '#666666';
+	}
+	if (isset($colors['link'])) {
+		$link = $colors['link'];
+		$link_hover = darkenHex($link,15);
+	}
+	else { $link = '#428bca'; $link_hover = '#2a6496'; }
+	echo 'a {color:' . $link . ';}';
 	echo 'a:hover, a:focus {color:' . $link_hover . ';}';
-  echo '.navbar-inverse, #masthead, #colophon { background: ' . $colors['canvas'] . '; color: ' . $colors['canvas-text'] . '; }';
+  echo '.navbar-inverse, #masthead, #colophon { background: ' . $canvas . '; color: ' . $canvas_text . '; }';
   echo '.navbar-inverse .navbar-nav > li > a, #colophon a, #secondary a { color: ' . $canvas_link . '; }';
-	echo '#masthead a, #masthead a:hover { color: ' . $colors['canvas-text'] . '; }';
+	echo '#colophon a:hover, #secondary a:hover { color: ' . $canvas_text . '; }';
+	echo '#masthead a, #masthead a:hover { color: ' . $canvas_text . '; }';
   echo '.navbar-inverse .navbar-nav > .dropdown > a .caret { border-top-color: ' . $canvas_link . '; border-bottom-color: ' . $canvas_link . '; }';
-  if ($colors['canvas'] != '#222222') { echo '.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus { color: ' . $colors['canvas-text'] . '; background-color: ' . $canvas_dark . ';
+  echo '.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus { color: ' . $canvas_text . '; background-color: ' . $canvas_dark . ';
 }';
-  echo '.navbar-inverse { border-color: ' . $canvas_dark . ';}'; }
-	echo '#secondary { background: ' . $canvas_light . '; color: ' . $colors['canvas-text'] . '; }';
+  echo '.navbar-inverse { border-color: ' . $canvas_dark . ';}';
+	echo '#secondary { background: ' . $canvas_light . '; color: ' . $canvas_text . '; }';
   echo '</style>';
 }
 
