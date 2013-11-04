@@ -12,7 +12,7 @@ get_header(); ?>
 
       <?php while ( have_posts() ) : the_post(); ?>
 
-        <article id="post-<?php the_ID(); ?>" <?php post_class(''); ?>>
+        <article id="post-<?php the_ID(); ?>" <?php post_class('col-lg-12 col-md-12 col-sm-12'); ?>>
           <?php if (has_post_thumbnail()) { the_post_thumbnail(); } ?>
           
           <header class="entry-header">
@@ -34,9 +34,13 @@ get_header(); ?>
           </div><!-- .entry-content -->
           <?php endif; ?>
           
-          <?php if ( current_user_can('edit_posts') ) { ?><a class="btn btn-default btn-sm" href="<?php echo get_edit_post_link(); ?>">Edit</a><?php } ?>
+          
         </article><!-- #page-<?php the_ID(); ?> -->
-
+        
+        <div class="clearfix"></div>
+        
+				<div style="margin:1em 0;"><?php if ( current_user_can('edit_posts') ) { ?><a class="btn btn-default btn-sm" href="<?php echo get_edit_post_link(); ?>">Edit</a><?php } ?></div>
+        
         <?php
           // If comments are open or we have at least one comment, load up the comment template
           if ( comments_open() || '0' != get_comments_number() )
@@ -47,5 +51,5 @@ get_header(); ?>
     </div><!-- #content -->
   </div><!-- #primary -->
 
-<?php get_sidebar(); ?>
+<?php get_template_part('widgets','footer'); ?>
 <?php get_footer(); ?>
