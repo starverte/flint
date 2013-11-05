@@ -102,5 +102,5 @@ get_header(); ?>
     </div><!-- #content -->
   </section><!-- #primary -->
 
-<?php get_template_part('widgets','footer'); ?>
+<?php flint_get_widgets('footer'); ?>
 <?php get_footer(); ?>
