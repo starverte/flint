@@ -19,7 +19,7 @@ get_header(); ?>
       <?php /* Start the Loop */ ?>
       <?php while ( have_posts() ) : the_post(); ?>
 
-        <?php 'post' == get_post_type()  ?  get_template_part( 'format', get_post_format() ) : get_template_part( 'type', get_post_type() ); ?>
+        <?php 'post' == get_post_type()  ?  get_template_part( 'format', get_post_format() ) : 'page' == get_post_type()  ?  get_template_part( 'templates/full', 'content' ) : get_template_part( 'type', get_post_type() ); ?>
 
       <?php endwhile; ?>
 
