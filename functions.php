@@ -623,59 +623,55 @@ function lightenHex( $HexColor, $percent ) {
   return '#' . $RGBColor['Red'].$RGBColor['Green'].$RGBColor['Blue'];
 }
 
-/**
- * Define column widths based on options for default template
- * or by page template
- */
 function flint_get_template( $output = 'slug', $width = '' ) {
-	$options = get_option( 'flint_templates' );
-	$template = get_post_meta( get_the_ID(), '_wp_page_template', true );
-	if ($width == '') { $width = $template == 'default' ? 'templates/'. $options['default_width'] . '.php' : $template ; }
-	switch ($output) {
-		case 'slug':
-			return $options['default_width'];
-			break;
-		case 'content':
-			switch ($width) {
-				case 'templates/full.php':
-					echo 'col-lg-8 col-md-8 col-sm-8';
-					break;
-				case 'templates/slim.php':
-					echo 'col-lg-4 col-md-4 col-sm-4';
-					break;
-				case 'templates/narrow.php':
-					echo 'col-lg-6 col-md-6 col-sm-6';
-					break;
-				case 'templates/wide.php':
-					echo 'col-lg-12 col-md-12 col-sm-12';
-					break;
-			}
-			break;
-		case 'margins':
-			switch ($width) {
-				case 'templates/full.php':
-					echo '<div class="col-lg-2 col-md-2 col-sm-2"></div>';
-					break;
-				case 'templates/slim.php':
-					echo '<div class="col-lg-4 col-md-4 col-sm-4"></div>';
-					break;
-				case 'templates/narrow.php':
-					echo '<div class="col-lg-3 col-md-3 col-sm-3"></div>';
-					break;
-				case 'templates/wide.php':
-					break;
-			}
-			break;
-	}
+  $options = get_option( 'flint_templates' );
+  $template = get_post_meta( get_the_ID(), '_wp_page_template', true );
+  if ($width == '') { $width = $template == 'default' ? 'templates/'. $options['default_width'] . '.php' : $template ; }
+  switch ($output) {
+    case 'slug':
+      return $options['default_width'];
+      break;
+    case 'content':
+      switch ($width) {
+        case 'templates/full.php':
+          echo 'col-lg-8 col-md-8 col-sm-8';
+          break;
+        case 'templates/slim.php':
+          echo 'col-lg-4 col-md-4 col-sm-4';
+          break;
+        case 'templates/narrow.php':
+          echo 'col-lg-6 col-md-6 col-sm-6';
+          break;
+        case 'templates/wide.php':
+          echo 'col-lg-12 col-md-12 col-sm-12';
+          break;
+      }
+      break;
+    case 'margins':
+      switch ($width) {
+        case 'templates/full.php':
+          echo '<div class="col-lg-2 col-md-2 col-sm-2"></div>';
+          break;
+        case 'templates/slim.php':
+          echo '<div class="col-lg-4 col-md-4 col-sm-4"></div>';
+          break;
+        case 'templates/narrow.php':
+          echo '<div class="col-lg-3 col-md-3 col-sm-3"></div>';
+          break;
+        case 'templates/wide.php':
+          break;
+      }
+      break;
+  }
 }
 function flint_get_widgets_template( $output, $widget_area = 'footer' ) {
-	$options = get_option( 'flint_templates' );
-	switch ($widget_area) {
-		case 'footer':
-			if ($options['widgets_footer_width'] == 'match') {
-				flint_get_template( $output );
-			}
-			else { flint_get_template( $output, $options['widgets_footer_width']); }
-			break;
-	}
+  $options = get_option( 'flint_templates' );
+  switch ($widget_area) {
+    case 'footer':
+      if ($options['widgets_footer_width'] == 'match') {
+        flint_get_template( $output );
+      }
+      else { flint_get_template( $output, $options['widgets_footer_width']); }
+      break;
+  }
 }
