@@ -139,9 +139,9 @@ function flint_get_widgets( $slug, $name = null ) {
   $templates = array();
   $name = (string) $name;
   if ( '' !== $name )
-    $templates[] = "/widgets/{$slug}-{$name}.php";
+    $templates[] = "widgets/{$slug}-{$name}.php";
   
-  $templates[] = "{$slug}.php";
+  $templates[] = "widgets/{$slug}.php";
   
   locate_template($templates, true, false);
 }
