@@ -5,12 +5,12 @@
  */
 
 ( function( $ ) {
-	wp.customize( 'flint_colors[link]', function( value ) {
+  wp.customize( 'flint_colors[link]', function( value ) {
     value.bind( function( to ) {
       $( 'a, a:hover, a:focus' ).css( 'color', to );
     } );
   } );
-	
+  
   // Site title and description.
   wp.customize( 'blogname', function( value ) {
     value.bind( function( to ) {

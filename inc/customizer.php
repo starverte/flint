@@ -33,7 +33,7 @@ function flint_customize_register( $wp_customize ) {
     'settings' => 'flint_colors[link]',
     'priority' => '60',
   )));
-	
+  
   $wp_customize->add_setting('flint_colors[canvas]', array(
     'default'           => '#222222',
     'sanitize_callback' => 'sanitize_hex_color',
