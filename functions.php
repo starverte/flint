@@ -128,6 +128,25 @@ function flint_widgets_init() {
 add_action( 'widgets_init', 'flint_widgets_init' );
 
 /**
+ * Gets the template for the widget area
+ * Modeled after get_template_part and get_sidebar
+ * get_sidebar doesn't make sense for all widget areas, so this replaces that function
+ *
+ */
+function flint_get_widgets( $slug, $name = null ) {
+  do_action( "get_sidebar", $slug, $name );
+  
+  $templates = array();
+  $name = (string) $name;
+  if ( '' !== $name )
+    $templates[] = "/widgets/{$slug}-{$name}.php";
+  
+  $templates[] = "{$slug}.php";
+  
+  locate_template($templates, true, false);
+}
+
+/**
  * Enqueue scripts and styles
  */
 function flint_scripts() {
@@ -425,34 +444,34 @@ function flint_options_css() {
   else {
     echo 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Open Sans", sans-serif; font-weight: 600}';
   }
-	$canvas_text = isset($colors['canvas-text']) ? $colors['canvas-text'] : '#fff' ;
-	$canvas_link = isset($colors['canvas-text']) ? darkenHex($canvas_text,15) : '#d9d9d9' ;
-	if (isset($colors['canvas'])) {
-		$canvas = $colors['canvas'];
-		$canvas_dark = darkenHex($canvas,10);
-		$canvas_light = lightenHex($canvas,5);
-	}
+  $canvas_text = isset($colors['canvas-text']) ? $colors['canvas-text'] : '#fff' ;
+  $canvas_link = isset($colors['canvas-text']) ? darkenHex($canvas_text,15) : '#d9d9d9' ;
+  if (isset($colors['canvas'])) {
+    $canvas = $colors['canvas'];
+    $canvas_dark = darkenHex($canvas,10);
+    $canvas_light = lightenHex($canvas,5);
+  }
   else {
-		$canvas = '#222222';
-		$canvas_dark = '#000000';
-		$canvas_light = '#666666';
-	}
-	if (isset($colors['link'])) {
-		$link = $colors['link'];
-		$link_hover = darkenHex($link,15);
-	}
-	else { $link = '#428bca'; $link_hover = '#2a6496'; }
-	echo 'a {color:' . $link . ';}';
-	echo 'a:hover, a:focus {color:' . $link_hover . ';}';
+    $canvas = '#222222';
+    $canvas_dark = '#000000';
+    $canvas_light = '#666666';
+  }
+  if (isset($colors['link'])) {
+    $link = $colors['link'];
+    $link_hover = darkenHex($link,15);
+  }
+  else { $link = '#428bca'; $link_hover = '#2a6496'; }
+  echo 'a {color:' . $link . ';}';
+  echo 'a:hover, a:focus {color:' . $link_hover . ';}';
   echo '.navbar-inverse, #masthead, #colophon { background: ' . $canvas . '; color: ' . $canvas_text . '; }';
   echo '.navbar-inverse .navbar-nav > li > a, #colophon a, .widgets.widgets-footer a { color: ' . $canvas_link . '; }';
-	echo '#colophon a:hover, .widgets.widgets-footer a:hover { color: ' . $canvas_text . '; }';
-	echo '#masthead a, #masthead a:hover { color: ' . $canvas_text . '; }';
+  echo '#colophon a:hover, .widgets.widgets-footer a:hover { color: ' . $canvas_text . '; }';
+  echo '#masthead a, #masthead a:hover { color: ' . $canvas_text . '; }';
   echo '.navbar-inverse .navbar-nav > .dropdown > a .caret { border-top-color: ' . $canvas_link . '; border-bottom-color: ' . $canvas_link . '; }';
   echo '.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus { color: ' . $canvas_text . '; background-color: ' . $canvas_dark . ';
 }';
   echo '.navbar-inverse { border-color: ' . $canvas_dark . ';}';
-	echo '.widgets.widgets-footer { background: ' . $canvas_light . '; color: ' . $canvas_text . '; }';
+  echo '.widgets.widgets-footer { background: ' . $canvas_light . '; color: ' . $canvas_text . '; }';
   echo '</style>';
 }
 
