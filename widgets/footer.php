@@ -7,12 +7,12 @@
 ?>
   <div class="widgets widgets-footer" role="complementary">
     <div class="container">
-      <div class="col-lg-2 col-md-2 col-sm-2"></div>
-      <div class="widget-area col-lg-8 col-md-8 col-sm-8" >
+      <?php flint_get_widgets_template('margins', 'footer'); ?>
+      <div class="widget-area <?php flint_get_widgets_template('content', 'footer'); ?>" >
         <?php do_action( 'before_sidebar' ); ?>
         <?php if ( ! dynamic_sidebar( 'footer' ) ) : ?>
         <?php endif; ?>
       </div><!-- .widget-area -->
-      <div class="col-lg-2 col-md-2 col-sm-2"></div>
+      <?php flint_get_widgets_template('margins', 'footer'); ?>
     </div>
   </div><!-- .widgets.widgets-footer -->

@@ -17,7 +17,7 @@ get_header(); ?>
 
       <?php while ( have_posts() ) : the_post(); ?>
 
-        <?php get_template_part( 'templates/full', 'content' ); ?>
+        <?php get_template_part( 'templates/' . flint_get_template(), 'content' ); ?>
 
         <?php
           // If comments are open or we have at least one comment, load up the comment template

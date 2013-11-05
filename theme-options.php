@@ -20,8 +20,10 @@ $flint_general = array(
 );
 
 $flint_templates = array(
-  'clear_nav'   => 'breadcrumbs',
-  'clear_width' => 'full',
+  'default_width'        => 'full',
+  'widgets_footer_width' => 'match',
+  'clear_nav'            => 'breadcrumbs',
+  'clear_width'          => 'full',
 );
 
 if ( is_admin() ) {
@@ -147,15 +149,27 @@ if ( is_admin() ) {
       
       <table class="form-table">
       
-      	<tr valign="top"><th scope="row"><h3>Default Page Template</h3></th></tr>
+        <tr valign="top"><th scope="row"><h3>Default Page Template</h3></th></tr>
       
-      	<tr valign="top"><th scope="row"><?php _e( 'Page Width', 'flint' ); ?></th>
+        <tr valign="top"><th scope="row"><?php _e( 'Page Width', 'flint' ); ?></th>
           <td>
             <select name="flint_templates[default_width]">
-            	<option value="full"   <?php selected( $options['default_width'], 'full'   ); ?>>Full</option>
+              <option value="full"   <?php selected( $options['default_width'], 'full'   ); ?>>Full</option>
               <option value="slim"   <?php selected( $options['default_width'], 'slim'   ); ?>>Slim</option>
               <option value="narrow" <?php selected( $options['default_width'], 'narrow' ); ?>>Narrow</option>
               <option value="wide"   <?php selected( $options['default_width'], 'wide'   ); ?>>Wide</option>
+            </select>
+          </td>
+        </tr>
+        
+        <tr valign="top"><th scope="row"><?php _e( 'Footer Widget Area Width', 'flint' ); ?></th>
+          <td>
+            <select name="flint_templates[widgets_footer_width]">
+              <option value="match"  <?php selected( $options['widgets_footer_width'], 'match'  ); ?>>Match Page Width</option>
+              <option value="slim"   <?php selected( $options['widgets_footer_width'], 'slim'   ); ?>>Slim</option>
+              <option value="narrow" <?php selected( $options['widgets_footer_width'], 'narrow' ); ?>>Narrow</option>
+              <option value="full"   <?php selected( $options['widgets_footer_width'], 'full'   ); ?>>Full</option>
+              <option value="wide"   <?php selected( $options['widgets_footer_width'], 'wide'   ); ?>>Wide</option>
             </select>
           </td>
         </tr>
@@ -174,7 +188,7 @@ if ( is_admin() ) {
         <tr valign="top"><th scope="row"><?php _e( 'Page Width', 'flint' ); ?></th>
           <td>
             <select name="flint_templates[clear_width]">
-            	<option value="full"   <?php selected( $options['clear_width'], 'full'   ); ?>>Full</option>
+              <option value="full"   <?php selected( $options['clear_width'], 'full'   ); ?>>Full</option>
               <option value="slim"   <?php selected( $options['clear_width'], 'slim'   ); ?>>Slim</option>
               <option value="narrow" <?php selected( $options['clear_width'], 'narrow' ); ?>>Narrow</option>
               <option value="wide"   <?php selected( $options['clear_width'], 'wide'   ); ?>>Wide</option>
