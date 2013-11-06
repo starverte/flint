@@ -6,8 +6,8 @@
 *
 * @package Flint
 */
-?><header id="masthead" class="site-header" role="banner">
-	<?php if (current_theme_supports('custom-header')) { ?>
+?><div id="masthead" class="canvas site-header" role="banner">
+  <?php if (current_theme_supports('custom-header')) { ?>
     <div class="container hidden-xs">
       <?php $header_image = get_header_image();
       if ( ! empty( $header_image ) ) { ?>
@@ -23,4 +23,4 @@
       <?php } /* if ( display_header_text() ) */ ?>
     </div><!-- .container -->
   <?php } /* if (current_theme_supports('custom-header')) */ ?>
-</header><!-- #masthead -->
+</div><!-- #masthead -->

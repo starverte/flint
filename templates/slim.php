@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Wide
+ * Template Name: Slim
  *
  * @package Flint
  * @since 1.1.0
@@ -12,7 +12,7 @@ get_header(); ?>
 
       <?php while ( have_posts() ) : the_post(); ?>
 
-        <?php get_template_part( 'templates/wide', 'content' ); ?>
+        <?php get_template_part( 'templates/slim', 'content' ); ?>
 
         <?php
           // If comments are open or we have at least one comment, load up the comment template

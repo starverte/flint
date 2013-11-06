@@ -482,11 +482,11 @@ article.comment {
 /* =Widgets
 ----------------------------------------------- */
 
-#secondary {
+.widgets.widgets-footer {
   background: #444;
   color: #fff;
 }
-#secondary a {
+.widgets.widgets-footer a {
   color: #999;
 }
 .widget {
