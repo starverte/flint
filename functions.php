@@ -463,15 +463,14 @@ function flint_options_css() {
   else { $link = '#428bca'; $link_hover = '#2a6496'; }
   echo 'a {color:' . $link . ';}';
   echo 'a:hover, a:focus {color:' . $link_hover . ';}';
-  echo '.navbar-inverse, #masthead, #colophon { background: ' . $canvas . '; color: ' . $canvas_text . '; }';
-  echo '.navbar-inverse .navbar-nav > li > a, #colophon a, .widgets.widgets-footer a { color: ' . $canvas_link . '; }';
-  echo '#colophon a:hover, .widgets.widgets-footer a:hover { color: ' . $canvas_text . '; }';
-  echo '#masthead a, #masthead a:hover { color: ' . $canvas_text . '; }';
+  echo '.canvas { background-color: ' . $canvas . '; border-color: ' . $canvas_dark . '; color: ' . $canvas_text . '; }';
+  echo '.navbar-inverse .navbar-nav > li > a, .canvas a, .canvas-light a { color: ' . $canvas_link . '; }';
+  echo '.canvas a:hover, .canvas-light a:hover { color: ' . $canvas_text . '; }';
+  echo '.site-branding a, .site-branding a:hover { color: ' . $canvas_text . '; }';
   echo '.navbar-inverse .navbar-nav > .dropdown > a .caret { border-top-color: ' . $canvas_link . '; border-bottom-color: ' . $canvas_link . '; }';
   echo '.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus { color: ' . $canvas_text . '; background-color: ' . $canvas_dark . ';
 }';
-  echo '.navbar-inverse { border-color: ' . $canvas_dark . ';}';
-  echo '.widgets.widgets-footer { background: ' . $canvas_light . '; color: ' . $canvas_text . '; }';
+  echo '.canvas-light { background: ' . $canvas_light . '; color: ' . $canvas_text . '; }';
   echo '</style>';
 }
 
