@@ -5,7 +5,7 @@
  * @package Flint
  */
 ?>
-  <div class="widgets widgets-footer" role="complementary">
+  <div class="canvas-light widgets widgets-footer" role="complementary">
     <div class="container">
       <?php flint_get_widgets_template('margins', 'footer'); ?>
       <div class="widget-area <?php flint_get_widgets_template('content', 'footer'); ?>" >

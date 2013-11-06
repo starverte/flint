@@ -6,7 +6,7 @@
 *
 * @package Flint
 */
-?><nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+?><nav class="canvas navbar navbar-inverse navbar-fixed-top" role="navigation">
   <h1 class="screen-reader-text"><?php _e( 'Menu', 'flint' ); ?></h1>
   <div class="screen-reader-text skip-link"><a href="#content" title="<?php esc_attr_e( 'Skip to content', 'flint' ); ?>"><?php _e( 'Skip to content', 'flint' ); ?></a></div>
   <div class="container">
