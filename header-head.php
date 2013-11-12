@@ -22,7 +22,7 @@
   <?php wp_head(); ?>
   <?php flint_options_css(); ?>
 </head>
-<body <?php if ( is_page_template('template-clear.php') ) { body_class('clear'); } else { body_class(); } ?>>
+<body <?php flint_body_class(); ?>>
   <?php if ( function_exists( 'steel_open' ) ) { steel_open(); } ?>
   <div id="page" class="hfeed site">
     <?php do_action( 'before' ); ?>
