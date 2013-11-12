@@ -40,7 +40,7 @@ body {
   padding-top: 50px;
 }
 body.clear {
-  padding-top: 20px;
+  padding-top: 0;
   padding-bottom: 20px;
 }
 article {
@@ -237,8 +237,8 @@ table > tfoot > tr.warning > th {
 .site-branding h2 {
   font-size: 18px;
 }
-#masthead {
-  margin-bottom: 2em;
+#primary {
+  margin-top: 2em;
 }
 @media (min-width: 768px) {
   #masthead {
