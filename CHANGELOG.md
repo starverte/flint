@@ -1,4 +1,16 @@
-###Flint 1.0.5
+###Flint 1.1.0
+For complete diff, check out [Pull Request](https://github.com/starverte/flint/pull/109)
+- Added templates: Clear, Minimal, Wide, Full, Narrow, Slim
+- Added customizer support: change fonts, colors, and more
+- Added theme options
+ - Custom Footer
+ - Featured Images: Show or hide on posts and pages
+ - Default page template: Content width, Footer widget area width
+ - Clear: Navigation, content width
+ - Minimal: Navigation, content width, widget area
+
+
+###Flint 1.0.5 - October 3, 2013
 - Update branding
 - Add bottom margin to articles
 
