@@ -731,3 +731,20 @@ function flint_body_class() {
   }
   else { body_class(); }
 }
+
+function flint_post_thumbnail( $type = 'post', $loc = 'single') {
+  $layout = get_option( 'flint_layout' );
+  $posts_image = !empty($layout['posts_image']) ? $layout['posts_image'] : 'always';
+  $pages_image = !empty($layout['pages_image']) ? $layout['pages_image'] : 'always';
+  switch ($type) {
+    case 'post':
+      if ($posts_image == 'always') {if (has_post_thumbnail()) { the_post_thumbnail(); }}
+      elseif ($posts_image == 'archives' && $loc == 'archive') {if (has_post_thumbnail()) { the_post_thumbnail(); }}
+      break;
+    case 'page':
+      if ($pages_image == 'always') {if (has_post_thumbnail()) { the_post_thumbnail(); }}
+      elseif ($pages_image == 'archives' && $loc == 'archive') {if (has_post_thumbnail()) { the_post_thumbnail(); }}
+      break;
+  }
+  
+}

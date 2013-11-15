@@ -8,7 +8,7 @@
 
   <div class="row">
     <div class="col-lg-2 col-md-2 col-sm-2">
-      <?php if (has_post_thumbnail()) { the_post_thumbnail(); } ?>
+      <?php if (is_singular()) { flint_post_thumbnail(); } else { flint_post_thumbnail( 'post', 'archive' ); } ?>
       <?php if (is_single()) {} else { ?><a class="btn btn-info btn-block hidden-xs" href="<?php echo get_permalink(); ?>">View gallery</a><?php } ?>
     </div>
     <article id="post-<?php the_ID(); ?>" <?php post_class('col-lg-8 col-md-8 col-sm-8'); ?>>
