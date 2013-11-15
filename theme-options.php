@@ -207,9 +207,9 @@ if ( is_admin() ) {
         <tr valign="top"><th scope="row"><?php _e( 'Page Width', 'flint' ); ?></th>
           <td>
             <select name="flint_templates[default_width]">
-              <option value="full"   <?php selected( $default_width, 'full'   ); ?>>Full</option>
               <option value="slim"   <?php selected( $default_width, 'slim'   ); ?>>Slim</option>
               <option value="narrow" <?php selected( $default_width, 'narrow' ); ?>>Narrow</option>
+              <option value="full"   <?php selected( $default_width, 'full'   ); ?>>Full</option>
               <option value="wide"   <?php selected( $default_width, 'wide'   ); ?>>Wide</option>
             </select>
           </td>
@@ -241,9 +241,9 @@ if ( is_admin() ) {
         <tr valign="top"><th scope="row"><?php _e( 'Page Width', 'flint' ); ?></th>
           <td>
             <select name="flint_templates[clear_width]">
-              <option value="full"   <?php selected( $clear_width, 'full'   ); ?>>Full</option>
               <option value="slim"   <?php selected( $clear_width, 'slim'   ); ?>>Slim</option>
               <option value="narrow" <?php selected( $clear_width, 'narrow' ); ?>>Narrow</option>
+              <option value="full"   <?php selected( $clear_width, 'full'   ); ?>>Full</option>
               <option value="wide"   <?php selected( $clear_width, 'wide'   ); ?>>Wide</option>
             </select>
           </td>
@@ -263,9 +263,9 @@ if ( is_admin() ) {
         <tr valign="top"><th scope="row"><?php _e( 'Page Width', 'flint' ); ?></th>
           <td>
             <select name="flint_templates[minimal_width]">
-              <option value="full"   <?php selected( $minimal_width, 'full'   ); ?>>Full</option>
               <option value="slim"   <?php selected( $minimal_width, 'slim'   ); ?>>Slim</option>
               <option value="narrow" <?php selected( $minimal_width, 'narrow' ); ?>>Narrow</option>
+              <option value="full"   <?php selected( $minimal_width, 'full'   ); ?>>Full</option>
               <option value="wide"   <?php selected( $minimal_width, 'wide'   ); ?>>Wide</option>
             </select>
           </td>
@@ -273,7 +273,7 @@ if ( is_admin() ) {
         
         <tr valign="top"><th scope="row"><?php _e( 'Widget Area', 'flint' ); ?></th>
           <td>
-            <select name="flint_templates[minimal_width]">
+            <select name="flint_templates[minimal_widget_area]">
               <option value="none"   <?php selected( $minimal_widget_area, 'none'   ); ?>>None</option>
               <option value="footer" <?php selected( $minimal_widget_area, 'footer' ); ?>>Footer</option>
             </select>
