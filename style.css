@@ -39,7 +39,8 @@ textarea {
 body {
   padding-top: 50px;
 }
-body.clear {
+body.clear.clear-breadcrumbs,
+body.minimal.minimal-breadcrumbs {
   padding-top: 0;
   padding-bottom: 20px;
 }
