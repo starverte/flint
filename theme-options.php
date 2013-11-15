@@ -7,26 +7,11 @@
  * @since 1.1.0
  */
 
-// Default options values
-$flint_general = array(
-  'company'     => '',
-  'address'     => '',
-  'locality'    => '',
-  'postal_code' => '',
-  'tel'         => '',
-  'fax'         => '',
-  'email'       => '',
-  'text'        => '',
-);
+$flint_general = array();
 
-$flint_templates = array(
-  'default_width'        => 'full',
-  'widgets_footer_width' => 'match',
-  'clear_nav'            => 'breadcrumbs',
-  'clear_width'          => 'full',
-  'minimal_nav'          => 'breadcrumbs',
-  'minimal_width'        => 'full',
-);
+$flint_layout = array();
+
+$flint_templates = array();
 
 if ( is_admin() ) {
 
@@ -46,6 +31,9 @@ if ( is_admin() ) {
         case 'general' : 
           flint_general_options(); 
           break;
+        case 'layout' : 
+          flint_layout_options(); 
+          break;
         case 'templates' : 
           flint_templates_options(); 
           break;
@@ -56,7 +44,7 @@ if ( is_admin() ) {
     echo '<div class="wrap"><img style="float: left;height: 34px;margin: 7px 8px 0 0;width: 34px;" src="' . get_template_directory_uri() . '/img/sparks.png"><h2 class="nav-tab-wrapper">';
     if ( isset ( $_GET['tab'] ) ) { $tab = $_GET['tab']; }
     else { $tab = 'general'; }
-    $flint_tabs = array( 'general' => 'Flint Options', 'templates' => 'Page Templates' ); 
+    $flint_tabs = array( 'general' => 'Flint Options', 'layout' => 'Layout Options', 'templates' => 'Page Templates' ); 
     $links = array(); 
     foreach( $flint_tabs as $flint_tab => $name ) { $links[] = $flint_tab == $tab ? '<a class="nav-tab nav-tab-active" href="?page=theme_options&tab=' . $flint_tab . '">' . $name . '</a>' : '<a class="nav-tab" href="?page=theme_options&tab=' . $flint_tab . '">' . $name . '</a>'; }
     foreach ( $links as $link ) { echo $link; }
@@ -65,7 +53,8 @@ if ( is_admin() ) {
   
   add_action( 'admin_init', 'flint_register_settings' );
   function flint_register_settings() {
-    register_setting( 'flint_section_general', 'flint_general', 'flint_validate_general');
+    register_setting( 'flint_section_general'  , 'flint_general'  , 'flint_validate_general'  );
+    register_setting( 'flint_section_layout'   , 'flint_layout'   , 'flint_validate_layout'   );
     register_setting( 'flint_section_templates', 'flint_templates', 'flint_validate_templates');
   }
   
@@ -130,6 +119,58 @@ if ( is_admin() ) {
       
       <p class="submit"><input type="submit" class="button-primary" value="Save Options" /></p>
   
+    </form>
+  
+    </div><?php
+  }
+  
+  function flint_layout_options() {
+    global $flint_layout;
+    
+    if ( ! isset( $_REQUEST['updated'] ) ) { $_REQUEST['updated'] = false; }
+    if ( false !== $_REQUEST['updated'] ) { ?>
+      <div class="updated fade"><p><strong><?php _e( 'Options saved' ); ?></strong></p></div><?php
+    } ?>
+    
+    <form method="post" action="options.php">
+    
+      <?php
+        $options = get_option( 'flint_layout', $flint_layout );
+        
+        $posts_image = !empty($options['posts_image']) ? $options['posts_image'] : 'always';
+        $pages_image = !empty($options['pages_image']) ? $options['pages_image'] : 'always';
+      ?>
+      
+      <?php settings_fields( 'flint_section_layout' ); ?>
+      
+      <table class="form-table">
+      
+        <tr valign="top"><th scope="row"><h3>Featured Images</h3><p>These settings do not apply to the Wide Template.</p></th></tr>
+      
+        <tr valign="top"><th scope="row"><?php _e( 'Show for Posts', 'flint' ); ?></th>
+          <td>
+            <select name="flint_layout[posts_image]">
+              <option value="always"   <?php selected( $posts_image, 'always'   ); ?>>Always</option>
+              <option value="archives" <?php selected( $posts_image, 'archives' ); ?>>Archives/Search Only</option>
+              <option value="never"    <?php selected( $posts_image, 'never'    ); ?>>Never</option>
+            </select>
+          </td>
+        </tr>
+        
+        <tr valign="top"><th scope="row"><?php _e( 'Show for Pages', 'flint' ); ?></th>
+          <td>
+            <select name="flint_layout[pages_image]">
+              <option value="always"   <?php selected( $pages_image, 'always'   ); ?>>Always</option>
+              <option value="archives" <?php selected( $pages_image, 'archives' ); ?>>Archives/Search Only</option>
+              <option value="never"    <?php selected( $pages_image, 'never'    ); ?>>Never</option>
+            </select>
+          </td>
+        </tr>
+      
+      </table>
+      
+      <p class="submit"><input type="submit" class="button-primary" value="Save Options" /></p>
+    
     </form>
   
     </div><?php
@@ -253,6 +294,12 @@ if ( is_admin() ) {
     $options = get_option( 'flint_general', $flint_general );
     
     $input['text'] = wp_filter_post_kses( $input['text'] );
+    return $input;
+  }
+  
+  function flint_validate_layout( $input ) {
+    global $flint_layout;
+    $options = get_option( 'flint_layout', $flint_layout );  
     return $input;
   }
   
