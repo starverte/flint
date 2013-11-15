@@ -25,5 +25,6 @@ get_header(); ?>
 
       </div><!-- #content .site-content -->
     </div><!-- #primary .content-area -->
-    
+
+<?php flint_get_widgets('footer'); ?>
 <?php get_footer(); ?>
