@@ -1,5 +1,6 @@
 ###Flint 1.1.0
 For complete diff, check out [Pull Request](https://github.com/starverte/flint/pull/109)
+- Upgraded to Bootstrap 3.0.2
 - Added templates: Clear, Minimal, Wide, Full, Narrow, Slim
 - Added customizer support: change fonts, colors, and more
 - Added theme options
