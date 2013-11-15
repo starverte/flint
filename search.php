@@ -19,7 +19,10 @@ get_header(); ?>
       <?php /* Start the Loop */ ?>
       <?php while ( have_posts() ) : the_post(); ?>
 
-        <?php 'post' == get_post_type()  ?  get_template_part( 'format', get_post_format() ) : 'page' == get_post_type()  ?  get_template_part( 'templates/full', 'content' ) : get_template_part( 'type', get_post_type() ); ?>
+        <?php $type = get_post_type();
+          if ($type == 'post') { get_template_part( 'format', get_post_format()); }
+          elseif ($type == 'page') { get_template_part( 'templates/' . flint_get_template(), 'content' ); }
+          else { get_template_part( 'type', get_post_type() ); } ?>
 
       <?php endwhile; ?>
 
