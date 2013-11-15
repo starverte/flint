@@ -137,11 +137,8 @@ function flint_get_widgets( $slug, $name = null ) {
   do_action( "get_sidebar", $slug, $name );
   
   $templates = array();
-  $name = (string) $name;
-  if ( '' !== $name )
-    $templates[] = "widgets/{$slug}-{$name}.php";
   
-  $templates[] = "widgets/{$slug}.php";
+  $templates[] = "widgets/area-{$slug}.php";
   
   locate_template($templates, true, false);
 }
