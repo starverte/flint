@@ -2,8 +2,8 @@
 Theme Name: Flint
 Theme URI: http://sparks.starverte.com/flint
 Author: Star Verte LLC
-Description: A responsive, minimalist theme built on Twitter's Bootstrap 3 and based on Automattic's _s theme. Make it your own with a custom background, custom header, and custom menus. More customization options coming soon.
-Version: 1.0.5
+Description: A responsive, minimalist theme built on Twitter's Bootstrap 3.0.1 and based on Automattic's _s theme. Make it your own with a custom background, custom header, and custom menus. More customization options coming soon.
+Version: 1.1.0-rc1
 License: GPLv3
 License URI: LICENSE.md
 Tags: custom-background, custom-header, custom-menu, flexible-header, one-column, post-formats, threaded-comments
@@ -39,11 +39,25 @@ textarea {
 body {
   padding-top: 50px;
 }
+body.clear.clear-breadcrumbs,
+body.minimal.minimal-breadcrumbs {
+  padding-top: 0;
+  padding-bottom: 20px;
+}
 article {
     margin-bottom: 3em;
 }
-b, strong {
-  font-weight: 700;
+h1 {
+  font-size: 28px;
+}
+h2 {
+  font-size: 24px;
+}
+h3 {
+  font-size: 20px;
+}
+h4 {
+  font-size: 16px;
 }
 img, video {
   padding-top: 5px;
@@ -219,16 +233,13 @@ table > tfoot > tr.warning > th {
 ----------------------------------------------- */
 
 .site-branding h1 a {
-  color: #fff;
   font-size: 56px;
 }
 .site-branding h2 {
-  color: #fff;
   font-size: 18px;
 }
-#masthead {
-  background: #222;
-  margin-bottom: 2em;
+#primary {
+  margin-top: 2em;
 }
 @media (min-width: 768px) {
   #masthead {
@@ -243,7 +254,7 @@ table > tfoot > tr.warning > th {
 .bypostauthor {
 }
 .entry-title {
-  font-size: 2.4em;
+  font-size: 32px;
   margin-top: 0;
   -ms-word-wrap: break-word;
       word-wrap: break-word;
@@ -472,11 +483,11 @@ article.comment {
 /* =Widgets
 ----------------------------------------------- */
 
-#secondary {
+.widgets.widgets-footer {
   background: #444;
   color: #fff;
 }
-#secondary a {
+.widgets.widgets-footer a {
   color: #999;
 }
 .widget {
@@ -515,11 +526,8 @@ article.comment {
 ----------------------------------------------- */
 
 #colophon {
-  background: #222;
-  color: #fff;
 }
 #colophon a {
-  color: #999;
 }
 .site-info {
   padding: 1em;
