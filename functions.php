@@ -133,14 +133,24 @@ add_action( 'widgets_init', 'flint_widgets_init' );
  * get_sidebar doesn't make sense for all widget areas, so this replaces that function
  *
  */
-function flint_get_widgets( $slug, $name = null ) {
-  do_action( "get_sidebar", $slug, $name );
+function flint_get_widgets( $slug, $minimal = false ) {
+  $options = get_option( 'flint_templates' );
+  $minimal_widget_area = !empty($options['minimal_widget_area']) ? $options['minimal_widget_area'] : 'navbar';
+	
+	switch ($minimal) {
+		case true:
+			if ($slug == $minimal_widget_area) { flint_get_widgets( $slug, false); }
+			break;
+		case false:
+			do_action( "get_sidebar", $slug );
+			
+			$templates   = array();
+			$templates[] = "widgets/area-{$slug}.php";
+			
+			locate_template($templates, true, false);
+			break;
+	}
   
-  $templates = array();
-  
-  $templates[] = "widgets/area-{$slug}.php";
-  
-  locate_template($templates, true, false);
 }
 
 /**
@@ -695,8 +705,10 @@ function flint_get_template( $output = 'slug', $template = '' ) {
  */
 function flint_get_widgets_template( $output, $widget_area = 'footer' ) {
   $options = get_option( 'flint_templates' );
-	$widgets_footer_width = !empty($options['widgets_footer_width'])   ? $options['widgets_footer_width']   : 'full';
-	$type = get_post_type( get_the_ID() );
+	$type    = get_post_type( get_the_ID() );
+	
+	$widgets_footer_width = !empty($options['widgets_footer_width']) ? $options['widgets_footer_width'] : 'full';
+	
   switch ($widget_area) {
     case 'footer':
       if ($widgets_footer_width == 'match') {
