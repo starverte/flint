@@ -345,6 +345,9 @@ add_filter( 'use_default_gallery_style', '__return_false' );
  * Returns breadcrumbs for pages
  */
 function flint_breadcrumbs( $display = 'show' ) {
+	$options = get_option( 'flint_templates' );
+	$clear_nav   = !empty($options['clear_nav'])   ? $options['clear_nav']   : 'breadcrumbs';
+  $minimal_nav = !empty($options['minimal_nav']) ? $options['minimal_nav'] : 'navbar';
   switch ($display) {
     case 'show':
       global $post;
@@ -352,17 +355,17 @@ function flint_breadcrumbs( $display = 'show' ) {
       $anc = array_reverse( $anc );
       echo '<ol class="breadcrumb">';
       echo '<li><a href="' . get_home_url() . '">Home</a></li>';
-      foreach ( $anc as $ancestor ) { echo '<li><a href="#">' . get_the_title( $ancestor ) . '</a></li>'; }
+      foreach ( $anc as $ancestor ) { echo '<li><a href="' . get_permalink( $ancestor ) . '">' . get_the_title( $ancestor ) . '</a></li>'; }
       echo '<li class="active">' . get_the_title() . '</li>';
       echo '</ol>';
       break;
     case 'clear':
-      $options = get_option( 'flint_templates' );
-      if ($options['clear_nav'] == 'breadcrumbs') { flint_breadcrumbs(); }
+      
+      if ($clear_nav == 'breadcrumbs') { flint_breadcrumbs(); }
       break;
     case 'minimal':
       $options = get_option( 'flint_templates' );
-      if (!empty($options['minimal_nav']) && $options['minimal_nav'] == 'breadcrumbs') { flint_breadcrumbs(); }
+      if ($minimal_nav == 'breadcrumbs') { flint_breadcrumbs(); }
       break;
   }
   $options = get_option( 'flint_templates' );
@@ -639,13 +642,15 @@ function lightenHex( $HexColor, $percent ) {
 function flint_get_template( $output = 'slug', $template = '' ) {
   $options       = get_option( 'flint_templates' );
   $the_template  = get_post_meta( get_the_ID(), '_wp_page_template', true );
+	$type          = get_post_type( get_the_ID() );
   
   $default_width = !empty($options['default_width']) ? $options['default_width'] : 'full';
   $clear_width   = !empty($options['clear_width'])   ? $options['clear_width']   : 'full';
   $minimal_width = !empty($options['minimal_width']) ? $options['minimal_width'] : 'full';
   
   
-  if ($template == '') { $template = $the_template == 'default' ? 'templates/'. $default_width . '.php' : ($the_template == 'templates/clear.php' ? 'templates/'. $clear_width . '.php' : ($the_template == 'templates/minimal.php' ? 'templates/'. $minimal_width . '.php' : $the_template)); }
+  if ($template == '' && $type == 'page') { $template = $the_template == 'default' ? 'templates/'. $default_width . '.php' : ($the_template == 'templates/clear.php' ? 'templates/'. $clear_width . '.php' : ($the_template == 'templates/minimal.php' ? 'templates/'. $minimal_width . '.php' : $the_template)); }
+	elseif ($template == '' && $type != 'page') { $template = 'templates/'. $default_width . '.php'; }
   switch ($output) {
     case 'slug':
       $slug = $the_template == 'templates/clear.php' ? $clear_width : ($the_template == 'templates/minimal.php' ? $minimal_width : $default_width) ;
@@ -690,12 +695,15 @@ function flint_get_template( $output = 'slug', $template = '' ) {
  */
 function flint_get_widgets_template( $output, $widget_area = 'footer' ) {
   $options = get_option( 'flint_templates' );
+	$widgets_footer_width = !empty($options['widgets_footer_width'])   ? $options['widgets_footer_width']   : 'full';
+	$type = get_post_type( get_the_ID() );
   switch ($widget_area) {
     case 'footer':
-      if ($options['widgets_footer_width'] == 'match') {
-        flint_get_template( $output );
+      if ($widgets_footer_width == 'match') {
+				if ($type == 'page') { flint_get_template( $output ); }
+				else { flint_get_template( $output, 'templates/full.php' ); }
       }
-      else { flint_get_template( $output, $options['widgets_footer_width']); }
+      else { flint_get_template( $output, 'templates/' . $widgets_footer_width . '.php'); }
       break;
   }
 }
