@@ -1,6 +1,6 @@
 Flint 1.1.0-rc1 [![Stories in Ready](https://badge.waffle.io/starverte/flint.png?label=ready)](http://waffle.io/starverte/flint)
 =====
-A responsive, minimalist theme built on Twitter's Bootstrap 3 and based on Automattic's _s theme. Make it your own with a custom background, custom header, and custom menus. More customization options coming soon.
+A responsive, minimalist theme built on Twitter's Bootstrap 3 and based on Automattic's _s theme. Make it your own with a custom background, custom header, custom menus, custom colors and more.
 
 Learn more at http://sparks.starverte.com/flint.
 

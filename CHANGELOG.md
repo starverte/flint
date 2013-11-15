@@ -1,4 +1,26 @@
-###Flint 1.0.3
+###Flint 1.1.0
+For complete diff, check out [Pull Request](https://github.com/starverte/flint/pull/109)
+- Upgraded to Bootstrap 3.0.2
+- Added templates: Clear, Minimal, Wide, Full, Narrow, Slim
+- Added customizer support: change fonts, colors, and more
+- Added theme options
+ - Custom Footer
+ - Featured Images: Show or hide on posts and pages
+ - Default page template: Content width, Footer widget area width
+ - Clear: Navigation, content width
+ - Minimal: Navigation, content width, widget area
+
+
+###Flint 1.0.5 - October 3, 2013
+- Update branding
+- Add bottom margin to articles
+
+###Flint 1.0.4 - October 3, 2013
+- Add `get_sidebar()` to `front-page.php` to display sidebar on front page
+- Change sidebar display name from "Sidebar" to "Footer" for clarity
+- Change sidebar functional name from `sidebar-1` to `footer` for clarity
+
+###Flint 1.0.3 - September 23, 2013
 - Removed `.hentry { margin: 0 0 6em; }`
 - Added spacing and top border to `#comments`
 
