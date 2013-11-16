@@ -172,32 +172,31 @@ function flint_scripts() {
     wp_enqueue_script( 'flint-keyboard-image-navigation', get_template_directory_uri() . '/js/keyboard-image-navigation.js', array( 'jquery' ), '4c99b2a' );
   }
   
-  //Load Google Font
+  //Load Google Fonts
   $fonts = get_option( 'flint_fonts' );
-  if (isset($fonts['body-font'])) {
-    switch ($fonts['body-font']) {
-      case 'Open Sans':
-        wp_enqueue_style( 'open-sans', 'http://fonts.googleapis.com/css?family=Open+Sans:300,600,300,700,300italic,600italic,700italic', array(), theme_version() );
-        break;
-      case 'Oswald':
-        wp_enqueue_style( 'oswald', 'http://fonts.googleapis.com/css?family=Oswald:300,400,700', array(), theme_version() );
-        break;
-      case 'Roboto':
-        wp_enqueue_style( 'roboto', 'http://fonts.googleapis.com/css?family=Roboto:300,300italic,400,400italic,700,700italic', array(), theme_version() );
-        break;
-      case 'Droid Sans':
-        wp_enqueue_style( 'droid-sans', 'http://fonts.googleapis.com/css?family=Droid+Sans:400,700', array(), theme_version() );
-        break;
-      case 'Lato':
-        wp_enqueue_style( 'lato', 'http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic', array(), theme_version() );
-        break;
-    }
-  }
-  else {
-    wp_enqueue_style( 'open-sans', 'http://fonts.googleapis.com/css?family=Open+Sans:300,600,300,700,300italic,600italic,700italic', array(), theme_version() );
-  }
-  if (isset($fonts['heading-font']) && $fonts['heading-font'] != $fonts['body-font'] ) {
-    switch ($fonts['heading-font']) {
+	
+	$body_font    = !empty($fonts['body_font'])    ? $fonts['body_font']    : 'Open Sans';
+	$heading_font = !empty($fonts['heading_font']) ? $fonts['heading_font'] : 'Open Sans';
+  
+	switch ($body_font) {
+		case 'Open Sans':
+			wp_enqueue_style( 'open-sans', 'http://fonts.googleapis.com/css?family=Open+Sans:300,600,300,700,300italic,600italic,700italic', array(), theme_version() );
+			break;
+		case 'Oswald':
+			wp_enqueue_style( 'oswald', 'http://fonts.googleapis.com/css?family=Oswald:300,400,700', array(), theme_version() );
+			break;
+		case 'Roboto':
+			wp_enqueue_style( 'roboto', 'http://fonts.googleapis.com/css?family=Roboto:300,300italic,400,400italic,700,700italic', array(), theme_version() );
+			break;
+		case 'Droid Sans':
+			wp_enqueue_style( 'droid-sans', 'http://fonts.googleapis.com/css?family=Droid+Sans:400,700', array(), theme_version() );
+			break;
+		case 'Lato':
+			wp_enqueue_style( 'lato', 'http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic', array(), theme_version() );
+			break;
+	}
+  if ( $heading_font != $body_font ) {
+    switch ($heading_font) {
       case 'Open Sans':
         wp_enqueue_style( 'open-sans', 'http://fonts.googleapis.com/css?family=Open+Sans:300,600,300,700,300italic,600italic,700italic', array(), theme_version() );
         break;
@@ -416,75 +415,57 @@ function flint_custom_footer() {
 
 function flint_options_css() {
   $fonts = get_option( 'flint_fonts' );
+	$body_font    = !empty($fonts['body_font'])    ? $fonts['body_font']    : 'Open Sans' ;
+	$heading_font = !empty($fonts['heading_font']) ? $fonts['heading_font'] : 'Open Sans' ;
+	
   $colors = get_option( 'flint_colors' );
-  echo '<style type="text/css">'; 
-  if (isset($fonts['body-font'])) {
-    switch ($fonts['body-font']) {
-      case 'Open Sans':
-        echo 'body { font-family: "Open Sans", sans-serif; font-weight: 300; }';
-        echo 'b, strong { font-weight: 700; }';
-        break;
-      case 'Oswald':
-        echo 'body { font-family: "Oswald", sans-serif; font-weight: 300; }';
-        echo 'b, strong { font-weight: 700; }';
-        break;
-      case 'Roboto':
-        echo 'body { font-family: "Roboto", sans-serif; font-weight: 300; }';
-        echo 'b, strong { font-weight: 700; }';
-        break;
-      case 'Droid Sans':
-        echo 'body { font-family: "Droid Sans", sans-serif; font-weight: 400; }';
-        echo 'b, strong { font-weight: 700; }';
-        break;
-      case 'Lato':
-        echo 'body { font-family: "Lato", sans-serif; font-weight: 300; }';
-        echo 'b, strong { font-weight: 700; }';
-        break;
-    }
-  }
-  else {
-    echo 'body { font-family: "Open Sans", sans-serif; font-weight: 300; }';
-    echo 'b, strong { font-weight: 700; }';
-  }
-  if (isset($fonts['heading-font'])) {
-    switch ($fonts['heading-font']) {
-      case 'Open Sans':
-        echo 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Open Sans", sans-serif; font-weight: 600}';
-        break;
-      case 'Oswald':
-        echo 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Oswald", sans-serif; font-weight: 400}';
-        break;
-      case 'Roboto':
-        echo 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Roboto", sans-serif; font-weight: 400}';
-        break;
-      case 'Droid Sans':
-        echo 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Droid Sans", sans-serif; font-weight: 700}';
-        break;
-      case 'Lato':
-        echo 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Lato", sans-serif; font-weight: 400}';
-        break;
-    }
-  }
-  else {
-    echo 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Open Sans", sans-serif; font-weight: 600}';
-  }
-  $canvas_text = isset($colors['canvas-text']) ? $colors['canvas-text'] : '#fff' ;
-  $canvas_link = isset($colors['canvas-text']) ? darkenHex($canvas_text,15) : '#d9d9d9' ;
-  if (isset($colors['canvas'])) {
-    $canvas = $colors['canvas'];
-    $canvas_dark = darkenHex($canvas,10);
-    $canvas_light = lightenHex($canvas,5);
-  }
-  else {
-    $canvas = '#222222';
-    $canvas_dark = '#000000';
-    $canvas_light = '#666666';
-  }
-  if (isset($colors['link'])) {
-    $link = $colors['link'];
-    $link_hover = darkenHex($link,15);
-  }
-  else { $link = '#428bca'; $link_hover = '#2a6496'; }
+	$link         = !empty($colors['link'])        ? $colors['link']        : '#428bca' ;
+	$link_hover   = !empty($colors['link'])        ? darkenHex($link,15)    : '#2a6496' ;
+	$canvas       = !empty($colors['canvas'])      ? $colors['canvas']      : '#222222' ;
+	$canvas_dark  = !empty($colors['canvas'])      ? darkenHex($canvas,10)  : '#000000' ;
+	$canvas_light = !empty($colors['canvas'])      ? darkenHex($lighten,5)  : '#666666' ;
+	$canvas_text  = !empty($colors['canvas_text']) ? $colors['canvas_text'] : '#ffffff' ;
+	
+  $canvas_link = darkenHex($canvas_text,15);
+	
+	switch ($body_font) {
+		case 'Open Sans':
+			$body = 'body { font-family: "Open Sans",  sans-serif; font-weight: 300; } b, strong { font-weight: 700; }';
+			break;
+		case 'Oswald':
+			$body = 'body { font-family: "Oswald",     sans-serif; font-weight: 300; } b, strong { font-weight: 700; }';
+			break;
+		case 'Roboto':
+			$body = 'body { font-family: "Roboto",     sans-serif; font-weight: 300; } b, strong { font-weight: 700; }';
+			break;
+		case 'Droid Sans':
+			$body = 'body { font-family: "Droid Sans", sans-serif; font-weight: 400; } b, strong { font-weight: 700; }';
+			break;
+		case 'Lato':
+			$body = 'body { font-family: "Lato",       sans-serif; font-weight: 300; } b, strong { font-weight: 700; }';
+			break;
+	}
+	switch ($heading_font) {
+		case 'Open Sans':
+			$headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Open Sans",  sans-serif; font-weight: 600;}';
+			break;
+		case 'Oswald':
+			$headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Oswald",     sans-serif; font-weight: 400;}';
+			break;
+		case 'Roboto':
+			$headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Roboto",     sans-serif; font-weight: 400;}';
+			break;
+		case 'Droid Sans':
+			$headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Droid Sans", sans-serif; font-weight: 700;}';
+			break;
+		case 'Lato':
+			$headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Lato",       sans-serif; font-weight: 400;}';
+			break;
+	}
+
+	echo '<style type="text/css">';
+	echo $body;
+	echo $headings;
   echo 'a {color:' . $link . ';}';
   echo 'a:hover, a:focus {color:' . $link_hover . ';}';
   echo '.canvas { background-color: ' . $canvas . '; border-color: ' . $canvas_dark . '; color: ' . $canvas_text . '; }';
