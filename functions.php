@@ -3,6 +3,7 @@
  * Flint functions and definitions
  *
  * @package Flint
+ * @since 1.1.0
  */
 
 /**
@@ -19,84 +20,36 @@ require( get_template_directory() . '/inc/jetpack.php' );
 if ( ! function_exists( 'flint_setup' ) ) :
 /**
  * Sets up theme defaults and registers support for various WordPress features.
- *
- * Note that this function is hooked into the after_setup_theme hook, which runs
- * before the init hook. The init hook is too late for some features, such as indicating
- * support post thumbnails.
  */
 function flint_setup() {
 
-  /**
-   * Custom template tags for this theme.
-   */
   require( get_template_directory() . '/inc/template-tags.php' );
 
-  /**
-   * Custom functions that act independently of the theme templates
-   */
   require( get_template_directory() . '/inc/extras.php' );
 
-  /**
-   * Customizer additions
-   */
   require( get_template_directory() . '/inc/customizer.php' );
-  
-  /**
-   * Theme Options
-   */
+
   require_once( get_template_directory() . '/theme-options.php' );
 
-  /**
-   * Make theme available for translation
-   * Translations can be filed in the /languages/ directory
-   * If you're building a theme based on Flint, use a find and replace
-   * to change 'flint' to the name of your theme in all the template files
-   */
   load_theme_textdomain( 'flint', get_template_directory() . '/languages' );
 
-  /**
-   * Add default posts and comments RSS feed links to head
-   */
   add_theme_support( 'automatic-feed-links' );
 
-  /**
-   * Enable support for Post Thumbnails on posts and pages
-   *
-   * @link http://codex.wordpress.org/Function_Reference/add_theme_support#Post_Thumbnails
-   */
   add_theme_support( 'post-thumbnails' );
 
-  /**
-   * This theme uses wp_nav_menu() in one location.
-   */
   register_nav_menus( array(
     'primary' => __( 'Primary Menu', 'flint' ),
   ) );
 
-  /**
-   * Enable support for Post Formats
-   */
   add_theme_support( 'post-formats', array( 'aside', 'chat', 'gallery', 'link', 'status' ) );
-  
-  /**
-   * Add theme support for custom CSS in the TinyMCE visual editor
-   */
+
   add_editor_style( 'editor-style.css' );
 }
 endif; // flint_setup
 add_action( 'after_setup_theme', 'flint_setup' );
 
 /**
- * Setup the WordPress core custom background feature.
- *
- * Use add_theme_support to register support for WordPress 3.4+
- * as well as provide backward compatibility for WordPress 3.3
- * using feature detection of wp_get_theme() which was introduced
- * in WordPress 3.4.
- *
- * @todo Remove the 3.3 support when WordPress 3.6 is released.
- *
- * Hooks into the after_setup_theme action.
+ * Implement the Custom Background feature
  */
 function flint_register_custom_background() {
   $args = array(
@@ -111,6 +64,11 @@ function flint_register_custom_background() {
   }
 }
 add_action( 'after_setup_theme', 'flint_register_custom_background' );
+
+/**
+ * Implement the Custom Header feature
+ */
+require( get_template_directory() . '/inc/custom-header.php' );
 
 /**
  * Register widgetized area and update sidebar with default widgets
@@ -136,20 +94,20 @@ add_action( 'widgets_init', 'flint_widgets_init' );
 function flint_get_widgets( $slug, $minimal = false ) {
   $options = get_option( 'flint_templates' );
   $minimal_widget_area = !empty($options['minimal_widget_area']) ? $options['minimal_widget_area'] : 'navbar';
-	
-	switch ($minimal) {
-		case true:
-			if ($slug == $minimal_widget_area) { flint_get_widgets( $slug, false); }
-			break;
-		case false:
-			do_action( "get_sidebar", $slug );
-			
-			$templates   = array();
-			$templates[] = "widgets/area-{$slug}.php";
-			
-			locate_template($templates, true, false);
-			break;
-	}
+  
+  switch ($minimal) {
+    case true:
+      if ($slug == $minimal_widget_area) { flint_get_widgets( $slug, false); }
+      break;
+    case false:
+      do_action( "get_sidebar", $slug );
+      
+      $templates   = array();
+      $templates[] = "widgets/area-{$slug}.php";
+      
+      locate_template($templates, true, false);
+      break;
+  }
   
 }
 
@@ -174,27 +132,27 @@ function flint_scripts() {
   
   //Load Google Fonts
   $fonts = get_option( 'flint_fonts' );
-	
-	$body_font    = !empty($fonts['body_font'])    ? $fonts['body_font']    : 'Open Sans';
-	$heading_font = !empty($fonts['heading_font']) ? $fonts['heading_font'] : 'Open Sans';
   
-	switch ($body_font) {
-		case 'Open Sans':
-			wp_enqueue_style( 'open-sans', 'http://fonts.googleapis.com/css?family=Open+Sans:300,600,300,700,300italic,600italic,700italic', array(), theme_version() );
-			break;
-		case 'Oswald':
-			wp_enqueue_style( 'oswald', 'http://fonts.googleapis.com/css?family=Oswald:300,400,700', array(), theme_version() );
-			break;
-		case 'Roboto':
-			wp_enqueue_style( 'roboto', 'http://fonts.googleapis.com/css?family=Roboto:300,300italic,400,400italic,700,700italic', array(), theme_version() );
-			break;
-		case 'Droid Sans':
-			wp_enqueue_style( 'droid-sans', 'http://fonts.googleapis.com/css?family=Droid+Sans:400,700', array(), theme_version() );
-			break;
-		case 'Lato':
-			wp_enqueue_style( 'lato', 'http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic', array(), theme_version() );
-			break;
-	}
+  $body_font    = !empty($fonts['body_font'])    ? $fonts['body_font']    : 'Open Sans';
+  $heading_font = !empty($fonts['heading_font']) ? $fonts['heading_font'] : 'Open Sans';
+  
+  switch ($body_font) {
+    case 'Open Sans':
+      wp_enqueue_style( 'open-sans', 'http://fonts.googleapis.com/css?family=Open+Sans:300,600,300,700,300italic,600italic,700italic', array(), theme_version() );
+      break;
+    case 'Oswald':
+      wp_enqueue_style( 'oswald', 'http://fonts.googleapis.com/css?family=Oswald:300,400,700', array(), theme_version() );
+      break;
+    case 'Roboto':
+      wp_enqueue_style( 'roboto', 'http://fonts.googleapis.com/css?family=Roboto:300,300italic,400,400italic,700,700italic', array(), theme_version() );
+      break;
+    case 'Droid Sans':
+      wp_enqueue_style( 'droid-sans', 'http://fonts.googleapis.com/css?family=Droid+Sans:400,700', array(), theme_version() );
+      break;
+    case 'Lato':
+      wp_enqueue_style( 'lato', 'http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic', array(), theme_version() );
+      break;
+  }
   if ( $heading_font != $body_font ) {
     switch ($heading_font) {
       case 'Open Sans':
@@ -219,15 +177,6 @@ function flint_scripts() {
   wp_enqueue_style( 'flint-style', get_stylesheet_uri(), array(), theme_version() );
 }
 add_action( 'wp_enqueue_scripts', 'flint_scripts' );
-
-function flint_admin_scripts() {
-}
-add_action( 'admin_enqueue_scripts', 'flint_admin_scripts' );
-
-/**
- * Implement the Custom Header feature
- */
-require( get_template_directory() . '/inc/custom-header.php' );
 
 /**
  * Extended Walker class for use with the
@@ -354,8 +303,8 @@ add_filter( 'use_default_gallery_style', '__return_false' );
  * Returns breadcrumbs for pages
  */
 function flint_breadcrumbs( $display = 'show' ) {
-	$options = get_option( 'flint_templates' );
-	$clear_nav   = !empty($options['clear_nav'])   ? $options['clear_nav']   : 'breadcrumbs';
+  $options = get_option( 'flint_templates' );
+  $clear_nav   = !empty($options['clear_nav'])   ? $options['clear_nav']   : 'breadcrumbs';
   $minimal_nav = !empty($options['minimal_nav']) ? $options['minimal_nav'] : 'navbar';
   switch ($display) {
     case 'show':
@@ -415,57 +364,57 @@ function flint_custom_footer() {
 
 function flint_options_css() {
   $fonts = get_option( 'flint_fonts' );
-	$body_font    = !empty($fonts['body_font'])    ? $fonts['body_font']    : 'Open Sans' ;
-	$heading_font = !empty($fonts['heading_font']) ? $fonts['heading_font'] : 'Open Sans' ;
-	
+  $body_font    = !empty($fonts['body_font'])    ? $fonts['body_font']    : 'Open Sans' ;
+  $heading_font = !empty($fonts['heading_font']) ? $fonts['heading_font'] : 'Open Sans' ;
+  
   $colors = get_option( 'flint_colors' );
-	$link         = !empty($colors['link'])        ? $colors['link']        : '#428bca' ;
-	$link_hover   = !empty($colors['link'])        ? darkenHex($link,15)    : '#2a6496' ;
-	$canvas       = !empty($colors['canvas'])      ? $colors['canvas']      : '#222222' ;
-	$canvas_dark  = !empty($colors['canvas'])      ? darkenHex($canvas,10)  : '#000000' ;
-	$canvas_light = !empty($colors['canvas'])      ? darkenHex($lighten,5)  : '#666666' ;
-	$canvas_text  = !empty($colors['canvas_text']) ? $colors['canvas_text'] : '#ffffff' ;
-	
-  $canvas_link = darkenHex($canvas_text,15);
-	
-	switch ($body_font) {
-		case 'Open Sans':
-			$body = 'body { font-family: "Open Sans",  sans-serif; font-weight: 300; } b, strong { font-weight: 700; }';
-			break;
-		case 'Oswald':
-			$body = 'body { font-family: "Oswald",     sans-serif; font-weight: 300; } b, strong { font-weight: 700; }';
-			break;
-		case 'Roboto':
-			$body = 'body { font-family: "Roboto",     sans-serif; font-weight: 300; } b, strong { font-weight: 700; }';
-			break;
-		case 'Droid Sans':
-			$body = 'body { font-family: "Droid Sans", sans-serif; font-weight: 400; } b, strong { font-weight: 700; }';
-			break;
-		case 'Lato':
-			$body = 'body { font-family: "Lato",       sans-serif; font-weight: 300; } b, strong { font-weight: 700; }';
-			break;
-	}
-	switch ($heading_font) {
-		case 'Open Sans':
-			$headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Open Sans",  sans-serif; font-weight: 600;}';
-			break;
-		case 'Oswald':
-			$headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Oswald",     sans-serif; font-weight: 400;}';
-			break;
-		case 'Roboto':
-			$headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Roboto",     sans-serif; font-weight: 400;}';
-			break;
-		case 'Droid Sans':
-			$headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Droid Sans", sans-serif; font-weight: 700;}';
-			break;
-		case 'Lato':
-			$headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Lato",       sans-serif; font-weight: 400;}';
-			break;
-	}
+  $link         = !empty($colors['link'])        ? $colors['link']        : '#428bca' ;
+  $link_hover   = !empty($colors['link'])        ? flint_darken_hex($link,15)    : '#2a6496' ;
+  $canvas       = !empty($colors['canvas'])      ? $colors['canvas']      : '#222222' ;
+  $canvas_dark  = !empty($colors['canvas'])      ? flint_darken_hex($canvas,10)  : '#000000' ;
+  $canvas_light = !empty($colors['canvas'])      ? flint_darken_hex($lighten,5)  : '#666666' ;
+  $canvas_text  = !empty($colors['canvas_text']) ? $colors['canvas_text'] : '#ffffff' ;
+  
+  $canvas_link = flint_darken_hex($canvas_text,15);
+  
+  switch ($body_font) {
+    case 'Open Sans':
+      $body = 'body { font-family: "Open Sans",  sans-serif; font-weight: 300; } b, strong { font-weight: 700; }';
+      break;
+    case 'Oswald':
+      $body = 'body { font-family: "Oswald",     sans-serif; font-weight: 300; } b, strong { font-weight: 700; }';
+      break;
+    case 'Roboto':
+      $body = 'body { font-family: "Roboto",     sans-serif; font-weight: 300; } b, strong { font-weight: 700; }';
+      break;
+    case 'Droid Sans':
+      $body = 'body { font-family: "Droid Sans", sans-serif; font-weight: 400; } b, strong { font-weight: 700; }';
+      break;
+    case 'Lato':
+      $body = 'body { font-family: "Lato",       sans-serif; font-weight: 300; } b, strong { font-weight: 700; }';
+      break;
+  }
+  switch ($heading_font) {
+    case 'Open Sans':
+      $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Open Sans",  sans-serif; font-weight: 600;}';
+      break;
+    case 'Oswald':
+      $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Oswald",     sans-serif; font-weight: 400;}';
+      break;
+    case 'Roboto':
+      $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Roboto",     sans-serif; font-weight: 400;}';
+      break;
+    case 'Droid Sans':
+      $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Droid Sans", sans-serif; font-weight: 700;}';
+      break;
+    case 'Lato':
+      $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Lato",       sans-serif; font-weight: 400;}';
+      break;
+  }
 
-	echo '<style type="text/css">';
-	echo $body;
-	echo $headings;
+  echo '<style type="text/css">';
+  echo $body;
+  echo $headings;
   echo 'a {color:' . $link . ';}';
   echo 'a:hover, a:focus {color:' . $link_hover . ';}';
   echo '.canvas { background-color: ' . $canvas . '; border-color: ' . $canvas_dark . '; color: ' . $canvas_text . '; }';
@@ -482,7 +431,7 @@ function flint_options_css() {
 /**
  * Converts Hex to HSL
  */
-function HexHSL( $HexColor ) {
+function flint_hex_hsl( $HexColor ) {
   $HexColor    = str_replace( '#', '', $HexColor );
   
   if( strlen( $HexColor ) < 3 ) str_pad( $HexColor, 3 - strlen( $HexColor ), '0' );
@@ -530,7 +479,7 @@ function HexHSL( $HexColor ) {
 /**
  * Converts HSL to Hex
  */
-function HSLHex( $Hue = 0, $Saturation = 0, $Luminance = 0 ) {
+function flint_hsl_hex( $Hue = 0, $Saturation = 0, $Luminance = 0 ) {
   
   $HSLColor    = array( 'Hue' => $Hue, 'Saturation' => $Saturation, 'Luminance' => $Luminance );
   $RGBColor    = array( 'Red' => 0, 'Green' => 0, 'Blue' => 0 );
@@ -608,22 +557,22 @@ function HSLHex( $Hue = 0, $Saturation = 0, $Luminance = 0 ) {
 /**
  * Darkens Hex color by defined percentage
  */
-function darkenHex( $HexColor, $percent ) {
-  $HSLColor = HexHSL($HexColor);
+function flint_darken_hex( $HexColor, $percent ) {
+  $HSLColor = flint_hex_hsl($HexColor);
   $HSLColor['Luminance'] = $HSLColor['Luminance'] - ($percent/100);
   $HSLColor['Luminance'] = $HSLColor['Luminance'] < 0 ? 0 : $HSLColor['Luminance'];
-  $RGBColor = HSLHex($HSLColor['Hue'],$HSLColor['Saturation'],$HSLColor['Luminance']);
+  $RGBColor = flint_hsl_hex($HSLColor['Hue'],$HSLColor['Saturation'],$HSLColor['Luminance']);
   return '#' . $RGBColor['Red'].$RGBColor['Green'].$RGBColor['Blue'];
 }
 
 /**
  * Lightens Hex color by defined percentage
  */
-function lightenHex( $HexColor, $percent ) {
-  $HSLColor = HexHSL($HexColor);
+function flint_lighten_hex( $HexColor, $percent ) {
+  $HSLColor = flint_hex_hsl($HexColor);
   $HSLColor['Luminance'] = $HSLColor['Luminance'] + ($percent/100);
   $HSLColor['Luminance'] = $HSLColor['Luminance'] < 0 ? 0 : $HSLColor['Luminance'];
-  $RGBColor = HSLHex($HSLColor['Hue'],$HSLColor['Saturation'],$HSLColor['Luminance']);
+  $RGBColor = flint_hsl_hex($HSLColor['Hue'],$HSLColor['Saturation'],$HSLColor['Luminance']);
   return '#' . $RGBColor['Red'].$RGBColor['Green'].$RGBColor['Blue'];
 }
 
@@ -633,7 +582,7 @@ function lightenHex( $HexColor, $percent ) {
 function flint_get_template( $output = 'slug', $template = '' ) {
   $options       = get_option( 'flint_templates' );
   $the_template  = get_post_meta( get_the_ID(), '_wp_page_template', true );
-	$type          = get_post_type( get_the_ID() );
+  $type          = get_post_type( get_the_ID() );
   
   $default_width = !empty($options['default_width']) ? $options['default_width'] : 'full';
   $clear_width   = !empty($options['clear_width'])   ? $options['clear_width']   : 'full';
@@ -641,7 +590,7 @@ function flint_get_template( $output = 'slug', $template = '' ) {
   
   
   if ($template == '' && $type == 'page') { $template = $the_template == 'default' ? 'templates/'. $default_width . '.php' : ($the_template == 'templates/clear.php' ? 'templates/'. $clear_width . '.php' : ($the_template == 'templates/minimal.php' ? 'templates/'. $minimal_width . '.php' : $the_template)); }
-	elseif ($template == '' && $type != 'page') { $template = 'templates/'. $default_width . '.php'; }
+  elseif ($template == '' && $type != 'page') { $template = 'templates/'. $default_width . '.php'; }
   switch ($output) {
     case 'slug':
       $slug = $the_template == 'templates/clear.php' ? $clear_width : ($the_template == 'templates/minimal.php' ? $minimal_width : $default_width) ;
@@ -686,15 +635,15 @@ function flint_get_template( $output = 'slug', $template = '' ) {
  */
 function flint_get_widgets_template( $output, $widget_area = 'footer' ) {
   $options = get_option( 'flint_templates' );
-	$type    = get_post_type( get_the_ID() );
-	
-	$widgets_footer_width = !empty($options['widgets_footer_width']) ? $options['widgets_footer_width'] : 'full';
-	
+  $type    = get_post_type( get_the_ID() );
+  
+  $widgets_footer_width = !empty($options['widgets_footer_width']) ? $options['widgets_footer_width'] : 'full';
+  
   switch ($widget_area) {
     case 'footer':
       if ($widgets_footer_width == 'match') {
-				if ($type == 'page') { flint_get_template( $output ); }
-				else { flint_get_template( $output, 'templates/full.php' ); }
+        if ($type == 'page') { flint_get_template( $output ); }
+        else { flint_get_template( $output, 'templates/full.php' ); }
       }
       else { flint_get_template( $output, 'templates/' . $widgets_footer_width . '.php'); }
       break;
@@ -744,5 +693,4 @@ function flint_post_thumbnail( $type = 'post', $loc = 'single') {
       elseif ($pages_image == 'archives' && $loc == 'archive') {if (has_post_thumbnail()) { the_post_thumbnail(); }}
       break;
   }
-  
 }
