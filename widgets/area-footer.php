@@ -1,8 +1,9 @@
 <?php
 /**
- * The "Sidebar" containing the main widget areas.
+ * The "Sidebar" that appears below the content.
  *
  * @package Flint
+ * @since 1.1.0
  */
 ?>
   <div class="canvas-light widgets widgets-footer" role="complementary">
