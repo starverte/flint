@@ -57,7 +57,7 @@ function flint_customize_register( $wp_customize ) {
     'transport'         => 'postMessage',
   ));
   
-  $wp_customize->add_control( new WP_Customize_Color_Control($wp_customize, 'canvas-text', array(
+  $wp_customize->add_control( new WP_Customize_Color_Control($wp_customize, 'canvas_text', array(
     'label'    => __('Canvas Text', 'flint'),
     'section'  => 'colors',
     'settings' => 'flint_colors[canvas-text]',
@@ -76,7 +76,7 @@ function flint_customize_register( $wp_customize ) {
     'transport'         => 'postMessage',
   ));
   
-  $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'heading-font', array(
+  $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'heading_font', array(
     'label'    => __('Headings', 'flint'),
     'section'  => 'flint_fonts',
     'settings' => 'flint_fonts[heading-font]',
@@ -85,17 +85,17 @@ function flint_customize_register( $wp_customize ) {
     'choices' => $fonts,
   )));
   
-  $wp_customize->add_setting('flint_fonts[body-font]', array(
+  $wp_customize->add_setting('flint_fonts[body_font]', array(
     'default'           => 'Open Sans',
     'capability'        => 'edit_theme_options',
     'type'              => 'option',
     'transport'         => 'postMessage',
   ));
   
-  $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'body-font', array(
+  $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'body_font', array(
     'label'    => __('Body', 'flint'),
     'section'  => 'flint_fonts',
-    'settings' => 'flint_fonts[body-font]',
+    'settings' => 'flint_fonts[body_font]',
     'priority' => '20',
     'type' => 'select',
     'choices' => $fonts,

@@ -149,7 +149,7 @@ function flint_admin_header_style() {
     }
     .site-branding h1,
     .site-branding h2 {
-      font-family: "<?php $fonts = get_option( 'flint_fonts' ); echo $fonts['heading-font']; ?>", sans-serif!important;
+      font-family: "<?php $fonts = get_option( 'flint_fonts' ); echo $fonts['heading_font']; ?>", sans-serif!important;
       font-weight: 500!important;
       line-height: 1.1;
       margin-top: 20px;

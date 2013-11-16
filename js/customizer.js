@@ -48,7 +48,7 @@
       $( 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6' ).css( 'font-family', to );
     } );
   } );
-  wp.customize( 'flint_fonts[body-font]', function( value ) {
+  wp.customize( 'flint_fonts[body_font]', function( value ) {
     value.bind( function( to ) {
       $( 'body' ).css( 'font-family', to );
     } );
