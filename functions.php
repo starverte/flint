@@ -24,8 +24,8 @@ if ( ! function_exists( 'flint_setup' ) ) :
 function flint_setup() {
 
   require( get_template_directory() . '/inc/template-tags.php' );
-	
-	require( get_template_directory() . '/inc/colors.php' );
+  
+  require( get_template_directory() . '/inc/colors.php' );
 
   require( get_template_directory() . '/inc/extras.php' );
 
