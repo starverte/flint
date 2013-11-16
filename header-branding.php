@@ -1,26 +1,29 @@
 <?php
 /**
-* The Header for our theme.
-*
-* Displays the branding header element
-*
-* @package Flint
-*/
-?><div id="masthead" class="canvas site-header" role="banner">
-  <?php if (current_theme_supports('custom-header')) { ?>
-    <div class="container hidden-xs">
-      <?php $header_image = get_header_image();
-      if ( ! empty( $header_image ) ) { ?>
-        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home" <?php if ( display_header_text() ) { ?> class="col-lg-2 col-md-2 visible-lg visible-md"<?php } ?>>
-          <img src="<?php header_image(); ?>" width="<?php echo get_custom_header()->width; ?>" height="<?php echo get_custom_header()->height; ?>" alt="" />
-        </a>
-      <?php } /* if ( ! empty( $header_image ) ) */
-      if ( display_header_text() ) { ?>
-        <div class="site-branding <?php if ( ! empty( $header_image ) ) { ?>col-lg-10 col-lg-10 col-md-10<?php } ?>">
-          <h1 class="site-title hidden-xs"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-          <h2 class="site-description hidden-xs"><?php bloginfo( 'description' ); ?></h2>
-        </div><!-- .site-branding -->
-      <?php } /* if ( display_header_text() ) */ ?>
-    </div><!-- .container -->
-  <?php } /* if (current_theme_supports('custom-header')) */ ?>
-</div><!-- #masthead -->
+ * The Header for our theme.
+ *
+ * Displays the branding header element
+ *
+ * @package Flint
+ * @since 1.1.0
+ */
+?>
+
+  <div id="masthead" class="canvas site-header" role="banner">
+    <?php if (current_theme_supports('custom-header')) { ?>
+      <div class="container hidden-xs">
+        <?php $header_image = get_header_image();
+        if ( ! empty( $header_image ) ) { ?>
+          <a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home" <?php if ( display_header_text() ) { ?> class="col-lg-2 col-md-2 visible-lg visible-md"<?php } ?>>
+            <img src="<?php header_image(); ?>" width="<?php echo get_custom_header()->width; ?>" height="<?php echo get_custom_header()->height; ?>" alt="" />
+          </a>
+        <?php } /* if ( ! empty( $header_image ) ) */
+        if ( display_header_text() ) { ?>
+          <div class="site-branding <?php if ( ! empty( $header_image ) ) { ?>col-lg-10 col-lg-10 col-md-10<?php } ?>">
+            <h1 class="site-title hidden-xs"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+            <h2 class="site-description hidden-xs"><?php bloginfo( 'description' ); ?></h2>
+          </div><!-- .site-branding -->
+        <?php } /* if ( display_header_text() ) */ ?>
+      </div><!-- .container -->
+    <?php } /* if (current_theme_supports('custom-header')) */ ?>
+  </div><!-- #masthead -->

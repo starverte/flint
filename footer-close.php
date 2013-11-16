@@ -5,6 +5,7 @@
  * Contains the closing elements
  *
  * @package Flint
+ * @since 1.1.0
  */
 ?>
 

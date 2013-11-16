@@ -3,6 +3,7 @@
  * The template used for displaying custom post type content
  *
  * @package Flint
+ * @since 1.1.0
  */
 ?>
 
@@ -15,7 +16,7 @@
         <h1 class="entry-title"><?php if (is_singular()) { echo the_title(); } else { $permalink = get_permalink(); $title = get_the_title(); echo '<a href="' . $permalink .'" rel="bookmark">' . $title . '</a>'; } ?></h1>
       </header><!-- .entry-header -->
       
-      <?php if ( is_search() ) : // Only display Excerpts for Search ?>
+      <?php if ( is_search() ) : ?>
       <div class="entry-summary">
         <?php the_excerpt(); ?>
       </div><!-- .entry-summary -->

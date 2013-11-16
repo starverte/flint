@@ -3,6 +3,7 @@
  * The template for displaying image attachments.
  *
  * @package Flint
+ * @since 1.0.0
  */
 
 get_header();
@@ -119,7 +120,7 @@ get_header();
           comments_template();
       ?>
 
-    <?php endwhile; // end of the loop. ?>
+    <?php endwhile; ?>
 
     </div><!-- #content -->
   </div><!-- #primary -->

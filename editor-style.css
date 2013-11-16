@@ -2,12 +2,15 @@
  * The style used for the TinyMCE editor for posts, pages, etc.
  *
  * @package Flint
+ * @since 1.1.0
  */
  
 @import url("css/bootstrap.min.css");
 
 body {
   padding: 1em;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
 }
 body,
 button,
@@ -24,6 +27,13 @@ img, video {
   padding-bottom: 5px;
   max-width: 100%;
   height: auto;
+}
+h1, h2, h3,
+h4, h5, h6,
+.h1, .h2, .h3,
+.h4, .h5, .h6 {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
 }
 
 /* Alignment */

@@ -1,37 +1,11 @@
 <?php
 /**
- * Sample implementation of the Custom Header feature
- * http://codex.wordpress.org/Custom_Headers
- *
- * You can add an optional custom header image to header.php like so ...
-
-  <?php $header_image = get_header_image();
-  if ( ! empty( $header_image ) ) { ?>
-    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
-      <img src="<?php header_image(); ?>" width="<?php echo get_custom_header()->width; ?>" height="<?php echo get_custom_header()->height; ?>" alt="" />
-    </a>
-  <?php } // if ( ! empty( $header_image ) ) ?>
-
+ * Creates Custom Header page
  *
  * @package Flint
+ * @since 1.1.0
  */
 
-/**
- * Setup the WordPress core custom header feature.
- *
- * Use add_theme_support to register support for WordPress 3.4+
- * as well as provide backward compatibility for previous versions.
- * Use feature detection of wp_get_theme() which was introduced
- * in WordPress 3.4.
- *
- * @todo Rework this function to remove WordPress 3.4 support when WordPress 3.6 is released.
- *
- * @uses flint_header_style()
- * @uses flint_admin_header_style()
- * @uses flint_admin_header_image()
- *
- * @package Flint
- */
 if ( ! function_exists( 'flint_custom_header_setup' ) ) :
 function flint_custom_header_setup() {
   $default_image = get_template_directory_uri();
@@ -59,20 +33,14 @@ add_action( 'after_setup_theme', 'flint_custom_header_setup' );
 if ( ! function_exists( 'flint_header_style' ) ) :
 /**
  * Styles the header image and text displayed on the blog
- *
- * @see flint_custom_header_setup().
  */
 function flint_header_style() {
 
-  // If no custom options for text are set, let's bail
-  // get_header_textcolor() options: HEADER_TEXTCOLOR is default, hide text (returns 'blank') or any hex value
   if ( HEADER_TEXTCOLOR == get_header_textcolor() )
     return;
-  // If we get this far, we have custom styles. Let's do this.
   ?>
   <style type="text/css">
   <?php
-    // Has the text been hidden?
     if ( 'blank' == get_header_textcolor() ) :
   ?>
     .site-title,
@@ -82,7 +50,6 @@ function flint_header_style() {
       clip: rect(1px, 1px, 1px, 1px);
     }
   <?php
-    // If the user has set a custom color for the text use that
     else :
   ?>
     .site-title a,
@@ -98,8 +65,6 @@ endif; // flint_header_style
 if ( ! function_exists( 'flint_admin_header_style' ) ) :
 /**
  * Styles the header image displayed on the Appearance > Header admin panel.
- *
- * @see flint_custom_header_setup().
  */
 function flint_admin_header_style() {
 ?>
@@ -149,7 +114,7 @@ function flint_admin_header_style() {
     }
     .site-branding h1,
     .site-branding h2 {
-      font-family: "<?php $fonts = get_option( 'flint_fonts' ); echo $fonts['heading-font']; ?>", sans-serif!important;
+      font-family: "<?php $fonts = get_option( 'flint_fonts' ); echo $fonts['heading_font']; ?>", sans-serif!important;
       font-weight: 500!important;
       line-height: 1.1;
       margin-top: 20px;
@@ -165,8 +130,6 @@ endif; // flint_admin_header_style
 if ( ! function_exists( 'flint_admin_header_image' ) ) :
 /**
  * Custom header image markup displayed on the Appearance > Header admin panel.
- *
- * @see flint_custom_header_setup().
  */
 function flint_admin_header_image() { ?>
   <div id="heading" class="row">
@@ -181,13 +144,13 @@ function flint_admin_header_image() { ?>
       <a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home" <?php if ( display_header_text() ) { ?> class="col-xs-2"<?php } ?>>
         <img src="<?php header_image(); ?>" width="<?php echo get_custom_header()->width; ?>" height="<?php echo get_custom_header()->height; ?>" alt="" />
       </a>
-    <?php } /* if ( ! empty( $header_image ) ) */
+    <?php } // if ( ! empty( $header_image ) )
     if ( display_header_text() ) { ?>
     <div class="site-branding <?php if ( ! empty( $header_image ) ) { ?>col-xs-8<?php } ?>">
       <h1 class="site-title" style="font-size: 27px;font-weight:bold;text-shadow:none;"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home" style="color:#<?php echo get_header_textcolor() ?>;text-decoration: none;"><?php bloginfo( 'name' ); ?></a></h1>
       <h2 class="site-description" style="font-weight:bold;text-shadow:none;color:#<?php echo get_header_textcolor() ?>"><?php bloginfo( 'description' ); ?></h2>
     </div>
-    <?php } /* if ( display_header_text() ) */ ?>
+    <?php } // if ( display_header_text() ) ?>
   </div>
 <?php }
 endif; // flint_admin_header_image

@@ -5,6 +5,7 @@
  * Learn more: http://codex.wordpress.org/Template_Hierarchy
  *
  * @package Flint
+ * @since 1.0.0
  */
 ?>
 

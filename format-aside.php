@@ -1,6 +1,7 @@
 <?php
 /**
  * @package Flint
+ * @since 1.1.0
  */
 ?>
 
@@ -16,7 +17,7 @@
       <footer class="entry-meta clearfix">
         <?php flint_posted_on(); ?>
         <span class="sep"> | </span>
-        <?php if ( 'post' == get_post_type() ) : // Hide category and tag text for pages on Search ?>
+        <?php if ( 'post' == get_post_type() ) : ?>
           <span class="cat-links">
             Posted in
             <?php if ( flint_categorized_blog() ) {

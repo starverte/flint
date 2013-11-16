@@ -3,6 +3,7 @@
  * The template for displaying 404 pages (Not Found).
  *
  * @package Flint
+ * @since 1.0.0
  */
 
 get_header(); ?>
@@ -16,7 +17,7 @@ get_header(); ?>
             <h1 class="entry-title"><?php _e( 'Are we missing something?', 'flint' ); ?></h1>
           </header><!-- .entry-header -->
           
-          <?php if ( is_search() ) : // Only display Excerpts for Search ?>
+          <?php if ( is_search() ) : ?>
           <div class="entry-summary">
             <?php the_excerpt(); ?>
           </div><!-- .entry-summary -->
