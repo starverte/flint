@@ -4,6 +4,7 @@
  * See: http://jetpack.me/
  *
  * @package Flint
+ * @since 1.0.0
  */
 
 /**

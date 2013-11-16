@@ -1,12 +1,14 @@
 <?php
 /**
-* The Header for our theme.
-*
-* Displays all of the <head> section and everything up till <header>
-*
-* @package Flint
-*/
-?><!DOCTYPE html>
+ * The Header for our theme.
+ *
+ * Displays all of the <head> section and everything up till <header>
+ *
+ * @package Flint
+ * @since 1.1.0
+ */
+?>
+<!DOCTYPE html>
 <!--[if lt IE 9]><html <?php language_attributes(); ?> class="ie"><![endif]-->
 <!--[if gte IE 9]><!--><html <?php language_attributes(); ?>><!--<![endif]-->
 <head>

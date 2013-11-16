@@ -3,13 +3,9 @@
  * Flint Theme Customizer
  *
  * @package Flint
+ * @since 1.1.0
  */
 
-/**
- * Add postMessage support for site title and description for the Theme Customizer.
- *
- * @param WP_Customize_Manager $wp_customize Theme Customizer object.
- */
 function flint_customize_register( $wp_customize ) {
   $fonts = array(
     'Open Sans'  => 'Open Sans',
@@ -107,15 +103,13 @@ function flint_customize_register( $wp_customize ) {
 }
 add_action( 'customize_register', 'flint_customize_register' );
 
-/**
- * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
- */
 function flint_customize_preview_js() {
   wp_enqueue_script( 'flint_customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview' ), '1.1.0', true );
-  wp_enqueue_style( 'open-sans', 'http://fonts.googleapis.com/css?family=Open+Sans:300,600,300,700,300italic,600italic,700italic', array(), '' );
-  wp_enqueue_style( 'oswald', 'http://fonts.googleapis.com/css?family=Oswald:300,400,700', array(), '' );
-  wp_enqueue_style( 'roboto', 'http://fonts.googleapis.com/css?family=Roboto:300,300italic,400,400italic,700,700italic', array(), '' );
-  wp_enqueue_style( 'droid-sans', 'http://fonts.googleapis.com/css?family=Droid+Sans:400,700', array(), '' );
-  wp_enqueue_style( 'lato', 'http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic', array(), '' );
+  
+  wp_enqueue_style( 'open-sans' , 'http://fonts.googleapis.com/css?family=Open+Sans:300,600,300,700,300italic,600italic,700italic', array(), '' );
+  wp_enqueue_style( 'oswald'    , 'http://fonts.googleapis.com/css?family=Oswald:300,400,700'                                     , array(), '' );
+  wp_enqueue_style( 'roboto'    , 'http://fonts.googleapis.com/css?family=Roboto:300,300italic,400,400italic,700,700italic'       , array(), '' );
+  wp_enqueue_style( 'droid-sans', 'http://fonts.googleapis.com/css?family=Droid+Sans:400,700'                                     , array(), '' );
+  wp_enqueue_style( 'lato'      , 'http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic'         , array(), '' );
 }
 add_action( 'customize_preview_init', 'flint_customize_preview_js' );

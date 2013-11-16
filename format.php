@@ -1,6 +1,7 @@
 <?php
 /**
  * @package Flint
+ * @since 1.1.0
  */
 ?>
 
@@ -19,7 +20,7 @@
         <?php endif; ?>
       </header><!-- .entry-header -->
       
-      <?php if ( is_search() ) : // Only display Excerpts for Search ?>
+      <?php if ( is_search() ) : ?>
       <div class="entry-summary">
         <?php the_excerpt(); ?>
       </div><!-- .entry-summary -->
@@ -35,7 +36,7 @@
       <?php endif; ?>
       
       <footer class="entry-meta clearfix">
-        <?php if ( 'post' == get_post_type() ) : // Hide category and tag text for pages on Search ?>
+        <?php if ( 'post' == get_post_type() ) : ?>
           <span class="cat-links">
             Posted in
             <?php if ( flint_categorized_blog() ) {

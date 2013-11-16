@@ -2,9 +2,8 @@
 /**
  * Custom template tags for this theme.
  *
- * Eventually, some of the functionality here could be replaced by core features
- *
  * @package Flint
+ * @since 1.1.0
  */
 
 if ( ! function_exists( 'flint_content_nav' ) ) :
@@ -14,7 +13,6 @@ if ( ! function_exists( 'flint_content_nav' ) ) :
 function flint_content_nav( $nav_id ) {
   global $wp_query, $post;
 
-  // Don't print empty markup on single pages if there's nowhere to navigate.
   if ( is_single() ) {
     $previous = ( is_attachment() ) ? get_post( $post->post_parent ) : get_adjacent_post( false, '', true );
     $next = get_adjacent_post( false, '', false );
@@ -23,7 +21,6 @@ function flint_content_nav( $nav_id ) {
       return;
   }
 
-  // Don't print empty markup in archives if there's only one page.
   if ( $wp_query->max_num_pages < 2 && ( is_home() || is_archive() || is_search() ) )
     return;
 
@@ -33,7 +30,7 @@ function flint_content_nav( $nav_id ) {
   <nav role="navigation" id="<?php echo esc_attr( $nav_id ); ?>" class="<?php echo $nav_class; ?>">
     <h1 class="screen-reader-text"><?php _e( 'Post navigation', 'flint' ); ?></h1>
 
-  <?php if ( is_single() ) : // navigation links for single posts ?>
+  <?php if ( is_single() ) : ?>
   
   <ul class="pager">
 
@@ -42,7 +39,7 @@ function flint_content_nav( $nav_id ) {
     
   </ul>
 
-  <?php elseif ( $wp_query->max_num_pages > 1 && ( is_home() || is_archive() || is_search() ) ) : // navigation links for home, archive, and search pages ?>
+  <?php elseif ( $wp_query->max_num_pages > 1 && ( is_home() || is_archive() || is_search() ) ) : ?>
   
   <ul class="pager">
     
@@ -110,7 +107,7 @@ function flint_comment( $comment, $args, $depth ) {
     break;
   endswitch;
 }
-endif; // ends check for flint_comment()
+endif; // flint_comment()
 
 
 if ( ! function_exists( 'flint_posted_on' ) ) :
@@ -272,12 +269,11 @@ function flint_get_the_content($more_link_text = 'Read more', $stripteaser = fal
   $output = '';
   $hasTeaser = false;
 
-  // If post password required and it doesn't match the cookie.
   if ( post_password_required() )
     return get_the_password_form();
 
-  if ( $page > count($pages) ) // if the requested page doesn't exist
-    $page = count($pages); // give them the highest numbered page that DOES exist
+  if ( $page > count($pages) )
+    $page = count($pages);
 
   $content = $pages[$page-1];
   if ( preg_match('/<!--more(.*?)?-->/', $content, $matches) ) {
@@ -305,7 +301,7 @@ function flint_get_the_content($more_link_text = 'Read more', $stripteaser = fal
     }
 
   }
-  if ( $preview ) // preview fix for javascript bug with foreign languages
+  if ( $preview )
     $output =  preg_replace_callback('/\%u([0-9A-F]{4})/', '_convert_urlencoded_to_entities', $output);
 
   return $output;
@@ -439,7 +435,6 @@ function flint_avatar( $id_or_email, $size = '96', $default = '', $alt = false )
     if ( $user )
       $email = $user->user_email;
   } elseif ( is_object($id_or_email) ) {
-    // No avatar for pingbacks or trackbacks
     $allowed_comment_types = apply_filters( 'get_avatar_comment_types', array( 'comment' ) );
     if ( ! empty( $id_or_email->comment_type ) && ! in_array( $id_or_email->comment_type, (array) $allowed_comment_types ) )
       return false;
@@ -509,13 +504,6 @@ function flint_avatar( $id_or_email, $size = '96', $default = '', $alt = false )
 
 /**
  * Retrieve HTML content for reply to comment link.
- *
- * The default arguments that can be override are 'add_below', 'respond_id',
- * 'reply_text', 'login_text', and 'depth'. The 'login_text' argument will be
- * used, if the user must log in or register first before posting a comment. The
- * 'reply_text' will be used, if they can post a reply. The 'add_below' and
- * 'respond_id' arguments are for the JavaScript moveAddCommentForm() function
- * parameters.
  */
 function get_flint_reply_link($args = array(), $comment = null, $post = null) {
   global $user_ID;
