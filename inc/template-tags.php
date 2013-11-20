@@ -763,7 +763,7 @@ function flint_get_widgets_template( $output, $widget_area = 'footer' ) {
   $options = get_option( 'flint_templates' );
   $type    = get_post_type( get_the_ID() );
   
-  $widgets_footer_width = !empty($options['widgets_footer_width']) ? $options['widgets_footer_width'] : 'full';
+  $widgets_footer_width = !empty($options['widgets_footer_width']) ? $options['widgets_footer_width'] : 'match';
   
   switch ($widget_area) {
     case 'footer':
