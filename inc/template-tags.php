@@ -642,12 +642,12 @@ function flint_options_css() {
   $heading_font = !empty($fonts['heading_font']) ? $fonts['heading_font'] : 'Open Sans' ;
   
   $colors = get_option( 'flint_colors' );
-  $link         = !empty($colors['link'])        ? $colors['link']        : '#428bca' ;
+  $link         = !empty($colors['link'])        ? $colors['link']               : '#428bca' ;
   $link_hover   = !empty($colors['link'])        ? flint_darken_hex($link,15)    : '#2a6496' ;
-  $canvas       = !empty($colors['canvas'])      ? $colors['canvas']      : '#222222' ;
+  $canvas       = !empty($colors['canvas'])      ? $colors['canvas']             : '#222222' ;
   $canvas_dark  = !empty($colors['canvas'])      ? flint_darken_hex($canvas,10)  : '#000000' ;
   $canvas_light = !empty($colors['canvas'])      ? flint_darken_hex($lighten,5)  : '#666666' ;
-  $canvas_text  = !empty($colors['canvas_text']) ? $colors['canvas_text'] : '#ffffff' ;
+  $canvas_text  = !empty($colors['canvas_text']) ? $colors['canvas_text']        : '#ffffff' ;
   
   $canvas_link = flint_darken_hex($canvas_text,15);
   
