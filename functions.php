@@ -55,7 +55,7 @@ add_action( 'after_setup_theme', 'flint_setup' );
  */
 function flint_register_custom_background() {
   $args = array(
-    'default-color' => 'ffffff',
+    'default-color' => 'eeeeee',
     'default-image' => '',
   );
 
