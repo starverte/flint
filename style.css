@@ -484,13 +484,6 @@ article.comment {
 /* =Widgets
 ----------------------------------------------- */
 
-.widgets.widgets-footer {
-  background: #444;
-  color: #fff;
-}
-.widgets.widgets-footer a {
-  color: #999;
-}
 .widget {
   margin: 0.75em 0;
 }

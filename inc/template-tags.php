@@ -646,31 +646,31 @@ function flint_options_css() {
   $link_hover   = !empty($colors['link'])        ? flint_darken_hex($link,15)    : '#2a6496' ;
   $canvas       = !empty($colors['canvas'])      ? $colors['canvas']             : '#222222' ;
   $canvas_dark  = !empty($colors['canvas'])      ? flint_darken_hex($canvas,10)  : '#000000' ;
-  $canvas_light = !empty($colors['canvas'])      ? flint_darken_hex($lighten,5)  : '#666666' ;
+  $canvas_light = !empty($colors['canvas'])      ? flint_lighten_hex($canvas,5)  : '#333333' ;
   $canvas_text  = !empty($colors['canvas_text']) ? $colors['canvas_text']        : '#ffffff' ;
   
   $canvas_link = flint_darken_hex($canvas_text,15);
   
   switch ($body_font) {
     case 'Open Sans':
-      $body = 'body { font-family: "Open Sans",  sans-serif; font-weight: 300; } b, strong { font-weight: 700; }';
+      $body = 'body { font-family: "Open Sans",  sans-serif; font-weight: 300; } b, strong { font-weight: 600; }';
       break;
     case 'Oswald':
-      $body = 'body { font-family: "Oswald",     sans-serif; font-weight: 300; } b, strong { font-weight: 700; }';
+      $body = 'body { font-family: "Oswald",     sans-serif; font-weight: 300; } b, strong { font-weight: 600; }';
       break;
     case 'Roboto':
-      $body = 'body { font-family: "Roboto",     sans-serif; font-weight: 300; } b, strong { font-weight: 700; }';
+      $body = 'body { font-family: "Roboto",     sans-serif; font-weight: 300; } b, strong { font-weight: 600; }';
       break;
     case 'Droid Sans':
-      $body = 'body { font-family: "Droid Sans", sans-serif; font-weight: 400; } b, strong { font-weight: 700; }';
+      $body = 'body { font-family: "Droid Sans", sans-serif; font-weight: 400; } b, strong { font-weight: 600; }';
       break;
     case 'Lato':
-      $body = 'body { font-family: "Lato",       sans-serif; font-weight: 300; } b, strong { font-weight: 700; }';
+      $body = 'body { font-family: "Lato",       sans-serif; font-weight: 300; } b, strong { font-weight: 600; }';
       break;
   }
   switch ($heading_font) {
     case 'Open Sans':
-      $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Open Sans",  sans-serif; font-weight: 600;}';
+      $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Open Sans",  sans-serif; font-weight: 400;}';
       break;
     case 'Oswald':
       $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Oswald",     sans-serif; font-weight: 400;}';
@@ -679,7 +679,7 @@ function flint_options_css() {
       $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Roboto",     sans-serif; font-weight: 400;}';
       break;
     case 'Droid Sans':
-      $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Droid Sans", sans-serif; font-weight: 700;}';
+      $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Droid Sans", sans-serif; font-weight: 400;}';
       break;
     case 'Lato':
       $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Lato",       sans-serif; font-weight: 400;}';
