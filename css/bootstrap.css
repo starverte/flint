@@ -73,7 +73,7 @@ abbr[title] {
 
 b,
 strong {
-  font-weight: bold;
+  font-weight: 600;
 }
 
 dfn {
@@ -627,7 +627,7 @@ dd {
 }
 
 dt {
-  font-weight: bold;
+  font-weight: 600;
 }
 
 dd {
@@ -1866,7 +1866,7 @@ legend {
 label {
   display: inline-block;
   margin-bottom: 5px;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 input[type="search"] {
@@ -5109,7 +5109,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   display: inline;
   padding: .2em .6em .3em;
   font-size: 75%;
-  font-weight: bold;
+  font-weight: 600;
   line-height: 1;
   color: #ffffff;
   text-align: center;
@@ -5188,7 +5188,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   min-width: 10px;
   padding: 3px 7px;
   font-size: 12px;
-  font-weight: bold;
+  font-weight: 600;
   line-height: 1;
   color: #ffffff;
   text-align: center;
@@ -5308,7 +5308,7 @@ a.thumbnail.active {
 }
 
 .alert .alert-link {
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .alert > p,
@@ -5949,7 +5949,7 @@ a.list-group-item.active:focus .list-group-item-text {
 .close {
   float: right;
   font-size: 21px;
-  font-weight: bold;
+  font-weight: 600;
   line-height: 1;
   color: #000000;
   text-shadow: 0 1px 0 #ffffff;
