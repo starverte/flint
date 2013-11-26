@@ -27,4 +27,5 @@
 <body <?php flint_body_class(); ?>>
   <?php if ( function_exists( 'steel_open' ) ) { steel_open(); } ?>
   <div id="page" class="hfeed site">
+    <div id="top-pad"></div>
     <?php do_action( 'before' ); ?>
