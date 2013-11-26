@@ -9,6 +9,8 @@
  */
 ?>
 
+</div><!-- #page -->
+
 <footer id="colophon" class="canvas site-footer" role="contentinfo">
   <div class="site-info container">
     <?php flint_custom_footer(); ?>
