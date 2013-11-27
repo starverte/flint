@@ -1,6 +1,6 @@
 <?php
 /**
- * The widget area that appears below the content.
+ * The "Sidebar" that appears below the content.
  *
  * @package Flint
  * @since 1.1.0
