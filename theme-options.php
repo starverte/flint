@@ -68,40 +68,48 @@ if ( is_admin() ) {
     
     <form method="post" action="options.php">
     
-      <?php $options = get_option( 'flint_general', $flint_general ); ?>
+      <?php
+        $options = get_option( 'flint_general', $flint_general );
+        $company     = !empty($options['company'])     ? $options['company']            : ''                     ;
+        $tel         = !empty($options['tel'])         ? $options['tel']                : ''                     ;
+        $email       = !empty($options['email'])       ? $options['email']              : ''                     ;
+        $fax         = !empty($options['fax'])         ? $options['fax']                : ''                     ;
+        $address     = !empty($options['address'])     ? $options['address']            : ''                     ;
+        $locality    = !empty($options['locality'])    ? $options['locality']           : ''                     ;
+        $postal_code = !empty($options['postal_code']) ? $options['postal_code']        : ''                     ;
+        $footer      = !empty($options['text'])        ? stripslashes($options['text']) : '{WordPress} | {theme}';
+      ?>
       
       <?php settings_fields( 'flint_section_general' ); ?>
-  
-      
       
       <table class="form-table">
       
         <tr valign="top"><th scope="row"><?php _e( 'Company Name', 'flint' ); ?></th>
-          <td><input id="flint_general[company]" class="regular-text" type="text" name="flint_general[company]" value="<?php esc_attr_e( $options['company'] ); ?>" /></td>
+          <td><input id="flint_general[company]" class="regular-text" type="text" name="flint_general[company]" value="<?php esc_attr_e( $company ); ?>" /></td>
         </tr>
         
         <tr valign="top"><th scope="row"><?php _e( 'Street Address', 'flint' ); ?></th>
-          <td><input id="flint_general[address]" class="regular-text" type="text" name="flint_general[address]" value="<?php esc_attr_e( $options['address'] ); ?>" /></td>
+          <td><input id="flint_general[address]" class="regular-text" type="text" name="flint_general[address]" value="<?php esc_attr_e( $address ); ?>" /></td>
         </tr>
         
         <tr valign="top"><th scope="row"><?php _e( 'City, State', 'flint' ); ?></th>
-          <td><input id="flint_general[locality]" class="regular-text" type="text" name="flint_general[locality]" value="<?php esc_attr_e( $options['locality'] ); ?>" /></td>
+          <td><input id="flint_general[locality]" class="regular-text" type="text" name="flint_general[locality]" value="<?php esc_attr_e( $locality ); ?>" /></td>
         </tr>
         
         <tr valign="top"><th scope="row"><?php _e( 'Zip Code', 'flint' ); ?></th>
-          <td><input id="flint_general[postal_code]" class="regular-text" type="text" name="flint_general[postal_code]" value="<?php esc_attr_e( $options['postal_code'] ); ?>" /></td>
+          <td><input id="flint_general[postal_code]" class="regular-text" type="text" name="flint_general[postal_code]" value="<?php esc_attr_e( $postal_code ); ?>" /></td>
         </tr>
         
         <tr valign="top"><th scope="row"><?php _e( 'Phone Number', 'flint' ); ?></th>
-          <td><input id="flint_general[tel]" class="regular-text" type="text" name="flint_general[tel]" value="<?php esc_attr_e( $options['tel'] ); ?>" /></td>
+          <td><input id="flint_general[tel]" class="regular-text" type="text" name="flint_general[tel]" value="<?php esc_attr_e( $tel ); ?>" /></td>
         </tr>
         
         <tr valign="top"><th scope="row"><?php _e( 'Fax Number', 'flint' ); ?></th>
-          <td><input id="flint_general[fax]" class="regular-text" type="text" name="flint_general[fax]" value="<?php esc_attr_e( $options['fax'] ); ?>" /></td>
+          <td><input id="flint_general[fax]" class="regular-text" type="text" name="flint_general[fax]" value="<?php esc_attr_e( $fax ); ?>" /></td>
         </tr>
         
         <tr valign="top"><th scope="row"><?php _e( 'Email Address', 'flint' ); ?></th>
-          <td><input id="flint_general[email]" class="regular-text" type="text" name="flint_general[email]" value="<?php esc_attr_e( $options['email'] ); ?>" /></td>
+          <td><input id="flint_general[email]" class="regular-text" type="text" name="flint_general[email]" value="<?php esc_attr_e( $email ); ?>" /></td>
         </tr>
         
        </table>
@@ -112,7 +120,7 @@ if ( is_admin() ) {
       <table class="form-table">
         
         <tr valign="top"><th scope="row"><?php _e( 'Footer Text', 'flint' ); ?></th>
-          <td><textarea id="flint_general[text]" class="text-field" name="flint_general[text]" rows="5" style="width:80%;max-width:400px;"><?php echo stripslashes($options['text']); ?></textarea></td>
+          <td><textarea id="flint_general[text]" class="text-field" name="flint_general[text]" rows="5" style="width:80%;max-width:400px;"><?php echo $footer; ?></textarea></td>
         </tr>
       
       </table>
