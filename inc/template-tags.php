@@ -608,7 +608,18 @@ function flint_breadcrumbs( $display = 'show' ) {
  * Creates custom footer from theme options
  */
 function flint_custom_footer() {
+  $theme = wp_get_theme();
   $options = get_option( 'flint_general' );
+  
+  $company     = !empty($options['company'])     ? $options['company']            : ''                     ;
+  $tel         = !empty($options['tel'])         ? $options['tel']                : ''                     ;
+  $email       = !empty($options['email'])       ? $options['email']              : ''                     ;
+  $fax         = !empty($options['fax'])         ? $options['fax']                : ''                     ;
+  $address     = !empty($options['address'])     ? $options['address']            : ''                     ;
+  $locality    = !empty($options['locality'])    ? $options['locality']           : ''                     ;
+  $postal_code = !empty($options['postal_code']) ? $options['postal_code']        : ''                     ;
+  $footer      = !empty($options['text'])        ? stripslashes($options['text']) : '{WordPress} | {theme}';
+  
   $patterns = array(
     '/{site title}/',
     '/{site description}/',
@@ -617,19 +628,23 @@ function flint_custom_footer() {
     '/{phone}/',
     '/{email}/',
     '/{fax}/',
-    '/{address}/'
+    '/{address}/',
+    '/{WordPress}/',
+    '/{theme}/'
   );
   $replacements = array(
     get_bloginfo( 'name' ),
     get_bloginfo( 'description' ),
     date('Y'),
-    '<span itemprop="name">'      . $options['company'] . '</span>',
-    '<span itemprop="telephone">' . $options['tel']     . '</span>',
-    '<span itemprop="email">'     . $options['email']   . '</span>',
-    '<span itemprop="faxNumber">' . $options['fax']     . '</span>',
-    '<span id="address" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><span id="street" itemprop="streetAddress">' . $options['address'] . '</span><span class="comma">, </span><span id="locality" itemprop="addressLocality">' . $options['locality'] . '</span> <span id="postal-code" itemprop="postalCode">' . $options['postal_code'] . '</span></span>'
+    '<span itemprop="name">'      . $company . '</span>',
+    '<span itemprop="telephone">' . $tel     . '</span>',
+    '<span itemprop="email">'     . $email   . '</span>',
+    '<span itemprop="faxNumber">' . $fax     . '</span>',
+    '<span id="address" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><span id="street" itemprop="streetAddress">' . $address . '</span><span class="comma">, </span><span id="locality" itemprop="addressLocality">' . $locality . '</span> <span id="postal-code" itemprop="postalCode">' . $postal_code . '</span></span>',
+    'Proudly powered by <a href="http://wordpress.org/" title="A Semantic Personal Publishing Platform">WordPress</a>',
+    'Theme: <a href="'.$theme->get( 'ThemeURI' ).'">'.$theme.'</a> by '.$theme->get( 'Author' ),
   );
-  $footer = stripslashes($options['text']);
+  
   $footer = preg_replace( $patterns, $replacements, $footer);
   echo '<div id="org" itemscope itemtype="http://schema.org/Organization">';
   echo $footer;
