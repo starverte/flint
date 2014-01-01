@@ -110,6 +110,7 @@ function flint_comment( $comment, $args, $depth ) {
 endif; // flint_comment()
 
 
+add_action('flint_entry_meta_below_post','flint_the_comments', 20);
 function flint_the_comments() {
   if ( ! post_password_required() && ( comments_open() || '0' != get_comments_number() ) ) : ?>
     <span class="sep"> | </span>
