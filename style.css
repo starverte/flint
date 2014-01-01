@@ -43,6 +43,9 @@ body {
 #top-pad {
   padding-top: 50px;
 }
+.404 #top-pad {
+  padding-top: 0;
+}
 body.clear.clear-breadcrumbs #top-pad,
 body.minimal.minimal-breadcrumbs #top-pad {
   padding-top: 0;
@@ -249,9 +252,6 @@ table > tfoot > tr.warning > th {
 .site-branding h2 {
   font-size: 18px;
 }
-#primary {
-  margin-top: 2em;
-}
 @media (min-width: 768px) {
   #masthead {
     padding: 1em 0;
@@ -292,10 +292,22 @@ a.more-link {
   clear: both;
   margin: 0 0 1.5em;
 }
+#primary {
+  margin-top: 2em;
+}
+.archive #primary {
+  margin-top: 0;
+}
 #primary.full-width {
   clear: both;
   float: none;
   width: 100%;
+}
+.page-header {
+  margin: 20px 0;
+}
+.page-header h1 {
+  margin: 0;
 }
 .pager a { color: #333!important; }
 .pw {
