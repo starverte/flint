@@ -132,6 +132,42 @@ function flint_posted_on() {
 endif;
 
 
+if ( ! function_exists( 'flint_posted_in' ) ) :
+/**
+ * Prints HTML with the categories and tags that the post is in.
+ */
+function flint_posted_in() {
+  $categories = get_the_category();
+  $tags = get_the_tags();
+  $separator = ' '; ?>
+  
+  <?php if (has_category()) { ?>
+  
+    <span class="cat-links">
+      Posted in
+      <?php $output = '';
+      foreach($categories as $category) { $output .= '<a class="label label-default" href="'.get_category_link( $category->term_id ).'" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $category->name ) ) . '">'.$category->cat_name.'</a>'.$separator;}
+      echo trim($output, $separator); ?>
+    </span><!-- .cat-links -->
+    
+    <?php } //endif has_category()
+  
+  if (has_tag()) {
+    
+    if (has_category()) { ?><span class="sep"> | </span><?php } ?>
+  
+    <span class="tags-links">
+      Tagged
+      <?php $output = '';
+      foreach($tags as $tag) {$output .= '<a class="label label-info" href="'.get_tag_link( $tag->term_id ).'" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $tag->name ) ) . '">'.$tag->name.'</a>'.$separator; }
+      echo trim($output, $separator); ?>
+    </span><!-- .tags-links --><?php
+    
+  } //endif has_tag()
+}
+endif;
+
+
 /**
  * Returns true if a blog has more than 1 category
  */
