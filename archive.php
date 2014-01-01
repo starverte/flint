@@ -16,6 +16,13 @@ get_header(); ?>
       <header class="page-header">
         <h1 class="page-title">
           <?php
+            //Template actions before title
+            if ( is_category() ) { do_action('flint_open_cat_title'); }
+            elseif  ( is_tag() ) { do_action('flint_open_tag_title'); }
+            elseif  ( is_tax() ) { do_action('flint_open_' . single_term_title( '', false ) . '_title'); }
+            else                 { do_action('flint_open_archive_title'); }
+
+            //Title of archive page
             if ( is_category() ) { printf( __( '%s', 'flint' ), '<span>' . single_cat_title( '', false ) . '</span>' ); }
             elseif  ( is_tag() ) { printf( __( '%s', 'flint' ), '<span>' . single_tag_title( '', false ) . '</span>' ); }
 
@@ -36,17 +43,23 @@ get_header(); ?>
             elseif ( is_tax( 'post_format', 'post-format-link'  ) ) { _e( 'Links' , 'flint' ); }
 
             else { _e( '<span>' . 'Archives' . '</span>', 'flint' ); }
+
+            //Template actions after title
+            if ( is_category() ) { do_action('flint_close_cat_title'); }
+            elseif  ( is_tag() ) { do_action('flint_close_tag_title'); }
+            elseif  ( is_tax() ) { do_action('flint_close_' . single_term_title( '', false ) . '_title'); }
+            else                 { do_action('flint_close_archive_title'); }
           ?>
         </h1>
         <?php
           if ( is_category() ) {
              $category_description = category_description();
              if ( ! empty( $category_description ) ) { echo apply_filters( 'category_archive_meta', '<div class="taxonomy-description">' . $category_description . '</div>' ); }
-					}
+          }
            elseif ( is_tag() ) {
              $tag_description = tag_description();
              if ( ! empty( $tag_description ) ) { echo apply_filters( 'tag_archive_meta', '<div class="taxonomy-description">' . $tag_description . '</div>' ); }
-					 }
+           }
         ?>
       </header><!-- .page-header -->
 
