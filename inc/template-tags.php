@@ -110,6 +110,14 @@ function flint_comment( $comment, $args, $depth ) {
 endif; // flint_comment()
 
 
+function flint_the_comments() {
+  if ( ! post_password_required() && ( comments_open() || '0' != get_comments_number() ) ) : ?>
+    <span class="sep"> | </span>
+    <span class="comments-link"><?php comments_popup_link( __( 'Leave a comment', 'flint' ), __( '1 Comment', 'flint' ), __( '% Comments', 'flint' ) ); ?></span>
+  <?php endif;
+}
+
+
 add_action('flint_entry_meta_above_post','flint_posted_on');
 if ( ! function_exists( 'flint_posted_on' ) ) :
 /**
