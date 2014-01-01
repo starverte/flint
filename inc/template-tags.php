@@ -795,30 +795,34 @@ function flint_get_widgets_template( $output, $widget_area = 'footer' ) {
  * Body class is determined by page template
  */
 function flint_body_class() {
+  global $post;
   $options = get_option( 'flint_templates' );
-  $template = get_post_meta( get_the_ID(), '_wp_page_template', true );
-  $clear_nav   = !empty($options['clear_nav'])   ? $options['clear_nav']   : 'breadcrumbs';
-  $minimal_nav = !empty($options['minimal_nav']) ? $options['minimal_nav'] : 'navbar';
-  
-  if ($template == 'templates/clear.php') {
-    switch ($clear_nav) {
-      case 'navbar':
-        body_class('clear clear-nav');
-        break;
-      case 'breadcrumbs':
-        body_class('clear clear-breadcrumbs');
-        break;
+  if (!empty($post->ID)) {
+    $template = get_post_meta( $post->ID, '_wp_page_template', true );
+    $clear_nav   = !empty($options['clear_nav'])   ? $options['clear_nav']   : 'breadcrumbs';
+    $minimal_nav = !empty($options['minimal_nav']) ? $options['minimal_nav'] : 'navbar';
+    
+    if ($template == 'templates/clear.php') {
+      switch ($clear_nav) {
+        case 'navbar':
+          body_class('clear clear-nav');
+          break;
+        case 'breadcrumbs':
+          body_class('clear clear-breadcrumbs');
+          break;
+      }
     }
-  }
-  elseif ($template == 'templates/minimal.php') {
-    switch ($minimal_nav) {
-      case 'navbar':
-        body_class('clear clear-nav');
-        break;
-      case 'breadcrumbs':
-        body_class('clear clear-breadcrumbs');
-        break;
+    elseif ($template == 'templates/minimal.php') {
+      switch ($minimal_nav) {
+        case 'navbar':
+          body_class('clear clear-nav');
+          break;
+        case 'breadcrumbs':
+          body_class('clear clear-breadcrumbs');
+          break;
+      }
     }
+    else { body_class(); }
   }
   else { body_class(); }
 }
