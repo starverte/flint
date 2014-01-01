@@ -110,6 +110,16 @@ function flint_comment( $comment, $args, $depth ) {
 endif; // flint_comment()
 
 
+add_action('flint_entry_meta_below_post','flint_the_comments', 20);
+function flint_the_comments() {
+  if ( ! post_password_required() && ( comments_open() || '0' != get_comments_number() ) ) : ?>
+    <span class="sep"> | </span>
+    <span class="comments-link"><?php comments_popup_link( __( 'Leave a comment', 'flint' ), __( '1 Comment', 'flint' ), __( '% Comments', 'flint' ) ); ?></span>
+  <?php endif;
+}
+
+
+add_action('flint_entry_meta_above_post','flint_posted_on');
 if ( ! function_exists( 'flint_posted_on' ) ) :
 /**
  * Prints HTML with meta information for the current post-date/time and author.
@@ -128,6 +138,43 @@ function flint_posted_on() {
     esc_attr( sprintf( __( 'View all posts by %s', 'flint' ), get_the_author() ) ),
     get_the_author()
   );
+}
+endif;
+
+
+add_action('flint_entry_meta_below_post','flint_posted_in', 10);
+if ( ! function_exists( 'flint_posted_in' ) ) :
+/**
+ * Prints HTML with the categories and tags that the post is in.
+ */
+function flint_posted_in() {
+  $categories = get_the_category();
+  $tags = get_the_tags();
+  $separator = ' '; ?>
+  
+  <?php if (has_category()) { ?>
+  
+    <span class="cat-links">
+      Posted in
+      <?php $output = '';
+      foreach($categories as $category) { $output .= '<a class="label label-default" href="'.get_category_link( $category->term_id ).'" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $category->name ) ) . '">'.$category->cat_name.'</a>'.$separator;}
+      echo trim($output, $separator); ?>
+    </span><!-- .cat-links -->
+    
+    <?php } //endif has_category()
+  
+  if (has_tag()) {
+    
+    if (has_category()) { ?><span class="sep"> | </span><?php } ?>
+  
+    <span class="tags-links">
+      Tagged
+      <?php $output = '';
+      foreach($tags as $tag) {$output .= '<a class="label label-info" href="'.get_tag_link( $tag->term_id ).'" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $tag->name ) ) . '">'.$tag->name.'</a>'.$separator; }
+      echo trim($output, $separator); ?>
+    </span><!-- .tags-links --><?php
+    
+  } //endif has_tag()
 }
 endif;
 
@@ -795,30 +842,34 @@ function flint_get_widgets_template( $output, $widget_area = 'footer' ) {
  * Body class is determined by page template
  */
 function flint_body_class() {
+  global $post;
   $options = get_option( 'flint_templates' );
-  $template = get_post_meta( get_the_ID(), '_wp_page_template', true );
-  $clear_nav   = !empty($options['clear_nav'])   ? $options['clear_nav']   : 'breadcrumbs';
-  $minimal_nav = !empty($options['minimal_nav']) ? $options['minimal_nav'] : 'navbar';
-  
-  if ($template == 'templates/clear.php') {
-    switch ($clear_nav) {
-      case 'navbar':
-        body_class('clear clear-nav');
-        break;
-      case 'breadcrumbs':
-        body_class('clear clear-breadcrumbs');
-        break;
+  if (!empty($post->ID)) {
+    $template = get_post_meta( $post->ID, '_wp_page_template', true );
+    $clear_nav   = !empty($options['clear_nav'])   ? $options['clear_nav']   : 'breadcrumbs';
+    $minimal_nav = !empty($options['minimal_nav']) ? $options['minimal_nav'] : 'navbar';
+    
+    if ($template == 'templates/clear.php') {
+      switch ($clear_nav) {
+        case 'navbar':
+          body_class('clear clear-nav');
+          break;
+        case 'breadcrumbs':
+          body_class('clear clear-breadcrumbs');
+          break;
+      }
     }
-  }
-  elseif ($template == 'templates/minimal.php') {
-    switch ($minimal_nav) {
-      case 'navbar':
-        body_class('clear clear-nav');
-        break;
-      case 'breadcrumbs':
-        body_class('clear clear-breadcrumbs');
-        break;
+    elseif ($template == 'templates/minimal.php') {
+      switch ($minimal_nav) {
+        case 'navbar':
+          body_class('clear clear-nav');
+          break;
+        case 'breadcrumbs':
+          body_class('clear clear-breadcrumbs');
+          break;
+      }
     }
+    else { body_class(); }
   }
   else { body_class(); }
 }

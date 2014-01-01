@@ -13,7 +13,17 @@
     </div>
     <article id="post-<?php the_ID(); ?>" <?php post_class('col-lg-8 col-md-8 col-sm-8'); ?>>
       <header class="entry-header">
+        <?php $type = get_post_type(); ?>
+        <?php do_action('flint_open_entry_header'.$type); ?>
+        
         <h1 class="entry-title"><?php if (is_singular()) { echo the_title(); } else { $permalink = get_permalink(); $title = get_the_title(); echo '<a href="' . $permalink .'" rel="bookmark">' . $title . '</a>'; } ?></h1>
+      
+        <div class="entry-meta">
+          <?php do_action('flint_entry_meta_above'.$type); ?>
+        </div><!-- .entry-meta -->
+        
+        <?php do_action('flint_close_entry_header'.$type); ?>
+        
       </header><!-- .entry-header -->
       
       <?php if ( is_search() ) : ?>
@@ -31,7 +41,11 @@
       </div><!-- .entry-content -->
       <?php endif; ?>
       
-    </article><!-- #page-<?php the_ID(); ?> -->
+      <footer class="entry-meta clearfix">
+      <?php do_action('flint_entry_meta_below'.$type); ?>     
+      </footer><!-- .entry-meta -->
+      
+    </article><!-- #<?php echo $type; ?>-<?php the_ID(); ?> -->
     <div class="col-lg-1 col-md-1 col-sm-1"></div>
     <?php if ( current_user_can('edit_posts') ) { ?><a class="btn btn-default btn-sm col-lg-1 col-md-1 col-sm-1" href="<?php echo get_edit_post_link(); ?>">Edit</a><?php } ?>
   </div><!-- .row -->
