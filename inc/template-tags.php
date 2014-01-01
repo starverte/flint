@@ -110,6 +110,7 @@ function flint_comment( $comment, $args, $depth ) {
 endif; // flint_comment()
 
 
+add_action('flint_entry_meta_above_post','flint_posted_on');
 if ( ! function_exists( 'flint_posted_on' ) ) :
 /**
  * Prints HTML with meta information for the current post-date/time and author.
@@ -132,6 +133,7 @@ function flint_posted_on() {
 endif;
 
 
+add_action('flint_entry_meta_below_post','flint_posted_in', 10);
 if ( ! function_exists( 'flint_posted_in' ) ) :
 /**
  * Prints HTML with the categories and tags that the post is in.
