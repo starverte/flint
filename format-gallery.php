@@ -17,7 +17,7 @@
         <h1 class="entry-title"><?php if (is_single()) { echo the_title(); } else { $permalink = get_permalink(); $title = get_the_title(); echo '<a href="' . $permalink .'" rel="bookmark">' . $title . '</a>'; } ?></h1>
         <?php if (is_single()) {} else { ?><a class="btn btn-info btn-block visible-xs" href="<?php echo get_permalink(); ?>">View gallery</a><?php } ?>
         <div class="entry-meta">
-          <?php flint_posted_on(); ?>
+          <?php do_action('flint_entry_meta_above_post'); ?>
         </div><!-- .entry-meta -->
       </header><!-- .entry-header -->
       
@@ -73,38 +73,7 @@
       </div><!-- .entry-content -->
       <?php endif; ?>
       <footer class="entry-meta clearfix">
-        <?php if ( 'post' == get_post_type() ) : ?>
-          <span class="cat-links">
-            Posted in
-            <?php if ( flint_categorized_blog() ) {
-              $categories = get_the_category();
-              $separator = ' ';
-              $output = '';
-              if($categories){
-                foreach($categories as $category) { $output .= '<a class="label label-default" href="'.get_category_link( $category->term_id ).'" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $category->name ) ) . '">'.$category->cat_name.'</a>'.$separator;}
-                echo trim($output, $separator);
-              }
-            } //if ( flint_categorized_blog() ) ?>
-          </span><!-- .cat-links -->
-          
-          <span class="sep"> | </span>
-          <span class="tags-links">
-            Tagged
-            <?php
-            $tags = get_the_tags();
-            $separator = ' ';
-            $output = '';
-            if($tags){
-              foreach($tags as $tag) {$output .= '<a class="label label-info" href="'.get_tag_link( $tag->term_id ).'" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $tag->name ) ) . '">'.$tag->name.'</a>'.$separator; }
-              echo trim($output, $separator);
-            } ?>
-          </span><!-- .tags-links -->
-        <?php endif; // End if 'post' == get_post_type() ?>
-        
-        <?php if ( ! post_password_required() && ( comments_open() || '0' != get_comments_number() ) ) : ?>
-          <span class="sep"> | </span>
-          <span class="comments-link"><?php comments_popup_link( __( 'Leave a comment', 'flint' ), __( '1 Comment', 'flint' ), __( '% Comments', 'flint' ) ); ?></span>
-        <?php endif; ?>
+        <?php do_action('flint_entry_meta_below_post'); ?>
       </footer><!-- .entry-meta -->
     </article><!-- #page-<?php the_ID(); ?> -->
     <div class="col-lg-1 col-md-1 col-sm-1"></div>

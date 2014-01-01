@@ -14,7 +14,17 @@
     </div>
     <article id="post-<?php the_ID(); ?>" <?php post_class('col-lg-6 col-md-6 col-sm-6'); ?>>
       <header class="entry-header">
+        <?php $type = get_post_type(); ?>
+        <?php do_action('flint_open_entry_header'.$type); ?>
+        
         <h1 class="entry-title"><?php if (is_singular()) { echo the_title(); } else { $permalink = get_permalink(); $title = get_the_title(); echo '<a href="' . $permalink .'" rel="bookmark">' . $title . '</a>'; } ?></h1>
+      
+        <div class="entry-meta">
+          <?php do_action('flint_entry_meta_above'.$type); ?>
+        </div><!-- .entry-meta -->
+        
+        <?php do_action('flint_close_entry_header'.$type); ?>
+        
       </header><!-- .entry-header -->
       
       <?php if ( is_search() ) : ?>
