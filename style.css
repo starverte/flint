@@ -270,6 +270,10 @@ table > tfoot > tr.warning > th {
   -ms-word-wrap: break-word;
       word-wrap: break-word;
 }
+.btn-edit {
+  margin-top: -3.5em;
+  float: right;
+}
 .sticky {
 }
 .byline {

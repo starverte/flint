@@ -12,6 +12,7 @@
     <article id="post-<?php the_ID(); ?>" <?php post_class('col-lg-8 col-md-8 col-sm-8'); ?>>      
       <div class="entry-content">
         <h3><?php flint_the_content(); ?></h3>
+        <?php if ( current_user_can('edit_posts') ) { ?><a class="btn btn-default btn-sm btn-edit hidden-xs" href="<?php echo get_edit_post_link(); ?>">Edit Link</a><?php } ?>
       </div><!-- .entry-content -->
       
       <footer class="entry-meta clearfix">
@@ -20,6 +21,5 @@
         <?php do_action('flint_entry_meta_below_post'); ?>
       </footer><!-- .entry-meta -->
     </article><!-- #post-<?php the_ID(); ?> -->
-    <div class="col-lg-1 col-md-1 col-sm-1"></div>
-    <?php if ( current_user_can('edit_posts') ) { ?><a class="btn btn-default btn-sm col-lg-1 col-md-1 col-sm-1" href="<?php echo get_edit_post_link(); ?>">Edit</a><?php } ?>
+    <div class="col-lg-2 col-md-2 col-sm-2"></div>
   </div><!-- .row -->

@@ -15,6 +15,7 @@
         <?php do_action('flint_open_entry_header'.$type); ?>
       
         <h1 class="entry-title"><?php if (is_single()) { echo the_title(); } else { $permalink = get_permalink(); $title = get_the_title(); echo '<a href="' . $permalink .'" rel="bookmark">' . $title . '</a>'; } ?></h1>
+        <?php if ( current_user_can('edit_posts') ) { ?><a class="btn btn-default btn-sm btn-edit hidden-xs" href="<?php echo get_edit_post_link(); ?>">Edit Status</a><?php } ?>
         
         <div class="entry-meta">
           <?php do_action('flint_entry_meta_above'.$type); ?>
@@ -43,6 +44,5 @@
         <?php do_action('flint_entry_meta_below_post'); ?>
       </footer><!-- .entry-meta -->
     </article><!-- #post-<?php the_ID(); ?> -->
-    <div class="col-lg-1 col-md-1 col-sm-1"></div>
-    <?php if ( current_user_can('edit_posts') ) { ?><a class="btn btn-default btn-sm col-lg-1 col-md-1 col-sm-1" href="<?php echo get_edit_post_link(); ?>">Edit</a><?php } ?>
+    <div class="col-lg-2 col-md-2 col-sm-2"></div>
   </div><!-- .row -->
