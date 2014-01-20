@@ -152,20 +152,25 @@ function flint_posted_in() {
   $tags = get_the_tags();
   $separator = ' '; ?>
   
-  <?php if (has_category()) { ?>
+  <?php if (flint_has_category()) { ?>
   
     <span class="cat-links">
-      Posted in
+      
       <?php $output = '';
-      foreach($categories as $category) { $output .= '<a class="label label-default" href="'.get_category_link( $category->term_id ).'" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $category->name ) ) . '">'.$category->cat_name.'</a>'.$separator;}
-      echo trim($output, $separator); ?>
+      foreach($categories as $category) {
+        if ($category->cat_name != 'Uncategorized') {
+          $output .= '<a class="label label-default" href="'.get_category_link( $category->term_id ).'" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $category->name ) ) . '">'.$category->cat_name.'</a>'.$separator;
+        }
+      }
+      $output = trim($output, $separator);
+      echo 'Posted in ' . $output; ?>
     </span><!-- .cat-links -->
     
-    <?php } //endif has_category()
+    <?php } //endif flint_has_category()
   
   if (has_tag()) {
     
-    if (has_category()) { ?><span class="sep"> | </span><?php } ?>
+    if (flint_has_category()) { ?><span class="sep"> | </span><?php } ?>
   
     <span class="tags-links">
       Tagged
@@ -890,5 +895,26 @@ function flint_post_thumbnail( $type = 'post', $loc = 'single') {
       if ($pages_image == 'always') {if (has_post_thumbnail()) { the_post_thumbnail(); }}
       elseif ($pages_image == 'archives' && $loc == 'archive') {if (has_post_thumbnail()) { the_post_thumbnail(); }}
       break;
+  }
+}
+
+/**
+ * Similar to WordPress has_category()
+ * Ignores "Uncategorized"
+ */
+function flint_has_category( $category = '', $post = null ) {
+  if (has_term( $category, 'category', $post )) {
+    $cats = '';
+    foreach(get_the_category() as $cat) {
+      if ($cat->cat_name != 'Uncategorized') {
+        $cats .= $cat->cat_name;
+      }
+    }
+    $output = trim($cats, ' ');
+    if (!empty($output)) { return true; }
+    else { return false; }
+  }
+  else {
+    return false;
   }
 }
