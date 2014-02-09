@@ -40,6 +40,9 @@ html,
 body {
   height: 100%;
 }
+body {
+  background-color: #eee;
+}
 #top-pad {
   padding-top: 50px;
 }
@@ -53,6 +56,11 @@ body.minimal.minimal-breadcrumbs #top-pad {
 }
 article {
     margin-bottom: 3em;
+}
+article.format-aside,
+article.format-status,
+article.format-link {
+  margin-top: 3em;
 }
 blockquote cite {
   float: right;
@@ -78,6 +86,9 @@ img, video {
   padding-bottom: 5px;
   max-width: 100%;
   height: auto;
+}
+hr {
+  border-top: 1px solid #ccc;
 }
 .label {
   line-height: 2;
