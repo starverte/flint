@@ -563,6 +563,9 @@ article.comment {
 .site-info {
   padding: 1em;
 }
+#credits {
+  font-size: 0.875em;
+}
 
 
 /* =Infinite Scroll

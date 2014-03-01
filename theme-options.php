@@ -70,14 +70,14 @@ if ( is_admin() ) {
     
       <?php
         $options = get_option( 'flint_general', $flint_general );
-        $company     = !empty($options['company'])     ? $options['company']            : ''                     ;
-        $tel         = !empty($options['tel'])         ? $options['tel']                : ''                     ;
-        $email       = !empty($options['email'])       ? $options['email']              : ''                     ;
-        $fax         = !empty($options['fax'])         ? $options['fax']                : ''                     ;
-        $address     = !empty($options['address'])     ? $options['address']            : ''                     ;
-        $locality    = !empty($options['locality'])    ? $options['locality']           : ''                     ;
-        $postal_code = !empty($options['postal_code']) ? $options['postal_code']        : ''                     ;
-        $footer      = !empty($options['text'])        ? stripslashes($options['text']) : '{WordPress} | {theme}';
+        $company     = !empty($options['company'])     ? $options['company']            : '';
+        $tel         = !empty($options['tel'])         ? $options['tel']                : '';
+        $email       = !empty($options['email'])       ? $options['email']              : '';
+        $fax         = !empty($options['fax'])         ? $options['fax']                : '';
+        $address     = !empty($options['address'])     ? $options['address']            : '';
+        $locality    = !empty($options['locality'])    ? $options['locality']           : '';
+        $postal_code = !empty($options['postal_code']) ? $options['postal_code']        : '';
+        $footer      = !empty($options['text'])        ? stripslashes($options['text']) : '';
       ?>
       
       <?php settings_fields( 'flint_section_general' ); ?>
