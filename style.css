@@ -3,7 +3,7 @@ Theme Name: Flint
 Theme URI: http://sparks.starverte.com/flint
 Author: Star Verte LLC
 Description: A responsive, minimalist theme built on Twitter's Bootstrap 3 and based on Automattic's _s theme. Make it your own with a custom background, custom header, custom menus, custom colors and more.
-Version: 1.1.0
+Version: 1.1.1
 License: GPLv3
 License URI: LICENSE.md
 Tags: custom-background, custom-header, custom-menu, flexible-header, one-column, post-formats, threaded-comments
@@ -36,16 +36,31 @@ select,
 textarea {
   color: #404040;
 }
+html,
 body {
+  height: 100%;
+}
+body {
+  background-color: #eee;
+}
+#top-pad {
   padding-top: 50px;
 }
-body.clear.clear-breadcrumbs,
-body.minimal.minimal-breadcrumbs {
+.404 #top-pad {
+  padding-top: 0;
+}
+body.clear.clear-breadcrumbs #top-pad,
+body.minimal.minimal-breadcrumbs #top-pad {
   padding-top: 0;
   padding-bottom: 20px;
 }
 article {
     margin-bottom: 3em;
+}
+article.format-aside,
+article.format-status,
+article.format-link {
+  margin-top: 3em;
 }
 blockquote cite {
   float: right;
@@ -72,8 +87,17 @@ img, video {
   max-width: 100%;
   height: auto;
 }
+hr {
+  border-top: 1px solid #ccc;
+}
 .label {
   line-height: 2;
+}
+#page {
+  min-height: 100%;
+  height: auto;
+  margin: 0 auto -48px;
+  padding: 0 0 48px;
 }
 
 /* Alignment */
@@ -239,9 +263,6 @@ table > tfoot > tr.warning > th {
 .site-branding h2 {
   font-size: 18px;
 }
-#primary {
-  margin-top: 2em;
-}
 @media (min-width: 768px) {
   #masthead {
     padding: 1em 0;
@@ -259,6 +280,10 @@ table > tfoot > tr.warning > th {
   margin-top: 0;
   -ms-word-wrap: break-word;
       word-wrap: break-word;
+}
+.btn-edit {
+  margin-top: -3.5em;
+  float: right;
 }
 .sticky {
 }
@@ -282,10 +307,22 @@ a.more-link {
   clear: both;
   margin: 0 0 1.5em;
 }
+#primary {
+  margin-top: 2em;
+}
+.archive #primary {
+  margin-top: 0;
+}
 #primary.full-width {
   clear: both;
   float: none;
   width: 100%;
+}
+.page-header {
+  margin: 20px 0;
+}
+.page-header h1 {
+  margin: 0;
 }
 .pager a { color: #333!important; }
 .pw {
@@ -484,13 +521,6 @@ article.comment {
 /* =Widgets
 ----------------------------------------------- */
 
-.widgets.widgets-footer {
-  background: #444;
-  color: #fff;
-}
-.widgets.widgets-footer a {
-  color: #999;
-}
 .widget {
   margin: 0.75em 0;
 }
@@ -532,6 +562,9 @@ article.comment {
 }
 .site-info {
   padding: 1em;
+}
+#credits {
+  font-size: 0.875em;
 }
 
 

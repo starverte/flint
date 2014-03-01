@@ -3,7 +3,7 @@
  * Displays content for the single posts
  *
  * @package Flint
- * @since 1.1.0
+ * @since 1.1.1
  */
 ?>
 
@@ -13,11 +13,17 @@
   
   <article id="post-<?php the_ID(); ?>" <?php post_class('col-lg-1 col-lg-10 col-md-10 col-sm-10 col-xs-10'); ?>>
     <header class="entry-header">
+      <?php $type = get_post_type(); ?>
+      <?php do_action('flint_open_entry_header_'.$type); ?>
+      
       <h1 class="entry-title"><?php the_title(); ?></h1>
       
       <div class="entry-meta">
-        <?php flint_posted_on(); ?>
+        <?php do_action('flint_entry_meta_above_'.$type); ?>
       </div><!-- .entry-meta -->
+      
+      <?php do_action('flint_close_entry_header_'.$type); ?>
+      
     </header><!-- .entry-header -->
     
     <div class="entry-content">
@@ -31,35 +37,6 @@
     </div><!-- .entry-content -->
     
     <footer class="entry-meta clearfix">
-      <?php
-      /* translators: used between list items, there is a space after the comma */
-      $category_list = get_the_category_list( __( ', ', 'flint' ) );
-      
-      /* translators: used between list items, there is a space after the comma */
-      $tag_list = get_the_tag_list( '', __( ', ', 'flint' ) );
-      
-      if ( ! flint_categorized_blog() ) {
-        if ( '' != $tag_list ) {
-          $meta_text = __( 'This entry was tagged %2$s. Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', 'flint' );
-        } else {
-          $meta_text = __( 'Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', 'flint' );
-      }
-      
-      } else {
-        if ( '' != $tag_list ) {
-          $meta_text = __( 'This entry was posted in %1$s and tagged %2$s. Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', 'flint' );
-        } else {
-          $meta_text = __( 'This entry was posted in %1$s. Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', 'flint' );
-        }
-      } // end check for categories on this blog
-      
-      printf(
-        $meta_text,
-        $category_list,
-        $tag_list,
-        get_permalink(),
-        the_title_attribute( 'echo=0' )
-      );
-      ?>      
+      <?php do_action('flint_entry_meta_below_'.$type); ?>     
     </footer><!-- .entry-meta -->
   </article><!-- #post-<?php the_ID(); ?> -->

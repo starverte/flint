@@ -1,7 +1,7 @@
 <?php
 /**
  * @package Flint
- * @since 1.1.0
+ * @since 1.1.1
  */
 ?>
 
@@ -11,13 +11,18 @@
     </div>
     <article id="post-<?php the_ID(); ?>" <?php post_class('col-lg-8 col-md-8 col-sm-8'); ?>>
       <header class="entry-header">
+        <?php $type = get_post_type(); ?>
+        <?php do_action('flint_open_entry_header_'.$type); ?>
+      
         <h1 class="entry-title"><?php if (is_single()) { echo the_title(); } else { $permalink = get_permalink(); $title = get_the_title(); echo '<a href="' . $permalink .'" rel="bookmark">' . $title . '</a>'; } ?></h1>
+        <?php if ( current_user_can('edit_posts') ) { ?><a class="btn btn-default btn-sm btn-edit hidden-xs" href="<?php echo get_edit_post_link(); ?>">Edit</a><?php } ?>
         
-        <?php if ( 'post' == get_post_type() ) : ?>
-          <div class="entry-meta">
-            <?php flint_posted_on(); ?>
-          </div><!-- .entry-meta -->
-        <?php endif; ?>
+        <div class="entry-meta">
+          <?php do_action('flint_entry_meta_above_'.$type); ?>
+        </div><!-- .entry-meta -->
+        
+        <?php do_action('flint_close_entry_header_'.$type); ?>
+        
       </header><!-- .entry-header -->
       
       <?php if ( is_search() ) : ?>
@@ -36,40 +41,8 @@
       <?php endif; ?>
       
       <footer class="entry-meta clearfix">
-        <?php if ( 'post' == get_post_type() ) : ?>
-          <span class="cat-links">
-            Posted in
-            <?php if ( flint_categorized_blog() ) {
-              $categories = get_the_category();
-              $separator = ' ';
-              $output = '';
-              if($categories){
-                foreach($categories as $category) { $output .= '<a class="label label-default" href="'.get_category_link( $category->term_id ).'" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $category->name ) ) . '">'.$category->cat_name.'</a>'.$separator;}
-                echo trim($output, $separator);
-              }
-            } //if ( flint_categorized_blog() ) ?>
-          </span><!-- .cat-links -->
-          
-          <span class="sep"> | </span>
-          <span class="tags-links">
-            Tagged
-            <?php
-            $tags = get_the_tags();
-            $separator = ' ';
-            $output = '';
-            if($tags){
-              foreach($tags as $tag) {$output .= '<a class="label label-info" href="'.get_tag_link( $tag->term_id ).'" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $tag->name ) ) . '">'.$tag->name.'</a>'.$separator; }
-              echo trim($output, $separator);
-            } ?>
-          </span><!-- .tags-links -->
-        <?php endif; // End if 'post' == get_post_type() ?>
-        
-        <?php if ( ! post_password_required() && ( comments_open() || '0' != get_comments_number() ) ) : ?>
-          <span class="sep"> | </span>
-          <span class="comments-link"><?php comments_popup_link( __( 'Leave a comment', 'flint' ), __( '1 Comment', 'flint' ), __( '% Comments', 'flint' ) ); ?></span>
-        <?php endif; ?>
+        <?php do_action('flint_entry_meta_below_post'); ?>
       </footer><!-- .entry-meta -->
     </article><!-- #post-<?php the_ID(); ?> -->
-    <div class="col-lg-1 col-md-1 col-sm-1"></div>
-    <?php if ( current_user_can('edit_posts') ) { ?><a class="btn btn-default btn-sm col-lg-1 col-md-1 col-sm-1" href="<?php echo get_edit_post_link(); ?>">Edit</a><?php } ?>
+    <div class="col-lg-2 col-md-2 col-sm-2"></div>
   </div><!-- .row -->

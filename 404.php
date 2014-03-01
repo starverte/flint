@@ -3,7 +3,7 @@
  * The template for displaying 404 pages (Not Found).
  *
  * @package Flint
- * @since 1.0.0
+ * @since 1.1.1
  */
 
 get_header(); ?>
@@ -14,7 +14,9 @@ get_header(); ?>
         <div class="col-lg-2 col-md-2 col-sm-2"></div>
         <article id="post-0" class="post error404 not-found col-lg-8 col-md-8 col-sm-8">
           <header class="entry-header">
+            <?php do_action('flint_open_entry_header_404'); ?>
             <h1 class="entry-title"><?php _e( 'Are we missing something?', 'flint' ); ?></h1>
+            <?php do_action('flint_close_entry_header_404'); ?>
           </header><!-- .entry-header -->
           
           <?php if ( is_search() ) : ?>

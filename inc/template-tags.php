@@ -3,7 +3,7 @@
  * Custom template tags for this theme.
  *
  * @package Flint
- * @since 1.1.0
+ * @since 1.1.1
  */
 
 if ( ! function_exists( 'flint_content_nav' ) ) :
@@ -110,6 +110,16 @@ function flint_comment( $comment, $args, $depth ) {
 endif; // flint_comment()
 
 
+add_action('flint_entry_meta_below_post','flint_the_comments', 20);
+function flint_the_comments() {
+  if ( ! post_password_required() && ( comments_open() || '0' != get_comments_number() ) ) : ?>
+    <span class="sep"> | </span>
+    <span class="comments-link"><?php comments_popup_link( __( 'Leave a comment', 'flint' ), __( '1 Comment', 'flint' ), __( '% Comments', 'flint' ) ); ?></span>
+  <?php endif;
+}
+
+
+add_action('flint_entry_meta_above_post','flint_posted_on');
 if ( ! function_exists( 'flint_posted_on' ) ) :
 /**
  * Prints HTML with meta information for the current post-date/time and author.
@@ -128,6 +138,48 @@ function flint_posted_on() {
     esc_attr( sprintf( __( 'View all posts by %s', 'flint' ), get_the_author() ) ),
     get_the_author()
   );
+}
+endif;
+
+
+add_action('flint_entry_meta_below_post','flint_posted_in', 10);
+if ( ! function_exists( 'flint_posted_in' ) ) :
+/**
+ * Prints HTML with the categories and tags that the post is in.
+ */
+function flint_posted_in() {
+  $categories = get_the_category();
+  $tags = get_the_tags();
+  $separator = ' '; ?>
+  
+  <?php if (flint_has_category()) { ?>
+  
+    <span class="cat-links">
+      
+      <?php $output = '';
+      foreach($categories as $category) {
+        if ($category->cat_name != 'Uncategorized') {
+          $output .= '<a class="label label-default" href="'.get_category_link( $category->term_id ).'" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $category->name ) ) . '">'.$category->cat_name.'</a>'.$separator;
+        }
+      }
+      $output = trim($output, $separator);
+      echo 'Posted in ' . $output; ?>
+    </span><!-- .cat-links -->
+    
+    <?php } //endif flint_has_category()
+  
+  if (has_tag()) {
+    
+    if (flint_has_category()) { ?><span class="sep"> | </span><?php } ?>
+  
+    <span class="tags-links">
+      Tagged
+      <?php $output = '';
+      foreach($tags as $tag) {$output .= '<a class="label label-info" href="'.get_tag_link( $tag->term_id ).'" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $tag->name ) ) . '">'.$tag->name.'</a>'.$separator; }
+      echo trim($output, $separator); ?>
+    </span><!-- .tags-links --><?php
+    
+  } //endif has_tag()
 }
 endif;
 
@@ -608,7 +660,18 @@ function flint_breadcrumbs( $display = 'show' ) {
  * Creates custom footer from theme options
  */
 function flint_custom_footer() {
+  $theme = wp_get_theme();
   $options = get_option( 'flint_general' );
+  
+  $company     = !empty($options['company'])     ? $options['company']            : '';
+  $tel         = !empty($options['tel'])         ? $options['tel']                : '';
+  $email       = !empty($options['email'])       ? $options['email']              : '';
+  $fax         = !empty($options['fax'])         ? $options['fax']                : '';
+  $address     = !empty($options['address'])     ? $options['address']            : '';
+  $locality    = !empty($options['locality'])    ? $options['locality']           : '';
+  $postal_code = !empty($options['postal_code']) ? $options['postal_code']        : '';
+  $footer      = !empty($options['text'])        ? stripslashes($options['text']) : '';
+  
   $patterns = array(
     '/{site title}/',
     '/{site description}/',
@@ -623,13 +686,13 @@ function flint_custom_footer() {
     get_bloginfo( 'name' ),
     get_bloginfo( 'description' ),
     date('Y'),
-    '<span itemprop="name">'      . $options['company'] . '</span>',
-    '<span itemprop="telephone">' . $options['tel']     . '</span>',
-    '<span itemprop="email">'     . $options['email']   . '</span>',
-    '<span itemprop="faxNumber">' . $options['fax']     . '</span>',
-    '<span id="address" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><span id="street" itemprop="streetAddress">' . $options['address'] . '</span><span class="comma">, </span><span id="locality" itemprop="addressLocality">' . $options['locality'] . '</span> <span id="postal-code" itemprop="postalCode">' . $options['postal_code'] . '</span></span>'
+    '<span itemprop="name">'      . $company . '</span>',
+    '<span itemprop="telephone">' . $tel     . '</span>',
+    '<span itemprop="email">'     . $email   . '</span>',
+    '<span itemprop="faxNumber">' . $fax     . '</span>',
+    '<span id="address" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><span id="street" itemprop="streetAddress">' . $address . '</span><span class="comma">, </span><span id="locality" itemprop="addressLocality">' . $locality . '</span> <span id="postal-code" itemprop="postalCode">' . $postal_code . '</span></span>'
   );
-  $footer = stripslashes($options['text']);
+  
   $footer = preg_replace( $patterns, $replacements, $footer);
   echo '<div id="org" itemscope itemtype="http://schema.org/Organization">';
   echo $footer;
@@ -646,31 +709,31 @@ function flint_options_css() {
   $link_hover   = !empty($colors['link'])        ? flint_darken_hex($link,15)    : '#2a6496' ;
   $canvas       = !empty($colors['canvas'])      ? $colors['canvas']             : '#222222' ;
   $canvas_dark  = !empty($colors['canvas'])      ? flint_darken_hex($canvas,10)  : '#000000' ;
-  $canvas_light = !empty($colors['canvas'])      ? flint_darken_hex($lighten,5)  : '#666666' ;
+  $canvas_light = !empty($colors['canvas'])      ? flint_lighten_hex($canvas,5)  : '#333333' ;
   $canvas_text  = !empty($colors['canvas_text']) ? $colors['canvas_text']        : '#ffffff' ;
   
   $canvas_link = flint_darken_hex($canvas_text,15);
   
   switch ($body_font) {
     case 'Open Sans':
-      $body = 'body { font-family: "Open Sans",  sans-serif; font-weight: 300; } b, strong { font-weight: 700; }';
+      $body = 'body { font-family: "Open Sans",  sans-serif; font-weight: 300; } b, strong { font-weight: 600; }';
       break;
     case 'Oswald':
-      $body = 'body { font-family: "Oswald",     sans-serif; font-weight: 300; } b, strong { font-weight: 700; }';
+      $body = 'body { font-family: "Oswald",     sans-serif; font-weight: 300; } b, strong { font-weight: 600; }';
       break;
     case 'Roboto':
-      $body = 'body { font-family: "Roboto",     sans-serif; font-weight: 300; } b, strong { font-weight: 700; }';
+      $body = 'body { font-family: "Roboto",     sans-serif; font-weight: 300; } b, strong { font-weight: 600; }';
       break;
     case 'Droid Sans':
-      $body = 'body { font-family: "Droid Sans", sans-serif; font-weight: 400; } b, strong { font-weight: 700; }';
+      $body = 'body { font-family: "Droid Sans", sans-serif; font-weight: 400; } b, strong { font-weight: 600; }';
       break;
     case 'Lato':
-      $body = 'body { font-family: "Lato",       sans-serif; font-weight: 300; } b, strong { font-weight: 700; }';
+      $body = 'body { font-family: "Lato",       sans-serif; font-weight: 300; } b, strong { font-weight: 600; }';
       break;
   }
   switch ($heading_font) {
     case 'Open Sans':
-      $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Open Sans",  sans-serif; font-weight: 600;}';
+      $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Open Sans",  sans-serif; font-weight: 400;}';
       break;
     case 'Oswald':
       $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Oswald",     sans-serif; font-weight: 400;}';
@@ -679,7 +742,7 @@ function flint_options_css() {
       $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Roboto",     sans-serif; font-weight: 400;}';
       break;
     case 'Droid Sans':
-      $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Droid Sans", sans-serif; font-weight: 700;}';
+      $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Droid Sans", sans-serif; font-weight: 400;}';
       break;
     case 'Lato':
       $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Lato",       sans-serif; font-weight: 400;}';
@@ -780,30 +843,34 @@ function flint_get_widgets_template( $output, $widget_area = 'footer' ) {
  * Body class is determined by page template
  */
 function flint_body_class() {
+  global $post;
   $options = get_option( 'flint_templates' );
-  $template = get_post_meta( get_the_ID(), '_wp_page_template', true );
-  $clear_nav   = !empty($options['clear_nav'])   ? $options['clear_nav']   : 'breadcrumbs';
-  $minimal_nav = !empty($options['minimal_nav']) ? $options['minimal_nav'] : 'navbar';
-  
-  if ($template == 'templates/clear.php') {
-    switch ($clear_nav) {
-      case 'navbar':
-        body_class('clear clear-nav');
-        break;
-      case 'breadcrumbs':
-        body_class('clear clear-breadcrumbs');
-        break;
+  if (!empty($post->ID)) {
+    $template = get_post_meta( $post->ID, '_wp_page_template', true );
+    $clear_nav   = !empty($options['clear_nav'])   ? $options['clear_nav']   : 'breadcrumbs';
+    $minimal_nav = !empty($options['minimal_nav']) ? $options['minimal_nav'] : 'navbar';
+    
+    if ($template == 'templates/clear.php') {
+      switch ($clear_nav) {
+        case 'navbar':
+          body_class('clear clear-nav');
+          break;
+        case 'breadcrumbs':
+          body_class('clear clear-breadcrumbs');
+          break;
+      }
     }
-  }
-  elseif ($template == 'templates/minimal.php') {
-    switch ($minimal_nav) {
-      case 'navbar':
-        body_class('clear clear-nav');
-        break;
-      case 'breadcrumbs':
-        body_class('clear clear-breadcrumbs');
-        break;
+    elseif ($template == 'templates/minimal.php') {
+      switch ($minimal_nav) {
+        case 'navbar':
+          body_class('clear clear-nav');
+          break;
+        case 'breadcrumbs':
+          body_class('clear clear-breadcrumbs');
+          break;
+      }
     }
+    else { body_class(); }
   }
   else { body_class(); }
 }
@@ -824,5 +891,26 @@ function flint_post_thumbnail( $type = 'post', $loc = 'single') {
       if ($pages_image == 'always') {if (has_post_thumbnail()) { the_post_thumbnail(); }}
       elseif ($pages_image == 'archives' && $loc == 'archive') {if (has_post_thumbnail()) { the_post_thumbnail(); }}
       break;
+  }
+}
+
+/**
+ * Similar to WordPress has_category()
+ * Ignores "Uncategorized"
+ */
+function flint_has_category( $category = '', $post = null ) {
+  if (has_term( $category, 'category', $post )) {
+    $cats = '';
+    foreach(get_the_category() as $cat) {
+      if ($cat->cat_name != 'Uncategorized') {
+        $cats .= $cat->cat_name;
+      }
+    }
+    $output = trim($cats, ' ');
+    if (!empty($output)) { return true; }
+    else { return false; }
+  }
+  else {
+    return false;
   }
 }
