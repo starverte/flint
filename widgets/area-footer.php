@@ -3,7 +3,7 @@
  * The widget area that appears below the content.
  *
  * @package Flint
- * @since 1.1.0
+ * @since 1.1.1
  */
 ?>
 <?php if ( is_active_sidebar( 'footer' ) ) { ?>

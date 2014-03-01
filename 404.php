@@ -3,7 +3,7 @@
  * The template for displaying 404 pages (Not Found).
  *
  * @package Flint
- * @since 1.0.0
+ * @since 1.1.1
  */
 
 get_header(); ?>
