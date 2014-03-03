@@ -1,4 +1,23 @@
-###Flint 1.1.0
+###Flint 1.1.1
+For complete diff, check out [Pull Request](https://github.com/starverte/flint/pull/141)
+- Upgrade to Bootstrap 3.1.1
+- Thinner font styles
+- Fix override conflict with .widgets.widgets-footer
+- Register defaults for custom footer options
+- Implement two footer elements
+ - Custom Footer Area
+ - Site Credits
+- New actions!
+ - `flint_open_entry_header_404` / `flint_close_entry_header_404`
+ - `flint_open_entry_header_$type` / `flint_close_entry_header_$type`
+ - `flint_open_cat_title` / `flint_close_cat_title`
+ - `flint_open_tag_title` / `flint_close_tag_title`
+ - `flint_open_$term_title` / `flint_close_$term_title`
+ - `flint_open_archive_title` / `flint_close_archive_title`
+ - `flint_entry_meta_above_$term` / `flint_entry_meta_below_$term`
+
+
+###Flint 1.1.0 - November 20, 2013
 For complete diff, check out [Pull Request](https://github.com/starverte/flint/pull/109)
 - Upgraded to Bootstrap 3.0.2
 - Added templates: Clear, Minimal, Wide, Full, Narrow, Slim

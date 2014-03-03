@@ -5,7 +5,7 @@
  * Displays all of the <head> section and everything up till <header>
  *
  * @package Flint
- * @since 1.1.0
+ * @since 1.1.1
  */
 ?>
 <!DOCTYPE html>

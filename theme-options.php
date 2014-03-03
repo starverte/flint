@@ -4,7 +4,7 @@
  * Source: http://digitalraindrops.net/2011/02/tabbed-options-page/
  *
  * @package Flint
- * @since 1.1.0
+ * @since 1.1.1
  */
 
 $flint_general = array();
