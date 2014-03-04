@@ -1,4 +1,11 @@
-###Flint 1.1.1
+###Flint 1.1.3
+For complete diff, check out [Pull Request](#)
+- Fix footer link
+
+###Flint 1.1.2
+Alias for Flint 1.1.1 for WordPress.org
+
+###Flint 1.1.1 - March 1, 2014
 For complete diff, check out [Pull Request](https://github.com/starverte/flint/pull/141)
 - Upgrade to Bootstrap 3.1.1
 - Thinner font styles
