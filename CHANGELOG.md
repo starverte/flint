@@ -1,5 +1,5 @@
 ###Flint 1.1.3
-For complete diff, check out [Pull Request](#)
+For complete diff, check out [Pull Request](https://github.com/starverte/flint/pull/147)
 - Fix footer link
 
 ###Flint 1.1.2
