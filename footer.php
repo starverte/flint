@@ -5,7 +5,7 @@
  * Contains the closing of the id=main div and all content after
  *
  * @package Flint
- * @since 1.1.1
+ * @since 1.1.3
  */
 ?>
 
@@ -18,7 +18,7 @@
     </div>
     <div id="credits" class="col-lg-4 col-md-5">
       <?php $theme = wp_get_theme(); ?>
-      Proudly powered by <a href="http://wordpress.org/" title="A Semantic Personal Publishing Platform">WordPress</a> | Theme: <a href="<?php echo $theme->get( 'ThemeURI' ) ?>'"><?php echo $theme ?></a> by <?php echo $theme->get( 'Author' ) ?>
+      Proudly powered by <a href="http://wordpress.org/" title="A Semantic Personal Publishing Platform">WordPress</a> | Theme: <a href="<?php echo $theme->get( 'ThemeURI' ) ?>"><?php echo $theme ?></a> by <?php echo $theme->get( 'Author' ) ?>
     </div>
   </div><!-- .site-info -->
 </footer><!-- #colophon -->
