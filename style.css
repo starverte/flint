@@ -40,20 +40,6 @@ html,
 body {
   height: 100%;
 }
-body {
-  background-color: #eee;
-}
-#top-pad {
-  padding-top: 50px;
-}
-.404 #top-pad {
-  padding-top: 0;
-}
-body.clear.clear-breadcrumbs #top-pad,
-body.minimal.minimal-breadcrumbs #top-pad {
-  padding-top: 0;
-  padding-bottom: 20px;
-}
 article {
     margin-bottom: 3em;
 }
@@ -62,6 +48,7 @@ article.format-status,
 article.format-link {
   margin-top: 3em;
 }
+b, strong { font-weight: 600; }
 blockquote cite {
   float: right;
   clear: left;
@@ -257,6 +244,17 @@ table > tfoot > tr.warning > th {
 /* =Header
 ----------------------------------------------- */
 
+#top-pad {
+  padding-top: 50px;
+}
+.404 #top-pad {
+  padding-top: 0;
+}
+body.clear.clear-breadcrumbs #top-pad,
+body.minimal.minimal-breadcrumbs #top-pad {
+  padding-top: 0;
+  padding-bottom: 20px;
+}
 .site-branding h1 a {
   font-size: 56px;
 }

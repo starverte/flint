@@ -660,7 +660,6 @@ function flint_breadcrumbs( $display = 'show' ) {
  * Creates custom footer from theme options
  */
 function flint_custom_footer() {
-  $theme = wp_get_theme();
   $options = get_option( 'flint_general' );
   
   $company     = !empty($options['company'])     ? $options['company']            : '';
@@ -703,7 +702,7 @@ function flint_options_css() {
   $fonts = get_option( 'flint_fonts' );
   $body_font    = !empty($fonts['body_font'])    ? $fonts['body_font']    : 'Open Sans' ;
   $heading_font = !empty($fonts['heading_font']) ? $fonts['heading_font'] : 'Open Sans' ;
-  
+
   $colors = get_option( 'flint_colors' );
   $link         = !empty($colors['link'])        ? $colors['link']               : '#428bca' ;
   $link_hover   = !empty($colors['link'])        ? flint_darken_hex($link,15)    : '#2a6496' ;
@@ -711,41 +710,50 @@ function flint_options_css() {
   $canvas_dark  = !empty($colors['canvas'])      ? flint_darken_hex($canvas,10)  : '#000000' ;
   $canvas_light = !empty($colors['canvas'])      ? flint_lighten_hex($canvas,5)  : '#333333' ;
   $canvas_text  = !empty($colors['canvas_text']) ? $colors['canvas_text']        : '#ffffff' ;
-  
-  $canvas_link = flint_darken_hex($canvas_text,15);
-  
+
+	$bg         = get_theme_mod( 'background_color', '#eeeeee' );
+	$blockquote = flint_darken_hex($bg,6.5);
+
+	$canvas_link = flint_darken_hex($canvas_text,15);
+
+	$body = 'body {';
+	$body .= 'background-color: ' . $bg . '; font-family: ';
+
   switch ($body_font) {
     case 'Open Sans':
-      $body = 'body { font-family: "Open Sans",  sans-serif; font-weight: 300; } b, strong { font-weight: 600; }';
+      $body .= '"Open Sans",  sans-serif; font-weight: 300; }';
       break;
     case 'Oswald':
-      $body = 'body { font-family: "Oswald",     sans-serif; font-weight: 300; } b, strong { font-weight: 600; }';
+      $body .= '"Oswald",     sans-serif; font-weight: 300; }';
       break;
     case 'Roboto':
-      $body = 'body { font-family: "Roboto",     sans-serif; font-weight: 300; } b, strong { font-weight: 600; }';
+      $body .= '"Roboto",     sans-serif; font-weight: 300; }';
       break;
     case 'Droid Sans':
-      $body = 'body { font-family: "Droid Sans", sans-serif; font-weight: 400; } b, strong { font-weight: 600; }';
+      $body .= '"Droid Sans", sans-serif; font-weight: 400; }';
       break;
     case 'Lato':
-      $body = 'body { font-family: "Lato",       sans-serif; font-weight: 300; } b, strong { font-weight: 600; }';
+      $body .= '"Lato",       sans-serif; font-weight: 300; }';
       break;
   }
+
+	$headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: ';
+
   switch ($heading_font) {
     case 'Open Sans':
-      $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Open Sans",  sans-serif; font-weight: 400;}';
+      $headings .= '"Open Sans",  sans-serif; font-weight: 400;}';
       break;
     case 'Oswald':
-      $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Oswald",     sans-serif; font-weight: 400;}';
+      $headings .= '"Oswald",     sans-serif; font-weight: 400;}';
       break;
     case 'Roboto':
-      $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Roboto",     sans-serif; font-weight: 400;}';
+      $headings .= '"Roboto",     sans-serif; font-weight: 400;}';
       break;
     case 'Droid Sans':
-      $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Droid Sans", sans-serif; font-weight: 400;}';
+      $headings .= '"Droid Sans", sans-serif; font-weight: 400;}';
       break;
     case 'Lato':
-      $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Lato",       sans-serif; font-weight: 400;}';
+      $headings .= '"Lato",       sans-serif; font-weight: 400;}';
       break;
   }
 
@@ -754,6 +762,7 @@ function flint_options_css() {
   echo $headings;
   echo 'a {color:' . $link . ';}';
   echo 'a:hover, a:focus {color:' . $link_hover . ';}';
+	echo 'blockquote {border-left-color: ' . $blockquote . ';}';
   echo '.canvas { background-color: ' . $canvas . '; border-color: ' . $canvas_dark . '; color: ' . $canvas_text . '; }';
   echo '.navbar-inverse .navbar-nav > li > a, .canvas a, .canvas-light a { color: ' . $canvas_link . '; }';
   echo '.canvas a:hover, .canvas-light a:hover { color: ' . $canvas_text . '; }';
