@@ -12,12 +12,15 @@ if ( ! function_exists( 'flint_content_nav' ) ) :
  */
 function flint_content_nav( $nav_id ) {
   global $wp_query, $post;
+  $type = get_post_type($post->ID);
 
   if ( is_single() ) {
     $previous = ( is_attachment() ) ? get_post( $post->post_parent ) : get_adjacent_post( false, '', true );
     $next = get_adjacent_post( false, '', false );
 
     if ( ! $next && ! $previous )
+      return;
+    if ( $type = 'steel_product' )//Hide bottom navigation for products
       return;
   }
 
@@ -299,8 +302,17 @@ function flint_link_page( $i ) {
 /**
  * Modifies the_content to allow for more tag to be a bootstrap button
  */
-function flint_the_content($more_link_text = 'Read more', $stripteaser = false, $flint_more_class = 'btn btn-primary', $flint_more_before = ' <a href="', $flint_more_after = '</a>') {
-  $content = flint_get_the_content($more_link_text, $stripteaser, $flint_more_class, $flint_more_before, $flint_more_after);
+function flint_the_content($more_link_text = 'Read more', $stripteaser = false, $args = array() ) {
+  
+  $defaults = array(
+    'more_class'  => 'btn btn-primary',
+    'more_before' => '<div style="float:right;"><a href="',
+    'more_after'  => '</a></div>',
+  );
+  
+  $args = wp_parse_args( $args, $defaults );
+  
+  $content = flint_get_the_content($more_link_text, $stripteaser, $args);
   $content = apply_filters('the_content', $content);
   $content = str_replace(']]>', ']]&gt;', $content);
   echo $content;
@@ -310,10 +322,18 @@ function flint_the_content($more_link_text = 'Read more', $stripteaser = false, 
 /**
  * Modifies get_the_content to allow for more tag to be a bootstrap button
  */
-function flint_get_the_content($more_link_text = 'Read more', $stripteaser = false, $flint_more_class = 'btn btn-primary', $flint_more_before = ' <a href="', $flint_more_after = '</a>') {
+function flint_get_the_content( $more_link_text = 'Read more', $stripteaser = false, $args = array() ) {
   global $more, $page, $pages, $multipage, $preview;
 
   $post = get_post();
+  
+  $defaults = array(
+    'more_class'  => 'btn btn-primary',
+    'more_before' => '<div style="float:right;"><a href="',
+    'more_after'  => '</a></div>',
+  );
+  
+  $args = wp_parse_args( $args, $defaults );
 
   if ( null === $more_link_text )
     $more_link_text = __( '(more...)', 'flint' );
@@ -348,7 +368,7 @@ function flint_get_the_content($more_link_text = 'Read more', $stripteaser = fal
       $output .= '<span id="more-' . $post->ID . '"></span>' . $content[1];
     } else {
       if ( ! empty($more_link_text) )
-        $output .= apply_filters( 'the_content_more_link', $flint_more_before . get_permalink() . "#more-{$post->ID}\"" . 'class="more-link ' . $flint_more_class . '">' . $more_link_text . $flint_more_after );
+        $output .= apply_filters( 'the_content_more_link', $args['more_before'] . get_permalink() . "#more-{$post->ID}\"" . 'class="more-link ' . $args['more_class'] . '">' . $more_link_text . $args['more_after'] );
       $output = force_balance_tags($output);
     }
 
