@@ -711,13 +711,13 @@ function flint_options_css() {
   $canvas_light = !empty($colors['canvas'])      ? flint_lighten_hex($canvas,5)  : '#333333' ;
   $canvas_text  = !empty($colors['canvas_text']) ? $colors['canvas_text']        : '#ffffff' ;
 
-	$bg         = get_theme_mod( 'background_color', '#eeeeee' );
-	$blockquote = flint_darken_hex($bg,6.5);
+  $bg         = get_theme_mod( 'background_color', '#eeeeee' );
+  $blockquote = flint_darken_hex($bg,6.5);
 
-	$canvas_link = flint_darken_hex($canvas_text,15);
+  $canvas_link = flint_darken_hex($canvas_text,15);
 
-	$body = 'body {';
-	$body .= 'background-color: ' . $bg . '; font-family: ';
+  $body = 'body {';
+  $body .= 'background-color: ' . $bg . '; font-family: ';
 
   switch ($body_font) {
     case 'Open Sans':
@@ -735,9 +735,12 @@ function flint_options_css() {
     case 'Lato':
       $body .= '"Lato",       sans-serif; font-weight: 300; }';
       break;
+    case 'Strait':
+      $body .= '"Strait",     sans-serif; font-weight: 400; }';
+      break;
   }
 
-	$headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: ';
+  $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: ';
 
   switch ($heading_font) {
     case 'Open Sans':
@@ -755,6 +758,9 @@ function flint_options_css() {
     case 'Lato':
       $headings .= '"Lato",       sans-serif; font-weight: 400;}';
       break;
+    case 'Strait':
+      $headings .= '"Strait",     sans-serif; font-weight: 400;}';
+      break;
   }
 
   echo '<style type="text/css">';
@@ -762,7 +768,7 @@ function flint_options_css() {
   echo $headings;
   echo 'a {color:' . $link . ';}';
   echo 'a:hover, a:focus {color:' . $link_hover . ';}';
-	echo 'blockquote {border-left-color: ' . $blockquote . ';}';
+  echo 'blockquote {border-left-color: ' . $blockquote . ';}';
   echo '.canvas { background-color: ' . $canvas . '; border-color: ' . $canvas_dark . '; color: ' . $canvas_text . '; }';
   echo '.navbar-inverse .navbar-nav > li > a, .canvas a, .canvas-light a { color: ' . $canvas_link . '; }';
   echo '.canvas a:hover, .canvas-light a:hover { color: ' . $canvas_text . '; }';
