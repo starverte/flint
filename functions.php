@@ -73,17 +73,21 @@ add_action( 'after_setup_theme', 'flint_register_custom_background' );
 require( get_template_directory() . '/inc/custom-header.php' );
 
 /**
- * Register widgetized area and update sidebar with default widgets
+ * Register widgetized areas and update sidebar with default widgets
  */
 function flint_widgets_init() {
-  register_sidebar( array(
-    'name'          => __( 'Footer', 'flint' ),
-    'id'            => 'footer',
-    'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-    'after_widget'  => '</aside>',
-    'before_title'  => '<h1 class="widget-title">',
-    'after_title'   => '</h1>',
-  ) );
+  $widget_areas = flint_widget_areas();
+  
+  foreach ($widget_areas as $widget_area) {
+    register_sidebar( array(
+      'name'          => __( $widget_area, 'flint' ),
+      'id'            => strtolower($widget_area),
+      'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+      'after_widget'  => '</aside>',
+      'before_title'  => '<h1 class="widget-title">',
+      'after_title'   => '</h1>',
+    ) );
+  }
 }
 add_action( 'widgets_init', 'flint_widgets_init' );
 
@@ -270,5 +274,4 @@ class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
 
   }
 }
-
 add_filter( 'use_default_gallery_style', '__return_false' );
