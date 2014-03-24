@@ -11,8 +11,10 @@ if ( ! function_exists( 'flint_content_nav' ) ) :
  * Display navigation to next/previous pages when applicable
  */
 function flint_content_nav( $nav_id ) {
-  global $wp_query, $post;
-  $type = get_post_type($post->ID);
+  global $wp_query;
+  global $post;
+  global $post_id;
+  $type = get_post_type($post_id);
 
   if ( is_single() ) {
     $previous = ( is_attachment() ) ? get_post( $post->post_parent ) : get_adjacent_post( false, '', true );
