@@ -11,13 +11,18 @@ if ( ! function_exists( 'flint_content_nav' ) ) :
  * Display navigation to next/previous pages when applicable
  */
 function flint_content_nav( $nav_id ) {
-  global $wp_query, $post;
+  global $wp_query;
+  global $post;
+  global $post_id;
+  $type = get_post_type($post_id);
 
   if ( is_single() ) {
     $previous = ( is_attachment() ) ? get_post( $post->post_parent ) : get_adjacent_post( false, '', true );
     $next = get_adjacent_post( false, '', false );
 
     if ( ! $next && ! $previous )
+      return;
+    if ( $type = 'steel_product' )//Hide bottom navigation for products
       return;
   }
 
@@ -299,8 +304,17 @@ function flint_link_page( $i ) {
 /**
  * Modifies the_content to allow for more tag to be a bootstrap button
  */
-function flint_the_content($more_link_text = 'Read more', $stripteaser = false, $flint_more_class = 'btn btn-primary', $flint_more_before = ' <a href="', $flint_more_after = '</a>') {
-  $content = flint_get_the_content($more_link_text, $stripteaser, $flint_more_class, $flint_more_before, $flint_more_after);
+function flint_the_content($more_link_text = 'Read more', $stripteaser = false, $args = array() ) {
+  
+  $defaults = array(
+    'more_class'  => 'btn btn-primary',
+    'more_before' => '<div style="float:right;"><a href="',
+    'more_after'  => '</a></div>',
+  );
+  
+  $args = wp_parse_args( $args, $defaults );
+  
+  $content = flint_get_the_content($more_link_text, $stripteaser, $args);
   $content = apply_filters('the_content', $content);
   $content = str_replace(']]>', ']]&gt;', $content);
   echo $content;
@@ -310,10 +324,18 @@ function flint_the_content($more_link_text = 'Read more', $stripteaser = false, 
 /**
  * Modifies get_the_content to allow for more tag to be a bootstrap button
  */
-function flint_get_the_content($more_link_text = 'Read more', $stripteaser = false, $flint_more_class = 'btn btn-primary', $flint_more_before = ' <a href="', $flint_more_after = '</a>') {
+function flint_get_the_content( $more_link_text = 'Read more', $stripteaser = false, $args = array() ) {
   global $more, $page, $pages, $multipage, $preview;
 
   $post = get_post();
+  
+  $defaults = array(
+    'more_class'  => 'btn btn-primary',
+    'more_before' => '<div style="float:right;"><a href="',
+    'more_after'  => '</a></div>',
+  );
+  
+  $args = wp_parse_args( $args, $defaults );
 
   if ( null === $more_link_text )
     $more_link_text = __( '(more...)', 'flint' );
@@ -348,7 +370,7 @@ function flint_get_the_content($more_link_text = 'Read more', $stripteaser = fal
       $output .= '<span id="more-' . $post->ID . '"></span>' . $content[1];
     } else {
       if ( ! empty($more_link_text) )
-        $output .= apply_filters( 'the_content_more_link', $flint_more_before . get_permalink() . "#more-{$post->ID}\"" . 'class="more-link ' . $flint_more_class . '">' . $more_link_text . $flint_more_after );
+        $output .= apply_filters( 'the_content_more_link', $args['more_before'] . get_permalink() . "#more-{$post->ID}\"" . 'class="more-link ' . $args['more_class'] . '">' . $more_link_text . $args['more_after'] );
       $output = force_balance_tags($output);
     }
 
@@ -660,7 +682,6 @@ function flint_breadcrumbs( $display = 'show' ) {
  * Creates custom footer from theme options
  */
 function flint_custom_footer() {
-  $theme = wp_get_theme();
   $options = get_option( 'flint_general' );
   
   $company     = !empty($options['company'])     ? $options['company']            : '';
@@ -703,7 +724,7 @@ function flint_options_css() {
   $fonts = get_option( 'flint_fonts' );
   $body_font    = !empty($fonts['body_font'])    ? $fonts['body_font']    : 'Open Sans' ;
   $heading_font = !empty($fonts['heading_font']) ? $fonts['heading_font'] : 'Open Sans' ;
-  
+
   $colors = get_option( 'flint_colors' );
   $link         = !empty($colors['link'])        ? $colors['link']               : '#428bca' ;
   $link_hover   = !empty($colors['link'])        ? flint_darken_hex($link,15)    : '#2a6496' ;
@@ -711,41 +732,56 @@ function flint_options_css() {
   $canvas_dark  = !empty($colors['canvas'])      ? flint_darken_hex($canvas,10)  : '#000000' ;
   $canvas_light = !empty($colors['canvas'])      ? flint_lighten_hex($canvas,5)  : '#333333' ;
   $canvas_text  = !empty($colors['canvas_text']) ? $colors['canvas_text']        : '#ffffff' ;
-  
+
+  $bg         = get_theme_mod( 'background_color', '#eeeeee' );
+  $blockquote = flint_darken_hex($bg,6.5);
+
   $canvas_link = flint_darken_hex($canvas_text,15);
-  
+
+  $body = 'body {';
+  $body .= 'background-color: ' . $bg . '; font-family: ';
+
   switch ($body_font) {
     case 'Open Sans':
-      $body = 'body { font-family: "Open Sans",  sans-serif; font-weight: 300; } b, strong { font-weight: 600; }';
+      $body .= '"Open Sans",  sans-serif; font-weight: 300; }';
       break;
     case 'Oswald':
-      $body = 'body { font-family: "Oswald",     sans-serif; font-weight: 300; } b, strong { font-weight: 600; }';
+      $body .= '"Oswald",     sans-serif; font-weight: 300; }';
       break;
     case 'Roboto':
-      $body = 'body { font-family: "Roboto",     sans-serif; font-weight: 300; } b, strong { font-weight: 600; }';
+      $body .= '"Roboto",     sans-serif; font-weight: 300; }';
       break;
     case 'Droid Sans':
-      $body = 'body { font-family: "Droid Sans", sans-serif; font-weight: 400; } b, strong { font-weight: 600; }';
+      $body .= '"Droid Sans", sans-serif; font-weight: 400; }';
       break;
     case 'Lato':
-      $body = 'body { font-family: "Lato",       sans-serif; font-weight: 300; } b, strong { font-weight: 600; }';
+      $body .= '"Lato",       sans-serif; font-weight: 300; }';
+      break;
+    case 'Strait':
+      $body .= '"Strait",     sans-serif; font-weight: 400; }';
       break;
   }
+
+  $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: ';
+
   switch ($heading_font) {
     case 'Open Sans':
-      $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Open Sans",  sans-serif; font-weight: 400;}';
+      $headings .= '"Open Sans",  sans-serif; font-weight: 400;}';
       break;
     case 'Oswald':
-      $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Oswald",     sans-serif; font-weight: 400;}';
+      $headings .= '"Oswald",     sans-serif; font-weight: 400;}';
       break;
     case 'Roboto':
-      $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Roboto",     sans-serif; font-weight: 400;}';
+      $headings .= '"Roboto",     sans-serif; font-weight: 400;}';
       break;
     case 'Droid Sans':
-      $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Droid Sans", sans-serif; font-weight: 400;}';
+      $headings .= '"Droid Sans", sans-serif; font-weight: 400;}';
       break;
     case 'Lato':
-      $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: "Lato",       sans-serif; font-weight: 400;}';
+      $headings .= '"Lato",       sans-serif; font-weight: 400;}';
+      break;
+    case 'Strait':
+      $headings .= '"Strait",     sans-serif; font-weight: 400;}';
       break;
   }
 
@@ -754,6 +790,7 @@ function flint_options_css() {
   echo $headings;
   echo 'a {color:' . $link . ';}';
   echo 'a:hover, a:focus {color:' . $link_hover . ';}';
+  echo 'blockquote {border-left-color: ' . $blockquote . ';}';
   echo '.canvas { background-color: ' . $canvas . '; border-color: ' . $canvas_dark . '; color: ' . $canvas_text . '; }';
   echo '.navbar-inverse .navbar-nav > li > a, .canvas a, .canvas-light a { color: ' . $canvas_link . '; }';
   echo '.canvas a:hover, .canvas-light a:hover { color: ' . $canvas_text . '; }';

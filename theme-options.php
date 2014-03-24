@@ -147,6 +147,11 @@ if ( is_admin() ) {
         
         $posts_image = !empty($options['posts_image']) ? $options['posts_image'] : 'always';
         $pages_image = !empty($options['pages_image']) ? $options['pages_image'] : 'always';
+        
+        $widget_area_header = !empty($options['widget_area_header']) ? $options['widget_area_header'] : 'hide';
+        $widget_area_footer = !empty($options['widget_area_footer']) ? $options['widget_area_footer'] : 'show';
+        $widget_area_left   = !empty($options['widget_area_left'  ]) ? $options['widget_area_left'  ] : 'hide';
+        $widget_area_right  = !empty($options['widget_area_right' ]) ? $options['widget_area_right' ] : 'hide';
       ?>
       
       <?php settings_fields( 'flint_section_layout' ); ?>
@@ -171,6 +176,44 @@ if ( is_admin() ) {
               <option value="always"   <?php selected( $pages_image, 'always'   ); ?>>Always</option>
               <option value="archives" <?php selected( $pages_image, 'archives' ); ?>>Archives/Search Only</option>
               <option value="never"    <?php selected( $pages_image, 'never'    ); ?>>Never</option>
+            </select>
+          </td>
+        </tr>
+        
+        <tr valign="top"><th scope="row"><h3>Widget Areas</h3></th></tr>
+      
+        <tr valign="top"><th scope="row"><?php _e( 'Header', 'flint' ); ?></th>
+          <td>
+            <select name="flint_layout[widget_area_header]">
+              <option value="show" <?php selected( $widget_area_header, 'show' ); ?>>Show</option>
+              <option value="hide" <?php selected( $widget_area_header, 'hide' ); ?>>Hide</option>
+            </select>
+          </td>
+        </tr>
+        
+        <tr valign="top"><th scope="row"><?php _e( 'Footer', 'flint' ); ?></th>
+          <td>
+            <select name="flint_layout[widget_area_footer]">
+              <option value="show" <?php selected( $widget_area_footer, 'show' ); ?>>Show</option>
+              <option value="hide" <?php selected( $widget_area_footer, 'hide' ); ?>>Hide</option>
+            </select>
+          </td>
+        </tr>
+        
+        <tr valign="top"><th scope="row"><?php _e( 'Left', 'flint' ); ?></th>
+          <td>
+            <select name="flint_layout[widget_area_left]">
+              <option value="show" <?php selected( $widget_area_left, 'show' ); ?>>Show</option>
+              <option value="hide" <?php selected( $widget_area_left, 'hide' ); ?>>Hide</option>
+            </select>
+          </td>
+        </tr>
+        
+        <tr valign="top"><th scope="row"><?php _e( 'Right', 'flint' ); ?></th>
+          <td>
+            <select name="flint_layout[widget_area_right]">
+              <option value="show" <?php selected( $widget_area_right, 'show' ); ?>>Show</option>
+              <option value="hide" <?php selected( $widget_area_right, 'hide' ); ?>>Hide</option>
             </select>
           </td>
         </tr>
@@ -317,4 +360,21 @@ if ( is_admin() ) {
     return $input;
   }
 
+}
+
+function flint_widget_areas() {
+  $options = get_option( 'flint_layout' );
+  $header = !empty($options['widget_area_header']) ? $options['widget_area_header'] : 'hide';
+  $footer = !empty($options['widget_area_footer']) ? $options['widget_area_footer'] : 'show';
+  $left   = !empty($options['widget_area_left'  ]) ? $options['widget_area_left'  ] : 'hide';
+  $right  = !empty($options['widget_area_right' ]) ? $options['widget_area_right' ] : 'hide';
+  
+  $widget_areas  = '';
+  $widget_areas .= $header == 'show' ? 'Header,' : '';
+  $widget_areas .= $footer == 'show' ? 'Footer,' : '';
+  $widget_areas .= $left   == 'show' ? 'Left,'   : '';
+  $widget_areas .= $right  == 'show' ? 'Right,'  : '';
+  
+  $widget_areas = explode(',',$widget_areas);
+  return $widget_areas;
 }
