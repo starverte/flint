@@ -53,10 +53,10 @@ b, strong {
 }
 blockquote cite {
   float: right;
-  padding-top: .75em;
-  padding-bottom: .75em;
+  padding-top: 0.75em;
+  padding-bottom: 0.75em;
   clear: left;
-  font-size: .75em;
+  font-size: 0.75em;
 }
 h1 {
   font-size: 28px;
@@ -133,7 +133,7 @@ hr {
   text-decoration: none;
   background-color: #f1f1f1;
   border-radius: 3px;
-  box-shadow: 0 0 2px 2px rgba(0, 0, 0, .6);
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
 }
 
 /* Tables */
@@ -249,7 +249,7 @@ table > tfoot > tr.warning > th {
 #top-pad {
   padding-top: 50px;
 }
-.404 #top-pad {
+0.404 #top-pad {
   padding-top: 0;
 }
 body.clear.clear-breadcrumbs #top-pad,
@@ -366,8 +366,8 @@ a.more-link {
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 4px;
-  -webkit-transition: all .2s ease-in-out;
-          transition: all .2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+          transition: all 0.2s ease-in-out;
 }
 .carousel img {
   border: none;
@@ -439,8 +439,8 @@ a.more-link {
   margin-bottom: 1.5em;
   border: 1px solid #ddd;
   border-radius: 4px;
-  -webkit-transition: all .2s ease-in-out;
-          transition: all .2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+          transition: all 0.2s ease-in-out;
 }
 .wp-caption img[class*="wp-image-"] {
   display: block;
@@ -453,7 +453,7 @@ a.more-link {
   text-align: center;
 }
 .wp-caption .wp-caption-text {
-  margin: .8075em 0;
+  margin: 0.8075em 0;
 }
 .site-content .gallery {
   margin-bottom: 1.5em;
@@ -466,8 +466,8 @@ a.more-link {
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 4px;
-  -webkit-transition: all .2s ease-in-out;
-          transition: all .2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+          transition: all 0.2s ease-in-out;
 }
 .site-content .gallery dd {
   margin: 0;
@@ -531,7 +531,7 @@ object {
 }
 article.comment {
   padding: 1em;
-  margin-bottom: .5em;
+  margin-bottom: 0.5em;
 }
 
 
@@ -539,7 +539,7 @@ article.comment {
 ----------------------------------------------- */
 
 .widget {
-  margin: .75em 0;
+  margin: 0.75em 0;
 }
 
 /* Make sure select elements fit in widgets */
@@ -581,7 +581,7 @@ article.comment {
   padding: 1em;
 }
 #credits {
-  font-size: .875em;
+  font-size: 0.875em;
 }
 
 
@@ -607,17 +607,17 @@ article.comment {
   background-image: none;
   border: 1px solid #ccc;
   border-radius: 4px;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-  -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-          transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+          transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
 .contact-form input:focus,
 .contact-form textarea:focus {
   border-color: #66afe9;
   outline: 0;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
-          box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+          box-shadow: inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px rgba(102, 175, 233, 0.6);
 }
 .contact-form input::-moz-placeholder,
 .contact-form textarea::-moz-placeholder {
@@ -682,8 +682,8 @@ article.comment {
 .contact-submit input.active {
   background-image: none;
   outline: 0;
-  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
-          box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+          box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
 .contact-submit input:hover,
 .contact-submit input:focus,
