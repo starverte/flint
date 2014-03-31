@@ -8,7 +8,7 @@
   "element-case": "lower",
   "eof-newline": true,
   "leading-zero": false,
-  "remove-empty-rulesets": true,
+  "remove-empty-rulesets": false,
   "rule-indent": 2,
   "stick-brace": true,
   "strip-spaces": true,
