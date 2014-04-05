@@ -33,6 +33,8 @@ function flint_after_setup_theme() {
   add_theme_support( 'automatic-feed-links' );
 
   add_theme_support( 'post-thumbnails' );
+	
+	add_theme_support( 'html5' );
 
   register_nav_menus( array(
     'primary' => __( 'Primary Menu', 'flint' ),
