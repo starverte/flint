@@ -3,7 +3,7 @@
  * Flint functions and definitions
  *
  * @package Flint
- * @version 1.1.1
+ * @version 1.2.0
  */
 
 /**
@@ -12,16 +12,11 @@
 if ( ! isset( $content_width ) )
   $content_width = 750; /* pixels */
 
-/*
- * Load Jetpack compatibility file.
- */
-require( get_template_directory() . '/inc/jetpack.php' );
-
-if ( ! function_exists( 'flint_setup' ) ) :
+if ( ! function_exists( 'flint_after_setup_theme' ) ) :
 /**
  * Sets up theme defaults and registers support for various WordPress features.
  */
-function flint_setup() {
+function flint_after_setup_theme() {
 
   require( get_template_directory() . '/inc/template-tags.php' );
   
@@ -46,14 +41,10 @@ function flint_setup() {
   add_theme_support( 'post-formats', array( 'aside', 'chat', 'gallery', 'link', 'status' ) );
 
   add_editor_style( 'editor-style.css' );
-}
-endif; // flint_setup
-add_action( 'after_setup_theme', 'flint_setup' );
-
-/**
- * Implement the Custom Background feature
- */
-function flint_register_custom_background() {
+  
+  /**
+   * Implement the Custom Background feature
+   */
   $args = array(
     'default-color' => 'eeeeee',
     'default-image' => '',
@@ -64,8 +55,40 @@ function flint_register_custom_background() {
   if ( function_exists( 'wp_get_theme' ) ) {
     add_theme_support( 'custom-background', $args );
   }
+  
+  /**
+   * Implement Custom Header feature
+   */
+  $default_image = get_template_directory_uri();
+  $header = array(
+    'default-image'          => $default_image.'/img/default-header.png',
+    'default-text-color'     => 'ffffff',
+    'width'                  => 300,
+    'height'                 => 300,
+    'flex-height'            => true,
+    'flex-width'             => true,
+    'wp-head-callback'       => 'flint_header_style',
+    'admin-head-callback'    => 'flint_admin_header_style',
+    'admin-preview-callback' => 'flint_admin_header_image',
+  );
+
+  $header = apply_filters( 'flint_custom_header_args', $header );
+
+  if ( function_exists( 'wp_get_theme' ) ) {
+    add_theme_support( 'custom-header', $header );
+  }
+  
+  /** 
+   * Add theme support for Infinite Scroll.
+   * See: http://jetpack.me/support/infinite-scroll/
+   */
+  add_theme_support( 'infinite-scroll', array(
+    'container' => 'content',
+    'footer'    => 'page',
+  ) );
 }
-add_action( 'after_setup_theme', 'flint_register_custom_background' );
+endif; // flint_after_setup_theme
+add_action( 'after_setup_theme', 'flint_after_setup_theme' );
 
 /**
  * Implement the Custom Header feature
@@ -94,9 +117,11 @@ add_action( 'widgets_init', 'flint_widgets_init' );
 /**
  * Enqueue scripts and styles
  */
-function flint_scripts() {
+function flint_enqueue_scripts() {
   
-  // Load Twitter Bootstrap
+  /**
+   * Load Twitter Bootstrap
+   */
   wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', array('jquery'), '3.0.0', true );
   wp_enqueue_style( 'bootstrap-css', get_template_directory_uri() . '/css/bootstrap.min.css', array() , '3.0.0' );
 
@@ -110,7 +135,9 @@ function flint_scripts() {
     wp_enqueue_script( 'flint-keyboard-image-navigation', get_template_directory_uri() . '/js/keyboard-image-navigation.js', array( 'jquery' ), '4c99b2a' );
   }
   
-  //Load Google Fonts
+  /* 
+   * Load Google Fonts
+   */
   $fonts = get_option( 'flint_fonts' );
   
   $body_font    = !empty($fonts['body_font'])    ? $fonts['body_font']    : 'Open Sans';
@@ -159,10 +186,12 @@ function flint_scripts() {
     }
   }
   
-  //Load theme stylesheet
+  /**
+   * Load theme stylesheet
+   */
   wp_enqueue_style( 'flint-style', get_stylesheet_uri(), array(), flint_theme_version() );
 }
-add_action( 'wp_enqueue_scripts', 'flint_scripts' );
+add_action( 'wp_enqueue_scripts', 'flint_enqueue_scripts' );
 
 /**
  * Extended Walker class for use with the
@@ -189,7 +218,10 @@ class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
 
     $classes = empty( $item->classes ) ? array() : (array) $item->classes;
     
-    // managing divider: add divider class to an element to get a divider before it.
+    /**
+     * Managing Divider
+     * Add divider class to an element to get a divider before it.
+     */
     $divider_class_position = array_search('divider', $classes);
     if($divider_class_position !== false){
       $output .= "<li class=\"divider\"></li>\n";
@@ -230,13 +262,14 @@ class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
   
 
   function display_element( $element, &$children_elements, $max_depth, $depth=0, $args, &$output ) {
-    //v($element);
     if ( !$element )
       return;
 
     $id_field = $this->db_fields['id'];
 
-    //display this element
+    /**
+     * Display element
+     */
     if ( is_array( $args[0] ) )
       $args[0]['has_children'] = ! empty( $children_elements[$element->$id_field] );
     else if ( is_object( $args[0] ) )
@@ -246,14 +279,18 @@ class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
 
     $id = $element->$id_field;
 
-    // descend only when the depth is right and there are childrens for this element
+    /**
+     * Title
+     * descend only when the depth is right and there are childrens for this element
+     */
     if ( ($max_depth == 0 || $max_depth > $depth+1 ) && isset( $children_elements[$id]) ) {
 
       foreach( $children_elements[ $id ] as $child ){
-
+        /**
+         * Start the child delimiter
+         */
         if ( !isset($newlevel) ) {
           $newlevel = true;
-          //start the child delimiter
           $cb_args = array_merge( array(&$output, $depth), $args);
           call_user_func_array(array(&$this, 'start_lvl'), $cb_args);
         }
@@ -261,14 +298,17 @@ class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
       }
       unset( $children_elements[ $id ] );
     }
-
+    /**
+     * End the child delimiter
+     */
     if ( isset($newlevel) && $newlevel ){
-      //end the child delimiter
       $cb_args = array_merge( array(&$output, $depth), $args);
       call_user_func_array(array(&$this, 'end_lvl'), $cb_args);
     }
 
-    //end this element
+    /**
+     * End this element
+     */
     $cb_args = array_merge( array(&$output, $element, $depth), $args);
     call_user_func_array(array(&$this, 'end_el'), $cb_args);
 
