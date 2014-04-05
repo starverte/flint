@@ -33,8 +33,8 @@ function flint_after_setup_theme() {
   add_theme_support( 'automatic-feed-links' );
 
   add_theme_support( 'post-thumbnails' );
-	
-	add_theme_support( 'html5' );
+  
+  add_theme_support( 'html5' );
 
   register_nav_menus( array(
     'primary' => __( 'Primary Menu', 'flint' ),
@@ -101,7 +101,7 @@ require( get_template_directory() . '/inc/custom-header.php' );
  * Register widgetized areas and update sidebar with default widgets
  */
 function flint_widgets_init() {
-  $widget_areas = flint_widget_areas();
+  $widget_areas = array('Header','Footer','Left','Right');
   
   foreach ($widget_areas as $widget_area) {
     register_sidebar( array(
