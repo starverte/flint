@@ -299,6 +299,12 @@ body.minimal.minimal-breadcrumbs #top-pad {
   display:block;
 }
 .sticky {
+  padding: 20px;
+  padding-top:0;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 2px 2px 2px #ddd;
 }
 .byline {
   display: none;
