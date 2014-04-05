@@ -5,7 +5,7 @@
  * Eventually, some of the functionality here could be replaced by core features
  *
  * @package Flint
- * @since 1.0.0
+ * @since 1.2.0
  */
 
 /**
@@ -18,22 +18,18 @@ function flint_page_menu_args( $args ) {
 add_filter( 'wp_page_menu_args', 'flint_page_menu_args' );
 
 /**
- * Adds custom classes to the array of body classes.
+ * Adds a class of group-blog to blogs with more than 1 published author
  */
-function flint_body_classes( $classes ) {
-  // Adds a class of group-blog to blogs with more than 1 published author
-  if ( is_multi_author() ) {
-    $classes[] = 'group-blog';
-  }
-
+function flint_body_class_multi_author( $classes ) {
+  if ( is_multi_author() ) { $classes[] = 'group-blog'; }
   return $classes;
 }
-add_filter( 'body_class', 'flint_body_classes' );
+add_filter( 'body_class', 'flint_body_class_multi_author' );
 
 /**
  * Filter in a link to a content ID attribute for the next/previous image links on image attachment pages
  */
-function flint_enhanced_image_navigation( $url, $id ) {
+function flint_attachment_link( $url, $id ) {
   if ( ! is_attachment() && ! wp_attachment_is_image( $id ) )
     return $url;
 
@@ -43,7 +39,7 @@ function flint_enhanced_image_navigation( $url, $id ) {
 
   return $url;
 }
-add_filter( 'attachment_link', 'flint_enhanced_image_navigation', 10, 2 );
+add_filter( 'attachment_link', 'flint_attachment_link', 10, 2 );
 
 /**
  * Filters wp_title to print a neat <title> tag based on what is being viewed.
@@ -54,17 +50,14 @@ function flint_wp_title( $title, $sep ) {
   if ( is_feed() )
     return $title;
 
-  // Add the blog name
-  $title .= get_bloginfo( 'name' );
+  $title .= get_bloginfo( 'name' );// Add the blog name
 
-  // Add the blog description for the home/front page.
   $site_description = get_bloginfo( 'description', 'display' );
   if ( $site_description && ( is_home() || is_front_page() ) )
-    $title .= " $sep $site_description";
+    $title .= " $sep $site_description";// Add the blog description for the home/front page.
 
-  // Add a page number if necessary:
   if ( $paged >= 2 || $page >= 2 )
-    $title .= " $sep " . sprintf( __( 'Page %s', 'flint' ), max( $paged, $page ) );
+    $title .= " $sep " . sprintf( __( 'Page %s', 'flint' ), max( $paged, $page ) );// Add a page number if necessary
 
   return $title;
 }

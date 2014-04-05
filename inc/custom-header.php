@@ -3,32 +3,8 @@
  * Creates Custom Header page
  *
  * @package Flint
- * @since 1.1.0
+ * @since 1.2.0
  */
-
-if ( ! function_exists( 'flint_custom_header_setup' ) ) :
-function flint_custom_header_setup() {
-  $default_image = get_template_directory_uri();
-  $args = array(
-    'default-image'          => $default_image.'/img/default-header.png',
-    'default-text-color'     => 'ffffff',
-    'width'                  => 300,
-    'height'                 => 300,
-    'flex-height'            => true,
-    'flex-width'             => true,
-    'wp-head-callback'       => 'flint_header_style',
-    'admin-head-callback'    => 'flint_admin_header_style',
-    'admin-preview-callback' => 'flint_admin_header_image',
-  );
-
-  $args = apply_filters( 'flint_custom_header_args', $args );
-
-  if ( function_exists( 'wp_get_theme' ) ) {
-    add_theme_support( 'custom-header', $args );
-  }
-}
-endif;
-add_action( 'after_setup_theme', 'flint_custom_header_setup' );
 
 if ( ! function_exists( 'flint_header_style' ) ) :
 /**

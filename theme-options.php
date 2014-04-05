@@ -4,7 +4,7 @@
  * Source: http://digitalraindrops.net/2011/02/tabbed-options-page/
  *
  * @package Flint
- * @since 1.1.1
+ * @since 1.2.0
  */
 
 $flint_general = array();
@@ -15,8 +15,8 @@ $flint_templates = array();
 
 if ( is_admin() ) {
 
-  add_action( 'admin_menu', 'flint_section_options' );
-  function flint_section_options() {
+  add_action( 'admin_menu', 'flint_admin_menu' );
+  function flint_admin_menu() {
     add_theme_page( 'Flint Options', 'Flint Options', 'edit_theme_options', 'theme_options', 'flint_options_page' );
   }
   function flint_options_page() {
@@ -51,8 +51,8 @@ if ( is_admin() ) {
     echo '</h2>'; 
   }
   
-  add_action( 'admin_init', 'flint_register_settings' );
-  function flint_register_settings() {
+  add_action( 'admin_init', 'flint_admin_init' );
+  function flint_admin_init() {
     register_setting( 'flint_section_general'  , 'flint_general'  , 'flint_validate_general'  );
     register_setting( 'flint_section_layout'   , 'flint_layout'   , 'flint_validate_layout'   );
     register_setting( 'flint_section_templates', 'flint_templates', 'flint_validate_templates');

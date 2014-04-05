@@ -3,7 +3,7 @@
  * Custom template tags for this theme.
  *
  * @package Flint
- * @since 1.1.1
+ * @since 1.2.0
  */
 
 if ( ! function_exists( 'flint_content_nav' ) ) :
@@ -194,23 +194,19 @@ endif;
  */
 function flint_categorized_blog() {
   if ( false === ( $all_the_cool_cats = get_transient( 'all_the_cool_cats' ) ) ) {
-    // Create an array of all the categories that are attached to posts
-    $all_the_cool_cats = get_categories( array(
-      'hide_empty' => 1,
-    ) );
+    
+    $all_the_cool_cats = get_categories( array( 'hide_empty' => 1, ) );// Create an array of all the categories that are attached to posts
 
-    // Count the number of categories that are attached to the posts
-    $all_the_cool_cats = count( $all_the_cool_cats );
+    
+    $all_the_cool_cats = count( $all_the_cool_cats );// Count the number of categories that are attached to the posts
 
     set_transient( 'all_the_cool_cats', $all_the_cool_cats );
   }
 
   if ( '1' != $all_the_cool_cats ) {
-    // This blog has more than 1 category so flint_categorized_blog should return true
-    return true;
+    return true;// This blog has more than 1 category
   } else {
-    // This blog has only 1 category so flint_categorized_blog should return false
-    return false;
+    return false;// This blog has only 1 category
   }
 }
 
@@ -218,7 +214,6 @@ function flint_categorized_blog() {
  * Flush out the transients used in flint_categorized_blog
  */
 function flint_category_transient_flusher() {
-  // Like, beat it. Dig?
   delete_transient( 'all_the_cool_cats' );
 }
 add_action( 'edit_category', 'flint_category_transient_flusher' );
