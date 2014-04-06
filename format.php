@@ -1,7 +1,11 @@
 <?php
 /**
+ * Post Template
+ *
+ * The template for displaying post content for default post format.
+ *
  * @package Flint
- * @since 1.1.1
+ * @since 1.2.0
  */
 ?>
 

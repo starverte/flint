@@ -3,7 +3,7 @@
  * Template Name: Minimal
  *
  * @package Flint
- * @since 1.1.0
+ * @since 1.2.0
  */
 $options = get_option( 'flint_templates' );
 get_header('head');
