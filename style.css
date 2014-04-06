@@ -299,8 +299,11 @@ body.minimal.minimal-breadcrumbs #top-pad {
   display:block;
 }
 .sticky {
+  max-width: 95%;
   padding: 20px;
   padding-top:0;
+  margin-right: auto;
+  margin-left: auto;
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 4px;
