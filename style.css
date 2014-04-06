@@ -3,10 +3,11 @@ Theme Name: Flint
 Theme URI: http://sparks.starverte.com/flint
 Author: Star Verte LLC
 Description: A responsive, minimalist theme built on Twitter's Bootstrap 3 and based on Automattic's _s theme. Make it your own with a custom background, custom header, custom menus, custom colors and more.
-Version: 1.1.3
+Version: 1.2.0
 License: GPLv3
 License URI: LICENSE.md
 Tags: custom-background, custom-header, custom-menu, flexible-header, one-column, post-formats, threaded-comments
+Text Domain: flint
 
 A spark sets a fire ablaze, and similarly the Sparks Framework is made up of 'sparks' that help initiate the creative process of website development within WordPress. Often times to start a fire, a person uses flint and steel. With the Sparks Framework it is the same way. 'Flint' (the core theme) and 'Steel' (the core plugin) makeup the foundation of the framework. Then, additional child themes and plugins extend the functionality and user experience.
 
@@ -40,33 +41,22 @@ html,
 body {
   height: 100%;
 }
-body {
-  background-color: #eee;
-}
-#top-pad {
-  padding-top: 50px;
-}
-.404 #top-pad {
-  padding-top: 0;
-}
-body.clear.clear-breadcrumbs #top-pad,
-body.minimal.minimal-breadcrumbs #top-pad {
-  padding-top: 0;
-  padding-bottom: 20px;
-}
 article {
-    margin-bottom: 3em;
+  margin-bottom: 3em;
 }
 article.format-aside,
 article.format-status,
 article.format-link {
   margin-top: 3em;
 }
+b, strong {
+  font-weight: 600;
+}
 blockquote cite {
   float: right;
-  clear: left;
   padding-top: 0.75em;
   padding-bottom: 0.75em;
+  clear: left;
   font-size: 0.75em;
 }
 h1 {
@@ -82,10 +72,10 @@ h4 {
   font-size: 16px;
 }
 img, video {
-  padding-top: 5px;
-  padding-bottom: 5px;
   max-width: 100%;
   height: auto;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 hr {
   border-top: 1px solid #ccc;
@@ -94,10 +84,10 @@ hr {
   line-height: 2;
 }
 #page {
-  min-height: 100%;
   height: auto;
-  margin: 0 auto -48px;
+  min-height: 100%;
   padding: 0 0 48px;
+  margin: 0 auto -48px;
 }
 
 /* Alignment */
@@ -112,10 +102,10 @@ hr {
   margin-left: 1.5em;
 }
 .aligncenter {
-  clear: both;
   display: block;
-  margin-left: auto;
   margin-right: auto;
+  margin-left: auto;
+  clear: both;
 }
 .alignnone {
   clear: both;
@@ -123,28 +113,28 @@ hr {
 
 /* Text meant only for screen readers */
 .screen-reader-text {
-  clip: rect(1px, 1px, 1px, 1px);
   position: absolute !important;
+  clip: rect(1px, 1px, 1px, 1px);
 }
 .screen-reader-text:hover,
 .screen-reader-text:active,
 .screen-reader-text:focus {
+  top: 5px;
+  left: 5px;
+  z-index: 100000; /* Above WP toolbar */
+  display: block;
+  width: auto;
+  height: auto;
+  padding: 15px 23px 14px;
+  clip: auto !important;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: normal;
+  color: #21759b;
+  text-decoration: none;
   background-color: #f1f1f1;
   border-radius: 3px;
   box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
-  clip: auto !important;
-  color: #21759b;
-  display: block;
-  font-size: 14px;
-  font-weight: bold;
-  height: auto;
-  left: 5px;
-  line-height: normal;
-  padding: 15px 23px 14px;
-  text-decoration: none;
-  top: 5px;
-  width: auto;
-  z-index: 100000; /* Above WP toolbar */
 }
 
 /* Tables */
@@ -174,7 +164,7 @@ table tfoot > tr > td {
   padding: 8px;
   line-height: 1.428571429;
   vertical-align: top;
-  border-top: 1px solid #dddddd;
+  border-top: 1px solid #ddd;
 }
 table thead > tr > th {
   vertical-align: bottom;
@@ -188,10 +178,10 @@ table thead:first-child tr:first-child td {
   border-top: 0;
 }
 table tbody + tbody {
-  border-top: 2px solid #dddddd;
+  border-top: 2px solid #ddd;
 }
 table table {
-  background-color: #ffffff;
+  background-color: #fff;
 }
 table > thead > tr > td.active,
 table > tbody > tr > td.active,
@@ -257,6 +247,17 @@ table > tfoot > tr.warning > th {
 /* =Header
 ----------------------------------------------- */
 
+#top-pad {
+  padding-top: 50px;
+}
+0.404 #top-pad {
+  padding-top: 0;
+}
+body.clear.clear-breadcrumbs #top-pad,
+body.minimal.minimal-breadcrumbs #top-pad {
+  padding-top: 0;
+  padding-bottom: 20px;
+}
 .site-branding h1 a {
   font-size: 56px;
 }
@@ -277,15 +278,37 @@ table > tfoot > tr.warning > th {
 }
 .entry-title {
   font-size: 32px;
-  margin-top: 0;
   -ms-word-wrap: break-word;
       word-wrap: break-word;
 }
+.entry-thumb img {
+  margin-top: 20px;
+}
+.single .entry-title,
+.page .entry-title {
+  margin-top: 0;
+}
 .btn-edit {
-  margin-top: -3.5em;
   float: right;
+  margin-top: -3.5em;
+}
+.home .entry-title,
+.home .btn-edit {
+  display: none;
+}
+.home.blog .entry-title {
+  display:block;
 }
 .sticky {
+  max-width: 95%;
+  padding: 20px;
+  padding-top:0;
+  margin-right: auto;
+  margin-left: auto;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 2px 2px 2px #ddd;
 }
 .byline {
   display: none;
@@ -304,34 +327,38 @@ a.more-link {
   color: #fff;
 }
 .page-links {
-  clear: both;
   margin: 0 0 1.5em;
+  clear: both;
 }
 #primary {
   margin-top: 2em;
+  margin-bottom: 2em;
 }
 .archive #primary {
   margin-top: 0;
+  margin-bottom: 0;
 }
 #primary.full-width {
-  clear: both;
   float: none;
   width: 100%;
+  clear: both;
 }
 .page-header {
-  margin: 20px 0;
+  margin: 0 20px;
 }
 .page-header h1 {
   margin: 0;
 }
-.pager a { color: #333!important; }
+.pager a {
+  color: #333!important;
+}
 .pw {
   width: 200px;
   margin-right: 5px;
 }
 .featured-horizontal img {
-  max-height: 200px;
   width: auto;
+  max-height: 200px;
 }
 
 /* Asides  */
@@ -349,27 +376,30 @@ a.more-link {
   padding: 1%;
   padding: 4px;
   line-height: 1.428571429;
-  background-color: #ffffff;
-  border: 1px solid #dddddd;
+  background-color: #fff;
+  border: 1px solid #ddd;
   border-radius: 4px;
   -webkit-transition: all 0.2s ease-in-out;
           transition: all 0.2s ease-in-out;
 }
+.carousel img {
+  border: none;
+}
 .gallery {
-  clear: both;
-  overflow: hidden;
   margin: 0 auto;
+  overflow: hidden;
+  clear: both;
 }
 .gallery .gallery-item {
-  overflow: hidden;
   float: left;
   margin: 10px 0 0;
+  overflow: hidden;
   text-align: center;
   list-style: none;
 }
 .gallery-caption {
   padding: 9px;
-  color: #333333;
+  color: #333;
 }
 .gallery-columns-0 .gallery-item {
   width: 100%;
@@ -412,25 +442,25 @@ a.more-link {
 }
 .entry-content img.wp-smiley,
 .comment-content img.wp-smiley {
-  border: none;
-  margin-bottom: 0;
-  margin-top: 0;
   padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  border: none;
 }
 .wp-caption {
-  border: 1px solid #dddddd;
+  max-width: 100%;
+  margin-bottom: 1.5em;
+  border: 1px solid #ddd;
   border-radius: 4px;
   -webkit-transition: all 0.2s ease-in-out;
           transition: all 0.2s ease-in-out;
-  margin-bottom: 1.5em;
-  max-width: 100%;
 }
 .wp-caption img[class*="wp-image-"] {
+  display: block;
+  max-width: 98%;
+  margin: 1.2% auto 0;
   border: 0;
   border-radius: 6px;
-  display: block;
-  margin: 1.2% auto 0;
-  max-width: 98%;
 }
 .wp-caption-text {
   text-align: center;
@@ -446,8 +476,8 @@ a.more-link {
 .site-content .gallery a img {
   padding: 4px;
   line-height: 1.428571429;
-  background-color: #ffffff;
-  border: 1px solid #dddddd;
+  background-color: #fff;
+  border: 1px solid #ddd;
   border-radius: 4px;
   -webkit-transition: all 0.2s ease-in-out;
           transition: all 0.2s ease-in-out;
@@ -481,8 +511,8 @@ object {
 }
 [class*="navigation"] .nav-next {
   float: right;
-  text-align: right;
   width: 50%;
+  text-align: right;
 }
 .previous a,
 .next a {
@@ -500,9 +530,9 @@ object {
 ----------------------------------------------- */
 
 #comments {
-  border-top: 1px dotted;
   margin-top: 1em;
   margin-bottom: 1em;
+  border-top: 1px dotted;
 }
 .comment-content a {
   -ms-word-wrap: break-word;
@@ -513,8 +543,8 @@ object {
   list-style: none;
 }
 article.comment {
-  margin-bottom: 0.5em;
   padding: 1em;
+  margin-bottom: 0.5em;
 }
 
 
@@ -537,16 +567,16 @@ article.comment {
 
 /* Link widget (Legacy) */
 .link-widget {
-  background: #fafafa;
   color: #404040;
+  background: #fafafa;
 }
 .link-widget-link:active,
 .link-widget-link:hover {
   text-decoration: none;
 }
 .link-widget-link:hover .link-widget {
-  background: #fdfdfd;
   color: #404040;
+  background: #fdfdfd;
 }
 .link-widget .widget-title {
   margin: 0;
@@ -565,6 +595,116 @@ article.comment {
 }
 #credits {
   font-size: 0.875em;
+}
+
+
+/* =Jetpack Contact Form
+----------------------------------------------- */
+
+/* @see Twitter Bootstrap .form-group */
+.contact-form div {
+  margin-bottom: 15px;
+}
+
+/* @see Twitter Bootstrap .form-control, etc */
+.contact-form input,
+.contact-form textarea {
+  display: block;
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+          transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+          box-shadow: inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+}
+.contact-form input::-moz-placeholder,
+.contact-form textarea::-moz-placeholder {
+  color: #999;
+  opacity: 1;
+}
+.contact-form input:-ms-input-placeholder,
+.contact-form textarea:-ms-input-placeholder {
+  color: #999;
+}
+.contact-form input::-webkit-input-placeholder,
+.contact-form textarea::-webkit-input-placeholder {
+  color: #999;
+}
+.contact-form input[disabled],
+.contact-form input[readonly],
+.contact-form fieldset[disabled] input {
+  cursor: not-allowed;
+  background-color: #eee;
+  opacity: 1;
+}
+.contact-form textarea {
+  height: auto;
+}
+
+/* @see Twitter Bootstrap .btn, .btn-default, etc. */
+.contact-submit input {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  color: #333;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid transparent;
+  border-color: #ccc;
+  border-radius: 4px;
+}
+.contact-submit input:focus,
+.contact-submit input:active:focus,
+.contact-submit input.active:focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+.contact-submit input:hover,
+.contact-submit input:focus {
+  color: #333;
+  text-decoration: none;
+}
+.contact-submit input:active,
+.contact-submit input.active {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+          box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+.contact-submit input:hover,
+.contact-submit input:focus,
+.contact-submit input:active,
+.contact-submit input.active {
+  color: #333;
+  background-color: #ebebeb;
+  border-color: #adadad;
 }
 
 

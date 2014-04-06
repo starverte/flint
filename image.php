@@ -3,7 +3,7 @@
  * The template for displaying image attachments.
  *
  * @package Flint
- * @since 1.0.0
+ * @since 1.2.0
  */
 
 get_header();
@@ -63,17 +63,17 @@ get_header();
                     break;
                 }
                 $k++;
-                // If there is more than 1 attachment in a gallery
+                
+                /**
+                 * If there is more than 1 attachment in a gallery
+                 */
                 if ( count( $attachments ) > 1 ) {
                   if ( isset( $attachments[ $k ] ) )
-                    // get the URL of the next image attachment
-                    $next_attachment_url = get_attachment_link( $attachments[ $k ]->ID );
+                    $next_attachment_url = get_attachment_link( $attachments[ $k ]->ID );// get the URL of the next image attachment
                   else
-                    // or get the URL of the first image attachment
-                    $next_attachment_url = get_attachment_link( $attachments[ 0 ]->ID );
+                    $next_attachment_url = get_attachment_link( $attachments[ 0 ]->ID );// or get the URL of the first image attachment
                 } else {
-                  // or, if there's only 1 image, get the URL of the image
-                  $next_attachment_url = wp_get_attachment_url();
+                  $next_attachment_url = wp_get_attachment_url();// or, if there's only 1 image, get the URL of the image
                 }
               ?>
 
@@ -115,7 +115,9 @@ get_header();
       </article><!-- #post-<?php the_ID(); ?> -->
 
       <?php
-        // If comments are open or we have at least one comment, load up the comment template
+        /**
+         * If comments are open or we have at least one comment, load up the comment template
+         */
         if ( comments_open() || '0' != get_comments_number() )
           comments_template();
       ?>

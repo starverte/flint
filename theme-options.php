@@ -4,7 +4,7 @@
  * Source: http://digitalraindrops.net/2011/02/tabbed-options-page/
  *
  * @package Flint
- * @since 1.1.1
+ * @since 1.2.0
  */
 
 $flint_general = array();
@@ -15,8 +15,8 @@ $flint_templates = array();
 
 if ( is_admin() ) {
 
-  add_action( 'admin_menu', 'flint_section_options' );
-  function flint_section_options() {
+  add_action( 'admin_menu', 'flint_admin_menu' );
+  function flint_admin_menu() {
     add_theme_page( 'Flint Options', 'Flint Options', 'edit_theme_options', 'theme_options', 'flint_options_page' );
   }
   function flint_options_page() {
@@ -51,8 +51,8 @@ if ( is_admin() ) {
     echo '</h2>'; 
   }
   
-  add_action( 'admin_init', 'flint_register_settings' );
-  function flint_register_settings() {
+  add_action( 'admin_init', 'flint_admin_init' );
+  function flint_admin_init() {
     register_setting( 'flint_section_general'  , 'flint_general'  , 'flint_validate_general'  );
     register_setting( 'flint_section_layout'   , 'flint_layout'   , 'flint_validate_layout'   );
     register_setting( 'flint_section_templates', 'flint_templates', 'flint_validate_templates');
@@ -63,7 +63,7 @@ if ( is_admin() ) {
     
     if ( ! isset( $_REQUEST['updated'] ) ) { $_REQUEST['updated'] = false; }
     if ( false !== $_REQUEST['updated'] ) { ?>
-      <div class="updated fade"><p><strong><?php _e( 'Options saved' ); ?></strong></p></div><?php
+      <div class="updated fade"><p><strong><?php _e( 'Options saved', 'flint' ); ?></strong></p></div><?php
     } ?>
     
     <form method="post" action="options.php">
@@ -85,36 +85,36 @@ if ( is_admin() ) {
       <table class="form-table">
       
         <tr valign="top"><th scope="row"><?php _e( 'Company Name', 'flint' ); ?></th>
-          <td><input id="flint_general[company]" class="regular-text" type="text" name="flint_general[company]" value="<?php esc_attr_e( $company ); ?>" /></td>
+          <td><input id="flint_general[company]" class="regular-text" type="text" name="flint_general[company]" value="<?php esc_attr( $company ); ?>" /></td>
         </tr>
         
         <tr valign="top"><th scope="row"><?php _e( 'Street Address', 'flint' ); ?></th>
-          <td><input id="flint_general[address]" class="regular-text" type="text" name="flint_general[address]" value="<?php esc_attr_e( $address ); ?>" /></td>
+          <td><input id="flint_general[address]" class="regular-text" type="text" name="flint_general[address]" value="<?php esc_attr( $address ); ?>" /></td>
         </tr>
         
         <tr valign="top"><th scope="row"><?php _e( 'City, State', 'flint' ); ?></th>
-          <td><input id="flint_general[locality]" class="regular-text" type="text" name="flint_general[locality]" value="<?php esc_attr_e( $locality ); ?>" /></td>
+          <td><input id="flint_general[locality]" class="regular-text" type="text" name="flint_general[locality]" value="<?php esc_attr( $locality ); ?>" /></td>
         </tr>
         
         <tr valign="top"><th scope="row"><?php _e( 'Zip Code', 'flint' ); ?></th>
-          <td><input id="flint_general[postal_code]" class="regular-text" type="text" name="flint_general[postal_code]" value="<?php esc_attr_e( $postal_code ); ?>" /></td>
+          <td><input id="flint_general[postal_code]" class="regular-text" type="text" name="flint_general[postal_code]" value="<?php esc_attr( $postal_code ); ?>" /></td>
         </tr>
         
         <tr valign="top"><th scope="row"><?php _e( 'Phone Number', 'flint' ); ?></th>
-          <td><input id="flint_general[tel]" class="regular-text" type="text" name="flint_general[tel]" value="<?php esc_attr_e( $tel ); ?>" /></td>
+          <td><input id="flint_general[tel]" class="regular-text" type="text" name="flint_general[tel]" value="<?php esc_attr( $tel ); ?>" /></td>
         </tr>
         
         <tr valign="top"><th scope="row"><?php _e( 'Fax Number', 'flint' ); ?></th>
-          <td><input id="flint_general[fax]" class="regular-text" type="text" name="flint_general[fax]" value="<?php esc_attr_e( $fax ); ?>" /></td>
+          <td><input id="flint_general[fax]" class="regular-text" type="text" name="flint_general[fax]" value="<?php esc_attr( $fax ); ?>" /></td>
         </tr>
         
         <tr valign="top"><th scope="row"><?php _e( 'Email Address', 'flint' ); ?></th>
-          <td><input id="flint_general[email]" class="regular-text" type="text" name="flint_general[email]" value="<?php esc_attr_e( $email ); ?>" /></td>
+          <td><input id="flint_general[email]" class="regular-text" type="text" name="flint_general[email]" value="<?php esc_attr( $email ); ?>" /></td>
         </tr>
         
        </table>
         
-      <p>Customize the footer using template tags. For example, type in <code>ABC Company</code> in as "Company Name" and then in "Footer Text" type <code><?php _e( '&<span></span>copy;'); ?> {year} {company}</code> and the Footer will output as <code>&copy; <?php echo date('Y'); ?> ABC Company</code>.</p>
+      <p>Customize the footer using template tags. For example, type in <code>ABC Company</code> in as "Company Name" and then in "Footer Text" type <code>&amp;copy; {year} {company}</code> and the Footer will output as <code>&copy; <?php echo date('Y'); ?> ABC Company</code>.</p>
       <p>Available tags: <code>{site title}</code>, <code>{site description}</code>, <code>{year}</code>, <code>{company}</code>, <code>{address}</code>, <code>{phone}</code>, <code>{email}</code>, and <code>{fax}</code></p>
       
       <table class="form-table">
@@ -137,7 +137,7 @@ if ( is_admin() ) {
     
     if ( ! isset( $_REQUEST['updated'] ) ) { $_REQUEST['updated'] = false; }
     if ( false !== $_REQUEST['updated'] ) { ?>
-      <div class="updated fade"><p><strong><?php _e( 'Options saved' ); ?></strong></p></div><?php
+      <div class="updated fade"><p><strong><?php _e( 'Options saved', 'flint' ); ?></strong></p></div><?php
     } ?>
     
     <form method="post" action="options.php">
@@ -189,7 +189,7 @@ if ( is_admin() ) {
     
     if ( ! isset( $_REQUEST['updated'] ) ) { $_REQUEST['updated'] = false; }
     if ( false !== $_REQUEST['updated'] ) { ?>
-      <div class="updated fade"><p><strong><?php _e( 'Options saved' ); ?></strong></p></div><?php
+      <div class="updated fade"><p><strong><?php _e( 'Options saved', 'flint' ); ?></strong></p></div><?php
     } ?>
     
     <form method="post" action="options.php">
@@ -283,7 +283,10 @@ if ( is_admin() ) {
           <td>
             <select name="flint_templates[minimal_widget_area]">
               <option value="none"   <?php selected( $minimal_widget_area, 'none'   ); ?>>None</option>
+              <option value="header" <?php selected( $minimal_widget_area, 'header' ); ?>>Header</option>
               <option value="footer" <?php selected( $minimal_widget_area, 'footer' ); ?>>Footer</option>
+              <option value="left" <?php selected( $minimal_widget_area, 'left'   ); ?>>Left</option>
+              <option value="right" <?php selected( $minimal_widget_area, 'right'  ); ?>>Right</option>
             </select>
           </td>
         </tr>

@@ -3,7 +3,7 @@
  * Flint Theme Customizer
  *
  * @package Flint
- * @since 1.1.0
+ * @since 1.2.0
  */
 
 function flint_customize_register( $wp_customize ) {
@@ -13,6 +13,7 @@ function flint_customize_register( $wp_customize ) {
     'Roboto'     => 'Roboto',
     'Droid Sans' => 'Droid Sans',
     'Lato'       => 'Lato',
+    'Strait'     => 'Strait',
   );
   
   $wp_customize->add_setting('flint_colors[link]', array(
@@ -65,7 +66,7 @@ function flint_customize_register( $wp_customize ) {
     'priority'   => 30,
   ));
   
-  $wp_customize->add_setting('flint_fonts[heading-font]', array(
+  $wp_customize->add_setting('flint_fonts[heading_font]', array(
     'default'           => 'Open Sans',
     'capability'        => 'edit_theme_options',
     'type'              => 'option',
@@ -75,7 +76,7 @@ function flint_customize_register( $wp_customize ) {
   $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'heading_font', array(
     'label'    => __('Headings', 'flint'),
     'section'  => 'flint_fonts',
-    'settings' => 'flint_fonts[heading-font]',
+    'settings' => 'flint_fonts[heading_font]',
     'priority' => '10',
     'type' => 'select',
     'choices' => $fonts,
@@ -103,13 +104,14 @@ function flint_customize_register( $wp_customize ) {
 }
 add_action( 'customize_register', 'flint_customize_register' );
 
-function flint_customize_preview_js() {
-  wp_enqueue_script( 'flint_customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview' ), '1.1.0', true );
+function flint_customize_preview_init() {
+  wp_enqueue_script( 'flint_customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview' ), flint_theme_version(), true );
   
   wp_enqueue_style( 'open-sans' , 'http://fonts.googleapis.com/css?family=Open+Sans:300,600,300,700,300italic,600italic,700italic', array(), '' );
   wp_enqueue_style( 'oswald'    , 'http://fonts.googleapis.com/css?family=Oswald:300,400,700'                                     , array(), '' );
   wp_enqueue_style( 'roboto'    , 'http://fonts.googleapis.com/css?family=Roboto:300,300italic,400,400italic,700,700italic'       , array(), '' );
   wp_enqueue_style( 'droid-sans', 'http://fonts.googleapis.com/css?family=Droid+Sans:400,700'                                     , array(), '' );
   wp_enqueue_style( 'lato'      , 'http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic'         , array(), '' );
+  wp_enqueue_style( 'strait'    , 'http://fonts.googleapis.com/css?family=Strait'                                                 , array(), '' );
 }
-add_action( 'customize_preview_init', 'flint_customize_preview_js' );
+add_action( 'customize_preview_init', 'flint_customize_preview_init' );

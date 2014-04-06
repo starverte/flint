@@ -2,6 +2,9 @@
  * Theme Customizer enhancements for a better user experience.
  *
  * Contains handlers to make Theme Customizer preview reload changes asynchronously.
+ *
+ * @package Flint
+ * @since 1.2.0
  */
 
 ( function( $ ) {
@@ -43,7 +46,7 @@
   } );
   
   // Fonts
-  wp.customize( 'flint_fonts[heading-font]', function( value ) {
+  wp.customize( 'flint_fonts[heading_font]', function( value ) {
     value.bind( function( to ) {
       $( 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6' ).css( 'font-family', to );
     } );

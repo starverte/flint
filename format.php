@@ -1,15 +1,21 @@
 <?php
 /**
+ * Post Template
+ *
+ * The template for displaying post content for default post format.
+ *
  * @package Flint
- * @since 1.1.1
+ * @since 1.2.0
  */
 ?>
 
   <div class="row">
-    <div class="col-lg-2 col-md-2 col-sm-2">
-      <?php if (is_singular()) { flint_post_thumbnail(); } else { flint_post_thumbnail( 'post', 'archive' ); } ?>
-    </div>
-    <article id="post-<?php the_ID(); ?>" <?php post_class('col-lg-8 col-md-8 col-sm-8'); ?>>
+    <?php if (!is_active_sidebar('left') &&  !is_active_sidebar('right') && has_post_thumbnail()) { ?>
+      <div class="col-lg-2 col-md-2 col-sm-2">
+        <?php if (is_singular()) { flint_post_thumbnail(); } else { flint_post_thumbnail( 'post', 'archive' ); } ?>
+      </div>
+    <?php } ?>
+    <article id="post-<?php the_ID(); ?>" <?php if (!is_active_sidebar('left') &&  !is_active_sidebar('right') && has_post_thumbnail()) { post_class('col-lg-10 col-md-10 col-sm-10'); } else { post_class(); } ?>>
       <header class="entry-header">
         <?php $type = get_post_type(); ?>
         <?php do_action('flint_open_entry_header_'.$type); ?>
@@ -44,5 +50,5 @@
         <?php do_action('flint_entry_meta_below_post'); ?>
       </footer><!-- .entry-meta -->
     </article><!-- #post-<?php the_ID(); ?> -->
-    <div class="col-lg-2 col-md-2 col-sm-2"></div>
+    <?php if (!is_active_sidebar('left') &&  !is_active_sidebar('right') && has_post_thumbnail()) { ?><div class="col-lg-2 col-md-2 col-sm-2"></div><?php } ?>
   </div><!-- .row -->
