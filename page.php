@@ -3,7 +3,7 @@
  * The default page template
  *
  * @package Flint
- * @since 1.1.0
+ * @since 1.2.0
  */
 
 get_header(); ?>

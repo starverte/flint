@@ -105,7 +105,7 @@ function flint_widgets_init() {
   
   foreach ($widget_areas as $widget_area) {
     register_sidebar( array(
-      'name'          => __( $widget_area, 'flint' ),
+      'name'          => $widget_area,
       'id'            => strtolower($widget_area),
       'before_widget' => '<aside id="%1$s" class="widget %2$s">',
       'after_widget'  => '</aside>',

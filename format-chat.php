@@ -1,7 +1,11 @@
 <?php
 /**
+ * Chat Post Format Template
+ *
+ * The template for displaying the post content for chat posts
+ *
  * @package Flint
- * @since 1.1.1
+ * @since 1.2.0
  */
 ?>
 

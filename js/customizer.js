@@ -2,6 +2,9 @@
  * Theme Customizer enhancements for a better user experience.
  *
  * Contains handlers to make Theme Customizer preview reload changes asynchronously.
+ *
+ * @package Flint
+ * @since 1.2.0
  */
 
 ( function( $ ) {

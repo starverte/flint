@@ -5,7 +5,7 @@
  * Contains the closing of the id=main div and all content after
  *
  * @package Flint
- * @since 1.1.3
+ * @since 1.2.0
  */
 ?>
 
