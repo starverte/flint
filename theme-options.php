@@ -283,7 +283,10 @@ if ( is_admin() ) {
           <td>
             <select name="flint_templates[minimal_widget_area]">
               <option value="none"   <?php selected( $minimal_widget_area, 'none'   ); ?>>None</option>
+              <option value="header" <?php selected( $minimal_widget_area, 'header' ); ?>>Header</option>
               <option value="footer" <?php selected( $minimal_widget_area, 'footer' ); ?>>Footer</option>
+              <option value="left" <?php selected( $minimal_widget_area, 'left'   ); ?>>Left</option>
+              <option value="right" <?php selected( $minimal_widget_area, 'right'  ); ?>>Right</option>
             </select>
           </td>
         </tr>

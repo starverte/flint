@@ -618,7 +618,7 @@ function flint_reply_link($args = array(), $comment = null, $post = null) {
  */
 function flint_get_widgets( $slug, $minimal = false ) {
   $options = get_option( 'flint_templates' );
-  $minimal_widget_area = !empty($options['minimal_widget_area']) ? $options['minimal_widget_area'] : 'navbar';
+  $minimal_widget_area = !empty($options['minimal_widget_area']) ? $options['minimal_widget_area'] : false;
   
   switch ($minimal) {
     case true:
@@ -633,6 +633,21 @@ function flint_get_widgets( $slug, $minimal = false ) {
       locate_template($templates, true, false);
       break;
   }
+}
+
+/**
+ * Checks to see if widget area is to be displayed for the Minimal page template.
+ * For other page templates, use is_active_sidebar()
+ */
+function flint_is_active_widgets( $slug ) {
+	$options = get_option( 'flint_templates' );
+  $minimal_widget_area = !empty($options['minimal_widget_area']) ? $options['minimal_widget_area'] : false;
+	
+	if ($slug == $minimal_widget_area):
+		return true;
+	else:
+		return false;
+	endif;
 }
 
 /**
@@ -802,19 +817,18 @@ function flint_options_css() {
  */
 function flint_get_template( $output = 'slug', $template = '' ) {
   $options       = get_option( 'flint_templates' );
-  $the_template  = get_post_meta( get_the_ID(), '_wp_page_template', true );
+  $the_template  = is_active_sidebar('left') || is_active_sidebar('right') ? 'wide' : get_post_meta( get_the_ID(), '_wp_page_template', true );
   $type          = get_post_type( get_the_ID() );
   
   $default_width = !empty($options['default_width']) ? $options['default_width'] : 'full';
   $clear_width   = !empty($options['clear_width'])   ? $options['clear_width']   : 'full';
   $minimal_width = !empty($options['minimal_width']) ? $options['minimal_width'] : 'full';
   
-  
-  if ($template == '' && $type == 'page') { $template = $the_template == 'default' ? 'templates/'. $default_width . '.php' : ($the_template == 'templates/clear.php' ? 'templates/'. $clear_width . '.php' : ($the_template == 'templates/minimal.php' ? 'templates/'. $minimal_width . '.php' : $the_template)); }
+  if ($template == '' && $type == 'page') { $template = $the_template == 'default' ? 'templates/'. $default_width . '.php' : ($the_template == 'templates/clear.php' ? 'templates/'. $clear_width . '.php' : ($the_template == 'templates/minimal.php' ? 'templates/'. $minimal_width . '.php' : 'templates/'. $the_template . '.php')); }
   elseif ($template == '' && $type != 'page') { $template = 'templates/'. $default_width . '.php'; }
   switch ($output) {
     case 'slug':
-      $slug = $the_template == 'templates/clear.php' ? $clear_width : ($the_template == 'templates/minimal.php' ? $minimal_width : $default_width) ;
+      $slug = $the_template == 'templates/clear.php' ? $clear_width : ($the_template == 'templates/minimal.php' ? $minimal_width : $the_template) ;
       return $slug;
       break;
     case 'content':
@@ -849,6 +863,7 @@ function flint_get_template( $output = 'slug', $template = '' ) {
       }
       break;
   }
+	
 }
 
 /**
