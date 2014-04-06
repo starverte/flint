@@ -3,7 +3,7 @@
  * The Template for displaying all single posts.
  *
  * @package Flint
- * @since 1.1.1
+ * @since 1.2.0
  */
 
 get_header(); ?>
@@ -29,7 +29,9 @@ get_header(); ?>
       <?php flint_content_nav( 'nav-below' ); ?>
   
       <?php
-        // If comments are open or we have at least one comment, load up the comment template
+        /**
+         * If comments are open or we have at least one comment, load up the comment template
+         */
         if ( comments_open() || '0' != get_comments_number() )
           comments_template();
       ?>

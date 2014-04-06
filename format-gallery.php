@@ -8,11 +8,13 @@
 ?>
 
   <div class="row">
-    <div class="col-lg-2 col-md-2 col-sm-2">
-      <?php if (is_singular()) { flint_post_thumbnail(); } else { flint_post_thumbnail( 'post', 'archive' ); } ?>
-      <?php if (is_single()) {} else { ?><a class="btn btn-info btn-block hidden-xs" href="<?php echo get_permalink(); ?>">View gallery</a><?php } ?>
-    </div>
-    <article id="post-<?php the_ID(); ?>" <?php post_class('col-lg-8 col-md-8 col-sm-8'); ?>>
+    <?php if (!is_active_sidebar('left') &&  !is_active_sidebar('right') && has_post_thumbnail()) { ?>
+      <div class="col-lg-2 col-md-2 col-sm-2">
+        <?php if (is_singular()) { flint_post_thumbnail(); } else { flint_post_thumbnail( 'post', 'archive' ); } ?>
+        <?php if (is_single()) {} else { ?><a class="btn btn-info btn-block hidden-xs" href="<?php echo get_permalink(); ?>">View gallery</a><?php } ?>
+      </div>
+     <?php } ?>
+    <article id="post-<?php the_ID(); ?>" <?php if (!is_active_sidebar('left') &&  !is_active_sidebar('right') && has_post_thumbnail()) { post_class('col-lg-10 col-md-10 col-sm-10'); } else { post_class(); } ?>>
       <header class="entry-header">
         <h1 class="entry-title"><?php if (is_single()) { echo the_title(); } else { $permalink = get_permalink(); $title = get_the_title(); echo '<a href="' . $permalink .'" rel="bookmark">' . $title . '</a>'; } ?></h1>
         <?php if ( current_user_can('edit_posts') ) { ?><a class="btn btn-default btn-sm btn-edit hidden-xs" href="<?php echo get_edit_post_link(); ?>">Edit Gallery</a><?php } ?>
@@ -77,5 +79,5 @@
         <?php do_action('flint_entry_meta_below_post'); ?>
       </footer><!-- .entry-meta -->
     </article><!-- #page-<?php the_ID(); ?> -->
-    <div class="col-lg-2 col-md-2 col-sm-2"></div>
+    <?php if (!is_active_sidebar('left') &&  !is_active_sidebar('right') && has_post_thumbnail()) { ?><div class="col-lg-2 col-md-2 col-sm-2"></div><?php } ?>
   </div><!-- .row -->

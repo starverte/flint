@@ -3,7 +3,7 @@ Theme Name: Flint
 Theme URI: http://sparks.starverte.com/flint
 Author: Star Verte LLC
 Description: A responsive, minimalist theme built on Twitter's Bootstrap 3 and based on Automattic's _s theme. Make it your own with a custom background, custom header, custom menus, custom colors and more.
-Version: 1.1.3
+Version: 1.2.0
 License: GPLv3
 License URI: LICENSE.md
 Tags: custom-background, custom-header, custom-menu, flexible-header, one-column, post-formats, threaded-comments
@@ -295,7 +295,19 @@ body.minimal.minimal-breadcrumbs #top-pad {
 .home .btn-edit {
   display: none;
 }
+.home.blog .entry-title {
+  display:block;
+}
 .sticky {
+  max-width: 95%;
+  padding: 20px;
+  padding-top:0;
+  margin-right: auto;
+  margin-left: auto;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 2px 2px 2px #ddd;
 }
 .byline {
   display: none;
