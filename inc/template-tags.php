@@ -640,14 +640,14 @@ function flint_get_widgets( $slug, $minimal = false ) {
  * For other page templates, use is_active_sidebar()
  */
 function flint_is_active_widgets( $slug ) {
-	$options = get_option( 'flint_templates' );
+  $options = get_option( 'flint_templates' );
   $minimal_widget_area = !empty($options['minimal_widget_area']) ? $options['minimal_widget_area'] : false;
-	
-	if ($slug == $minimal_widget_area):
-		return true;
-	else:
-		return false;
-	endif;
+  
+  if ($slug == $minimal_widget_area):
+    return true;
+  else:
+    return false;
+  endif;
 }
 
 /**
@@ -863,7 +863,7 @@ function flint_get_template( $output = 'slug', $template = '' ) {
       }
       break;
   }
-	
+  
 }
 
 /**

@@ -8,7 +8,7 @@
 ?>
 
   <div class="row">
-  	<?php if (!is_active_sidebar('left') &&  !is_active_sidebar('right') && has_post_thumbnail()) { ?>
+    <?php if (!is_active_sidebar('left') &&  !is_active_sidebar('right') && has_post_thumbnail()) { ?>
       <div class="col-lg-2 col-md-2 col-sm-2">
         <?php if (is_singular()) { flint_post_thumbnail(); } else { flint_post_thumbnail( 'post', 'archive' ); } ?>
         <?php if (is_single()) {} else { ?><a class="btn btn-info btn-block hidden-xs" href="<?php echo get_permalink(); ?>">View gallery</a><?php } ?>

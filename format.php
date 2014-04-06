@@ -6,7 +6,7 @@
 ?>
 
   <div class="row">
-  	<?php if (!is_active_sidebar('left') &&  !is_active_sidebar('right') && has_post_thumbnail()) { ?>
+    <?php if (!is_active_sidebar('left') &&  !is_active_sidebar('right') && has_post_thumbnail()) { ?>
       <div class="col-lg-2 col-md-2 col-sm-2">
         <?php if (is_singular()) { flint_post_thumbnail(); } else { flint_post_thumbnail( 'post', 'archive' ); } ?>
       </div>
