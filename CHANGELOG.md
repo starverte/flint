@@ -1,3 +1,10 @@
+###Flint 1.2.1
+For complete diff, check out [Pull Request](https://github.com/starverte/flint/pull/159)
+- Significant changes to `flint_get_template()` in order to work properly and not have extraneous code
+- WordPress Toolbar doesn't affect page layout (no more hiding of nav menu)
+- Right footer content now `text-align: right;`
+- Space headers appropriately
+
 ###Flint 1.2.0
 For complete diff, check out [Pull Request](https://github.com/starverte/flint/pull/155)
 - New Widget Areas: Header, Left, Right (and Footer)
