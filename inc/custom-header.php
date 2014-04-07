@@ -3,7 +3,7 @@
  * Creates Custom Header page
  *
  * @package Flint
- * @since 1.2.0
+ * @since 1.2.1
  */
 
 if ( ! function_exists( 'flint_header_style' ) ) :
@@ -45,7 +45,7 @@ if ( ! function_exists( 'flint_admin_header_style' ) ) :
 function flint_admin_header_style() {
 ?>
   <style type="text/css">
-    @import url("http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700");
+    @import url("//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700");
     .row::before, .row::after {
       display: table;
       content: " ";

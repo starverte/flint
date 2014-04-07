@@ -4,6 +4,7 @@ For complete diff, check out [Pull Request](https://github.com/starverte/flint/p
 - WordPress Toolbar doesn't affect page layout (no more hiding of nav menu)
 - Right footer content now `text-align: right;`
 - Space headers appropriately
+- Changed font links from `http://` to `//`
 
 ###Flint 1.2.0
 For complete diff, check out [Pull Request](https://github.com/starverte/flint/pull/155)

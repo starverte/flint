@@ -3,7 +3,7 @@
  * Flint functions and definitions
  *
  * @package Flint
- * @version 1.2.0
+ * @version 1.2.1
  */
 
 /**
@@ -147,43 +147,43 @@ function flint_enqueue_scripts() {
   
   switch ($body_font) {
     case 'Open Sans':
-      wp_enqueue_style( 'open-sans', 'http://fonts.googleapis.com/css?family=Open+Sans:300,600,300,700,300italic,600italic,700italic', array(), flint_theme_version() );
+      wp_enqueue_style( 'open-sans', '//fonts.googleapis.com/css?family=Open+Sans:300,600,300,700,300italic,600italic,700italic', array(), flint_theme_version() );
       break;
     case 'Oswald':
-      wp_enqueue_style( 'oswald', 'http://fonts.googleapis.com/css?family=Oswald:300,400,700', array(), flint_theme_version() );
+      wp_enqueue_style( 'oswald', '//fonts.googleapis.com/css?family=Oswald:300,400,700', array(), flint_theme_version() );
       break;
     case 'Roboto':
-      wp_enqueue_style( 'roboto', 'http://fonts.googleapis.com/css?family=Roboto:300,300italic,400,400italic,700,700italic', array(), flint_theme_version() );
+      wp_enqueue_style( 'roboto', '//fonts.googleapis.com/css?family=Roboto:300,300italic,400,400italic,700,700italic', array(), flint_theme_version() );
       break;
     case 'Droid Sans':
-      wp_enqueue_style( 'droid-sans', 'http://fonts.googleapis.com/css?family=Droid+Sans:400,700', array(), flint_theme_version() );
+      wp_enqueue_style( 'droid-sans', '//fonts.googleapis.com/css?family=Droid+Sans:400,700', array(), flint_theme_version() );
       break;
     case 'Lato':
-      wp_enqueue_style( 'lato', 'http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic', array(), flint_theme_version() );
+      wp_enqueue_style( 'lato', '//fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic', array(), flint_theme_version() );
       break;
     case 'Strait':
-      wp_enqueue_style( 'strait', 'http://fonts.googleapis.com/css?family=Strait', array(), flint_theme_version() );
+      wp_enqueue_style( 'strait', '//fonts.googleapis.com/css?family=Strait', array(), flint_theme_version() );
       break;
   }
   if ( $heading_font != $body_font ) {
     switch ($heading_font) {
       case 'Open Sans':
-        wp_enqueue_style( 'open-sans', 'http://fonts.googleapis.com/css?family=Open+Sans:300,600,300,700,300italic,600italic,700italic', array(), flint_theme_version() );
+        wp_enqueue_style( 'open-sans', '//fonts.googleapis.com/css?family=Open+Sans:300,600,300,700,300italic,600italic,700italic', array(), flint_theme_version() );
         break;
       case 'Oswald':
-        wp_enqueue_style( 'oswald', 'http://fonts.googleapis.com/css?family=Oswald:300,400,700', array(), flint_theme_version() );
+        wp_enqueue_style( 'oswald', '//fonts.googleapis.com/css?family=Oswald:300,400,700', array(), flint_theme_version() );
         break;
       case 'Roboto':
-        wp_enqueue_style( 'roboto', 'http://fonts.googleapis.com/css?family=Roboto:300,300italic,400,400italic,700,700italic', array(), flint_theme_version() );
+        wp_enqueue_style( 'roboto', '//fonts.googleapis.com/css?family=Roboto:300,300italic,400,400italic,700,700italic', array(), flint_theme_version() );
         break;
       case 'Droid Sans':
-        wp_enqueue_style( 'droid-sans', 'http://fonts.googleapis.com/css?family=Droid+Sans:400,700', array(), flint_theme_version() );
+        wp_enqueue_style( 'droid-sans', '//fonts.googleapis.com/css?family=Droid+Sans:400,700', array(), flint_theme_version() );
         break;
       case 'Lato':
-        wp_enqueue_style( 'lato', 'http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic', array(), flint_theme_version() );
+        wp_enqueue_style( 'lato', '//fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic', array(), flint_theme_version() );
         break;
       case 'Strait':
-        wp_enqueue_style( 'strait', 'http://fonts.googleapis.com/css?family=Strait', array(), flint_theme_version() );
+        wp_enqueue_style( 'strait', '//fonts.googleapis.com/css?family=Strait', array(), flint_theme_version() );
         break;
     }
   }
