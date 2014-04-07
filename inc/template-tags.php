@@ -3,7 +3,7 @@
  * Custom template tags for this theme.
  *
  * @package Flint
- * @since 1.2.0
+ * @since 1.2.1
  */
 
 if ( ! function_exists( 'flint_content_nav' ) ) :
@@ -31,7 +31,7 @@ function flint_content_nav( $nav_id ) {
 
   $nav_class = ( is_single() ) ? 'navigation-post' : 'navigation-paging';
 
-  ?>
+  ?>  
   <nav role="navigation" id="<?php echo esc_attr( $nav_id ); ?>" class="<?php echo $nav_class; ?>">
     <h1 class="screen-reader-text"><?php _e( 'Post navigation', 'flint' ); ?></h1>
 
@@ -643,7 +643,7 @@ function flint_is_active_widgets( $slug ) {
   $options = get_option( 'flint_templates' );
   $minimal_widget_area = !empty($options['minimal_widget_area']) ? $options['minimal_widget_area'] : false;
   
-  if ($slug == $minimal_widget_area):
+  if ($slug == $minimal_widget_area && is_active_sidebar( $slug )):
     return true;
   else:
     return false;
@@ -816,49 +816,57 @@ function flint_options_css() {
  * Returns slug or class for #primary based on theme options
  */
 function flint_get_template( $output = 'slug', $template = '' ) {
-  $options       = get_option( 'flint_templates' );
-  $the_template  = is_active_sidebar('left') || is_active_sidebar('right') ? 'wide' : get_post_meta( get_the_ID(), '_wp_page_template', true );
-  $type          = get_post_type( get_the_ID() );
+  $options = get_option( 'flint_templates' );
+  $file    = get_post_meta( get_the_ID(), '_wp_page_template', true );
   
   $default_width = !empty($options['default_width']) ? $options['default_width'] : 'full';
   $clear_width   = !empty($options['clear_width'])   ? $options['clear_width']   : 'full';
   $minimal_width = !empty($options['minimal_width']) ? $options['minimal_width'] : 'full';
   
-  if ($template == '' && $type == 'page') { $template = $the_template == 'default' ? 'templates/'. $default_width . '.php' : ($the_template == 'templates/clear.php' ? 'templates/'. $clear_width . '.php' : ($the_template == 'templates/minimal.php' ? 'templates/'. $minimal_width . '.php' : 'templates/'. $the_template . '.php')); }
-  elseif ($template == '' && $type != 'page') { $template = 'templates/'. $default_width . '.php'; }
+  if (!empty($template)) { trigger_error('$template variable in flint_get_template() is deprecated as of Flint 1.2.1. Use get_template() to get a particular file.'); unset($t); }
+  
+  if (empty($file) | $file == 'default') {
+    if ( is_active_sidebar('left') || is_active_sidebar('right') ) { $slug = 'wide'; }
+    else { $slug = $default_width; }
+  }
+  elseif ($file == 'templates/clear.php') { $slug = $clear_width; }
+  elseif ($file == 'templates/minimal.php') {
+    if ( flint_is_active_widgets('left') || flint_is_active_widgets('right') ) { $slug = 'wide'; }
+    else{ $slug = $minimal_width; }
+  }
+  
   switch ($output) {
     case 'slug':
-      $slug = $the_template == 'templates/clear.php' ? $clear_width : ($the_template == 'templates/minimal.php' ? $minimal_width : $the_template) ;
       return $slug;
       break;
     case 'content':
-      switch ($template) {
-        case 'templates/full.php':
+      switch ($slug) {
+        case 'full':
           echo 'col-lg-8 col-md-8 col-sm-8';
           break;
-        case 'templates/slim.php':
+        case 'slim':
           echo 'col-lg-4 col-md-4 col-sm-4';
           break;
-        case 'templates/narrow.php':
+        case 'narrow':
           echo 'col-lg-6 col-md-6 col-sm-6';
           break;
-        case 'templates/wide.php':
+        case 'wide':
           echo 'col-lg-12 col-md-12 col-sm-12';
           break;
       }
       break;
     case 'margins':
-      switch ($template) {
-        case 'templates/full.php':
+      switch ($slug) {
+        case 'full':
           echo '<div class="col-lg-2 col-md-2 col-sm-2"></div>';
           break;
-        case 'templates/slim.php':
+        case 'slim':
           echo '<div class="col-lg-4 col-md-4 col-sm-4"></div>';
           break;
-        case 'templates/narrow.php':
+        case 'narrow':
           echo '<div class="col-lg-3 col-md-3 col-sm-3"></div>';
           break;
-        case 'templates/wide.php':
+        case 'wide':
           break;
       }
       break;
