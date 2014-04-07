@@ -1,3 +1,10 @@
+###Flint 1.2.0
+For complete diff, check out [Pull Request](https://github.com/starverte/flint/pull/155)
+- New Widget Areas: Header, Left, Right (and Footer)
+- Minimal template supports new widget areas
+- New font: Strait
+- Bug fixes
+
 ###Flint 1.1.3
 For complete diff, check out [Pull Request](https://github.com/starverte/flint/pull/147)
 - Fix footer link
