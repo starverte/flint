@@ -3,7 +3,7 @@
  * Flint functions and definitions
  *
  * @package Flint
- * @version 1.2.1
+ * @version 1.2.2
  */
 
 /**
@@ -29,20 +29,20 @@ function flint_after_setup_theme() {
   require_once( get_template_directory() . '/theme-options.php' );
 
   load_theme_textdomain( 'flint', get_template_directory() . '/languages' );
+  
+  register_nav_menus( array(
+    'primary' => __( 'Primary Menu', 'flint' ),
+  ) );
+
+  add_editor_style( 'editor-style.css' );
 
   add_theme_support( 'automatic-feed-links' );
 
   add_theme_support( 'post-thumbnails' );
   
   add_theme_support( 'html5' );
-
-  register_nav_menus( array(
-    'primary' => __( 'Primary Menu', 'flint' ),
-  ) );
-
+  
   add_theme_support( 'post-formats', array( 'aside', 'chat', 'gallery', 'link', 'status' ) );
-
-  add_editor_style( 'editor-style.css' );
   
   /**
    * Implement the Custom Background feature
@@ -54,9 +54,7 @@ function flint_after_setup_theme() {
 
   $args = apply_filters( 'flint_custom_background_args', $args );
 
-  if ( function_exists( 'wp_get_theme' ) ) {
-    add_theme_support( 'custom-background', $args );
-  }
+  add_theme_support( 'custom-background', $args );
   
   /**
    * Implement Custom Header feature
@@ -76,9 +74,7 @@ function flint_after_setup_theme() {
 
   $header = apply_filters( 'flint_custom_header_args', $header );
 
-  if ( function_exists( 'wp_get_theme' ) ) {
-    add_theme_support( 'custom-header', $header );
-  }
+  add_theme_support( 'custom-header', $header );
   
   /** 
    * Add theme support for Infinite Scroll.
