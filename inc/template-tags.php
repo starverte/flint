@@ -394,11 +394,11 @@ add_filter( 'the_password_form', 'flint_password_form' );
 
 /**
  * Modifies comment form to use bootstrap styles
- * TODO: Remove "Required fields are marked *"
- * TODO: Fix width of inputs
- * TODO: Check pattern of email address
- * TODO: Check required fields before allowing submit
- * TODO: Fix approved tags width
+ * @todo Remove "Required fields are marked *"
+ * @todo Fix width of inputs
+ * @todo Check pattern of email address
+ * @todo Check required fields before allowing submit
+ * @todo Fix approved tags width
  */
 function flint_comment_form( $args = array(), $post_id = null ) {
   global $id;
