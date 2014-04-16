@@ -13,8 +13,6 @@ $flint_layout = array();
 
 $flint_templates = array();
 
-if ( is_admin() ) {
-
   add_action( 'admin_menu', 'flint_admin_menu' );
   function flint_admin_menu() {
     add_theme_page( 'Flint Options', 'Flint Options', 'edit_theme_options', 'theme_options', 'flint_options_page' );
@@ -85,31 +83,31 @@ if ( is_admin() ) {
       <table class="form-table">
       
         <tr valign="top"><th scope="row"><?php _e( 'Company Name', 'flint' ); ?></th>
-          <td><input id="flint_general[company]" class="regular-text" type="text" name="flint_general[company]" value="<?php esc_attr( $company ); ?>" /></td>
+          <td><input id="flint_general[company]" class="regular-text" type="text" name="flint_general[company]" value="<?php echo $company ?>" /></td>
         </tr>
         
         <tr valign="top"><th scope="row"><?php _e( 'Street Address', 'flint' ); ?></th>
-          <td><input id="flint_general[address]" class="regular-text" type="text" name="flint_general[address]" value="<?php esc_attr( $address ); ?>" /></td>
+          <td><input id="flint_general[address]" class="regular-text" type="text" name="flint_general[address]" value="<?php echo $address ?>" /></td>
         </tr>
         
         <tr valign="top"><th scope="row"><?php _e( 'City, State', 'flint' ); ?></th>
-          <td><input id="flint_general[locality]" class="regular-text" type="text" name="flint_general[locality]" value="<?php esc_attr( $locality ); ?>" /></td>
+          <td><input id="flint_general[locality]" class="regular-text" type="text" name="flint_general[locality]" value="<?php echo $locality ?>" /></td>
         </tr>
         
         <tr valign="top"><th scope="row"><?php _e( 'Zip Code', 'flint' ); ?></th>
-          <td><input id="flint_general[postal_code]" class="regular-text" type="text" name="flint_general[postal_code]" value="<?php esc_attr( $postal_code ); ?>" /></td>
+          <td><input id="flint_general[postal_code]" class="regular-text" type="text" name="flint_general[postal_code]" value="<?php echo $postal_code ?>" /></td>
         </tr>
         
         <tr valign="top"><th scope="row"><?php _e( 'Phone Number', 'flint' ); ?></th>
-          <td><input id="flint_general[tel]" class="regular-text" type="text" name="flint_general[tel]" value="<?php esc_attr( $tel ); ?>" /></td>
+          <td><input id="flint_general[tel]" class="regular-text" type="text" name="flint_general[tel]" value="<?php echo $tel ?>" /></td>
         </tr>
         
         <tr valign="top"><th scope="row"><?php _e( 'Fax Number', 'flint' ); ?></th>
-          <td><input id="flint_general[fax]" class="regular-text" type="text" name="flint_general[fax]" value="<?php esc_attr( $fax ); ?>" /></td>
+          <td><input id="flint_general[fax]" class="regular-text" type="text" name="flint_general[fax]" value="<?php echo $fax ?>" /></td>
         </tr>
         
         <tr valign="top"><th scope="row"><?php _e( 'Email Address', 'flint' ); ?></th>
-          <td><input id="flint_general[email]" class="regular-text" type="text" name="flint_general[email]" value="<?php esc_attr( $email ); ?>" /></td>
+          <td><input id="flint_general[email]" class="regular-text" type="text" name="flint_general[email]" value="<?php echo $email ?>" /></td>
         </tr>
         
        </table>
@@ -320,4 +318,43 @@ if ( is_admin() ) {
     return $input;
   }
 
+function flint_get_options( $key, $section = 'general' ) {
+  $options = get_option( 'flint_general' );
+  $val = !empty($options[$key]) ? $options[$key] : false;
+  return $val;
+}
+function flint_get_address( $schema = true, $args = array() ) {
+  $options = get_option( 'flint_general' );
+  
+  $address     = $options['address'];
+  $locality    = $options['locality'];
+  $postal_code = $options['postal_code'];
+  
+  $defaults = array(
+    'before' => '<span id="street" itemprop="streetAddress">',
+    'item1'  => $address,
+    'sep1'   => '</span>, <span id="locality" itemprop="addressLocality">',
+    'item2'  => $locality,
+    'sep2'   => '</span> <span id="postal-code" itemprop="postalCode">',
+    'item3'  => $postal_code,
+    'after'  => '</span>',
+    'open'   => '<div id="org" itemscope itemtype="http://schema.org/Organization"><span id="address" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">',
+    'close'  => '</span></div>',
+  );
+  $alts = array(
+    'before' => '',
+    'item1'  => $address,
+    'sep1'   => ', ',
+    'item2'  => $locality,
+    'sep2'   => ' ',
+    'item3'  => $postal_code,
+    'after'  => '',
+    'open'   => '',
+    'close'  => '',
+  );
+  
+  $args = $schema == true ? wp_parse_args( $args, $defaults ) : wp_parse_args( $args, $alts );
+  $output = $args['open'] . $args['before'] . $args['item1'] . $args['sep1'] . $args['item2'] . $args['sep2'] . $args['item3'] . $args['after'] . $args['close'];
+  
+  echo $output;
 }
