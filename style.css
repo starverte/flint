@@ -306,9 +306,9 @@ body.minimal.minimal-breadcrumbs #top-pad {
   max-width: 95%;
   padding: 20px;
   padding-top:0;
+  margin-top: 3em;
   margin-right: auto;
   margin-left: auto;
-  margin-top: 3em;
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 4px;
