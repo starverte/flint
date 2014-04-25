@@ -8,12 +8,13 @@
 
 function flint_customize_register( $wp_customize ) {
   $fonts = array(
-    'Open Sans'  => 'Open Sans',
-    'Oswald'     => 'Oswald',
-    'Roboto'     => 'Roboto',
-    'Droid Sans' => 'Droid Sans',
-    'Lato'       => 'Lato',
-    'Strait'     => 'Strait',
+    'Open Sans'   => 'Open Sans',
+    'Oswald'      => 'Oswald',
+    'Roboto'      => 'Roboto',
+    'Droid Sans'  => 'Droid Sans',
+    'Lato'        => 'Lato',
+    'Nova Square' => 'Nova Square',
+    'Strait'      => 'Strait',
   );
   
   $wp_customize->add_setting('flint_colors[link]', array(
@@ -107,11 +108,12 @@ add_action( 'customize_register', 'flint_customize_register' );
 function flint_customize_preview_init() {
   wp_enqueue_script( 'flint_customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview' ), flint_theme_version(), true );
   
-  wp_enqueue_style( 'open-sans' , '//fonts.googleapis.com/css?family=Open+Sans:300,600,300,700,300italic,600italic,700italic', array(), '' );
-  wp_enqueue_style( 'oswald'    , '//fonts.googleapis.com/css?family=Oswald:300,400,700'                                     , array(), '' );
-  wp_enqueue_style( 'roboto'    , '//fonts.googleapis.com/css?family=Roboto:300,300italic,400,400italic,700,700italic'       , array(), '' );
-  wp_enqueue_style( 'droid-sans', '//fonts.googleapis.com/css?family=Droid+Sans:400,700'                                     , array(), '' );
-  wp_enqueue_style( 'lato'      , '//fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic'         , array(), '' );
-  wp_enqueue_style( 'strait'    , '//fonts.googleapis.com/css?family=Strait'                                                 , array(), '' );
+  wp_enqueue_style( 'open-sans'  , '//fonts.googleapis.com/css?family=Open+Sans:300,600,300,700,300italic,600italic,700italic', array(), '' );
+  wp_enqueue_style( 'oswald'     , '//fonts.googleapis.com/css?family=Oswald:300,400,700'                                     , array(), '' );
+  wp_enqueue_style( 'roboto'     , '//fonts.googleapis.com/css?family=Roboto:300,300italic,400,400italic,700,700italic'       , array(), '' );
+  wp_enqueue_style( 'droid-sans' , '//fonts.googleapis.com/css?family=Droid+Sans:400,700'                                     , array(), '' );
+  wp_enqueue_style( 'lato'       , '//fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic'         , array(), '' );
+  wp_enqueue_style( 'nova-square', '//fonts.googleapis.com/css?family=Nova+Square'                                            , array(), '' );
+  wp_enqueue_style( 'strait'     , '//fonts.googleapis.com/css?family=Strait'                                                 , array(), '' );
 }
 add_action( 'customize_preview_init', 'flint_customize_preview_init' );
