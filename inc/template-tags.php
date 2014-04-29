@@ -938,6 +938,8 @@ function flint_body_class() {
 
 /**
  * Gets the featured image for a post or page if not specified otherwise in theme options
+ *
+ * Deprecated. Use flint_the_post_thumbnail
  */
 function flint_post_thumbnail( $type = 'post', $loc = 'single') {
   $layout = get_option( 'flint_layout' );
@@ -951,6 +953,29 @@ function flint_post_thumbnail( $type = 'post', $loc = 'single') {
     case 'page':
       if ($pages_image == 'always') {if (has_post_thumbnail()) { the_post_thumbnail(); }}
       elseif ($pages_image == 'archives' && $loc == 'archive') {if (has_post_thumbnail()) { the_post_thumbnail(); }}
+      break;
+  }
+}
+
+/**
+ * Gets the featured image for a post or page if not specified otherwise in theme options
+ */
+function flint_the_post_thumbnail( $size = 'post-thumbnail', $attr = '' ) {
+  $layout = get_option( 'flint_layout' );
+  $type   = get_post_type();
+  $posts_image = !empty($layout['posts_image']) ? $layout['posts_image'] : 'always';
+  $pages_image = !empty($layout['pages_image']) ? $layout['pages_image'] : 'always';
+  switch ($type) {
+    case 'post':
+      if ($posts_image == 'always') {if (has_post_thumbnail()) { the_post_thumbnail( $size, $attr ); }}
+      elseif ($posts_image == 'archives' && is_archive()) {if (has_post_thumbnail()) { the_post_thumbnail( $size, $attr ); }}
+      break;
+    case 'page':
+      if ($pages_image == 'always') {if (has_post_thumbnail()) { the_post_thumbnail( $size, $attr ); }}
+      elseif ($pages_image == 'archives' && is_archive()) {if (has_post_thumbnail()) { the_post_thumbnail( $size, $attr ); }}
+      break;
+    default:
+      if (has_post_thumbnail()) { the_post_thumbnail( $size, $attr ); }
       break;
   }
 }
