@@ -1,4 +1,8 @@
 {
+  "exclude": [
+    ".git/**",
+    "css/bootstrap**"
+  ],
   "always-semicolon": true,
   "block-indent": 2,
   "colon-space": true,
