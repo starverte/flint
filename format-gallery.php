@@ -25,7 +25,7 @@
           <?php do_action('flint_entry_meta_above_post'); ?>
         </div><!-- .entry-meta -->
       </header><!-- .entry-header -->
-      
+
       <?php if ( is_search() ) : ?>
       <div class="entry-summary">
         <?php the_excerpt(); ?>
@@ -38,7 +38,7 @@
           preg_match( "/$pattern/s", get_the_content(), $match );
           $atts   = isset( $match[3] ) ? shortcode_parse_atts( $match[3] ) : array();
           $images = isset( $atts['ids'] ) ? explode( ',', $atts['ids'] ) : false;
-          
+
           if ( ! $images ) {
             $images = get_posts( array(
             'post_parent'      => get_the_ID(),
@@ -50,14 +50,14 @@
             'numberposts'      => 999,
             'suppress_filters' => false
             ) );
-          }  
-          
+          }
+
           if ( $images ) {
             $total_images = count( $images );
             $image        = array_shift( $images ); ?>
-            
+
             <p><a class="gallery-thumb hidden-xs" href="<?php the_permalink(); ?>"><?php echo wp_get_attachment_image( $image, 'large' ); ?></a></p>
-            
+
             <p class="gallery-info">
               <?php
               printf( _n( 'This gallery contains <a %1$s>%2$s photo</a>.', 'This gallery contains <a %1$s>%2$s photos</a>.', $total_images, 'flint' ),
@@ -65,9 +65,9 @@
               number_format_i18n( $total_images )
               ); ?>
             </p>
-            
+
             <?php the_excerpt(); ?>
-            
+
           <?php } // if ( $images )
         } //not single ?>
         <?php

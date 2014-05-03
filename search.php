@@ -12,7 +12,7 @@ get_header(); ?>
 <section id="primary" class="content-area container">
 
   <?php flint_get_widgets('left'); ?>
-  
+
   <div id="content" class="site-content<?php if ( is_active_sidebar( 'left' ) | is_active_sidebar( 'right' ) ) { if ( is_active_sidebar( 'left' ) && is_active_sidebar( 'right' ) ) { echo ' col-lg-6 col-md-6'; } else { echo ' col-lg-9 col-md-9'; } } else { echo ' col-lg-12 col-md-12'; } ?>" role="main">
 
   <?php if ( have_posts() ) : ?>
@@ -39,9 +39,9 @@ get_header(); ?>
   <?php endif; ?>
 
   </div><!-- #content -->
-  
+
   <?php flint_get_widgets('right'); ?>
-  
+
 </section><!-- #primary -->
 
 <?php flint_get_widgets('footer'); ?>

@@ -6,12 +6,12 @@
 ?>
 
   <div class="row">
-    <article id="post-<?php the_ID(); ?>" <?php post_class('col-lg-12 col-md-12 col-sm-12'); ?>>      
+    <article id="post-<?php the_ID(); ?>" <?php post_class('col-lg-12 col-md-12 col-sm-12'); ?>>
       <div class="entry-content">
         <h4><?php flint_the_content(); ?></h4>
         <?php if ( current_user_can('edit_posts') ) { ?><a class="btn btn-default btn-sm btn-edit hidden-xs" href="<?php echo get_edit_post_link(); ?>">Edit Status</a><?php } ?>
       </div><!-- .entry-content -->
-      
+
       <footer class="entry-meta clearfix">
         <?php flint_posted_on(); ?>
         <span class="sep"> | </span>

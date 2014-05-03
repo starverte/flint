@@ -96,9 +96,9 @@ get_header(); ?>
     <?php endif; ?>
 
     </div><!-- #content -->
-    
+
     <?php flint_get_widgets('right'); ?>
-    
+
   </section><!-- #primary -->
 
 <?php flint_get_widgets('footer'); ?>
