@@ -7,6 +7,11 @@
  */
 
 function flint_customize_register( $wp_customize ) {
+
+  global $a_color;
+  global $canvas_bg;
+  global $canvas_color;
+
   $fonts = array(
     'Open Sans'   => 'Open Sans',
     'Oswald'      => 'Oswald',
@@ -18,7 +23,7 @@ function flint_customize_register( $wp_customize ) {
   );
 
   $wp_customize->add_setting('flint_colors[link]', array(
-    'default'           => '#428bca',
+    'default'           => '#'.$a_color,
     'sanitize_callback' => 'sanitize_hex_color',
     'capability'        => 'edit_theme_options',
     'type'              => 'option',
@@ -33,7 +38,7 @@ function flint_customize_register( $wp_customize ) {
   )));
 
   $wp_customize->add_setting('flint_colors[canvas]', array(
-    'default'           => '#222222',
+    'default'           => '#'.$canvas_bg,
     'sanitize_callback' => 'sanitize_hex_color',
     'capability'        => 'edit_theme_options',
     'type'              => 'option',
@@ -48,7 +53,7 @@ function flint_customize_register( $wp_customize ) {
   )));
 
   $wp_customize->add_setting('flint_colors[canvas-text]', array(
-    'default'           => '#ffffff',
+    'default'           => '#'.$canvas_color,
     'sanitize_callback' => 'sanitize_hex_color',
     'capability'        => 'edit_theme_options',
     'type'              => 'option',
