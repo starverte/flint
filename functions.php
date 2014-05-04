@@ -19,7 +19,7 @@ if ( ! function_exists( 'flint_after_setup_theme' ) ) :
 function flint_after_setup_theme() {
 
   require( get_template_directory() . '/inc/template-tags.php' );
-  
+
   require( get_template_directory() . '/inc/colors.php' );
 
   require( get_template_directory() . '/inc/extras.php' );
@@ -29,7 +29,7 @@ function flint_after_setup_theme() {
   require_once( get_template_directory() . '/theme-options.php' );
 
   load_theme_textdomain( 'flint', get_template_directory() . '/languages' );
-  
+
   register_nav_menus( array(
     'primary' => __( 'Primary Menu', 'flint' ),
   ) );
@@ -39,11 +39,11 @@ function flint_after_setup_theme() {
   add_theme_support( 'automatic-feed-links' );
 
   add_theme_support( 'post-thumbnails' );
-  
+
   add_theme_support( 'html5' );
-  
+
   add_theme_support( 'post-formats', array( 'aside', 'chat', 'gallery', 'link', 'status' ) );
-  
+
   /**
    * Implement the Custom Background feature
    */
@@ -55,7 +55,7 @@ function flint_after_setup_theme() {
   $args = apply_filters( 'flint_custom_background_args', $args );
 
   add_theme_support( 'custom-background', $args );
-  
+
   /**
    * Implement Custom Header feature
    */
@@ -75,8 +75,8 @@ function flint_after_setup_theme() {
   $header = apply_filters( 'flint_custom_header_args', $header );
 
   add_theme_support( 'custom-header', $header );
-  
-  /** 
+
+  /**
    * Add theme support for Infinite Scroll.
    * See: http://jetpack.me/support/infinite-scroll/
    */
@@ -98,7 +98,7 @@ require( get_template_directory() . '/inc/custom-header.php' );
  */
 function flint_widgets_init() {
   $widget_areas = array('Header','Footer','Left','Right');
-  
+
   foreach ($widget_areas as $widget_area) {
     register_sidebar( array(
       'name'          => $widget_area,
@@ -116,7 +116,7 @@ add_action( 'widgets_init', 'flint_widgets_init' );
  * Enqueue scripts and styles
  */
 function flint_enqueue_scripts() {
-  
+
   /**
    * Load Twitter Bootstrap
    */
@@ -132,15 +132,15 @@ function flint_enqueue_scripts() {
   if ( is_singular() && wp_attachment_is_image() ) {
     wp_enqueue_script( 'flint-keyboard-image-navigation', get_template_directory_uri() . '/js/keyboard-image-navigation.js', array( 'jquery' ), '4c99b2a' );
   }
-  
-  /* 
+
+  /*
    * Load Google Fonts
    */
   $fonts = get_option( 'flint_fonts' );
-  
+
   $body_font    = !empty($fonts['body_font'])    ? $fonts['body_font']    : 'Open Sans';
   $heading_font = !empty($fonts['heading_font']) ? $fonts['heading_font'] : 'Open Sans';
-  
+
   switch ($body_font) {
     case 'Open Sans':
       wp_enqueue_style( 'open-sans', '//fonts.googleapis.com/css?family=Open+Sans:300,600,300,700,300italic,600italic,700italic', array(), flint_theme_version() );
@@ -189,7 +189,7 @@ function flint_enqueue_scripts() {
         break;
     }
   }
-  
+
   /**
    * Load theme stylesheet
    */
@@ -221,7 +221,7 @@ class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
     $class_names = $value = '';
 
     $classes = empty( $item->classes ) ? array() : (array) $item->classes;
-    
+
     /**
      * Managing Divider
      * Add divider class to an element to get a divider before it.
@@ -231,7 +231,7 @@ class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
       $output .= "<li class=\"divider\"></li>\n";
       unset($classes[$divider_class_position]);
     }
-    
+
     $classes[] = ($args->has_children) ? 'dropdown' : '';
     $classes[] = ($item->current || $item->current_item_ancestor) ? 'active' : '';
     $classes[] = 'menu-item-' . $item->ID;
@@ -263,7 +263,7 @@ class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
 
     $output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
   }
-  
+
 
   function display_element( $element, &$children_elements, $max_depth, $depth=0, $args, &$output ) {
     if ( !$element )
