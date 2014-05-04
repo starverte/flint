@@ -96,8 +96,8 @@ function flint_admin_header_style() {
       margin-top: 20px;
       margin-bottom: 10px;
     }
-    
-    
+
+
   </style>
 <?php
 }
