@@ -41,6 +41,9 @@ html,
 body {
   height: 100%;
 }
+body {
+  padding-top: 70px;
+}
 article {
   margin-bottom: 3em;
 }
@@ -300,12 +303,12 @@ body.minimal.minimal-breadcrumbs #top-pad {
   display: none;
 }
 .home.blog .entry-title {
-  display:block;
+  display: block;
 }
 .sticky {
   max-width: 95%;
   padding: 20px;
-  padding-top:0;
+  padding-top: 0;
   margin-top: 3em;
   margin-right: auto;
   margin-left: auto;
