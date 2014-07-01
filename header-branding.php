@@ -14,7 +14,7 @@
       <div class="container hidden-xs">
         <?php $header_image = get_header_image();
         if ( ! empty( $header_image ) ) { ?>
-          <a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home" <?php if ( display_header_text() ) { ?> class="col-lg-2 col-md-2 visible-lg visible-md"<?php } ?>>
+          <a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home" <?php if ( display_header_text() ) { ?> class="col-lg-2 col-md-2 visible-lg-block visible-md-block"<?php } ?>>
             <img src="<?php header_image(); ?>" width="<?php echo get_custom_header()->width; ?>" height="<?php echo get_custom_header()->height; ?>" alt="" />
           </a>
         <?php } /* if ( ! empty( $header_image ) ) */
