@@ -63,7 +63,7 @@ get_header();
                     break;
                 }
                 $k++;
-                
+
                 /**
                  * If there is more than 1 attachment in a gallery
                  */
