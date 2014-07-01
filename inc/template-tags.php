@@ -31,23 +31,23 @@ function flint_content_nav( $nav_id ) {
 
   $nav_class = ( is_single() ) ? 'navigation-post' : 'navigation-paging';
 
-  ?>  
+  ?>
   <nav role="navigation" id="<?php echo esc_attr( $nav_id ); ?>" class="<?php echo $nav_class; ?>">
     <h1 class="screen-reader-text"><?php _e( 'Post navigation', 'flint' ); ?></h1>
 
   <?php if ( is_single() ) : ?>
-  
+
   <ul class="pager">
 
     <?php previous_post_link( '<li class="previous">%link</li>' ); ?>
     <?php next_post_link( '<li class="next">%link</li>' ); ?>
-    
+
   </ul>
 
   <?php elseif ( $wp_query->max_num_pages > 1 && ( is_home() || is_archive() || is_search() ) ) : ?>
-  
+
   <ul class="pager">
-    
+
     <?php if ( get_next_posts_link() ) : ?>
     <li class="previous"><?php next_posts_link( __( 'Older posts', 'flint' ) ); ?></li>
     <?php endif; ?>
@@ -55,9 +55,9 @@ function flint_content_nav( $nav_id ) {
     <?php if ( get_previous_posts_link() ) : ?>
     <li class="next"><?php previous_posts_link( __( 'Newer posts', 'flint' ) ); ?></li>
     <?php endif; ?>
-    
+
   </ul>
-  
+
   <?php endif; ?>
 
   </nav>
@@ -97,7 +97,7 @@ function flint_comment( $comment, $args, $depth ) {
         <br>
         <?php endif; ?>
         <?php comment_text(); ?>
-        
+
       </div>
       <div class="col-lg-3 col-md-3 col-sm-3">
         <p><a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>"><time datetime="<?php comment_time( 'c' ); ?>">
@@ -107,7 +107,7 @@ function flint_comment( $comment, $args, $depth ) {
         <?php if ( current_user_can('moderate_comments') ) { ?><a class="btn btn-default btn-sm" href="<?php echo get_edit_comment_link(); ?>" >Edit</a><?php } ?>
       </div>
     </article>
-    
+
   <?php
     break;
   endswitch;
@@ -156,11 +156,11 @@ function flint_posted_in() {
   $categories = get_the_category();
   $tags = get_the_tags();
   $separator = ' '; ?>
-  
+
   <?php if (flint_has_category()) { ?>
-  
+
     <span class="cat-links">
-      
+
       <?php $output = '';
       foreach($categories as $category) {
         if ($category->cat_name != 'Uncategorized') {
@@ -170,20 +170,20 @@ function flint_posted_in() {
       $output = trim($output, $separator);
       echo 'Posted in ' . $output; ?>
     </span><!-- .cat-links -->
-    
+
     <?php } //endif flint_has_category()
-  
+
   if (has_tag()) {
-    
+
     if (flint_has_category()) { ?><span class="sep"> | </span><?php } ?>
-  
+
     <span class="tags-links">
       Tagged
       <?php $output = '';
       foreach($tags as $tag) {$output .= '<a class="label label-info" href="'.get_tag_link( $tag->term_id ).'" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $tag->name ) ) . '">'.$tag->name.'</a>'.$separator; }
       echo trim($output, $separator); ?>
     </span><!-- .tags-links --><?php
-    
+
   } //endif has_tag()
 }
 endif;
@@ -194,10 +194,10 @@ endif;
  */
 function flint_categorized_blog() {
   if ( false === ( $all_the_cool_cats = get_transient( 'all_the_cool_cats' ) ) ) {
-    
+
     $all_the_cool_cats = get_categories( array( 'hide_empty' => 1, ) );// Create an array of all the categories that are attached to posts
 
-    
+
     $all_the_cool_cats = count( $all_the_cool_cats );// Count the number of categories that are attached to the posts
 
     set_transient( 'all_the_cool_cats', $all_the_cool_cats );
@@ -300,15 +300,15 @@ function flint_link_page( $i ) {
  * Modifies the_content to allow for more tag to be a bootstrap button
  */
 function flint_the_content($more_link_text = 'Read more', $stripteaser = false, $args = array() ) {
-  
+
   $defaults = array(
     'more_class'  => 'btn btn-primary',
     'more_before' => '<div style="float:right;"><a href="',
     'more_after'  => '</a></div>',
   );
-  
+
   $args = wp_parse_args( $args, $defaults );
-  
+
   $content = flint_get_the_content($more_link_text, $stripteaser, $args);
   $content = apply_filters('the_content', $content);
   $content = str_replace(']]>', ']]&gt;', $content);
@@ -323,13 +323,13 @@ function flint_get_the_content( $more_link_text = 'Read more', $stripteaser = fa
   global $more, $page, $pages, $multipage, $preview;
 
   $post = get_post();
-  
+
   $defaults = array(
     'more_class'  => 'btn btn-primary',
     'more_before' => '<div style="float:right;"><a href="',
     'more_after'  => '</a></div>',
   );
-  
+
   $args = wp_parse_args( $args, $defaults );
 
   if ( null === $more_link_text )
@@ -619,17 +619,17 @@ function flint_reply_link($args = array(), $comment = null, $post = null) {
 function flint_get_widgets( $slug, $minimal = false ) {
   $options = get_option( 'flint_templates' );
   $minimal_widget_area = !empty($options['minimal_widget_area']) ? $options['minimal_widget_area'] : false;
-  
+
   switch ($minimal) {
     case true:
       if ($slug == $minimal_widget_area) { flint_get_widgets( $slug, false); }
       break;
     case false:
       do_action( "get_sidebar", $slug );
-      
+
       $templates   = array();
       $templates[] = "widgets/area-{$slug}.php";
-      
+
       locate_template($templates, true, false);
       break;
   }
@@ -642,7 +642,7 @@ function flint_get_widgets( $slug, $minimal = false ) {
 function flint_is_active_widgets( $slug ) {
   $options = get_option( 'flint_templates' );
   $minimal_widget_area = !empty($options['minimal_widget_area']) ? $options['minimal_widget_area'] : false;
-  
+
   if ($slug == $minimal_widget_area && is_active_sidebar( $slug )):
     return true;
   else:
@@ -677,7 +677,7 @@ function flint_breadcrumbs( $display = 'show' ) {
       echo '</ol>';
       break;
     case 'clear':
-      
+
       if ($clear_nav == 'breadcrumbs') { flint_breadcrumbs(); }
       break;
     case 'minimal':
@@ -693,7 +693,7 @@ function flint_breadcrumbs( $display = 'show' ) {
  */
 function flint_custom_footer() {
   $options = get_option( 'flint_general' );
-  
+
   $company     = !empty($options['company'])     ? $options['company']            : '';
   $tel         = !empty($options['tel'])         ? $options['tel']                : '';
   $email       = !empty($options['email'])       ? $options['email']              : '';
@@ -702,7 +702,7 @@ function flint_custom_footer() {
   $locality    = !empty($options['locality'])    ? $options['locality']           : '';
   $postal_code = !empty($options['postal_code']) ? $options['postal_code']        : '';
   $footer      = !empty($options['text'])        ? stripslashes($options['text']) : '';
-  
+
   $patterns = array(
     '/{site title}/',
     '/{site description}/',
@@ -723,7 +723,7 @@ function flint_custom_footer() {
     '<span itemprop="faxNumber">' . $fax     . '</span>',
     '<span id="address" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><span id="street" itemprop="streetAddress">' . $address . '</span><span class="comma">, </span><span id="locality" itemprop="addressLocality">' . $locality . '</span> <span id="postal-code" itemprop="postalCode">' . $postal_code . '</span></span>'
   );
-  
+
   $footer = preg_replace( $patterns, $replacements, $footer);
   echo '<div id="org" itemscope itemtype="http://schema.org/Organization">';
   echo $footer;
@@ -731,19 +731,29 @@ function flint_custom_footer() {
 }
 
 function flint_options_css() {
+
+  global $bg;
+  global $txt_color;
+  global $a_color;
+  global $a_color_hover;
+  global $canvas_bg;
+  global $canvas_bg_dark;
+  global $canvas_bg_light;
+  global $canvas_color;
+
   $fonts = get_option( 'flint_fonts' );
   $body_font    = !empty($fonts['body_font'])    ? $fonts['body_font']    : 'Open Sans' ;
   $heading_font = !empty($fonts['heading_font']) ? $fonts['heading_font'] : 'Open Sans' ;
 
   $colors = get_option( 'flint_colors' );
-  $link         = !empty($colors['link'])        ? $colors['link']               : '#428bca' ;
-  $link_hover   = !empty($colors['link'])        ? flint_darken_hex($link,15)    : '#2a6496' ;
-  $canvas       = !empty($colors['canvas'])      ? $colors['canvas']             : '#222222' ;
-  $canvas_dark  = !empty($colors['canvas'])      ? flint_darken_hex($canvas,10)  : '#000000' ;
-  $canvas_light = !empty($colors['canvas'])      ? flint_lighten_hex($canvas,5)  : '#333333' ;
-  $canvas_text  = !empty($colors['canvas_text']) ? $colors['canvas_text']        : '#ffffff' ;
+  $link         = !empty($colors['link'])        ? $colors['link']               : '#'.$a_color ;
+  $link_hover   = !empty($colors['link'])        ? flint_darken_hex($link,15)    : '#'.$a_color_hover ;
+  $canvas       = !empty($colors['canvas'])      ? $colors['canvas']             : '#'.$canvas_bg ;
+  $canvas_dark  = !empty($colors['canvas'])      ? flint_darken_hex($canvas,10)  : '#'.$canvas_bg_dark ;
+  $canvas_light = !empty($colors['canvas'])      ? flint_lighten_hex($canvas,5)  : '#'.$canvas_bg_light ;
+  $canvas_text  = !empty($colors['canvas_text']) ? $colors['canvas_text']        : '#'.$canvas_color ;
 
-  $bg         = get_theme_mod( 'background_color', '#eeeeee' );
+  $bg         = get_theme_mod( 'background_color', '#'.$bg );
   $blockquote = flint_darken_hex($bg,6.5);
 
   $canvas_link = flint_darken_hex($canvas_text,15);
@@ -753,22 +763,25 @@ function flint_options_css() {
 
   switch ($body_font) {
     case 'Open Sans':
-      $body .= '"Open Sans",  sans-serif; font-weight: 300; }';
+      $body .= '"Open Sans",   sans-serif; font-weight: 300; }';
       break;
     case 'Oswald':
-      $body .= '"Oswald",     sans-serif; font-weight: 300; }';
+      $body .= '"Oswald",      sans-serif; font-weight: 300; }';
       break;
     case 'Roboto':
-      $body .= '"Roboto",     sans-serif; font-weight: 300; }';
+      $body .= '"Roboto",      sans-serif; font-weight: 300; }';
       break;
     case 'Droid Sans':
-      $body .= '"Droid Sans", sans-serif; font-weight: 400; }';
+      $body .= '"Droid Sans",  sans-serif; font-weight: 400; }';
       break;
     case 'Lato':
-      $body .= '"Lato",       sans-serif; font-weight: 300; }';
+      $body .= '"Lato",        sans-serif; font-weight: 300; }';
+      break;
+    case 'Nova Square':
+      $body .= '"Nova Square", sans-serif; font-weight: 400; }';
       break;
     case 'Strait':
-      $body .= '"Strait",     sans-serif; font-weight: 400; }';
+      $body .= '"Strait",      sans-serif; font-weight: 400; }';
       break;
   }
 
@@ -776,22 +789,25 @@ function flint_options_css() {
 
   switch ($heading_font) {
     case 'Open Sans':
-      $headings .= '"Open Sans",  sans-serif; font-weight: 400;}';
+      $headings .= '"Open Sans",   sans-serif; font-weight: 400;}';
       break;
     case 'Oswald':
-      $headings .= '"Oswald",     sans-serif; font-weight: 400;}';
+      $headings .= '"Oswald",      sans-serif; font-weight: 400;}';
       break;
     case 'Roboto':
-      $headings .= '"Roboto",     sans-serif; font-weight: 400;}';
+      $headings .= '"Roboto",      sans-serif; font-weight: 400;}';
       break;
     case 'Droid Sans':
-      $headings .= '"Droid Sans", sans-serif; font-weight: 400;}';
+      $headings .= '"Droid Sans",  sans-serif; font-weight: 400;}';
       break;
     case 'Lato':
-      $headings .= '"Lato",       sans-serif; font-weight: 400;}';
+      $headings .= '"Lato",        sans-serif; font-weight: 400;}';
+      break;
+    case 'Nova Square':
+      $headings .= '"Nova Square", sans-serif; font-weight: 400; }';
       break;
     case 'Strait':
-      $headings .= '"Strait",     sans-serif; font-weight: 400;}';
+      $headings .= '"Strait",      sans-serif; font-weight: 400;}';
       break;
   }
 
@@ -818,13 +834,13 @@ function flint_options_css() {
 function flint_get_template( $output = 'slug', $template = '' ) {
   $options = get_option( 'flint_templates' );
   $file    = get_post_meta( get_the_ID(), '_wp_page_template', true );
-  
+
   $default_width = !empty($options['default_width']) ? $options['default_width'] : 'full';
   $clear_width   = !empty($options['clear_width'])   ? $options['clear_width']   : 'full';
   $minimal_width = !empty($options['minimal_width']) ? $options['minimal_width'] : 'full';
-  
+
   if (!empty($template)) { trigger_error('$template variable in flint_get_template() is deprecated as of Flint 1.2.1. Use get_template() to get a particular file.'); unset($t); }
-  
+
   if (empty($file) | $file == 'default') {
     if ( is_active_sidebar('left') || is_active_sidebar('right') ) { $slug = 'wide'; }
     else { $slug = $default_width; }
@@ -834,7 +850,7 @@ function flint_get_template( $output = 'slug', $template = '' ) {
     if ( flint_is_active_widgets('left') || flint_is_active_widgets('right') ) { $slug = 'wide'; }
     else{ $slug = $minimal_width; }
   }
-  
+
   switch ($output) {
     case 'slug':
       return $slug;
@@ -871,7 +887,7 @@ function flint_get_template( $output = 'slug', $template = '' ) {
       }
       break;
   }
-  
+
 }
 
 /**
@@ -880,9 +896,9 @@ function flint_get_template( $output = 'slug', $template = '' ) {
 function flint_get_widgets_template( $output, $widget_area = 'footer' ) {
   $options = get_option( 'flint_templates' );
   $type    = get_post_type( get_the_ID() );
-  
+
   $widgets_footer_width = !empty($options['widgets_footer_width']) ? $options['widgets_footer_width'] : 'match';
-  
+
   switch ($widget_area) {
     case 'footer':
       if ($widgets_footer_width == 'match') {
@@ -904,7 +920,7 @@ function flint_body_class() {
     $template = get_post_meta( $post->ID, '_wp_page_template', true );
     $clear_nav   = !empty($options['clear_nav'])   ? $options['clear_nav']   : 'breadcrumbs';
     $minimal_nav = !empty($options['minimal_nav']) ? $options['minimal_nav'] : 'navbar';
-    
+
     if ($template == 'templates/clear.php') {
       switch ($clear_nav) {
         case 'navbar':
@@ -932,6 +948,8 @@ function flint_body_class() {
 
 /**
  * Gets the featured image for a post or page if not specified otherwise in theme options
+ *
+ * Deprecated. Use flint_the_post_thumbnail
  */
 function flint_post_thumbnail( $type = 'post', $loc = 'single') {
   $layout = get_option( 'flint_layout' );
@@ -945,6 +963,29 @@ function flint_post_thumbnail( $type = 'post', $loc = 'single') {
     case 'page':
       if ($pages_image == 'always') {if (has_post_thumbnail()) { the_post_thumbnail(); }}
       elseif ($pages_image == 'archives' && $loc == 'archive') {if (has_post_thumbnail()) { the_post_thumbnail(); }}
+      break;
+  }
+}
+
+/**
+ * Gets the featured image for a post or page if not specified otherwise in theme options
+ */
+function flint_the_post_thumbnail( $size = 'post-thumbnail', $attr = '' ) {
+  $layout = get_option( 'flint_layout' );
+  $type   = get_post_type();
+  $posts_image = !empty($layout['posts_image']) ? $layout['posts_image'] : 'always';
+  $pages_image = !empty($layout['pages_image']) ? $layout['pages_image'] : 'always';
+  switch ($type) {
+    case 'post':
+      if ($posts_image == 'always') {if (has_post_thumbnail()) { the_post_thumbnail( $size, $attr ); }}
+      elseif ($posts_image == 'archives' && is_archive()) {if (has_post_thumbnail()) { the_post_thumbnail( $size, $attr ); }}
+      break;
+    case 'page':
+      if ($pages_image == 'always') {if (has_post_thumbnail()) { the_post_thumbnail( $size, $attr ); }}
+      elseif ($pages_image == 'archives' && is_archive()) {if (has_post_thumbnail()) { the_post_thumbnail( $size, $attr ); }}
+      break;
+    default:
+      if (has_post_thumbnail()) { the_post_thumbnail( $size, $attr ); }
       break;
   }
 }

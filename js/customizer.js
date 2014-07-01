@@ -14,7 +14,7 @@
       $( '.entry-content a, .entry-content a:hover, .entry-content a:focus' ).css( 'color', to );
     } );
   } );
-  
+
   // Site title and description.
   wp.customize( 'blogname', function( value ) {
     value.bind( function( to ) {
@@ -32,7 +32,7 @@
       $( '.site-title a, .site-description' ).css( 'color', to );
     } );
   } );
-  
+
   // Canvas colors
   wp.customize( 'flint_colors[canvas]', function( value ) {
     value.bind( function( to ) {
@@ -44,7 +44,7 @@
       $( '.canvas' ).css( 'color', to );
     } );
   } );
-  
+
   // Fonts
   wp.customize( 'flint_fonts[heading_font]', function( value ) {
     value.bind( function( to ) {

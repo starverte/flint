@@ -17,12 +17,12 @@ Licensed under the GNU General Public License v2.0, http://www.gnu.org/licenses/
 
 ```
 Flint uses Bootstrap http://getbootstrap.com/
-(C) 2013 Twitter, Inc
+(C) 2011-2014 Twitter, Inc
 Licensed under the Apache License v2.0, http://www.apache.org/licenses/LICENSE-2.0
 ```
 
 ```
-Flint Copyright 2013  Star Verte LLC  (email : info@starverte.com)
+Flint Copyright 2013-2014 Star Verte LLC (email : dev@starverte.com)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
