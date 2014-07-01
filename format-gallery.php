@@ -5,7 +5,7 @@
  * The template for displaying the post content for gallery posts
  *
  * @package Flint
- * @since 1.2.0
+ * @since 1.2.3
  */
 ?>
 
