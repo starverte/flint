@@ -1,3 +1,10 @@
+###Flint 1.2.2
+For complete diff, check out [Pull Request](https://github.com/starverte/flint/pull/164)
+- Upgraded to Bootstrap 3.2
+- Margin and padding tweaks (no more `#top-pad`)
+- Code cleanup
+- Global color variables for better consistency
+
 ###Flint 1.2.1
 For complete diff, check out [Pull Request](https://github.com/starverte/flint/pull/159)
 - Significant changes to `flint_get_template()` in order to work properly and not have extraneous code
