@@ -370,6 +370,14 @@ a.more-link {
   width: auto;
   max-height: 200px;
 }
+.wa-left,
+.wa-both {
+  padding-left: 2.5em;
+}
+.wa-right,
+.wa-both {
+  padding-right: 2.5em;
+}
 
 /* Asides  */
 .blog .format-aside .entry-title,
