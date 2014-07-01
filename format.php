@@ -10,12 +10,12 @@
 ?>
 
   <div class="row">
-    <?php if (!is_active_sidebar('left') &&  !is_active_sidebar('right')) { ?>
+    <?php if (!is_active_sidebar('left') &&  !is_active_sidebar('right') && has_post_thumbnail()) { ?>
       <div class="col-lg-2 col-md-2 col-sm-2">
         <?php if (is_singular()) { flint_post_thumbnail(); } else { flint_post_thumbnail( 'post', 'archive' ); } ?>
       </div>
     <?php } ?>
-    <article id="post-<?php the_ID(); ?>" <?php if (!is_active_sidebar('left') &&  !is_active_sidebar('right')) { post_class('col-lg-8 col-md-8 col-sm-8'); } else { post_class(); } ?>>
+    <article id="post-<?php the_ID(); ?>" <?php if (!is_active_sidebar('left') &&  !is_active_sidebar('right') && has_post_thumbnail()) { post_class('col-lg-10 col-md-10 col-sm-10'); } else { post_class(); } ?>>
       <header class="entry-header">
         <?php $type = get_post_type(); ?>
         <?php do_action('flint_open_entry_header_'.$type); ?>
@@ -50,5 +50,5 @@
         <?php do_action('flint_entry_meta_below_post'); ?>
       </footer><!-- .entry-meta -->
     </article><!-- #post-<?php the_ID(); ?> -->
-    <?php if (!is_active_sidebar('left') &&  !is_active_sidebar('right')) { ?><div class="col-lg-2 col-md-2 col-sm-2"></div><?php } ?>
+    <?php if (!is_active_sidebar('left') &&  !is_active_sidebar('right') && has_post_thumbnail()) { ?><div class="col-lg-2 col-md-2 col-sm-2"></div><?php } ?>
   </div><!-- .row -->
