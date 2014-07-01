@@ -11,7 +11,7 @@
     <?php if (is_singular()) { flint_post_thumbnail(); } else { flint_post_thumbnail( 'post', 'archive' ); } ?>
   </div>
 
-  <article id="post-<?php the_ID(); ?>" <?php post_class('col-lg-1 col-lg-10 col-md-10 col-sm-10 col-xs-10'); ?>>
+  <article id="post-<?php the_ID(); ?>" <?php post_class('col-lg-10 col-lg-10 col-md-10 col-sm-10 col-xs-10'); ?>>
     <header class="entry-header">
       <?php $type = get_post_type(); ?>
       <?php do_action('flint_open_entry_header_'.$type); ?>
