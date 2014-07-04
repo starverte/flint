@@ -22,6 +22,63 @@ function flint_customize_register( $wp_customize ) {
     'Strait'      => 'Strait',
   );
 
+  $wp_customize->add_section( 'flint_general' , array(
+    'title'      => __( 'Footer', 'flint' ),
+    'priority'   => 25,
+  ));
+
+  $wp_customize->add_setting('flint_general[text]', array(
+    'default'           => '',
+    'capability'        => 'edit_theme_options',
+    'type'              => 'option',
+    'transport'         => 'postMessage',
+  ));
+
+  $wp_customize->add_control( new Flint_Customize_TextArea_Control($wp_customize, 'text', array(
+    'label'    => __('Footer Text', 'flint'),
+    'section'  => 'flint_general',
+    'settings' => 'flint_general[text]',
+    'priority' => '10',
+    'type'     => 'textarea',
+  )));
+
+  $wp_customize->add_section( 'flint_fonts' , array(
+    'title'      => __( 'Fonts', 'flint' ),
+    'priority'   => 30,
+  ));
+
+  $wp_customize->add_setting('flint_fonts[heading_font]', array(
+    'default'           => 'Open Sans',
+    'capability'        => 'edit_theme_options',
+    'type'              => 'option',
+    'transport'         => 'postMessage',
+  ));
+
+  $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'heading_font', array(
+    'label'    => __('Headings', 'flint'),
+    'section'  => 'flint_fonts',
+    'settings' => 'flint_fonts[heading_font]',
+    'priority' => '10',
+    'type' => 'select',
+    'choices' => $fonts,
+  )));
+
+  $wp_customize->add_setting('flint_fonts[body_font]', array(
+    'default'           => 'Open Sans',
+    'capability'        => 'edit_theme_options',
+    'type'              => 'option',
+    'transport'         => 'postMessage',
+  ));
+
+  $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'body_font', array(
+    'label'    => __('Body', 'flint'),
+    'section'  => 'flint_fonts',
+    'settings' => 'flint_fonts[body_font]',
+    'priority' => '20',
+    'type' => 'select',
+    'choices' => $fonts,
+  )));
+
   $wp_customize->add_setting('flint_colors[link]', array(
     'default'           => '#'.$a_color,
     'sanitize_callback' => 'sanitize_hex_color',
@@ -67,41 +124,49 @@ function flint_customize_register( $wp_customize ) {
     'priority' => '80',
   )));
 
-  $wp_customize->add_section( 'flint_fonts' , array(
-    'title'      => __( 'Fonts', 'flint' ),
-    'priority'   => 30,
+  $wp_customize->add_section( 'flint_layout' , array(
+    'title'      => __( 'Featured Images', 'flint' ),
+    'priority'   => 80,
   ));
 
-  $wp_customize->add_setting('flint_fonts[heading_font]', array(
-    'default'           => 'Open Sans',
+  $wp_customize->add_setting('flint_layout[posts_image]', array(
+    'default'           => 'always',
     'capability'        => 'edit_theme_options',
     'type'              => 'option',
     'transport'         => 'postMessage',
   ));
 
-  $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'heading_font', array(
-    'label'    => __('Headings', 'flint'),
-    'section'  => 'flint_fonts',
-    'settings' => 'flint_fonts[heading_font]',
+  $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'posts_image', array(
+    'label'    => __('Show for Posts', 'flint'),
+    'section'  => 'flint_layout',
+    'settings' => 'flint_layout[posts_image]',
     'priority' => '10',
     'type' => 'select',
-    'choices' => $fonts,
+    'choices' => array(
+      'always'    =>  'Always',
+      'archives'  =>  'Archives/Search Only',
+      'never'     =>  'Never',
+    ),
   )));
 
-  $wp_customize->add_setting('flint_fonts[body_font]', array(
-    'default'           => 'Open Sans',
+  $wp_customize->add_setting('flint_layout[pages_image]', array(
+    'default'           => 'always',
     'capability'        => 'edit_theme_options',
     'type'              => 'option',
     'transport'         => 'postMessage',
   ));
 
-  $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'body_font', array(
-    'label'    => __('Body', 'flint'),
-    'section'  => 'flint_fonts',
-    'settings' => 'flint_fonts[body_font]',
+  $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'pages_image', array(
+    'label'    => __('Show for Pages', 'flint'),
+    'section'  => 'flint_layout',
+    'settings' => 'flint_layout[pages_image]',
     'priority' => '20',
     'type' => 'select',
-    'choices' => $fonts,
+    'choices' => array(
+      'always'    =>  'Always',
+      'archives'  =>  'Archives/Search Only',
+      'never'     =>  'Never',
+    ),
   )));
 
   $wp_customize->get_setting( 'blogname'         )->transport = 'postMessage';
@@ -122,3 +187,24 @@ function flint_customize_preview_init() {
   wp_enqueue_style( 'strait'     , '//fonts.googleapis.com/css?family=Strait'                                                 , array(), '' );
 }
 add_action( 'customize_preview_init', 'flint_customize_preview_init' );
+
+if (class_exists('WP_Customize_Control')) {
+  class Flint_Customize_TextArea_Control extends WP_Customize_Control {
+    public $type = 'textarea';
+    public $description;
+
+    public function render_content() {
+        ?>
+        <label>
+          <?php if ( ! empty( $this->label ) ) : ?>
+            <span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
+          <?php endif;
+          if ( ! empty( $this->description ) ) : ?>
+            <span class="description customize-control-description"><?php echo $this->description; ?></span>
+          <?php endif; ?>
+          <textarea rows="5" <?php $this->link(); ?>><?php echo esc_textarea( $this->value() ); ?></textarea>
+        </label>
+        <?php
+    }
+  }
+}
