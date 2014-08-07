@@ -42,24 +42,17 @@ get_header(); ?>
 
       <?php while ( have_posts() ) : the_post(); ?>
 
-      <?php
-        $type = get_post_type();
-        if ($type == 'post') :
-          get_template_part( 'format', get_post_format() );
-        else :
-          get_template_part( 'type', $type );
-        endif;
-      ?>
+        <?php get_template_part( 'templates/' . flint_get_template(), 'content' ); ?>
+
+        <?php if ( comments_open() || '0' != get_comments_number() ) { comments_template(); } ?>
 
       <?php endwhile; ?>
 
-      <?php flint_content_nav( 'nav-below' ); ?>
-
-    </div><!-- #content .site-content -->
+    </div><!-- #content -->
 
     <?php flint_get_widgets('right'); ?>
 
-  </div><!-- #primary .content-area -->
+  </div><!-- #primary -->
 
 <?php flint_get_widgets('footer'); ?>
 <?php get_footer(); ?>
