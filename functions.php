@@ -182,6 +182,9 @@ function flint_enqueue_scripts() {
     case 'Strait':
       wp_enqueue_style( 'strait', '//fonts.googleapis.com/css?family=Strait', array(), flint_theme_version() );
       break;
+    case 'Yanone Kaffeesatz':
+      wp_enqueue_style( 'yanone-kaffeesatz', '//fonts.googleapis.com/css?family=Yanone+Kaffeesatz:300,400,700', array(), flint_theme_version() );
+      break;
   }
   if ( $heading_font != $body_font ) {
     switch ($heading_font) {
@@ -200,11 +203,14 @@ function flint_enqueue_scripts() {
       case 'Lato':
         wp_enqueue_style( 'lato', '//fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic', array(), flint_theme_version() );
         break;
-    case 'Nova Square':
+      case 'Nova Square':
         wp_enqueue_style( 'nova-square', '//fonts.googleapis.com/css?family=Nova+Square', array(), flint_theme_version() );
         break;
       case 'Strait':
         wp_enqueue_style( 'strait', '//fonts.googleapis.com/css?family=Strait', array(), flint_theme_version() );
+        break;
+      case 'Yanone Kaffeesatz':
+        wp_enqueue_style( 'yanone-kaffeesatz', '//fonts.googleapis.com/css?family=Yanone+Kaffeesatz:300,400,700', array(), flint_theme_version() );
         break;
     }
   }
