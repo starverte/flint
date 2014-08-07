@@ -763,25 +763,28 @@ function flint_options_css() {
 
   switch ($body_font) {
     case 'Open Sans':
-      $body .= '"Open Sans",   sans-serif; font-weight: 300; }';
+      $body .= '"Open Sans",         sans-serif; font-weight: 300; }';
       break;
     case 'Oswald':
-      $body .= '"Oswald",      sans-serif; font-weight: 300; }';
+      $body .= '"Oswald",            sans-serif; font-weight: 300; }';
       break;
     case 'Roboto':
-      $body .= '"Roboto",      sans-serif; font-weight: 300; }';
+      $body .= '"Roboto",            sans-serif; font-weight: 300; }';
       break;
     case 'Droid Sans':
-      $body .= '"Droid Sans",  sans-serif; font-weight: 400; }';
+      $body .= '"Droid Sans",        sans-serif; font-weight: 400; }';
       break;
     case 'Lato':
-      $body .= '"Lato",        sans-serif; font-weight: 300; }';
+      $body .= '"Lato",              sans-serif; font-weight: 300; }';
       break;
     case 'Nova Square':
-      $body .= '"Nova Square", sans-serif; font-weight: 400; }';
+      $body .= '"Nova Square",       sans-serif; font-weight: 400; }';
       break;
     case 'Strait':
-      $body .= '"Strait",      sans-serif; font-weight: 400; }';
+      $body .= '"Strait",            sans-serif; font-weight: 400; }';
+      break;
+    case 'Yanone Kaffeesatz':
+      $body .= '"Yanone Kaffeesatz", sans-serif; font-weight: 300; }';
       break;
   }
 
@@ -789,25 +792,28 @@ function flint_options_css() {
 
   switch ($heading_font) {
     case 'Open Sans':
-      $headings .= '"Open Sans",   sans-serif; font-weight: 400;}';
+      $headings .= '"Open Sans",         sans-serif; font-weight: 400;}';
       break;
     case 'Oswald':
-      $headings .= '"Oswald",      sans-serif; font-weight: 400;}';
+      $headings .= '"Oswald",            sans-serif; font-weight: 400;}';
       break;
     case 'Roboto':
-      $headings .= '"Roboto",      sans-serif; font-weight: 400;}';
+      $headings .= '"Roboto",            sans-serif; font-weight: 400;}';
       break;
     case 'Droid Sans':
-      $headings .= '"Droid Sans",  sans-serif; font-weight: 400;}';
+      $headings .= '"Droid Sans",        sans-serif; font-weight: 400;}';
       break;
     case 'Lato':
-      $headings .= '"Lato",        sans-serif; font-weight: 400;}';
+      $headings .= '"Lato",              sans-serif; font-weight: 400;}';
       break;
     case 'Nova Square':
-      $headings .= '"Nova Square", sans-serif; font-weight: 400; }';
+      $headings .= '"Nova Square",       sans-serif; font-weight: 400; }';
       break;
     case 'Strait':
-      $headings .= '"Strait",      sans-serif; font-weight: 400;}';
+      $headings .= '"Strait",            sans-serif; font-weight: 400;}';
+      break;
+    case 'Yanone Kaffeesatz':
+      $headings .= '"Yanone Kaffeesatz", sans-serif; font-weight: 400;}';
       break;
   }
 
