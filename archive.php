@@ -70,6 +70,8 @@ get_header(); ?>
             elseif ( is_tax( 'post_format', 'post-format-quote' ) ) { _e( 'Quotes', 'flint' ); }
             elseif ( is_tax( 'post_format', 'post-format-link'  ) ) { _e( 'Links' , 'flint' ); }
 
+            elseif ( is_tax() ) { printf( __( '%s', 'flint' ), '<span>' . single_term_title( '', false ) . '</span>' ); }
+
             else { _e( '<span>' . 'Archives' . '</span>', 'flint' ); }
 
             /**
@@ -123,3 +125,4 @@ get_header(); ?>
 
 <?php flint_get_widgets('footer'); ?>
 <?php get_footer(); ?>
+
