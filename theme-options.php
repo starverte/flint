@@ -338,8 +338,8 @@ function flint_get_address( $schema = true, $args = array() ) {
     'sep2'   => '</span> <span id="postal-code" itemprop="postalCode">',
     'item3'  => $postal_code,
     'after'  => '</span>',
-    'open'   => '<div id="org" itemscope itemtype="http://schema.org/Organization"><span id="address" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">',
-    'close'  => '</span></div>',
+    'open'   => '<span id="org" itemscope itemtype="http://schema.org/Organization"><span id="address" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">',
+    'close'  => '</span></span>',
   );
   $alts = array(
     'before' => '',
