@@ -42,15 +42,24 @@ get_header(); ?>
 
       <?php while ( have_posts() ) : the_post(); ?>
 
-        <?php get_template_part( 'templates/wide', 'content' ); // @todo Fix: Ability to customize page template ?>
+      <?php
+        $type = get_post_type();
+        if ($type == 'post') :
+          get_template_part( 'format', get_post_format() );
+        else :
+          get_template_part( 'type', $type );
+        endif;
+      ?>
 
       <?php endwhile; ?>
 
-    </div><!-- #content -->
+      <?php flint_content_nav( 'nav-below' ); ?>
+
+    </div><!-- #content .site-content -->
 
     <?php flint_get_widgets('right'); ?>
 
-  </div><!-- #primary -->
+  </div><!-- #primary .content-area -->
 
 <?php flint_get_widgets('footer'); ?>
 <?php get_footer(); ?>
