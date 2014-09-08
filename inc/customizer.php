@@ -170,6 +170,71 @@ function flint_customize_register( $wp_customize ) {
     ),
   )));
 
+  $wp_customize->add_section( 'flint_wa' , array(
+    'title'      => __( 'Widget Areas', 'flint' ),
+    'priority'   => 30,
+  ));
+
+  $wp_customize->add_setting('flint_wa[header]', array(
+    'default'           => '-1',
+    'capability'        => 'edit_theme_options',
+    'type'              => 'option',
+    'transport'         => 'postMessage',
+  ));
+
+  $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'header', array(
+    'label'    => __('Header', 'flint'),
+    'section'  => 'flint_wa',
+    'settings' => 'flint_wa[header]',
+    'priority' => '10',
+    'type' => 'select',
+    'choices' => array(
+      '-1'  =>  'None',
+      '1'   =>  'Display',
+    ),
+  )));
+
+  $wp_customize->add_setting('flint_wa[sides]', array(
+    'default'           => '-1',
+    'capability'        => 'edit_theme_options',
+    'type'              => 'option',
+    'transport'         => 'postMessage',
+  ));
+
+  $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'sides', array(
+    'label'    => __('Sidebars', 'flint'),
+    'section'  => 'flint_wa',
+    'settings' => 'flint_wa[sides]',
+    'priority' => '20',
+    'type' => 'select',
+    'choices' => array(
+      '-1'      =>  'None',
+      'left'    =>  'Left',
+      'right'   =>  'Right',
+      'both'    =>  'Both',
+    ),
+  )));
+
+  $wp_customize->add_setting('flint_wa[footer]', array(
+    'default'           => '1',
+    'capability'        => 'edit_theme_options',
+    'type'              => 'option',
+    'transport'         => 'postMessage',
+  ));
+
+  $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'footer', array(
+    'label'    => __('Footer', 'flint'),
+    'section'  => 'flint_wa',
+    'settings' => 'flint_wa[footer]',
+    'priority' => '30',
+    'type' => 'select',
+    'choices' => array(
+      '-1'  =>  'None',
+      '1'   =>  'Full-width',
+      '3'   =>  '1-3 columns',
+    ),
+  )));
+
   $wp_customize->get_setting( 'blogname'         )->transport = 'postMessage';
   $wp_customize->get_setting( 'blogdescription'  )->transport = 'postMessage';
   $wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
