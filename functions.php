@@ -116,12 +116,32 @@ require( get_template_directory() . '/inc/custom-header.php' );
  * Register widgetized areas and update sidebar with default widgets
  */
 function flint_widgets_init() {
-  $widget_areas = array('Header','Footer','Left','Right');
+  $wa        = get_option('flint_wa');
+  $wa_header = $wa['header'];
+  $wa_sides  = $wa['sides'];
+  $wa_footer = $wa['footer'];
+
+  $widget_areas = array();
+
+  if (!empty($wa_header) && $wa_header == '1')
+    array_push($widget_areas, 'Header' );
+
+  if (!empty($wa_sides) && $wa_sides == 'left' || $wa_sides == 'both' )
+    array_push($widget_areas, 'Left' );
+
+  if (!empty($wa_sides) && $wa_sides == 'right' || $wa_sides == 'both' )
+    array_push($widget_areas, 'Right' );
+
+  if (!empty($wa_footer) && $wa_footer == '1' || empty($wa_footer) )
+    array_push($widget_areas, 'Footer' );
+
+  if (!empty($wa_footer) && $wa_footer == '3' )
+    array_push($widget_areas, 'Footer Left', 'Footer Center', 'Footer Right' );
 
   foreach ($widget_areas as $widget_area) {
     register_sidebar( array(
       'name'          => $widget_area,
-      'id'            => strtolower($widget_area),
+      'id'            => str_replace(' ','_',strtolower($widget_area)),
       'before_widget' => '<aside id="%1$s" class="widget %2$s">',
       'after_widget'  => '</aside>',
       'before_title'  => '<h1 class="widget-title">',
