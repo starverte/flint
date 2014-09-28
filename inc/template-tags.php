@@ -704,14 +704,14 @@ function flint_custom_footer() {
   $footer      = !empty($options['text'])        ? stripslashes($options['text']) : '';
 
   $patterns = array(
-    '/{site title}/',
-    '/{site description}/',
-    '/{year}/',
-    '/{company}/',
-    '/{phone}/',
-    '/{email}/',
-    '/{fax}/',
-    '/{address}/'
+    '/@SITE_TITLE@/',
+    '/@SITE_DESCRIPTION@/',
+    '/@YEAR@/',
+    '/@COMPANY@/',
+    '/@PHONE@/',
+    '/@EMAIL@/',
+    '/@FAX@/',
+    '/@ADDRESS@/'
   );
   $replacements = array(
     get_bloginfo( 'name' ),

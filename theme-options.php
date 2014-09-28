@@ -5,6 +5,8 @@
  *
  * @package Flint
  * @since 1.2.0
+ *
+ * @todo Remove in next release
  */
 
 $flint_general = array();
@@ -64,6 +66,8 @@ $flint_templates = array();
       <div class="updated fade"><p><strong><?php _e( 'Options saved', 'flint' ); ?></strong></p></div><?php
     } ?>
 
+    <div class="updated fade"><p><strong><?php _e( 'These options are now available via the Customizer (Appearance &rarr; Customize).', 'flint' ); ?></strong></p></div>
+
     <form method="post" action="options.php">
 
       <?php
@@ -112,8 +116,8 @@ $flint_templates = array();
 
        </table>
 
-      <p>Customize the footer using template tags. For example, type in <code>ABC Company</code> in as "Company Name" and then in "Footer Text" type <code>&amp;copy; {year} {company}</code> and the Footer will output as <code>&copy; <?php echo date('Y'); ?> ABC Company</code>.</p>
-      <p>Available tags: <code>{site title}</code>, <code>{site description}</code>, <code>{year}</code>, <code>{company}</code>, <code>{address}</code>, <code>{phone}</code>, <code>{email}</code>, and <code>{fax}</code></p>
+      <p>Customize the footer using template tags. For example, type in <code>ABC Company</code> in as "Company Name" and then in "Footer Text" type <code>&amp;copy; @YEAR@ @COMPANY@</code> and the Footer will output as <code>&copy; <?php echo date('Y'); ?> ABC Company</code>.</p>
+      <p>Available tags: <code>@SITE_TITLE@</code>, <code>@SITE_DESCRIPTION@</code>, <code>@YEAR@</code>, <code>@COMPANY@</code>, <code>@ADDRESS@</code>, <code>@PHONE@</code>, <code>@EMAIL@</code>, and <code>@FAX@</code></p>
 
       <table class="form-table">
 
@@ -137,6 +141,8 @@ $flint_templates = array();
     if ( false !== $_REQUEST['updated'] ) { ?>
       <div class="updated fade"><p><strong><?php _e( 'Options saved', 'flint' ); ?></strong></p></div><?php
     } ?>
+
+    <div class="updated fade"><p><strong><?php _e( 'These options are now available via the Customizer (Appearance &rarr; Customize).', 'flint' ); ?></strong></p></div>
 
     <form method="post" action="options.php">
 
@@ -189,6 +195,8 @@ $flint_templates = array();
     if ( false !== $_REQUEST['updated'] ) { ?>
       <div class="updated fade"><p><strong><?php _e( 'Options saved', 'flint' ); ?></strong></p></div><?php
     } ?>
+
+    <div class="updated fade"><p><strong><?php _e( 'These options are now available via the Customizer (Appearance &rarr; Customize).', 'flint' ); ?></strong></p></div>
 
     <form method="post" action="options.php">
 
