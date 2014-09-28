@@ -123,14 +123,15 @@ function flint_widgets_init() {
 
   $widget_areas = array();
 
-  if (!empty($wa_header) && $wa_header == '1')
+  if (!empty($wa_header) && $wa_header == '1' || empty($wa_header) )
     array_push($widget_areas, 'Header' );
 
-  if (!empty($wa_sides) && $wa_sides == 'left' || $wa_sides == 'both' )
-    array_push($widget_areas, 'Left' );
+  if (!empty($wa_header) && $wa_header == '3' )
+    array_push($widget_areas, 'Header Left', 'Header Center', 'Header Right' );
 
-  if (!empty($wa_sides) && $wa_sides == 'right' || $wa_sides == 'both' )
-    array_push($widget_areas, 'Right' );
+  array_push($widget_areas, 'Left' );
+
+  array_push($widget_areas, 'Right' );
 
   if (!empty($wa_footer) && $wa_footer == '1' || empty($wa_footer) )
     array_push($widget_areas, 'Footer' );
@@ -259,7 +260,6 @@ class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
 
   function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
 
-
     $indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
 
     $li_attributes = '';
@@ -284,7 +284,6 @@ class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
       $classes[] = 'dropdown-submenu';
     }
 
-
     $class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
     $class_names = ' class="' . esc_attr( $class_names ) . '"';
 
@@ -304,7 +303,6 @@ class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
     $item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
     $item_output .= ($depth == 0 && $args->has_children) ? ' <b class="caret"></b></a>' : '</a>';
     $item_output .= $args->after;
-
 
     $output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
   }
