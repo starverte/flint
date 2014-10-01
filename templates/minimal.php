@@ -14,23 +14,23 @@ if (empty($options['minimal_nav']) || $options['minimal_nav'] == 'navbar'){ get_
 
     <div class="row">
 
-    <?php flint_get_widgets('left', true); ?>
+      <?php flint_get_widgets('left', true); ?>
 
-    <div id="content" class="site-content<?php if ( flint_is_active_widgets( 'left' ) | flint_is_active_widgets( 'right' ) ) { echo ' col-xs-12 col-md-9'; } ?>" role="main">
+      <div id="content" class="site-content<?php if ( flint_is_active_widgets( 'left' ) | flint_is_active_widgets( 'right' ) ) { echo ' col-xs-12 col-md-9'; } ?>" role="main">
 
-      <?php while ( have_posts() ) : the_post(); ?>
+        <?php while ( have_posts() ) : the_post(); ?>
 
-        <?php flint_breadcrumbs('minimal'); ?>
+          <?php flint_breadcrumbs('minimal'); ?>
 
-        <?php get_template_part( 'templates/' . flint_get_template(), 'content' ); ?>
+          <?php get_template_part( 'templates/' . flint_get_template(), 'content' ); ?>
 
-        <?php if ( comments_open() || '0' != get_comments_number() ) { comments_template(); } ?>
+          <?php if ( comments_open() || '0' != get_comments_number() ) { comments_template(); } ?>
 
-      <?php endwhile; ?>
+        <?php endwhile; ?>
 
-    </div><!-- #content -->
+      </div><!-- #content -->
 
-    <?php flint_get_widgets('right', true); ?>
+      <?php flint_get_widgets('right', true); ?>
 
     </div><!-- .row -->
 
