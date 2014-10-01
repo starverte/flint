@@ -8,10 +8,17 @@
 ?>
 
   <div class="row">
-    <div class="col-xs-12 col-sm-2 col-md-2">
-      <?php if (is_singular()) { flint_post_thumbnail(); } else { flint_post_thumbnail( 'post', 'archive' ); } ?>
-    </div>
-    <article id="post-<?php the_ID(); ?>" <?php post_class('col-xs-12 col-sm-8 col-md-8'); ?>>
+    <?php if (!is_active_sidebar('left') &&  !is_active_sidebar('right')) { ?>
+      <div class="col-xs-12 col-sm-2 col-md-2">
+        <?php if (is_singular()) { flint_post_thumbnail(); } else { flint_post_thumbnail( 'post', 'archive' ); } ?>
+      </div>
+    <?php }
+    else { ?>
+      <div class="col-xs-12 col-sm-2 hidden-md hidden-lg">
+        <?php if (is_singular()) { flint_post_thumbnail(); } else { flint_post_thumbnail( 'post', 'archive' ); } ?>
+      </div>
+    <?php } ?>
+    <article id="post-<?php the_ID(); ?>" <?php if (!is_active_sidebar('left') &&  !is_active_sidebar('right')) { post_class('col-xs-12 col-sm-8 col-md-8'); } else { post_class('col-xs-12 col-sm-8 col-md-12'); } ?>>
       <header class="entry-header">
         <?php $type = get_post_type(); ?>
         <?php do_action('flint_open_entry_header_'.$type); ?>
@@ -46,6 +53,7 @@
       <?php do_action('flint_entry_meta_below_'.$type); ?>
       </footer><!-- .entry-meta -->
 
-    </article><!-- #<?php echo $type; ?>-<?php the_ID(); ?> -->
-    <div class="hidden-xs col-sm-2 col-md-2"></div>
+    </article><!-- #post-<?php the_ID(); ?> -->
+    <?php if (!is_active_sidebar('left') &&  !is_active_sidebar('right')) { ?><div class="hidden-xs col-sm-2 col-md-2"></div><?php } ?>
+    <?php else { ?><div class="hidden-xs col-sm-2 hidden-md hidden-lg"></div><?php } ?>
   </div><!-- .row -->
