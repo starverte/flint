@@ -11,8 +11,8 @@ get_header(); ?>
   <div id="primary" class="content-area container">
     <div id="content" class="site-content" role="main">
       <div class="row">
-        <div class="col-lg-2 col-md-2 col-sm-2"></div>
-        <article id="post-0" class="post error404 not-found col-lg-8 col-md-8 col-sm-8">
+        <div class="hidden-xs col-sm-2 col-md-2"></div>
+        <article id="post-0" class="post error404 not-found col-xs-12 col-sm-8 col-md-8">
           <header class="entry-header">
             <?php do_action('flint_open_entry_header_404'); ?>
             <h1 class="entry-title"><?php _e( 'Are we missing something?', 'flint' ); ?></h1>
@@ -66,7 +66,7 @@ get_header(); ?>
             <?php endif; ?>
           </footer><!-- .entry-meta -->
         </article><!-- #page-<?php the_ID(); ?> -->
-        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        <div class="hidden-xs col-sm-2 col-md-2"></div>
       </div><!-- .row -->
     </div><!-- #content -->
   </div><!-- #primary -->

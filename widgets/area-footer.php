@@ -17,27 +17,27 @@ $type = get_post_type();
         <?php dynamic_sidebar('footer'); ?>
       </div><!-- .widget-area -->
       <?php flint_get_widgets_template('margins', 'footer'); ?>
-    </div>
+    </div><!-- .container -->
   </div><!-- .widgets.widgets-footer -->
 <?php } ?>
 <?php if ( is_active_sidebar( 'footer_left' ) || is_active_sidebar( 'footer_center' ) || is_active_sidebar( 'footer_right' ) ) { ?>
   <div class="canvas-light widgets widgets-footer" role="complementary">
     <div class="container">
-      <div class="widget-area col-lg-4 col-md-4" >
+      <div class="widget-area col-xs-12 col-md-4" >
         <?php do_action( 'before_sidebar' ); ?>
         <?php do_action( 'flint_widget_area_footer_left_'.$type ); ?>
         <?php dynamic_sidebar('footer_left'); ?>
       </div><!-- .widget-area -->
-      <div class="widget-area col-lg-4 col-md-4" >
+      <div class="widget-area col-xs-12 col-md-4" >
         <?php do_action( 'before_sidebar' ); ?>
         <?php do_action( 'flint_widget_area_footer_center_'.$type ); ?>
         <?php dynamic_sidebar('footer_center'); ?>
       </div><!-- .widget-area -->
-      <div class="widget-area col-lg-4 col-md-4" >
+      <div class="widget-area col-xs-12 col-md-4" >
         <?php do_action( 'before_sidebar' ); ?>
         <?php do_action( 'flint_widget_area_footer_right_'.$type ); ?>
         <?php dynamic_sidebar('footer_right'); ?>
       </div><!-- .widget-area -->
-    </div>
+    </div><!-- .container -->
   </div><!-- .widgets.widgets-footer -->
 <?php } ?>

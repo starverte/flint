@@ -87,10 +87,10 @@ function flint_comment( $comment, $args, $depth ) {
     ?>
   <li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
     <article id="comment-<?php comment_ID(); ?>" class="comment media row">
-      <div class="col-lg-2 col-md-2 col-sm-2">
+      <div class="hidden-xs col-sm-2">
         <?php echo flint_avatar( $comment ); ?>
       </div>
-      <div class="media-body col-lg-7 col-md-7 col-sm-7">
+      <div class="media-body col-xs-12 col-sm-7">
         <h4 class="media-heading"><?php printf( __( '%s <span class="says">says:</span>', 'flint' ), sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?></h4>
         <?php if ( $comment->comment_approved == '0' ) : ?>
         <em><?php _e( 'Your comment is awaiting moderation.', 'flint' ); ?></em>
@@ -99,7 +99,7 @@ function flint_comment( $comment, $args, $depth ) {
         <?php comment_text(); ?>
 
       </div>
-      <div class="col-lg-3 col-md-3 col-sm-3">
+      <div class="col-xs-12 col-sm-3">
         <p><a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>"><time datetime="<?php comment_time( 'c' ); ?>">
         <?php printf( _x( '%1$s <br> %2$s', '1: date, 2: time', 'flint' ), get_comment_date('M j, Y'), get_comment_time('g:i a') ); ?>
         </time></a></p>
@@ -837,7 +837,7 @@ function flint_options_css() {
 /**
  * Returns slug or class for #primary based on theme options
  */
-function flint_get_template( $output = 'slug', $template = '' ) {
+function flint_get_template( $output = 'slug', $template = '', $a = false ) {
   $options = get_option( 'flint_templates' );
   $file    = get_post_meta( get_the_ID(), '_wp_page_template', true );
 
@@ -845,7 +845,7 @@ function flint_get_template( $output = 'slug', $template = '' ) {
   $clear_width   = !empty($options['clear_width'])   ? $options['clear_width']   : 'full';
   $minimal_width = !empty($options['minimal_width']) ? $options['minimal_width'] : 'full';
 
-  if (!empty($template)) { trigger_error('$template variable in flint_get_template() is deprecated as of Flint 1.2.1. Use get_template() to get a particular file.'); unset($t); }
+  if (!empty($template) && $a != true) { trigger_error('$template variable in flint_get_template() is deprecated as of Flint 1.2.1. Use get_template() to get a particular file.'); unset($t); }
 
   if (empty($file) | $file == 'default') {
     if ( is_active_sidebar('left') || is_active_sidebar('right') ) { $slug = 'wide'; }
@@ -863,30 +863,30 @@ function flint_get_template( $output = 'slug', $template = '' ) {
       break;
     case 'content':
       switch ($slug) {
-        case 'full':
-          echo 'col-lg-8 col-md-8 col-sm-8';
-          break;
         case 'slim':
-          echo 'col-lg-4 col-md-4 col-sm-4';
+          echo 'col-xs-12 col-sm-8 col-md-4';
           break;
         case 'narrow':
-          echo 'col-lg-6 col-md-6 col-sm-6';
+          echo 'col-xs-12 col-sm-8 col-md-6';
+          break;
+        case 'full':
+          echo 'col-xs-12 col-sm-10 col-md-8';
           break;
         case 'wide':
-          echo 'col-lg-12 col-md-12 col-sm-12';
+          echo 'col-xs-12';
           break;
       }
       break;
     case 'margins':
       switch ($slug) {
-        case 'full':
-          echo '<div class="col-lg-2 col-md-2 col-sm-2"></div>';
-          break;
         case 'slim':
-          echo '<div class="col-lg-4 col-md-4 col-sm-4"></div>';
+          echo '<div class="hidden-xs col-sm-2 col-md-4"></div>';
           break;
         case 'narrow':
-          echo '<div class="col-lg-3 col-md-3 col-sm-3"></div>';
+          echo '<div class="hidden-xs col-sm-2 col-md-3"></div>';
+          break;
+        case 'full':
+          echo '<div class="hidden-xs col-sm-1 col-md-2"></div>';
           break;
         case 'wide':
           break;
@@ -909,9 +909,9 @@ function flint_get_widgets_template( $output, $widget_area = 'footer' ) {
     case 'footer':
       if ($widgets_footer_width == 'match') {
         if ($type == 'page') { flint_get_template( $output ); }
-        else { flint_get_template( $output, 'templates/full.php' ); }
+        else { flint_get_template( $output, 'templates/full.php', true ); }
       }
-      else { flint_get_template( $output, 'templates/' . $widgets_footer_width . '.php'); }
+      else { flint_get_template( $output, 'templates/' . $widgets_footer_width . '.php', true); }
       break;
   }
 }

@@ -9,7 +9,7 @@ $type = get_post_type();
 ?>
 <?php if ( is_active_sidebar( 'left' ) | is_active_sidebar( 'right' ) ) { ?>
   <?php if ( is_active_sidebar( 'right' ) ) { ?>
-    <div class="col-lg-3 col-md-3 widgets widgets-right" role="complementary">
+    <div class="hidden-xs hidden-sm col-md-3 widgets widgets-right" role="complementary">
         <div class="widget-area" >
           <?php do_action( 'before_sidebar' ); ?>
           <?php do_action( 'flint_widget_area_right_'.$type ); ?>

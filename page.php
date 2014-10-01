@@ -17,19 +17,19 @@ get_header(); ?>
       $content_class = 'site-content';
       if ( is_active_sidebar( 'left' ) | is_active_sidebar( 'right' ) ) {
         if ( is_active_sidebar( 'left' ) && is_active_sidebar( 'right' ) ) {
-          $content_class .= ' col-lg-6 col-md-6 wa-both';
+          $content_class .= ' col-xs-12 col-md-6 wa-both';
         }
         else {
           if ( is_active_sidebar( 'left' ) ) {
-            $content_class .= ' col-lg-9 col-md-9 wa-left';
+            $content_class .= ' col-xs-12 col-md-9 wa-left';
           }
           elseif ( is_active_sidebar( 'right' ) ) {
-            $content_class .= ' col-lg-9 col-md-9 wa-right';
+            $content_class .= ' col-xs-12 col-md-9 wa-right';
           }
         }
       }
       else {
-        $content_class .= ' col-lg-12 col-md-12';
+        $content_class .= ' col-xs-12';
       }
     ?>
 
@@ -37,7 +37,14 @@ get_header(); ?>
 
       <?php while ( have_posts() ) : the_post(); ?>
 
-        <?php get_template_part( 'templates/' . flint_get_template(), 'content' ); ?>
+        <?php
+          if ( is_active_sidebar( 'left' ) | is_active_sidebar( 'right' ) ) {
+            get_template_part( 'templates/full', 'content' );
+          }
+          else {
+            get_template_part( 'templates/' . flint_get_template(), 'content' );
+          }
+        ?>
 
         <?php if ( comments_open() || '0' != get_comments_number() ) { comments_template(); } ?>
 

@@ -14,7 +14,7 @@ if (empty($options['minimal_nav']) || $options['minimal_nav'] == 'navbar'){ get_
 
     <?php flint_get_widgets('left', true); ?>
 
-    <div id="content" class="site-content<?php if ( flint_is_active_widgets( 'left' ) | flint_is_active_widgets( 'right' ) ) { echo ' col-lg-9 col-md-9'; } ?>" role="main">
+    <div id="content" class="site-content<?php if ( flint_is_active_widgets( 'left' ) | flint_is_active_widgets( 'right' ) ) { echo ' col-xs-12 col-md-9'; } ?>" role="main">
 
       <?php while ( have_posts() ) : the_post(); ?>
 

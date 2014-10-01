@@ -8,7 +8,7 @@
 ?>
 
   <div class="row">
-    <article id="post-<?php the_ID(); ?>" <?php post_class('col-lg-12 col-md-12 col-sm-12'); ?>>
+    <article id="post-<?php the_ID(); ?>" <?php post_class('col-xs-12'); ?>>
       <header class="entry-header">
         <?php $type = get_post_type(); ?>
         <?php do_action('flint_open_entry_header_'.$type); ?>
