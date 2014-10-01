@@ -87,10 +87,10 @@ function flint_comment( $comment, $args, $depth ) {
     ?>
   <li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
     <article id="comment-<?php comment_ID(); ?>" class="comment media row">
-      <div class="hidden-xs col-sm-2">
+      <div class="col-xs-3 col-sm-2">
         <?php echo flint_avatar( $comment ); ?>
       </div>
-      <div class="media-body col-xs-12 col-sm-7">
+      <div class="media-body col-xs-5 col-sm-7">
         <h4 class="media-heading"><?php printf( __( '%s <span class="says">says:</span>', 'flint' ), sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?></h4>
         <?php if ( $comment->comment_approved == '0' ) : ?>
         <em><?php _e( 'Your comment is awaiting moderation.', 'flint' ); ?></em>
@@ -99,7 +99,7 @@ function flint_comment( $comment, $args, $depth ) {
         <?php comment_text(); ?>
 
       </div>
-      <div class="col-xs-12 col-sm-3">
+      <div class="col-xs-4 col-sm-3">
         <p><a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>"><time datetime="<?php comment_time( 'c' ); ?>">
         <?php printf( _x( '%1$s <br> %2$s', '1: date, 2: time', 'flint' ), get_comment_date('M j, Y'), get_comment_time('g:i a') ); ?>
         </time></a></p>

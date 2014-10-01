@@ -558,6 +558,7 @@ object {
 }
 .comment-list,
 .comment-list .children {
+  padding-left: 0;
   list-style: none;
 }
 article.comment {

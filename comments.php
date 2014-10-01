@@ -9,6 +9,7 @@
 if ( post_password_required() )
   return;
 ?>
+<div class="row">
   <?php flint_get_template('margins'); ?>
   <div id="comments" class="comments-area <?php flint_get_template('content'); ?>">
 
@@ -50,3 +51,4 @@ if ( post_password_required() )
 
   </div><!-- #comments -->
   <?php flint_get_template('margins'); ?>
+</div>
