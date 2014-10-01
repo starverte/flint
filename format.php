@@ -55,6 +55,6 @@
         <?php do_action('flint_entry_meta_below_post'); ?>
       </footer><!-- .entry-meta -->
     </article><!-- #post-<?php the_ID(); ?> -->
-    <?php if (!is_active_sidebar('left') &&  !is_active_sidebar('right')) { ?><div class="hidden-xs col-sm-2 col-md-2"></div><?php } ?>
-    <?php else { ?><div class="hidden-xs col-sm-2 hidden-md hidden-lg"></div><?php } ?>
+    <?php if (!is_active_sidebar('left') &&  !is_active_sidebar('right')) { ?><div class="hidden-xs col-sm-2 col-md-2"></div><?php }
+    else { ?><div class="hidden-xs col-sm-2 hidden-md hidden-lg"></div><?php } ?>
   </div><!-- .row -->
