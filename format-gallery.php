@@ -16,6 +16,12 @@
         <?php if (is_single()) {} else { ?><a class="btn btn-info btn-block hidden-xs" href="<?php echo get_permalink(); ?>">View gallery</a><?php } ?>
       </div>
      <?php } ?>
+    <?php else { ?>
+      <div class="col-xs-12 col-sm-2 hidden-md hidden-lg">
+        <?php if (is_singular()) { flint_post_thumbnail(); } else { flint_post_thumbnail( 'post', 'archive' ); } ?>
+        <?php if (is_single()) {} else { ?><a class="btn btn-info btn-block hidden-xs" href="<?php echo get_permalink(); ?>">View gallery</a><?php } ?>
+      </div>
+     <?php } ?>
     <article id="post-<?php the_ID(); ?>" <?php if (!is_active_sidebar('left') &&  !is_active_sidebar('right')) { post_class('col-xs-12 col-sm-8 col-md-8'); } else { post_class('col-xs-12 col-sm-8 col-md-12'); } ?>>
       <header class="entry-header">
         <h1 class="entry-title"><?php if (is_single()) { echo the_title(); } else { $permalink = get_permalink(); $title = get_the_title(); echo '<a href="' . $permalink .'" rel="bookmark">' . $title . '</a>'; } ?></h1>
@@ -82,4 +88,5 @@
       </footer><!-- .entry-meta -->
     </article><!-- #page-<?php the_ID(); ?> -->
     <?php if (!is_active_sidebar('left') &&  !is_active_sidebar('right')) { ?><div class="hidden-xs col-sm-2 col-md-2"></div><?php } ?>
+    <?php else { ?><div class="hidden-xs col-sm-2 hidden-md hidden-lg"></div><?php } ?
   </div><!-- .row -->

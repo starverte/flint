@@ -14,6 +14,11 @@
       <div class="col-xs-12 col-sm-2 col-md-2">
         <?php if (is_singular()) { flint_post_thumbnail(); } else { flint_post_thumbnail( 'post', 'archive' ); } ?>
       </div>
+    <?php }
+    else { ?>
+      <div class="col-xs-12 col-sm-2 hidden-md hidden-lg">
+        <?php if (is_singular()) { flint_post_thumbnail(); } else { flint_post_thumbnail( 'post', 'archive' ); } ?>
+      </div>
     <?php } ?>
     <article id="post-<?php the_ID(); ?>" <?php if (!is_active_sidebar('left') &&  !is_active_sidebar('right')) { post_class('col-xs-12 col-sm-8 col-md-8'); } else { post_class('col-xs-12 col-sm-8 col-md-12'); } ?>>
       <header class="entry-header">
@@ -51,4 +56,5 @@
       </footer><!-- .entry-meta -->
     </article><!-- #post-<?php the_ID(); ?> -->
     <?php if (!is_active_sidebar('left') &&  !is_active_sidebar('right')) { ?><div class="hidden-xs col-sm-2 col-md-2"></div><?php } ?>
+    <?php else { ?><div class="hidden-xs col-sm-2 hidden-md hidden-lg"></div><?php } ?>
   </div><!-- .row -->
