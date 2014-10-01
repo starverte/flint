@@ -18,48 +18,48 @@ get_header(); ?>
 
     <div class="row">
 
-    <?php
-      flint_get_widgets('left');
+      <?php
+        flint_get_widgets('left');
 
-      $content_class = 'site-content';
-      if ( is_active_sidebar( 'left' ) | is_active_sidebar( 'right' ) ) {
-        if ( is_active_sidebar( 'left' ) && is_active_sidebar( 'right' ) ) {
-          $content_class .= ' col-xs-12 col-md-6 wa-both';
+        $content_class = 'site-content';
+        if ( is_active_sidebar( 'left' ) | is_active_sidebar( 'right' ) ) {
+          if ( is_active_sidebar( 'left' ) && is_active_sidebar( 'right' ) ) {
+            $content_class .= ' col-xs-12 col-md-6 wa-both';
+          }
+          else {
+            if ( is_active_sidebar( 'left' ) ) {
+              $content_class .= ' col-xs-12 col-md-9 wa-left';
+            }
+            elseif ( is_active_sidebar( 'right' ) ) {
+              $content_class .= ' col-xs-12 col-md-9 wa-right';
+            }
+          }
         }
         else {
-          if ( is_active_sidebar( 'left' ) ) {
-            $content_class .= ' col-xs-12 col-md-9 wa-left';
-          }
-          elseif ( is_active_sidebar( 'right' ) ) {
-            $content_class .= ' col-xs-12 col-md-9 wa-right';
-          }
+          $content_class .= ' col-xs-12';
         }
-      }
-      else {
-        $content_class .= ' col-xs-12';
-      }
-    ?>
-
-    <div id="content" class="<?php echo $content_class; ?>" role="main">
-
-      <?php while ( have_posts() ) : the_post(); ?>
-
-      <?php
-        $type = get_post_type();
-        if ($type == 'post') :
-          get_template_part( 'format', get_post_format() );
-        else :
-          get_template_part( 'type', $type );
-        endif;
       ?>
 
-      <?php endwhile; ?>
+      <div id="content" class="<?php echo $content_class; ?>" role="main">
 
-      <?php flint_content_nav( 'nav-below' ); ?>
+        <?php while ( have_posts() ) : the_post(); ?>
 
-    </div><!-- #content .site-content -->
+        <?php
+          $type = get_post_type();
+          if ($type == 'post') :
+            get_template_part( 'format', get_post_format() );
+          else :
+            get_template_part( 'type', $type );
+          endif;
+        ?>
 
-    <?php flint_get_widgets('right'); ?>
+        <?php endwhile; ?>
+
+        <?php flint_content_nav( 'nav-below' ); ?>
+
+      </div><!-- #content .site-content -->
+
+      <?php flint_get_widgets('right'); ?>
 
     </div><!-- .row -->
 

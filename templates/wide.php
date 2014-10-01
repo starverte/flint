@@ -12,41 +12,41 @@ get_header(); ?>
 
     <div class="row">
 
-    <?php
-      flint_get_widgets('left');
+      <?php
+        flint_get_widgets('left');
 
-      $content_class = 'site-content';
-      if ( is_active_sidebar( 'left' ) | is_active_sidebar( 'right' ) ) {
-        if ( is_active_sidebar( 'left' ) && is_active_sidebar( 'right' ) ) {
-          $content_class .= ' col-xs-12 col-md-6 wa-both';
+        $content_class = 'site-content';
+        if ( is_active_sidebar( 'left' ) | is_active_sidebar( 'right' ) ) {
+          if ( is_active_sidebar( 'left' ) && is_active_sidebar( 'right' ) ) {
+            $content_class .= ' col-xs-12 col-md-6 wa-both';
+          }
+          else {
+            if ( is_active_sidebar( 'left' ) ) {
+              $content_class .= ' col-xs-12 col-md-9 wa-left';
+            }
+            elseif ( is_active_sidebar( 'right' ) ) {
+              $content_class .= ' col-xs-12 col-md-9 wa-right';
+            }
+          }
         }
         else {
-          if ( is_active_sidebar( 'left' ) ) {
-            $content_class .= ' col-xs-12 col-md-9 wa-left';
-          }
-          elseif ( is_active_sidebar( 'right' ) ) {
-            $content_class .= ' col-xs-12 col-md-9 wa-right';
-          }
+          $content_class .= ' col-xs-12';
         }
-      }
-      else {
-        $content_class .= ' col-xs-12';
-      }
-    ?>
+      ?>
 
-    <div id="content" class="<?php echo $content_class; ?>" role="main">
+      <div id="content" class="<?php echo $content_class; ?>" role="main">
 
-      <?php while ( have_posts() ) : the_post(); ?>
+        <?php while ( have_posts() ) : the_post(); ?>
 
-        <?php get_template_part( 'templates/wide', 'content' ); ?>
+          <?php get_template_part( 'templates/wide', 'content' ); ?>
 
-        <?php if ( comments_open() || '0' != get_comments_number() ) { comments_template(); } ?>
+          <?php if ( comments_open() || '0' != get_comments_number() ) { comments_template(); } ?>
 
-      <?php endwhile; ?>
+        <?php endwhile; ?>
 
-    </div><!-- #content -->
+      </div><!-- #content -->
 
-    <?php flint_get_widgets('right'); ?>
+      <?php flint_get_widgets('right'); ?>
 
     </div><!-- .row -->
 
