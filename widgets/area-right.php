@@ -17,5 +17,4 @@ $type = get_post_type();
         </div><!-- .widget-area -->
     </div><!-- .widgets.widgets-right -->
   <?php } ?>
-  </div><!-- .row -->
 <?php } ?>

@@ -10,6 +10,7 @@ get_header();
 ?>
 
   <div id="primary" class="content-area container image-attachment">
+    <div class="row">
     <div id="content" class="site-content" role="main">
 
     <?php while ( have_posts() ) : the_post(); ?>
@@ -125,6 +126,7 @@ get_header();
     <?php endwhile; ?>
 
     </div><!-- #content -->
+    </div><!-- .row -->
   </div><!-- #primary -->
 
 <?php get_footer(); ?>

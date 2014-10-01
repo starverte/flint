@@ -13,6 +13,7 @@
 
 <footer id="colophon" class="canvas site-footer" role="contentinfo">
   <div class="site-info container">
+    <div class="row">
     <div id="custom-footer" class="col-xs-12 col-md-6">
       <?php flint_custom_footer(); ?>
     </div>
@@ -22,6 +23,7 @@
       Theme: <a href="<?php echo $theme->get( 'ThemeURI' ) ?>"><?php echo $theme ?></a> by <?php echo $theme->get( 'Author' ) ?>
     </div>
   </div><!-- .site-info -->
+  </div><!-- .row -->
 </footer><!-- #colophon -->
 
 <?php get_footer( 'close' );

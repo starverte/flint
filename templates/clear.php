@@ -10,6 +10,7 @@ get_header('head');
 if ($options['clear_nav'] == 'navbar'){ get_header('nav'); } ?>
 
   <div id="primary" class="content-area container">
+    <div class="row">
     <div id="content" class="site-content" role="main">
 
       <?php while ( have_posts() ) : the_post(); ?>
@@ -23,6 +24,7 @@ if ($options['clear_nav'] == 'navbar'){ get_header('nav'); } ?>
       <?php endwhile; ?>
 
     </div><!-- #content -->
+    </div><!-- .row -->
   </div><!-- #primary -->
 
 <?php get_footer('close'); ?>

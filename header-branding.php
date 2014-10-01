@@ -12,6 +12,7 @@
   <div id="masthead" class="canvas site-header" role="banner">
     <?php if (current_theme_supports('custom-header')) { ?>
       <div class="container hidden-xs">
+        <div class="row">
         <?php $header_image = get_header_image();
         if ( ! empty( $header_image ) ) { ?>
           <a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home" <?php if ( display_header_text() ) { ?> class="hidden-xs hidden-sm col-md-2"<?php } ?>>
@@ -24,6 +25,7 @@
             <h2 class="site-description hidden-xs"><?php bloginfo( 'description' ); ?></h2>
           </div><!-- .site-branding -->
         <?php } /* if ( display_header_text() ) */ ?>
+        </div><!-- .row -->
       </div><!-- .container -->
     <?php } /* if (current_theme_supports('custom-header')) */ ?>
   </div><!-- #masthead -->

@@ -8,7 +8,6 @@
 $type = get_post_type();
 ?>
 <?php if ( is_active_sidebar( 'left' ) | is_active_sidebar( 'right' ) ) { ?>
-  <div class="row">
   <?php if ( is_active_sidebar( 'left' ) ) { ?>
     <div class="hidden-xs hidden-sm col-md-3 widgets widgets-left" role="complementary">
         <div class="widget-area" >

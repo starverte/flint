@@ -16,6 +16,8 @@ get_header(); ?>
 
   <div id="primary" class="content-area container">
 
+    <div class="row">
+
     <?php
       flint_get_widgets('left');
 
@@ -58,6 +60,8 @@ get_header(); ?>
     </div><!-- #content .site-content -->
 
     <?php flint_get_widgets('right'); ?>
+
+    </div><!-- .row -->
 
   </div><!-- #primary .content-area -->
 
