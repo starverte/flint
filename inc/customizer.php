@@ -370,12 +370,11 @@ function flint_customize_register( $wp_customize ) {
    */
   $wp_customize->add_panel( 'flint_panel_layout' , array(
     'title'    => __( 'Layout', 'flint' ),
-    'priority' => 130,
+    'priority' => 60,
   ));
 
     /**
-     * Featured Images section
-     */
+     * Featured Images section (removed)
     $wp_customize->add_section( 'flint_layout' , array(
       'title'    => __( 'Featured Images', 'flint' ),
       'priority' => 10,
@@ -384,7 +383,6 @@ function flint_customize_register( $wp_customize ) {
 
       /**
        * Featured Images on Posts setting
-       */
       $wp_customize->add_setting('flint_layout[posts_image]', array(
         'default'    => 'always',
         'capability' => 'edit_theme_options',
@@ -406,7 +404,6 @@ function flint_customize_register( $wp_customize ) {
 
       /**
        * Featured Images on Pages setting
-       */
       $wp_customize->add_setting('flint_layout[pages_image]', array(
         'default'    => 'always',
         'capability' => 'edit_theme_options',
@@ -425,23 +422,24 @@ function flint_customize_register( $wp_customize ) {
           'never'    => 'Never',
         ),
       )));
+     */
 
   /**
-   * Page Templates panel
-   */
+   * Page Templates panel (removed)
   $wp_customize->add_panel( 'flint_panel_templates' , array(
     'title'    => __( 'Page Templates', 'flint' ),
     'description' => 'Content width settings only impact screens 992px wide and larger.',
     'priority' => 140,
   ));
+   */
 
     /**
      * Default page template section
      */
-    $wp_customize->add_section( 'flint_templates_default' , array(
-      'title'       => __( 'Default', 'flint' ),
-      'priority'    => 10,
-      'panel'       => 'flint_panel_templates',
+    $wp_customize->add_section( 'flint_layout_pages' , array(
+      'title'       => __( 'Pages', 'flint' ),
+      'priority'    => 20,
+      'panel'       => 'flint_panel_layout',
     ));
 
       /**
@@ -455,9 +453,9 @@ function flint_customize_register( $wp_customize ) {
       ));
       $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'default_width', array(
         'label'    => __('Content Width', 'flint'),
-        'section'  => 'flint_templates_default',
+        'section'  => 'flint_layout_pages',
         'settings' => 'flint_templates[default_width]',
-        'priority' => 11,
+        'priority' => 21,
         'type'     => 'select',
         'choices'  => array(
           'slim'   => 'Slim',
@@ -468,8 +466,7 @@ function flint_customize_register( $wp_customize ) {
       )));
 
       /**
-       * Horizontal Widget Area Content Width setting
-       */
+       * Horizontal Widget Area Content Width setting (removed)
       $wp_customize->add_setting('flint_templates[widgets_footer_width]', array(
         'default'    => 'match',
         'capability' => 'edit_theme_options',
@@ -490,15 +487,92 @@ function flint_customize_register( $wp_customize ) {
           'wide'   => 'Wide',
         ),
       )));
+       */
+
+      /**
+       * Featured Images on Pages setting
+       */
+      $wp_customize->add_setting('flint_layout[pages_image]', array(
+        'default'    => 'always',
+        'capability' => 'edit_theme_options',
+        'type'       => 'option',
+        'transport'  => 'postMessage',
+      ));
+      $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'pages_image', array(
+        'label'    => __('Featured Images', 'flint'),
+        'section'  => 'flint_layout_pages',
+        'settings' => 'flint_layout[pages_image]',
+        'priority' => 23,
+        'type'     => 'select',
+        'choices'  => array(
+          'always'   => 'Always show',
+          'archives' => 'Archives/Search Only',
+          'never'    => 'Hide',
+        ),
+      )));
+
+    /**
+     * Default post template section
+     */
+    $wp_customize->add_section( 'flint_layout_posts' , array(
+      'title'       => __( 'Posts', 'flint' ),
+      'priority'    => 10,
+      'panel'       => 'flint_panel_layout',
+    ));
+
+      /**
+       * Default Content Width setting
+       */
+      $wp_customize->add_setting('flint_templates[default_post_width]', array(
+        'default'    => 'full',
+        'capability' => 'edit_theme_options',
+        'type'       => 'option',
+        'transport'  => 'postMessage',
+      ));
+      $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'default_post_width', array(
+        'label'    => __('Content Width', 'flint'),
+        'section'  => 'flint_layout_posts',
+        'settings' => 'flint_templates[default_post_width]',
+        'priority' => 11,
+        'type'     => 'select',
+        'choices'  => array(
+          'slim'   => 'Slim',
+          'narrow' => 'Narrow',
+          'full'   => 'Full',
+          'wide'   => 'Wide',
+        ),
+      )));
+
+      /**
+       * Featured Images on Posts setting
+       */
+      $wp_customize->add_setting('flint_layout[posts_image]', array(
+        'default'    => 'always',
+        'capability' => 'edit_theme_options',
+        'type'       => 'option',
+        'transport'  => 'postMessage',
+      ));
+      $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'posts_image', array(
+        'label'    => __('Featured Images', 'flint'),
+        'section'  => 'flint_layout_posts',
+        'settings' => 'flint_layout[posts_image]',
+        'priority' => 12,
+        'type'     => 'select',
+        'choices'  => array(
+          'always'   => 'Always show',
+          'archives' => 'Archives/Search Only',
+          'never'    => 'Hide',
+        ),
+      )));
 
     /**
      * Clear template section
      */
     $wp_customize->add_section( 'flint_templates_clear' , array(
-      'title'       => __( 'Clear', 'flint' ),
+      'title'       => __( 'Clear Page Template', 'flint' ),
       'description' => __( 'Clear is a page template that allows you to focus on just your content, free from distractions.', 'flint' ),
-      'priority'    => 20,
-      'panel'       => 'flint_panel_templates',
+      'priority'    => 30,
+      'panel'       => 'flint_panel_layout',
     ));
 
       /**
@@ -514,7 +588,7 @@ function flint_customize_register( $wp_customize ) {
         'label'    => __('Content Width', 'flint'),
         'section'  => 'flint_templates_clear',
         'settings' => 'flint_templates[clear_width]',
-        'priority' => 21,
+        'priority' => 31,
         'type'     => 'select',
         'choices'  => array(
           'slim'   => 'Slim',
@@ -537,7 +611,7 @@ function flint_customize_register( $wp_customize ) {
         'label'    => __('Navigation', 'flint'),
         'section'  => 'flint_templates_clear',
         'settings' => 'flint_templates[clear_nav]',
-        'priority' => 22,
+        'priority' => 32,
         'type'     => 'select',
         'choices'  => array(
           'breadcrumbs' => 'Breadcrumbs',
@@ -549,10 +623,10 @@ function flint_customize_register( $wp_customize ) {
      * Minimal template section
      */
     $wp_customize->add_section( 'flint_templates_minimal' , array(
-      'title'       => __( 'Minimal', 'flint' ),
+      'title'       => __( 'Minimal Page Template', 'flint' ),
       'description' => __( 'Minimal provides an additional page template with the focus on the content and an optional widget area.', 'flint' ),
-      'priority'    => 30,
-      'panel'       => 'flint_panel_templates',
+      'priority'    => 40,
+      'panel'       => 'flint_panel_layout',
     ));
 
       /**
@@ -568,7 +642,7 @@ function flint_customize_register( $wp_customize ) {
         'label'    => __('Content Width', 'flint'),
         'section'  => 'flint_templates_minimal',
         'settings' => 'flint_templates[minimal_width]',
-        'priority' => 31,
+        'priority' => 41,
         'type'     => 'select',
         'choices'  => array(
           'slim'   => 'Slim',
@@ -591,7 +665,7 @@ function flint_customize_register( $wp_customize ) {
         'label'    => __('Navigation', 'flint'),
         'section'  => 'flint_templates_minimal',
         'settings' => 'flint_templates[minimal_nav]',
-        'priority' => 32,
+        'priority' => 42,
         'type'     => 'select',
         'choices'  => array(
           'breadcrumbs' => 'Breadcrumbs',
@@ -612,7 +686,7 @@ function flint_customize_register( $wp_customize ) {
         'label'    => __('Widget Area', 'flint'),
         'section'  => 'flint_templates_minimal',
         'settings' => 'flint_templates[minimal_widget_area]',
-        'priority' => 33,
+        'priority' => 43,
         'type'     => 'select',
         'choices'  => array(
           'none'   => 'None',
