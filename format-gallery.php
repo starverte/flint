@@ -13,7 +13,7 @@
     <?php flint_get_spacer('left'); ?>
     <article id="post-<?php the_ID(); ?>" <?php flint_post_class(); ?>>
       <header class="entry-header">
-        <h1 class="entry-title"><?php if (is_single()) { echo the_title(); } else { $permalink = get_permalink(); $title = get_the_title(); echo '<a href="' . $permalink .'" rel="bookmark">' . $title . '</a>'; } ?></h1>
+        <h1 class="entry-title"><?php if (is_single()) { echo the_title(); } else { echo '<a href="' . get_permalink() .'" rel="bookmark">' . get_the_title() . '</a>'; } ?></h1>
         <?php if ( current_user_can('edit_posts') ) { ?><a class="btn btn-default btn-sm btn-edit hidden-xs" href="<?php echo get_edit_post_link(); ?>">Edit Gallery</a><?php } ?>
         <?php if (is_single()) {} else { ?><a class="btn btn-info btn-block visible-xs-block" href="<?php echo get_permalink(); ?>">View gallery</a><?php } ?>
         <div class="entry-meta">
