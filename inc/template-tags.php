@@ -1056,3 +1056,67 @@ function flint_content_class( $class = '' ) {
 
   echo 'class="' . $class . '"';
 }
+
+/**
+ * Post class
+ *
+ * Retrieves and displays the classes for the post div. If
+ *
+ * @uses get_option()
+ * @uses get_post_format()
+ * @uses is_active_sidebar()
+ * @uses post_class()
+ *
+ * @var array  $options       The options array for flint_templates
+ * @var string $format        The format, if any, of the post
+ * @var string $default_width The default width, as set in options, of a post
+ * @var string $width         The width of the post, which determines the col-* classes
+ *
+ * @todo Add parameter to append additional classes that accepts both string and array input
+ */
+function flint_post_class() {
+  global $post;
+  $options = get_option( 'flint_templates' );
+  $format  = get_post_format( $post->ID );
+
+  $default_width = !empty($options['default_post_width']) ? $options['default_post_width'] : 'full';
+
+  switch ($format) {
+    case 'aside':
+      $width = 'wide';
+      break;
+    case 'link':
+      $width = 'wide';
+      break;
+    case 'status':
+      $width = 'wide';
+      break;
+    default:
+      $width = $default_width;
+      break;
+  }
+
+  if (!is_active_sidebar('left') &&  !is_active_sidebar('right')) {
+    switch ($width) {
+      case 'slim':
+        post_class('col-xs-12 col-sm-8 col-md-4');
+        break;
+      case 'narrow':
+        post_class('col-xs-12 col-sm-8 col-md-6');
+        break;
+      case 'full':
+        post_class('col-xs-12 col-sm-8 col-md-8');
+        break;
+      case 'wide':
+        post_class('col-xs-12');
+        break;
+      default:
+        post_class('col-xs-12 col-sm-8 col-md-8');
+        break;
+    }
+  }
+
+  else {
+    post_class('col-xs-12 col-sm-8 col-md-8');
+  }
+}

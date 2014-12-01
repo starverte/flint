@@ -20,7 +20,7 @@
         <?php if (is_singular()) { flint_post_thumbnail(); } else { flint_post_thumbnail( 'post', 'archive' ); } ?>
       </div>
     <?php } ?>
-    <article id="post-<?php the_ID(); ?>" <?php if (!is_active_sidebar('left') &&  !is_active_sidebar('right')) { post_class('col-xs-12 col-sm-8 col-md-8'); } else { post_class('col-xs-12 col-sm-8 col-md-12'); } ?>>
+    <article id="post-<?php the_ID(); ?>" <?php flint_post_class(); ?>>
       <header class="entry-header">
         <?php $type = get_post_type(); ?>
         <?php do_action('flint_open_entry_header_'.$type); ?>
