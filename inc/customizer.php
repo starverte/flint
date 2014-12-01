@@ -298,218 +298,12 @@ function flint_customize_register( $wp_customize ) {
     )));
 
   /**
-   * Header Image section
-   */
-
-  /**
-   * Background Image section
-   */
-
-  /**
-   * Navigation section
-   */
-
-  /**
-   * Widgets panel
-   */
-
-    /**
-     * Widget Columns section
-     */
-    $wp_customize->add_section( 'flint_wa' , array(
-      'title'       => __( 'Columns', 'flint' ),
-      'description' => 'For screens larger than 768px wide, the header and footer areas can be divided into 3 columns.',
-      'priority'    => 180,
-      'panel'       => 'widgets',
-    ));
-
-      /**
-       * Header Columns setting
-       */
-      $wp_customize->add_setting('flint_wa[header]', array(
-        'default'    => '1',
-        'capability' => 'edit_theme_options',
-        'type'       => 'option',
-        'transport'  => 'postMessage',
-      ));
-      $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'header', array(
-        'label'    => __('Header', 'flint'),
-        'section'  => 'flint_wa',
-        'settings' => 'flint_wa[header]',
-        'priority' => 11,
-        'type'     => 'select',
-        'choices'  => array(
-          '1' => 'Full-width',
-          '3' => '3 columns',
-        ),
-      )));
-
-      /**
-       * Footer Columns setting
-       */
-      $wp_customize->add_setting('flint_wa[footer]', array(
-        'default'    => '1',
-        'capability' => 'edit_theme_options',
-        'type'       => 'option',
-        'transport'  => 'postMessage',
-      ));
-      $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'footer', array(
-        'label'    => __('Footer', 'flint'),
-        'section'  => 'flint_wa',
-        'settings' => 'flint_wa[footer]',
-        'priority' => 12,
-        'type'     => 'select',
-        'choices'  => array(
-          '1' => 'Full-width',
-          '3' => '3 columns',
-        ),
-      )));
-
-  /**
    * Layout panel
    */
   $wp_customize->add_panel( 'flint_panel_layout' , array(
     'title'    => __( 'Layout', 'flint' ),
     'priority' => 60,
   ));
-
-    /**
-     * Featured Images section (removed)
-    $wp_customize->add_section( 'flint_layout' , array(
-      'title'    => __( 'Featured Images', 'flint' ),
-      'priority' => 10,
-      'panel'    => 'flint_panel_layout',
-    ));
-
-      /**
-       * Featured Images on Posts setting
-      $wp_customize->add_setting('flint_layout[posts_image]', array(
-        'default'    => 'always',
-        'capability' => 'edit_theme_options',
-        'type'       => 'option',
-        'transport'  => 'postMessage',
-      ));
-      $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'posts_image', array(
-        'label'    => __('Show for Posts', 'flint'),
-        'section'  => 'flint_layout',
-        'settings' => 'flint_layout[posts_image]',
-        'priority' => 11,
-        'type'     => 'select',
-        'choices'  => array(
-          'always'   => 'Always',
-          'archives' => 'Archives/Search Only',
-          'never'    => 'Never',
-        ),
-      )));
-
-      /**
-       * Featured Images on Pages setting
-      $wp_customize->add_setting('flint_layout[pages_image]', array(
-        'default'    => 'always',
-        'capability' => 'edit_theme_options',
-        'type'       => 'option',
-        'transport'  => 'postMessage',
-      ));
-      $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'pages_image', array(
-        'label'    => __('Show for Pages', 'flint'),
-        'section'  => 'flint_layout',
-        'settings' => 'flint_layout[pages_image]',
-        'priority' => 12,
-        'type'     => 'select',
-        'choices'  => array(
-          'always'   => 'Always',
-          'archives' => 'Archives/Search Only',
-          'never'    => 'Never',
-        ),
-      )));
-     */
-
-  /**
-   * Page Templates panel (removed)
-  $wp_customize->add_panel( 'flint_panel_templates' , array(
-    'title'    => __( 'Page Templates', 'flint' ),
-    'description' => 'Content width settings only impact screens 992px wide and larger.',
-    'priority' => 140,
-  ));
-   */
-
-    /**
-     * Default page template section
-     */
-    $wp_customize->add_section( 'flint_layout_pages' , array(
-      'title'       => __( 'Pages', 'flint' ),
-      'priority'    => 20,
-      'panel'       => 'flint_panel_layout',
-    ));
-
-      /**
-       * Default Content Width setting
-       */
-      $wp_customize->add_setting('flint_templates[default_width]', array(
-        'default'    => 'full',
-        'capability' => 'edit_theme_options',
-        'type'       => 'option',
-        'transport'  => 'postMessage',
-      ));
-      $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'default_width', array(
-        'label'    => __('Content Width', 'flint'),
-        'section'  => 'flint_layout_pages',
-        'settings' => 'flint_templates[default_width]',
-        'priority' => 21,
-        'type'     => 'select',
-        'choices'  => array(
-          'slim'   => 'Slim',
-          'narrow' => 'Narrow',
-          'full'   => 'Full',
-          'wide'   => 'Wide',
-        ),
-      )));
-
-      /**
-       * Horizontal Widget Area Content Width setting (removed)
-      $wp_customize->add_setting('flint_templates[widgets_footer_width]', array(
-        'default'    => 'match',
-        'capability' => 'edit_theme_options',
-        'type'       => 'option',
-        'transport'  => 'postMessage',
-      ));
-      $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'widgets_footer_width', array(
-        'label'    => __('Horizontal Widget Area Width', 'flint'),
-        'section'  => 'flint_templates_default',
-        'settings' => 'flint_templates[widgets_footer_width]',
-        'priority' => 12,
-        'type'     => 'select',
-        'choices'  => array(
-          'match'  => 'Match Content Width',
-          'slim'   => 'Slim',
-          'narrow' => 'Narrow',
-          'full'   => 'Full',
-          'wide'   => 'Wide',
-        ),
-      )));
-       */
-
-      /**
-       * Featured Images on Pages setting
-       */
-      $wp_customize->add_setting('flint_layout[pages_image]', array(
-        'default'    => 'always',
-        'capability' => 'edit_theme_options',
-        'type'       => 'option',
-        'transport'  => 'postMessage',
-      ));
-      $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'pages_image', array(
-        'label'    => __('Featured Images', 'flint'),
-        'section'  => 'flint_layout_pages',
-        'settings' => 'flint_layout[pages_image]',
-        'priority' => 23,
-        'type'     => 'select',
-        'choices'  => array(
-          'always'   => 'Always show',
-          'archives' => 'Archives/Search Only',
-          'never'    => 'Hide',
-        ),
-      )));
 
     /**
      * Default post template section
@@ -557,6 +351,60 @@ function flint_customize_register( $wp_customize ) {
         'section'  => 'flint_layout_posts',
         'settings' => 'flint_layout[posts_image]',
         'priority' => 12,
+        'type'     => 'select',
+        'choices'  => array(
+          'always'   => 'Always show',
+          'archives' => 'Archives/Search Only',
+          'never'    => 'Hide',
+        ),
+      )));
+
+    /**
+     * Default page template section
+     */
+    $wp_customize->add_section( 'flint_layout_pages' , array(
+      'title'       => __( 'Pages', 'flint' ),
+      'priority'    => 20,
+      'panel'       => 'flint_panel_layout',
+    ));
+
+      /**
+       * Default Content Width setting
+       */
+      $wp_customize->add_setting('flint_templates[default_width]', array(
+        'default'    => 'full',
+        'capability' => 'edit_theme_options',
+        'type'       => 'option',
+        'transport'  => 'postMessage',
+      ));
+      $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'default_width', array(
+        'label'    => __('Content Width', 'flint'),
+        'section'  => 'flint_layout_pages',
+        'settings' => 'flint_templates[default_width]',
+        'priority' => 21,
+        'type'     => 'select',
+        'choices'  => array(
+          'slim'   => 'Slim',
+          'narrow' => 'Narrow',
+          'full'   => 'Full',
+          'wide'   => 'Wide',
+        ),
+      )));
+
+      /**
+       * Featured Images on Pages setting
+       */
+      $wp_customize->add_setting('flint_layout[pages_image]', array(
+        'default'    => 'always',
+        'capability' => 'edit_theme_options',
+        'type'       => 'option',
+        'transport'  => 'postMessage',
+      ));
+      $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'pages_image', array(
+        'label'    => __('Featured Images', 'flint'),
+        'section'  => 'flint_layout_pages',
+        'settings' => 'flint_layout[pages_image]',
+        'priority' => 23,
         'type'     => 'select',
         'choices'  => array(
           'always'   => 'Always show',
@@ -694,6 +542,74 @@ function flint_customize_register( $wp_customize ) {
           'left'   => 'Left',
           'right'  => 'Right',
           'footer' => 'Footer',
+        ),
+      )));
+
+  /**
+   * Header Image section
+   */
+
+  /**
+   * Background Image section
+   */
+
+  /**
+   * Navigation section
+   */
+
+  /**
+   * Widgets panel
+   */
+
+    /**
+     * Widget Columns section
+     */
+    $wp_customize->add_section( 'flint_wa' , array(
+      'title'       => __( 'Columns', 'flint' ),
+      'description' => 'For screens larger than 768px wide, the header and footer areas can be divided into 3 columns.',
+      'priority'    => 180,
+      'panel'       => 'widgets',
+    ));
+
+      /**
+       * Header Columns setting
+       */
+      $wp_customize->add_setting('flint_wa[header]', array(
+        'default'    => '1',
+        'capability' => 'edit_theme_options',
+        'type'       => 'option',
+        'transport'  => 'postMessage',
+      ));
+      $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'header', array(
+        'label'    => __('Header', 'flint'),
+        'section'  => 'flint_wa',
+        'settings' => 'flint_wa[header]',
+        'priority' => 11,
+        'type'     => 'select',
+        'choices'  => array(
+          '1' => 'Full-width',
+          '3' => '3 columns',
+        ),
+      )));
+
+      /**
+       * Footer Columns setting
+       */
+      $wp_customize->add_setting('flint_wa[footer]', array(
+        'default'    => '1',
+        'capability' => 'edit_theme_options',
+        'type'       => 'option',
+        'transport'  => 'postMessage',
+      ));
+      $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'footer', array(
+        'label'    => __('Footer', 'flint'),
+        'section'  => 'flint_wa',
+        'settings' => 'flint_wa[footer]',
+        'priority' => 12,
+        'type'     => 'select',
+        'choices'  => array(
+          '1' => 'Full-width',
+          '3' => '3 columns',
         ),
       )));
 
