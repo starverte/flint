@@ -1120,3 +1120,177 @@ function flint_post_class() {
     post_class('col-xs-12 col-sm-8 col-md-8');
   }
 }
+
+/**
+ * Get content spacer
+ *
+ * Retrieve and display content spacers based on default post width,
+ * post format, and if side widget areas are active.
+ *
+ * @uses flint_post_thumbnail()
+ * @uses get_option()
+ * @uses get_post_format()
+ * @uses is_active_sidebar()
+ * @uses is_single()
+ * @uses is_singular()
+ *
+ * @param string $side Left or right. Required.
+ * @var array $options The options array for flint_templates
+ * @var string $format The format, if any, of the post
+ * @var string $default_width The default post width, as defined by Customizer
+ * @var string $width The actual post width
+ *
+ * @todo Convert to return instead of displaying results
+ */
+function flint_get_spacer( $side ) {
+  global $post;
+  $options = get_option( 'flint_templates' );
+  $format  = get_post_format( $post->ID );
+  
+  $default_width = !empty($options['default_post_width']) ? $options['default_post_width'] : 'full';
+  
+  switch ($format) {
+    case 'aside':
+      $width = 'wide';
+      break;
+    case 'link':
+      $width = 'wide';
+      break;
+    case 'status':
+      $width = 'wide';
+      break;
+    default:
+      $width = $default_width;
+      break;
+  }
+  
+  if (!is_active_sidebar('left') &&  !is_active_sidebar('right')) {
+    if ($side == 'left') {
+      switch ($width) {
+        case 'slim' {
+          echo '<div class="hidden-xs hidden-sm col-md-2"></div>';
+          echo '<div class="col-xs-12 col-sm-2 col-md-2">';
+          
+          if (is_singular()) {
+            flint_post_thumbnail();
+          }
+          else {
+            flint_post_thumbnail( 'post', 'archive' );
+          }
+          
+          if (!is_single() && $format == 'gallery') {
+            echo '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
+          }
+          
+          echo '</div>';
+        }
+        
+        case 'narrow' {
+          echo '<div class="hidden-xs hidden-sm col-md-1"></div>';
+          echo '<div class="col-xs-12 col-sm-2 col-md-2">';
+          
+          if (is_singular()) {
+            flint_post_thumbnail();
+          }
+          else {
+            flint_post_thumbnail( 'post', 'archive' );
+          }
+          
+          if (!is_single() && $format == 'gallery') {
+            echo '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
+          }
+          
+          echo '</div>';
+        }
+        
+        case 'full' {
+          echo '<div class="col-xs-12 col-sm-2 col-md-2">';
+          
+          if (is_singular()) {
+            flint_post_thumbnail();
+          }
+          else {
+            flint_post_thumbnail( 'post', 'archive' );
+          }
+          
+          if (!is_single() && $format == 'gallery') {
+            echo '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
+          }
+          
+          echo '</div>';
+        }
+        
+        case 'wide' {
+          echo '<div class="col-xs-12 col-sm-12 hidden-md hidden-lg">';
+          
+          if (is_singular()) {
+            flint_post_thumbnail();
+          }
+          else {
+            flint_post_thumbnail( 'post', 'archive' );
+          }
+          
+          if (!is_single() && $format == 'gallery') {
+            echo '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
+          }
+          
+          echo '</div>';
+        }
+        
+        default {
+          echo '<div class="col-xs-12 col-sm-2 col-md-2">';
+          
+          if (is_singular()) {
+            flint_post_thumbnail();
+          }
+          else {
+            flint_post_thumbnail( 'post', 'archive' );
+          }
+          
+          if (!is_single() && $format == 'gallery') {
+            echo '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
+          }
+          
+          echo '</div>';
+        }
+      }
+    }
+    
+    elseif ($side == 'right') {
+      switch ($width) {
+        case 'slim':
+          $output = '<div class="hidden-xs col-sm-2 col-md-4"></div>';
+          break;
+        case 'narrow':
+          $output = '<div class="hidden-xs col-sm-2 col-md-3"></div>';
+          break;
+        case 'full':
+          $output = '<div class="hidden-xs col-sm-2 col-md-2"></div>';
+          break;
+        case 'wide':
+          $output = null;
+          break;
+        default:
+          $output = '<div class="hidden-xs col-sm-2 col-md-2"></div>';
+          break;
+      }
+      echo $output;
+    }
+  }
+  else {
+    if ($side == 'left') {
+      echo '<div class="col-xs-12 col-sm-12 hidden-md hidden-lg">';
+      if (is_singular()) {
+        flint_post_thumbnail();
+      }
+      else {
+        flint_post_thumbnail( 'post', 'archive' );
+      }
+      
+      echo '</div>';
+    }
+    else {
+      return;
+    }
+  }
+}
