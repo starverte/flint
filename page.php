@@ -13,29 +13,9 @@ get_header(); ?>
 
     <div class="row">
 
-      <?php
-        flint_get_widgets('left');
+      <?php flint_get_widgets('left'); ?>
 
-        $content_class = 'site-content';
-        if ( is_active_sidebar( 'left' ) | is_active_sidebar( 'right' ) ) {
-          if ( is_active_sidebar( 'left' ) && is_active_sidebar( 'right' ) ) {
-            $content_class .= ' col-xs-12 col-md-6 wa-both';
-          }
-          else {
-            if ( is_active_sidebar( 'left' ) ) {
-              $content_class .= ' col-xs-12 col-md-9 wa-left';
-            }
-            elseif ( is_active_sidebar( 'right' ) ) {
-              $content_class .= ' col-xs-12 col-md-9 wa-right';
-            }
-          }
-        }
-        else {
-          $content_class .= ' col-xs-12';
-        }
-      ?>
-
-      <div id="content" class="<?php echo $content_class; ?>" role="main">
+      <div id="content" role="main" <?php flint_content_class(); ?>>
 
         <?php while ( have_posts() ) : the_post(); ?>
 

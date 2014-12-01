@@ -1016,3 +1016,43 @@ function flint_has_category( $category = '', $post = null ) {
     return false;
   }
 }
+
+/**
+ * Content class
+ *
+ * Retrieve and display the classes for the content div.
+ * Checks if side widget areas are active and changes
+ * width of content accordingly.
+ *
+ * @uses get_option()
+ * @uses is_active_sidebar()
+ *
+ * @param string $class   Additional class or classes to append to content div
+ * @var   array  $options The options array for flint_templates
+ *
+ * @todo Allow array input for $class
+ */
+function flint_content_class( $class = '' ) {
+  global $post;
+  $options = get_option( 'flint_templates' );
+
+  $class .= !empty($class) ? ' site-content col-xs-12' : 'site-content col-xs-12';
+
+  if ( is_active_sidebar( 'left' ) | is_active_sidebar( 'right' ) ) {
+    if ( is_active_sidebar( 'left' ) && is_active_sidebar( 'right' ) ) {
+      $class .= ' col-md-6 wa-both';
+    }
+
+    else {
+      if ( is_active_sidebar( 'left' ) ) {
+        $class .= ' col-md-9 wa-left';
+      }
+
+      elseif ( is_active_sidebar( 'right' ) ) {
+        $class .= ' col-md-9 wa-right';
+      }
+    }
+  }
+
+  echo 'class="' . $class . '"';
+}
