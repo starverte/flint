@@ -35,7 +35,7 @@ button,
 input,
 select,
 textarea {
-  color: #404040;
+  color: #333;
 }
 html,
 body {
@@ -586,7 +586,7 @@ article.comment {
 
 /* Link widget (Legacy) */
 .link-widget {
-  color: #404040;
+  color: #333;
   background: #fafafa;
 }
 .link-widget-link:active,
@@ -594,7 +594,7 @@ article.comment {
   text-decoration: none;
 }
 .link-widget-link:hover .link-widget {
-  color: #404040;
+  color: #333;
   background: #fdfdfd;
 }
 .link-widget .widget-title {
