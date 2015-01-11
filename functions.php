@@ -46,8 +46,6 @@ function flint_after_setup_theme() {
 
   require( get_template_directory() . '/inc/customizer.php' );
 
-  require_once( get_template_directory() . '/theme-options.php' );
-
   load_theme_textdomain( 'flint', get_template_directory() . '/languages' );
 
   register_nav_menus( array(
