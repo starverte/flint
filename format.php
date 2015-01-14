@@ -10,17 +10,13 @@
 ?>
 
   <div class="row">
-    <?php if (!is_active_sidebar('left') &&  !is_active_sidebar('right')) { ?>
-      <div class="col-lg-2 col-md-2 col-sm-2">
-        <?php if (is_singular()) { flint_post_thumbnail(); } else { flint_post_thumbnail( 'post', 'archive' ); } ?>
-      </div>
-    <?php } ?>
-    <article id="post-<?php the_ID(); ?>" <?php if (!is_active_sidebar('left') &&  !is_active_sidebar('right')) { post_class('col-lg-8 col-md-8 col-sm-8'); } else { post_class(); } ?>>
+    <?php flint_get_spacer('left'); ?>
+    <article id="post-<?php the_ID(); ?>" <?php flint_post_class(); ?>>
       <header class="entry-header">
         <?php $type = get_post_type(); ?>
         <?php do_action('flint_open_entry_header_'.$type); ?>
 
-        <h1 class="entry-title"><?php if (is_single()) { echo the_title(); } else { $permalink = get_permalink(); $title = get_the_title(); echo '<a href="' . $permalink .'" rel="bookmark">' . $title . '</a>'; } ?></h1>
+        <h1 class="entry-title"><?php if (is_single()) { echo the_title(); } else { echo '<a href="' . get_permalink() .'" rel="bookmark">' . get_the_title() . '</a>'; } ?></h1>
         <?php if ( current_user_can('edit_posts') ) { ?><a class="btn btn-default btn-sm btn-edit hidden-xs" href="<?php echo get_edit_post_link(); ?>">Edit</a><?php } ?>
 
         <div class="entry-meta">
@@ -50,5 +46,5 @@
         <?php do_action('flint_entry_meta_below_post'); ?>
       </footer><!-- .entry-meta -->
     </article><!-- #post-<?php the_ID(); ?> -->
-    <?php if (!is_active_sidebar('left') &&  !is_active_sidebar('right')) { ?><div class="col-lg-2 col-md-2 col-sm-2"></div><?php } ?>
+    <?php flint_get_spacer('right'); ?>
   </div><!-- .row -->

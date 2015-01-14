@@ -43,6 +43,8 @@ if ( ! function_exists( 'flint_admin_header_style' ) ) :
  * Styles the header image displayed on the Appearance > Header admin panel.
  */
 function flint_admin_header_style() {
+  $options = flint_get_options();
+  $colors  = flint_get_colors();
 ?>
   <style type="text/css">
     @import url("//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700");
@@ -54,7 +56,7 @@ function flint_admin_header_style() {
       clear: both;
     }
     .appearance_page_custom-header #heading {
-      background: <?php $colors = get_option( 'flint_colors' ); echo $colors['canvas']; ?>;
+      background: <?php echo $colors['fill']; ?>;
       border: none;
     }
     img {
@@ -90,7 +92,7 @@ function flint_admin_header_style() {
     }
     .site-branding h1,
     .site-branding h2 {
-      font-family: "<?php $fonts = get_option( 'flint_fonts' ); echo $fonts['heading_font']; ?>", sans-serif!important;
+      font-family: "<?php echo $options['headings_font_family']; ?>", sans-serif!important;
       font-weight: 500!important;
       line-height: 1.1;
       margin-top: 20px;

@@ -35,7 +35,7 @@ button,
 input,
 select,
 textarea {
-  color: #404040;
+  color: #333;
 }
 html,
 body {
@@ -45,7 +45,7 @@ body {
   padding-top: 50px;
 }
 article {
-  margin-bottom: 3em;
+  margin-bottom: 1em;
 }
 article.format-aside,
 article.format-status,
@@ -309,7 +309,6 @@ body.minimal.minimal-breadcrumbs #top-pad {
   max-width: 95%;
   padding: 20px;
   padding-top: 0;
-  margin-top: 3em;
   margin-right: auto;
   margin-left: auto;
   background: #fff;
@@ -558,6 +557,7 @@ object {
 }
 .comment-list,
 .comment-list .children {
+  padding-left: 0;
   list-style: none;
 }
 article.comment {
@@ -585,7 +585,7 @@ article.comment {
 
 /* Link widget (Legacy) */
 .link-widget {
-  color: #404040;
+  color: #333;
   background: #fafafa;
 }
 .link-widget-link:active,
@@ -593,7 +593,7 @@ article.comment {
   text-decoration: none;
 }
 .link-widget-link:hover .link-widget {
-  color: #404040;
+  color: #333;
   background: #fdfdfd;
 }
 .link-widget .widget-title {
@@ -731,8 +731,8 @@ article.comment {
 ----------------------------------------------- */
 
 /* Globally hidden elements when Infinite Scroll is supported and in use. */
-.infinite-scroll .navigation-paging, /* Older / Newer Posts Navigation (always hidden) */
-.infinite-scroll.neverending .site-footer { /* Theme Footer (when set to scrolling) */
+.infinite-scroll .navigation-paging,
+.infinite-scroll.neverending .site-footer {
   display: none;
 }
 

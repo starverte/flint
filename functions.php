@@ -6,24 +6,6 @@
  * @version 1.2.2
  */
 
-global $bg;
-global $txt_color;
-global $a_color;
-global $a_color_hover;
-global $canvas_bg;
-global $canvas_bg_dark;
-global $canvas_bg_light;
-global $canvas_color;
-
-$bg              = 'f8f8f8';
-$txt_color       = '404040';
-$a_color         = '428bca';
-$a_color_hover   = '2a6496';
-$canvas_bg       = '222222';
-$canvas_bg_dark  = '000000';
-$canvas_bg_light = '333333';
-$canvas_color    = 'ffffff';
-
 /**
  * Set the content width based on the theme's design and stylesheet.
  */
@@ -35,8 +17,8 @@ if ( ! function_exists( 'flint_after_setup_theme' ) ) :
  * Sets up theme defaults and registers support for various WordPress features.
  */
 function flint_after_setup_theme() {
-  global $bg;
-  global $canvas_color;
+
+  require( get_template_directory() . '/inc/class-flint_bootstrap_menu.php' );
 
   require( get_template_directory() . '/inc/template-tags.php' );
 
@@ -46,7 +28,7 @@ function flint_after_setup_theme() {
 
   require( get_template_directory() . '/inc/customizer.php' );
 
-  require_once( get_template_directory() . '/theme-options.php' );
+  require( get_template_directory() . '/inc/options.php' );
 
   load_theme_textdomain( 'flint', get_template_directory() . '/languages' );
 
@@ -64,11 +46,13 @@ function flint_after_setup_theme() {
 
   add_theme_support( 'post-formats', array( 'aside', 'chat', 'gallery', 'link', 'status' ) );
 
+  $options = flint_get_options();
+
   /**
    * Implement the Custom Background feature
    */
   $args = array(
-    'default-color' => $bg,
+    'default-color' => $options['body_bg'],
     'default-image' => '',
   );
 
@@ -81,14 +65,11 @@ function flint_after_setup_theme() {
    */
   $header = array(
     'default-image'          => '',
-    'default-text-color'     => $canvas_color,
+    'default-text-color'     => $options['fill_color'],
     'width'                  => 300,
     'height'                 => 300,
     'flex-height'            => true,
-    'flex-width'             => true,
-    'wp-head-callback'       => 'flint_header_style',
-    'admin-head-callback'    => 'flint_admin_header_style',
-    'admin-preview-callback' => 'flint_admin_header_image',
+    'flex-width'             => true
   );
 
   $header = apply_filters( 'flint_custom_header_args', $header );
@@ -116,12 +97,32 @@ require( get_template_directory() . '/inc/custom-header.php' );
  * Register widgetized areas and update sidebar with default widgets
  */
 function flint_widgets_init() {
-  $widget_areas = array('Header','Footer','Left','Right');
+  $options = flint_get_options();
+
+  $widget_areas = array();
+
+  array_push($widget_areas, 'Left' );
+
+  array_push($widget_areas, 'Right' );
+
+  if ( $options['widget_areas_before'] == '3' ) {
+    array_push($widget_areas, 'Header Left', 'Header Center', 'Header Right' );
+  }
+  else {
+    array_push($widget_areas, 'Header' );
+  }
+
+  if ($options['widget_areas_after'] == '3' ) {
+    array_push($widget_areas, 'Footer Left', 'Footer Center', 'Footer Right' );
+  }
+  else {
+    array_push($widget_areas, 'Footer' );
+  }
 
   foreach ($widget_areas as $widget_area) {
     register_sidebar( array(
       'name'          => $widget_area,
-      'id'            => strtolower($widget_area),
+      'id'            => str_replace(' ','_',strtolower($widget_area)),
       'before_widget' => '<aside id="%1$s" class="widget %2$s">',
       'after_widget'  => '</aside>',
       'before_title'  => '<h1 class="widget-title">',
@@ -155,12 +156,9 @@ function flint_enqueue_scripts() {
   /*
    * Load Google Fonts
    */
-  $fonts = get_option( 'flint_fonts' );
+  $options = flint_get_options();
 
-  $body_font    = !empty($fonts['body_font'])    ? $fonts['body_font']    : 'Open Sans';
-  $heading_font = !empty($fonts['heading_font']) ? $fonts['heading_font'] : 'Open Sans';
-
-  switch ($body_font) {
+  switch ($options['font_family_base']) {
     case 'Open Sans':
       wp_enqueue_style( 'open-sans', '//fonts.googleapis.com/css?family=Open+Sans:300,600,300,700,300italic,600italic,700italic', array(), flint_theme_version() );
       break;
@@ -182,9 +180,12 @@ function flint_enqueue_scripts() {
     case 'Strait':
       wp_enqueue_style( 'strait', '//fonts.googleapis.com/css?family=Strait', array(), flint_theme_version() );
       break;
+    case 'Yanone Kaffeesatz':
+      wp_enqueue_style( 'yanone-kaffeesatz', '//fonts.googleapis.com/css?family=Yanone+Kaffeesatz:300,400,700', array(), flint_theme_version() );
+      break;
   }
-  if ( $heading_font != $body_font ) {
-    switch ($heading_font) {
+  if ( $options['headings_font_family'] != $options['font_family_base'] ) {
+    switch ($options['headings_font_family']) {
       case 'Open Sans':
         wp_enqueue_style( 'open-sans', '//fonts.googleapis.com/css?family=Open+Sans:300,600,300,700,300italic,600italic,700italic', array(), flint_theme_version() );
         break;
@@ -200,11 +201,14 @@ function flint_enqueue_scripts() {
       case 'Lato':
         wp_enqueue_style( 'lato', '//fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic', array(), flint_theme_version() );
         break;
-    case 'Nova Square':
+      case 'Nova Square':
         wp_enqueue_style( 'nova-square', '//fonts.googleapis.com/css?family=Nova+Square', array(), flint_theme_version() );
         break;
       case 'Strait':
         wp_enqueue_style( 'strait', '//fonts.googleapis.com/css?family=Strait', array(), flint_theme_version() );
+        break;
+      case 'Yanone Kaffeesatz':
+        wp_enqueue_style( 'yanone-kaffeesatz', '//fonts.googleapis.com/css?family=Yanone+Kaffeesatz:300,400,700', array(), flint_theme_version() );
         break;
     }
   }
@@ -216,125 +220,5 @@ function flint_enqueue_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'flint_enqueue_scripts' );
 
-/**
- * Extended Walker class for use with the
- * Twitter Bootstrap toolkit Dropdown menus in Wordpress.
- * Edited to support n-levels submenu.
- * @author johnmegahan https://gist.github.com/1597994, Emanuele 'Tex' Tessore https://gist.github.com/3765640
- */
-class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
-  function start_lvl( &$output, $depth = 0, $args = array() ) {
-
-    $indent = str_repeat( "\t", $depth );
-    $submenu = ($depth > 0) ? ' sub-menu' : '';
-    $output     .= "\n$indent<ul class=\"dropdown-menu$submenu depth_$depth\">\n";
-
-  }
-
-  function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
-
-
-    $indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
-
-    $li_attributes = '';
-    $class_names = $value = '';
-
-    $classes = empty( $item->classes ) ? array() : (array) $item->classes;
-
-    /**
-     * Managing Divider
-     * Add divider class to an element to get a divider before it.
-     */
-    $divider_class_position = array_search('divider', $classes);
-    if($divider_class_position !== false){
-      $output .= "<li class=\"divider\"></li>\n";
-      unset($classes[$divider_class_position]);
-    }
-
-    $classes[] = ($args->has_children) ? 'dropdown' : '';
-    $classes[] = ($item->current || $item->current_item_ancestor) ? 'active' : '';
-    $classes[] = 'menu-item-' . $item->ID;
-    if($depth && $args->has_children){
-      $classes[] = 'dropdown-submenu';
-    }
-
-
-    $class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
-    $class_names = ' class="' . esc_attr( $class_names ) . '"';
-
-    $id = apply_filters( 'nav_menu_item_id', 'menu-item-'. $item->ID, $item, $args );
-    $id = strlen( $id ) ? ' id="' . esc_attr( $id ) . '"' : '';
-
-    $output .= $indent . '<li' . $id . $value . $class_names . $li_attributes . '>';
-
-    $attributes  = ! empty( $item->attr_title )         ? ' title="'  . esc_attr( $item->attr_title ) .'"' : '';
-    $attributes .= ! empty( $item->target )             ? ' target="' . esc_attr( $item->target     ) .'"' : '';
-    $attributes .= ! empty( $item->xfn )                ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
-    $attributes .= ! empty( $item->url )                ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
-    $attributes .= ($depth == 0 && $args->has_children)  ? ' class="dropdown-toggle" data-toggle="dropdown"' : '';
-
-    $item_output = $args->before;
-    $item_output .= '<a'. $attributes .'>';
-    $item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
-    $item_output .= ($depth == 0 && $args->has_children) ? ' <b class="caret"></b></a>' : '</a>';
-    $item_output .= $args->after;
-
-
-    $output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
-  }
-
-
-  function display_element( $element, &$children_elements, $max_depth, $depth=0, $args, &$output ) {
-    if ( !$element )
-      return;
-
-    $id_field = $this->db_fields['id'];
-
-    /**
-     * Display element
-     */
-    if ( is_array( $args[0] ) )
-      $args[0]['has_children'] = ! empty( $children_elements[$element->$id_field] );
-    else if ( is_object( $args[0] ) )
-      $args[0]->has_children = ! empty( $children_elements[$element->$id_field] );
-    $cb_args = array_merge( array(&$output, $element, $depth), $args);
-    call_user_func_array(array(&$this, 'start_el'), $cb_args);
-
-    $id = $element->$id_field;
-
-    /**
-     * Title
-     * descend only when the depth is right and there are childrens for this element
-     */
-    if ( ($max_depth == 0 || $max_depth > $depth+1 ) && isset( $children_elements[$id]) ) {
-
-      foreach( $children_elements[ $id ] as $child ){
-        /**
-         * Start the child delimiter
-         */
-        if ( !isset($newlevel) ) {
-          $newlevel = true;
-          $cb_args = array_merge( array(&$output, $depth), $args);
-          call_user_func_array(array(&$this, 'start_lvl'), $cb_args);
-        }
-        $this->display_element( $child, $children_elements, $max_depth, $depth + 1, $args, $output );
-      }
-      unset( $children_elements[ $id ] );
-    }
-    /**
-     * End the child delimiter
-     */
-    if ( isset($newlevel) && $newlevel ){
-      $cb_args = array_merge( array(&$output, $depth), $args);
-      call_user_func_array(array(&$this, 'end_lvl'), $cb_args);
-    }
-
-    /**
-     * End this element
-     */
-    $cb_args = array_merge( array(&$output, $element, $depth), $args);
-    call_user_func_array(array(&$this, 'end_el'), $cb_args);
-
-  }
-}
 add_filter( 'use_default_gallery_style', '__return_false' );
+
