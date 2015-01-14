@@ -8,9 +8,7 @@
 
 function flint_customize_register( $wp_customize ) {
 
-  global $a_color;
-  global $canvas_bg;
-  global $canvas_color;
+  $options = flint_get_options();
 
   $fonts = array(
     'Open Sans'         => 'Open Sans',
@@ -37,7 +35,7 @@ function flint_customize_register( $wp_customize ) {
      * Title/Tagline section
      */
     $wp_customize->add_section( 'title_tagline', array(
-      'title'    => __( 'Site Title & Tagline' ),
+      'title'    => __( 'Site Title & Tagline', 'flint' ),
       'priority' => 20,
       'panel'    => 'flint_site_info',
     ));
@@ -46,7 +44,7 @@ function flint_customize_register( $wp_customize ) {
      * Organization Information section
      */
     $wp_customize->add_section( 'flint_organization', array(
-      'title'    => __( 'Organization Information' ),
+      'title'    => __( 'Organization Information', 'flint' ),
       'priority' => 40,
       'panel'    => 'flint_site_info',
     ));
@@ -54,16 +52,16 @@ function flint_customize_register( $wp_customize ) {
       /**
        * Company Name setting
        */
-      $wp_customize->add_setting('flint_general[company]', array(
+      $wp_customize->add_setting('flint_options[org]', array(
         'default'    => '',
         'capability' => 'edit_theme_options',
         'type'       => 'option',
         'transport'  => 'postMessage',
       ));
-      $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'company', array(
-        'label'    => __('Company', 'flint'),
+      $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'org', array(
+        'label'    => __('Organization', 'flint'),
         'section'  => 'flint_organization',
-        'settings' => 'flint_general[company]',
+        'settings' => 'flint_options[org]',
         'priority' => 41,
         'type'     => 'text',
       )));
@@ -71,16 +69,16 @@ function flint_customize_register( $wp_customize ) {
       /**
        * Street Address setting
        */
-      $wp_customize->add_setting('flint_general[address]', array(
+      $wp_customize->add_setting('flint_options[org_address]', array(
         'default'    => '',
         'capability' => 'edit_theme_options',
         'type'       => 'option',
         'transport'  => 'postMessage',
       ));
-      $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'address', array(
+      $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'org_address', array(
         'label'    => __('Street Address', 'flint'),
         'section'  => 'flint_organization',
-        'settings' => 'flint_general[address]',
+        'settings' => 'flint_options[org_address]',
         'priority' => 42,
         'type'     => 'text',
       )));
@@ -88,16 +86,16 @@ function flint_customize_register( $wp_customize ) {
       /**
        * City, State setting
        */
-      $wp_customize->add_setting('flint_general[locality]', array(
+      $wp_customize->add_setting('flint_options[org_locality]', array(
         'default'    => '',
         'capability' => 'edit_theme_options',
         'type'       => 'option',
         'transport'  => 'postMessage',
       ));
-      $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'locality', array(
+      $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'org_locality', array(
         'label'    => __('City, State', 'flint'),
         'section'  => 'flint_organization',
-        'settings' => 'flint_general[locality]',
+        'settings' => 'flint_options[org_locality]',
         'priority' => 43,
         'type'     => 'text',
       )));
@@ -105,16 +103,16 @@ function flint_customize_register( $wp_customize ) {
       /**
        * Postal Code setting
        */
-      $wp_customize->add_setting('flint_general[postal_code]', array(
+      $wp_customize->add_setting('flint_options[org_postal_code]', array(
         'default'    => '',
         'capability' => 'edit_theme_options',
         'type'       => 'option',
         'transport'  => 'postMessage',
       ));
-      $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'postal_code', array(
+      $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'org_postal_code', array(
         'label'    => __('Zip Code', 'flint'),
         'section'  => 'flint_organization',
-        'settings' => 'flint_general[postal_code]',
+        'settings' => 'flint_options[org_postal_code]',
         'priority' => 44,
         'type'     => 'text',
       )));
@@ -122,16 +120,16 @@ function flint_customize_register( $wp_customize ) {
       /**
        * Phone setting
        */
-      $wp_customize->add_setting('flint_general[tel]', array(
+      $wp_customize->add_setting('flint_options[org_tel]', array(
         'default'    => '',
         'capability' => 'edit_theme_options',
         'type'       => 'option',
         'transport'  => 'postMessage',
       ));
-      $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'tel', array(
+      $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'org_tel', array(
         'label'    => __('Phone Number', 'flint'),
         'section'  => 'flint_organization',
-        'settings' => 'flint_general[tel]',
+        'settings' => 'flint_options[org_tel]',
         'priority' => 45,
         'type'     => 'tel',
       )));
@@ -139,16 +137,16 @@ function flint_customize_register( $wp_customize ) {
       /**
        * Fax Number setting
        */
-      $wp_customize->add_setting('flint_general[fax]', array(
+      $wp_customize->add_setting('flint_options[org_fax]', array(
         'default'    => '',
         'capability' => 'edit_theme_options',
         'type'       => 'option',
         'transport'  => 'postMessage',
       ));
-      $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'fax', array(
+      $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'org_fax', array(
         'label'    => __('Fax Number', 'flint'),
         'section'  => 'flint_organization',
-        'settings' => 'flint_general[fax]',
+        'settings' => 'flint_options[org_fax]',
         'priority' => 46,
         'type'     => 'text',
       )));
@@ -156,16 +154,16 @@ function flint_customize_register( $wp_customize ) {
       /**
        * Email Address setting
        */
-      $wp_customize->add_setting('flint_general[email]', array(
+      $wp_customize->add_setting('flint_options[org_email]', array(
         'default'    => '',
         'capability' => 'edit_theme_options',
         'type'       => 'option',
         'transport'  => 'postMessage',
       ));
-      $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'email', array(
+      $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'org_email', array(
         'label'    => __('Email Address', 'flint'),
         'section'  => 'flint_organization',
-        'settings' => 'flint_general[email]',
+        'settings' => 'flint_options[org_email]',
         'priority' => 47,
         'type'     => 'email',
       )));
@@ -173,7 +171,7 @@ function flint_customize_register( $wp_customize ) {
     /**
      * Custom Footer section
      */
-    $wp_customize->add_section( 'flint_general' , array(
+    $wp_customize->add_section( 'flint_footer' , array(
       'title'       => __( 'Custom Footer', 'flint' ),
       'description' => 'Customize the footer using template tags. <a href="http://sparks.starverte.com/flint/customize/#custom_footer" target="_blank">Learn more</a>',
       'priority'    => 60,
@@ -183,82 +181,25 @@ function flint_customize_register( $wp_customize ) {
       /**
        * Footer Text setting
        */
-      $wp_customize->add_setting('flint_general[text]', array(
+      $wp_customize->add_setting('flint_options[footer_content]', array(
         'default'    => '',
         'capability' => 'edit_theme_options',
         'type'       => 'option',
         'transport'  => 'postMessage',
       ));
-      $wp_customize->add_control( new Flint_Customize_TextArea_Control($wp_customize, 'text', array(
+      $wp_customize->add_control( new Flint_Customize_TextArea_Control($wp_customize, 'footer_content', array(
         'label'    => __('Footer Text', 'flint'),
-        'section'  => 'flint_general',
-        'settings' => 'flint_general[text]',
+        'section'  => 'flint_footer',
+        'settings' => 'flint_options[footer_content]',
         'priority' => 61,
         'type'     => 'textarea',
       )));
-
-  /**
-   * Colors section
-   */
-
-    /**
-     * Link color setting
-     */
-    $wp_customize->add_setting('flint_colors[link]', array(
-      'default'           => '#'.$a_color,
-      'sanitize_callback' => 'sanitize_hex_color',
-      'capability'        => 'edit_theme_options',
-      'type'              => 'option',
-      'transport'         => 'postMessage',
-    ));
-    $wp_customize->add_control( new WP_Customize_Color_Control($wp_customize, 'link', array(
-      'label'    => __('Links', 'flint'),
-      'section'  => 'colors',
-      'settings' => 'flint_colors[link]',
-      'priority' => 60,
-    )));
-
-    /**
-     * Canvas background color setting
-     */
-    $wp_customize->add_setting('flint_colors[canvas]', array(
-      'default'           => '#'.$canvas_bg,
-      'sanitize_callback' => 'sanitize_hex_color',
-      'capability'        => 'edit_theme_options',
-      'type'              => 'option',
-      'transport'         => 'postMessage',
-    ));
-    $wp_customize->add_control( new WP_Customize_Color_Control($wp_customize, 'canvas', array(
-      'label'    => __('Canvas', 'flint'),
-      'section'  => 'colors',
-      'settings' => 'flint_colors[canvas]',
-      'priority' => 70,
-    )));
-
-    /**
-     * Canvas text color setting
-     */
-    $wp_customize->add_setting('flint_colors[canvas-text]', array(
-      'default'           => '#'.$canvas_color,
-      'sanitize_callback' => 'sanitize_hex_color',
-      'capability'        => 'edit_theme_options',
-      'type'              => 'option',
-      'transport'         => 'postMessage',
-    ));
-    $wp_customize->add_control( new WP_Customize_Color_Control($wp_customize, 'canvas_text', array(
-      'label'    => __('Canvas Text', 'flint'),
-      'section'  => 'colors',
-      'settings' => 'flint_colors[canvas-text]',
-      'priority' => 80,
-    )));
-
-
   /**
    * Fonts section
    */
   $wp_customize->add_section( 'flint_fonts' , array(
     'title'    => __( 'Fonts', 'flint' ),
-    'priority' => 50,
+    'priority' => 30,
   ));
 
     /**
@@ -274,7 +215,7 @@ function flint_customize_register( $wp_customize ) {
       'label'    => __('Headings', 'flint'),
       'section'  => 'flint_fonts',
       'settings' => 'flint_fonts[heading_font]',
-      'priority' => 51,
+      'priority' => 31,
       'type'     => 'select',
       'choices'  => $fonts,
     )));
@@ -292,9 +233,64 @@ function flint_customize_register( $wp_customize ) {
       'label'    => __('Body', 'flint'),
       'section'  => 'flint_fonts',
       'settings' => 'flint_fonts[body_font]',
-      'priority' => 52,
+      'priority' => 32,
       'type'     => 'select',
       'choices'  => $fonts,
+    )));
+
+  /**
+   * Colors section
+   */
+
+    /**
+     * Link color setting
+     */
+    $wp_customize->add_setting('flint_options[link_color]', array(
+      'default'           => $options['link_color'],
+      'sanitize_callback' => 'sanitize_hex_color',
+      'capability'        => 'edit_theme_options',
+      'type'              => 'option',
+      'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control( new WP_Customize_Color_Control($wp_customize, 'link_color', array(
+      'label'    => __('Links', 'flint'),
+      'section'  => 'colors',
+      'settings' => 'flint_options[link_color]',
+      'priority' => 60,
+    )));
+
+    /**
+     * Fill background color setting
+     */
+    $wp_customize->add_setting('flint_options[fill]', array(
+      'default'           => $options['fill'],
+      'sanitize_callback' => 'sanitize_hex_color',
+      'capability'        => 'edit_theme_options',
+      'type'              => 'option',
+      'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control( new WP_Customize_Color_Control($wp_customize, 'fill', array(
+      'label'    => __('Fill', 'flint'),
+      'section'  => 'colors',
+      'settings' => 'flint_options[fill]',
+      'priority' => 70,
+    )));
+
+    /**
+     * Fill text color setting
+     */
+    $wp_customize->add_setting('flint_options[fill_color]', array(
+      'default'           => $options['fill_color'],
+      'sanitize_callback' => 'sanitize_hex_color',
+      'capability'        => 'edit_theme_options',
+      'type'              => 'option',
+      'transport'         => 'postMessage',
+    ));
+    $wp_customize->add_control( new WP_Customize_Color_Control($wp_customize, 'fill_color', array(
+      'label'    => __('Fill Text', 'flint'),
+      'section'  => 'colors',
+      'settings' => 'flint_options[fill_color]',
+      'priority' => 80,
     )));
 
   /**
