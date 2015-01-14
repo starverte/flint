@@ -135,7 +135,7 @@ function flint_hsl_hex( $Hue = 0, $Saturation = 0, $Luminance = 0 ) {
 /**
  * Darkens Hex color by defined percentage
  */
-function flint_darken_hex( $HexColor, $percent ) {
+function flint_darken( $HexColor, $percent ) {
   $HSLColor = flint_hex_hsl($HexColor);
   $HSLColor['Luminance'] = $HSLColor['Luminance'] - ($percent/100);
   $HSLColor['Luminance'] = $HSLColor['Luminance'] < 0 ? 0 : $HSLColor['Luminance'];
@@ -146,7 +146,7 @@ function flint_darken_hex( $HexColor, $percent ) {
 /**
  * Lightens Hex color by defined percentage
  */
-function flint_lighten_hex( $HexColor, $percent ) {
+function flint_lighten( $HexColor, $percent ) {
   $HSLColor = flint_hex_hsl($HexColor);
   $HSLColor['Luminance'] = $HSLColor['Luminance'] + ($percent/100);
   $HSLColor['Luminance'] = $HSLColor['Luminance'] < 0 ? 0 : $HSLColor['Luminance'];

@@ -747,16 +747,16 @@ function flint_options_css() {
 
   $colors = get_option( 'flint_colors' );
   $link         = !empty($colors['link'])        ? $colors['link']               : '#'.$a_color ;
-  $link_hover   = !empty($colors['link'])        ? flint_darken_hex($link,15)    : '#'.$a_color_hover ;
+  $link_hover   = !empty($colors['link'])        ? flint_darken($link,15)    : '#'.$a_color_hover ;
   $canvas       = !empty($colors['canvas'])      ? $colors['canvas']             : '#'.$canvas_bg ;
-  $canvas_dark  = !empty($colors['canvas'])      ? flint_darken_hex($canvas,10)  : '#'.$canvas_bg_dark ;
-  $canvas_light = !empty($colors['canvas'])      ? flint_lighten_hex($canvas,5)  : '#'.$canvas_bg_light ;
+  $canvas_dark  = !empty($colors['canvas'])      ? flint_darken($canvas,10)  : '#'.$canvas_bg_dark ;
+  $canvas_light = !empty($colors['canvas'])      ? flint_lighten($canvas,5)  : '#'.$canvas_bg_light ;
   $canvas_text  = !empty($colors['canvas_text']) ? $colors['canvas_text']        : '#'.$canvas_color ;
 
   $bg         = get_theme_mod( 'background_color', '#'.$bg );
-  $blockquote = flint_darken_hex($bg,6.5);
+  $blockquote = flint_darken($bg,6.5);
 
-  $canvas_link = flint_darken_hex($canvas_text,15);
+  $canvas_link = flint_darken($canvas_text,15);
 
   $body = 'body {';
   $body .= 'background-color: ' . $bg . '; font-family: ';
