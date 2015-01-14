@@ -92,28 +92,27 @@ require( get_template_directory() . '/inc/custom-header.php' );
  * Register widgetized areas and update sidebar with default widgets
  */
 function flint_widgets_init() {
-  $wa        = get_option('flint_wa');
-  $wa_header = $wa['header'];
-  $wa_sides  = $wa['sides'];
-  $wa_footer = $wa['footer'];
+  $options = flint_get_options();
 
   $widget_areas = array();
-
-  if (!empty($wa_header) && $wa_header == '1' || empty($wa_header) )
-    array_push($widget_areas, 'Header' );
-
-  if (!empty($wa_header) && $wa_header == '3' )
-    array_push($widget_areas, 'Header Left', 'Header Center', 'Header Right' );
 
   array_push($widget_areas, 'Left' );
 
   array_push($widget_areas, 'Right' );
+  
+  if ( $options['widget_areas_before'] == '3' ) {
+    array_push($widget_areas, 'Header Left', 'Header Center', 'Header Right' );
+  }
+  else {
+    array_push($widget_areas, 'Header' );
+  }
 
-  if (!empty($wa_footer) && $wa_footer == '1' || empty($wa_footer) )
-    array_push($widget_areas, 'Footer' );
-
-  if (!empty($wa_footer) && $wa_footer == '3' )
+  if ($options['widget_areas_after'] == '3' ) {
     array_push($widget_areas, 'Footer Left', 'Footer Center', 'Footer Right' );
+  }
+  else {
+    array_push($widget_areas, 'Footer' );
+  }
 
   foreach ($widget_areas as $widget_area) {
     register_sidebar( array(
