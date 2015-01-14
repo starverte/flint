@@ -1167,7 +1167,7 @@ function flint_get_spacer( $side ) {
   if (!is_active_sidebar('left') &&  !is_active_sidebar('right')) {
     if ($side == 'left') {
       switch ($width) {
-        case 'slim' {
+        case 'slim':
           echo '<div class="hidden-xs hidden-sm col-md-2"></div>';
           echo '<div class="col-xs-12 col-sm-2 col-md-2">';
 
@@ -1183,9 +1183,9 @@ function flint_get_spacer( $side ) {
           }
 
           echo '</div>';
-        }
+          break;
 
-        case 'narrow' {
+        case 'narrow':
           echo '<div class="hidden-xs hidden-sm col-md-1"></div>';
           echo '<div class="col-xs-12 col-sm-2 col-md-2">';
 
@@ -1201,9 +1201,9 @@ function flint_get_spacer( $side ) {
           }
 
           echo '</div>';
-        }
+          break;
 
-        case 'full' {
+        case 'full':
           echo '<div class="col-xs-12 col-sm-2 col-md-2">';
 
           if (is_singular()) {
@@ -1218,9 +1218,9 @@ function flint_get_spacer( $side ) {
           }
 
           echo '</div>';
-        }
+          break;
 
-        case 'wide' {
+        case 'wide':
           echo '<div class="col-xs-12 col-sm-12 hidden-md hidden-lg">';
 
           if (is_singular()) {
@@ -1235,9 +1235,9 @@ function flint_get_spacer( $side ) {
           }
 
           echo '</div>';
-        }
+          break;
 
-        default {
+        default:
           echo '<div class="col-xs-12 col-sm-2 col-md-2">';
 
           if (is_singular()) {
@@ -1252,7 +1252,7 @@ function flint_get_spacer( $side ) {
           }
 
           echo '</div>';
-        }
+          break;
       }
     }
 
