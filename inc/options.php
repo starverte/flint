@@ -40,7 +40,7 @@ function flint_get_option_defaults() {
     'minimal_nav'                => 'navbar',
     'minimal_widget_area'        => 'none',
     'minimal_width'              => 'full',
-    
+
     'widget_areas_before'        => '1',
     'widget_areas_after'         => '1',
   );
@@ -87,7 +87,7 @@ function flint_get_option_defaults() {
   $defaults['widget_areas_before']  = !empty($wa['header'])                     ? $wa['header']                     : $defaults['widget_areas_before'];
   $defaults['widget_areas_after']   = !empty($wa['footer'])                     ? $wa['footer']                     : $defaults['widget_areas_after'];
   //END - backwards compatibility
-  
+
   return apply_filters('flint_option_defaults', $defaults);
 }
 
