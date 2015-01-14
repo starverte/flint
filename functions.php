@@ -151,12 +151,9 @@ function flint_enqueue_scripts() {
   /*
    * Load Google Fonts
    */
-  $fonts = get_option( 'flint_fonts' );
+  $options = flint_get_options();
 
-  $body_font    = !empty($fonts['body_font'])    ? $fonts['body_font']    : 'Open Sans';
-  $heading_font = !empty($fonts['heading_font']) ? $fonts['heading_font'] : 'Open Sans';
-
-  switch ($body_font) {
+  switch ($options['font_family_base']) {
     case 'Open Sans':
       wp_enqueue_style( 'open-sans', '//fonts.googleapis.com/css?family=Open+Sans:300,600,300,700,300italic,600italic,700italic', array(), flint_theme_version() );
       break;
@@ -182,8 +179,8 @@ function flint_enqueue_scripts() {
       wp_enqueue_style( 'yanone-kaffeesatz', '//fonts.googleapis.com/css?family=Yanone+Kaffeesatz:300,400,700', array(), flint_theme_version() );
       break;
   }
-  if ( $heading_font != $body_font ) {
-    switch ($heading_font) {
+  if ( $options['headings_font_family'] != $options['font_family_base'] ) {
+    switch ($options['headings_font_family']) {
       case 'Open Sans':
         wp_enqueue_style( 'open-sans', '//fonts.googleapis.com/css?family=Open+Sans:300,600,300,700,300italic,600italic,700italic', array(), flint_theme_version() );
         break;
