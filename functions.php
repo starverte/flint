@@ -45,7 +45,7 @@ function flint_after_setup_theme() {
   add_theme_support( 'html5' );
 
   add_theme_support( 'post-formats', array( 'aside', 'chat', 'gallery', 'link', 'status' ) );
-  
+
   $options = flint_get_options();
 
   /**
@@ -104,7 +104,7 @@ function flint_widgets_init() {
   array_push($widget_areas, 'Left' );
 
   array_push($widget_areas, 'Right' );
-  
+
   if ( $options['widget_areas_before'] == '3' ) {
     array_push($widget_areas, 'Header Left', 'Header Center', 'Header Right' );
   }
