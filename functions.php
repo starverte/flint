@@ -17,8 +17,7 @@ if ( ! function_exists( 'flint_after_setup_theme' ) ) :
  * Sets up theme defaults and registers support for various WordPress features.
  */
 function flint_after_setup_theme() {
-  global $bg;
-  global $canvas_color;
+  $options = flint_get_options();
 
   require( get_template_directory() . '/inc/template-tags.php' );
 
@@ -48,7 +47,7 @@ function flint_after_setup_theme() {
    * Implement the Custom Background feature
    */
   $args = array(
-    'default-color' => $bg,
+    'default-color' => $options['body_bg'],
     'default-image' => '',
   );
 
@@ -61,14 +60,11 @@ function flint_after_setup_theme() {
    */
   $header = array(
     'default-image'          => '',
-    'default-text-color'     => $canvas_color,
+    'default-text-color'     => $options['fill_color'],
     'width'                  => 300,
     'height'                 => 300,
     'flex-height'            => true,
-    'flex-width'             => true,
-    'wp-head-callback'       => 'flint_header_style',
-    'admin-head-callback'    => 'flint_admin_header_style',
-    'admin-preview-callback' => 'flint_admin_header_image',
+    'flex-width'             => true
   );
 
   $header = apply_filters( 'flint_custom_header_args', $header );
