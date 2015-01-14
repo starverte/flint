@@ -5,7 +5,7 @@
  * @package Flint
  * @since 1.2.0
  */
-$options = get_option( 'flint_templates' );
+$options = flint_get_options();
 get_header('head');
 if (empty($options['minimal_nav']) || $options['minimal_nav'] == 'navbar'){ get_header('nav'); } ?>
 <?php flint_get_widgets('header', true); ?>

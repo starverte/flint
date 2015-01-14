@@ -5,7 +5,7 @@
  * @package Flint
  * @since 1.1.0
  */
-$options = get_option( 'flint_templates' );
+$options = flint_get_options();
 get_header('head');
 if ($options['clear_nav'] == 'navbar'){ get_header('nav'); } ?>
 
