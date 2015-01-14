@@ -76,5 +76,5 @@
         <?php do_action('flint_entry_meta_below_post'); ?>
       </footer><!-- .entry-meta -->
     </article><!-- #page-<?php the_ID(); ?> -->
-    <?php flint_get_spacer('right'); ?
+    <?php flint_get_spacer('right'); ?>
   </div><!-- .row -->
