@@ -17,7 +17,6 @@ if ( ! function_exists( 'flint_after_setup_theme' ) ) :
  * Sets up theme defaults and registers support for various WordPress features.
  */
 function flint_after_setup_theme() {
-  $options = flint_get_options();
 
   require( get_template_directory() . '/inc/class-flint_bootstrap_menu.php' );
 
@@ -46,6 +45,8 @@ function flint_after_setup_theme() {
   add_theme_support( 'html5' );
 
   add_theme_support( 'post-formats', array( 'aside', 'chat', 'gallery', 'link', 'status' ) );
+  
+  $options = flint_get_options();
 
   /**
    * Implement the Custom Background feature
