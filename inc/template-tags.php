@@ -751,7 +751,7 @@ function flint_options_css() {
       break;
   }
 
-  $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: ';
+  $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .navbar-brand { font-family: ';
 
   switch ($options['headings_font_family']) {
     case 'Open Sans':
@@ -792,6 +792,7 @@ function flint_options_css() {
   echo '.navbar-inverse .navbar-nav > .dropdown > a .caret { border-top-color: ' . $colors['fill_link_color'] . '; border-bottom-color: ' . $colors['fill_link_color'] . '; }';
   echo '.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus { color: ' . $colors['fill_color'] . '; background-color: ' . $colors['fill_darker'] . ';
 }';
+  echo '.navbar-brand { color: ' . $colors['fill_color'] . '!important; }';
   echo '.fill-light { background: ' . $colors['fill_light'] . '; color: ' . $colors['fill_color'] . '; }';
   echo '</style>';
 }
@@ -1239,4 +1240,14 @@ function flint_get_spacer( $side ) {
       return;
     }
   }
+}
+
+function flint_nav_fallback() {
+  ?>
+  <a class="navbar-brand hidden-xs" href="<?php echo esc_url( home_url() ); ?>"><?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?></a>
+  <form method="get" class="navbar-form navbar-right" action="<?php echo esc_url( home_url( '/' ) ); ?>" role="search">
+    <div class="form-group">
+      <input type="text" class="form-control" name="s" value="<?php echo esc_attr( get_search_query() ); ?>" placeholder="Search" style="width: 200px;">
+    </div>
+  </form> <?php
 }
