@@ -617,12 +617,11 @@ function flint_reply_link($args = array(), $comment = null, $post = null) {
  *
  */
 function flint_get_widgets( $slug, $minimal = false ) {
-  $options = get_option( 'flint_templates' );
-  $minimal_widget_area = !empty($options['minimal_widget_area']) ? $options['minimal_widget_area'] : false;
+  $options = flint_get_options();
 
   switch ($minimal) {
     case true:
-      if ($slug == $minimal_widget_area) { flint_get_widgets( $slug, false); }
+      if ($slug == $options['minimal_widget_area']) { flint_get_widgets( $slug, false); }
       break;
     case false:
       do_action( "get_sidebar", $slug );
@@ -640,10 +639,9 @@ function flint_get_widgets( $slug, $minimal = false ) {
  * For other page templates, use is_active_sidebar()
  */
 function flint_is_active_widgets( $slug ) {
-  $options = get_option( 'flint_templates' );
-  $minimal_widget_area = !empty($options['minimal_widget_area']) ? $options['minimal_widget_area'] : false;
+  $options = flint_get_options();
 
-  if ($slug == $minimal_widget_area && is_active_sidebar( $slug )):
+  if ($slug == $options['minimal_widget_area'] && is_active_sidebar( $slug )):
     return true;
   else:
     return false;
@@ -662,9 +660,8 @@ function flint_theme_version() {
  * Returns breadcrumbs for pages
  */
 function flint_breadcrumbs( $display = 'show' ) {
-  $options = get_option( 'flint_templates' );
-  $clear_nav   = !empty($options['clear_nav'])   ? $options['clear_nav']   : 'breadcrumbs';
-  $minimal_nav = !empty($options['minimal_nav']) ? $options['minimal_nav'] : 'navbar';
+  $options = flint_get_options();
+
   switch ($display) {
     case 'show':
       global $post;
@@ -677,31 +674,21 @@ function flint_breadcrumbs( $display = 'show' ) {
       echo '</ol>';
       break;
     case 'clear':
-
-      if ($clear_nav == 'breadcrumbs') { flint_breadcrumbs(); }
+      if ($options['clear_nav'] == 'breadcrumbs') { flint_breadcrumbs(); }
       break;
     case 'minimal':
-      $options = get_option( 'flint_templates' );
-      if ($minimal_nav == 'breadcrumbs') { flint_breadcrumbs(); }
+      if ($options['minimal_nav'] == 'breadcrumbs') { flint_breadcrumbs(); }
       break;
   }
-  $options = get_option( 'flint_templates' );
 }
 
 /**
  * Creates custom footer from theme options
  */
 function flint_custom_footer() {
-  $options = get_option( 'flint_general' );
+  $options = flint_get_options();
 
-  $company     = !empty($options['company'])     ? $options['company']            : '';
-  $tel         = !empty($options['tel'])         ? $options['tel']                : '';
-  $email       = !empty($options['email'])       ? $options['email']              : '';
-  $fax         = !empty($options['fax'])         ? $options['fax']                : '';
-  $address     = !empty($options['address'])     ? $options['address']            : '';
-  $locality    = !empty($options['locality'])    ? $options['locality']           : '';
-  $postal_code = !empty($options['postal_code']) ? $options['postal_code']        : '';
-  $footer      = !empty($options['text'])        ? stripslashes($options['text']) : '';
+  $footer = stripslashes($options['footer_content']);
 
   $patterns = array(
     '/@SITE_TITLE@/',
@@ -717,51 +704,27 @@ function flint_custom_footer() {
     get_bloginfo( 'name' ),
     get_bloginfo( 'description' ),
     date('Y'),
-    '<span itemprop="name">'      . $company . '</span>',
-    '<span itemprop="telephone">' . $tel     . '</span>',
-    '<span itemprop="email">'     . $email   . '</span>',
-    '<span itemprop="faxNumber">' . $fax     . '</span>',
-    '<span id="address" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><span id="street" itemprop="streetAddress">' . $address . '</span><span class="comma">, </span><span id="locality" itemprop="addressLocality">' . $locality . '</span> <span id="postal-code" itemprop="postalCode">' . $postal_code . '</span></span>'
+    '<span itemprop="name">'      . $options['org'] . '</span>',
+    '<span itemprop="telephone">' . $options['org_tel']     . '</span>',
+    '<span itemprop="email">'     . $options['org_email']   . '</span>',
+    '<span itemprop="faxNumber">' . $options['org_fax']     . '</span>',
+    '<span id="address" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><span id="street" itemprop="streetAddress">' . $options['org_address'] . '</span><span class="comma">, </span><span id="locality" itemprop="addressLocality">' . $options['org_locality'] . '</span> <span id="postal-code" itemprop="postalCode">' . $options['org_postal_code'] . '</span></span>'
   );
 
-  $footer = preg_replace( $patterns, $replacements, $footer);
+  $footer = preg_replace( $patterns, $replacements, $footer );
   echo '<div id="org" itemscope itemtype="http://schema.org/Organization">';
   echo $footer;
   echo '</div>';
 }
 
 function flint_options_css() {
-
-  global $bg;
-  global $txt_color;
-  global $a_color;
-  global $a_color_hover;
-  global $canvas_bg;
-  global $canvas_bg_dark;
-  global $canvas_bg_light;
-  global $canvas_color;
-
-  $fonts = get_option( 'flint_fonts' );
-  $body_font    = !empty($fonts['body_font'])    ? $fonts['body_font']    : 'Open Sans' ;
-  $heading_font = !empty($fonts['heading_font']) ? $fonts['heading_font'] : 'Open Sans' ;
-
-  $colors = get_option( 'flint_colors' );
-  $link         = !empty($colors['link'])        ? $colors['link']               : '#'.$a_color ;
-  $link_hover   = !empty($colors['link'])        ? flint_darken($link,15)    : '#'.$a_color_hover ;
-  $canvas       = !empty($colors['canvas'])      ? $colors['canvas']             : '#'.$canvas_bg ;
-  $canvas_dark  = !empty($colors['canvas'])      ? flint_darken($canvas,10)  : '#'.$canvas_bg_dark ;
-  $canvas_light = !empty($colors['canvas'])      ? flint_lighten($canvas,5)  : '#'.$canvas_bg_light ;
-  $canvas_text  = !empty($colors['canvas_text']) ? $colors['canvas_text']        : '#'.$canvas_color ;
-
-  $bg         = get_theme_mod( 'background_color', '#'.$bg );
-  $blockquote = flint_darken($bg,6.5);
-
-  $canvas_link = flint_darken($canvas_text,15);
+  $options = flint_get_options();
+  $colors = flint_get_colors();
 
   $body = 'body {';
-  $body .= 'background-color: ' . $bg . '; font-family: ';
+  $body .= 'background-color: ' . $colors['body_bg'] . '; font-family: ';
 
-  switch ($body_font) {
+  switch ($options['font_family_base']) {
     case 'Open Sans':
       $body .= '"Open Sans",         sans-serif; font-weight: 300; }';
       break;
@@ -790,7 +753,7 @@ function flint_options_css() {
 
   $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: ';
 
-  switch ($heading_font) {
+  switch ($options['headings_font_family']) {
     case 'Open Sans':
       $headings .= '"Open Sans",         sans-serif; font-weight: 400;}';
       break;
@@ -816,21 +779,20 @@ function flint_options_css() {
       $headings .= '"Yanone Kaffeesatz", sans-serif; font-weight: 400;}';
       break;
   }
-
   echo '<style type="text/css">';
   echo $body;
   echo $headings;
-  echo 'a {color:' . $link . ';}';
-  echo 'a:hover, a:focus {color:' . $link_hover . ';}';
-  echo 'blockquote {border-left-color: ' . $blockquote . ';}';
-  echo '.canvas { background-color: ' . $canvas . '; border-color: ' . $canvas_dark . '; color: ' . $canvas_text . '; }';
-  echo '.navbar-inverse .navbar-nav > li > a, .canvas a, .canvas-light a { color: ' . $canvas_link . '; }';
-  echo '.canvas a:hover, .canvas-light a:hover { color: ' . $canvas_text . '; }';
-  echo '.site-branding a, .site-branding a:hover { color: ' . $canvas_text . '; }';
-  echo '.navbar-inverse .navbar-nav > .dropdown > a .caret { border-top-color: ' . $canvas_link . '; border-bottom-color: ' . $canvas_link . '; }';
-  echo '.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus { color: ' . $canvas_text . '; background-color: ' . $canvas_dark . ';
+  echo 'a {color:' . $colors['link_color'] . ';}';
+  echo 'a:hover, a:focus {color:' . $colors['link_hover_color'] . ';}';
+  echo 'blockquote {border-left-color: ' . $colors['blockquote_border_color'] . ';}';
+  echo '.fill { background-color: ' . $colors['fill'] . '; border-color: ' . $colors['fill_darker'] . '; color: ' . $colors['fill_color'] . '; }';
+  echo '.navbar-inverse .navbar-nav > li > a, .fill a, .fill-light a { color: ' . $colors['fill_link_color'] . '; }';
+  echo '.fill a:hover, .fill-light a:hover { color: ' . $colors['fill_color'] . '; }';
+  echo '.site-branding a, .site-branding a:hover { color: ' . $colors['fill_color'] . '; }';
+  echo '.navbar-inverse .navbar-nav > .dropdown > a .caret { border-top-color: ' . $colors['fill_link_color'] . '; border-bottom-color: ' . $colors['fill_link_color'] . '; }';
+  echo '.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus { color: ' . $colors['fill_color'] . '; background-color: ' . $colors['fill_darker'] . ';
 }';
-  echo '.canvas-light { background: ' . $canvas_light . '; color: ' . $canvas_text . '; }';
+  echo '.fill-light { background: ' . $colors['fill_light'] . '; color: ' . $colors['fill_color'] . '; }';
   echo '</style>';
 }
 
@@ -838,23 +800,19 @@ function flint_options_css() {
  * Returns slug or class for #primary based on theme options
  */
 function flint_get_template( $output = 'slug', $template = '', $a = false ) {
-  $options = get_option( 'flint_templates' );
+  $options = flint_get_options();
   $file    = get_post_meta( get_the_ID(), '_wp_page_template', true );
-
-  $default_width = !empty($options['default_width']) ? $options['default_width'] : 'full';
-  $clear_width   = !empty($options['clear_width'])   ? $options['clear_width']   : 'full';
-  $minimal_width = !empty($options['minimal_width']) ? $options['minimal_width'] : 'full';
 
   if (!empty($template) && $a != true) { trigger_error('$template variable in flint_get_template() is deprecated as of Flint 1.2.1. Use get_template() to get a particular file.'); unset($t); }
 
   if (empty($file) | $file == 'default') {
     if ( is_active_sidebar('left') || is_active_sidebar('right') ) { $slug = 'wide'; }
-    else { $slug = $default_width; }
+    else { $slug = $options['page_default_width']; }
   }
-  elseif ($file == 'templates/clear.php') { $slug = $clear_width; }
+  elseif ($file == 'templates/clear.php') { $slug = $options['clear_width']; }
   elseif ($file == 'templates/minimal.php') {
     if ( flint_is_active_widgets('left') || flint_is_active_widgets('right') ) { $slug = 'wide'; }
-    else{ $slug = $minimal_width; }
+    else{ $slug = $options['minimal_width']; }
   }
 
   switch ($output) {
@@ -900,18 +858,13 @@ function flint_get_template( $output = 'slug', $template = '', $a = false ) {
  * Returns slug or class for .widgets.widgets-footer based on theme options
  */
 function flint_get_widgets_template( $output, $widget_area = 'footer' ) {
-  $options = get_option( 'flint_templates' );
+  $options = flint_get_options();
   $type    = get_post_type( get_the_ID() );
-
-  $widgets_footer_width = !empty($options['widgets_footer_width']) ? $options['widgets_footer_width'] : 'match';
 
   switch ($widget_area) {
     case 'footer':
-      if ($widgets_footer_width == 'match') {
-        if ($type == 'page') { flint_get_template( $output ); }
-        else { flint_get_template( $output, 'templates/full.php', true ); }
-      }
-      else { flint_get_template( $output, 'templates/' . $widgets_footer_width . '.php', true); }
+      if ($type == 'page') { flint_get_template( $output ); }
+      else { flint_get_template( $output, 'templates/full.php', true ); }
       break;
   }
 }
@@ -921,14 +874,12 @@ function flint_get_widgets_template( $output, $widget_area = 'footer' ) {
  */
 function flint_body_class() {
   global $post;
-  $options = get_option( 'flint_templates' );
+  $options = flint_get_options();
   if (!empty($post->ID)) {
     $template = get_post_meta( $post->ID, '_wp_page_template', true );
-    $clear_nav   = !empty($options['clear_nav'])   ? $options['clear_nav']   : 'breadcrumbs';
-    $minimal_nav = !empty($options['minimal_nav']) ? $options['minimal_nav'] : 'navbar';
 
     if ($template == 'templates/clear.php') {
-      switch ($clear_nav) {
+      switch ($options['clear_nav']) {
         case 'navbar':
           body_class('clear clear-nav');
           break;
@@ -938,7 +889,7 @@ function flint_body_class() {
       }
     }
     elseif ($template == 'templates/minimal.php') {
-      switch ($minimal_nav) {
+      switch ($options['minimal_nav']) {
         case 'navbar':
           body_class('clear clear-nav');
           break;
@@ -958,7 +909,7 @@ function flint_body_class() {
  * Deprecated. Use flint_the_post_thumbnail
  */
 function flint_post_thumbnail( $type = 'post', $loc = 'single') {
-  $layout = get_option( 'flint_layout' );
+  $layout = flint_get_options();
   $posts_image = !empty($layout['posts_image']) ? $layout['posts_image'] : 'always';
   $pages_image = !empty($layout['pages_image']) ? $layout['pages_image'] : 'always';
   switch ($type) {
@@ -977,7 +928,7 @@ function flint_post_thumbnail( $type = 'post', $loc = 'single') {
  * Gets the featured image for a post or page if not specified otherwise in theme options
  */
 function flint_the_post_thumbnail( $size = 'post-thumbnail', $attr = '' ) {
-  $layout = get_option( 'flint_layout' );
+  $layout = flint_get_options();
   $type   = get_post_type();
   $posts_image = !empty($layout['posts_image']) ? $layout['posts_image'] : 'always';
   $pages_image = !empty($layout['pages_image']) ? $layout['pages_image'] : 'always';
@@ -1024,7 +975,7 @@ function flint_has_category( $category = '', $post = null ) {
  * Checks if side widget areas are active and changes
  * width of content accordingly.
  *
- * @uses get_option()
+ * @uses flint_get_options()
  * @uses is_active_sidebar()
  *
  * @param string $class   Additional class or classes to append to content div
@@ -1034,7 +985,7 @@ function flint_has_category( $category = '', $post = null ) {
  */
 function flint_content_class( $class = '' ) {
   global $post;
-  $options = get_option( 'flint_templates' );
+  $options = flint_get_options();
 
   $class .= !empty($class) ? ' site-content col-xs-12' : 'site-content col-xs-12';
 
@@ -1062,24 +1013,22 @@ function flint_content_class( $class = '' ) {
  *
  * Retrieves and displays the classes for the post div. If
  *
- * @uses get_option()
+ * @uses flint_get_options()
  * @uses get_post_format()
  * @uses is_active_sidebar()
  * @uses post_class()
  *
  * @var array  $options       The options array for flint_templates
  * @var string $format        The format, if any, of the post
- * @var string $default_width The default width, as set in options, of a post
+ * @var string $options['default_width'] The default width, as set in options, of a post
  * @var string $width         The width of the post, which determines the col-* classes
  *
  * @todo Add parameter to append additional classes that accepts both string and array input
  */
 function flint_post_class() {
   global $post;
-  $options = get_option( 'flint_templates' );
+  $options = flint_get_options();
   $format  = get_post_format( $post->ID );
-
-  $default_width = !empty($options['default_post_width']) ? $options['default_post_width'] : 'full';
 
   switch ($format) {
     case 'aside':
@@ -1092,7 +1041,7 @@ function flint_post_class() {
       $width = 'wide';
       break;
     default:
-      $width = $default_width;
+      $width = $options['post_default_width'];
       break;
   }
 
@@ -1128,7 +1077,7 @@ function flint_post_class() {
  * post format, and if side widget areas are active.
  *
  * @uses flint_post_thumbnail()
- * @uses get_option()
+ * @uses flint_get_options()
  * @uses get_post_format()
  * @uses is_active_sidebar()
  * @uses is_single()
@@ -1137,17 +1086,14 @@ function flint_post_class() {
  * @param string $side Left or right. Required.
  * @var array $options The options array for flint_templates
  * @var string $format The format, if any, of the post
- * @var string $default_width The default post width, as defined by Customizer
  * @var string $width The actual post width
  *
  * @todo Convert to return instead of displaying results
  */
 function flint_get_spacer( $side ) {
   global $post;
-  $options = get_option( 'flint_templates' );
+  $options = flint_get_options();
   $format  = get_post_format( $post->ID );
-
-  $default_width = !empty($options['default_post_width']) ? $options['default_post_width'] : 'full';
 
   switch ($format) {
     case 'aside':
@@ -1160,7 +1106,7 @@ function flint_get_spacer( $side ) {
       $width = 'wide';
       break;
     default:
-      $width = $default_width;
+      $width = $options['post_default_width'];
       break;
   }
 
