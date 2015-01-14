@@ -8,7 +8,7 @@
 $type = get_post_type();
 ?>
 <?php if ( is_active_sidebar( 'footer' ) ) { ?>
-  <div class="canvas-light widgets widgets-footer" role="complementary">
+  <div class="fill-light widgets widgets-footer" role="complementary">
     <div class="container">
       <div class="row">
         <?php flint_get_widgets_template('margins', 'footer'); ?>
@@ -23,7 +23,7 @@ $type = get_post_type();
   </div><!-- .widgets.widgets-footer -->
 <?php } ?>
 <?php if ( is_active_sidebar( 'footer_left' ) || is_active_sidebar( 'footer_center' ) || is_active_sidebar( 'footer_right' ) ) { ?>
-  <div class="canvas-light widgets widgets-footer" role="complementary">
+  <div class="fill-light widgets widgets-footer" role="complementary">
     <div class="container">
       <div class="row">
         <div class="widget-area col-md-4" >

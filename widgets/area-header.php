@@ -8,7 +8,7 @@
 $type = get_post_type();
 ?>
 <?php if ( is_active_sidebar( 'header' ) ) { ?>
-  <div class="canvas-light widgets widgets-header" role="complementary">
+  <div class="fill-light widgets widgets-header" role="complementary">
     <div class="container">
       <?php flint_get_widgets_template('margins', 'header'); ?>
       <div class="widget-area <?php flint_get_widgets_template('content', 'header'); ?>" >

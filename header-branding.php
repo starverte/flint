@@ -9,7 +9,7 @@
  */
 ?>
 
-  <div id="masthead" class="canvas site-header" role="banner">
+  <div id="masthead" class="fill site-header" role="banner">
     <?php if (current_theme_supports('custom-header')) { ?>
       <div class="container hidden-xs">
         <div class="row">
