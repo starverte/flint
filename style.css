@@ -45,7 +45,7 @@ body {
   padding-top: 50px;
 }
 article {
-  margin-bottom: 3em;
+  margin-bottom: 1em;
 }
 article.format-aside,
 article.format-status,
@@ -309,7 +309,6 @@ body.minimal.minimal-breadcrumbs #top-pad {
   max-width: 95%;
   padding: 20px;
   padding-top: 0;
-  margin-top: 3em;
   margin-right: auto;
   margin-left: auto;
   background: #fff;

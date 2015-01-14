@@ -221,3 +221,4 @@ function flint_enqueue_scripts() {
 add_action( 'wp_enqueue_scripts', 'flint_enqueue_scripts' );
 
 add_filter( 'use_default_gallery_style', '__return_false' );
+

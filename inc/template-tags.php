@@ -691,14 +691,14 @@ function flint_custom_footer() {
   $footer = stripslashes($options['footer_content']);
 
   $patterns = array(
-    '/@SITE_TITLE@/',
-    '/@SITE_DESCRIPTION@/',
-    '/@YEAR@/',
-    '/@COMPANY@/',
-    '/@PHONE@/',
-    '/@EMAIL@/',
-    '/@FAX@/',
-    '/@ADDRESS@/'
+    '/{site title}/',
+    '/{site description}/',
+    '/{year}/',
+    '/{company}/',
+    '/{phone}/',
+    '/{email}/',
+    '/{fax}/',
+    '/{address}/'
   );
   $replacements = array(
     get_bloginfo( 'name' ),
@@ -1065,9 +1065,8 @@ function flint_post_class() {
         break;
     }
   }
-
   else {
-    post_class('col-xs-12 col-sm-8 col-md-8');
+    post_class('col-xs-12');
   }
 }
 
@@ -1244,7 +1243,6 @@ function flint_get_spacer( $side ) {
 
 function flint_nav_fallback() {
   ?>
-  <a class="navbar-brand hidden-xs" href="<?php echo esc_url( home_url() ); ?>"><?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?></a>
   <form method="get" class="navbar-form navbar-right" action="<?php echo esc_url( home_url( '/' ) ); ?>" role="search">
     <div class="form-group">
       <input type="text" class="form-control" name="s" value="<?php echo esc_attr( get_search_query() ); ?>" placeholder="Search" style="width: 200px;">
