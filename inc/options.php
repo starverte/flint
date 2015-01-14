@@ -10,7 +10,7 @@
 function flint_get_option_defaults() {
   $defaults = array(
     'text_color'                 => '#404040',
-    'body_bg'                    => '#f8f8f8',
+    'body_bg'                    => '#ffffff',
     'fill_color'                 => '#ffffff',
     'fill'                       => '#222222',
     'link_color'                 => '#428bca',
@@ -91,13 +91,70 @@ function flint_get_option_defaults() {
   return apply_filters('flint_option_defaults', $defaults);
 }
 
-function flint_get_options() {
+/**
+ * Gets array of theme options
+ * For backwards compatibility, can also get single value
+ *
+ * @var string Deprecated. The single option to return.
+ */
+function flint_get_options( $option = null ) {
   $defaults = flint_get_option_defaults();
 
   $flint_options = wp_parse_args( get_option( 'flint_options' ), $defaults );
-  return $flint_options;
+
+  if (!empty($option)) {
+    $search = array(
+      'canvas-text',
+      'canvas',
+      'link',
+      'body_font',
+      'heading_font',
+      'company',
+      'address',
+      'locality',
+      'postal_code',
+      'tel',
+      'fax',
+      'email',
+      'text',
+      'pages_image',
+      'default_width',
+      'posts_image',
+      'default_post_width',
+      'header',
+      'footer',
+    );
+
+    $replace = array(
+      'fill_color',
+      'fill',
+      'link_color',
+      'font_family_base',
+      'headings_font_family',
+      'org',
+      'org_address',
+      'org_locality',
+      'org_postal_code',
+      'org_tel',
+      'org_fax',
+      'org_email',
+      'footer_content',
+      'page_featured_image',
+      'page_default_width',
+      'post_featured_image',
+      'post_default_width',
+      'widget_areas_before',
+      'widget_areas_after',
+    );
+
+    $_option = str_replace( $search, $replace, $option );
+
+    return $flint_options[$_option];
+  }
+  else {
+    return $flint_options;
+  }
 }
-//fill*
 
 function flint_get_colors() {
   $options = flint_get_options();
@@ -110,4 +167,36 @@ function flint_get_colors() {
     'fill_link_hover_color' => $options['fill_color'],
   );
   return wp_parse_args( $options, $calc );
+}
+
+function flint_get_address( $schema = true, $args = array() ) {
+  $options = flint_get_options();
+
+  $defaults = array(
+    'before' => '<span id="street" itemprop="streetAddress">',
+    'item1'  => $options['org_address'],
+    'sep1'   => '</span>, <span id="locality" itemprop="addressLocality">',
+    'item2'  => $options['org_locality'],
+    'sep2'   => '</span> <span id="postal-code" itemprop="postalCode">',
+    'item3'  => $options['org_postal_code'],
+    'after'  => '</span>',
+    'open'   => '<div id="org" itemscope itemtype="http://schema.org/Organization"><span id="address" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">',
+    'close'  => '</span></div>',
+  );
+
+  $alts = array(
+    'before' => '',
+    'item1'  => $options['org_address'],
+    'sep1'   => ', ',
+    'item2'  => $options['org_locality'],
+    'sep2'   => ' ',
+    'item3'  => $options['org_postal_code'],
+    'after'  => '',
+    'open'   => '',
+    'close'  => '',
+  );
+
+  $args = $schema == true ? wp_parse_args( $args, $defaults ) : wp_parse_args( $args, $alts );
+  $output = $args['open'] . $args['before'] . $args['item1'] . $args['sep1'] . $args['item2'] . $args['sep2'] . $args['item3'] . $args['after'] . $args['close'];
+  echo $output;
 }
