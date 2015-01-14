@@ -6,24 +6,6 @@
  * @version 1.2.2
  */
 
-global $bg;
-global $txt_color;
-global $a_color;
-global $a_color_hover;
-global $canvas_bg;
-global $canvas_bg_dark;
-global $canvas_bg_light;
-global $canvas_color;
-
-$bg              = 'f8f8f8';
-$txt_color       = '404040';
-$a_color         = '428bca';
-$a_color_hover   = '2a6496';
-$canvas_bg       = '222222';
-$canvas_bg_dark  = '000000';
-$canvas_bg_light = '333333';
-$canvas_color    = 'ffffff';
-
 /**
  * Set the content width based on the theme's design and stylesheet.
  */
