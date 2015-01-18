@@ -3,7 +3,7 @@
  * Template Name: Narrow
  *
  * @package Flint
- * @since 1.2.0
+ * @since 1.3.0
  */
 get_header(); ?>
 <?php flint_get_widgets('header'); ?>

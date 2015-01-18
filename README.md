@@ -1,4 +1,4 @@
-Flint 1.2.3
+Flint 1.3.0
 =====
 A responsive, minimalist theme built on Twitter's Bootstrap 3 and based on Automattic's _s theme. Make it your own with a custom background, custom header, custom menus, custom colors and more.
 
@@ -17,12 +17,12 @@ Licensed under the GNU General Public License v2.0, http://www.gnu.org/licenses/
 
 ```
 Flint uses Bootstrap http://getbootstrap.com/
-(C) 2011-2014 Twitter, Inc
-Licensed under the Apache License v2.0, http://www.apache.org/licenses/LICENSE-2.0
+(C) 2011-2015 Twitter, Inc
+Licensed under the MIT License, http://opensource.org/licenses/MIT
 ```
 
 ```
-Flint Copyright 2013-2014 Star Verte LLC (email : dev@starverte.com)
+Flint Copyright 2013-2015 Star Verte LLC (email : dev@starverte.com)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

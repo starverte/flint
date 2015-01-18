@@ -3,7 +3,7 @@
  * The template used for displaying custom post type content
  *
  * @package Flint
- * @since 1.1.1
+ * @since 1.3.0
  */
 ?>
 

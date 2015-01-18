@@ -1,3 +1,17 @@
+###Flint 1.3.0
+For complete diff, check out [Pull Request](https://github.com/starverte/flint/pull/168)
+- Header and Footer widget areas can now be divided into three columns
+- Added Yanone Kaffeesatz font
+- Added theme support for `title-tag`
+- Improved responsive grid
+- Improved Theme Customizer
+- Improved Options API handling
+- Improved sidebar layout display
+- Slightly darker text color for clarity
+- Removed Theme Options page (use Customizer instead)
+- `flint_get_options` returns ALL options
+- All references to `canvas` changed to `fill` to avoid confusion with `<canvas>` and theme by same name
+
 ###Flint 1.2.2
 For complete diff, check out [Pull Request](https://github.com/starverte/flint/pull/164)
 - Upgraded to Bootstrap 3.2

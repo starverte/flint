@@ -4,7 +4,7 @@
  * WordPress Options API
  *
  * @package Flint
- * @since 1.3
+ * @since 1.3.0
  */
 
 function flint_get_option_defaults() {
