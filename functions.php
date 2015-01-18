@@ -103,16 +103,16 @@ function flint_widgets_init() {
 
   $widget_areas = array();
 
-  array_push($widget_areas, 'Left' );
-
-  array_push($widget_areas, 'Right' );
-
   if ( $options['widget_areas_above'] == '3' ) {
     array_push($widget_areas, 'Header Left', 'Header Center', 'Header Right' );
   }
   else {
     array_push($widget_areas, 'Header' );
   }
+
+  array_push($widget_areas, 'Left' );
+
+  array_push($widget_areas, 'Right' );
 
   if ($options['widget_areas_below'] == '3' ) {
     array_push($widget_areas, 'Footer Left', 'Footer Center', 'Footer Right' );
