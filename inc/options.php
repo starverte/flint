@@ -41,8 +41,8 @@ function flint_get_option_defaults() {
     'minimal_widget_area'        => 'none',
     'minimal_width'              => 'full',
 
-    'widget_areas_before'        => '1',
-    'widget_areas_after'         => '1',
+    'widget_areas_above'         => '1',
+    'widget_areas_below'         => '1',
   );
 
   //BEGIN - backwards compatibility
@@ -84,8 +84,8 @@ function flint_get_option_defaults() {
   $defaults['minimal_widget_area']  = !empty($templates['minimal_widget_area']) ? $templates['minimal_widget_area'] : $defaults['minimal_widget_area'];
   $defaults['minimal_width']        = !empty($templates['minimal_width'])       ? $templates['minimal_width']       : $defaults['minimal_width'];
 
-  $defaults['widget_areas_before']  = !empty($wa['header'])                     ? $wa['header']                     : $defaults['widget_areas_before'];
-  $defaults['widget_areas_after']   = !empty($wa['footer'])                     ? $wa['footer']                     : $defaults['widget_areas_after'];
+  $defaults['widget_areas_above']   = !empty($wa['header'])                     ? $wa['header']                     : $defaults['widget_areas_above'];
+  $defaults['widget_areas_below']   = !empty($wa['footer'])                     ? $wa['footer']                     : $defaults['widget_areas_below'];
   //END - backwards compatibility
 
   return apply_filters('flint_option_defaults', $defaults);
@@ -143,8 +143,8 @@ function flint_get_options( $option = null ) {
       'page_default_width',
       'post_featured_image',
       'post_default_width',
-      'widget_areas_before',
-      'widget_areas_after',
+      'widget_areas_above',
+      'widget_areas_below',
     );
 
     $_option = str_replace( $search, $replace, $option );
