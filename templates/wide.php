@@ -3,48 +3,32 @@
  * Template Name: Wide
  *
  * @package Flint
- * @since 1.2.0
+ * @since 1.3.0
  */
 get_header(); ?>
 <?php flint_get_widgets('header'); ?>
 
   <div id="primary" class="content-area container">
 
-    <?php
-      flint_get_widgets('left');
+    <div class="row">
 
-      $content_class = 'site-content';
-      if ( is_active_sidebar( 'left' ) | is_active_sidebar( 'right' ) ) {
-        if ( is_active_sidebar( 'left' ) && is_active_sidebar( 'right' ) ) {
-          $content_class .= ' col-lg-6 col-md-6 wa-both';
-        }
-        else {
-          if ( is_active_sidebar( 'left' ) ) {
-            $content_class .= ' col-lg-9 col-md-9 wa-left';
-          }
-          elseif ( is_active_sidebar( 'right' ) ) {
-            $content_class .= ' col-lg-9 col-md-9 wa-right';
-          }
-        }
-      }
-      else {
-        $content_class .= ' col-lg-12 col-md-12';
-      }
-    ?>
+      <?php flint_get_widgets('left'); ?>
 
-    <div id="content" class="<?php echo $content_class; ?>" role="main">
+      <div id="content" role="main" <?php flint_content_class(); ?>>
 
-      <?php while ( have_posts() ) : the_post(); ?>
+        <?php while ( have_posts() ) : the_post(); ?>
 
-        <?php get_template_part( 'templates/wide', 'content' ); ?>
+          <?php get_template_part( 'templates/wide', 'content' ); ?>
 
-        <?php if ( comments_open() || '0' != get_comments_number() ) { comments_template(); } ?>
+          <?php if ( comments_open() || '0' != get_comments_number() ) { comments_template(); } ?>
 
-      <?php endwhile; ?>
+        <?php endwhile; ?>
 
-    </div><!-- #content -->
+      </div><!-- #content -->
 
-    <?php flint_get_widgets('right'); ?>
+      <?php flint_get_widgets('right'); ?>
+
+    </div><!-- .row -->
 
   </div><!-- #primary -->
 

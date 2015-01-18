@@ -5,11 +5,11 @@
  * Displays the navigation menu
  *
  * @package Flint
- * @since 1.2.3
+ * @since 1.3.0
  */
 ?>
 
-  <nav class="canvas navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <nav class="fill navbar navbar-inverse navbar-fixed-top" role="navigation">
     <h1 class="screen-reader-text"><?php _e( 'Menu', 'flint' ); ?></h1>
     <div class="screen-reader-text skip-link"><a href="#content" title="<?php esc_attr_e( 'Skip to content', 'flint' ); ?>"><?php _e( 'Skip to content', 'flint' ); ?></a></div>
     <div class="container">
@@ -21,17 +21,12 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand visible-xs-block" href="<?php echo esc_url( home_url() ); ?>"><?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?></a>
+        <a class="navbar-brand" href="<?php echo esc_url( home_url() ); ?>"><?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?></a>
       </div><!-- .navbar-header -->
 
       <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse navbar-ex1-collapse">
-        <?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_class' => 'nav navbar-nav', 'fallback_cb' => false, 'walker' => new Flint_Bootstrap_Menu ) ); ?>
-        <form method="get" class="navbar-form navbar-right" action="<?php echo esc_url( home_url( '/' ) ); ?>" role="search">
-          <div class="form-group">
-            <input type="text" class="form-control" name="s" value="<?php echo esc_attr( get_search_query() ); ?>" placeholder="Search" style="width: 200px;">
-          </div>
-        </form>
+      <div class="collapse navbar-collapse">
+        <?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_class' => 'nav navbar-nav', 'fallback_cb' => 'flint_nav_fallback', 'walker' => new Flint_Bootstrap_Menu ) ); ?>
       </div><!-- .navbar-collapse -->
     </div><!-- .container -->
   </nav><!-- .navbar -->

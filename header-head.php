@@ -5,7 +5,7 @@
  * Displays all of the <head> section and everything up till <header>
  *
  * @package Flint
- * @since 1.1.1
+ * @since 1.3.0
  */
 ?>
 <!DOCTYPE html>
@@ -15,7 +15,6 @@
   <meta charset="<?php bloginfo( 'charset' ); ?>" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title><?php wp_title( '|', true, 'right' ); ?></title>
   <link rel="profile" href="http://gmpg.org/xfn/11" />
   <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
   <!--[if lt IE 9]>

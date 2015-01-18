@@ -1,12 +1,12 @@
 <?php
 /**
  * @package Flint
- * @since 1.1.1
+ * @since 1.3.0
  */
 ?>
 
   <div class="row">
-    <article id="post-<?php the_ID(); ?>" <?php post_class('col-lg-12 col-md-12 col-sm-12'); ?>>
+    <article id="post-<?php the_ID(); ?>" <?php post_class('col-xs-12'); ?>>
       <div class="entry-content">
         <?php if ( current_user_can('edit_posts') ) { ?><a class="btn btn-default btn-sm btn-edit hidden-xs" href="<?php echo get_edit_post_link(); ?>">Edit Aside</a><?php } ?>
         <blockquote><?php flint_the_content(); ?></blockquote>

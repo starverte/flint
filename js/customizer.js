@@ -4,11 +4,11 @@
  * Contains handlers to make Theme Customizer preview reload changes asynchronously.
  *
  * @package Flint
- * @since 1.2.0
+ * @since 1.3.0
  */
 
 ( function( $ ) {
-  wp.customize( 'flint_colors[link]', function( value ) {
+  wp.customize( 'flint_options[link_color]', function( value ) {
     value.bind( function( to ) {
       $( '.entry-header a, .entry-header a:hover, .entry-header a:focus' ).css( 'color', to );
       $( '.entry-content a, .entry-content a:hover, .entry-content a:focus' ).css( 'color', to );
@@ -33,25 +33,25 @@
     } );
   } );
 
-  // Canvas colors
-  wp.customize( 'flint_colors[canvas]', function( value ) {
+  // Fill colors
+  wp.customize( 'flint_options[fill]', function( value ) {
     value.bind( function( to ) {
-      $( '.canvas' ).css( 'background-color', to );
+      $( '.fill' ).css( 'background-color', to );
     } );
   } );
-  wp.customize( 'flint_colors[canvas-text]', function( value ) {
+  wp.customize( 'flint_options[fill_color]', function( value ) {
     value.bind( function( to ) {
-      $( '.canvas' ).css( 'color', to );
+      $( '.fill' ).css( 'color', to );
     } );
   } );
 
   // Fonts
-  wp.customize( 'flint_fonts[heading_font]', function( value ) {
+  wp.customize( 'flint_options[headings_font_family]', function( value ) {
     value.bind( function( to ) {
       $( 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6' ).css( 'font-family', to );
     } );
   } );
-  wp.customize( 'flint_fonts[body_font]', function( value ) {
+  wp.customize( 'flint_options[font_family_base]', function( value ) {
     value.bind( function( to ) {
       $( 'body' ).css( 'font-family', to );
     } );

@@ -3,7 +3,7 @@
  * The template for displaying Search Results pages.
  *
  * @package Flint
- * @since 1.2.0
+ * @since 1.3.0
  */
 
 get_header(); ?>
@@ -11,56 +11,40 @@ get_header(); ?>
 
 <section id="primary" class="content-area container">
 
-    <?php
-      flint_get_widgets('left');
+  <div class="row">
 
-      $content_class = 'site-content';
-      if ( is_active_sidebar( 'left' ) | is_active_sidebar( 'right' ) ) {
-        if ( is_active_sidebar( 'left' ) && is_active_sidebar( 'right' ) ) {
-          $content_class .= ' col-lg-6 col-md-6 wa-both';
-        }
-        else {
-          if ( is_active_sidebar( 'left' ) ) {
-            $content_class .= ' col-lg-9 col-md-9 wa-left';
-          }
-          elseif ( is_active_sidebar( 'right' ) ) {
-            $content_class .= ' col-lg-9 col-md-9 wa-right';
-          }
-        }
-      }
-      else {
-        $content_class .= ' col-lg-12 col-md-12';
-      }
-    ?>
+      <?php flint_get_widgets('left'); ?>
 
-    <div id="content" class="<?php echo $content_class; ?>" role="main">
+      <div id="content" role="main" <?php flint_content_class(); ?>>
 
-  <?php if ( have_posts() ) : ?>
+    <?php if ( have_posts() ) : ?>
 
-    <header class="page-header">
-      <h1 class="page-title"><?php printf( __( 'Search Results for: %s', 'flint' ), '<span>' . get_search_query() . '</span>' ); ?></h1>
-    </header><!-- .page-header -->
+      <header class="page-header">
+        <h1 class="page-title"><?php printf( __( 'Search Results for: %s', 'flint' ), '<span>' . get_search_query() . '</span>' ); ?></h1>
+      </header><!-- .page-header -->
 
-    <?php while ( have_posts() ) : the_post(); ?>
+      <?php while ( have_posts() ) : the_post(); ?>
 
-      <?php $type = get_post_type();
-        if ($type == 'post') { get_template_part( 'format', get_post_format()); }
-        elseif ($type == 'page') { get_template_part( 'templates/' . flint_get_template(), 'content' ); }
-        else { get_template_part( 'type', get_post_type() ); } ?>
+        <?php $type = get_post_type();
+          if ($type == 'post') { get_template_part( 'format', get_post_format()); }
+          elseif ($type == 'page') { get_template_part( 'templates/' . flint_get_template(), 'content' ); }
+          else { get_template_part( 'type', get_post_type() ); } ?>
 
-    <?php endwhile; ?>
+      <?php endwhile; ?>
 
-    <?php flint_content_nav( 'nav-below' ); ?>
+      <?php flint_content_nav( 'nav-below' ); ?>
 
-  <?php else : ?>
+    <?php else : ?>
 
-    <?php get_template_part( 'no-results', 'search' ); ?>
+      <?php get_template_part( 'no-results', 'search' ); ?>
 
-  <?php endif; ?>
+    <?php endif; ?>
 
-  </div><!-- #content -->
+    </div><!-- #content -->
 
-  <?php flint_get_widgets('right'); ?>
+    <?php flint_get_widgets('right'); ?>
+
+  </div><!-- .row -->
 
 </section><!-- #primary -->
 

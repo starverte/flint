@@ -2,8 +2,9 @@
 Theme Name: Flint
 Theme URI: http://sparks.starverte.com/flint
 Author: Star Verte LLC
+Author URI: http://starverte.com
 Description: A responsive, minimalist theme built on Twitter's Bootstrap 3 and based on Automattic's _s theme. Make it your own with a custom background, custom header, custom menus, custom colors and more.
-Version: 1.2.3
+Version: 1.3.0
 License: GPLv3
 License URI: LICENSE.md
 Tags: custom-background, custom-header, custom-menu, flexible-header, one-column, post-formats, threaded-comments
@@ -11,7 +12,7 @@ Text Domain: flint
 
 A spark sets a fire ablaze, and similarly the Sparks Framework is made up of 'sparks' that help initiate the creative process of website development within WordPress. Often times to start a fire, a person uses flint and steel. With the Sparks Framework it is the same way. 'Flint' (the core theme) and 'Steel' (the core plugin) makeup the foundation of the framework. Then, additional child themes and plugins extend the functionality and user experience.
 
-    Copyright 2013-2014 Star Verte LLC (email : dev@starverte.com)
+    Copyright 2013-2015 Star Verte LLC (email : dev@starverte.com)
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -35,7 +36,7 @@ button,
 input,
 select,
 textarea {
-  color: #404040;
+  color: #333;
 }
 html,
 body {
@@ -45,7 +46,7 @@ body {
   padding-top: 50px;
 }
 article {
-  margin-bottom: 3em;
+  margin-bottom: 1em;
 }
 article.format-aside,
 article.format-status,
@@ -309,7 +310,6 @@ body.minimal.minimal-breadcrumbs #top-pad {
   max-width: 95%;
   padding: 20px;
   padding-top: 0;
-  margin-top: 3em;
   margin-right: auto;
   margin-left: auto;
   background: #fff;
@@ -351,10 +351,10 @@ a.more-link {
   clear: both;
 }
 .page-header {
-  margin: 0 20px;
+  margin: 0;
 }
 .page-header h1 {
-  margin: 0;
+  margin-top: 0;
 }
 .archive .page-header h1 {
   margin-top: 20px;
@@ -558,6 +558,7 @@ object {
 }
 .comment-list,
 .comment-list .children {
+  padding-left: 0;
   list-style: none;
 }
 article.comment {
@@ -585,7 +586,7 @@ article.comment {
 
 /* Link widget (Legacy) */
 .link-widget {
-  color: #404040;
+  color: #333;
   background: #fafafa;
 }
 .link-widget-link:active,
@@ -593,7 +594,7 @@ article.comment {
   text-decoration: none;
 }
 .link-widget-link:hover .link-widget {
-  color: #404040;
+  color: #333;
   background: #fdfdfd;
 }
 .link-widget .widget-title {
@@ -731,8 +732,8 @@ article.comment {
 ----------------------------------------------- */
 
 /* Globally hidden elements when Infinite Scroll is supported and in use. */
-.infinite-scroll .navigation-paging, /* Older / Newer Posts Navigation (always hidden) */
-.infinite-scroll.neverending .site-footer { /* Theme Footer (when set to scrolling) */
+.infinite-scroll .navigation-paging,
+.infinite-scroll.neverending .site-footer {
   display: none;
 }
 

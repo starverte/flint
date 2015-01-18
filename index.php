@@ -3,7 +3,7 @@
  * The main template file used to display a page when nothing more specific matches a query.
  *
  * @package Flint
- * @since 1.2.0
+ * @since 1.3.0
  */
 
 get_header(); ?>
@@ -11,56 +11,40 @@ get_header(); ?>
 
   <div id="primary" class="content-area container">
 
-    <?php
-      flint_get_widgets('left');
+    <div class="row">
 
-      $content_class = 'site-content';
-      if ( is_active_sidebar( 'left' ) | is_active_sidebar( 'right' ) ) {
-        if ( is_active_sidebar( 'left' ) && is_active_sidebar( 'right' ) ) {
-          $content_class .= ' col-lg-6 col-md-6 wa-both';
-        }
-        else {
-          if ( is_active_sidebar( 'left' ) ) {
-            $content_class .= ' col-lg-9 col-md-9 wa-left';
-          }
-          elseif ( is_active_sidebar( 'right' ) ) {
-            $content_class .= ' col-lg-9 col-md-9 wa-right';
-          }
-        }
-      }
-      else {
-        $content_class .= ' col-lg-12 col-md-12';
-      }
-    ?>
+      <?php flint_get_widgets('left'); ?>
 
-    <div id="content" class="<?php echo $content_class; ?>" role="main">
+      <div id="content" role="main" <?php flint_content_class(); ?>>
 
-    <?php if ( have_posts() ) : ?>
+      <?php if ( have_posts() ) : ?>
 
-      <?php while ( have_posts() ) : the_post(); ?>
+        <?php while ( have_posts() ) : the_post(); ?>
 
-        <?php
-          $type = get_post_type();
-          if ($type == 'post') :
-            get_template_part( 'format', get_post_format() );
-          else :
-            get_template_part( 'type', $type );
-          endif;
-        ?>
+          <?php
+            $type = get_post_type();
+            if ($type == 'post') :
+              get_template_part( 'format', get_post_format() );
+            else :
+              get_template_part( 'type', $type );
+            endif;
+          ?>
 
-      <?php endwhile; ?>
+        <?php endwhile; ?>
 
-      <?php flint_content_nav( 'nav-below' ); ?>
+        <?php flint_content_nav( 'nav-below' ); ?>
 
-    <?php else : ?>
+      <?php else : ?>
 
-      <?php get_template_part( 'no-results', 'index' ); ?>
+        <?php get_template_part( 'no-results', 'index' ); ?>
 
-    <?php endif; ?>
+      <?php endif; ?>
 
-    </div><!-- #content -->
+      </div><!-- #content -->
 
-    <?php flint_get_widgets('right'); ?>
+      <?php flint_get_widgets('right'); ?>
+
+    </div><!-- .row -->
 
   </div><!-- #primary -->
 

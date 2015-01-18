@@ -5,7 +5,7 @@
  * Eventually, some of the functionality here could be replaced by core features
  *
  * @package Flint
- * @since 1.2.0
+ * @since 1.3.0
  */
 
 /**
@@ -40,25 +40,3 @@ function flint_attachment_link( $url, $id ) {
   return $url;
 }
 add_filter( 'attachment_link', 'flint_attachment_link', 10, 2 );
-
-/**
- * Filters wp_title to print a neat <title> tag based on what is being viewed.
- */
-function flint_wp_title( $title, $sep ) {
-  global $page, $paged;
-
-  if ( is_feed() )
-    return $title;
-
-  $title .= get_bloginfo( 'name' );// Add the blog name
-
-  $site_description = get_bloginfo( 'description', 'display' );
-  if ( $site_description && ( is_home() || is_front_page() ) )
-    $title .= " $sep $site_description";// Add the blog description for the home/front page.
-
-  if ( $paged >= 2 || $page >= 2 )
-    $title .= " $sep " . sprintf( __( 'Page %s', 'flint' ), max( $paged, $page ) );// Add a page number if necessary
-
-  return $title;
-}
-add_filter( 'wp_title', 'flint_wp_title', 10, 2 );
