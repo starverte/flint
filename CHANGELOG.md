@@ -11,6 +11,7 @@ For complete diff, check out [Pull Request](https://github.com/starverte/flint/p
 - Removed Theme Options page (use Customizer instead)
 - `flint_get_options` returns ALL options
 - All references to `canvas` changed to `fill` to avoid confusion with `<canvas>` and theme by same name
+- Updated Bootstrap to 3.1.1
 
 ###Flint 1.2.2
 For complete diff, check out [Pull Request](https://github.com/starverte/flint/pull/164)
