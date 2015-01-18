@@ -46,6 +46,8 @@ function flint_after_setup_theme() {
 
   add_theme_support( 'post-formats', array( 'aside', 'chat', 'gallery', 'link', 'status' ) );
 
+  add_theme_support( 'title-tag' );
+
   $options = flint_get_options();
 
   /**
@@ -101,18 +103,18 @@ function flint_widgets_init() {
 
   $widget_areas = array();
 
-  array_push($widget_areas, 'Left' );
-
-  array_push($widget_areas, 'Right' );
-
-  if ( $options['widget_areas_before'] == '3' ) {
+  if ( $options['widget_areas_above'] == '3' ) {
     array_push($widget_areas, 'Header Left', 'Header Center', 'Header Right' );
   }
   else {
     array_push($widget_areas, 'Header' );
   }
 
-  if ($options['widget_areas_after'] == '3' ) {
+  array_push($widget_areas, 'Left' );
+
+  array_push($widget_areas, 'Right' );
+
+  if ($options['widget_areas_below'] == '3' ) {
     array_push($widget_areas, 'Footer Left', 'Footer Center', 'Footer Right' );
   }
   else {
@@ -221,4 +223,17 @@ function flint_enqueue_scripts() {
 add_action( 'wp_enqueue_scripts', 'flint_enqueue_scripts' );
 
 add_filter( 'use_default_gallery_style', '__return_false' );
+
+
+//BEGIN - Backwards compatibility for add_theme_support( 'title-tag' )
+//Remove after WordPress 4.3 released
+if ( ! function_exists( '_wp_render_title_tag' ) ) {
+  function flint_render_title() {
+      ?>
+      <title><?php wp_title( '|', true, 'right' ); ?></title>
+      <?php
+  }
+  add_action( 'wp_head', 'flint_render_title' );
+}
+//END - Backwards compatibility for add_theme_support( 'title-tag' )
 
