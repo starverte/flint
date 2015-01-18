@@ -980,7 +980,7 @@ function flint_has_category( $category = '', $post = null ) {
  * @uses is_active_sidebar()
  *
  * @param string $class   Additional class or classes to append to content div
- * @var   array  $options The options array for flint_templates
+ * @var   array  $options The options array
  *
  * @todo Allow array input for $class
  */
@@ -1019,7 +1019,7 @@ function flint_content_class( $class = '' ) {
  * @uses is_active_sidebar()
  * @uses post_class()
  *
- * @var array  $options       The options array for flint_templates
+ * @var array  $options       The options array
  * @var string $format        The format, if any, of the post
  * @var string $options['default_width'] The default width, as set in options, of a post
  * @var string $width         The width of the post, which determines the col-* classes
@@ -1084,7 +1084,7 @@ function flint_post_class() {
  * @uses is_singular()
  *
  * @param string $side Left or right. Required.
- * @var array $options The options array for flint_templates
+ * @var array $options The options array
  * @var string $format The format, if any, of the post
  * @var string $width The actual post width
  *
@@ -1110,7 +1110,7 @@ function flint_get_spacer( $side ) {
       break;
   }
 
-  if (!is_active_sidebar('left') &&  !is_active_sidebar('right')) {
+  if (!is_active_sidebar('left') && !is_active_sidebar('right')) {
     if ($side == 'left') {
       switch ($width) {
         case 'slim':
