@@ -3,7 +3,7 @@
  * Creates Custom Header page
  *
  * @package Flint
- * @since 1.2.1
+ * @since 1.3.0
  */
 
 if ( ! function_exists( 'flint_header_style' ) ) :
