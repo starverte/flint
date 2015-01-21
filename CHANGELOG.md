@@ -1,3 +1,8 @@
+###Flint 1.3.1
+For complete diff, check out [Pull Request](https://github.com/starverte/flint/pull/172)
+- Fix for fatal error for PHP < 5.5
+- Updated to Bootstrap 3.3.2
+
 ###Flint 1.3.0
 For complete diff, check out [Pull Request](https://github.com/starverte/flint/pull/168)
 - Header and Footer widget areas can now be divided into three columns
@@ -11,7 +16,7 @@ For complete diff, check out [Pull Request](https://github.com/starverte/flint/p
 - Removed Theme Options page (use Customizer instead)
 - `flint_get_options` returns ALL options
 - All references to `canvas` changed to `fill` to avoid confusion with `<canvas>` and theme by same name
-- Updated Bootstrap to 3.1.1
+- Updated Bootstrap to 3.3.1
 
 ###Flint 1.2.2
 For complete diff, check out [Pull Request](https://github.com/starverte/flint/pull/164)
