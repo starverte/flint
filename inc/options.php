@@ -52,8 +52,10 @@ function flint_get_option_defaults() {
   $layout    = get_option( 'flint_layout'    );
   $templates = get_option( 'flint_templates' );
   $wa        = get_option( 'flint_wa'        );
+  
+  $body_bg = get_theme_mod('background_color');
 
-  $defaults['body_bg']              = !empty(get_theme_mod('background_color')) ? get_theme_mod('background_color') : $defaults['body_bg'];
+  $defaults['body_bg']              = !empty($body_bg)                          ? $body_bg                          : $defaults['body_bg'];
   $defaults['fill_color']           = !empty($colors['canvas-text'])            ? $colors['canvas-text']            : $defaults['fill_color'];
   $defaults['fill']                 = !empty($colors['canvas'])                 ? $colors['canvas']                 : $defaults['fill'];
   $defaults['link_color']           = !empty($colors['link'])                   ? $colors['link']                   : $defaults['link_color'];
