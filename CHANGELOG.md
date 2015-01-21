@@ -1,3 +1,7 @@
+###Flint 1.3.1
+For complete diff, check out [Pull Request](https://github.com/starverte/flint/pull/172)
+- Fix for fatal error for PHP < 5.5
+
 ###Flint 1.3.0
 For complete diff, check out [Pull Request](https://github.com/starverte/flint/pull/168)
 - Header and Footer widget areas can now be divided into three columns
