@@ -4,7 +4,7 @@
  * WordPress Options API
  *
  * @package Flint
- * @since 1.3.0
+ * @since 1.3.1
  */
 
 function flint_get_option_defaults() {
@@ -52,7 +52,7 @@ function flint_get_option_defaults() {
   $layout    = get_option( 'flint_layout'    );
   $templates = get_option( 'flint_templates' );
   $wa        = get_option( 'flint_wa'        );
-  
+
   $body_bg = get_theme_mod('background_color');
 
   $defaults['body_bg']              = !empty($body_bg)                          ? $body_bg                          : $defaults['body_bg'];
