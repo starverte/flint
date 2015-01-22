@@ -1,3 +1,8 @@
+###Flint 1.3.2
+For complete diff, check out [Pull Request](https://github.com/starverte/flint/pull/174)
+- Deleted HTML5 Shiv
+- Added `translation-ready` tag
+
 ###Flint 1.3.1
 For complete diff, check out [Pull Request](https://github.com/starverte/flint/pull/172)
 - Fix for fatal error for PHP < 5.5
