@@ -45,6 +45,21 @@ function flint_get_option_defaults() {
     'widget_areas_below'         => '1',
   );
 
+  return apply_filters('flint_option_defaults', $defaults);
+}
+
+/**
+ * Gets array of theme options
+ * For backwards compatibility, can also get single value
+ *
+ * @var string Deprecated. The single option to return.
+ */
+function flint_get_options( $option = null ) {
+  $defaults = flint_get_option_defaults();
+
+  $defaults['body_bg']    = get_theme_mod('background_color', $defaults['body_bg'   ]);
+  $defaults['fill_color'] = get_theme_mod('header_textcolor', $defaults['fill_color']);
+
   //BEGIN - backwards compatibility
   $colors    = get_option( 'flint_colors'    );
   $fonts     = get_option( 'flint_fonts'     );
@@ -53,10 +68,6 @@ function flint_get_option_defaults() {
   $templates = get_option( 'flint_templates' );
   $wa        = get_option( 'flint_wa'        );
 
-  $body_bg = get_theme_mod('background_color');
-
-  $defaults['body_bg']              = !empty($body_bg)                          ? $body_bg                          : $defaults['body_bg'];
-  $defaults['fill_color']           = !empty($colors['canvas-text'])            ? $colors['canvas-text']            : $defaults['fill_color'];
   $defaults['fill']                 = !empty($colors['canvas'])                 ? $colors['canvas']                 : $defaults['fill'];
   $defaults['link_color']           = !empty($colors['link'])                   ? $colors['link']                   : $defaults['link_color'];
 
@@ -89,18 +100,6 @@ function flint_get_option_defaults() {
   $defaults['widget_areas_above']   = !empty($wa['header'])                     ? $wa['header']                     : $defaults['widget_areas_above'];
   $defaults['widget_areas_below']   = !empty($wa['footer'])                     ? $wa['footer']                     : $defaults['widget_areas_below'];
   //END - backwards compatibility
-
-  return apply_filters('flint_option_defaults', $defaults);
-}
-
-/**
- * Gets array of theme options
- * For backwards compatibility, can also get single value
- *
- * @var string Deprecated. The single option to return.
- */
-function flint_get_options( $option = null ) {
-  $defaults = flint_get_option_defaults();
 
   $flint_options = wp_parse_args( get_option( 'flint_options' ), $defaults );
 
@@ -202,3 +201,4 @@ function flint_get_address( $schema = true, $args = array() ) {
   $output = $args['open'] . $args['before'] . $args['item1'] . $args['sep1'] . $args['item2'] . $args['sep2'] . $args['item3'] . $args['after'] . $args['close'];
   echo $output;
 }
+

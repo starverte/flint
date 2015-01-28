@@ -128,5 +128,6 @@ get_header();
       </div><!-- #content -->
     </div><!-- .row -->
   </div><!-- #primary -->
+</div><!-- #page -->
 
 <?php get_footer(); ?>

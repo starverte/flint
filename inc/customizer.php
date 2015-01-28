@@ -190,7 +190,7 @@ function flint_customize_register( $wp_customize ) {
        */
       $wp_customize->add_setting('flint_options[footer_content]', array(
         'default'           => $defaults['footer_content'],
-        'sanitize_callback' => 'esc_text_area',
+        'sanitize_callback' => 'esc_textarea',
         'capability'        => 'edit_theme_options',
         'type'              => 'option',
         'transport'         => 'refresh',
@@ -251,6 +251,8 @@ function flint_customize_register( $wp_customize ) {
   /**
    * Colors section
    */
+
+    $wp_customize->remove_control( 'header_textcolor' );
 
     /**
      * Link color setting
@@ -773,6 +775,4 @@ function flint_sanitize_widget_columns( $input ) {
     return $defaults['widget_areas_above'];
   }
 }
-
-
 
