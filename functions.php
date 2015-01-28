@@ -48,13 +48,13 @@ function flint_after_setup_theme() {
 
   add_theme_support( 'title-tag' );
 
-  $options = flint_get_options();
+  $defaults = flint_get_option_defaults();
 
   /**
    * Implement the Custom Background feature
    */
   $args = array(
-    'default-color' => $options['body_bg'],
+    'default-color' => $defaults['body_bg'],
     'default-image' => '',
   );
 
@@ -67,7 +67,7 @@ function flint_after_setup_theme() {
    */
   $header = array(
     'default-image'          => '',
-    'default-text-color'     => $options['fill_color'],
+    'default-text-color'     => $defaults['fill_color'],
     'width'                  => 300,
     'height'                 => 300,
     'flex-height'            => true,

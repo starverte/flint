@@ -26,5 +26,6 @@ if ($options['clear_nav'] == 'navbar'){ get_header('nav'); } ?>
       </div><!-- #content -->
     </div><!-- .row -->
   </div><!-- #primary -->
+</div><!-- #page -->
 
 <?php get_footer('close'); ?>

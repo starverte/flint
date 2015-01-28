@@ -70,5 +70,6 @@ get_header(); ?>
       </div><!-- .row -->
     </div><!-- #content -->
   </div><!-- #primary -->
+</div><!-- #page -->
 
 <?php get_footer(); ?>

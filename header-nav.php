@@ -15,7 +15,7 @@
     <div class="container">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-primary">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
@@ -25,7 +25,7 @@
       </div><!-- .navbar-header -->
 
       <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse">
+      <div class="collapse navbar-collapse navbar-primary">
         <?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_class' => 'nav navbar-nav', 'fallback_cb' => 'flint_nav_fallback', 'walker' => new Flint_Bootstrap_Menu ) ); ?>
       </div><!-- .navbar-collapse -->
     </div><!-- .container -->

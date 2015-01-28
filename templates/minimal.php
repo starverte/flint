@@ -36,5 +36,7 @@ if (empty($options['minimal_nav']) || $options['minimal_nav'] == 'navbar'){ get_
 
   </div><!-- #primary -->
 
+</div><!-- #page -->
+
 <?php flint_get_widgets('footer', true); ?>
 <?php get_footer('close'); ?>

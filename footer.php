@@ -9,8 +9,6 @@
  */
 ?>
 
-</div><!-- #page -->
-
 <footer id="colophon" class="fill site-footer" role="contentinfo">
   <div class="site-info container">
     <div class="row">
@@ -27,3 +25,4 @@
 </footer><!-- #colophon -->
 
 <?php get_footer( 'close' );
+

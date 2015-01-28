@@ -722,7 +722,7 @@ function flint_options_css() {
   $colors = flint_get_colors();
 
   $body = 'body {';
-  $body .= 'background-color: ' . $colors['body_bg'] . '; font-family: ';
+  $body .= 'background-color: #' . $colors['body_bg'] . '; font-family: ';
 
   switch ($options['font_family_base']) {
     case 'Open Sans':
