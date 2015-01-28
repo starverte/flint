@@ -3,7 +3,7 @@
  * Custom template tags for this theme.
  *
  * @package Flint
- * @since 1.3.0
+ * @since 1.3.3
  */
 
 if ( ! function_exists( 'flint_content_nav' ) ) :
