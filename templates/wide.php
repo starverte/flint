@@ -3,7 +3,7 @@
  * Template Name: Wide
  *
  * @package Flint
- * @since 1.3.0
+ * @since 1.3.3
  */
 get_header(); ?>
 <?php flint_get_widgets('header'); ?>

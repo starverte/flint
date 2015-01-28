@@ -3,7 +3,7 @@
  * Template Name: Clear
  *
  * @package Flint
- * @since 1.3.0
+ * @since 1.3.3
  */
 $options = flint_get_options();
 get_header('head');

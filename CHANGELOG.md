@@ -1,3 +1,10 @@
+###Flint 1.3.3
+For complete diff, check out [Pull Request](https://github.com/starverte/flint/pull/176)
+- Fixed bug that was causing navigation menu to not work on mobile layouts
+- Fixed customizer bugs
+- Added action `flint_open` to header
+- Fixed footer widget area, so that like the footer, is always on the bottom of the page
+
 ###Flint 1.3.2
 For complete diff, check out [Pull Request](https://github.com/starverte/flint/pull/174)
 - Deleted HTML5 Shiv
