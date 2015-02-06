@@ -703,7 +703,7 @@ function flint_sanitize_width( $input ) {
   if ( array_key_exists( $input, $valid ) ) {
     return $input;
   } else {
-    return $defaults['post_default_width'];
+    return;
   }
 }
 
@@ -716,7 +716,7 @@ function flint_sanitize_clear_nav( $input ) {
   if ( array_key_exists( $input, $valid ) ) {
     return $input;
   } else {
-    return $defaults['clear_nav'];
+    return;
   }
 }
 
@@ -729,7 +729,7 @@ function flint_sanitize_minimal_nav( $input ) {
   if ( array_key_exists( $input, $valid ) ) {
     return $input;
   } else {
-    return $defaults['minimal_nav'];
+    return;
   }
 }
 
@@ -745,7 +745,7 @@ function flint_sanitize_minimal_widget_area( $input ) {
   if ( array_key_exists( $input, $valid ) ) {
     return $input;
   } else {
-    return $defaults['minimal_widget_area'];
+    return;
   }
 }
 
@@ -759,7 +759,7 @@ function flint_sanitize_featured_image( $input ) {
   if ( array_key_exists( $input, $valid ) ) {
     return $input;
   } else {
-    return $defaults['post_featured_image'];
+    return;
   }
 }
 
@@ -772,7 +772,7 @@ function flint_sanitize_widget_columns( $input ) {
   if ( array_key_exists( $input, $valid ) ) {
     return $input;
   } else {
-    return $defaults['widget_areas_above'];
+    return;
   }
 }
 
