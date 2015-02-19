@@ -3,7 +3,7 @@
  * Flint functions and definitions
  *
  * @package Flint
- * @version 1.3.0
+ * @version 1.3.3
  */
 
 /**
@@ -32,9 +32,11 @@ function flint_after_setup_theme() {
 
   load_theme_textdomain( 'flint', get_template_directory() . '/languages' );
 
-  register_nav_menus( array(
+  $nav_menus = array(
     'primary' => __( 'Primary Menu', 'flint' ),
-  ) );
+  );
+  $nav_menus = apply_filters('flint_nav_menus', $nav_menus);
+  register_nav_menus( $nav_menus );
 
   add_editor_style( 'editor-style.css' );
 
