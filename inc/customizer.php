@@ -3,7 +3,7 @@
  * Flint Theme Customizer
  *
  * @package Flint
- * @since 1.3.3
+ * @since 1.3.4
  */
 
 function flint_customize_register( $wp_customize ) {
