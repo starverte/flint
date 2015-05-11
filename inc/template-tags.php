@@ -3,7 +3,7 @@
  * Custom template tags for this theme.
  *
  * @package Flint
- * @since 1.3.3
+ * @since 1.3.5
  */
 
 if ( ! function_exists( 'flint_content_nav' ) ) :
@@ -806,14 +806,14 @@ function flint_get_template( $output = 'slug', $template = '', $a = false ) {
 
   if (!empty($template) && $a != true) { trigger_error('$template variable in flint_get_template() is deprecated as of Flint 1.2.1. Use get_template() to get a particular file.'); unset($t); }
 
-  if (empty($file) | $file == 'default') {
-    if ( is_active_sidebar('left') || is_active_sidebar('right') ) { $slug = 'wide'; }
-    else { $slug = $options['page_default_width']; }
-  }
-  elseif ($file == 'templates/clear.php') { $slug = $options['clear_width']; }
+  if ($file == 'templates/clear.php') { $slug = $options['clear_width']; }
   elseif ($file == 'templates/minimal.php') {
     if ( flint_is_active_widgets('left') || flint_is_active_widgets('right') ) { $slug = 'wide'; }
     else{ $slug = $options['minimal_width']; }
+  }
+  else {
+    if ( is_active_sidebar('left') || is_active_sidebar('right') ) { $slug = 'wide'; }
+    else { $slug = $options['page_default_width']; }
   }
 
   switch ($output) {
