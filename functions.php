@@ -136,6 +136,13 @@ function flint_widgets_init() {
 }
 add_action( 'widgets_init', 'flint_widgets_init' );
 
+add_filter( 'jetpack_implode_frontend_css', '__return_false' );
+
+function flint_print_styles() {
+  wp_deregister_style( 'grunion.css' );
+}
+add_action('wp_print_styles','flint_print_styles');
+
 /**
  * Enqueue scripts and styles
  */
