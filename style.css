@@ -676,6 +676,27 @@ article.comment {
   height: auto;
 }
 
+.contact-form .radio,
+.contact-form .checkbox {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  position: relative;
+}
+.contact-form input.radio,
+.contact-form input.checkbox {
+  border: none;
+  position: absolute;
+  width: auto;
+  margin-top: -7px;
+  margin-bottom: 0;
+  margin-left: -20px;
+}
+.contact-form label.radio,
+.contact-form label.checkbox {
+  margin-left: 20px;
+}
+
 /* @see Twitter Bootstrap .btn, .btn-default, etc. */
 .contact-submit input {
   display: inline-block;
