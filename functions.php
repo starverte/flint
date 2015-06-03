@@ -3,7 +3,7 @@
  * Flint functions and definitions
  *
  * @package Flint
- * @version 1.3.4
+ * @version 1.3.7
  */
 
 /**
