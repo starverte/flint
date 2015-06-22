@@ -1,3 +1,15 @@
+###Flint 1.3.8
+- Upgrade to Bootstrap 3.3.5
+
+###Flint 1.3.7
+- Deregisters Jetpack form styles
+
+###Flint 1.3.6
+- [Bug fix](https://github.com/starverte/flint/issues/183): Jetpack checkboxes and radio buttons now display properly
+
+###Flint 1.3.5
+- `flint_get_template`: default condition moved to last else
+
 ###Flint 1.3.4
 For complete diff, check out [Pull Request](https://github.com/starverte/flint/pull/180)
 - Upgraded to Bootstrap 3.3.4
