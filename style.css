@@ -41,6 +41,8 @@ textarea {
 html,
 body {
   height: 100%;
+  -ms-word-wrap: break-word;
+      word-wrap: break-word;
 }
 body {
   padding-top: 50px;
