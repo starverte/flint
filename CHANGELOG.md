@@ -1,3 +1,7 @@
+###Flint 1.3.9
+- Non-breaking text now breaks properly
+- Bug fix: Navigation menus that weren't displaying properly on mobile due to non-breaking text now display properly
+
 ###Flint 1.3.8
 - Upgrade to Bootstrap 3.3.5
 
