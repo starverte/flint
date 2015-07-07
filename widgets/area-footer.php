@@ -7,6 +7,7 @@
  */
 $type = get_post_type();
 ?>
+
 <?php if ( is_active_sidebar( 'footer' ) ) { ?>
   <div class="fill-light widgets widgets-footer" role="complementary">
     <div class="container">

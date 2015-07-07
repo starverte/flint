@@ -7,6 +7,7 @@
  */
 $type = get_post_type();
 ?>
+
 <?php if ( is_active_sidebar( 'left' ) | is_active_sidebar( 'right' ) ) { ?>
   <?php if ( is_active_sidebar( 'right' ) ) { ?>
     <div class="hidden-xs hidden-sm col-md-3 widgets widgets-right" role="complementary">

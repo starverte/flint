@@ -5,9 +5,13 @@
  * @package Flint
  * @since 1.3.3
  */
-$options = flint_get_options();
 get_header('head');
-if ($options['clear_nav'] == 'navbar'){ get_header('nav'); } ?>
+
+$options = flint_get_options();
+if ( 'navbar' === $options['clear_nav'] ) {
+  get_header('nav');
+}
+?>
 
   <div id="primary" class="content-area container">
     <div class="row">

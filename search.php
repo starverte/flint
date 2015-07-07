@@ -5,9 +5,9 @@
  * @package Flint
  * @since 1.3.0
  */
-
-get_header(); ?>
-<?php flint_get_widgets('header'); ?>
+get_header();
+flint_get_widgets('header');
+?>
 
 <section id="primary" class="content-area container">
 

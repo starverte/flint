@@ -5,8 +5,8 @@
  * @package Flint
  * @since 1.3.3
  */
-
-get_header(); ?>
+get_header();
+?>
 
   <div id="primary" class="content-area container">
     <div id="content" class="site-content" role="main">
