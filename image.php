@@ -5,7 +5,6 @@
  * @package Flint
  * @since 1.3.3
  */
-
 get_header();
 ?>
 
