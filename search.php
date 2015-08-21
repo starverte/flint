@@ -3,7 +3,7 @@
  * The template for displaying Search Results pages.
  *
  * @package Flint
- * @since 1.3.0
+ * @since 1.3.9.1
  */
 get_header();
 flint_get_widgets('header');
