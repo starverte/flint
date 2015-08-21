@@ -3,12 +3,17 @@
  * Template Name: Minimal
  *
  * @package Flint
- * @since 1.3.3
+ * @since 1.3.9.1
  */
-$options = flint_get_options();
 get_header('head');
-if (empty($options['minimal_nav']) || $options['minimal_nav'] == 'navbar'){ get_header('nav'); } ?>
-<?php flint_get_widgets('header', true); ?>
+
+$options = flint_get_options();
+if ( empty($options['minimal_nav']) || 'navbar' === $options['minimal_nav'] ) {
+  get_header('nav');
+}
+
+flint_get_widgets('header', true);
+?>
 
   <div id="primary" class="content-area container">
 

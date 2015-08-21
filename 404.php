@@ -3,10 +3,10 @@
  * The template for displaying 404 pages (Not Found).
  *
  * @package Flint
- * @since 1.3.3
+ * @since 1.3.9.1
  */
-
-get_header(); ?>
+get_header();
+?>
 
   <div id="primary" class="content-area container">
     <div id="content" class="site-content" role="main">

@@ -3,10 +3,11 @@
  * The widget area that appears below the content.
  *
  * @package Flint
- * @since 1.3.0
+ * @since 1.3.9.1
  */
 $type = get_post_type();
 ?>
+
 <?php if ( is_active_sidebar( 'footer' ) ) { ?>
   <div class="fill-light widgets widgets-footer" role="complementary">
     <div class="container">

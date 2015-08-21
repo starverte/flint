@@ -1,3 +1,6 @@
+###Flint 1.3.9.1
+- Cleaned up file headers
+
 ###Flint 1.3.9
 - Non-breaking text now breaks properly
 - Bug fix: Navigation menus that weren't displaying properly on mobile due to non-breaking text now display properly

@@ -3,10 +3,11 @@
  * Template Name: Slim
  *
  * @package Flint
- * @since 1.3.3
+ * @since 1.3.9.1
  */
-get_header(); ?>
-<?php flint_get_widgets('header'); ?>
+get_header();
+flint_get_widgets('header');
+?>
 
   <div id="primary" class="content-area container">
 

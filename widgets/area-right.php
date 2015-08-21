@@ -3,10 +3,11 @@
  * The widget area that appears to the right of content.
  *
  * @package Flint
- * @since 1.3.0
+ * @since 1.3.9.1
  */
 $type = get_post_type();
 ?>
+
 <?php if ( is_active_sidebar( 'left' ) | is_active_sidebar( 'right' ) ) { ?>
   <?php if ( is_active_sidebar( 'right' ) ) { ?>
     <div class="hidden-xs hidden-sm col-md-3 widgets widgets-right" role="complementary">
