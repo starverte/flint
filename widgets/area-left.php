@@ -3,7 +3,7 @@
  * The widget area that appears to the left of content.
  *
  * @package Flint
- * @since 1.3.0
+ * @since 1.3.9.1
  */
 $type = get_post_type();
 ?>

@@ -7,7 +7,7 @@
  * or a static page.
  *
  * @package Flint
- * @since 1.3.3
+ * @since 1.3.9.1
  *
  */
 get_header();
