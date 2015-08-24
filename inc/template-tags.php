@@ -574,7 +574,7 @@ function flint_avatar( $id_or_email, $size = '96', $default = '', $alt = false )
 /**
  * Retrieve HTML content for reply to comment link.
  */
-function get_flint_reply_link($args = array(), $comment = null, $post = null) {
+function flint_get_reply_link($args = array(), $comment = null, $post = null) {
   global $user_ID;
 
   $defaults = array('add_below' => 'comment', 'respond_id' => 'respond', 'reply_text' => __('Reply', 'flint'),
@@ -607,7 +607,7 @@ function get_flint_reply_link($args = array(), $comment = null, $post = null) {
  * Displays the HTML content for reply to comment link.
  */
 function flint_reply_link($args = array(), $comment = null, $post = null) {
-  echo get_flint_reply_link($args, $comment, $post);
+  echo flint_get_reply_link($args, $comment, $post);
 }
 
 /**
