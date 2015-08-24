@@ -6,8 +6,16 @@
  * @since 1.3.0
  */
 
- /**
+/**
  * Converts Hex to HSL
+ *
+ * @param string $HexColor A color, in hexadecimal i.e. 'ffffff'
+ *
+ * @var double $Hue The hue of the color
+ * @var double $Saturation The saturation of the hue
+ * @var double $Luminance The brightness of the hue
+ *
+ * @return array Hue, Saturation, and Luminance of the color
  */
 function flint_hex_hsl( $HexColor ) {
   $HexColor    = str_replace( '#', '', $HexColor );
@@ -56,6 +64,12 @@ function flint_hex_hsl( $HexColor ) {
 
 /**
  * Converts HSL to Hex
+ *
+ * @param double $Hue The hue of the color
+ * @param double $Saturation The saturation of the hue
+ * @param double $Luminance The brightness of the hue
+ *
+ * @return string A color, in hexadecimal i.e. 'ffffff'
  */
 function flint_hsl_hex( $Hue = 0, $Saturation = 0, $Luminance = 0 ) {
 
@@ -134,6 +148,11 @@ function flint_hsl_hex( $Hue = 0, $Saturation = 0, $Luminance = 0 ) {
 
 /**
  * Darkens Hex color by defined percentage
+ *
+ * @param string $HexColor A color, in hexadecimal i.e. 'ffffff'
+ * @param double $percent The percentage to darken the color
+ *
+ * @return string A hexadecimal color, a darker color than $HexColor
  */
 function flint_darken( $HexColor, $percent ) {
   $HSLColor = flint_hex_hsl($HexColor);
@@ -145,6 +164,11 @@ function flint_darken( $HexColor, $percent ) {
 
 /**
  * Lightens Hex color by defined percentage
+ *
+ * @param string $HexColor A color, in hexadecimal i.e. 'ffffff'
+ * @param double $percent The percentage to lighten the color
+ *
+ * @return string A hexadecimal color, a lighter color than $HexColor
  */
 function flint_lighten( $HexColor, $percent ) {
   $HSLColor = flint_hex_hsl($HexColor);
