@@ -616,12 +616,12 @@ function flint_comment_reply_link($args = array(), $comment = null, $post = null
  * get_sidebar doesn't make sense for all widget areas, so this replaces that function
  *
  */
-function flint_get_widgets( $slug, $minimal = false ) {
+function flint_get_sidebar( $slug, $minimal = false ) {
   $options = flint_get_options();
 
   switch ($minimal) {
     case true:
-      if ($slug == $options['minimal_widget_area']) { flint_get_widgets( $slug, false); }
+      if ($slug == $options['minimal_widget_area']) { flint_get_sidebar( $slug, false); }
       break;
     case false:
       do_action( "get_sidebar", $slug );
@@ -858,7 +858,7 @@ function flint_get_template( $output = 'slug', $template = '', $a = false ) {
 /**
  * Returns slug or class for .widgets.widgets-footer based on theme options
  */
-function flint_get_widgets_template( $output, $widget_area = 'footer' ) {
+function flint_get_sidebar_template( $output, $widget_area = 'footer' ) {
   $options = flint_get_options();
   $type    = get_post_type( get_the_ID() );
 
