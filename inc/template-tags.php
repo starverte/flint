@@ -103,7 +103,7 @@ function flint_comment( $comment, $args, $depth ) {
         <p><a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>"><time datetime="<?php comment_time( 'c' ); ?>">
         <?php printf( _x( '%1$s <br> %2$s', '1: date, 2: time', 'flint' ), get_comment_date('M j, Y'), get_comment_time('g:i a') ); ?>
         </time></a></p>
-        <?php flint_reply_link(array_merge( $args, array( 'depth' => $depth, 'max_depth' => $args['max_depth'] ) )); ?>
+        <?php flint_comment_reply_link(array_merge( $args, array( 'depth' => $depth, 'max_depth' => $args['max_depth'] ) )); ?>
         <?php if ( current_user_can('moderate_comments') ) { ?><a class="btn btn-default btn-sm" href="<?php echo get_edit_comment_link(); ?>" >Edit</a><?php } ?>
       </div>
     </article>
@@ -574,7 +574,7 @@ function flint_avatar( $id_or_email, $size = '96', $default = '', $alt = false )
 /**
  * Retrieve HTML content for reply to comment link.
  */
-function flint_get_reply_link($args = array(), $comment = null, $post = null) {
+function flint_get_comment_reply_link($args = array(), $comment = null, $post = null) {
   global $user_ID;
 
   $defaults = array('add_below' => 'comment', 'respond_id' => 'respond', 'reply_text' => __('Reply', 'flint'),
@@ -606,8 +606,8 @@ function flint_get_reply_link($args = array(), $comment = null, $post = null) {
 /**
  * Displays the HTML content for reply to comment link.
  */
-function flint_reply_link($args = array(), $comment = null, $post = null) {
-  echo flint_get_reply_link($args, $comment, $post);
+function flint_comment_reply_link($args = array(), $comment = null, $post = null) {
+  echo flint_get_comment_reply_link($args, $comment, $post);
 }
 
 /**
