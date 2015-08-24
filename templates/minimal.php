@@ -21,7 +21,7 @@ flint_get_sidebar('header', true);
 
       <?php flint_get_sidebar('left', true); ?>
 
-      <div id="content" class="site-content<?php if ( flint_is_active_widgets( 'left' ) | flint_is_active_widgets( 'right' ) ) { echo ' col-xs-12 col-md-9'; } ?>" role="main">
+      <div id="content" class="site-content<?php if ( flint_is_active_sidebar( 'left' ) | flint_is_active_sidebar( 'right' ) ) { echo ' col-xs-12 col-md-9'; } ?>" role="main">
 
         <?php while ( have_posts() ) : the_post(); ?>
 

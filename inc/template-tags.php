@@ -638,7 +638,7 @@ function flint_get_sidebar( $slug, $minimal = false ) {
  * Checks to see if widget area is to be displayed for the Minimal page template.
  * For other page templates, use is_active_sidebar()
  */
-function flint_is_active_widgets( $slug ) {
+function flint_is_active_sidebar( $slug ) {
   $options = flint_get_options();
 
   if ($slug == $options['minimal_widget_area'] && is_active_sidebar( $slug )):
@@ -808,7 +808,7 @@ function flint_get_template( $output = 'slug', $template = '', $a = false ) {
 
   if ($file == 'templates/clear.php') { $slug = $options['clear_width']; }
   elseif ($file == 'templates/minimal.php') {
-    if ( flint_is_active_widgets('left') || flint_is_active_widgets('right') ) { $slug = 'wide'; }
+    if ( flint_is_active_sidebar('left') || flint_is_active_sidebar('right') ) { $slug = 'wide'; }
     else{ $slug = $options['minimal_width']; }
   }
   else {
