@@ -9,6 +9,9 @@
 if ( ! function_exists( 'flint_content_nav' ) ) :
 /**
  * Display navigation to next/previous pages when applicable
+ *
+ * @deprecated 2.0.0
+ * @ignore
  */
 function flint_content_nav( $nav_id ) {
   global $wp_query;
@@ -72,6 +75,9 @@ if ( ! function_exists( 'flint_comment' ) ) :
  * Template for comments and pingbacks.
  *
  * Used as a callback by wp_list_comments() for displaying the comments.
+ *
+ * @deprecated 2.0.0
+ * @ignore
  */
 function flint_comment( $comment, $args, $depth ) {
   $GLOBALS['comment'] = $comment;
@@ -116,6 +122,10 @@ endif; // flint_comment()
 
 
 add_action('flint_entry_meta_below_post','flint_the_comments', 20);
+/**
+ * @deprecated 2.0.0
+ * @ignore
+ */
 function flint_the_comments() {
   if ( ! post_password_required() && ( comments_open() || '0' != get_comments_number() ) ) : ?>
     <span class="sep"> | </span>
@@ -219,17 +229,26 @@ function flint_category_transient_flusher() {
 add_action( 'edit_category', 'flint_category_transient_flusher' );
 add_action( 'save_post', 'flint_category_transient_flusher' );
 
-
 /**
- * Use bootstrap pagination
+ * The formatted output of a list of pages, using Twitter Bootstrap pagination.
+ *
+ * Displays page links for paginated posts (i.e. includes the <!--nextpage-->.
+ * Quicktag one or more times). This tag must be within The Loop.
+ *
+ * @param string|array $args
+ * @return string Formatted output in HTML.
  */
-function flint_link_pages($args = '') {
+function flint_link_pages( $args = '' ) {
   $defaults = array(
-    'before' => '<p>', 'after' => '</p>',
-    'link_before' => '', 'link_after' => '',
-    'next_or_number' => 'number', 'nextpagelink' => __('Next page', 'flint'),
-    'previouspagelink' => __('Previous page', 'flint'), 'pagelink' => '%',
-    'echo' => 1
+    'before'           => '<p>',
+    'after'            => '</p>',
+    'link_before'      => '',
+    'link_after'       => '',
+    'next_or_number'   => 'number',
+    'nextpagelink'     => __('Next page', 'flint'),
+    'previouspagelink' => __('Previous page', 'flint'),
+    'pagelink'         => '%',
+    'echo'             => 1
   );
 
   $r = wp_parse_args( $args, $defaults );
@@ -277,6 +296,13 @@ function flint_link_pages($args = '') {
 
   return $output;
 }
+
+/**
+ * Helper function for flint_link_pages().
+ *
+ * @param int $i Page number.
+ * @return string Link.
+ */
 function flint_link_page( $i ) {
   global $wp_rewrite;
   $post = get_post();
@@ -297,9 +323,13 @@ function flint_link_page( $i ) {
 
 
 /**
- * Modifies the_content to allow for more tag to be a bootstrap button
+ * Display the post content, with Twitter Bootstrap "More" button.
+ *
+ * @param string $more_link_text Optional. Content for when there is more text.
+ * @param bool   $strip_teaser   Optional. Strip teaser content before the more text. Default is false.
+ * @param array  $args           Optional. An array of arguments for displaying the more button.
  */
-function flint_the_content($more_link_text = 'Read more', $stripteaser = false, $args = array() ) {
+function flint_the_content($more_link_text = 'Read more', $strip_teaser = false, $args = array() ) {
 
   $defaults = array(
     'more_class'  => 'btn btn-primary',
@@ -309,7 +339,7 @@ function flint_the_content($more_link_text = 'Read more', $stripteaser = false, 
 
   $args = wp_parse_args( $args, $defaults );
 
-  $content = flint_get_the_content($more_link_text, $stripteaser, $args);
+  $content = flint_get_the_content($more_link_text, $strip_teaser, $args);
   $content = apply_filters('the_content', $content);
   $content = str_replace(']]>', ']]&gt;', $content);
   echo $content;
@@ -317,9 +347,14 @@ function flint_the_content($more_link_text = 'Read more', $stripteaser = false, 
 
 
 /**
- * Modifies get_the_content to allow for more tag to be a bootstrap button
+ * Retrieve the post content, with Twitter Bootstrap "More" button.
+ *
+ * @param string $more_link_text Optional. Content for when there is more text.
+ * @param bool   $strip_teaser   Optional. Strip teaser content before the more text. Default is false.
+ * @param array  $args           Optional. An array of arguments for displaying the more button.
+ * @return string
  */
-function flint_get_the_content( $more_link_text = 'Read more', $stripteaser = false, $args = array() ) {
+function flint_get_the_content( $more_link_text = 'Read more', $strip_teaser = false, $args = array() ) {
   global $more, $page, $pages, $multipage, $preview;
 
   $post = get_post();
@@ -355,9 +390,9 @@ function flint_get_the_content( $more_link_text = 'Read more', $stripteaser = fa
     $content = array($content);
   }
   if ( (false !== strpos($post->post_content, '<!--noteaser-->') && ((!$multipage) || ($page==1))) )
-    $stripteaser = true;
+    $strip_teaser = true;
   $teaser = $content[0];
-  if ( $more && $stripteaser && $hasTeaser )
+  if ( $more && $strip_teaser && $hasTeaser )
     $teaser = '';
   $output .= $teaser;
   if ( count($content) > 1 ) {
@@ -391,9 +426,12 @@ function flint_password_form() {
 }
 add_filter( 'the_password_form', 'flint_password_form' );
 
-
 /**
- * Modifies comment form to use bootstrap styles
+ * Output a complete commenting form for use within a template, using Twitter Bootstrap styles.
+ *
+ * @param array       $args
+ * @param int|WP_Post $post_id Post ID or WP_Post object to generate the form for. Default current post.
+ *
  * @todo Remove "Required fields are marked *"
  * @todo Fix width of inputs
  * @todo Check pattern of email address
@@ -484,7 +522,9 @@ function flint_comment_form( $args = array(), $post_id = null ) {
 
 /**
  * Retrieve the avatar for a user who provided a user ID or email address.
-*/
+ *
+ * @ignore
+ */
 function flint_avatar( $id_or_email, $size = '96', $default = '', $alt = false ) {
   if ( ! get_option('show_avatars') )
     return false;
@@ -573,6 +613,12 @@ function flint_avatar( $id_or_email, $size = '96', $default = '', $alt = false )
 
 /**
  * Retrieve HTML content for reply to comment link.
+ *
+ * @param array       $args
+ * @param int         $comment Comment being replied to. Default current comment.
+ * @param int|WP_Post $post    Post ID or WP_Post object the comment is going to be displayed on.
+ *                             Default current post.
+ * @return void|false|string Link to show comment form, if successful. False, if comments are closed.
  */
 function flint_get_comment_reply_link($args = array(), $comment = null, $post = null) {
   global $user_ID;
@@ -603,18 +649,28 @@ function flint_get_comment_reply_link($args = array(), $comment = null, $post = 
     $link = "<a class='comment-reply-link btn btn-primary btn-sm' href='" . esc_url( add_query_arg( 'replytocom', $comment->comment_ID ) ) . "#" . $respond_id . "' onclick='return addComment.moveForm(\"$add_below-$comment->comment_ID\", \"$comment->comment_ID\", \"$respond_id\", \"$post->ID\")'>$reply_text</a>";
   return apply_filters('comment_reply_link', $before . $link . $after, $args, $comment, $post);
 }
+
 /**
  * Displays the HTML content for reply to comment link.
+ *
+ * @param array       $args    Optional. Override default options.
+ * @param int         $comment Comment being replied to. Default current comment.
+ * @param int|WP_Post $post    Post ID or WP_Post object the comment is going to be displayed on.
+ *                             Default current post.
+ * @return mixed Link to show comment form, if successful. False, if comments are closed.
  */
 function flint_comment_reply_link($args = array(), $comment = null, $post = null) {
   echo flint_get_comment_reply_link($args, $comment, $post);
 }
 
 /**
- * Gets the template for the widget area
+ * Load sidebar template.
+ *
  * Modeled after get_template_part and get_sidebar
  * get_sidebar doesn't make sense for all widget areas, so this replaces that function
  *
+ * @param string $slug    The slug of the specialised sidebar.
+ * @param bool   $minimal If true, using the Minimal page template
  */
 function flint_get_sidebar( $slug, $minimal = false ) {
   $options = flint_get_options();
@@ -635,8 +691,13 @@ function flint_get_sidebar( $slug, $minimal = false ) {
 }
 
 /**
- * Checks to see if widget area is to be displayed for the Minimal page template.
- * For other page templates, use is_active_sidebar()
+ * Whether a sidebar is in use on the Minimal page template
+ *
+ * @see is_active_sidebar() for other page templates
+ *
+ * @param string $slug Sidebar name, id or number to check.
+ *
+ * @return bool true if the sidebar is in use, false otherwise.
  */
 function flint_is_active_sidebar( $slug ) {
   $options = flint_get_options();
@@ -658,12 +719,20 @@ function flint_theme_version() {
 
 /**
  * Returns breadcrumbs for pages
+ *
+ * @param string $template The page template
  */
-function flint_breadcrumbs( $display = 'show' ) {
+function flint_breadcrumbs( $template = 'default' ) {
   $options = flint_get_options();
 
-  switch ($display) {
-    case 'show':
+  switch ($template) {
+    case 'clear':
+      if ($options['clear_nav'] == 'breadcrumbs') { flint_breadcrumbs(); }
+      break;
+    case 'minimal':
+      if ($options['minimal_nav'] == 'breadcrumbs') { flint_breadcrumbs(); }
+      break;
+    default:
       global $post;
       $anc = get_post_ancestors( $post->ID );
       $anc = array_reverse( $anc );
@@ -672,12 +741,6 @@ function flint_breadcrumbs( $display = 'show' ) {
       foreach ( $anc as $ancestor ) { echo '<li><a href="' . get_permalink( $ancestor ) . '">' . get_the_title( $ancestor ) . '</a></li>'; }
       echo '<li class="active">' . get_the_title() . '</li>';
       echo '</ol>';
-      break;
-    case 'clear':
-      if ($options['clear_nav'] == 'breadcrumbs') { flint_breadcrumbs(); }
-      break;
-    case 'minimal':
-      if ($options['minimal_nav'] == 'breadcrumbs') { flint_breadcrumbs(); }
       break;
   }
 }
@@ -717,6 +780,9 @@ function flint_custom_footer() {
   echo '</div>';
 }
 
+/**
+ * Generate CSS from customization options
+ */
 function flint_options_css() {
   $options = flint_get_options();
   $colors = flint_get_colors();
