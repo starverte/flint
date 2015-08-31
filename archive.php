@@ -54,7 +54,7 @@ flint_get_sidebar('header');
 
               elseif ( is_tax() ) { printf( __( '%s', 'flint' ), '<span>' . single_term_title( '', false ) . '</span>' ); }
 
-              else { _e( '<span>' . 'Archives' . '</span>', 'flint' ); }
+              else { _e( '<span>Archives</span>', 'flint' ); }
 
               /**
                * Template actions after title

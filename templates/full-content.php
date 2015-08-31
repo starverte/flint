@@ -9,7 +9,7 @@
 
   <div class="row">
     <div class="col-xs-12 col-sm-1 col-md-2">
-      <?php if (is_singular()) { flint_post_thumbnail('page'); } else { flint_post_thumbnail( 'page', 'archive' ); } ?>
+      <?php flint_the_post_thumbnail(); ?>
     </div>
     <article id="post-<?php the_ID(); ?>" <?php post_class('col-xs-12 col-sm-10 col-md-8'); ?>>
       <header class="entry-header">
