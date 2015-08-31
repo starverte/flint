@@ -3,7 +3,7 @@
  * Flint functions and definitions
  *
  * @package Flint
- * @version 1.3.7
+ * @version 1.4.0
  */
 
 /**
@@ -23,6 +23,8 @@ function flint_after_setup_theme() {
   require( get_template_directory() . '/inc/template-tags.php' );
 
   require( get_template_directory() . '/inc/colors.php' );
+
+  require( get_template_directory() . '/inc/deprecated.php' );
 
   require( get_template_directory() . '/inc/extras.php' );
 

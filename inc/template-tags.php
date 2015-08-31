@@ -3,7 +3,7 @@
  * Custom template tags for this theme.
  *
  * @package Flint
- * @since 1.3.5
+ * @since 1.4.0
  */
 
 if ( ! function_exists( 'flint_content_nav' ) ) :
@@ -968,27 +968,6 @@ function flint_body_class() {
     else { body_class(); }
   }
   else { body_class(); }
-}
-
-/**
- * Gets the featured image for a post or page if not specified otherwise in theme options
- *
- * Deprecated. Use flint_the_post_thumbnail
- */
-function flint_post_thumbnail( $type = 'post', $loc = 'single') {
-  $layout = flint_get_options();
-  $posts_image = !empty($layout['posts_image']) ? $layout['posts_image'] : 'always';
-  $pages_image = !empty($layout['pages_image']) ? $layout['pages_image'] : 'always';
-  switch ($type) {
-    case 'post':
-      if ($posts_image == 'always') {if (has_post_thumbnail()) { the_post_thumbnail(); }}
-      elseif ($posts_image == 'archives' && $loc == 'archive') {if (has_post_thumbnail()) { the_post_thumbnail(); }}
-      break;
-    case 'page':
-      if ($pages_image == 'always') {if (has_post_thumbnail()) { the_post_thumbnail(); }}
-      elseif ($pages_image == 'archives' && $loc == 'archive') {if (has_post_thumbnail()) { the_post_thumbnail(); }}
-      break;
-  }
 }
 
 /**

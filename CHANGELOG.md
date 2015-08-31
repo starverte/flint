@@ -1,3 +1,13 @@
+###Flint 1.4.0
+For complete diff, check out [Pull Request](https://github.com/starverte/flint/pull/201)
+- Deprecated: `get_flint_reply_link` (use `flint_get_comment_reply_link` instead)
+- Deprecated: `flint_reply_link` (use `flint_comment_reply_link` instead)
+- Deprecated: `flint_get_widgets` (use `flint_get_sidebar` instead)
+- Deprecated: `flint_get_widgets_template` (use `flint_get_sidebar_template` instead)
+- Deprecated: `flint_is_active_widgets` (use `flint_is_active_sidebar` instead)
+- Deprecated: `flint_render_title` (use [`add_theme_support( 'title-tag' )`](https://codex.wordpress.org/Function_Reference/add_theme_support#Title_Tag) instead)
+- Improved in-source documentation for functions and classes
+
 ###Flint 1.3.9.1
 - Cleaned up file headers
 
