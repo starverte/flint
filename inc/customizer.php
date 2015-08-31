@@ -3,7 +3,7 @@
  * Flint Theme Customizer
  *
  * @package Flint
- * @since 1.3.4
+ * @since 1.4.0
  */
 
 /**
