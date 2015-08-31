@@ -3,7 +3,7 @@
  * Displays content for the "Slim" template.
  *
  * @package Flint
- * @since 1.3.0
+ * @since 1.4.1
  */
 ?>
 
