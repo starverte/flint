@@ -24,6 +24,8 @@ function flint_after_setup_theme() {
 
   require( get_template_directory() . '/inc/colors.php' );
 
+  require( get_template_directory() . '/inc/deprecated.php' );
+
   require( get_template_directory() . '/inc/extras.php' );
 
   require( get_template_directory() . '/inc/customizer.php' );
