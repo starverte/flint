@@ -465,10 +465,10 @@ function flint_comment_form( $args = array(), $post_id = null ) {
   $defaults = array(
     'fields'               => apply_filters( 'comment_form_default_fields', $fields ),
     'comment_field'        => '<p class="comment-form-comment"><label for="comment">' . _x( 'Comment*', 'noun', 'flint' ) . '</label><textarea class="form-control" id="comment" name="comment" cols="45" rows="8" aria-required="true" required></textarea></p>',
-    'must_log_in'          => '<p class="must-log-in">' . sprintf( __( 'You must be <a href="%s">logged in</a> to post a comment.' ), wp_login_url( apply_filters( 'the_permalink', get_permalink( $post_id ) ) ) ) . '</p>',
-    'logged_in_as'         => '<p class="logged-in-as">' . sprintf( __( 'Logged in as <a href="%1$s">%2$s</a>. <a href="%3$s" title="Log out of this account">Log out?</a>' ), get_edit_user_link(), $user_identity, wp_logout_url( apply_filters( 'the_permalink', get_permalink( $post_id ) ) ) ) . '</p>',
+    'must_log_in'          => '<p class="must-log-in">' . sprintf( __( 'You must be <a href="%s">logged in</a> to post a comment.', 'flint' ), wp_login_url( apply_filters( 'the_permalink', get_permalink( $post_id ) ) ) ) . '</p>',
+    'logged_in_as'         => '<p class="logged-in-as">' . sprintf( __( 'Logged in as <a href="%1$s">%2$s</a>. <a href="%3$s" title="Log out of this account">Log out?</a>', 'flint' ), get_edit_user_link(), $user_identity, wp_logout_url( apply_filters( 'the_permalink', get_permalink( $post_id ) ) ) ) . '</p>',
     'comment_notes_before' => '<p class="comment-notes">' . __( 'Your email address will not be published.', 'flint' ) . ( $req ? $required_text : '' ) . '</p>',
-    'comment_notes_after'  => '<p class="form-allowed-tags">' . sprintf( __( 'You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: %s' ), ' <code style="white-space:normal;">' . allowed_tags() . '</code>' ) . '</p>',
+    'comment_notes_after'  => '<p class="form-allowed-tags">' . sprintf( __( 'You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: %s', 'flint' ), ' <code style="white-space:normal;">' . allowed_tags() . '</code>' ) . '</p>',
     'id_form'              => 'commentform',
     'id_submit'            => 'submit',
     'title_reply'          => __( 'Leave a Reply', 'flint' ),
@@ -1121,7 +1121,7 @@ function flint_post_class() {
  * Retrieve and display content spacers based on default post width,
  * post format, and if side widget areas are active.
  *
- * @uses flint_post_thumbnail()
+ * @uses flint_the_post_thumbnail()
  * @uses flint_get_options()
  * @uses get_post_format()
  * @uses is_active_sidebar()
@@ -1162,12 +1162,7 @@ function flint_get_spacer( $side ) {
           echo '<div class="hidden-xs hidden-sm col-md-2"></div>';
           echo '<div class="col-xs-12 col-sm-2 col-md-2">';
 
-          if (is_singular()) {
-            flint_post_thumbnail();
-          }
-          else {
-            flint_post_thumbnail( 'post', 'archive' );
-          }
+          flint_the_post_thumbnail();
 
           if (!is_single() && $format == 'gallery') {
             echo '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
@@ -1180,12 +1175,7 @@ function flint_get_spacer( $side ) {
           echo '<div class="hidden-xs hidden-sm col-md-1"></div>';
           echo '<div class="col-xs-12 col-sm-2 col-md-2">';
 
-          if (is_singular()) {
-            flint_post_thumbnail();
-          }
-          else {
-            flint_post_thumbnail( 'post', 'archive' );
-          }
+          flint_the_post_thumbnail();
 
           if (!is_single() && $format == 'gallery') {
             echo '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
@@ -1197,12 +1187,7 @@ function flint_get_spacer( $side ) {
         case 'full':
           echo '<div class="col-xs-12 col-sm-2 col-md-2">';
 
-          if (is_singular()) {
-            flint_post_thumbnail();
-          }
-          else {
-            flint_post_thumbnail( 'post', 'archive' );
-          }
+          flint_the_post_thumbnail();
 
           if (!is_single() && $format == 'gallery') {
             echo '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
@@ -1214,12 +1199,7 @@ function flint_get_spacer( $side ) {
         case 'wide':
           echo '<div class="col-xs-12 col-sm-12 hidden-md hidden-lg">';
 
-          if (is_singular()) {
-            flint_post_thumbnail();
-          }
-          else {
-            flint_post_thumbnail( 'post', 'archive' );
-          }
+          flint_the_post_thumbnail();
 
           if (!is_single() && $format == 'gallery') {
             echo '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
@@ -1231,12 +1211,7 @@ function flint_get_spacer( $side ) {
         default:
           echo '<div class="col-xs-12 col-sm-2 col-md-2">';
 
-          if (is_singular()) {
-            flint_post_thumbnail();
-          }
-          else {
-            flint_post_thumbnail( 'post', 'archive' );
-          }
+          flint_the_post_thumbnail();
 
           if (!is_single() && $format == 'gallery') {
             echo '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
@@ -1271,12 +1246,8 @@ function flint_get_spacer( $side ) {
   else {
     if ($side == 'left') {
       echo '<div class="col-xs-12 col-sm-12 hidden-md hidden-lg">';
-      if (is_singular()) {
-        flint_post_thumbnail();
-      }
-      else {
-        flint_post_thumbnail( 'post', 'archive' );
-      }
+
+      flint_the_post_thumbnail();
 
       echo '</div>';
     }
