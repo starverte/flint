@@ -3,7 +3,7 @@
  * The template for displaying Archive pages
  *
  * @package Flint
- * @since 1.4.0
+ * @since 1.4.1
  */
 get_header();
 flint_get_sidebar('header');
@@ -54,7 +54,7 @@ flint_get_sidebar('header');
 
               elseif ( is_tax() ) { printf( __( '%s', 'flint' ), '<span>' . single_term_title( '', false ) . '</span>' ); }
 
-              else { _e( '<span>' . 'Archives' . '</span>', 'flint' ); }
+              else { _e( '<span>Archives</span>', 'flint' ); }
 
               /**
                * Template actions after title

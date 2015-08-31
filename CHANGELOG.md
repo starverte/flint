@@ -1,3 +1,7 @@
+###Flint 1.4.1
+- Replace all instances of `flint_post_thumbnail` with `flint_the_post_thumbnail`
+- Update `screenshot.png` for Flint 1.4
+
 ###Flint 1.4.0
 For complete diff, check out [Pull Request](https://github.com/starverte/flint/pull/201)
 - Deprecated: `get_flint_reply_link` (use `flint_get_comment_reply_link` instead)

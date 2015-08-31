@@ -3,12 +3,12 @@
  * Displays content for the single posts
  *
  * @package Flint
- * @since 1.3.0
+ * @since 1.4.1
  */
 ?>
 
   <div class="col-xs-12 col-sm-2">
-    <?php if (is_singular()) { flint_post_thumbnail(); } else { flint_post_thumbnail( 'post', 'archive' ); } ?>
+    <?php flint_the_post_thumbnail(); ?>
   </div>
 
   <article id="post-<?php the_ID(); ?>" <?php post_class('col-xs-12 col-sm-8'); ?>>
