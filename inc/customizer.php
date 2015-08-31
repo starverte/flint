@@ -6,6 +6,11 @@
  * @since 1.3.4
  */
 
+/**
+ * Register customization options for Flint
+ *
+ * @param object $wp_customize An instance of the WP_Customize_Manager class
+ */
 function flint_customize_register( $wp_customize ) {
 
   $defaults = flint_get_option_defaults();
@@ -638,6 +643,9 @@ function flint_customize_register( $wp_customize ) {
 }
 add_action( 'customize_register', 'flint_customize_register' );
 
+/**
+ * Load styles and scripts for customization options
+ */
 function flint_customize_preview_init() {
   wp_enqueue_script( 'flint_customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview' ), flint_theme_version(), true );
 
@@ -653,10 +661,34 @@ function flint_customize_preview_init() {
 add_action( 'customize_preview_init', 'flint_customize_preview_init' );
 
 if (class_exists('WP_Customize_Control')) {
+  /**
+   * Customize TextArea Control class.
+   */
   class Flint_Customize_TextArea_Control extends WP_Customize_Control {
+
+    /**
+     * Type of control
+     *
+     * @access public
+     * @var string
+     */
     public $type = 'textarea';
+
+    /**
+     * Description text for control
+     *
+     * @access public
+     * @var string
+     */
     public $description;
 
+    /**
+     * Render the control's content.
+     *
+     * Allows the content to be overriden without having to rewrite the wrapper in $this->render().
+     *
+     * Control content can alternately be rendered in JS. See {@see WP_Customize_Control::print_template()}.
+     */
     public function render_content() {
       ?>
       <label>
@@ -673,6 +705,11 @@ if (class_exists('WP_Customize_Control')) {
   }
 }
 
+/**
+ * Sanitize font options
+ *
+ * @param string $input The input value to sanitize
+ */
 function flint_sanitize_font( $input ) {
   $valid = array(
     'Open Sans'         => 'Open Sans',
@@ -692,6 +729,11 @@ function flint_sanitize_font( $input ) {
   }
 }
 
+/**
+ * Sanitize width options
+ *
+ * @param string $input The input value to sanitize
+ */
 function flint_sanitize_width( $input ) {
   $valid = array(
     'slim'   => 'Slim',
@@ -707,6 +749,11 @@ function flint_sanitize_width( $input ) {
   }
 }
 
+/**
+ * Sanitize navigation options for Clear template
+ *
+ * @param string $input The input value to sanitize
+ */
 function flint_sanitize_clear_nav( $input ) {
   $valid = array(
     'breadcrumbs' => 'Breadcrumbs',
@@ -720,6 +767,11 @@ function flint_sanitize_clear_nav( $input ) {
   }
 }
 
+/**
+ * Sanitize navigation options for Minimal template
+ *
+ * @param string $input The input value to sanitize
+ */
 function flint_sanitize_minimal_nav( $input ) {
   $valid = array(
     'breadcrumbs' => 'Breadcrumbs',
@@ -733,6 +785,11 @@ function flint_sanitize_minimal_nav( $input ) {
   }
 }
 
+/**
+ * Sanitize widget area options for Minimal template
+ *
+ * @param string $input The input value to sanitize
+ */
 function flint_sanitize_minimal_widget_area( $input ) {
   $valid = array(
     'none'   => 'None',
@@ -749,6 +806,11 @@ function flint_sanitize_minimal_widget_area( $input ) {
   }
 }
 
+/**
+ * Sanitize featured image options
+ *
+ * @param string $input The input value to sanitize
+ */
 function flint_sanitize_featured_image( $input ) {
   $valid = array(
     'always'   => 'Always show',
@@ -763,6 +825,11 @@ function flint_sanitize_featured_image( $input ) {
   }
 }
 
+/**
+ * Sanitize widget column options
+ *
+ * @param string $input The input value to sanitize
+ */
 function flint_sanitize_widget_columns( $input ) {
   $valid = array(
     '1' => 'Full-width',

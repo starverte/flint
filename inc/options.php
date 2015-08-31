@@ -7,6 +7,9 @@
  * @since 1.3.3
  */
 
+/**
+ * Get option defaults
+ */
 function flint_get_option_defaults() {
   $defaults = array(
     'text_color'                 => '#404040',
@@ -52,7 +55,7 @@ function flint_get_option_defaults() {
  * Gets array of theme options
  * For backwards compatibility, can also get single value
  *
- * @var string Deprecated. The single option to return.
+ * @param string $option Deprecated. The single option to return.
  */
 function flint_get_options( $option = null ) {
   $defaults = flint_get_option_defaults();
@@ -157,6 +160,9 @@ function flint_get_options( $option = null ) {
   }
 }
 
+/**
+ * Get color option values
+ */
 function flint_get_colors() {
   $options = flint_get_options();
   $calc = array(
@@ -170,6 +176,14 @@ function flint_get_colors() {
   return wp_parse_args( $options, $calc );
 }
 
+/**
+ * Get address from options
+ *
+ * @param bool $schema If true, return address with schema.org microdata
+ * @param array $args Array of address return arguments
+ *
+ * @return string The address, as filtered
+ */
 function flint_get_address( $schema = true, $args = array() ) {
   $options = flint_get_options();
 
