@@ -3,17 +3,17 @@
  * The main template file used to display a page when nothing more specific matches a query.
  *
  * @package Flint
- * @since 1.3.9.1
+ * @since 1.4.0
  */
 get_header();
-flint_get_widgets('header');
+flint_get_sidebar('header');
 ?>
 
   <div id="primary" class="content-area container">
 
     <div class="row">
 
-      <?php flint_get_widgets('left'); ?>
+      <?php flint_get_sidebar('left'); ?>
 
       <div id="content" role="main" <?php flint_content_class(); ?>>
 
@@ -42,7 +42,7 @@ flint_get_widgets('header');
 
       </div><!-- #content -->
 
-      <?php flint_get_widgets('right'); ?>
+      <?php flint_get_sidebar('right'); ?>
 
     </div><!-- .row -->
 
@@ -50,5 +50,5 @@ flint_get_widgets('header');
 
 </div><!-- #page -->
 
-<?php flint_get_widgets('footer'); ?>
+<?php flint_get_sidebar('footer'); ?>
 <?php get_footer(); ?>

@@ -4,9 +4,20 @@
  * Twitter Bootstrap toolkit Dropdown menus in Wordpress.
  * Edited to support n-levels submenu.
  * @author johnmegahan https://gist.github.com/1597994, Emanuele 'Tex' Tessore https://gist.github.com/3765640
- * @since 1.3.0
+ * @since 1.4.0
  */
 class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
+  /**
+   * Starts the list before the elements are added.
+   *
+   * @see Walker_Nav_Menu::start_lvl()
+   *
+   * @since 1.3.0
+   *
+   * @param string $output Passed by reference. Used to append additional content.
+   * @param int    $depth  Depth of menu item. Used for padding.
+   * @param array  $args   An array of arguments. @see wp_nav_menu()
+   */
   function start_lvl( &$output, $depth = 0, $args = array() ) {
 
     $indent = str_repeat( "\t", $depth );
@@ -15,6 +26,18 @@ class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
 
   }
 
+
+  /**
+   * Start the element output.
+   *
+   * @since 1.3.0
+   *
+   * @param string $output Passed by reference. Used to append additional content.
+   * @param object $item   Menu item data object.
+   * @param int    $depth  Depth of menu item. Used for padding.
+   * @param array  $args   An array of arguments. @see wp_nav_menu()
+   * @param int    $id     Current item ID.
+   */
   function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
 
     $indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
@@ -64,16 +87,17 @@ class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
     $output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
   }
 
-
+  /**
+   * Display element
+   *
+   * @ignore
+   */
   function display_element( $element, &$children_elements, $max_depth, $depth=0, $args, &$output ) {
     if ( !$element )
       return;
 
     $id_field = $this->db_fields['id'];
 
-    /**
-     * Display element
-     */
     if ( is_array( $args[0] ) )
       $args[0]['has_children'] = ! empty( $children_elements[$element->$id_field] );
     else if ( is_object( $args[0] ) )

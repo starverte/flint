@@ -3,7 +3,7 @@
  * The widget area that appears below the content.
  *
  * @package Flint
- * @since 1.3.9.1
+ * @since 1.4.0
  */
 $type = get_post_type();
 ?>
@@ -12,13 +12,13 @@ $type = get_post_type();
   <div class="fill-light widgets widgets-footer" role="complementary">
     <div class="container">
       <div class="row">
-        <?php flint_get_widgets_template('margins', 'footer'); ?>
-        <div class="widget-area <?php flint_get_widgets_template('content', 'footer'); ?>" >
+        <?php flint_get_sidebar_template('margins', 'footer'); ?>
+        <div class="widget-area <?php flint_get_sidebar_template('content', 'footer'); ?>" >
           <?php do_action( 'before_sidebar' ); ?>
           <?php do_action( 'flint_widget_area_footer_'.$type ); ?>
           <?php dynamic_sidebar('footer'); ?>
         </div><!-- .widget-area -->
-        <?php flint_get_widgets_template('margins', 'footer'); ?>
+        <?php flint_get_sidebar_template('margins', 'footer'); ?>
       </div><!-- .row -->
     </div><!-- .container -->
   </div><!-- .widgets.widgets-footer -->

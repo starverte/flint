@@ -3,7 +3,7 @@
  * Flint functions and definitions
  *
  * @package Flint
- * @version 1.3.7
+ * @version 1.4.0
  */
 
 /**
@@ -23,6 +23,8 @@ function flint_after_setup_theme() {
   require( get_template_directory() . '/inc/template-tags.php' );
 
   require( get_template_directory() . '/inc/colors.php' );
+
+  require( get_template_directory() . '/inc/deprecated.php' );
 
   require( get_template_directory() . '/inc/extras.php' );
 
@@ -138,6 +140,9 @@ add_action( 'widgets_init', 'flint_widgets_init' );
 
 add_filter( 'jetpack_implode_frontend_css', '__return_false' );
 
+/**
+ * Deregister the default styles for Jetpack forms.
+ */
 function flint_print_styles() {
   wp_deregister_style( 'grunion.css' );
 }
@@ -232,17 +237,4 @@ function flint_enqueue_scripts() {
 add_action( 'wp_enqueue_scripts', 'flint_enqueue_scripts' );
 
 add_filter( 'use_default_gallery_style', '__return_false' );
-
-
-//BEGIN - Backwards compatibility for add_theme_support( 'title-tag' )
-//Remove after WordPress 4.3 released
-if ( ! function_exists( '_wp_render_title_tag' ) ) {
-  function flint_render_title() {
-      ?>
-      <title><?php wp_title( '|', true, 'right' ); ?></title>
-      <?php
-  }
-  add_action( 'wp_head', 'flint_render_title' );
-}
-//END - Backwards compatibility for add_theme_support( 'title-tag' )
 
