@@ -24,15 +24,6 @@
 function flint_deprecated_function( $function, $version, $replacement = null ) {
 
 	/**
-	 * Fires when a deprecated function is called.
-	 *
-	 * @param string $function    The function that was called.
-	 * @param string $replacement The function that should have been called.
-	 * @param string $version     The version of WordPress that deprecated the function.
-	 */
-	do_action( 'deprecated_function_run', $function, $replacement, $version );
-
-	/**
 	 * Filter whether to trigger an error for deprecated functions.
 	 *
 	 * @param bool $trigger Whether to trigger the error for deprecated functions. Default true.
