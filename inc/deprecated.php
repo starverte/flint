@@ -3,7 +3,7 @@
  * Deprecated functions for backwards compatibility
  *
  * @package Flint
- * @since 1.4.0
+ * @since 1.4.2
  */
 
 /**
@@ -15,10 +15,10 @@
  */
 function flint_trigger_error( $dep, $ver, $new = null ) {
   if (!empty($new)) {
-    trigger_error("The function $dep is deprecated as of Flint $ver. Use $new instead.");
+    trigger_error("The function $dep is deprecated as of Flint $ver. Use $new instead.", 'flint');
   }
   else {
-    trigger_error("The function $dep is deprecated as of Flint $ver.");
+    trigger_error("The function $dep is deprecated as of Flint $ver.", 'flint');
   }
 }
 
