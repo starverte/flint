@@ -1,3 +1,6 @@
+###Flint 1.4.3
+- Replace `flint_trigger_error` with `flint_deprecated_function`
+
 ###Flint 1.4.2
 - Add support for theme translation to `flint_trigger_error` function
 
