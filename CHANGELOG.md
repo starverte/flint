@@ -1,3 +1,6 @@
+###Flint 1.4.2
+- Add support for theme translation to `flint_trigger_error` function
+
 ###Flint 1.4.1
 - Replace all instances of `flint_post_thumbnail` with `flint_the_post_thumbnail`
 - Update `screenshot.png` for Flint 1.4
