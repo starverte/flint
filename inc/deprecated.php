@@ -3,23 +3,37 @@
  * Deprecated functions for backwards compatibility
  *
  * @package Flint
- * @since 1.4.2
+ * @since 1.4.3
  */
 
 /**
- * Trigger error helper function for deprecated functions
+ * Mark a function as deprecated and inform when it has been used.
  *
- * @param string $dep Required. The deprecated function.
- * @param string $ver Required. The version when the function was deprecated.
- * @param string $new Optional. The function to use instead.
+ * There is a hook deprecated_function_run that will be called that can be used
+ * to get the backtrace up to what file and function called the deprecated
+ * function.
+ *
+ * The current behavior is to trigger a user error if WP_DEBUG is true.
+ *
+ * This function is to be used in every function that is deprecated.
+ *
+ * @param string $function    The function that was called.
+ * @param string $version     The version of Flint that deprecated the function.
+ * @param string $replacement Optional. The function that should have been called. Default null.
  */
-function flint_trigger_error( $dep, $ver, $new = null ) {
-  if (!empty($new)) {
-    trigger_error("The function $dep is deprecated as of Flint $ver. Use $new instead.", 'flint');
-  }
-  else {
-    trigger_error("The function $dep is deprecated as of Flint $ver.", 'flint');
-  }
+function flint_deprecated_function( $function, $version, $replacement = null ) {
+
+	/**
+	 * Filter whether to trigger an error for deprecated functions.
+	 *
+	 * @param bool $trigger Whether to trigger the error for deprecated functions. Default true.
+	 */
+	if ( WP_DEBUG && apply_filters( 'deprecated_function_trigger_error', true ) ) {
+    if ( ! is_null( $replacement ) )
+      trigger_error( sprintf( __('%1$s is <strong>deprecated</strong> since Flint version %2$s! Use %3$s instead.', 'flint'), $function, $version, $replacement ) );
+    else
+      trigger_error( sprintf( __('%1$s is <strong>deprecated</strong> since Flint version %2$s with no alternative available.', 'flint'), $function, $version ) );
+	}
 }
 
 /**
@@ -28,7 +42,7 @@ function flint_trigger_error( $dep, $ver, $new = null ) {
  * @deprecated 1.3.9 Use flint_the_post_thumbnail
  */
 function flint_post_thumbnail( $type = 'post', $loc = 'single' ) {
-  flint_trigger_error( 'flint_post_thumbnail', '1.3.9', 'flint_the_post_thumbnail' );
+  flint_deprecated_function( __FUNCTION__, '1.3.9', 'flint_the_post_thumbnail()' );
   $layout = flint_get_options();
   $posts_image = !empty($layout['posts_image']) ? $layout['posts_image'] : 'always';
   $pages_image = !empty($layout['pages_image']) ? $layout['pages_image'] : 'always';
@@ -56,7 +70,7 @@ function flint_post_thumbnail( $type = 'post', $loc = 'single' ) {
  * @return mixed Link to show comment form, if successful. False, if comments are closed.
  */
 function flint_reply_link( $args = array(), $comment = null, $post = null ) {
-  flint_trigger_error( 'flint_reply_link', '1.4.0', 'flint_comment_reply_link' );
+  flint_deprecated_function( __FUNCTION__, '1.4.0', 'flint_comment_reply_link()' );
   flint_get_comment_reply_link( $args, $comment, $post );
 }
 
@@ -72,7 +86,7 @@ function flint_reply_link( $args = array(), $comment = null, $post = null ) {
  * @return void|false|string Link to show comment form, if successful. False, if comments are closed.
  */
 function get_flint_reply_link( $args = array(), $comment = null, $post = null ) {
-  flint_trigger_error( 'get_flint_reply_link', '1.4.0', 'flint_get_comment_reply_link' );
+  flint_deprecated_function( __FUNCTION__, '1.4.0', 'flint_get_comment_reply_link()' );
   flint_get_comment_reply_link( $args, $comment, $post );
 }
 
@@ -88,7 +102,7 @@ function get_flint_reply_link( $args = array(), $comment = null, $post = null ) 
  * @param bool   $minimal If true, using the Minimal page template
  */
 function flint_get_widgets( $slug, $minimal = false ) {
-  flint_trigger_error( 'flint_get_widgets', '1.4.0', 'flint_get_sidebar' );
+  flint_deprecated_function( __FUNCTION__, '1.4.0', 'flint_get_sidebar()' );
   flint_get_sidebar( $slug, $minimal );
 }
 
@@ -98,7 +112,7 @@ function flint_get_widgets( $slug, $minimal = false ) {
  * @deprecated 1.4.0 Use flint_get_sidebar_template instead.
  */
 function flint_get_widgets_template( $output, $widget_area = 'footer' ) {
-  flint_trigger_error( 'flint_get_widgets_template', '1.4.0', 'flint_get_sidebar_template' );
+  flint_deprecated_function( __FUNCTION__, '1.4.0', 'flint_get_sidebar_template()' );
   flint_get_sidebar( $output, $widget_area );
 }
 
@@ -114,6 +128,6 @@ function flint_get_widgets_template( $output, $widget_area = 'footer' ) {
  * @return bool true if the sidebar is in use, false otherwise.
  */
 function flint_is_active_widgets( $slug ) {
-  flint_trigger_error( 'flint_is_active_widgets', '1.4.0', 'flint_is_active_sidebar' );
+  flint_deprecated_function( __FUNCTION__, '1.4.0', 'flint_is_active_sidebar()' );
   flint_get_sidebar( $slug );
 }
