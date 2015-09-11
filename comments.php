@@ -5,12 +5,12 @@
  * @package Flint
  * @since 1.3.9.1
  */
-if ( post_password_required() )
-  return;
+if ( post_password_required() ) {
+  return; }
 ?>
 <div class="row">
-  <?php flint_get_template('margins'); ?>
-  <div id="comments" class="comments-area <?php flint_get_template('content'); ?>">
+  <?php flint_get_template( 'margins' ); ?>
+  <div id="comments" class="comments-area <?php flint_get_template( 'content' ); ?>">
 
     <?php if ( have_comments() ) : ?>
       <h2 class="comments-title">
@@ -49,5 +49,5 @@ if ( post_password_required() )
     <?php flint_comment_form(); ?>
 
   </div><!-- #comments -->
-  <?php flint_get_template('margins'); ?>
+  <?php flint_get_template( 'margins' ); ?>
 </div>

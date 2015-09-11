@@ -17,20 +17,20 @@ function flint_content_nav( $nav_id ) {
   global $wp_query;
   global $post;
   global $post_id;
-  $type = get_post_type($post_id);
+  $type = get_post_type( $post_id );
 
   if ( is_single() ) {
     $previous = ( is_attachment() ) ? get_post( $post->post_parent ) : get_adjacent_post( false, '', true );
     $next = get_adjacent_post( false, '', false );
 
-    if ( ! $next && ! $previous )
-      return;
-    if ( $type = 'steel_product' )//Hide bottom navigation for products
-      return;
+    if ( ! $next && ! $previous ) {
+      return; }
+    if ( $type = 'steel_product' ) { // Hide bottom navigation for products
+      return; }
   }
 
-  if ( $wp_query->max_num_pages < 2 && ( is_home() || is_archive() || is_search() ) )
-    return;
+  if ( $wp_query->max_num_pages < 2 && ( is_home() || is_archive() || is_search() ) ) {
+    return; }
 
   $nav_class = ( is_single() ) ? 'navigation-post' : 'navigation-paging';
 
@@ -107,10 +107,10 @@ function flint_comment( $comment, $args, $depth ) {
       </div>
       <div class="col-xs-4 col-sm-3">
         <p><a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>"><time datetime="<?php comment_time( 'c' ); ?>">
-        <?php printf( _x( '%1$s <br> %2$s', '1: date, 2: time', 'flint' ), get_comment_date('M j, Y'), get_comment_time('g:i a') ); ?>
+        <?php printf( _x( '%1$s <br> %2$s', '1: date, 2: time', 'flint' ), get_comment_date( 'M j, Y' ), get_comment_time( 'g:i a' ) ); ?>
         </time></a></p>
-        <?php flint_comment_reply_link(array_merge( $args, array( 'depth' => $depth, 'max_depth' => $args['max_depth'] ) )); ?>
-        <?php if ( current_user_can('moderate_comments') ) { ?><a class="btn btn-default btn-sm" href="<?php echo get_edit_comment_link(); ?>" >Edit</a><?php } ?>
+        <?php flint_comment_reply_link( array_merge( $args, array( 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
+        <?php if ( current_user_can( 'moderate_comments' ) ) { ?><a class="btn btn-default btn-sm" href="<?php echo get_edit_comment_link(); ?>" >Edit</a><?php } ?>
       </div>
     </article>
 
@@ -121,7 +121,7 @@ function flint_comment( $comment, $args, $depth ) {
 endif; // flint_comment()
 
 
-add_action('flint_entry_meta_below_post','flint_the_comments', 20);
+add_action( 'flint_entry_meta_below_post','flint_the_comments', 20 );
 /**
  * @deprecated 2.0.0
  * @ignore
@@ -134,16 +134,16 @@ function flint_the_comments() {
 }
 
 
-add_action('flint_entry_meta_above_post','flint_posted_on');
+add_action( 'flint_entry_meta_above_post','flint_posted_on' );
 if ( ! function_exists( 'flint_posted_on' ) ) :
 /**
  * Prints HTML with meta information for the current post-date/time and author.
  */
 function flint_posted_on() {
-  if (get_the_date('Y') != date('Y')) :
-    $postdate = esc_html( get_the_date('F j, Y') );
+  if ( get_the_date( 'Y' ) != date( 'Y' ) ) :
+    $postdate = esc_html( get_the_date( 'F j, Y' ) );
   else :
-    $postdate = esc_html( get_the_date('F j') );
+    $postdate = esc_html( get_the_date( 'F j' ) );
   endif;
   printf( __( 'Posted on <a href="%1$s" rel="bookmark"><time class="entry-date" datetime="%2$s">%3$s</time></a><span class="byline"> by <span class="author vcard"><a class="url fn n" href="%4$s" title="%5$s" rel="author">%6$s</a></span></span>', 'flint' ),
     esc_url( get_permalink() ),
@@ -157,7 +157,7 @@ function flint_posted_on() {
 endif;
 
 
-add_action('flint_entry_meta_below_post','flint_posted_in', 10);
+add_action( 'flint_entry_meta_below_post','flint_posted_in', 10 );
 if ( ! function_exists( 'flint_posted_in' ) ) :
 /**
  * Prints HTML with the categories and tags that the post is in.
@@ -167,31 +167,31 @@ function flint_posted_in() {
   $tags = get_the_tags();
   $separator = ' '; ?>
 
-  <?php if (flint_has_category()) { ?>
+  <?php if ( flint_has_category() ) { ?>
 
     <span class="cat-links">
 
       <?php $output = '';
-      foreach($categories as $category) {
-        if ($category->cat_name != 'Uncategorized') {
+      foreach ( $categories as $category ) {
+        if ( $category->cat_name != 'Uncategorized' ) {
           $output .= '<a class="label label-default" href="'.get_category_link( $category->term_id ).'" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $category->name ) ) . '">'.$category->cat_name.'</a>'.$separator;
         }
       }
-      $output = trim($output, $separator);
+      $output = trim( $output, $separator );
       echo 'Posted in ' . $output; ?>
     </span><!-- .cat-links -->
 
     <?php } //endif flint_has_category()
 
-  if (has_tag()) {
+  if ( has_tag() ) {
 
-    if (flint_has_category()) { ?><span class="sep"> | </span><?php } ?>
+    if ( flint_has_category() ) { ?><span class="sep"> | </span><?php } ?>
 
     <span class="tags-links">
       Tagged
       <?php $output = '';
-      foreach($tags as $tag) {$output .= '<a class="label label-info" href="'.get_tag_link( $tag->term_id ).'" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $tag->name ) ) . '">'.$tag->name.'</a>'.$separator; }
-      echo trim($output, $separator); ?>
+      foreach ( $tags as $tag ) {$output .= '<a class="label label-info" href="'.get_tag_link( $tag->term_id ).'" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $tag->name ) ) . '">'.$tag->name.'</a>'.$separator; }
+      echo trim( $output, $separator ); ?>
     </span><!-- .tags-links --><?php
 
   } //endif has_tag()
@@ -205,8 +205,7 @@ endif;
 function flint_categorized_blog() {
   if ( false === ( $all_the_cool_cats = get_transient( 'all_the_cool_cats' ) ) ) {
 
-    $all_the_cool_cats = get_categories( array( 'hide_empty' => 1, ) );// Create an array of all the categories that are attached to posts
-
+    $all_the_cool_cats = get_categories( array( 'hide_empty' => 1 ) );// Create an array of all the categories that are attached to posts
 
     $all_the_cool_cats = count( $all_the_cool_cats );// Count the number of categories that are attached to the posts
 
@@ -245,10 +244,10 @@ function flint_link_pages( $args = '' ) {
     'link_before'      => '',
     'link_after'       => '',
     'next_or_number'   => 'number',
-    'nextpagelink'     => __('Next page', 'flint'),
-    'previouspagelink' => __('Previous page', 'flint'),
+    'nextpagelink'     => __( 'Next page', 'flint' ),
+    'previouspagelink' => __( 'Previous page', 'flint' ),
     'pagelink'         => '%',
-    'echo'             => 1
+    'echo'             => 1,
   );
 
   $r = wp_parse_args( $args, $defaults );
@@ -261,13 +260,12 @@ function flint_link_pages( $args = '' ) {
   if ( $multipage ) {
     if ( 'number' == $next_or_number ) {
       $output .= $before;
-      for ( $i = 1; $i < ($numpages+1); $i = $i + 1 ) {
-        $j = str_replace('%',$i,$pagelink);
+      for ( $i = 1; $i < ($numpages + 1); $i = $i + 1 ) {
+        $j = str_replace( '%',$i,$pagelink );
         $output .= ' ';
-        if ( ($i != $page) || ((!$more) && ($page==1)) ) {
-          $output .= flint_link_page($i);
-        }
-        else {
+        if ( ($i != $page) || (( ! $more) && ($page == 1)) ) {
+          $output .= flint_link_page( $i );
+        } else {
           $output .= '<li class="active"><a>';
         }
         $output .= $link_before . $j . $link_after . '</a></li>';
@@ -278,12 +276,12 @@ function flint_link_pages( $args = '' ) {
         $output .= $before;
         $i = $page - 1;
         if ( $i && $more ) {
-          $output .= _wp_link_page($i);
+          $output .= _wp_link_page( $i );
           $output .= $link_before. $previouspagelink . $link_after . '</a>';
         }
         $i = $page + 1;
         if ( $i <= $numpages && $more ) {
-          $output .= _wp_link_page($i);
+          $output .= _wp_link_page( $i );
           $output .= $link_before. $nextpagelink . $link_after . '</a>';
         }
         $output .= $after;
@@ -291,8 +289,8 @@ function flint_link_pages( $args = '' ) {
     }
   }
 
-  if ( $echo )
-    echo $output;
+  if ( $echo ) {
+    echo $output; }
 
   return $output;
 }
@@ -310,12 +308,10 @@ function flint_link_page( $i ) {
   if ( 1 == $i ) {
     $url = get_permalink();
   } else {
-    if ( '' == get_option('permalink_structure') || in_array($post->post_status, array('draft', 'pending')) )
-      $url = add_query_arg( 'page', $i, get_permalink() );
-    elseif ( 'page' == get_option('show_on_front') && get_option('page_on_front') == $post->ID )
-      $url = trailingslashit(get_permalink()) . user_trailingslashit("$wp_rewrite->pagination_base/" . $i, 'single_paged');
-    else
-      $url = trailingslashit(get_permalink()) . user_trailingslashit($i, 'single_paged');
+    if ( '' == get_option( 'permalink_structure' ) || in_array( $post->post_status, array( 'draft', 'pending' ) ) ) {
+      $url = add_query_arg( 'page', $i, get_permalink() ); } elseif ( 'page' == get_option( 'show_on_front' ) && get_option( 'page_on_front' ) == $post->ID )
+      $url = trailingslashit( get_permalink() ) . user_trailingslashit( "$wp_rewrite->pagination_base/" . $i, 'single_paged' );
+    else {       $url = trailingslashit( get_permalink() ) . user_trailingslashit( $i, 'single_paged' ); }
   }
 
   return '<li><a href="' . esc_url( $url ) . '">';
@@ -329,7 +325,7 @@ function flint_link_page( $i ) {
  * @param bool   $strip_teaser   Optional. Strip teaser content before the more text. Default is false.
  * @param array  $args           Optional. An array of arguments for displaying the more button.
  */
-function flint_the_content($more_link_text = 'Read more', $strip_teaser = false, $args = array() ) {
+function flint_the_content( $more_link_text = 'Read more', $strip_teaser = false, $args = array() ) {
 
   $defaults = array(
     'more_class'  => 'btn btn-primary',
@@ -339,9 +335,9 @@ function flint_the_content($more_link_text = 'Read more', $strip_teaser = false,
 
   $args = wp_parse_args( $args, $defaults );
 
-  $content = flint_get_the_content($more_link_text, $strip_teaser, $args);
-  $content = apply_filters('the_content', $content);
-  $content = str_replace(']]>', ']]&gt;', $content);
+  $content = flint_get_the_content( $more_link_text, $strip_teaser, $args );
+  $content = apply_filters( 'the_content', $content );
+  $content = str_replace( ']]>', ']]&gt;', $content );
   echo $content;
 }
 
@@ -367,46 +363,45 @@ function flint_get_the_content( $more_link_text = 'Read more', $strip_teaser = f
 
   $args = wp_parse_args( $args, $defaults );
 
-  if ( null === $more_link_text )
-    $more_link_text = __( '(more...)', 'flint' );
+  if ( null === $more_link_text ) {
+    $more_link_text = __( '(more...)', 'flint' ); }
 
   $output = '';
   $hasTeaser = false;
 
-  if ( post_password_required() )
-    return get_the_password_form();
+  if ( post_password_required() ) {
+    return get_the_password_form(); }
 
-  if ( $page > count($pages) )
-    $page = count($pages);
+  if ( $page > count( $pages ) ) {
+    $page = count( $pages ); }
 
-  $content = $pages[$page-1];
-  if ( preg_match('/<!--more(.*?)?-->/', $content, $matches) ) {
-    $content = explode($matches[0], $content, 2);
-    if ( !empty($matches[1]) && !empty($more_link_text) )
-      $more_link_text = strip_tags(wp_kses_no_null(trim($matches[1])));
+  $content = $pages[ $page -1 ];
+  if ( preg_match( '/<!--more(.*?)?-->/', $content, $matches ) ) {
+    $content = explode( $matches[0], $content, 2 );
+    if ( ! empty( $matches[1] ) && ! empty( $more_link_text ) ) {
+      $more_link_text = strip_tags( wp_kses_no_null( trim( $matches[1] ) ) ); }
 
     $hasTeaser = true;
   } else {
-    $content = array($content);
+    $content = array( $content );
   }
-  if ( (false !== strpos($post->post_content, '<!--noteaser-->') && ((!$multipage) || ($page==1))) )
-    $strip_teaser = true;
+  if ( (false !== strpos( $post->post_content, '<!--noteaser-->' ) && (( ! $multipage) || ($page == 1))) ) {
+    $strip_teaser = true; }
   $teaser = $content[0];
-  if ( $more && $strip_teaser && $hasTeaser )
-    $teaser = '';
+  if ( $more && $strip_teaser && $hasTeaser ) {
+    $teaser = ''; }
   $output .= $teaser;
-  if ( count($content) > 1 ) {
+  if ( count( $content ) > 1 ) {
     if ( $more ) {
       $output .= '<span id="more-' . $post->ID . '"></span>' . $content[1];
     } else {
-      if ( ! empty($more_link_text) )
-        $output .= apply_filters( 'the_content_more_link', $args['more_before'] . get_permalink() . "#more-{$post->ID}\"" . 'class="more-link ' . $args['more_class'] . '">' . $more_link_text . $args['more_after'] );
-      $output = force_balance_tags($output);
+      if ( ! empty( $more_link_text ) ) {
+        $output .= apply_filters( 'the_content_more_link', $args['more_before'] . get_permalink() . "#more-{$post->ID}\"" . 'class="more-link ' . $args['more_class'] . '">' . $more_link_text . $args['more_after'] ); }
+      $output = force_balance_tags( $output );
     }
-
-  }
-  if ( $preview )
-    $output =  preg_replace_callback('/\%u([0-9A-F]{4})/', '_convert_urlencoded_to_entities', $output);
+}
+  if ( $preview ) {
+    $output = preg_replace_callback( '/\%u([0-9A-F]{4})/', '_convert_urlencoded_to_entities', $output ); }
 
   return $output;
 }
@@ -441,10 +436,9 @@ add_filter( 'the_password_form', 'flint_password_form' );
 function flint_comment_form( $args = array(), $post_id = null ) {
   global $id;
 
-  if ( null === $post_id )
+  if ( null === $post_id ) {
     $post_id = $id;
-  else
-    $id = $post_id;
+} else {     $id = $post_id; }
 
   $commenter = wp_get_current_commenter();
   $user = wp_get_current_user();
@@ -452,16 +446,16 @@ function flint_comment_form( $args = array(), $post_id = null ) {
 
   $req = get_option( 'require_name_email' );
   $aria_req = ( $req ? " aria-required='true' required" : '' );
-  $fields =  array(
+  $fields = array(
     'author' => '<p class="comment-form-author">' .
                 '<input class="form-control required" id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" ' . $aria_req . ' placeholder="Name*"></p>',
     'email'  => '<p class="comment-form-email">' .
-                '<input class="form-control" id="email" name="email" type="text" value="' . esc_attr(  $commenter['comment_author_email'] ) . '" ' . $aria_req . ' placeholder="Email Address*"></p>',
+                '<input class="form-control" id="email" name="email" type="text" value="' . esc_attr( $commenter['comment_author_email'] ) . '" ' . $aria_req . ' placeholder="Email Address*"></p>',
     'url'    => '<p class="comment-form-url">' .
                 '<input class="form-control" id="url" name="url" type="text" value="' . esc_attr( $commenter['comment_author_url'] ) . '" placeholder="Website URL" /></p>',
   );
 
-  $required_text = sprintf( ' ' . __('Required fields are marked %s', 'flint'), '<span class="required">*</span>' );
+  $required_text = sprintf( ' ' . __( 'Required fields are marked %s', 'flint' ), '<span class="required">*</span>' );
   $defaults = array(
     'fields'               => apply_filters( 'comment_form_default_fields', $fields ),
     'comment_field'        => '<p class="comment-form-comment"><label for="comment">' . _x( 'Comment*', 'noun', 'flint' ) . '</label><textarea class="form-control" id="comment" name="comment" cols="45" rows="8" aria-required="true" required></textarea></p>',
@@ -484,13 +478,13 @@ function flint_comment_form( $args = array(), $post_id = null ) {
       <?php do_action( 'comment_form_before' ); ?>
     <div id="respond">
       <h3 id="reply-title"><?php comment_form_title( $args['title_reply'], $args['title_reply_to'] ); ?> <small><?php cancel_comment_reply_link( $args['cancel_reply_link'] ); ?></small></h3>
-      <?php if ( get_option( 'comment_registration' ) && !is_user_logged_in() ) : ?>
+      <?php if ( get_option( 'comment_registration' ) && ! is_user_logged_in() ) : ?>
         <?php echo $args['must_log_in']; ?>
         <?php do_action( 'comment_form_must_log_in_after' ); ?>
       <?php else : ?>
         <form class="form-horizontal" action="<?php echo site_url( '/wp-comments-post.php' ); ?>" method="post" id="<?php echo esc_attr( $args['id_form'] ); ?>">
           <?php do_action( 'comment_form_top' ); ?>
-          <?php if ( current_user_can('moderate_comments') ) : ?>
+          <?php if ( current_user_can( 'moderate_comments' ) ) : ?>
             <?php echo apply_filters( 'comment_form_logged_in', $args['logged_in_as'], $commenter, $user_identity ); ?>
             <?php do_action( 'comment_form_logged_in_after', $commenter, $user_identity ); ?>
           <?php else : ?>
@@ -526,89 +520,86 @@ function flint_comment_form( $args = array(), $post_id = null ) {
  * @ignore
  */
 function flint_avatar( $id_or_email, $size = '96', $default = '', $alt = false ) {
-  if ( ! get_option('show_avatars') )
-    return false;
+  if ( ! get_option( 'show_avatars' ) ) {
+    return false; }
 
-  if ( false === $alt)
+  if ( false === $alt ) {
     $safe_alt = '';
-  else
-    $safe_alt = esc_attr( $alt );
+} else {     $safe_alt = esc_attr( $alt ); }
 
-  if ( !is_numeric($size) )
-    $size = '96';
+  if ( ! is_numeric( $size ) ) {
+    $size = '96'; }
 
   $email = '';
-  if ( is_numeric($id_or_email) ) {
+  if ( is_numeric( $id_or_email ) ) {
     $id = (int) $id_or_email;
-    $user = get_userdata($id);
-    if ( $user )
-      $email = $user->user_email;
-  } elseif ( is_object($id_or_email) ) {
+    $user = get_userdata( $id );
+    if ( $user ) {
+      $email = $user->user_email; }
+  } elseif ( is_object( $id_or_email ) ) {
     $allowed_comment_types = apply_filters( 'get_avatar_comment_types', array( 'comment' ) );
-    if ( ! empty( $id_or_email->comment_type ) && ! in_array( $id_or_email->comment_type, (array) $allowed_comment_types ) )
-      return false;
+    if ( ! empty( $id_or_email->comment_type ) && ! in_array( $id_or_email->comment_type, (array) $allowed_comment_types ) ) {
+      return false; }
 
-    if ( !empty($id_or_email->user_id) ) {
+    if ( ! empty( $id_or_email->user_id ) ) {
       $id = (int) $id_or_email->user_id;
-      $user = get_userdata($id);
-      if ( $user)
-        $email = $user->user_email;
-    } elseif ( !empty($id_or_email->comment_author_email) ) {
+      $user = get_userdata( $id );
+      if ( $user ) {
+        $email = $user->user_email; }
+    } elseif ( ! empty( $id_or_email->comment_author_email ) ) {
       $email = $id_or_email->comment_author_email;
     }
   } else {
     $email = $id_or_email;
   }
 
-  if ( empty($default) ) {
-    $avatar_default = get_option('avatar_default');
-    if ( empty($avatar_default) )
+  if ( empty( $default ) ) {
+    $avatar_default = get_option( 'avatar_default' );
+    if ( empty( $avatar_default ) ) {
       $default = 'mystery';
-    else
-      $default = $avatar_default;
+} else {       $default = $avatar_default; }
   }
 
-  if ( !empty($email) )
-    $email_hash = md5( strtolower( trim( $email ) ) );
+  if ( ! empty( $email ) ) {
+    $email_hash = md5( strtolower( trim( $email ) ) ); }
 
   if ( is_ssl() ) {
     $host = 'https://secure.gravatar.com';
   } else {
-    if ( !empty($email) )
-      $host = sprintf( "http://%d.gravatar.com", ( hexdec( $email_hash[0] ) % 2 ) );
-    else
-      $host = 'http://0.gravatar.com';
+    if ( ! empty( $email ) ) {
+      $host = sprintf( 'http://%d.gravatar.com', ( hexdec( $email_hash[0] ) % 2 ) );
+} else {       $host = 'http://0.gravatar.com'; }
   }
 
-  if ( 'mystery' == $default )
+  if ( 'mystery' == $default ) {
     $default = "$host/avatar/ad516503a11cd5ca435acc9bb6523536?s={$size}"; // ad516503a11cd5ca435acc9bb6523536 == md5('unknown@gravatar.com')
-  elseif ( 'blank' == $default )
+} elseif ( 'blank' == $default )
     $default = $email ? 'blank' : includes_url( 'images/blank.gif' );
-  elseif ( !empty($email) && 'gravatar_default' == $default )
+  elseif ( ! empty( $email ) && 'gravatar_default' == $default )
     $default = '';
   elseif ( 'gravatar_default' == $default )
     $default = "$host/avatar/?s={$size}";
-  elseif ( empty($email) )
+  elseif ( empty( $email ) )
     $default = "$host/avatar/?d=$default&amp;s={$size}";
-  elseif ( strpos($default, 'http://') === 0 )
+  elseif ( strpos( $default, 'http://' ) === 0 )
     $default = add_query_arg( 's', $size, $default );
 
-  if ( !empty($email) ) {
+  if ( ! empty( $email ) ) {
     $out = "$host/avatar/";
     $out .= $email_hash;
     $out .= '?s='.$size;
     $out .= '&amp;d=' . urlencode( $default );
 
-    $rating = get_option('avatar_rating');
-    if ( !empty( $rating ) )
-      $out .= "&amp;r={$rating}";
+    $rating = get_option( 'avatar_rating' );
+    if ( ! empty( $rating ) ) {
+      $out .= "&amp;r={$rating}"; }
 
     $avatar = "<img alt='{$safe_alt}' src='{$out}' class='avatar avatar-{$size} media-object' height='{$size}' width='{$size}' />";
   } else {
     $avatar = "<img alt='{$safe_alt}' src='{$default}' class='avatar avatar-{$size} media-object avatar-default' height='{$size}' width='{$size}' />";
   }
 
-  return apply_filters('get_avatar', $avatar, $id_or_email, $size, $default, $alt);
+  return apply_filters( 'get_avatar', $avatar, $id_or_email, $size, $default, $alt );
 }
 
 /**
@@ -620,34 +611,40 @@ function flint_avatar( $id_or_email, $size = '96', $default = '', $alt = false )
  *                             Default current post.
  * @return void|false|string Link to show comment form, if successful. False, if comments are closed.
  */
-function flint_get_comment_reply_link($args = array(), $comment = null, $post = null) {
+function flint_get_comment_reply_link( $args = array(), $comment = null, $post = null ) {
   global $user_ID;
 
-  $defaults = array('add_below' => 'comment', 'respond_id' => 'respond', 'reply_text' => __('Reply', 'flint'),
-    'login_text' => __('Log in to Reply', 'flint'), 'depth' => 0, 'before' => '', 'after' => '');
+  $defaults = array(
+'add_below' => 'comment',
+'respond_id' => 'respond',
+'reply_text' => __( 'Reply', 'flint' ),
+    'login_text' => __( 'Log in to Reply', 'flint' ),
+'depth' => 0,
+'before' => '',
+'after' => '',
+);
 
-  $args = wp_parse_args($args, $defaults);
+  $args = wp_parse_args( $args, $defaults );
 
-  if ( 0 == $args['depth'] || $args['max_depth'] <= $args['depth'] )
-    return;
+  if ( 0 == $args['depth'] || $args['max_depth'] <= $args['depth'] ) {
+    return; }
 
-  extract($args, EXTR_SKIP);
+  extract( $args, EXTR_SKIP );
 
-  $comment = get_comment($comment);
-  if ( empty($post) )
-    $post = $comment->comment_post_ID;
-  $post = get_post($post);
+  $comment = get_comment( $comment );
+  if ( empty( $post ) ) {
+    $post = $comment->comment_post_ID; }
+  $post = get_post( $post );
 
-  if ( !comments_open($post->ID) )
-    return false;
+  if ( ! comments_open( $post->ID ) ) {
+    return false; }
 
   $link = '';
 
-  if ( get_option('comment_registration') && !$user_ID )
+  if ( get_option( 'comment_registration' ) && ! $user_ID ) {
     $link = '<a rel="nofollow" class="comment-reply-login btn btn-primary btn-sm" href="' . esc_url( wp_login_url( get_permalink() ) ) . '">' . $login_text . '</a>';
-  else
-    $link = "<a class='comment-reply-link btn btn-primary btn-sm' href='" . esc_url( add_query_arg( 'replytocom', $comment->comment_ID ) ) . "#" . $respond_id . "' onclick='return addComment.moveForm(\"$add_below-$comment->comment_ID\", \"$comment->comment_ID\", \"$respond_id\", \"$post->ID\")'>$reply_text</a>";
-  return apply_filters('comment_reply_link', $before . $link . $after, $args, $comment, $post);
+} else {     $link = "<a class='comment-reply-link btn btn-primary btn-sm' href='" . esc_url( add_query_arg( 'replytocom', $comment->comment_ID ) ) . '#' . $respond_id . "' onclick='return addComment.moveForm(\"$add_below-$comment->comment_ID\", \"$comment->comment_ID\", \"$respond_id\", \"$post->ID\")'>$reply_text</a>"; }
+  return apply_filters( 'comment_reply_link', $before . $link . $after, $args, $comment, $post );
 }
 
 /**
@@ -659,8 +656,8 @@ function flint_get_comment_reply_link($args = array(), $comment = null, $post = 
  *                             Default current post.
  * @return mixed Link to show comment form, if successful. False, if comments are closed.
  */
-function flint_comment_reply_link($args = array(), $comment = null, $post = null) {
-  echo flint_get_comment_reply_link($args, $comment, $post);
+function flint_comment_reply_link( $args = array(), $comment = null, $post = null ) {
+  echo flint_get_comment_reply_link( $args, $comment, $post );
 }
 
 /**
@@ -675,17 +672,17 @@ function flint_comment_reply_link($args = array(), $comment = null, $post = null
 function flint_get_sidebar( $slug, $minimal = false ) {
   $options = flint_get_options();
 
-  switch ($minimal) {
+  switch ( $minimal ) {
     case true:
-      if ($slug == $options['minimal_widget_area']) { flint_get_sidebar( $slug, false); }
+      if ( $slug == $options['minimal_widget_area'] ) { flint_get_sidebar( $slug, false ); }
       break;
     case false:
-      do_action( "get_sidebar", $slug );
+      do_action( 'get_sidebar', $slug );
 
       $templates   = array();
       $templates[] = "widgets/area-{$slug}.php";
 
-      locate_template($templates, true, false);
+      locate_template( $templates, true, false );
       break;
   }
 }
@@ -702,9 +699,9 @@ function flint_get_sidebar( $slug, $minimal = false ) {
 function flint_is_active_sidebar( $slug ) {
   $options = flint_get_options();
 
-  if ($slug == $options['minimal_widget_area'] && is_active_sidebar( $slug )):
+  if ( $slug == $options['minimal_widget_area'] && is_active_sidebar( $slug ) ) :
     return true;
-  else:
+  else :
     return false;
   endif;
 }
@@ -725,12 +722,12 @@ function flint_theme_version() {
 function flint_breadcrumbs( $template = 'default' ) {
   $options = flint_get_options();
 
-  switch ($template) {
+  switch ( $template ) {
     case 'clear':
-      if ($options['clear_nav'] == 'breadcrumbs') { flint_breadcrumbs(); }
+      if ( $options['clear_nav'] == 'breadcrumbs' ) { flint_breadcrumbs(); }
       break;
     case 'minimal':
-      if ($options['minimal_nav'] == 'breadcrumbs') { flint_breadcrumbs(); }
+      if ( $options['minimal_nav'] == 'breadcrumbs' ) { flint_breadcrumbs(); }
       break;
     default:
       global $post;
@@ -751,7 +748,7 @@ function flint_breadcrumbs( $template = 'default' ) {
 function flint_custom_footer() {
   $options = flint_get_options();
 
-  $footer = stripslashes($options['footer_content']);
+  $footer = stripslashes( $options['footer_content'] );
 
   $patterns = array(
     '/{site title}/',
@@ -761,17 +758,17 @@ function flint_custom_footer() {
     '/{phone}/',
     '/{email}/',
     '/{fax}/',
-    '/{address}/'
+    '/{address}/',
   );
   $replacements = array(
     get_bloginfo( 'name' ),
     get_bloginfo( 'description' ),
-    date('Y'),
+    date( 'Y' ),
     '<span itemprop="name">'      . $options['org'] . '</span>',
     '<span itemprop="telephone">' . $options['org_tel']     . '</span>',
     '<span itemprop="email">'     . $options['org_email']   . '</span>',
     '<span itemprop="faxNumber">' . $options['org_fax']     . '</span>',
-    '<span id="address" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><span id="street" itemprop="streetAddress">' . $options['org_address'] . '</span><span class="comma">, </span><span id="locality" itemprop="addressLocality">' . $options['org_locality'] . '</span> <span id="postal-code" itemprop="postalCode">' . $options['org_postal_code'] . '</span></span>'
+    '<span id="address" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><span id="street" itemprop="streetAddress">' . $options['org_address'] . '</span><span class="comma">, </span><span id="locality" itemprop="addressLocality">' . $options['org_locality'] . '</span> <span id="postal-code" itemprop="postalCode">' . $options['org_postal_code'] . '</span></span>',
   );
 
   $footer = preg_replace( $patterns, $replacements, $footer );
@@ -790,7 +787,7 @@ function flint_options_css() {
   $body = 'body {';
   $body .= 'background-color: #' . $colors['body_bg'] . '; font-family: ';
 
-  switch ($options['font_family_base']) {
+  switch ( $options['font_family_base'] ) {
     case 'Open Sans':
       $body .= '"Open Sans",         sans-serif; font-weight: 300; }';
       break;
@@ -819,7 +816,7 @@ function flint_options_css() {
 
   $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .navbar-brand { font-family: ';
 
-  switch ($options['headings_font_family']) {
+  switch ( $options['headings_font_family'] ) {
     case 'Open Sans':
       $headings .= '"Open Sans",         sans-serif; font-weight: 400;}';
       break;
@@ -870,24 +867,23 @@ function flint_get_template( $output = 'slug', $template = '', $a = false ) {
   $options = flint_get_options();
   $file    = get_post_meta( get_the_ID(), '_wp_page_template', true );
 
-  if (!empty($template) && $a != true) { trigger_error('$template variable in flint_get_template() is deprecated as of Flint 1.2.1. Use get_template() to get a particular file.'); unset($t); }
+  if ( ! empty( $template ) && $a != true ) { trigger_error( '$template variable in flint_get_template() is deprecated as of Flint 1.2.1. Use get_template() to get a particular file.' );
+unset( $t ); }
 
-  if ($file == 'templates/clear.php') { $slug = $options['clear_width']; }
-  elseif ($file == 'templates/minimal.php') {
-    if ( flint_is_active_sidebar('left') || flint_is_active_sidebar('right') ) { $slug = 'wide'; }
-    else{ $slug = $options['minimal_width']; }
-  }
-  else {
-    if ( is_active_sidebar('left') || is_active_sidebar('right') ) { $slug = 'wide'; }
-    else { $slug = $options['page_default_width']; }
+  if ( $file == 'templates/clear.php' ) { $slug = $options['clear_width']; } elseif ( $file == 'templates/minimal.php' ) {
+    if ( flint_is_active_sidebar( 'left' ) || flint_is_active_sidebar( 'right' ) ) { $slug = 'wide';
+} else { $slug = $options['minimal_width']; }
+  } else {
+    if ( is_active_sidebar( 'left' ) || is_active_sidebar( 'right' ) ) { $slug = 'wide';
+} else { $slug = $options['page_default_width']; }
   }
 
-  switch ($output) {
+  switch ( $output ) {
     case 'slug':
       return $slug;
       break;
     case 'content':
-      switch ($slug) {
+      switch ( $slug ) {
         case 'slim':
           echo 'col-xs-12 col-sm-8 col-md-4';
           break;
@@ -903,7 +899,7 @@ function flint_get_template( $output = 'slug', $template = '', $a = false ) {
       }
       break;
     case 'margins':
-      switch ($slug) {
+      switch ( $slug ) {
         case 'slim':
           echo '<div class="hidden-xs col-sm-2 col-md-4"></div>';
           break;
@@ -928,10 +924,10 @@ function flint_get_sidebar_template( $output, $widget_area = 'footer' ) {
   $options = flint_get_options();
   $type    = get_post_type( get_the_ID() );
 
-  switch ($widget_area) {
+  switch ( $widget_area ) {
     case 'footer':
-      if ($type == 'page') { flint_get_template( $output ); }
-      else { flint_get_template( $output, 'templates/full.php', true ); }
+      if ( $type == 'page' ) { flint_get_template( $output );
+} else { flint_get_template( $output, 'templates/full.php', true ); }
       break;
   }
 }
@@ -942,32 +938,29 @@ function flint_get_sidebar_template( $output, $widget_area = 'footer' ) {
 function flint_body_class() {
   global $post;
   $options = flint_get_options();
-  if (!empty($post->ID)) {
+  if ( ! empty( $post->ID ) ) {
     $template = get_post_meta( $post->ID, '_wp_page_template', true );
 
-    if ($template == 'templates/clear.php') {
-      switch ($options['clear_nav']) {
+    if ( $template == 'templates/clear.php' ) {
+      switch ( $options['clear_nav'] ) {
         case 'navbar':
-          body_class('clear clear-nav');
+          body_class( 'clear clear-nav' );
           break;
         case 'breadcrumbs':
-          body_class('clear clear-breadcrumbs');
+          body_class( 'clear clear-breadcrumbs' );
           break;
       }
-    }
-    elseif ($template == 'templates/minimal.php') {
-      switch ($options['minimal_nav']) {
+    } elseif ( $template == 'templates/minimal.php' ) {
+      switch ( $options['minimal_nav'] ) {
         case 'navbar':
-          body_class('clear clear-nav');
+          body_class( 'clear clear-nav' );
           break;
         case 'breadcrumbs':
-          body_class('clear clear-breadcrumbs');
+          body_class( 'clear clear-breadcrumbs' );
           break;
       }
-    }
-    else { body_class(); }
-  }
-  else { body_class(); }
+    } else { body_class(); }
+  } else { body_class(); }
 }
 
 /**
@@ -976,19 +969,21 @@ function flint_body_class() {
 function flint_the_post_thumbnail( $size = 'post-thumbnail', $attr = '' ) {
   $layout = flint_get_options();
   $type   = get_post_type();
-  $posts_image = !empty($layout['posts_image']) ? $layout['posts_image'] : 'always';
-  $pages_image = !empty($layout['pages_image']) ? $layout['pages_image'] : 'always';
-  switch ($type) {
+  $posts_image = ! empty( $layout['posts_image'] ) ? $layout['posts_image'] : 'always';
+  $pages_image = ! empty( $layout['pages_image'] ) ? $layout['pages_image'] : 'always';
+  switch ( $type ) {
     case 'post':
-      if ($posts_image == 'always') {if (has_post_thumbnail()) { the_post_thumbnail( $size, $attr ); }}
-      elseif ($posts_image == 'archives' && is_archive()) {if (has_post_thumbnail()) { the_post_thumbnail( $size, $attr ); }}
+      if ( $posts_image == 'always' ) {if ( has_post_thumbnail() ) { the_post_thumbnail( $size, $attr ); }
+} elseif ( $posts_image == 'archives' && is_archive() ) {if ( has_post_thumbnail() ) { the_post_thumbnail( $size, $attr ); }
+}
       break;
     case 'page':
-      if ($pages_image == 'always') {if (has_post_thumbnail()) { the_post_thumbnail( $size, $attr ); }}
-      elseif ($pages_image == 'archives' && is_archive()) {if (has_post_thumbnail()) { the_post_thumbnail( $size, $attr ); }}
+      if ( $pages_image == 'always' ) {if ( has_post_thumbnail() ) { the_post_thumbnail( $size, $attr ); }
+} elseif ( $pages_image == 'archives' && is_archive() ) {if ( has_post_thumbnail() ) { the_post_thumbnail( $size, $attr ); }
+}
       break;
     default:
-      if (has_post_thumbnail()) { the_post_thumbnail( $size, $attr ); }
+      if ( has_post_thumbnail() ) { the_post_thumbnail( $size, $attr ); }
       break;
   }
 }
@@ -998,18 +993,17 @@ function flint_the_post_thumbnail( $size = 'post-thumbnail', $attr = '' ) {
  * Ignores "Uncategorized"
  */
 function flint_has_category( $category = '', $post = null ) {
-  if (has_term( $category, 'category', $post )) {
+  if ( has_term( $category, 'category', $post ) ) {
     $cats = '';
-    foreach(get_the_category() as $cat) {
-      if ($cat->cat_name != 'Uncategorized') {
+    foreach ( get_the_category() as $cat ) {
+      if ( $cat->cat_name != 'Uncategorized' ) {
         $cats .= $cat->cat_name;
       }
     }
-    $output = trim($cats, ' ');
-    if (!empty($output)) { return true; }
-    else { return false; }
-  }
-  else {
+    $output = trim( $cats, ' ' );
+    if ( ! empty( $output ) ) { return true;
+} else { return false; }
+  } else {
     return false;
   }
 }
@@ -1033,19 +1027,15 @@ function flint_content_class( $class = '' ) {
   global $post;
   $options = flint_get_options();
 
-  $class .= !empty($class) ? ' site-content col-xs-12' : 'site-content col-xs-12';
+  $class .= ! empty( $class ) ? ' site-content col-xs-12' : 'site-content col-xs-12';
 
   if ( is_active_sidebar( 'left' ) | is_active_sidebar( 'right' ) ) {
     if ( is_active_sidebar( 'left' ) && is_active_sidebar( 'right' ) ) {
       $class .= ' col-md-6 wa-both';
-    }
-
-    else {
+    } else {
       if ( is_active_sidebar( 'left' ) ) {
         $class .= ' col-md-9 wa-left';
-      }
-
-      elseif ( is_active_sidebar( 'right' ) ) {
+      } elseif ( is_active_sidebar( 'right' ) ) {
         $class .= ' col-md-9 wa-right';
       }
     }
@@ -1076,7 +1066,7 @@ function flint_post_class() {
   $options = flint_get_options();
   $format  = get_post_format( $post->ID );
 
-  switch ($format) {
+  switch ( $format ) {
     case 'aside':
       $width = 'wide';
       break;
@@ -1091,27 +1081,26 @@ function flint_post_class() {
       break;
   }
 
-  if (!is_active_sidebar('left') &&  !is_active_sidebar('right')) {
-    switch ($width) {
+  if ( ! is_active_sidebar( 'left' ) && ! is_active_sidebar( 'right' ) ) {
+    switch ( $width ) {
       case 'slim':
-        post_class('col-xs-12 col-sm-8 col-md-4');
+        post_class( 'col-xs-12 col-sm-8 col-md-4' );
         break;
       case 'narrow':
-        post_class('col-xs-12 col-sm-8 col-md-6');
+        post_class( 'col-xs-12 col-sm-8 col-md-6' );
         break;
       case 'full':
-        post_class('col-xs-12 col-sm-8 col-md-8');
+        post_class( 'col-xs-12 col-sm-8 col-md-8' );
         break;
       case 'wide':
-        post_class('col-xs-12');
+        post_class( 'col-xs-12' );
         break;
       default:
-        post_class('col-xs-12 col-sm-8 col-md-8');
+        post_class( 'col-xs-12 col-sm-8 col-md-8' );
         break;
     }
-  }
-  else {
-    post_class('col-xs-12');
+  } else {
+    post_class( 'col-xs-12' );
   }
 }
 
@@ -1140,7 +1129,7 @@ function flint_get_spacer( $side ) {
   $options = flint_get_options();
   $format  = get_post_format( $post->ID );
 
-  switch ($format) {
+  switch ( $format ) {
     case 'aside':
       $width = 'wide';
       break;
@@ -1155,16 +1144,16 @@ function flint_get_spacer( $side ) {
       break;
   }
 
-  if (!is_active_sidebar('left') && !is_active_sidebar('right')) {
-    if ($side == 'left') {
-      switch ($width) {
+  if ( ! is_active_sidebar( 'left' ) && ! is_active_sidebar( 'right' ) ) {
+    if ( $side == 'left' ) {
+      switch ( $width ) {
         case 'slim':
           echo '<div class="hidden-xs hidden-sm col-md-2"></div>';
           echo '<div class="col-xs-12 col-sm-2 col-md-2">';
 
           flint_the_post_thumbnail();
 
-          if (!is_single() && $format == 'gallery') {
+          if ( ! is_single() && $format == 'gallery' ) {
             echo '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
           }
 
@@ -1177,7 +1166,7 @@ function flint_get_spacer( $side ) {
 
           flint_the_post_thumbnail();
 
-          if (!is_single() && $format == 'gallery') {
+          if ( ! is_single() && $format == 'gallery' ) {
             echo '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
           }
 
@@ -1189,7 +1178,7 @@ function flint_get_spacer( $side ) {
 
           flint_the_post_thumbnail();
 
-          if (!is_single() && $format == 'gallery') {
+          if ( ! is_single() && $format == 'gallery' ) {
             echo '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
           }
 
@@ -1201,7 +1190,7 @@ function flint_get_spacer( $side ) {
 
           flint_the_post_thumbnail();
 
-          if (!is_single() && $format == 'gallery') {
+          if ( ! is_single() && $format == 'gallery' ) {
             echo '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
           }
 
@@ -1213,17 +1202,15 @@ function flint_get_spacer( $side ) {
 
           flint_the_post_thumbnail();
 
-          if (!is_single() && $format == 'gallery') {
+          if ( ! is_single() && $format == 'gallery' ) {
             echo '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
           }
 
           echo '</div>';
           break;
       }
-    }
-
-    elseif ($side == 'right') {
-      switch ($width) {
+    } elseif ( $side == 'right' ) {
+      switch ( $width ) {
         case 'slim':
           $output = '<div class="hidden-xs col-sm-2 col-md-4"></div>';
           break;
@@ -1242,16 +1229,14 @@ function flint_get_spacer( $side ) {
       }
       echo $output;
     }
-  }
-  else {
-    if ($side == 'left') {
+  } else {
+    if ( $side == 'left' ) {
       echo '<div class="col-xs-12 col-sm-12 hidden-md hidden-lg">';
 
       flint_the_post_thumbnail();
 
       echo '</div>';
-    }
-    else {
+    } else {
       return;
     }
   }

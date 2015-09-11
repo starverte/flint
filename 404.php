@@ -14,9 +14,9 @@ get_header();
         <div class="hidden-xs col-sm-2 col-md-2"></div>
         <article id="post-0" class="post error404 not-found col-xs-12 col-sm-8 col-md-8">
           <header class="entry-header">
-            <?php do_action('flint_open_entry_header_404'); ?>
+            <?php do_action( 'flint_open_entry_header_404' ); ?>
             <h1 class="entry-title"><?php _e( 'Are we missing something?', 'flint' ); ?></h1>
-            <?php do_action('flint_close_entry_header_404'); ?>
+            <?php do_action( 'flint_close_entry_header_404' ); ?>
           </header><!-- .entry-header -->
 
           <?php if ( is_search() ) : ?>

@@ -51,16 +51,16 @@ class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
      * Managing Divider
      * Add divider class to an element to get a divider before it.
      */
-    $divider_class_position = array_search('divider', $classes);
-    if($divider_class_position !== false){
+    $divider_class_position = array_search( 'divider', $classes );
+    if ( $divider_class_position !== false ) {
       $output .= "<li class=\"divider\"></li>\n";
-      unset($classes[$divider_class_position]);
+      unset( $classes[ $divider_class_position ] );
     }
 
     $classes[] = ($args->has_children) ? 'dropdown' : '';
     $classes[] = ($item->current || $item->current_item_ancestor) ? 'active' : '';
     $classes[] = 'menu-item-' . $item->ID;
-    if($depth && $args->has_children){
+    if ( $depth && $args->has_children ) {
       $classes[] = 'dropdown-submenu';
     }
 
@@ -73,9 +73,9 @@ class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
     $output .= $indent . '<li' . $id . $value . $class_names . $li_attributes . '>';
 
     $attributes  = ! empty( $item->attr_title )         ? ' title="'  . esc_attr( $item->attr_title ) .'"' : '';
-    $attributes .= ! empty( $item->target )             ? ' target="' . esc_attr( $item->target     ) .'"' : '';
-    $attributes .= ! empty( $item->xfn )                ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
-    $attributes .= ! empty( $item->url )                ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
+    $attributes .= ! empty( $item->target )             ? ' target="' . esc_attr( $item->target ) .'"' : '';
+    $attributes .= ! empty( $item->xfn )                ? ' rel="'    . esc_attr( $item->xfn ) .'"' : '';
+    $attributes .= ! empty( $item->url )                ? ' href="'   . esc_attr( $item->url ) .'"' : '';
     $attributes .= ($depth == 0 && $args->has_children)  ? ' class="dropdown-toggle" data-toggle="dropdown"' : '';
 
     $item_output = $args->before;
@@ -92,18 +92,17 @@ class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
    *
    * @ignore
    */
-  function display_element( $element, &$children_elements, $max_depth, $depth=0, $args, &$output ) {
-    if ( !$element )
-      return;
+  function display_element( $element, &$children_elements, $max_depth, $depth = 0, $args, &$output ) {
+    if ( ! $element ) {
+      return; }
 
     $id_field = $this->db_fields['id'];
 
-    if ( is_array( $args[0] ) )
-      $args[0]['has_children'] = ! empty( $children_elements[$element->$id_field] );
-    else if ( is_object( $args[0] ) )
-      $args[0]->has_children = ! empty( $children_elements[$element->$id_field] );
-    $cb_args = array_merge( array(&$output, $element, $depth), $args);
-    call_user_func_array(array(&$this, 'start_el'), $cb_args);
+    if ( is_array( $args[0] ) ) {
+      $args[0]['has_children'] = ! empty( $children_elements[ $element->$id_field ] ); } else if ( is_object( $args[0] ) ) {
+      $args[0]->has_children = ! empty( $children_elements[ $element->$id_field ] ); }
+    $cb_args = array_merge( array( &$output, $element, $depth ), $args );
+    call_user_func_array( array( &$this, 'start_el' ), $cb_args );
 
     $id = $element->$id_field;
 
@@ -111,16 +110,16 @@ class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
      * Title
      * descend only when the depth is right and there are childrens for this element
      */
-    if ( ($max_depth == 0 || $max_depth > $depth+1 ) && isset( $children_elements[$id]) ) {
+    if ( ($max_depth == 0 || $max_depth > $depth + 1 ) && isset( $children_elements[ $id ] ) ) {
 
-      foreach( $children_elements[ $id ] as $child ){
+      foreach ( $children_elements[ $id ] as $child ) {
         /**
          * Start the child delimiter
          */
-        if ( !isset($newlevel) ) {
+        if ( ! isset( $newlevel ) ) {
           $newlevel = true;
-          $cb_args = array_merge( array(&$output, $depth), $args);
-          call_user_func_array(array(&$this, 'start_lvl'), $cb_args);
+          $cb_args = array_merge( array( &$output, $depth ), $args );
+          call_user_func_array( array( &$this, 'start_lvl' ), $cb_args );
         }
         $this->display_element( $child, $children_elements, $max_depth, $depth + 1, $args, $output );
       }
@@ -129,16 +128,16 @@ class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
     /**
      * End the child delimiter
      */
-    if ( isset($newlevel) && $newlevel ){
-      $cb_args = array_merge( array(&$output, $depth), $args);
-      call_user_func_array(array(&$this, 'end_lvl'), $cb_args);
+    if ( isset( $newlevel ) && $newlevel ) {
+      $cb_args = array_merge( array( &$output, $depth ), $args );
+      call_user_func_array( array( &$this, 'end_lvl' ), $cb_args );
     }
 
     /**
      * End this element
      */
-    $cb_args = array_merge( array(&$output, $element, $depth), $args);
-    call_user_func_array(array(&$this, 'end_el'), $cb_args);
+    $cb_args = array_merge( array( &$output, $element, $depth ), $args );
+    call_user_func_array( array( &$this, 'end_el' ), $cb_args );
 
   }
 }

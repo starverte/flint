@@ -12,8 +12,8 @@ if ( ! function_exists( 'flint_header_style' ) ) :
  */
 function flint_header_style() {
 
-  if ( HEADER_TEXTCOLOR == get_header_textcolor() )
-    return;
+  if ( HEADER_TEXTCOLOR == get_header_textcolor() ) {
+    return; }
   ?>
   <style type="text/css">
   <?php
@@ -109,13 +109,13 @@ if ( ! function_exists( 'flint_admin_header_image' ) ) :
 /**
  * Custom header image markup displayed on the Appearance > Header admin panel.
  */
-function flint_admin_header_image() { ?>
+function flint_admin_header_image() {
+ ?>
   <div id="heading" class="row">
     <?php
-    if ( 'blank' == get_header_textcolor() || '' == get_header_textcolor() )
+    if ( 'blank' == get_header_textcolor() || '' == get_header_textcolor() ) {
       $style = ' style="display:none;"';
-    else
-      $style = ' style="color:#' . get_header_textcolor() . ';"';
+} else {       $style = ' style="color:#' . get_header_textcolor() . ';"'; }
     ?>
     <?php $header_image = get_header_image();
     if ( ! empty( $header_image ) ) { ?>

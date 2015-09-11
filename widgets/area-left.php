@@ -14,7 +14,7 @@ $type = get_post_type();
         <div class="widget-area" >
           <?php do_action( 'before_sidebar' ); ?>
           <?php do_action( 'flint_widget_area_left_'.$type ); ?>
-          <?php dynamic_sidebar('left'); ?>
+          <?php dynamic_sidebar( 'left' ); ?>
         </div><!-- .widget-area -->
     </div><!-- .widgets.widgets-left -->
   <?php } ?>
