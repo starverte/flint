@@ -7,6 +7,7 @@
  * @package Flint
  * @since 1.3.3
  */
+
 ?>
 
   <nav class="fill navbar navbar-inverse navbar-fixed-top" role="navigation">

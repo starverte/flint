@@ -7,6 +7,7 @@
  * @package Flint
  * @since 1.3.0
  */
+
 ?>
 
   <div id="masthead" class="fill site-header" role="banner">

@@ -7,6 +7,7 @@
  * @package Flint
  * @since 1.3.3
  */
+
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 9]><html <?php language_attributes(); ?> class="ie"><![endif]-->

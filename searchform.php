@@ -5,6 +5,7 @@
  * @package Flint
  * @since 1.0.0
  */
+
 ?>
   <form method="get" id="searchform" class="form-inline" action="<?php echo esc_url( home_url( '/' ) ); ?>" role="search">
     <label for="s" class="screen-reader-text"><?php _ex( 'Search', 'assistive text', 'flint' ); ?></label>

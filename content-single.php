@@ -5,6 +5,7 @@
  * @package Flint
  * @since 1.4.1
  */
+
 ?>
 
   <div class="col-xs-12 col-sm-2">

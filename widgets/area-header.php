@@ -5,6 +5,7 @@
  * @package Flint
  * @since 1.4.0
  */
+
 $type = get_post_type();
 ?>
 

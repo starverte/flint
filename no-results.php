@@ -7,6 +7,7 @@
  * @package Flint
  * @since 1.0.0
  */
+
 ?>
 
 <article id="post-0" class="post no-results not-found">

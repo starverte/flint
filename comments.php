@@ -5,6 +5,7 @@
  * @package Flint
  * @since 1.3.9.1
  */
+
 if ( post_password_required() ) {
   return; }
 ?>
