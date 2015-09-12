@@ -18,7 +18,7 @@ if ( ! function_exists( 'flint_after_setup_theme' ) ) :
  */
 function flint_after_setup_theme() {
 
-  require( get_template_directory() . '/inc/class-flint_bootstrap_menu.php' );
+  require( get_template_directory() . '/inc/class-flint-bootstrap-menu.php' );
 
   require( get_template_directory() . '/inc/template-tags.php' );
 
@@ -107,7 +107,7 @@ function flint_widgets_init() {
 
   $widget_areas = array();
 
-  if ( $options['widget_areas_above'] == '3' ) {
+  if ( '3' === $options['widget_areas_above'] ) {
     array_push( $widget_areas, 'Header Left', 'Header Center', 'Header Right' );
   } else {
     array_push( $widget_areas, 'Header' );
@@ -117,7 +117,7 @@ function flint_widgets_init() {
 
   array_push( $widget_areas, 'Right' );
 
-  if ( $options['widget_areas_below'] == '3' ) {
+  if ( '3' === $options['widget_areas_below'] ) {
     array_push( $widget_areas, 'Footer Left', 'Footer Center', 'Footer Right' );
   } else {
     array_push( $widget_areas, 'Footer' );

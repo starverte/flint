@@ -22,7 +22,7 @@ flint_get_sidebar( 'header' );
 
         <?php
             $type = get_post_type();
-            if ( $type == 'post' ) :
+            if ( 'post' === $type ) :
               get_template_part( 'format', get_post_format() );
             else :
               get_template_part( 'type', $type );

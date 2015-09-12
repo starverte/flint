@@ -47,14 +47,26 @@ function flint_post_thumbnail( $type = 'post', $loc = 'single' ) {
   $pages_image = ! empty( $layout['pages_image'] ) ? $layout['pages_image'] : 'always';
   switch ( $type ) {
     case 'post':
-      if ( $posts_image == 'always' ) {if ( has_post_thumbnail() ) { the_post_thumbnail(); }
-} elseif ( $posts_image == 'archives' && $loc == 'archive' ) {if ( has_post_thumbnail() ) { the_post_thumbnail(); }
-}
+      if ( 'always' === $posts_image ) {
+        if ( has_post_thumbnail() ) {
+          the_post_thumbnail();
+        }
+      } elseif ( 'archives' === $posts_image && 'archive' === $loc ) {
+        if ( has_post_thumbnail() ) {
+          the_post_thumbnail();
+        }
+      }
       break;
     case 'page':
-      if ( $pages_image == 'always' ) {if ( has_post_thumbnail() ) { the_post_thumbnail(); }
-} elseif ( $pages_image == 'archives' && $loc == 'archive' ) {if ( has_post_thumbnail() ) { the_post_thumbnail(); }
-}
+      if ( 'always' === $pages_image ) {
+        if ( has_post_thumbnail() ) {
+          the_post_thumbnail();
+        }
+      } elseif ( 'archives' === $pages_image && 'archive' === $loc ) {
+        if ( has_post_thumbnail() ) {
+          the_post_thumbnail();
+        }
+      }
       break;
   }
 }

@@ -24,7 +24,7 @@ function flint_hex_hsl( $HexColor ) {
 
   $Add         = strlen( $HexColor ) == 6 ? 2 : 1;
   $AA          = 0;
-  $AddOn       = $Add == 1 ? ( $AA = 16 - 1 ) + 1 : 1;
+  $AddOn       = 1 === $Add ? ( $AA = 16 - 1 ) + 1 : 1;
 
   $Red         = round( ( hexdec( substr( $HexColor, 0, $Add ) ) * $AddOn + $AA ) / 255, 6 );
   $Green       = round( ( hexdec( substr( $HexColor, $Add, $Add ) ) * $AddOn + $AA ) / 255, 6 );
@@ -39,7 +39,7 @@ function flint_hex_hsl( $HexColor ) {
 
   $HSLColor['Luminance'] = ( $Minimum + $Maximum ) / 2;
 
-  if ( $Chroma == 0 ) {
+  if ( 0 === $Chroma ) {
     $HSLColor['Luminance'] = round( $HSLColor['Luminance'], 3 );
     return $HSLColor;
   }
@@ -103,23 +103,23 @@ function flint_hsl_hex( $Hue = 0, $Saturation = 0, $Luminance = 0 ) {
     $Mb   = $Ma + $Vs;
     $Mc   = $Radial - $Vs;
 
-    if ( $Wg == 1 ) {
+    if ( 1 === $Wg ) {
       $RGBColor['Red']   = $Mc;
       $RGBColor['Green'] = $Radial;
       $RGBColor['Blue']  = $Ma;
-    } else if ( $Wg == 2 ) {
+    } else if ( 2 === $Wg ) {
       $RGBColor['Red']   = $Ma;
       $RGBColor['Green'] = $Radial;
       $RGBColor['Blue']  = $Mb;
-    } else if ( $Wg == 3 ) {
+    } else if ( 3 === $Wg ) {
       $RGBColor['Red']   = $Ma;
       $RGBColor['Green'] = $Mc;
       $RGBColor['Blue']  = $Radial;
-    } else if ( $Wg == 4 ) {
+    } else if ( 4 === $Wg ) {
       $RGBColor['Red']   = $Mb;
       $RGBColor['Green'] = $Ma;
       $RGBColor['Blue']  = $Radial;
-    } else if ( $Wg == 5 ) {
+    } else if ( 5 === $Wg ) {
       $RGBColor['Red']   = $Radial;
       $RGBColor['Green'] = $Ma;
       $RGBColor['Blue']  = $Mc;
