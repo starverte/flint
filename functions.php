@@ -91,7 +91,7 @@ function flint_after_setup_theme() {
     'footer'    => 'page',
   ) );
 }
-endif; // flint_after_setup_theme
+endif;
 add_action( 'after_setup_theme', 'flint_after_setup_theme' );
 
 /**

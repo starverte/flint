@@ -32,7 +32,7 @@ get_header();
 
             <?php the_widget( 'WP_Widget_Recent_Posts' ); ?>
 
-            <?php if ( flint_categorized_blog() ) : // Only show the widget if site has multiple categories. ?>
+            <?php if ( flint_categorized_blog() ) : ?>
             <div class="widget widget_categories">
               <h2 class="widgettitle"><?php _e( 'Most Used Categories', 'flint' ); ?></h2>
               <ul>

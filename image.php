@@ -70,16 +70,16 @@ get_header();
                    */
                   if ( count( $attachments ) > 1 ) {
                     if ( isset( $attachments[ $k ] ) ) {
-                      $next_attachment_url = get_attachment_link( $attachments[ $k ]->ID );// get the URL of the next image attachment
-} else {                       $next_attachment_url = get_attachment_link( $attachments[0]->ID );// or get the URL of the first image attachment
+                      $next_attachment_url = get_attachment_link( $attachments[ $k ]->ID );
+} else {                       $next_attachment_url = get_attachment_link( $attachments[0]->ID );
 }
 } else {
-                    $next_attachment_url = wp_get_attachment_url();// or, if there's only 1 image, get the URL of the image
+                    $next_attachment_url = wp_get_attachment_url();
                   }
                 ?>
 
                 <a href="<?php echo $next_attachment_url; ?>" title="<?php the_title_attribute(); ?>" rel="attachment"><?php
-                  $attachment_size = apply_filters( 'flint_attachment_size', array( 1200, 1200 ) ); // Filterable image size.
+                  $attachment_size = apply_filters( 'flint_attachment_size', array( 1200, 1200 ) );
                   echo wp_get_attachment_image( $post->ID, $attachment_size );
                 ?></a>
               </div><!-- .attachment -->
@@ -102,13 +102,13 @@ get_header();
           </div><!-- .entry-content -->
 
           <footer class="entry-meta clearfix">
-            <?php if ( comments_open() && pings_open() ) : // Comments and trackbacks open ?>
+            <?php if ( comments_open() && pings_open() ) : ?>
               <?php printf( __( '<a class="comment-link" href="#respond" title="Post a comment">Post a comment</a> or leave a trackback: <a class="trackback-link" href="%s" title="Trackback URL for your post" rel="trackback">Trackback URL</a>.', 'flint' ), get_trackback_url() ); ?>
-            <?php elseif ( ! comments_open() && pings_open() ) : // Only trackbacks open ?>
+            <?php elseif ( ! comments_open() && pings_open() ) : ?>
               <?php printf( __( 'Comments are closed, but you can leave a trackback: <a class="trackback-link" href="%s" title="Trackback URL for your post" rel="trackback">Trackback URL</a>.', 'flint' ), get_trackback_url() ); ?>
-            <?php elseif ( comments_open() && ! pings_open() ) : // Only comments open ?>
+            <?php elseif ( comments_open() && ! pings_open() ) : ?>
               <?php _e( 'Trackbacks are closed, but you can <a class="comment-link" href="#respond" title="Post a comment">post a comment</a>.', 'flint' ); ?>
-            <?php elseif ( ! comments_open() && ! pings_open() ) : // Comments and trackbacks closed ?>
+            <?php elseif ( ! comments_open() && ! pings_open() ) : ?>
               <?php _e( 'Both comments and trackbacks are currently closed.', 'flint' ); ?>
             <?php endif; ?>
             <?php edit_post_link( __( 'Edit', 'flint' ), ' <span class="edit-link">', '</span>' ); ?>

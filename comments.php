@@ -26,7 +26,7 @@ if ( post_password_required() ) {
         <li class="previous"><?php previous_comments_link( __( 'Older Comments', 'flint' ) ); ?></li>
         <li class="next"><?php next_comments_link( __( 'Newer Comments', 'flint' ) ); ?></li>
       </ul><!-- .pager -->
-      <?php endif; // check for comment navigation ?>
+      <?php endif; ?>
 
       <ol class="comment-list">
         <?php wp_list_comments( array( 'callback' => 'flint_comment' ) ); ?>
@@ -37,9 +37,9 @@ if ( post_password_required() ) {
         <li class="previous"><?php previous_comments_link( __( 'Older Comments', 'flint' ) ); ?></li>
         <li class="next"><?php next_comments_link( __( 'Newer Comments', 'flint' ) ); ?></li>
       </ul><!-- .pager -->
-      <?php endif; // check for comment navigation ?>
+      <?php endif; ?>
 
-    <?php endif; // have_comments() ?>
+    <?php endif; ?>
 
     <?php
       if ( ! comments_open() && '0' != get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) :

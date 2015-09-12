@@ -17,7 +17,7 @@
         <h1 class="entry-title"><?php if ( is_single() ) { echo the_title();
 } else { echo '<a href="' . get_permalink() .'" rel="bookmark">' . get_the_title() . '</a>'; } ?></h1>
         <?php if ( current_user_can( 'edit_posts' ) ) { ?><a class="btn btn-default btn-sm btn-edit hidden-xs" href="<?php echo get_edit_post_link(); ?>">Edit Gallery</a><?php } ?>
-        <?php if ( is_single() ) {} else { ?><a class="btn btn-info btn-block visible-xs-block" href="<?php echo get_permalink(); ?>">View gallery</a><?php } ?>
+        <?php if ( ! is_single() ) { ?><a class="btn btn-info btn-block visible-xs-block" href="<?php echo get_permalink(); ?>">View gallery</a><?php } ?>
         <div class="entry-meta">
           <?php do_action( 'flint_entry_meta_above_post' ); ?>
         </div><!-- .entry-meta -->
@@ -43,7 +43,7 @@
             'post_mime_type'   => 'image',
             'orderby'          => 'menu_order',
             'order'            => 'ASC',
-            'numberposts'      => 999,
+            'numberposts'      => 12,
             'suppress_filters' => false,
             ) );
           }
@@ -64,8 +64,8 @@
 
             <?php the_excerpt(); ?>
 
-          <?php } // if ( $images )
-        } //not single ?>
+          <?php }
+        } ?>
         <?php
         flint_link_pages( array(
           'before' => '<ul class="pagination">',

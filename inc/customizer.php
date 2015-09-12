@@ -661,6 +661,7 @@ function flint_customize_preview_init() {
 add_action( 'customize_preview_init', 'flint_customize_preview_init' );
 
 if ( class_exists( 'WP_Customize_Control' ) ) {
+
   /**
    * Customize TextArea Control class.
    */

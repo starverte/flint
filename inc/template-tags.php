@@ -67,7 +67,7 @@ function flint_content_nav( $nav_id ) {
   <!-- #<?php echo esc_html( $nav_id ); ?> -->
 <?php
 }
-endif; // flint_content_nav
+endif;
 
 
 if ( ! function_exists( 'flint_comment' ) ) :
@@ -120,7 +120,7 @@ function flint_comment( $comment, $args, $depth ) {
     break;
   endswitch;
 }
-endif; // flint_comment()
+endif;
 
 
 add_action( 'flint_entry_meta_below_post','flint_the_comments', 20 );
@@ -213,18 +213,18 @@ endif;
 function flint_categorized_blog() {
   if ( false === ( $all_the_cool_cats = get_transient( 'all_the_cool_cats' ) ) ) {
 
-    $all_the_cool_cats = get_categories( array( 'hide_empty' => 1 ) );// Create an array of all the categories that are attached to posts
+    $all_the_cool_cats = get_categories( array( 'hide_empty' => 1 ) );
 
-    $all_the_cool_cats = count( $all_the_cool_cats );// Count the number of categories that are attached to the posts
+    $all_the_cool_cats = count( $all_the_cool_cats );
 
     set_transient( 'all_the_cool_cats', $all_the_cool_cats );
   }
 
   if ( '1' != $all_the_cool_cats ) {
-    return true;// This blog has more than 1 category
+    return true;
   }
  else {
-    return false;// This blog has only 1 category
+    return false;
   }
 }
 
@@ -606,9 +606,7 @@ function flint_avatar( $id_or_email, $size = '96', $default = '', $alt = false )
   }
 
   if ( 'mystery' == $default ) {
-    $default = "$host/avatar/ad516503a11cd5ca435acc9bb6523536?s={
-$size}
-"; // ad516503a11cd5ca435acc9bb6523536 == md5('unknown@gravatar.com')
+    $default = "$host/avatar/ad516503a11cd5ca435acc9bb6523536?s={$size}";
 }
  elseif ( 'blank' == $default )
     $default = $email ? 'blank' : includes_url( 'images/blank.gif' );
@@ -650,17 +648,7 @@ $size}
 ' />";
   }
  else {
-    $avatar = "<img alt='{
-$safe_alt}
-' src='{
-$default}
-' class='avatar avatar-{
-$size}
- media-object avatar-default' height='{
-$size}
-' width='{
-$size}
-' />";
+    $avatar = "<img alt='{$safe_alt}' src='{$default}' class='avatar avatar-{$size} media-object avatar-default' height='{$size}' width='{$size}' />";
   }
 
   return apply_filters( 'get_avatar', $avatar, $id_or_email, $size, $default, $alt );
@@ -697,7 +685,8 @@ function flint_get_comment_reply_link( $args = array(), $comment = null, $post =
 
   $comment = get_comment( $comment );
   if ( empty( $post ) ) {
-    $post = $comment->comment_post_ID; }
+    $post = $comment->comment_post_ID;
+    }
   $post = get_post( $post );
 
   if ( ! comments_open( $post->ID ) ) {

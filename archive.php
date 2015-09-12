@@ -69,7 +69,7 @@ flint_get_sidebar( 'header' );
             } elseif ( is_tag() ) {
               $tag_description = tag_description();
               if ( ! empty( $tag_description ) ) { echo apply_filters( 'tag_archive_meta', '<div class="taxonomy-description">' . $tag_description . '</div>' ); }
-            } elseif ( is_tax( 'post_format' ) ) {} elseif ( is_tax() ) {
+            } elseif ( is_tax() ) {
               $term_description = term_description();
               if ( ! empty( $term_description ) ) { echo apply_filters( 'tag_archive_meta', '<p class="taxonomy-description">' . $term_description . '</p>' ); }
             }
