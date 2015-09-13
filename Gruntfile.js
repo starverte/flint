@@ -2,6 +2,12 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     shell: {
+      empty_tests: {
+        command: 'rm -rfv tests'
+      },
+      syntax_clone: {
+        command: 'git clone https://gist.github.com/e2ab7e46b53e8882ba8e.git tests'
+      },
       phpcs_clone: {
         command: 'git clone https://github.com/squizlabs/PHP_CodeSniffer.git tests/php-codesniffer'
       },
@@ -18,12 +24,12 @@ module.exports = function(grunt) {
         command: "bash tests/syntax.sh >> tests/results"
       },
       phpcs_tests: {
-        command: 'tests/php-codesniffer/scripts/phpcs -p -s -v -n . --standard=./codesniffer.ruleset.xml --extensions=php >> tests/results'
+        command: 'tests/php-codesniffer/scripts/phpcs -p -s -v -n . --standard=./codesniffer.ruleset.xml --extensions=php --ignore=tests/*,node_modules/* >> tests/results'
       }
     }
   });
 
   grunt.loadNpmTasks( 'grunt-shell' );
-  grunt.registerTask( 'init', ['shell:phpcs_clone', 'shell:wpcs_clone', 'shell:phpcs_config'] );
+  grunt.registerTask( 'init', ['shell:empty_tests', 'shell:syntax_clone', 'shell:phpcs_clone', 'shell:wpcs_clone', 'shell:phpcs_config'] );
   grunt.registerTask( 'test', ['shell:reset_tests', 'shell:syntax_tests', 'shell:phpcs_tests'] );
 }
