@@ -125,6 +125,8 @@ endif;
 
 add_action( 'flint_entry_meta_below_post','flint_the_comments', 20 );
 /**
+ * Display the comments
+ *
  * @deprecated 2.0.0
  * @ignore
  */

@@ -1,5 +1,7 @@
 <?php
 /**
+ * Status post format template
+ *
  * @package Flint
  * @since 1.3.0
  */

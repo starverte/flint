@@ -63,7 +63,7 @@ function flint_get_options( $option = null ) {
   $defaults['body_bg']    = get_theme_mod( 'background_color', $defaults['body_bg'] );
   $defaults['fill_color'] = get_theme_mod( 'header_textcolor', $defaults['fill_color'] );
 
-  // BEGIN - backwards compatibility
+  // Backwards compatability begins here. Remove in 1.5+.
   $colors    = get_option( 'flint_colors' );
   $fonts     = get_option( 'flint_fonts' );
   $general   = get_option( 'flint_general' );
@@ -102,7 +102,7 @@ function flint_get_options( $option = null ) {
 
   $defaults['widget_areas_above']   = ! empty( $wa['header'] )                     ? $wa['header']                     : $defaults['widget_areas_above'];
   $defaults['widget_areas_below']   = ! empty( $wa['footer'] )                     ? $wa['footer']                     : $defaults['widget_areas_below'];
-  // END - backwards compatibility
+  // Backwards compatability ends here. Remove in 1.5+.
   $flint_options = wp_parse_args( get_option( 'flint_options' ), $defaults );
 
   if ( ! empty( $option ) ) {
