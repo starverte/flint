@@ -166,8 +166,8 @@ endif;
 add_action( 'flint_entry_meta_below_post','flint_posted_in', 10 );
 if ( ! function_exists( 'flint_posted_in' ) ) :
 /**
-* Prints HTML with the categories and tags that the post is in.
-*/
+ * Prints HTML with the categories and tags that the post is in.
+ */
 function flint_posted_in() {
   $categories = get_the_category();
   $tags = get_the_tags();
