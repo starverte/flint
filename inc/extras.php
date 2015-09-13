@@ -25,7 +25,9 @@ add_filter( 'wp_page_menu_args', 'flint_page_menu_args' );
  * @param array $classes An array of CSS classes to be applied to the <body> tag
  */
 function flint_body_class_multi_author( $classes ) {
-  if ( is_multi_author() ) { $classes[] = 'group-blog'; }
+  if ( is_multi_author() ) {
+    $classes[] = 'group-blog';
+  }
   return $classes;
 }
 add_filter( 'body_class', 'flint_body_class_multi_author' );
@@ -38,11 +40,14 @@ add_filter( 'body_class', 'flint_body_class_multi_author' );
  */
 function flint_attachment_link( $url, $id ) {
   if ( ! is_attachment() && ! wp_attachment_is_image( $id ) ) {
-    return $url; }
+    return $url;
+  }
 
   $image = get_post( $id );
+
   if ( ! empty( $image->post_parent ) && $image->post_parent != $id ) {
-    $url .= '#main'; }
+    $url .= '#main';
+  }
 
   return $url;
 }

@@ -31,7 +31,9 @@ function flint_deprecated_function( $function, $version, $replacement = null ) {
   if ( WP_DEBUG && apply_filters( 'deprecated_function_trigger_error', true ) ) {
     if ( ! is_null( $replacement ) ) {
       trigger_error( sprintf( __( '%1$s is <strong>deprecated</strong> since Flint version %2$s! Use %3$s instead.', 'flint' ), $function, $version, $replacement ) );
-} else {       trigger_error( sprintf( __( '%1$s is <strong>deprecated</strong> since Flint version %2$s with no alternative available.', 'flint' ), $function, $version ) ); }
+    } else {
+      trigger_error( sprintf( __( '%1$s is <strong>deprecated</strong> since Flint version %2$s with no alternative available.', 'flint' ), $function, $version ) );
+    }
   }
 }
 

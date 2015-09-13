@@ -24,9 +24,11 @@ function flint_content_nav( $nav_id ) {
     $next = get_adjacent_post( false, '', false );
 
     if ( ! $next && ! $previous ) {
-      return; }
+      return;
+    }
     if ( $type = 'steel_product' ) {
-      return; }
+      return;
+    }
   }
 
   if ( $wp_query->max_num_pages < 2 && ( is_home() || is_archive() || is_search() ) ) {
@@ -164,43 +166,40 @@ endif;
 add_action( 'flint_entry_meta_below_post','flint_posted_in', 10 );
 if ( ! function_exists( 'flint_posted_in' ) ) :
 /**
- * Prints HTML with the categories and tags that the post is in.
- */
+* Prints HTML with the categories and tags that the post is in.
+*/
 function flint_posted_in() {
   $categories = get_the_category();
   $tags = get_the_tags();
-  $separator = ' '; ?>
+  $separator = ' ';
 
-  <?php if ( flint_has_category() ) {
-?>
-
-    <span class="cat-links">
-
-      <?php $output = '';
-      foreach ( $categories as $category ) {
-        if ( $category->cat_name != 'Uncategorized' ) {
-          $output .= '<a class="label label-default" href="'.get_category_link( $category->term_id ).'" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $category->name ) ) . '">'.$category->cat_name.'</a>'.$separator;
-        }
+  if ( flint_has_category() ) : ?>
+    <span class="cat-links"><?php
+    $output = '';
+    foreach ( $categories as $category ) {
+      if ( $category->cat_name != 'Uncategorized' ) {
+        $output .= '<a class="label label-default" href="'.get_category_link( $category->term_id ).'" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $category->name ) ) . '">'.$category->cat_name.'</a>'.$separator;
       }
-      $output = trim( $output, $separator );
-      echo 'Posted in ' . $output; ?>
-    </span><!-- .cat-links -->
+    }
 
-    <?php }
+    $output = trim( $output, $separator );
+    echo 'Posted in ' . $output; ?>
+    </span><!-- .cat-links --><?php
+  endif;
+
   if ( has_tag() ) {
-
-    if ( flint_has_category() ) {
-?><span class="sep"> | </span><?php }
- ?>
+    if ( flint_has_category() ) : ?>
+      <span class="sep"> | </span>
+    <?php endif; ?>
 
     <span class="tags-links">
-      Tagged
-      <?php $output = '';
+      Tagged <?php
+      $output = '';
       foreach ( $tags as $tag ) {
-$output .= '<a class="label label-info" href="'.get_tag_link( $tag->term_id ).'" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $tag->name ) ) . '">'.$tag->name.'</a>'.$separator; }
+        $output .= '<a class="label label-info" href="'.get_tag_link( $tag->term_id ).'" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $tag->name ) ) . '">'.$tag->name.'</a>'.$separator;
+      }
       echo trim( $output, $separator ); ?>
     </span><!-- .tags-links --><?php
-
   }
 }
 endif;
@@ -408,9 +407,8 @@ $post->ID}
     }
 }
   if ( $preview ) {
-    $output = preg_replace_callback( '/\%u([0-9A-F]{
-4}
-)/', '_convert_urlencoded_to_entities', $output ); }
+    $output = preg_replace_callback( '/\%u([0-9A-F]{4})/', '_convert_urlencoded_to_entities', $output );
+  }
 
   return $output;
 }
@@ -761,11 +759,13 @@ function flint_breadcrumbs( $template = 'default' ) {
   switch ( $template ) {
     case 'clear':
       if ( 'breadcrumbs' === $options['clear_nav'] ) {
-flint_breadcrumbs(); }
+        flint_breadcrumbs();
+      }
       break;
     case 'minimal':
       if ( 'breadcrumbs' === $options['minimal_nav'] ) {
-flint_breadcrumbs(); }
+        flint_breadcrumbs();
+      }
       break;
     default:
       global $post;
@@ -774,7 +774,8 @@ flint_breadcrumbs(); }
       echo '<ol class="breadcrumb">';
       echo '<li><a href="' . get_home_url() . '">Home</a></li>';
       foreach ( $anc as $ancestor ) {
-echo '<li><a href="' . get_permalink( $ancestor ) . '">' . get_the_title( $ancestor ) . '</a></li>'; }
+        echo '<li><a href="' . get_permalink( $ancestor ) . '">' . get_the_title( $ancestor ) . '</a></li>';
+      }
       echo '<li class="active">' . get_the_title() . '</li>';
       echo '</ol>';
       break;
