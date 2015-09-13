@@ -185,7 +185,6 @@ function flint_posted_in() {
     </span><!-- .cat-links -->
 
     <?php }
- // endif flint_has_category()
   if ( has_tag() ) {
 
     if ( flint_has_category() ) {
@@ -201,7 +200,6 @@ $output .= '<a class="label label-info" href="'.get_tag_link( $tag->term_id ).'"
     </span><!-- .tags-links --><?php
 
   }
- // endif has_tag()
 }
 endif;
 
@@ -294,8 +292,7 @@ function flint_link_pages( $args = '' ) {
   }
   if ( $echo ) {
     echo $output;
-  }
-  else {
+  } else {
     return $output;
   }
 }
@@ -459,12 +456,9 @@ function flint_comment_form( $args = array(), $post_id = null ) {
   $req = get_option( 'require_name_email' );
   $aria_req = ( $req ? " aria-required='true' required" : '' );
   $fields = array(
-    'author' => '<p class="comment-form-author">' .
-                '<input class="form-control required" id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" ' . $aria_req . ' placeholder="Name*"></p>',
-    'email'  => '<p class="comment-form-email">' .
-                '<input class="form-control" id="email" name="email" type="text" value="' . esc_attr( $commenter['comment_author_email'] ) . '" ' . $aria_req . ' placeholder="Email Address*"></p>',
-    'url'    => '<p class="comment-form-url">' .
-                '<input class="form-control" id="url" name="url" type="text" value="' . esc_attr( $commenter['comment_author_url'] ) . '" placeholder="Website URL" /></p>',
+    'author' => '<p class="comment-form-author"><input class="form-control required" id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" ' . $aria_req . ' placeholder="Name*"></p>',
+    'email'  => '<p class="comment-form-email"><input class="form-control" id="email" name="email" type="text" value="' . esc_attr( $commenter['comment_author_email'] ) . '" ' . $aria_req . ' placeholder="Email Address*"></p>',
+    'url'    => '<p class="comment-form-url"><input class="form-control" id="url" name="url" type="text" value="' . esc_attr( $commenter['comment_author_url'] ) . '" placeholder="Website URL" /></p>',
   );
 
   $required_text = sprintf( ' ' . __( 'Required fields are marked %s', 'flint' ), '<span class="required">*</span>' );
@@ -604,17 +598,13 @@ function flint_avatar( $id_or_email, $size = '96', $default = '', $alt = false )
     $default = "$host/avatar/ad516503a11cd5ca435acc9bb6523536?s={$size}";
   } elseif ( 'blank' === $default ) {
     $default = $email ? 'blank' : includes_url( 'images/blank.gif' );
-  }
-  elseif ( ! empty( $email ) && 'gravatar_default' === $default ) {
+  } elseif ( ! empty( $email ) && 'gravatar_default' === $default ) {
     $default = '';
-  }
-  elseif ( 'gravatar_default' === $default ) {
+  } elseif ( 'gravatar_default' === $default ) {
     $default = "$host/avatar/?s={$size}";
-  }
-  elseif ( empty( $email ) ) {
+  } elseif ( empty( $email ) ) {
     $default = "$host/avatar/?d=$default&amp;s={$size}";
-  }
-  elseif ( strpos( $default, 'http://' ) === 0 ) {
+  } elseif ( strpos( $default, 'http://' ) === 0 ) {
     $default = add_query_arg( 's', $size, $default );
   }
 
