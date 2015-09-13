@@ -253,56 +253,50 @@ function flint_link_pages( $args = '' ) {
     'link_before'      => '',
     'link_after'       => '',
     'next_or_number'   => 'number',
-    'nextpagelink'     => __( 'Next page', 'flint' ),
-    'previouspagelink' => __( 'Previous page', 'flint' ),
+    'nextpagelink'     => __('Next page', 'flint'),
+    'previouspagelink' => __('Previous page', 'flint'),
     'pagelink'         => '%',
-    'echo'             => 1,
+    'echo'             => 1
   );
-
   $r = wp_parse_args( $args, $defaults );
   $r = apply_filters( 'wp_link_pages_args', $r );
   extract( $r, EXTR_SKIP );
-
   global $page, $numpages, $multipage, $more, $pagenow;
-
   $output = '';
   if ( $multipage ) {
     if ( 'number' == $next_or_number ) {
       $output .= $before;
-      for ( $i = 1; $i < ($numpages + 1); $i = $i + 1 ) {
-        $j = str_replace( '%',$i,$pagelink );
+      for ( $i = 1; $i < ($numpages+1); $i = $i + 1 ) {
+        $j = str_replace('%',$i,$pagelink);
         $output .= ' ';
-        if ( ( $i !== $page ) || ( ( ! $more ) && ( 1 === $page ) ) {
-          $output .= flint_link_page( $i );
+        if ( ($i != $page) || ((!$more) && ($page==1)) ) {
+          $output .= flint_link_page($i);
         }
- else {
+        else {
           $output .= '<li class="active"><a>';
         }
         $output .= $link_before . $j . $link_after . '</a></li>';
       }
       $output .= $after;
-    }
- else {
+    } else {
       if ( $more ) {
         $output .= $before;
         $i = $page - 1;
         if ( $i && $more ) {
-          $output .= _wp_link_page( $i );
+          $output .= _wp_link_page($i);
           $output .= $link_before. $previouspagelink . $link_after . '</a>';
         }
         $i = $page + 1;
         if ( $i <= $numpages && $more ) {
-          $output .= _wp_link_page( $i );
+          $output .= _wp_link_page($i);
           $output .= $link_before. $nextpagelink . $link_after . '</a>';
         }
         $output .= $after;
       }
     }
   }
-
-  if ( $echo ) {
-    echo $output; }
-
+  if ( $echo )
+    echo $output;
   return $output;
 }
 
