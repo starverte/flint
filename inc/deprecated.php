@@ -152,7 +152,7 @@ function flint_get_widgets( $slug, $minimal = false ) {
  */
 function flint_get_widgets_template( $output, $widget_area = 'footer' ) {
   flint_deprecated_function( __FUNCTION__, '1.4.0', 'flint_get_sidebar_template()' );
-  return flint_get_sidebar( $output, $widget_area );
+  return flint_get_sidebar_template( $output, $widget_area );
 }
 
 /**
@@ -168,7 +168,7 @@ function flint_get_widgets_template( $output, $widget_area = 'footer' ) {
  */
 function flint_is_active_widgets( $slug ) {
   flint_deprecated_function( __FUNCTION__, '1.4.0', 'flint_is_active_sidebar()' );
-  return flint_get_sidebar( $slug );
+  return flint_is_active_sidebar( $slug );
 }
 
 /**
