@@ -5,6 +5,7 @@
  * @package Flint
  * @since 1.3.0
  */
+
 ?>
 
   <div class="row">

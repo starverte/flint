@@ -5,6 +5,7 @@
  * @package Flint
  * @since 1.3.9.1
  */
+
 get_header( 'head' );
 
 $options = flint_get_options();

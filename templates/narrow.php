@@ -5,6 +5,7 @@
  * @package Flint
  * @since 1.4.0
  */
+
 get_header();
 flint_get_sidebar( 'header' );
 ?>
