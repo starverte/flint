@@ -5,11 +5,12 @@
  * @package Flint
  * @since 1.3.9.1
  */
-get_header('head');
+
+get_header( 'head' );
 
 $options = flint_get_options();
 if ( 'navbar' === $options['clear_nav'] ) {
-  get_header('nav');
+  get_header( 'nav' );
 }
 ?>
 
@@ -19,7 +20,7 @@ if ( 'navbar' === $options['clear_nav'] ) {
 
         <?php while ( have_posts() ) : the_post(); ?>
 
-          <?php flint_breadcrumbs('clear'); ?>
+          <?php flint_breadcrumbs( 'clear' ); ?>
 
           <?php get_template_part( 'templates/' . flint_get_template(), 'content' ); ?>
 
@@ -32,4 +33,4 @@ if ( 'navbar' === $options['clear_nav'] ) {
   </div><!-- #primary -->
 </div><!-- #page -->
 
-<?php get_footer('close'); ?>
+<?php get_footer( 'close' ); ?>

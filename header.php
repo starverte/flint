@@ -7,8 +7,8 @@
  * @package Flint
  * @since 1.3.9.1
  */
+
 get_header( 'head' );
 get_header( 'nav' );
 get_header( 'branding' );
 ?>
-

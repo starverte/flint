@@ -25,7 +25,9 @@ add_filter( 'wp_page_menu_args', 'flint_page_menu_args' );
  * @param array $classes An array of CSS classes to be applied to the <body> tag
  */
 function flint_body_class_multi_author( $classes ) {
-  if ( is_multi_author() ) { $classes[] = 'group-blog'; }
+  if ( is_multi_author() ) {
+    $classes[] = 'group-blog';
+  }
   return $classes;
 }
 add_filter( 'body_class', 'flint_body_class_multi_author' );
@@ -34,15 +36,18 @@ add_filter( 'body_class', 'flint_body_class_multi_author' );
  * Filter in a link to a content ID attribute for the next/previous image links on image attachment pages
  *
  * @param string $url The url for the attachment
- * @param int $id The id of the attachment
+ * @param int    $id The id of the attachment
  */
 function flint_attachment_link( $url, $id ) {
-  if ( ! is_attachment() && ! wp_attachment_is_image( $id ) )
+  if ( ! is_attachment() && ! wp_attachment_is_image( $id ) ) {
     return $url;
+  }
 
   $image = get_post( $id );
-  if ( ! empty( $image->post_parent ) && $image->post_parent != $id )
+
+  if ( ! empty( $image->post_parent ) && $image->post_parent != $id ) {
     $url .= '#main';
+  }
 
   return $url;
 }

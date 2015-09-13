@@ -5,24 +5,25 @@
  * @package Flint
  * @since 1.4.1
  */
+
 ?>
 
   <div class="col-xs-12 col-sm-2">
     <?php flint_the_post_thumbnail(); ?>
   </div>
 
-  <article id="post-<?php the_ID(); ?>" <?php post_class('col-xs-12 col-sm-8'); ?>>
+  <article id="post-<?php the_ID(); ?>" <?php post_class( 'col-xs-12 col-sm-8' ); ?>>
     <header class="entry-header">
       <?php $type = get_post_type(); ?>
-      <?php do_action('flint_open_entry_header_'.$type); ?>
+      <?php do_action( 'flint_open_entry_header_'.$type ); ?>
 
       <h1 class="entry-title"><?php the_title(); ?></h1>
 
       <div class="entry-meta">
-        <?php do_action('flint_entry_meta_above_'.$type); ?>
+        <?php do_action( 'flint_entry_meta_above_'.$type ); ?>
       </div><!-- .entry-meta -->
 
-      <?php do_action('flint_close_entry_header_'.$type); ?>
+      <?php do_action( 'flint_close_entry_header_'.$type ); ?>
 
     </header><!-- .entry-header -->
 
@@ -37,7 +38,7 @@
     </div><!-- .entry-content -->
 
     <footer class="entry-meta clearfix">
-      <?php do_action('flint_entry_meta_below_'.$type); ?>
+      <?php do_action( 'flint_entry_meta_below_'.$type ); ?>
     </footer><!-- .entry-meta -->
   </article><!-- #post-<?php the_ID(); ?> -->
 

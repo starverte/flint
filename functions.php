@@ -9,8 +9,8 @@
 /**
  * Set the content width based on the theme's design and stylesheet.
  */
-if ( ! isset( $content_width ) )
-  $content_width = 750; /* pixels */
+if ( ! isset( $content_width ) ) {
+  $content_width = 750; } /* pixels */
 
 if ( ! function_exists( 'flint_after_setup_theme' ) ) :
 /**
@@ -18,7 +18,7 @@ if ( ! function_exists( 'flint_after_setup_theme' ) ) :
  */
 function flint_after_setup_theme() {
 
-  require( get_template_directory() . '/inc/class-flint_bootstrap_menu.php' );
+  require( get_template_directory() . '/inc/class-flint-bootstrap-menu.php' );
 
   require( get_template_directory() . '/inc/template-tags.php' );
 
@@ -37,7 +37,7 @@ function flint_after_setup_theme() {
   $nav_menus = array(
     'primary' => __( 'Primary Menu', 'flint' ),
   );
-  $nav_menus = apply_filters('flint_nav_menus', $nav_menus);
+  $nav_menus = apply_filters( 'flint_nav_menus', $nav_menus );
   register_nav_menus( $nav_menus );
 
   add_editor_style( 'editor-style.css' );
@@ -75,7 +75,7 @@ function flint_after_setup_theme() {
     'width'                  => 300,
     'height'                 => 300,
     'flex-height'            => true,
-    'flex-width'             => true
+    'flex-width'             => true,
   );
 
   $header = apply_filters( 'flint_custom_header_args', $header );
@@ -91,7 +91,7 @@ function flint_after_setup_theme() {
     'footer'    => 'page',
   ) );
 }
-endif; // flint_after_setup_theme
+endif;
 add_action( 'after_setup_theme', 'flint_after_setup_theme' );
 
 /**
@@ -107,28 +107,26 @@ function flint_widgets_init() {
 
   $widget_areas = array();
 
-  if ( $options['widget_areas_above'] == '3' ) {
-    array_push($widget_areas, 'Header Left', 'Header Center', 'Header Right' );
-  }
-  else {
-    array_push($widget_areas, 'Header' );
-  }
-
-  array_push($widget_areas, 'Left' );
-
-  array_push($widget_areas, 'Right' );
-
-  if ($options['widget_areas_below'] == '3' ) {
-    array_push($widget_areas, 'Footer Left', 'Footer Center', 'Footer Right' );
-  }
-  else {
-    array_push($widget_areas, 'Footer' );
+  if ( '3' === $options['widget_areas_above'] ) {
+    array_push( $widget_areas, 'Header Left', 'Header Center', 'Header Right' );
+  } else {
+    array_push( $widget_areas, 'Header' );
   }
 
-  foreach ($widget_areas as $widget_area) {
+  array_push( $widget_areas, 'Left' );
+
+  array_push( $widget_areas, 'Right' );
+
+  if ( '3' === $options['widget_areas_below'] ) {
+    array_push( $widget_areas, 'Footer Left', 'Footer Center', 'Footer Right' );
+  } else {
+    array_push( $widget_areas, 'Footer' );
+  }
+
+  foreach ( $widget_areas as $widget_area ) {
     register_sidebar( array(
       'name'          => $widget_area,
-      'id'            => str_replace(' ','_',strtolower($widget_area)),
+      'id'            => str_replace( ' ','_',strtolower( $widget_area ) ),
       'before_widget' => '<aside id="%1$s" class="widget %2$s">',
       'after_widget'  => '</aside>',
       'before_title'  => '<h1 class="widget-title">',
@@ -146,7 +144,7 @@ add_filter( 'jetpack_implode_frontend_css', '__return_false' );
 function flint_print_styles() {
   wp_deregister_style( 'grunion.css' );
 }
-add_action('wp_print_styles','flint_print_styles');
+add_action( 'wp_print_styles','flint_print_styles' );
 
 /**
  * Enqueue scripts and styles
@@ -156,7 +154,7 @@ function flint_enqueue_scripts() {
   /**
    * Load Twitter Bootstrap
    */
-  wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', array('jquery'), '3.0.0', true );
+  wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', array( 'jquery' ), '3.0.0', true );
   wp_enqueue_style( 'bootstrap-css', get_template_directory_uri() . '/css/bootstrap.min.css', array() , '3.0.0' );
 
   wp_enqueue_script( 'flint-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '9f3e2cd', true );
@@ -174,7 +172,7 @@ function flint_enqueue_scripts() {
    */
   $options = flint_get_options();
 
-  switch ($options['font_family_base']) {
+  switch ( $options['font_family_base'] ) {
     case 'Open Sans':
       wp_enqueue_style( 'open-sans', '//fonts.googleapis.com/css?family=Open+Sans:300,600,300,700,300italic,600italic,700italic', array(), flint_theme_version() );
       break;
@@ -201,7 +199,7 @@ function flint_enqueue_scripts() {
       break;
   }
   if ( $options['headings_font_family'] != $options['font_family_base'] ) {
-    switch ($options['headings_font_family']) {
+    switch ( $options['headings_font_family'] ) {
       case 'Open Sans':
         wp_enqueue_style( 'open-sans', '//fonts.googleapis.com/css?family=Open+Sans:300,600,300,700,300italic,600italic,700italic', array(), flint_theme_version() );
         break;

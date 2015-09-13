@@ -5,12 +5,13 @@
  * @package Flint
  * @since 1.3.9.1
  */
-if ( post_password_required() )
-  return;
+
+if ( post_password_required() ) {
+  return; }
 ?>
 <div class="row">
-  <?php flint_get_template('margins'); ?>
-  <div id="comments" class="comments-area <?php flint_get_template('content'); ?>">
+  <?php flint_get_template( 'margins' ); ?>
+  <div id="comments" class="comments-area <?php flint_get_template( 'content' ); ?>">
 
     <?php if ( have_comments() ) : ?>
       <h2 class="comments-title">
@@ -25,7 +26,7 @@ if ( post_password_required() )
         <li class="previous"><?php previous_comments_link( __( 'Older Comments', 'flint' ) ); ?></li>
         <li class="next"><?php next_comments_link( __( 'Newer Comments', 'flint' ) ); ?></li>
       </ul><!-- .pager -->
-      <?php endif; // check for comment navigation ?>
+      <?php endif; ?>
 
       <ol class="comment-list">
         <?php wp_list_comments( array( 'callback' => 'flint_comment' ) ); ?>
@@ -36,9 +37,9 @@ if ( post_password_required() )
         <li class="previous"><?php previous_comments_link( __( 'Older Comments', 'flint' ) ); ?></li>
         <li class="next"><?php next_comments_link( __( 'Newer Comments', 'flint' ) ); ?></li>
       </ul><!-- .pager -->
-      <?php endif; // check for comment navigation ?>
+      <?php endif; ?>
 
-    <?php endif; // have_comments() ?>
+    <?php endif; ?>
 
     <?php
       if ( ! comments_open() && '0' != get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) :
@@ -49,5 +50,5 @@ if ( post_password_required() )
     <?php flint_comment_form(); ?>
 
   </div><!-- #comments -->
-  <?php flint_get_template('margins'); ?>
+  <?php flint_get_template( 'margins' ); ?>
 </div>

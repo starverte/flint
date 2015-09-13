@@ -5,6 +5,7 @@
  * @package Flint
  * @since 1.3.9.1
  */
+
 get_header();
 ?>
 
@@ -14,9 +15,9 @@ get_header();
         <div class="hidden-xs col-sm-2 col-md-2"></div>
         <article id="post-0" class="post error404 not-found col-xs-12 col-sm-8 col-md-8">
           <header class="entry-header">
-            <?php do_action('flint_open_entry_header_404'); ?>
+            <?php do_action( 'flint_open_entry_header_404' ); ?>
             <h1 class="entry-title"><?php _e( 'Are we missing something?', 'flint' ); ?></h1>
-            <?php do_action('flint_close_entry_header_404'); ?>
+            <?php do_action( 'flint_close_entry_header_404' ); ?>
           </header><!-- .entry-header -->
 
           <?php if ( is_search() ) : ?>
@@ -31,7 +32,7 @@ get_header();
 
             <?php the_widget( 'WP_Widget_Recent_Posts' ); ?>
 
-            <?php if ( flint_categorized_blog() ) : // Only show the widget if site has multiple categories. ?>
+            <?php if ( flint_categorized_blog() ) : ?>
             <div class="widget widget_categories">
               <h2 class="widgettitle"><?php _e( 'Most Used Categories', 'flint' ); ?></h2>
               <ul>

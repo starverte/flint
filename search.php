@@ -5,15 +5,16 @@
  * @package Flint
  * @since 1.4.0
  */
+
 get_header();
-flint_get_sidebar('header');
+flint_get_sidebar( 'header' );
 ?>
 
 <section id="primary" class="content-area container">
 
   <div class="row">
 
-      <?php flint_get_sidebar('left'); ?>
+      <?php flint_get_sidebar( 'left' ); ?>
 
       <div id="content" role="main" <?php flint_content_class(); ?>>
 
@@ -25,10 +26,16 @@ flint_get_sidebar('header');
 
       <?php while ( have_posts() ) : the_post(); ?>
 
-        <?php $type = get_post_type();
-          if ($type == 'post') { get_template_part( 'format', get_post_format()); }
-          elseif ($type == 'page') { get_template_part( 'templates/' . flint_get_template(), 'content' ); }
-          else { get_template_part( 'type', get_post_type() ); } ?>
+        <?php
+          $type = get_post_type();
+          if ( 'post' === $type ) {
+            get_template_part( 'format', get_post_format() );
+          } elseif ( 'page' === $type ) {
+            get_template_part( 'templates/' . flint_get_template(), 'content' );
+          } else {
+            get_template_part( 'type', get_post_type() );
+          }
+        ?>
 
       <?php endwhile; ?>
 
@@ -42,11 +49,11 @@ flint_get_sidebar('header');
 
     </div><!-- #content -->
 
-    <?php flint_get_sidebar('right'); ?>
+    <?php flint_get_sidebar( 'right' ); ?>
 
   </div><!-- .row -->
 
 </section><!-- #primary -->
 
-<?php flint_get_sidebar('footer'); ?>
+<?php flint_get_sidebar( 'footer' ); ?>
 <?php get_footer(); ?>

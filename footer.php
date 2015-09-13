@@ -7,6 +7,7 @@
  * @package Flint
  * @since 1.3.3
  */
+
 ?>
 
 <footer id="colophon" class="fill site-footer" role="contentinfo">

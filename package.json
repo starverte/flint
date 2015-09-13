@@ -1,0 +1,24 @@
+{
+  "name": "flint",
+  "version": "1.3.9",
+  "description": "A responsive, minimalist theme built on Twitter's Bootstrap 3 and based on Automattic's _s theme. Make it your own with a custom background, custom header, custom menus, custom colors and more.",
+  "main": "style.css",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/starverte/flint.git"
+  },
+  "author": "Star Verte LLC",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/starverte/flint/issues"
+  },
+  "homepage": "https://github.com/starverte/flint#readme",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-phpdocumentor": "^0.4.1",
+    "grunt-shell": "^1.1.2"
+  }
+}

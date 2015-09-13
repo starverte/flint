@@ -48,7 +48,7 @@ function flint_get_option_defaults() {
     'widget_areas_below'         => '1',
   );
 
-  return apply_filters('flint_option_defaults', $defaults);
+  return apply_filters( 'flint_option_defaults', $defaults );
 }
 
 /**
@@ -60,53 +60,52 @@ function flint_get_option_defaults() {
 function flint_get_options( $option = null ) {
   $defaults = flint_get_option_defaults();
 
-  $defaults['body_bg']    = get_theme_mod('background_color', $defaults['body_bg'   ]);
-  $defaults['fill_color'] = get_theme_mod('header_textcolor', $defaults['fill_color']);
+  $defaults['body_bg']    = get_theme_mod( 'background_color', $defaults['body_bg'] );
+  $defaults['fill_color'] = get_theme_mod( 'header_textcolor', $defaults['fill_color'] );
 
-  //BEGIN - backwards compatibility
-  $colors    = get_option( 'flint_colors'    );
-  $fonts     = get_option( 'flint_fonts'     );
-  $general   = get_option( 'flint_general'   );
-  $layout    = get_option( 'flint_layout'    );
+  // Backwards compatability begins here. Remove in 1.5+.
+  $colors    = get_option( 'flint_colors' );
+  $fonts     = get_option( 'flint_fonts' );
+  $general   = get_option( 'flint_general' );
+  $layout    = get_option( 'flint_layout' );
   $templates = get_option( 'flint_templates' );
-  $wa        = get_option( 'flint_wa'        );
+  $wa        = get_option( 'flint_wa' );
 
-  $defaults['fill']                 = !empty($colors['canvas'])                 ? $colors['canvas']                 : $defaults['fill'];
-  $defaults['link_color']           = !empty($colors['link'])                   ? $colors['link']                   : $defaults['link_color'];
+  $defaults['fill']                 = ! empty( $colors['canvas'] )                 ? $colors['canvas']                 : $defaults['fill'];
+  $defaults['link_color']           = ! empty( $colors['link'] )                   ? $colors['link']                   : $defaults['link_color'];
 
-  $defaults['font_family_base']     = !empty($fonts['body_font'])               ? $fonts['body_font']               : $defaults['font_family_base'];
-  $defaults['headings_font_family'] = !empty($fonts['heading_font'])            ? $fonts['heading_font']            : $defaults['headings_font_family'];
+  $defaults['font_family_base']     = ! empty( $fonts['body_font'] )               ? $fonts['body_font']               : $defaults['font_family_base'];
+  $defaults['headings_font_family'] = ! empty( $fonts['heading_font'] )            ? $fonts['heading_font']            : $defaults['headings_font_family'];
 
-  $defaults['org']                  = !empty($general['company'])               ? $general['company']               : $defaults['org'];
-  $defaults['org_address']          = !empty($general['address'])               ? $general['address']               : $defaults['org_address'];
-  $defaults['org_locality']         = !empty($general['locality'])              ? $general['locality']              : $defaults['org_locality'];
-  $defaults['org_postal_code']      = !empty($general['postal_code'])           ? $general['postal_code']           : $defaults['org_postal_code'];
-  $defaults['org_tel']              = !empty($general['tel'])                   ? $general['tel']                   : $defaults['org_tel'];
-  $defaults['org_fax']              = !empty($general['fax'])                   ? $general['fax']                   : $defaults['org_fax'];
-  $defaults['org_email']            = !empty($general['email'])                 ? $general['email']                 : $defaults['org_email'];
+  $defaults['org']                  = ! empty( $general['company'] )               ? $general['company']               : $defaults['org'];
+  $defaults['org_address']          = ! empty( $general['address'] )               ? $general['address']               : $defaults['org_address'];
+  $defaults['org_locality']         = ! empty( $general['locality'] )              ? $general['locality']              : $defaults['org_locality'];
+  $defaults['org_postal_code']      = ! empty( $general['postal_code'] )           ? $general['postal_code']           : $defaults['org_postal_code'];
+  $defaults['org_tel']              = ! empty( $general['tel'] )                   ? $general['tel']                   : $defaults['org_tel'];
+  $defaults['org_fax']              = ! empty( $general['fax'] )                   ? $general['fax']                   : $defaults['org_fax'];
+  $defaults['org_email']            = ! empty( $general['email'] )                 ? $general['email']                 : $defaults['org_email'];
 
-  $defaults['clear_nav']            = !empty($templates['clear_nav'])           ? $templates['clear_nav']           : $defaults['clear_nav'];
-  $defaults['clear_width']          = !empty($templates['clear_width'])         ? $templates['clear_width']         : $defaults['clear_width'];
+  $defaults['clear_nav']            = ! empty( $templates['clear_nav'] )           ? $templates['clear_nav']           : $defaults['clear_nav'];
+  $defaults['clear_width']          = ! empty( $templates['clear_width'] )         ? $templates['clear_width']         : $defaults['clear_width'];
 
-  $defaults['footer_content']       = !empty($general['text'])                  ? $general['text']                  : $defaults['footer_content'];
+  $defaults['footer_content']       = ! empty( $general['text'] )                  ? $general['text']                  : $defaults['footer_content'];
 
-  $defaults['page_featured_image']  = !empty($layout['pages_image'])            ? $layout['pages_image']            : $defaults['page_featured_image'];
-  $defaults['page_default_width']   = !empty($templates['default_width'])       ? $templates['default_width']       : $defaults['page_default_width'];
+  $defaults['page_featured_image']  = ! empty( $layout['pages_image'] )            ? $layout['pages_image']            : $defaults['page_featured_image'];
+  $defaults['page_default_width']   = ! empty( $templates['default_width'] )       ? $templates['default_width']       : $defaults['page_default_width'];
 
-  $defaults['post_featured_image']  = !empty($layout['posts_image'])            ? $layout['posts_image']            : $defaults['post_featured_image'];
-  $defaults['post_default_width']   = !empty($templates['default_post_width'])  ? $templates['default_post_width']  : $defaults['post_default_width'];
+  $defaults['post_featured_image']  = ! empty( $layout['posts_image'] )            ? $layout['posts_image']            : $defaults['post_featured_image'];
+  $defaults['post_default_width']   = ! empty( $templates['default_post_width'] )  ? $templates['default_post_width']  : $defaults['post_default_width'];
 
-  $defaults['minimal_nav']          = !empty($templates['minimal_nav'])         ? $templates['minimal_nav']         : $defaults['minimal_nav'];
-  $defaults['minimal_widget_area']  = !empty($templates['minimal_widget_area']) ? $templates['minimal_widget_area'] : $defaults['minimal_widget_area'];
-  $defaults['minimal_width']        = !empty($templates['minimal_width'])       ? $templates['minimal_width']       : $defaults['minimal_width'];
+  $defaults['minimal_nav']          = ! empty( $templates['minimal_nav'] )         ? $templates['minimal_nav']         : $defaults['minimal_nav'];
+  $defaults['minimal_widget_area']  = ! empty( $templates['minimal_widget_area'] ) ? $templates['minimal_widget_area'] : $defaults['minimal_widget_area'];
+  $defaults['minimal_width']        = ! empty( $templates['minimal_width'] )       ? $templates['minimal_width']       : $defaults['minimal_width'];
 
-  $defaults['widget_areas_above']   = !empty($wa['header'])                     ? $wa['header']                     : $defaults['widget_areas_above'];
-  $defaults['widget_areas_below']   = !empty($wa['footer'])                     ? $wa['footer']                     : $defaults['widget_areas_below'];
-  //END - backwards compatibility
-
+  $defaults['widget_areas_above']   = ! empty( $wa['header'] )                     ? $wa['header']                     : $defaults['widget_areas_above'];
+  $defaults['widget_areas_below']   = ! empty( $wa['footer'] )                     ? $wa['footer']                     : $defaults['widget_areas_below'];
+  // Backwards compatability ends here. Remove in 1.5+.
   $flint_options = wp_parse_args( get_option( 'flint_options' ), $defaults );
 
-  if (!empty($option)) {
+  if ( ! empty( $option ) ) {
     $search = array(
       'canvas-text',
       'canvas',
@@ -153,9 +152,8 @@ function flint_get_options( $option = null ) {
 
     $_option = str_replace( $search, $replace, $option );
 
-    return $flint_options[$_option];
-  }
-  else {
+    return $flint_options[ $_option ];
+  } else {
     return $flint_options;
   }
 }
@@ -166,11 +164,11 @@ function flint_get_options( $option = null ) {
 function flint_get_colors() {
   $options = flint_get_options();
   $calc = array(
-    'link_hover_color' => flint_darken($options['link_color'], 15),
-    'blockquote_border_color' => flint_lighten($options['fill'], 15),
-    'fill_darker' => flint_darken($options['fill'], 20),
-    'fill_light' => flint_lighten($options['fill'], 15),
-    'fill_link_color' => flint_darken($options['fill_color'], 15),
+    'link_hover_color' => flint_darken( $options['link_color'], 15 ),
+    'blockquote_border_color' => flint_lighten( $options['fill'], 15 ),
+    'fill_darker' => flint_darken( $options['fill'], 20 ),
+    'fill_light' => flint_lighten( $options['fill'], 15 ),
+    'fill_link_color' => flint_darken( $options['fill_color'], 15 ),
     'fill_link_hover_color' => $options['fill_color'],
   );
   return wp_parse_args( $options, $calc );
@@ -179,7 +177,7 @@ function flint_get_colors() {
 /**
  * Get address from options
  *
- * @param bool $schema If true, return address with schema.org microdata
+ * @param bool  $schema If true, return address with schema.org microdata
  * @param array $args Array of address return arguments
  *
  * @return string The address, as filtered
@@ -211,7 +209,7 @@ function flint_get_address( $schema = true, $args = array() ) {
     'close'  => '',
   );
 
-  $args = $schema == true ? wp_parse_args( $args, $defaults ) : wp_parse_args( $args, $alts );
+  $args = true === $schema ? wp_parse_args( $args, $defaults ) : wp_parse_args( $args, $alts );
   $output = $args['open'] . $args['before'] . $args['item1'] . $args['sep1'] . $args['item2'] . $args['sep2'] . $args['item3'] . $args['after'] . $args['close'];
   echo $output;
 }

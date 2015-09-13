@@ -7,6 +7,7 @@
  * @package Flint
  * @since 1.3.3
  */
+
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 9]><html <?php language_attributes(); ?> class="ie"><![endif]-->
@@ -21,6 +22,6 @@
   <?php flint_options_css(); ?>
 </head>
 <body <?php flint_body_class(); ?>>
-  <?php do_action('flint_open'); ?>
+  <?php do_action( 'flint_open' ); ?>
   <div id="page" class="hfeed site">
     <?php do_action( 'before' ); ?>

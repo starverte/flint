@@ -23,17 +23,18 @@
  */
 function flint_deprecated_function( $function, $version, $replacement = null ) {
 
-	/**
-	 * Filter whether to trigger an error for deprecated functions.
-	 *
-	 * @param bool $trigger Whether to trigger the error for deprecated functions. Default true.
-	 */
-	if ( WP_DEBUG && apply_filters( 'deprecated_function_trigger_error', true ) ) {
-    if ( ! is_null( $replacement ) )
-      trigger_error( sprintf( __('%1$s is <strong>deprecated</strong> since Flint version %2$s! Use %3$s instead.', 'flint'), $function, $version, $replacement ) );
-    else
-      trigger_error( sprintf( __('%1$s is <strong>deprecated</strong> since Flint version %2$s with no alternative available.', 'flint'), $function, $version ) );
-	}
+  /**
+   * Filter whether to trigger an error for deprecated functions.
+   *
+   * @param bool $trigger Whether to trigger the error for deprecated functions. Default true.
+   */
+  if ( WP_DEBUG && apply_filters( 'deprecated_function_trigger_error', true ) ) {
+    if ( ! is_null( $replacement ) ) {
+      trigger_error( sprintf( __( '%1$s is <strong>deprecated</strong> since Flint version %2$s! Use %3$s instead.', 'flint' ), $function, $version, $replacement ) );
+    } else {
+      trigger_error( sprintf( __( '%1$s is <strong>deprecated</strong> since Flint version %2$s with no alternative available.', 'flint' ), $function, $version ) );
+    }
+  }
 }
 
 /**
@@ -44,16 +45,30 @@ function flint_deprecated_function( $function, $version, $replacement = null ) {
 function flint_post_thumbnail( $type = 'post', $loc = 'single' ) {
   flint_deprecated_function( __FUNCTION__, '1.3.9', 'flint_the_post_thumbnail()' );
   $layout = flint_get_options();
-  $posts_image = !empty($layout['posts_image']) ? $layout['posts_image'] : 'always';
-  $pages_image = !empty($layout['pages_image']) ? $layout['pages_image'] : 'always';
-  switch ($type) {
+  $posts_image = ! empty( $layout['posts_image'] ) ? $layout['posts_image'] : 'always';
+  $pages_image = ! empty( $layout['pages_image'] ) ? $layout['pages_image'] : 'always';
+  switch ( $type ) {
     case 'post':
-      if ($posts_image == 'always') {if (has_post_thumbnail()) { the_post_thumbnail(); }}
-      elseif ($posts_image == 'archives' && $loc == 'archive') {if (has_post_thumbnail()) { the_post_thumbnail(); }}
+      if ( 'always' === $posts_image ) {
+        if ( has_post_thumbnail() ) {
+          the_post_thumbnail();
+        }
+      } elseif ( 'archives' === $posts_image && 'archive' === $loc ) {
+        if ( has_post_thumbnail() ) {
+          the_post_thumbnail();
+        }
+      }
       break;
     case 'page':
-      if ($pages_image == 'always') {if (has_post_thumbnail()) { the_post_thumbnail(); }}
-      elseif ($pages_image == 'archives' && $loc == 'archive') {if (has_post_thumbnail()) { the_post_thumbnail(); }}
+      if ( 'always' === $pages_image ) {
+        if ( has_post_thumbnail() ) {
+          the_post_thumbnail();
+        }
+      } elseif ( 'archives' === $pages_image && 'archive' === $loc ) {
+        if ( has_post_thumbnail() ) {
+          the_post_thumbnail();
+        }
+      }
       break;
   }
 }
