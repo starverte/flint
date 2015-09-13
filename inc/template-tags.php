@@ -901,74 +901,12 @@ function flint_options_css() {
 }
 
 /**
- * Returns slug or class for #primary based on theme options
- */
-function flint_get_template( $output = 'slug', $template = '', $a = false ) {
-  $options = flint_get_options();
-  $file    = get_post_meta( get_the_ID(), '_wp_page_template', true );
-
-  if ( ! empty( $template ) && true !== $a ) {
-    trigger_error( '$template variable in flint_get_template() is deprecated as of Flint 1.2.1. Use get_template() to get a particular file.' );
-    unset( $t );
-  }
-
-  if ( 'templates/clear.php' === $file ) {
-    $slug = $options['clear_width'];
-  } elseif ( 'templates/minimal.php' === $file ) {
-    if ( flint_is_active_sidebar( 'left' ) || flint_is_active_sidebar( 'right' ) ) {
-      $slug = 'wide';
-    } else {
-      $slug = $options['minimal_width'];
-    }
-  } else {
-    if ( is_active_sidebar( 'left' ) || is_active_sidebar( 'right' ) ) {
-      $slug = 'wide';
-    } else {
-      $slug = $options['page_default_width'];
-    }
-  }
-
-  switch ( $output ) {
-    case 'slug':
-      return $slug;
-      break;
-    case 'content':
-      switch ( $slug ) {
-        case 'slim':
-          echo 'col-xs-12 col-sm-8 col-md-4';
-          break;
-        case 'narrow':
-          echo 'col-xs-12 col-sm-8 col-md-6';
-          break;
-        case 'full':
-          echo 'col-xs-12 col-sm-10 col-md-8';
-          break;
-        case 'wide':
-          echo 'col-xs-12';
-          break;
-      }
-      break;
-    case 'margins':
-      switch ( $slug ) {
-        case 'slim':
-          echo '<div class="hidden-xs col-sm-2 col-md-4"></div>';
-          break;
-        case 'narrow':
-          echo '<div class="hidden-xs col-sm-2 col-md-3"></div>';
-          break;
-        case 'full':
-          echo '<div class="hidden-xs col-sm-1 col-md-2"></div>';
-          break;
-        case 'wide':
-          break;
-      }
-      break;
-  }
-
-}
-
-/**
  * Returns slug or class for .widgets.widgets-footer based on theme options
+ *
+ * @uses flint_get_options()
+ * @uses flint_get_template()
+ *
+ * @param string $output
  */
 function flint_get_sidebar_template( $output, $widget_area = 'footer' ) {
   $options = flint_get_options();
@@ -1021,7 +959,13 @@ function flint_body_class() {
 }
 
 /**
- * Gets the featured image for a post or page if not specified otherwise in theme options
+ * Display the post thumbnail unless specified otherwise in theme options.
+ *
+ * @see the_post_thumbnail()
+ *
+ * @param string|array $size Optional. Registered image size to use, or flat array of height
+ *                           and width values. Default 'post-thumbnail'.
+ * @param string|array $attr Optional. Query string or array of attributes. Default empty.
  */
 function flint_the_post_thumbnail( $size = 'post-thumbnail', $attr = '' ) {
   $layout = flint_get_options();
@@ -1060,8 +1004,17 @@ function flint_the_post_thumbnail( $size = 'post-thumbnail', $attr = '' ) {
 }
 
 /**
- * Similar to WordPress has_category()
- * Ignores "Uncategorized"
+ * Check if the current post has any of given category.
+ *
+ * If not category specified, checks if the current post has any category other than 'Uncategorized'.
+ *
+ * @see has_category()
+ *
+ * @param string|int|array $category Optional. The category name/term_id/slug or array of them to check for.
+ * @param int|object $post Optional. Post to check instead of the current post.
+ * @return bool True if the current post has any of the given categories (or any category, if no category specified).
+ *
+ * @todo Replace 'Uncategorized' with default post category
  */
 function flint_has_category( $category = '', $post = null ) {
   if ( has_term( $category, 'category', $post ) ) {
@@ -1315,6 +1268,11 @@ function flint_get_spacer( $side ) {
   }
 }
 
+/**
+ * Navigation fallback
+ *
+ * If the menu doesn't exist, display search instead.
+ */
 function flint_nav_fallback() {
   ?>
   <form method="get" class="navbar-form navbar-right" action="<?php echo esc_url( home_url( '/' ) ); ?>" role="search">
@@ -1324,3 +1282,105 @@ function flint_nav_fallback() {
   </form> <?php
 }
 
+/**
+ * Return page template
+ */
+function flint_get_page_template() {
+  $options = flint_get_options();
+  $file    = get_post_meta( get_the_ID(), '_wp_page_template', true );
+
+  if ( 'templates/clear.php' === $file ) {
+    $template = $options['clear_width'];
+  } elseif ( 'templates/minimal.php' === $file ) {
+    if ( flint_is_active_sidebar( 'left' ) || flint_is_active_sidebar( 'right' ) ) {
+      $template = 'wide';
+    } else {
+      $template = $options['minimal_width'];
+    }
+  } else {
+    if ( is_active_sidebar( 'left' ) || is_active_sidebar( 'right' ) ) {
+      $template = 'wide';
+    } else {
+      $template = $options['page_default_width'];
+    }
+  }
+
+  return $template;
+}
+
+/**
+ * Return comments class
+ */
+function flint_comments_class() {
+  $options = flint_get_options();
+  $file    = get_post_meta( get_the_ID(), '_wp_page_template', true );
+
+  if ( 'templates/clear.php' === $file ) {
+    $template = $options['clear_width'];
+  } elseif ( 'templates/minimal.php' === $file ) {
+    if ( flint_is_active_sidebar( 'left' ) || flint_is_active_sidebar( 'right' ) ) {
+      $template = 'wide';
+    } else {
+      $template = $options['minimal_width'];
+    }
+  } else {
+    if ( is_active_sidebar( 'left' ) || is_active_sidebar( 'right' ) ) {
+      $template = 'wide';
+    } else {
+      $template = $options['page_default_width'];
+    }
+  }
+
+  switch ( $template ) {
+    case 'slim':
+      return 'col-xs-12 col-sm-8 col-md-4';
+      break;
+    case 'narrow':
+      return 'col-xs-12 col-sm-8 col-md-6';
+      break;
+    case 'full':
+      return 'col-xs-12 col-sm-10 col-md-8';
+      break;
+    case 'wide':
+      return 'col-xs-12';
+      break;
+  }
+}
+
+/**
+ * Return content margin element
+ */
+function flint_content_margin() {
+  $options = flint_get_options();
+  $file    = get_post_meta( get_the_ID(), '_wp_page_template', true );
+
+  if ( 'templates/clear.php' === $file ) {
+    $template = $options['clear_width'];
+  } elseif ( 'templates/minimal.php' === $file ) {
+    if ( flint_is_active_sidebar( 'left' ) || flint_is_active_sidebar( 'right' ) ) {
+      $template = 'wide';
+    } else {
+      $template = $options['minimal_width'];
+    }
+  } else {
+    if ( is_active_sidebar( 'left' ) || is_active_sidebar( 'right' ) ) {
+      $template = 'wide';
+    } else {
+      $template = $options['page_default_width'];
+    }
+  }
+
+  switch ( $template ) {
+    case 'slim':
+      return '<div class="hidden-xs col-sm-2 col-md-4"></div>';
+      break;
+    case 'narrow':
+      return '<div class="hidden-xs col-sm-2 col-md-3"></div>';
+      break;
+    case 'full':
+      return '<div class="hidden-xs col-sm-1 col-md-2"></div>';
+      break;
+    case 'wide':
+      break;
+  }
+}

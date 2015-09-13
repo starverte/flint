@@ -38,6 +38,30 @@ function flint_deprecated_function( $function, $version, $replacement = null ) {
 }
 
 /**
+ * Mark a parameter as deprecated and inform when it has been used.
+ *
+ * @param string $function    The function that was called.
+ * @param string $parameter   The parameter that was defined.
+ * @param string $version     The version of Flint that deprecated the parameter.
+ * @param string $replacement Optional. The function or parameter that should have been called or defined. Default null.
+ */
+function flint_deprecated_parameter( $function, $version, $replacement = null ) {
+
+  /**
+   * Filter whether to trigger an error for deprecated functions.
+   *
+   * @param bool $trigger Whether to trigger the error for deprecated functions. Default true.
+   */
+  if ( WP_DEBUG && apply_filters( 'deprecated_function_trigger_error', true ) ) {
+    if ( ! is_null( $replacement ) ) {
+      trigger_error( sprintf( __( 'The parameter %2$s in %1$s is <strong>deprecated</strong> since Flint version %3$s! Use %4$s instead.', 'flint' ), $function, $parameter, $version, $replacement ) );
+    } else {
+      trigger_error( sprintf( __( 'The parameter %2$s in %1$s is <strong>deprecated</strong> since Flint version %3$s with no alternative available.', 'flint' ), $function, $parameter, $version ) );
+    }
+  }
+}
+
+/**
  * Gets the featured image for a post or page if not specified otherwise in theme options
  *
  * @deprecated 1.3.9 Use flint_the_post_thumbnail
@@ -86,7 +110,7 @@ function flint_post_thumbnail( $type = 'post', $loc = 'single' ) {
  */
 function flint_reply_link( $args = array(), $comment = null, $post = null ) {
   flint_deprecated_function( __FUNCTION__, '1.4.0', 'flint_comment_reply_link()' );
-  flint_get_comment_reply_link( $args, $comment, $post );
+  return flint_get_comment_reply_link( $args, $comment, $post );
 }
 
 /**
@@ -102,7 +126,7 @@ function flint_reply_link( $args = array(), $comment = null, $post = null ) {
  */
 function get_flint_reply_link( $args = array(), $comment = null, $post = null ) {
   flint_deprecated_function( __FUNCTION__, '1.4.0', 'flint_get_comment_reply_link()' );
-  flint_get_comment_reply_link( $args, $comment, $post );
+  return flint_get_comment_reply_link( $args, $comment, $post );
 }
 
 /**
@@ -118,7 +142,7 @@ function get_flint_reply_link( $args = array(), $comment = null, $post = null ) 
  */
 function flint_get_widgets( $slug, $minimal = false ) {
   flint_deprecated_function( __FUNCTION__, '1.4.0', 'flint_get_sidebar()' );
-  flint_get_sidebar( $slug, $minimal );
+  return flint_get_sidebar( $slug, $minimal );
 }
 
 /**
@@ -128,7 +152,7 @@ function flint_get_widgets( $slug, $minimal = false ) {
  */
 function flint_get_widgets_template( $output, $widget_area = 'footer' ) {
   flint_deprecated_function( __FUNCTION__, '1.4.0', 'flint_get_sidebar_template()' );
-  flint_get_sidebar( $output, $widget_area );
+  return flint_get_sidebar( $output, $widget_area );
 }
 
 /**
@@ -144,5 +168,42 @@ function flint_get_widgets_template( $output, $widget_area = 'footer' ) {
  */
 function flint_is_active_widgets( $slug ) {
   flint_deprecated_function( __FUNCTION__, '1.4.0', 'flint_is_active_sidebar()' );
-  flint_get_sidebar( $slug );
+  return flint_get_sidebar( $slug );
+}
+
+/**
+ * Return various template-related items.
+ *
+ * Replaced by different task-specific functions.
+ *
+ * @deprecated 1.5.0 Use flint_get_page_template() to return page template slug.
+ *                   Use flint_comments_class() to return comments class.
+ *                   Use flint_content_margin() to return content margin.
+ *
+ * @param string $output   The format of the returned value.
+ * @param string $template Deprecated. The page template to use.
+ * @param bool   $a        Deprecated. Default false.
+ */
+function flint_get_template( $output = 'slug', $template = '', $a = false ) {
+  if ( ! empty( $template ) ) {
+    flint_deprecated_parameter( __FUNCTION__, '$template', '1.2.1', 'get_template()' );
+    return;
+  } else {
+    switch ( $output ) {
+      case 'slug':
+        flint_deprecated_function( __FUNCTION__, '1.5.0', 'flint_get_page_template()' );
+        return flint_get_page_template();
+        break;
+      case 'content':
+        flint_deprecated_function( __FUNCTION__, '1.5.0', 'flint_comments_class()' );
+        echo flint_comments_class();
+        return;
+        break;
+      case 'margins':
+        flint_deprecated_function( __FUNCTION__, '1.5.0', 'flint_content_margin()' );
+        echo flint_content_margin();
+        return;
+        break;
+    }
+  }
 }
