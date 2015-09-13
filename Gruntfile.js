@@ -6,7 +6,7 @@ module.exports = function(grunt) {
         command: 'rm -rfv tests'
       },
       syntax_clone: {
-        command: 'git clone https://gist.github.com/e2ab7e46b53e8882ba8e.git tests'
+        command: 'git clone https://gist.github.com/e2ab7e46b53e8882ba8e.git tests && rm -rfv tests/.git*'
       },
       phpcs_clone: {
         command: 'git clone https://github.com/squizlabs/PHP_CodeSniffer.git tests/php-codesniffer'
