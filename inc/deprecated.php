@@ -45,7 +45,7 @@ function flint_deprecated_function( $function, $version, $replacement = null ) {
  * @param string $version     The version of Flint that deprecated the parameter.
  * @param string $replacement Optional. The function or parameter that should have been called or defined. Default null.
  */
-function flint_deprecated_parameter( $function, $version, $replacement = null ) {
+function flint_deprecated_parameter( $function, $parameter, $version, $replacement = null ) {
 
   /**
    * Filter whether to trigger an error for deprecated functions.
