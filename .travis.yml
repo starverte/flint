@@ -1,8 +1,8 @@
-# Travis CI (MIT License) configuration file for the Underscores WordPress theme.
+# Travis CI (MIT License) configuration file for the Flint WordPress theme.
 # @link https://travis-ci.org/
 
-# For use with the Underscores WordPress theme.
-# @link https://github.com/Automattic/_s
+# For use with the Flint WordPress theme.
+# @link https://github.com/starverte/flint
 
 # Declare project language.
 # @link http://about.travis-ci.org/docs/user/languages/php/
@@ -10,14 +10,10 @@ language: php
 
 # Declare versions of PHP to use. Use one decimal max.
 php:
+  # aliased to a recent 5.6.x version
+  - "5.6"
   # aliased to a recent 5.5.x version
   - "5.5"
-  # aliased to a recent 5.4.x version
-  - "5.4"
-  # aliased to a recent 5.3.x version
-  - "5.3"
-  # Current $required_php_version for WordPress: 5.2.4
-  - "5.2"
 
 # Declare which versions of WordPress to test against.
 # Also declare whether or not to test in Multisite.
@@ -34,16 +30,31 @@ env:
   # @link https://github.com/WordPress/WordPress/tree/4.1-branch
   - WP_VERSION=4.1 WP_MULTISITE=0
   - WP_VERSION=4.1 WP_MULTISITE=1
+  # WordPress 4.0
+  # @link https://github.com/WordPress/WordPress/tree/4.0-branch
+  - WP_VERSION=3.7 WP_MULTISITE=0
+  # WordPress 3.9
+  # @link https://github.com/WordPress/WordPress/tree/3.9-branch
+  - WP_VERSION=3.9 WP_MULTISITE=0
+  # WordPress 3.8
+  # @link https://github.com/WordPress/WordPress/tree/3.8-branch
+  - WP_VERSION=3.8 WP_MULTISITE=0
+  # WordPress 3.7
+  # @link https://github.com/WordPress/WordPress/tree/3.7-branch
+  - WP_VERSION=3.7 WP_MULTISITE=0
+  # WordPress 3.6
+  # @link https://github.com/WordPress/WordPress/tree/3.6-branch
+  - WP_VERSION=3.6 WP_MULTISITE=0
 
-# Declare 5.6 beta in test matrix.
+# Declare 7.0 beta in test matrix.
 # @link https://buddypress.trac.wordpress.org/ticket/5620
 # @link http://docs.travis-ci.com/user/build-configuration/
 matrix:
   include:
-    - php: 5.6
+    - php: 7.0
       env: WP_VERSION=master
   allow_failures:
-    - php: 5.6
+    - php: 7.0
   fast_finish: true
 
 # Use this to prepare the system to install prerequisites or dependencies.
