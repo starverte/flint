@@ -98,7 +98,7 @@ function flint_comment( $comment, $args, $depth ) {
       </div>
       <div class="media-body col-xs-5 col-sm-7">
         <h4 class="media-heading"><?php printf( __( '%s <span class="says">says:</span>', 'flint' ), sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?></h4>
-        <?php if ( $comment->comment_approved == '0' ) : ?>
+        <?php if ( '0' === $comment->comment_approved ) : ?>
         <em><?php _e( 'Your comment is awaiting moderation.', 'flint' ); ?></em>
         <br>
         <?php endif; ?>
@@ -185,8 +185,7 @@ function flint_posted_in() {
     </span><!-- .cat-links -->
 
     <?php }
- //endif flint_has_category()
-
+ // endif flint_has_category()
   if ( has_tag() ) {
 
     if ( flint_has_category() ) {
@@ -202,7 +201,7 @@ $output .= '<a class="label label-info" href="'.get_tag_link( $tag->term_id ).'"
     </span><!-- .tags-links --><?php
 
   }
- //endif has_tag()
+ // endif has_tag()
 }
 endif;
 
@@ -222,8 +221,7 @@ function flint_categorized_blog() {
 
   if ( '1' != $all_the_cool_cats ) {
     return true;
-  }
- else {
+  } else {
     return false;
   }
 }
@@ -253,10 +251,10 @@ function flint_link_pages( $args = '' ) {
     'link_before'      => '',
     'link_after'       => '',
     'next_or_number'   => 'number',
-    'nextpagelink'     => __('Next page', 'flint'),
-    'previouspagelink' => __('Previous page', 'flint'),
+    'nextpagelink'     => __( 'Next page', 'flint' ),
+    'previouspagelink' => __( 'Previous page', 'flint' ),
     'pagelink'         => '%',
-    'echo'             => 1
+    'echo'             => 1,
   );
   $r = wp_parse_args( $args, $defaults );
   $r = apply_filters( 'wp_link_pages_args', $r );
@@ -264,15 +262,14 @@ function flint_link_pages( $args = '' ) {
   global $page, $numpages, $multipage, $more, $pagenow;
   $output = '';
   if ( $multipage ) {
-    if ( 'number' == $next_or_number ) {
+    if ( 'number' === $next_or_number ) {
       $output .= $before;
-      for ( $i = 1; $i < ($numpages+1); $i = $i + 1 ) {
-        $j = str_replace('%',$i,$pagelink);
+      for ( $i = 1; $i < ( $numpages + 1 ); $i = $i + 1 ) {
+        $j = str_replace( '%', $i, $pagelink );
         $output .= ' ';
-        if ( ($i != $page) || ((!$more) && ($page==1)) ) {
-          $output .= flint_link_page($i);
-        }
-        else {
+        if ( ( $i != $page ) || (( ! $more) && ( 1 === $page )) ) {
+          $output .= flint_link_page( $i );
+        } else {
           $output .= '<li class="active"><a>';
         }
         $output .= $link_before . $j . $link_after . '</a></li>';
@@ -283,21 +280,24 @@ function flint_link_pages( $args = '' ) {
         $output .= $before;
         $i = $page - 1;
         if ( $i && $more ) {
-          $output .= _wp_link_page($i);
+          $output .= _wp_link_page( $i );
           $output .= $link_before. $previouspagelink . $link_after . '</a>';
         }
         $i = $page + 1;
         if ( $i <= $numpages && $more ) {
-          $output .= _wp_link_page($i);
+          $output .= _wp_link_page( $i );
           $output .= $link_before. $nextpagelink . $link_after . '</a>';
         }
         $output .= $after;
       }
     }
   }
-  if ( $echo )
+  if ( $echo ) {
     echo $output;
-  return $output;
+  }
+  else {
+    return $output;
+  }
 }
 
 /**
@@ -310,13 +310,11 @@ function flint_link_page( $i ) {
   global $wp_rewrite;
   $post = get_post();
 
-  if ( 1 == $i ) {
+  if ( 1 === $i ) {
     $url = get_permalink();
-  }
- else {
-    if ( '' == get_option( 'permalink_structure' ) || in_array( $post->post_status, array( 'draft', 'pending' ) ) ) {
-      $url = add_query_arg( 'page', $i, get_permalink() ); }
- elseif ( 'page' == get_option( 'show_on_front' ) && get_option( 'page_on_front' ) == $post->ID )
+  } else {
+    if ( '' === get_option( 'permalink_structure' ) || in_array( $post->post_status, array( 'draft', 'pending' ) ) ) {
+      $url = add_query_arg( 'page', $i, get_permalink() ); } elseif ( 'page' === get_option( 'show_on_front' ) && get_option( 'page_on_front' ) === $post->ID )
       $url = trailingslashit( get_permalink() ) . user_trailingslashit( "$wp_rewrite->pagination_base/" . $i, 'single_paged' );
     else {
       $url = trailingslashit( get_permalink() ) . user_trailingslashit( $i, 'single_paged' ); }
@@ -390,8 +388,7 @@ function flint_get_the_content( $more_link_text = 'Read more', $strip_teaser = f
       $more_link_text = strip_tags( wp_kses_no_null( trim( $matches[1] ) ) ); }
 
     $hasTeaser = true;
-  }
- else {
+  } else {
     $content = array( $content );
   }
   if ( ( false !== strpos( $post->post_content, '<! --noteaser-->' ) && ( ( ! $multipage ) || ( 1 === $page ) ) ) ) {
@@ -403,8 +400,7 @@ function flint_get_the_content( $more_link_text = 'Read more', $strip_teaser = f
   if ( count( $content ) > 1 ) {
     if ( $more ) {
       $output .= '<span id="more-' . $post->ID . '"></span>' . $content[1];
-    }
- else {
+    } else {
       if ( ! empty( $more_link_text ) ) {
         $output .= apply_filters( 'the_content_more_link', $args['more_before'] . get_permalink() . "#more-{
 $post->ID}
@@ -452,9 +448,9 @@ function flint_comment_form( $args = array(), $post_id = null ) {
 
   if ( null === $post_id ) {
     $post_id = $id;
-}
- else {
-    $id = $post_id; }
+  } else {
+    $id = $post_id;
+  }
 
   $commenter = wp_get_current_commenter();
   $user = wp_get_current_user();
@@ -508,9 +504,7 @@ function flint_comment_form( $args = array(), $post_id = null ) {
             <?php
               do_action( 'comment_form_before_fields' );
               foreach ( (array) $args['fields'] as $name => $field ) {
-                echo apply_filters( "comment_form_field_{
-$name}
-", $field ) . "\n";
+                echo apply_filters( "comment_form_field_{$name}", $field ) . "\n";
               }
               do_action( 'comment_form_after_fields' );
               ?>
@@ -539,109 +533,104 @@ $name}
  */
 function flint_avatar( $id_or_email, $size = '96', $default = '', $alt = false ) {
   if ( ! get_option( 'show_avatars' ) ) {
-    return false; }
+    return false;
+  }
 
   if ( false === $alt ) {
     $safe_alt = '';
-}
- else {
-    $safe_alt = esc_attr( $alt ); }
+  } else {
+    $safe_alt = esc_attr( $alt );
+  }
 
   if ( ! is_numeric( $size ) ) {
-    $size = '96'; }
+    $size = '96';
+  }
 
   $email = '';
+
   if ( is_numeric( $id_or_email ) ) {
     $id = (int) $id_or_email;
     $user = get_userdata( $id );
+
     if ( $user ) {
-      $email = $user->user_email; }
-  }
- elseif ( is_object( $id_or_email ) ) {
+      $email = $user->user_email;
+    }
+  } elseif ( is_object( $id_or_email ) ) {
     $allowed_comment_types = apply_filters( 'get_avatar_comment_types', array( 'comment' ) );
+
     if ( ! empty( $id_or_email->comment_type ) && ! in_array( $id_or_email->comment_type, (array) $allowed_comment_types ) ) {
-      return false; }
+      return false;
+    }
 
     if ( ! empty( $id_or_email->user_id ) ) {
       $id = (int) $id_or_email->user_id;
       $user = get_userdata( $id );
+
       if ( $user ) {
-        $email = $user->user_email; }
-    }
- elseif ( ! empty( $id_or_email->comment_author_email ) ) {
+        $email = $user->user_email;
+      }
+    } elseif ( ! empty( $id_or_email->comment_author_email ) ) {
       $email = $id_or_email->comment_author_email;
     }
-  }
- else {
+  } else {
     $email = $id_or_email;
   }
 
   if ( empty( $default ) ) {
     $avatar_default = get_option( 'avatar_default' );
+
     if ( empty( $avatar_default ) ) {
       $default = 'mystery';
-}
- else {
-      $default = $avatar_default; }
+    } else {
+      $default = $avatar_default;
+    }
   }
 
   if ( ! empty( $email ) ) {
-    $email_hash = md5( strtolower( trim( $email ) ) ); }
+    $email_hash = md5( strtolower( trim( $email ) ) );
+  }
 
   if ( is_ssl() ) {
     $host = 'https://secure.gravatar.com';
-  }
- else {
+  } else {
     if ( ! empty( $email ) ) {
       $host = sprintf( 'http://%d.gravatar.com', ( hexdec( $email_hash[0] ) % 2 ) );
-}
- else {
-      $host = 'http://0.gravatar.com'; }
+    } else {
+      $host = 'http://0.gravatar.com';
+    }
   }
 
-  if ( 'mystery' == $default ) {
+  if ( 'mystery' === $default ) {
     $default = "$host/avatar/ad516503a11cd5ca435acc9bb6523536?s={$size}";
-}
- elseif ( 'blank' == $default )
+  } elseif ( 'blank' === $default ) {
     $default = $email ? 'blank' : includes_url( 'images/blank.gif' );
-  elseif ( ! empty( $email ) && 'gravatar_default' == $default )
+  }
+  elseif ( ! empty( $email ) && 'gravatar_default' === $default ) {
     $default = '';
-  elseif ( 'gravatar_default' == $default )
-    $default = "$host/avatar/?s={
-$size}
-";
-  elseif ( empty( $email ) )
-    $default = "$host/avatar/?d=$default&amp;s={
-$size}
-";
-  elseif ( strpos( $default, 'http://' ) === 0 )
+  }
+  elseif ( 'gravatar_default' === $default ) {
+    $default = "$host/avatar/?s={$size}";
+  }
+  elseif ( empty( $email ) ) {
+    $default = "$host/avatar/?d=$default&amp;s={$size}";
+  }
+  elseif ( strpos( $default, 'http://' ) === 0 ) {
     $default = add_query_arg( 's', $size, $default );
+  }
 
   if ( ! empty( $email ) ) {
     $out = "$host/avatar/";
     $out .= $email_hash;
     $out .= '?s='.$size;
     $out .= '&amp;d=' . urlencode( $default );
-
     $rating = get_option( 'avatar_rating' );
-    if ( ! empty( $rating ) ) {
-      $out .= "&amp;r={
-$rating}
-"; }
 
-    $avatar = "<img alt='{
-$safe_alt}
-' src='{
-$out}
-' class='avatar avatar-{
-$size}
- media-object' height='{
-$size}
-' width='{
-$size}
-' />";
-  }
- else {
+    if ( ! empty( $rating ) ) {
+      $out .= "&amp;r={$rating}";
+    }
+
+    $avatar = "<img alt='{$safe_alt}' src='{$out}' class='avatar avatar-{$size} media-object' height='{$size}' width='{$size}' />";
+  } else {
     $avatar = "<img alt='{$safe_alt}' src='{$default}' class='avatar avatar-{$size} media-object avatar-default' height='{$size}' width='{$size}' />";
   }
 
@@ -659,40 +648,43 @@ $size}
  */
 function flint_get_comment_reply_link( $args = array(), $comment = null, $post = null ) {
   global $user_ID;
-
   $defaults = array(
-'add_below' => 'comment',
-'respond_id' => 'respond',
-'reply_text' => __( 'Reply', 'flint' ),
+    'add_below' => 'comment',
+    'respond_id' => 'respond',
+    'reply_text' => __( 'Reply', 'flint' ),
     'login_text' => __( 'Log in to Reply', 'flint' ),
-'depth' => 0,
-'before' => '',
-'after' => '',
-);
+    'depth' => 0,
+    'before' => '',
+    'after' => '',
+  );
 
   $args = wp_parse_args( $args, $defaults );
 
-  if ( 0 == $args['depth'] || $args['max_depth'] <= $args['depth'] ) {
-    return; }
+  if ( 0 === $args['depth'] || $args['max_depth'] <= $args['depth'] ) {
+    return;
+  }
 
   extract( $args, EXTR_SKIP );
-
   $comment = get_comment( $comment );
+
   if ( empty( $post ) ) {
     $post = $comment->comment_post_ID;
-    }
+  }
+
   $post = get_post( $post );
 
   if ( ! comments_open( $post->ID ) ) {
-    return false; }
+    return false;
+  }
 
   $link = '';
 
   if ( get_option( 'comment_registration' ) && ! $user_ID ) {
     $link = '<a rel="nofollow" class="comment-reply-login btn btn-primary btn-sm" href="' . esc_url( wp_login_url( get_permalink() ) ) . '">' . $login_text . '</a>';
-}
- else {
-    $link = "<a class='comment-reply-link btn btn-primary btn-sm' href='" . esc_url( add_query_arg( 'replytocom', $comment->comment_ID ) ) . '#' . $respond_id . "' onclick='return addComment.moveForm(\"$add_below-$comment->comment_ID\", \"$comment->comment_ID\", \"$respond_id\", \"$post->ID\")'>$reply_text</a>"; }
+  } else {
+    $link = "<a class='comment-reply-link btn btn-primary btn-sm' href='" . esc_url( add_query_arg( 'replytocom', $comment->comment_ID ) ) . '#' . $respond_id . "' onclick='return addComment.moveForm(\"$add_below-$comment->comment_ID\", \"$comment->comment_ID\", \"$respond_id\", \"$post->ID\")'>$reply_text</a>";
+  }
+
   return apply_filters( 'comment_reply_link', $before . $link . $after, $args, $comment, $post );
 }
 
@@ -723,7 +715,7 @@ function flint_get_sidebar( $slug, $minimal = false ) {
 
   switch ( $minimal ) {
     case true:
-      if ( $slug == $options['minimal_widget_area'] ) {
+      if ( $slug === $options['minimal_widget_area'] ) {
 flint_get_sidebar( $slug, false ); }
       break;
     case false:
@@ -751,7 +743,7 @@ $slug}
 function flint_is_active_sidebar( $slug ) {
   $options = flint_get_options();
 
-  if ( $slug == $options['minimal_widget_area'] && is_active_sidebar( $slug ) ) :
+  if ( $slug === $options['minimal_widget_area'] && is_active_sidebar( $slug ) ) :
     return true;
   else :
     return false;
@@ -909,8 +901,7 @@ function flint_options_css() {
   echo '.fill a:hover, .fill-light a:hover { color: ' . $colors['fill_color'] . '; }';
   echo '.site-branding a, .site-branding a:hover { color: ' . $colors['fill_color'] . '; }';
   echo '.navbar-inverse .navbar-nav > .dropdown > a .caret { border-top-color: ' . $colors['fill_link_color'] . '; border-bottom-color: ' . $colors['fill_link_color'] . '; }';
-  echo '.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus { color: ' . $colors['fill_color'] . '; background-color: ' . $colors['fill_darker'] . ';
-}';
+  echo '.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus { color: ' . $colors['fill_color'] . '; background-color: ' . $colors['fill_darker'] . '; }';
   echo '.navbar-brand { color: ' . $colors['fill_color'] . '! important; }';
   echo '.fill-light { background: ' . $colors['fill_light'] . '; color: ' . $colors['fill_color'] . '; }';
   echo '</style>';
@@ -930,20 +921,16 @@ function flint_get_template( $output = 'slug', $template = '', $a = false ) {
 
   if ( 'templates/clear.php' === $file ) {
     $slug = $options['clear_width'];
-  }
-  elseif ( 'templates/minimal.php' === $file ) {
+  } elseif ( 'templates/minimal.php' === $file ) {
     if ( flint_is_active_sidebar( 'left' ) || flint_is_active_sidebar( 'right' ) ) {
       $slug = 'wide';
-    }
-    else {
+    } else {
       $slug = $options['minimal_width'];
     }
-  }
-  else {
+  } else {
     if ( is_active_sidebar( 'left' ) || is_active_sidebar( 'right' ) ) {
       $slug = 'wide';
-    }
-    else {
+    } else {
       $slug = $options['page_default_width'];
     }
   }
@@ -998,8 +985,7 @@ function flint_get_sidebar_template( $output, $widget_area = 'footer' ) {
     case 'footer':
       if ( 'page' === $type ) {
         flint_get_template( $output );
-      }
- else {
+      } else {
         flint_get_template( $output, 'templates/full.php', true );
       }
       break;
@@ -1024,8 +1010,7 @@ function flint_body_class() {
           body_class( 'clear clear-breadcrumbs' );
           break;
       }
-    }
- elseif ( 'templates/minimal.php' === $template ) {
+    } elseif ( 'templates/minimal.php' === $template ) {
       switch ( $options['minimal_nav'] ) {
         case 'navbar':
           body_class( 'clear clear-nav' );
@@ -1034,12 +1019,10 @@ function flint_body_class() {
           body_class( 'clear clear-breadcrumbs' );
           break;
       }
-    }
- else {
+    } else {
       body_class();
     }
-  }
- else {
+  } else {
     body_class();
   }
 }
@@ -1058,8 +1041,7 @@ function flint_the_post_thumbnail( $size = 'post-thumbnail', $attr = '' ) {
         if ( has_post_thumbnail() ) {
           the_post_thumbnail( $size, $attr );
         }
-      }
- elseif ( 'archives' === $posts_image && is_archive() ) {
+      } elseif ( 'archives' === $posts_image && is_archive() ) {
         if ( has_post_thumbnail() ) {
           the_post_thumbnail( $size, $attr );
         }
@@ -1070,8 +1052,7 @@ function flint_the_post_thumbnail( $size = 'post-thumbnail', $attr = '' ) {
         if ( has_post_thumbnail() ) {
           the_post_thumbnail( $size, $attr );
         }
-      }
- elseif ( 'archives' === $pages_image && is_archive() ) {
+      } elseif ( 'archives' === $pages_image && is_archive() ) {
         if ( has_post_thumbnail() ) {
           the_post_thumbnail( $size, $attr );
         }
@@ -1100,11 +1081,9 @@ function flint_has_category( $category = '', $post = null ) {
     $output = trim( $cats, ' ' );
     if ( ! empty( $output ) ) {
 return true;
-}
- else {
+} else {
 return false; }
-  }
- else {
+  } else {
     return false;
   }
 }
@@ -1133,12 +1112,10 @@ function flint_content_class( $class = '' ) {
   if ( is_active_sidebar( 'left' ) | is_active_sidebar( 'right' ) ) {
     if ( is_active_sidebar( 'left' ) && is_active_sidebar( 'right' ) ) {
       $class .= ' col-md-6 wa-both';
-    }
- else {
+    } else {
       if ( is_active_sidebar( 'left' ) ) {
         $class .= ' col-md-9 wa-left';
-      }
- elseif ( is_active_sidebar( 'right' ) ) {
+      } elseif ( is_active_sidebar( 'right' ) ) {
         $class .= ' col-md-9 wa-right';
       }
     }
@@ -1202,8 +1179,7 @@ function flint_post_class() {
         post_class( 'col-xs-12 col-sm-8 col-md-8' );
         break;
     }
-  }
- else {
+  } else {
     post_class( 'col-xs-12' );
   }
 }
@@ -1313,8 +1289,7 @@ function flint_get_spacer( $side ) {
           echo '</div>';
           break;
       }
-    }
- elseif ( 'right' === $side ) {
+    } elseif ( 'right' === $side ) {
       switch ( $width ) {
         case 'slim':
           $output = '<div class="hidden-xs col-sm-2 col-md-4"></div>';
@@ -1334,16 +1309,14 @@ function flint_get_spacer( $side ) {
       }
       echo $output;
     }
-  }
- else {
+  } else {
     if ( 'left' === $side ) {
       echo '<div class="col-xs-12 col-sm-12 hidden-md hidden-lg">';
 
       flint_the_post_thumbnail();
 
       echo '</div>';
-    }
- else {
+    } else {
       return;
     }
   }
