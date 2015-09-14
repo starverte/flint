@@ -27,7 +27,7 @@
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse navbar-primary">
-        <?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_class' => 'nav navbar-nav', 'fallback_cb' => 'flint_nav_fallback', 'walker' => new Flint_Bootstrap_Menu ) ); ?>
+        <?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_class' => 'nav navbar-nav', 'fallback_cb' => 'flint_nav_fallback', 'walker' => new Flint_Walker_Nav_Menu_Navbar ) ); ?>
       </div><!-- .navbar-collapse -->
     </div><!-- .container -->
   </nav><!-- .navbar -->

@@ -1,6 +1,6 @@
 <?php
 /**
- * Flint_Bootstrap_Menu class
+ * Flint_Walker_Nav_Menu_Navbar class
  *
  * @package Flint
  * @since 1.4.0
@@ -12,7 +12,7 @@
  * Edited to support n-levels submenu.
  * @author johnmegahan https://gist.github.com/1597994, Emanuele 'Tex' Tessore https://gist.github.com/3765640
  */
-class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
+class Flint_Walker_Nav_Menu_Navbar extends Walker_Nav_Menu {
   /**
    * Starts the list before the elements are added.
    *
