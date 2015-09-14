@@ -39,24 +39,13 @@ function flint_deprecated_function( $function, $version, $replacement = null ) {
  * Gets the featured image for a post or page if not specified otherwise in theme options
  *
  * @deprecated 1.3.9 Use flint_the_post_thumbnail
+ *
+ * @param string $type The post type.
+ * @param string $loc The current template.
  */
 function flint_post_thumbnail( $type = 'post', $loc = 'single' ) {
   flint_deprecated_function( __FUNCTION__, '1.3.9', 'flint_the_post_thumbnail()' );
-  $layout = flint_get_options();
-  $posts_image = ! empty( $layout['posts_image'] ) ? $layout['posts_image'] : 'always';
-  $pages_image = ! empty( $layout['pages_image'] ) ? $layout['pages_image'] : 'always';
-  switch ( $type ) {
-    case 'post':
-      if ( $posts_image == 'always' ) {if ( has_post_thumbnail() ) { the_post_thumbnail(); }
-} elseif ( $posts_image == 'archives' && $loc == 'archive' ) {if ( has_post_thumbnail() ) { the_post_thumbnail(); }
-}
-      break;
-    case 'page':
-      if ( $pages_image == 'always' ) {if ( has_post_thumbnail() ) { the_post_thumbnail(); }
-} elseif ( $pages_image == 'archives' && $loc == 'archive' ) {if ( has_post_thumbnail() ) { the_post_thumbnail(); }
-}
-      break;
-  }
+  flint_the_post_thumbnail();
 }
 
 /**
@@ -80,7 +69,7 @@ function flint_reply_link( $args = array(), $comment = null, $post = null ) {
  *
  * @deprecated 1.4.0 Use flint_get_comment_reply_link instead.
  *
- * @param array       $args
+ * @param array       $args    Optional. Override default options.
  * @param int         $comment Comment being replied to. Default current comment.
  * @param int|WP_Post $post    Post ID or WP_Post object the comment is going to be displayed on.
  *                             Default current post.
@@ -111,6 +100,9 @@ function flint_get_widgets( $slug, $minimal = false ) {
  * Returns slug or class for .widgets.widgets-footer based on theme options
  *
  * @deprecated 1.4.0 Use flint_get_sidebar_template instead.
+ *
+ * @param string $output The return type: slug, content, or margins.
+ * @param string $widget_area The widget area: header, footer, left, or right.
  */
 function flint_get_widgets_template( $output, $widget_area = 'footer' ) {
   flint_deprecated_function( __FUNCTION__, '1.4.0', 'flint_get_sidebar_template()' );

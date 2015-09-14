@@ -12,6 +12,8 @@ if ( ! function_exists( 'flint_content_nav' ) ) :
  *
  * @deprecated 2.0.0
  * @ignore
+ *
+ * @param string $nav_id The slug ID of the navigation menu.
  */
 function flint_content_nav( $nav_id ) {
   global $wp_query;
@@ -77,7 +79,10 @@ if ( ! function_exists( 'flint_comment' ) ) :
  * Used as a callback by wp_list_comments() for displaying the comments.
  *
  * @deprecated 2.0.0
- * @ignore
+ *
+ * @param object $comment The comment object.
+ * @param array  $args An array of arguments.
+ * @param int    $depth The depth of the current comment.
  */
 function flint_comment( $comment, $args, $depth ) {
   $GLOBALS['comment'] = $comment;
@@ -236,7 +241,7 @@ add_action( 'save_post', 'flint_category_transient_flusher' );
  * Displays page links for paginated posts (i.e. includes the <!--nextpage-->.
  * Quicktag one or more times). This tag must be within The Loop.
  *
- * @param string|array $args
+ * @param string|array $args A string or array of argument(s).
  * @return string Formatted output in HTML.
  */
 function flint_link_pages( $args = '' ) {
@@ -426,7 +431,7 @@ add_filter( 'the_password_form', 'flint_password_form' );
 /**
  * Output a complete commenting form for use within a template, using Twitter Bootstrap styles.
  *
- * @param array       $args
+ * @param array       $args An array of arguments.
  * @param int|WP_Post $post_id Post ID or WP_Post object to generate the form for. Default current post.
  *
  * @todo Remove "Required fields are marked *"
@@ -514,9 +519,19 @@ function flint_comment_form( $args = array(), $post_id = null ) {
 }
 
 /**
- * Retrieve the avatar for a user who provided a user ID or email address.
+ * Retrieve the avatar `<img>` tag for a user, email address, MD5 hash, comment, or post.
  *
- * @ignore
+ * @see get_the_avatar()
+ *
+ * @param mixed  $id_or_email The Gravatar to retrieve. Accepts a user_id,
+ *                            user email, or WP_User object.
+ * @param string $size        Optional. Height and width of the avatar image file in pixels. Default 96.
+ * @param string $default     Optional. URL for the default image or a default type. Accepts
+ *                            'mystery' (The Oyster Man), 'blank' (transparent GIF),
+ *                            or 'gravatar_default' (the Gravatar logo). Default is the value of the
+ *                            'avatar_default' option, with a fallback of 'mystery'.
+ * @param string $alt         Optional. Alternative text to use in &lt;img&gt; tag. Default empty.
+ * @return false|string `<img>` tag for the user's avatar. False on failure.
  */
 function flint_avatar( $id_or_email, $size = '96', $default = '', $alt = false ) {
   if ( ! get_option( 'show_avatars' ) ) {
@@ -604,7 +619,7 @@ function flint_avatar( $id_or_email, $size = '96', $default = '', $alt = false )
 /**
  * Retrieve HTML content for reply to comment link.
  *
- * @param array       $args
+ * @param array       $args An array of arguments.
  * @param int         $comment Comment being replied to. Default current comment.
  * @param int|WP_Post $post    Post ID or WP_Post object the comment is going to be displayed on.
  *                             Default current post.
@@ -861,6 +876,10 @@ function flint_options_css() {
 
 /**
  * Returns slug or class for #primary based on theme options
+ *
+ * @param string $output   The return type: slug, content, or margins.
+ * @param string $template The page template.
+ * @param bool   $a        Used for internal use only.
  */
 function flint_get_template( $output = 'slug', $template = '', $a = false ) {
   $options = flint_get_options();
@@ -918,6 +937,9 @@ unset( $t ); }
 
 /**
  * Returns slug or class for .widgets.widgets-footer based on theme options
+ *
+ * @param string $output The return type: slug, content, or margins.
+ * @param string $widget_area The widget area: header, footer, left, or right.
  */
 function flint_get_sidebar_template( $output, $widget_area = 'footer' ) {
   $options = flint_get_options();
@@ -963,24 +985,42 @@ function flint_body_class() {
 }
 
 /**
- * Gets the featured image for a post or page if not specified otherwise in theme options
+ * Display featured image for a post according to theme options
+ *
+ * @param string $size Optional. Registered image size to use. Default 'post-thumbnail'.
+ * @param string $attr Optional. Query string or array of attributes. Default empty.
  */
 function flint_the_post_thumbnail( $size = 'post-thumbnail', $attr = '' ) {
   $layout = flint_get_options();
   $type   = get_post_type();
   $posts_image = ! empty( $layout['posts_image'] ) ? $layout['posts_image'] : 'always';
   $pages_image = ! empty( $layout['pages_image'] ) ? $layout['pages_image'] : 'always';
+
   switch ( $type ) {
     case 'post':
-      if ( $posts_image == 'always' ) {if ( has_post_thumbnail() ) { the_post_thumbnail( $size, $attr ); }
-} elseif ( $posts_image == 'archives' && is_archive() ) {if ( has_post_thumbnail() ) { the_post_thumbnail( $size, $attr ); }
-}
+      if ( $posts_image == 'always' ) {
+        if ( has_post_thumbnail() ) {
+          the_post_thumbnail( $size, $attr );
+        }
+      } elseif ( $posts_image == 'archives' && is_archive() ) {
+        if ( has_post_thumbnail() ) {
+          the_post_thumbnail( $size, $attr );
+        }
+      }
       break;
+
     case 'page':
-      if ( $pages_image == 'always' ) {if ( has_post_thumbnail() ) { the_post_thumbnail( $size, $attr ); }
-} elseif ( $pages_image == 'archives' && is_archive() ) {if ( has_post_thumbnail() ) { the_post_thumbnail( $size, $attr ); }
-}
+      if ( $pages_image == 'always' ) {
+        if ( has_post_thumbnail() ) {
+          the_post_thumbnail( $size, $attr );
+        }
+      } elseif ( $pages_image == 'archives' && is_archive() ) {
+        if ( has_post_thumbnail() ) {
+          the_post_thumbnail( $size, $attr );
+        }
+      }
       break;
+
     default:
       if ( has_post_thumbnail() ) { the_post_thumbnail( $size, $attr ); }
       break;
@@ -988,20 +1028,34 @@ function flint_the_post_thumbnail( $size = 'post-thumbnail', $attr = '' ) {
 }
 
 /**
- * Similar to WordPress has_category()
- * Ignores "Uncategorized"
+ * Check if the current post has any of given category
+ *
+ * Also checks for any non-Uncategorized category if no category specified.
+ *
+ * @see has_category()
+ *
+ * @param string|int|array $category Optional. The category name/term_id/slug or array of them to check for.
+ * @param int|object       $post     Optional. Post to check instead of the current post.
+ *
+ * @return bool True if the current post has any of the given categories (or any category, if no category specified).
  */
 function flint_has_category( $category = '', $post = null ) {
   if ( has_term( $category, 'category', $post ) ) {
     $cats = '';
+
     foreach ( get_the_category() as $cat ) {
       if ( $cat->cat_name != 'Uncategorized' ) {
         $cats .= $cat->cat_name;
       }
     }
+
     $output = trim( $cats, ' ' );
-    if ( ! empty( $output ) ) { return true;
-} else { return false; }
+
+    if ( ! empty( $output ) ) {
+      return true;
+    } else {
+      return false;
+    }
   } else {
     return false;
   }
