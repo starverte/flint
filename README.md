@@ -1,5 +1,6 @@
-Flint 1.4.3
+Flint 1.4.3 [![Build Status](https://travis-ci.org/mbeall/flint.svg?branch=master)](https://travis-ci.org/mbeall/flint)
 =====
+
 A responsive, minimalist theme built on Twitter's Bootstrap 3 and based on Automattic's _s theme. Make it your own with a custom background, custom header, custom menus, custom colors and more.
 
 Learn more at http://sparks.starverte.com/flint.
