@@ -28,10 +28,44 @@ function flint_deprecated_function( $function, $version, $replacement = null ) {
    *
    * @param bool $trigger Whether to trigger the error for deprecated functions. Default true.
    */
-  if ( WP_DEBUG && apply_filters( 'deprecated_function_trigger_error', true ) ) {
+  if ( true === WP_DEBUG ) {
     if ( ! is_null( $replacement ) ) {
       trigger_error( sprintf( __( '%1$s is <strong>deprecated</strong> since Flint version %2$s! Use %3$s instead.', 'flint' ), $function, $version, $replacement ) );
-} else {       trigger_error( sprintf( __( '%1$s is <strong>deprecated</strong> since Flint version %2$s with no alternative available.', 'flint' ), $function, $version ) ); }
+    } else {
+      trigger_error( sprintf( __( '%1$s is <strong>deprecated</strong> since Flint version %2$s with no alternative available.', 'flint' ), $function, $version ) );
+    }
+  }
+}
+
+/**
+ * Mark a function as deprecated and inform when it has been used.
+ *
+ * There is a hook deprecated_function_run that will be called that can be used
+ * to get the backtrace up to what file and function called the deprecated
+ * function.
+ *
+ * The current behavior is to trigger a user error if WP_DEBUG is true.
+ *
+ * This function is to be used in every function that is deprecated.
+ *
+ * @param string $function    The function that was called.
+ * @param string $parameter   The parameter that was defined.
+ * @param string $version     The version of Flint that deprecated the function.
+ * @param string $replacement Optional. The function that should have been called. Default null.
+ */
+function flint_deprecated_parameter( $function, $parameter, $version, $replacement = null ) {
+
+  /**
+   * Filter whether to trigger an error for deprecated functions.
+   *
+   * @param bool $trigger Whether to trigger the error for deprecated functions. Default true.
+   */
+  if ( true === WP_DEBUG ) {
+    if ( ! is_null( $replacement ) ) {
+      trigger_error( sprintf( __( 'The %2$s parameter for %1$s is <strong>deprecated</strong> since Flint version %3$s! Use %4$s instead.', 'flint' ), $function, $parameter, $version, $replacement ) );
+    } else {
+      trigger_error( sprintf( __( 'The %2$s parameter for %1$s is <strong>deprecated</strong> since Flint version %3$s with no alternative available.', 'flint' ), $function, $parameter, $version ) );
+    }
   }
 }
 
@@ -147,7 +181,7 @@ class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
    * @param array  $args   An array of arguments.
    */
   function start_lvl( &$output, $depth = 0, $args = array() ) {
-    flint_deprecated_function( __CLASS__, '1.5.0', 'Flint_Walker_Nav_Menu_Navbar::start_lvl' );
+    flint_deprecated_function( __CLASS__, '1.5.0', 'Flint_Walker_Nav_Menu_Navbar' );
 
     $indent = str_repeat( "\t", $depth );
     $submenu = ($depth > 0) ? ' sub-menu' : '';
@@ -168,7 +202,7 @@ class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
    * @param int    $id     Current item ID.
    */
   function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
-    flint_deprecated_function( __CLASS__, '1.5.0', 'Flint_Walker_Nav_Menu_Navbar::start_el' );
+    flint_deprecated_function( __CLASS__, '1.5.0', 'Flint_Walker_Nav_Menu_Navbar' );
 
     $indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
 
@@ -228,7 +262,7 @@ class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
    * @param string $output            Passed by reference. Used to append additional content.
    */
   function display_element( $element, &$children_elements, $max_depth, $depth = 0, $args, &$output ) {
-    flint_deprecated_function( __CLASS__, '1.5.0', 'Flint_Walker_Nav_Menu_Navbar::display_element' );
+    flint_deprecated_function( __CLASS__, '1.5.0', 'Flint_Walker_Nav_Menu_Navbar' );
     if ( ! $element ) {
       return; }
 
