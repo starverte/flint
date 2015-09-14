@@ -177,8 +177,8 @@ function flint_get_colors() {
 /**
  * Get address from options
  *
- * @param bool  $schema If true, return address with schema.org microdata
- * @param array $args Array of address return arguments
+ * @param bool  $schema If true, return address with schema.org microdata.
+ * @param array $args Array of address return arguments.
  *
  * @return string The address, as filtered
  */

@@ -9,7 +9,7 @@
 /**
  * Register customization options for Flint
  *
- * @param object $wp_customize An instance of the WP_Customize_Manager class
+ * @param object $wp_customize An instance of the WP_Customize_Manager class.
  */
 function flint_customize_register( $wp_customize ) {
 
@@ -665,7 +665,7 @@ add_action( 'customize_preview_init', 'flint_customize_preview_init' );
 /**
  * Sanitize font options
  *
- * @param string $input The input value to sanitize
+ * @param string $input The input value to sanitize.
  */
 function flint_sanitize_font( $input ) {
   $valid = array(
@@ -689,7 +689,7 @@ function flint_sanitize_font( $input ) {
 /**
  * Sanitize width options
  *
- * @param string $input The input value to sanitize
+ * @param string $input The input value to sanitize.
  */
 function flint_sanitize_width( $input ) {
   $valid = array(
@@ -709,7 +709,7 @@ function flint_sanitize_width( $input ) {
 /**
  * Sanitize navigation options for Clear template
  *
- * @param string $input The input value to sanitize
+ * @param string $input The input value to sanitize.
  */
 function flint_sanitize_clear_nav( $input ) {
   $valid = array(
@@ -727,7 +727,7 @@ function flint_sanitize_clear_nav( $input ) {
 /**
  * Sanitize navigation options for Minimal template
  *
- * @param string $input The input value to sanitize
+ * @param string $input The input value to sanitize.
  */
 function flint_sanitize_minimal_nav( $input ) {
   $valid = array(
@@ -745,7 +745,7 @@ function flint_sanitize_minimal_nav( $input ) {
 /**
  * Sanitize widget area options for Minimal template
  *
- * @param string $input The input value to sanitize
+ * @param string $input The input value to sanitize.
  */
 function flint_sanitize_minimal_widget_area( $input ) {
   $valid = array(
@@ -766,7 +766,7 @@ function flint_sanitize_minimal_widget_area( $input ) {
 /**
  * Sanitize featured image options
  *
- * @param string $input The input value to sanitize
+ * @param string $input The input value to sanitize.
  */
 function flint_sanitize_featured_image( $input ) {
   $valid = array(
@@ -785,7 +785,7 @@ function flint_sanitize_featured_image( $input ) {
 /**
  * Sanitize widget column options
  *
- * @param string $input The input value to sanitize
+ * @param string $input The input value to sanitize.
  */
 function flint_sanitize_widget_columns( $input ) {
   $valid = array(

@@ -666,7 +666,7 @@ function flint_comment_reply_link( $args = array(), $comment = null, $post = nul
  * get_sidebar doesn't make sense for all widget areas, so this replaces that function
  *
  * @param string $slug    The slug of the specialised sidebar.
- * @param bool   $minimal If true, using the Minimal page template
+ * @param bool   $minimal If true, using the Minimal page template.
  */
 function flint_get_sidebar( $slug, $minimal = false ) {
   $options = flint_get_options();
@@ -716,7 +716,7 @@ function flint_theme_version() {
 /**
  * Returns breadcrumbs for pages
  *
- * @param string $template The page template
+ * @param string $template The page template.
  */
 function flint_breadcrumbs( $template = 'default' ) {
   $options = flint_get_options();
@@ -1017,7 +1017,7 @@ function flint_has_category( $category = '', $post = null ) {
  * @uses flint_get_options()
  * @uses is_active_sidebar()
  *
- * @param string $class   Additional class or classes to append to content div
+ * @param string $class   Additional class or classes to append to content div.
  * @var   array  $options The options array
  *
  * @todo Allow array input for $class

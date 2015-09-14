@@ -100,7 +100,7 @@ function get_flint_reply_link( $args = array(), $comment = null, $post = null ) 
  * get_sidebar doesn't make sense for all widget areas, so this replaces that function
  *
  * @param string $slug    The slug of the specialised sidebar.
- * @param bool   $minimal If true, using the Minimal page template
+ * @param bool   $minimal If true, using the Minimal page template.
  */
 function flint_get_widgets( $slug, $minimal = false ) {
   flint_deprecated_function( __FUNCTION__, '1.4.0', 'flint_get_sidebar()' );
