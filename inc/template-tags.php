@@ -873,67 +873,6 @@ function flint_options_css() {
 }
 
 /**
- * Returns slug or class for #primary based on theme options
- *
- * @param string $output   The return type: slug, content, or margins.
- * @param string $template The page template.
- * @param bool   $a        Used for internal use only.
- */
-function flint_get_template( $output = 'slug', $template = '', $a = false ) {
-  $options = flint_get_options();
-  $file    = get_post_meta( get_the_ID(), '_wp_page_template', true );
-
-  if ( ! empty( $template ) && $a != true ) { trigger_error( '$template variable in flint_get_template() is deprecated as of Flint 1.2.1. Use get_template() to get a particular file.' );
-unset( $t ); }
-
-  if ( $file == 'templates/clear.php' ) { $slug = $options['clear_width']; } elseif ( $file == 'templates/minimal.php' ) {
-    if ( flint_is_active_sidebar( 'left' ) || flint_is_active_sidebar( 'right' ) ) { $slug = 'wide';
-} else { $slug = $options['minimal_width']; }
-  } else {
-    if ( is_active_sidebar( 'left' ) || is_active_sidebar( 'right' ) ) { $slug = 'wide';
-} else { $slug = $options['page_default_width']; }
-  }
-
-  switch ( $output ) {
-    case 'slug':
-      return $slug;
-      break;
-    case 'content':
-      switch ( $slug ) {
-        case 'slim':
-          echo 'col-xs-12 col-sm-8 col-md-4';
-          break;
-        case 'narrow':
-          echo 'col-xs-12 col-sm-8 col-md-6';
-          break;
-        case 'full':
-          echo 'col-xs-12 col-sm-10 col-md-8';
-          break;
-        case 'wide':
-          echo 'col-xs-12';
-          break;
-      }
-      break;
-    case 'margins':
-      switch ( $slug ) {
-        case 'slim':
-          echo '<div class="hidden-xs col-sm-2 col-md-4"></div>';
-          break;
-        case 'narrow':
-          echo '<div class="hidden-xs col-sm-2 col-md-3"></div>';
-          break;
-        case 'full':
-          echo '<div class="hidden-xs col-sm-1 col-md-2"></div>';
-          break;
-        case 'wide':
-          break;
-      }
-      break;
-  }
-
-}
-
-/**
  * Returns slug or class for .widgets.widgets-footer based on theme options
  *
  * @param string $output The return type: slug, content, or margins.

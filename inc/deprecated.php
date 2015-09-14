@@ -312,3 +312,85 @@ class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
   }
 }
 
+
+
+/**
+ * Returns slug or class for #primary based on theme options
+ *
+ * @deprecated 1.5.0
+ *
+ * @param string $output   The return type: slug, content, or margins.
+ * @param string $template Deprecated. The page template.
+ * @param bool   $a        Used for internal use only.
+ */
+function flint_get_template( $output = 'slug', $template = '', $a = false ) {
+  $options = flint_get_options();
+  $file    = get_post_meta( get_the_ID(), '_wp_page_template', true );
+
+  if ( ! empty( $template ) && $a != true ) {
+    flint_deprecated_parameter( __FUNCTION__, '$template', '1.2.1', 'get_template()' );
+  }
+
+  if ( $file == 'templates/clear.php' ) {
+    $slug = $options['clear_width'];
+  } elseif ( $file == 'templates/minimal.php' ) {
+    if ( flint_is_active_sidebar( 'left' ) || flint_is_active_sidebar( 'right' ) ) {
+      $slug = 'wide';
+    } else {
+      $slug = $options['minimal_width'];
+    }
+  } else {
+    if ( is_active_sidebar( 'left' ) || is_active_sidebar( 'right' ) ) {
+      $slug = 'wide';
+    } else {
+      $slug = $options['page_default_width'];
+    }
+  }
+
+  switch ( $output ) {
+    case 'slug':
+      return $slug;
+      break;
+
+    case 'content':
+      switch ( $slug ) {
+        case 'slim':
+          echo 'col-xs-12 col-sm-8 col-md-4';
+          break;
+
+        case 'narrow':
+          echo 'col-xs-12 col-sm-8 col-md-6';
+          break;
+
+        case 'full':
+          echo 'col-xs-12 col-sm-10 col-md-8';
+          break;
+
+        case 'wide':
+          echo 'col-xs-12';
+          break;
+      }
+
+      break;
+
+    case 'margins':
+      switch ( $slug ) {
+        case 'slim':
+          echo '<div class="hidden-xs col-sm-2 col-md-4"></div>';
+          break;
+
+        case 'narrow':
+          echo '<div class="hidden-xs col-sm-2 col-md-3"></div>';
+          break;
+
+        case 'full':
+          echo '<div class="hidden-xs col-sm-1 col-md-2"></div>';
+          break;
+
+        case 'wide':
+          break;
+      }
+
+      break;
+  }
+}
