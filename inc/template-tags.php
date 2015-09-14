@@ -1241,6 +1241,11 @@ function flint_get_spacer( $side ) {
   }
 }
 
+/**
+ * Navigation fallback
+ *
+ * If the menu doesn't exist, display search instead.
+ */
 function flint_nav_fallback() {
   ?>
   <form method="get" class="navbar-form navbar-right" action="<?php echo esc_url( home_url( '/' ) ); ?>" role="search">
