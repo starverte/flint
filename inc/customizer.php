@@ -200,7 +200,7 @@ function flint_customize_register( $wp_customize ) {
         'type'              => 'option',
         'transport'         => 'refresh',
       ));
-      $wp_customize->add_control( new Flint_Customize_TextArea_Control($wp_customize, 'footer_content', array(
+      $wp_customize->add_control( new Flint_Customize_Control_Textarea($wp_customize, 'footer_content', array(
         'label'    => __( 'Footer Text', 'flint' ),
         'section'  => 'flint_footer',
         'settings' => 'flint_options[footer_content]',
@@ -659,52 +659,6 @@ function flint_customize_preview_init() {
   wp_enqueue_style( 'yanone-kaffeesatz', '//fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,300,700'                          , array(), '' );
 }
 add_action( 'customize_preview_init', 'flint_customize_preview_init' );
-
-if ( class_exists( 'WP_Customize_Control' ) ) {
-
-  /**
-   * Customize TextArea Control class.
-   */
-  class Flint_Customize_TextArea_Control extends WP_Customize_Control {
-
-    /**
-     * Type of control
-     *
-     * @access public
-     * @var string
-     */
-    public $type = 'textarea';
-
-    /**
-     * Description text for control
-     *
-     * @access public
-     * @var string
-     */
-    public $description;
-
-    /**
-     * Render the control's content.
-     *
-     * Allows the content to be overriden without having to rewrite the wrapper in $this->render().
-     *
-     * Control content can alternately be rendered in JS. See {@see WP_Customize_Control::print_template()}.
-     */
-    public function render_content() {
-      ?>
-      <label>
-        <?php if ( ! empty( $this->label ) ) : ?>
-          <span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
-        <?php endif;
-        if ( ! empty( $this->description ) ) : ?>
-          <span class="description customize-control-description"><?php echo $this->description; ?></span>
-        <?php endif; ?>
-        <textarea rows="5" <?php $this->link(); ?>><?php echo esc_textarea( $this->value() ); ?></textarea>
-      </label>
-      <?php
-    }
-  }
-}
 
 /**
  * Sanitize font options

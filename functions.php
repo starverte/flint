@@ -28,6 +28,8 @@ function flint_after_setup_theme() {
 
   require( get_template_directory() . '/inc/extras.php' );
 
+  require( get_template_directory() . '/inc/class-customize-control-textarea.php' );
+
   require( get_template_directory() . '/inc/customizer.php' );
 
   require( get_template_directory() . '/inc/options.php' );
