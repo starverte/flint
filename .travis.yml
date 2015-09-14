@@ -42,9 +42,6 @@ env:
   # WordPress 3.7
   # @link https://github.com/WordPress/WordPress/tree/3.7-branch
   - WP_VERSION=3.7
-  # WordPress 3.6
-  # @link https://github.com/WordPress/WordPress/tree/3.6-branch
-  - WP_VERSION=3.6
 
 # Declare 7.0 beta in test matrix.
 # @link https://buddypress.trac.wordpress.org/ticket/5620
@@ -55,7 +52,6 @@ matrix:
       env: WP_VERSION=master
   allow_failures:
     - php: 7.0
-    - env: WP_VERSION=3.6
     - env: WP_VERSION=3.7
     - env: WP_VERSION=3.8
     - env: WP_VERSION=3.9
