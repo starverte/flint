@@ -10,10 +10,9 @@ if ( ! function_exists( 'flint_content_nav' ) ) :
 /**
  * Display navigation to next/previous pages when applicable
  *
- * @deprecated 2.0.0
- * @ignore
- *
  * @param string $nav_id The slug ID of the navigation menu.
+ *
+ * @todo Remove in Flint 2.
  */
 function flint_content_nav( $nav_id ) {
   global $wp_query;
@@ -78,7 +77,7 @@ if ( ! function_exists( 'flint_comment' ) ) :
  *
  * Used as a callback by wp_list_comments() for displaying the comments.
  *
- * @deprecated 2.0.0
+ * @todo Remove in Flint 2.
  *
  * @param object $comment The comment object.
  * @param array  $args An array of arguments.
@@ -130,8 +129,7 @@ add_action( 'flint_entry_meta_below_post','flint_the_comments', 20 );
 /**
  * Display comments below post
  *
- * @deprecated 2.0.0
- * @ignore
+ * @todo Remove in Flint 2.
  */
 function flint_the_comments() {
   if ( ! post_password_required() && ( comments_open() || '0' != get_comments_number() ) ) : ?>
