@@ -31,9 +31,7 @@ function flint_deprecated_function( $function, $version, $replacement = null ) {
   if ( WP_DEBUG && apply_filters( 'deprecated_function_trigger_error', true ) ) {
     if ( ! is_null( $replacement ) ) {
       trigger_error( sprintf( __( '%1$s is <strong>deprecated</strong> since Flint version %2$s! Use %3$s instead.', 'flint' ), $function, $version, $replacement ) );
-    } else {
-      trigger_error( sprintf( __( '%1$s is <strong>deprecated</strong> since Flint version %2$s with no alternative available.', 'flint' ), $function, $version ) );
-    }
+} else {       trigger_error( sprintf( __( '%1$s is <strong>deprecated</strong> since Flint version %2$s with no alternative available.', 'flint' ), $function, $version ) ); }
   }
 }
 
@@ -49,26 +47,14 @@ function flint_post_thumbnail( $type = 'post', $loc = 'single' ) {
   $pages_image = ! empty( $layout['pages_image'] ) ? $layout['pages_image'] : 'always';
   switch ( $type ) {
     case 'post':
-      if ( 'always' === $posts_image ) {
-        if ( has_post_thumbnail() ) {
-          the_post_thumbnail();
-        }
-      } elseif ( 'archives' === $posts_image && 'archive' === $loc ) {
-        if ( has_post_thumbnail() ) {
-          the_post_thumbnail();
-        }
-      }
+      if ( $posts_image == 'always' ) {if ( has_post_thumbnail() ) { the_post_thumbnail(); }
+} elseif ( $posts_image == 'archives' && $loc == 'archive' ) {if ( has_post_thumbnail() ) { the_post_thumbnail(); }
+}
       break;
     case 'page':
-      if ( 'always' === $pages_image ) {
-        if ( has_post_thumbnail() ) {
-          the_post_thumbnail();
-        }
-      } elseif ( 'archives' === $pages_image && 'archive' === $loc ) {
-        if ( has_post_thumbnail() ) {
-          the_post_thumbnail();
-        }
-      }
+      if ( $pages_image == 'always' ) {if ( has_post_thumbnail() ) { the_post_thumbnail(); }
+} elseif ( $pages_image == 'archives' && $loc == 'archive' ) {if ( has_post_thumbnail() ) { the_post_thumbnail(); }
+}
       break;
   }
 }
@@ -146,3 +132,4 @@ function flint_is_active_widgets( $slug ) {
   flint_deprecated_function( __FUNCTION__, '1.4.0', 'flint_is_active_sidebar()' );
   flint_get_sidebar( $slug );
 }
+

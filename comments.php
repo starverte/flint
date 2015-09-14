@@ -7,7 +7,8 @@
  */
 
 if ( post_password_required() ) {
-  return; }
+  return;
+}
 ?>
 <div class="row">
   <?php flint_get_template( 'margins' ); ?>

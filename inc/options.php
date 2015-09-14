@@ -151,7 +151,7 @@ function flint_get_options( $option = null ) {
     );
 
     $_option = str_replace( $search, $replace, $option );
-
+    flint_deprecated_parameter( __FUNCTION__, '$option', '1.4.0' );
     return $flint_options[ $_option ];
   } else {
     return $flint_options;

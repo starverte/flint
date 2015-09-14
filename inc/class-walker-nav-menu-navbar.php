@@ -1,6 +1,6 @@
 <?php
 /**
- * Flint_Bootstrap_Menu class
+ * Flint_Walker_Nav_Menu_Navbar class
  *
  * @package Flint
  * @since 1.4.0
@@ -12,7 +12,7 @@
  * Edited to support n-levels submenu.
  * @author johnmegahan https://gist.github.com/1597994, Emanuele 'Tex' Tessore https://gist.github.com/3765640
  */
-class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
+class Flint_Walker_Nav_Menu_Navbar extends Walker_Nav_Menu {
   /**
    * Starts the list before the elements are added.
    *
@@ -96,7 +96,12 @@ class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
   /**
    * Display element
    *
-   * @ignore
+   * @param object $element           Menu item data object.
+   * @param array  $children_elements Array of menu item data object that are children of $element.
+   * @param int    $max_depth         Maximum depth of menu item.
+   * @param int    $depth             Depth of menu item.
+   * @param array  $args              An array of arguments. @see wp_nav_menu()
+   * @param string $output            Passed by reference. Used to append additional content.
    */
   function display_element( $element, &$children_elements, $max_depth, $depth = 0, $args, &$output ) {
     if ( ! $element ) {
