@@ -530,3 +530,26 @@ function flint_get_spacer( $side ) {
     }
   }
 }
+
+/**
+ * Returns slug or class for .widgets.widgets-footer based on theme options
+ *
+ * @deprecated 1.5.0
+ *
+ * @param string $output The return type: slug, content, or margins.
+ * @param string $widget_area The widget area: header, footer, left, or right.
+ */
+function flint_get_sidebar_template( $output, $widget_area = 'footer' ) {
+  $options = flint_get_options();
+  $type    = get_post_type( get_the_ID() );
+
+  switch ( $widget_area ) {
+    case 'footer':
+      if ( $type == 'page' ) {
+        flint_get_template( $output );
+      } else {
+        flint_get_template( $output, 'templates/full.php', true );
+      }
+      break;
+  }
+}
