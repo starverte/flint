@@ -346,135 +346,19 @@ function flint_get_template( $output = 'slug', $template = '', $a = false ) {
  * Retrieve and display content spacers based on default post width,
  * post format, and if side widget areas are active.
  *
- * @uses flint_the_post_thumbnail()
- * @uses flint_get_options()
- * @uses get_post_format()
- * @uses is_active_sidebar()
- * @uses is_single()
- * @uses is_singular()
+ * @deprecated 1.5.0 Use flint_post_margin() instead.
  *
- * @param string $side Left or right. Required.
- * @var array $options The options array
- * @var string $format The format, if any, of the post
- * @var string $width The actual post width
- *
- * @todo Convert to return instead of displaying results
+ * @param string $side Optional. Left or right. Default null.
  */
-function flint_get_spacer( $side ) {
-  global $post;
-  $options = flint_get_options();
-  $format  = get_post_format( $post->ID );
+function flint_get_spacer( $side = null ) {
+  flint_deprecated_function( __FUNCTION__, '1.5.0', 'flint_post_margin()' );
+  switch ( $side ) {
+    case 'left':
+      return flint_post_margin( true );
+      break;
 
-  switch ( $format ) {
-    case 'aside':
-      $width = 'wide';
-      break;
-    case 'link':
-      $width = 'wide';
-      break;
-    case 'status':
-      $width = 'wide';
-      break;
     default:
-      $width = $options['post_default_width'];
-      break;
-  }
-
-  if ( ! is_active_sidebar( 'left' ) && ! is_active_sidebar( 'right' ) ) {
-    if ( $side == 'left' ) {
-      switch ( $width ) {
-        case 'slim':
-          echo '<div class="hidden-xs hidden-sm col-md-2"></div>';
-          echo '<div class="col-xs-12 col-sm-2 col-md-2">';
-
-          flint_the_post_thumbnail();
-
-          if ( ! is_single() && $format == 'gallery' ) {
-            echo '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
-          }
-
-          echo '</div>';
-          break;
-
-        case 'narrow':
-          echo '<div class="hidden-xs hidden-sm col-md-1"></div>';
-          echo '<div class="col-xs-12 col-sm-2 col-md-2">';
-
-          flint_the_post_thumbnail();
-
-          if ( ! is_single() && $format == 'gallery' ) {
-            echo '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
-          }
-
-          echo '</div>';
-          break;
-
-        case 'full':
-          echo '<div class="col-xs-12 col-sm-2 col-md-2">';
-
-          flint_the_post_thumbnail();
-
-          if ( ! is_single() && $format == 'gallery' ) {
-            echo '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
-          }
-
-          echo '</div>';
-          break;
-
-        case 'wide':
-          echo '<div class="col-xs-12 col-sm-12 hidden-md hidden-lg">';
-
-          flint_the_post_thumbnail();
-
-          if ( ! is_single() && $format == 'gallery' ) {
-            echo '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
-          }
-
-          echo '</div>';
-          break;
-
-        default:
-          echo '<div class="col-xs-12 col-sm-2 col-md-2">';
-
-          flint_the_post_thumbnail();
-
-          if ( ! is_single() && $format == 'gallery' ) {
-            echo '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
-          }
-
-          echo '</div>';
-          break;
-      }
-    } elseif ( $side == 'right' ) {
-      switch ( $width ) {
-        case 'slim':
-          $output = '<div class="hidden-xs col-sm-2 col-md-4"></div>';
-          break;
-        case 'narrow':
-          $output = '<div class="hidden-xs col-sm-2 col-md-3"></div>';
-          break;
-        case 'full':
-          $output = '<div class="hidden-xs col-sm-2 col-md-2"></div>';
-          break;
-        case 'wide':
-          $output = null;
-          break;
-        default:
-          $output = '<div class="hidden-xs col-sm-2 col-md-2"></div>';
-          break;
-      }
-      echo $output;
-    }
-  } else {
-    if ( $side == 'left' ) {
-      echo '<div class="col-xs-12 col-sm-12 hidden-md hidden-lg">';
-
-      flint_the_post_thumbnail();
-
-      echo '</div>';
-    } else {
-      return;
-    }
+      return flint_post_margin();
   }
 }
 
