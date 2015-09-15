@@ -1096,3 +1096,71 @@ function flint_nav_fallback() {
   </form> <?php
 }
 
+/**
+ * Retrieves post width
+ */
+function flint_post_width() {
+  $options = flint_get_options();
+  $type = get_post_type( get_the_ID() );
+
+  if ( ! is_active_sidebar( 'left' ) && ! is_active_sidebar( 'right' ) ) {
+    if ( 'page' === $type ) {
+      $template = get_post_meta( get_the_ID(), '_wp_page_template', true );
+
+      switch ( $template ) {
+        case 'templates/clear.php':
+          $post_width = $options['clear_width'];
+          break;
+
+        case 'templates/minimal.php':
+          $post_width = $options['minimal_width'];
+          break;
+
+        case 'templates/slim.php':
+          $post_width = 'slim';
+          break;
+
+        case 'templates/narrow.php':
+          $post_width = 'narrow';
+          break;
+
+        case 'templates/full.php':
+          $post_width = 'full';
+          break;
+
+        case 'templates/wide.php':
+          $post_width = 'wide';
+          break;
+
+        default:
+          $post_width = $options['page_default_width'];
+      }
+    } elseif ( 'page' === $type ) {
+      $format = get_post_format( $post->ID );
+
+      switch ( $format ) {
+        case 'aside':
+          $post_width = 'wide';
+          break;
+
+        case 'link':
+          $post_width = 'wide';
+          break;
+
+        case 'status':
+          $post_width = 'wide';
+          break;
+
+        default:
+          $post_width = $options['post_default_width'];
+          break;
+      }
+    } else {
+      $post_width = $options['post_default_width'];
+    }
+  } else {
+    $post_width = 'wide';
+  }
+
+  return $post_width;
+}
