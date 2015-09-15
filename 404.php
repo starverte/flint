@@ -16,7 +16,7 @@ get_header();
         <article id="post-0" class="post error404 not-found col-xs-12 col-sm-8 col-md-8">
           <header class="entry-header">
             <?php do_action( 'flint_open_entry_header_404' ); ?>
-            <h1 class="entry-title"><?php _e( 'Are we missing something?', 'flint' ); ?></h1>
+            <h1 class="entry-title"><?php esc_html_e( 'Are we missing something?', 'flint' ); ?></h1>
             <?php do_action( 'flint_close_entry_header_404' ); ?>
           </header><!-- .entry-header -->
 
@@ -26,7 +26,7 @@ get_header();
           </div><!-- .entry-summary -->
           <?php else : ?>
           <div class="entry-content">
-            <p><?php _e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'flint' ); ?></p>
+            <p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'flint' ); ?></p>
 
             <?php get_search_form(); ?>
 
@@ -34,7 +34,7 @@ get_header();
 
             <?php if ( flint_categorized_blog() ) : ?>
             <div class="widget widget_categories">
-              <h2 class="widgettitle"><?php _e( 'Most Used Categories', 'flint' ); ?></h2>
+              <h2 class="widgettitle"><?php esc_html_e( 'Most Used Categories', 'flint' ); ?></h2>
               <ul>
               <?php
                 wp_list_categories( array(

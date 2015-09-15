@@ -45,7 +45,7 @@ if ( post_password_required() ) {
     <?php
       if ( ! comments_open() && '0' != get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) :
     ?>
-      <p class="no-comments"><?php _e( 'Comments are closed.', 'flint' ); ?></p>
+      <p class="no-comments"><?php esc_html_e( 'Comments are closed.', 'flint' ); ?></p>
     <?php endif; ?>
 
     <?php flint_comment_form(); ?>

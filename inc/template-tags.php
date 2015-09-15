@@ -39,8 +39,8 @@ function flint_content_nav( $nav_id ) {
   $nav_class = ( is_single() ) ? 'navigation-post' : 'navigation-paging';
 
   ?>
-  <nav role="navigation" id="<?php echo esc_attr( $nav_id ); ?>" class="<?php echo $nav_class; ?>">
-    <h1 class="screen-reader-text"><?php _e( 'Post navigation', 'flint' ); ?></h1>
+  <nav role="navigation" id="<?php esc_attr_e( $nav_id ); ?>" class="<?php echo $nav_class; ?>">
+    <h1 class="screen-reader-text"><?php esc_html_e( 'Post navigation', 'flint' ); ?></h1>
 
   <?php if ( is_single() ) : ?>
 
@@ -90,7 +90,7 @@ function flint_comment( $comment, $args, $depth ) {
   case 'trackback' :
   ?>
   <li class="post pingback">
-    <p><?php _e( 'Pingback:', 'flint' ); ?> <?php comment_author_link(); ?></p>
+    <p><?php esc_html_e( 'Pingback:', 'flint' ); ?> <?php comment_author_link(); ?></p>
     <?php
       break;
     default :
@@ -103,7 +103,7 @@ function flint_comment( $comment, $args, $depth ) {
       <div class="media-body col-xs-5 col-sm-7">
         <h4 class="media-heading"><?php printf( __( '%s <span class="says">says:</span>', 'flint' ), sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?></h4>
         <?php if ( $comment->comment_approved == '0' ) : ?>
-        <em><?php _e( 'Your comment is awaiting moderation.', 'flint' ); ?></em>
+        <em><?php esc_html_e( 'Your comment is awaiting moderation.', 'flint' ); ?></em>
         <br>
         <?php endif; ?>
         <?php comment_text(); ?>
@@ -483,7 +483,7 @@ function flint_comment_form( $args = array(), $post_id = null ) {
         <?php echo $args['must_log_in']; ?>
         <?php do_action( 'comment_form_must_log_in_after' ); ?>
       <?php else : ?>
-        <form class="form-horizontal" action="<?php echo site_url( '/wp-comments-post.php' ); ?>" method="post" id="<?php echo esc_attr( $args['id_form'] ); ?>">
+        <form class="form-horizontal" action="<?php echo site_url( '/wp-comments-post.php' ); ?>" method="post" id="<?php esc_attr_e( $args['id_form'] ); ?>">
           <?php do_action( 'comment_form_top' ); ?>
           <?php if ( current_user_can( 'moderate_comments' ) ) : ?>
             <?php echo apply_filters( 'comment_form_logged_in', $args['logged_in_as'], $commenter, $user_identity ); ?>
@@ -501,7 +501,7 @@ function flint_comment_form( $args = array(), $post_id = null ) {
           <?php echo apply_filters( 'comment_form_field_comment', $args['comment_field'] ); ?>
           <?php echo $args['comment_notes_after']; ?>
           <p class="form-submit">
-            <button class="btn btn-default" name="submit" type="submit" id="<?php echo esc_attr( $args['id_submit'] ); ?>"><?php echo esc_attr( $args['label_submit'] ); ?></button>
+            <button class="btn btn-default" name="submit" type="submit" id="<?php esc_attr_e( $args['id_submit'] ); ?>"><?php esc_attr_e( $args['label_submit'] ); ?></button>
             <?php comment_id_fields( $post_id ); ?>
           </p>
           <?php do_action( 'comment_form', $post_id ); ?>
@@ -1063,7 +1063,7 @@ function flint_nav_fallback() {
   ?>
   <form method="get" class="navbar-form navbar-right" action="<?php echo esc_url( home_url( '/' ) ); ?>" role="search">
     <div class="form-group">
-      <input type="text" class="form-control" name="s" value="<?php echo esc_attr( get_search_query() ); ?>" placeholder="Search" style="width: 200px;">
+      <input type="text" class="form-control" name="s" value="<?php esc_attr_e( get_search_query() ); ?>" placeholder="Search" style="width: 200px;">
     </div>
   </form> <?php
 }

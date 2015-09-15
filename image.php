@@ -107,9 +107,9 @@ get_header();
             <?php elseif ( ! comments_open() && pings_open() ) : ?>
               <?php printf( __( 'Comments are closed, but you can leave a trackback: <a class="trackback-link" href="%s" title="Trackback URL for your post" rel="trackback">Trackback URL</a>.', 'flint' ), get_trackback_url() ); ?>
             <?php elseif ( comments_open() && ! pings_open() ) : ?>
-              <?php _e( 'Trackbacks are closed, but you can <a class="comment-link" href="#respond" title="Post a comment">post a comment</a>.', 'flint' ); ?>
+              <?php printf( __( 'Trackbacks are closed, but you can <a class="comment-link" href="#respond" title="Post a comment">post a comment</a>.', 'flint' ) ); ?>
             <?php elseif ( ! comments_open() && ! pings_open() ) : ?>
-              <?php _e( 'Both comments and trackbacks are currently closed.', 'flint' ); ?>
+              <?php esc_html_e( 'Both comments and trackbacks are currently closed.', 'flint' ); ?>
             <?php endif; ?>
             <?php edit_post_link( __( 'Edit', 'flint' ), ' <span class="edit-link">', '</span>' ); ?>
           </footer><!-- .entry-meta -->
