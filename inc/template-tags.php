@@ -1189,3 +1189,74 @@ function flint_post_width_class() {
       break;
   }
 }
+
+/**
+ * Retrieves margin for post, and post thumbnail if needed
+ *
+ * @param bool $thumbnail Optional. Whether to display the post thumbnail in margin. Default false.
+ */
+function flint_post_margin( $thumbnail = false ) {
+  $post_width = flint_post_width();
+  $output     = '';
+
+  if ( true === $thumbnail && ! is_active_sidebar( 'left' ) && ! is_active_sidebar( 'right' ) ) {
+    switch ( $post_width ) {
+      case 'slim':
+        $output .= '<div class="hidden-xs hidden-sm col-md-2"></div>';
+        $output .= '<div class="col-xs-12 col-sm-2 col-md-2">';
+        $output .= flint_get_the_post_thumbnail();
+        if ( ! is_single() && $format == 'gallery' ) {
+          $output .= '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
+        }
+        $output .= '</div>';
+        break;
+
+      case 'narrow':
+        $output .= '<div class="hidden-xs hidden-sm col-md-1"></div>';
+        $output .= '<div class="col-xs-12 col-sm-2 col-md-2">';
+        $output .= flint_get_the_post_thumbnail();
+        if ( ! is_single() && $format == 'gallery' ) {
+          $output .= '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
+        }
+        $output .= '</div>';
+        break;
+
+      case 'wide':
+        $output .= '<div class="col-xs-12 col-sm-12 hidden-md hidden-lg">';
+        $output .= flint_get_the_post_thumbnail();
+        if ( ! is_single() && $format == 'gallery' ) {
+          $output .= '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
+        }
+        $output .= '</div>';
+        break;
+
+      default:
+        $output .= '<div class="col-xs-12 col-sm-2 col-md-2">';
+        $output .= flint_get_the_post_thumbnail();
+        if ( ! is_single() && $format == 'gallery' ) {
+          $output .= '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
+        }
+        $output .= '</div>';
+        break;
+    }
+
+    return $output;
+  } else {
+    switch ( $post_width ) {
+      case 'slim':
+        return '<div class="hidden-xs col-sm-2 col-md-4"></div>';
+        break;
+
+      case 'narrow':
+        return '<div class="hidden-xs col-sm-2 col-md-3"></div>';
+        break;
+
+      case 'wide':
+        break;
+
+      default:
+        return '<div class="hidden-xs col-sm-1 col-md-2"></div>';
+        break;
+    }
+  }
+}
