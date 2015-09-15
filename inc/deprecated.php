@@ -92,7 +92,6 @@ function flint_post_thumbnail( $type = 'post', $loc = 'single' ) {
  * @param int         $comment Comment being replied to. Default current comment.
  * @param int|WP_Post $post    Post ID or WP_Post object the comment is going to be displayed on.
  *                             Default current post.
- * @return mixed Link to show comment form, if successful. False, if comments are closed.
  */
 function flint_reply_link( $args = array(), $comment = null, $post = null ) {
   flint_deprecated_function( __FUNCTION__, '1.4.0', 'flint_comment_reply_link()' );
@@ -108,7 +107,6 @@ function flint_reply_link( $args = array(), $comment = null, $post = null ) {
  * @param int         $comment Comment being replied to. Default current comment.
  * @param int|WP_Post $post    Post ID or WP_Post object the comment is going to be displayed on.
  *                             Default current post.
- * @return void|false|string Link to show comment form, if successful. False, if comments are closed.
  */
 function get_flint_reply_link( $args = array(), $comment = null, $post = null ) {
   flint_deprecated_function( __FUNCTION__, '1.4.0', 'flint_get_comment_reply_link()' );
@@ -157,7 +155,7 @@ function flint_get_widgets_template( $output, $widget_area = 'footer' ) {
  */
 function flint_is_active_widgets( $slug ) {
   flint_deprecated_function( __FUNCTION__, '1.4.0', 'flint_is_active_sidebar()' );
-  flint_get_sidebar( $slug );
+  return flint_is_active_sidebar( $slug );
 }
 
 /**
