@@ -24,7 +24,7 @@ flint_get_sidebar( 'header' );
             if ( is_active_sidebar( 'left' ) | is_active_sidebar( 'right' ) ) {
               get_template_part( 'templates/wide', 'content' );
             } else {
-              get_template_part( 'templates/' . flint_get_template(), 'content' );
+              get_template_part( 'templates/' . flint_post_width(), 'content' );
             }
           ?>
 

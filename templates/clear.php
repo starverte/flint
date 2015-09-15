@@ -22,7 +22,7 @@ if ( 'navbar' === $options['clear_nav'] ) {
 
           <?php flint_breadcrumbs( 'clear' ); ?>
 
-          <?php get_template_part( 'templates/' . flint_get_template(), 'content' ); ?>
+          <?php get_template_part( 'templates/' . flint_post_width(), 'content' ); ?>
 
           <?php if ( comments_open() || '0' != get_comments_number() ) { comments_template(); } ?>
 

@@ -31,7 +31,7 @@ flint_get_sidebar( 'header' );
           if ( 'post' === $type ) {
             get_template_part( 'format', get_post_format() );
           } elseif ( 'page' === $type ) {
-            get_template_part( 'templates/' . flint_get_template(), 'content' );
+            get_template_part( 'templates/' . flint_post_width(), 'content' );
           } else {
             get_template_part( 'type', get_post_type() );
           }
