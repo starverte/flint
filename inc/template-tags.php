@@ -6,7 +6,6 @@
  * @since 1.4.1
  */
 
-if ( ! function_exists( 'flint_content_nav' ) ) :
 /**
  * Display navigation to next/previous pages when applicable
  *
@@ -25,9 +24,13 @@ function flint_content_nav( $nav_id ) {
     $next = get_adjacent_post( false, '', false );
 
     if ( ! $next && ! $previous ) {
-      return; }
-    if ( $type = 'steel_product' ) { // Hide bottom navigation for products
-      return; }
+      return;
+    }
+
+    // Hide bottom navigation for products.
+    if ( $type = 'steel_product' ) {
+      return;
+    }
   }
 
   if ( $wp_query->max_num_pages < 2 && ( is_home() || is_archive() || is_search() ) ) {
@@ -68,10 +71,7 @@ function flint_content_nav( $nav_id ) {
   <!-- #<?php echo esc_html( $nav_id ); ?> -->
 <?php
 }
-endif; // flint_content_nav
 
-
-if ( ! function_exists( 'flint_comment' ) ) :
 /**
  * Template for comments and pingbacks.
  *
@@ -122,8 +122,6 @@ function flint_comment( $comment, $args, $depth ) {
     break;
   endswitch;
 }
-endif; // flint_comment()
-
 
 add_action( 'flint_entry_meta_below_post','flint_the_comments', 20 );
 /**
@@ -209,17 +207,19 @@ endif;
 function flint_categorized_blog() {
   if ( false === ( $all_the_cool_cats = get_transient( 'all_the_cool_cats' ) ) ) {
 
-    $all_the_cool_cats = get_categories( array( 'hide_empty' => 1 ) );// Create an array of all the categories that are attached to posts
+    // Create an array of all the categories that are attached to posts.
+    $all_the_cool_cats = get_categories( array( 'hide_empty' => 1 ) );
 
-    $all_the_cool_cats = count( $all_the_cool_cats );// Count the number of categories that are attached to the posts
+    // Count the number of categories that are attached to the posts.
+    $all_the_cool_cats = count( $all_the_cool_cats );
 
     set_transient( 'all_the_cool_cats', $all_the_cool_cats );
   }
 
   if ( '1' != $all_the_cool_cats ) {
-    return true;// This blog has more than 1 category
+    return true; // This blog has more than 1 category.
   } else {
-    return false;// This blog has only 1 category
+    return false; // This blog has only 1 category.
   }
 }
 
@@ -532,31 +532,44 @@ function flint_comment_form( $args = array(), $post_id = null ) {
  */
 function flint_avatar( $id_or_email, $size = '96', $default = '', $alt = false ) {
   if ( ! get_option( 'show_avatars' ) ) {
-    return false; }
+    return false;
+  }
 
   if ( false === $alt ) {
     $safe_alt = '';
-} else {     $safe_alt = esc_attr( $alt ); }
+  } else {
+    $safe_alt = esc_attr( $alt );
+  }
 
   if ( ! is_numeric( $size ) ) {
-    $size = '96'; }
+    $size = '96';
+  }
 
   $email = '';
+
   if ( is_numeric( $id_or_email ) ) {
     $id = (int) $id_or_email;
     $user = get_userdata( $id );
+
     if ( $user ) {
-      $email = $user->user_email; }
+      $email = $user->user_email;
+    }
   } elseif ( is_object( $id_or_email ) ) {
     $allowed_comment_types = apply_filters( 'get_avatar_comment_types', array( 'comment' ) );
-    if ( ! empty( $id_or_email->comment_type ) && ! in_array( $id_or_email->comment_type, (array) $allowed_comment_types ) ) {
-      return false; }
+
+    if ( ! empty( $id_or_email->comment_type ) ) {
+      if ( ! in_array( $id_or_email->comment_type, (array) $allowed_comment_types ) ) {
+        return false;
+      }
+    }
 
     if ( ! empty( $id_or_email->user_id ) ) {
       $id = (int) $id_or_email->user_id;
       $user = get_userdata( $id );
+
       if ( $user ) {
-        $email = $user->user_email; }
+        $email = $user->user_email;
+      }
     } elseif ( ! empty( $id_or_email->comment_author_email ) ) {
       $email = $id_or_email->comment_author_email;
     }
@@ -568,42 +581,49 @@ function flint_avatar( $id_or_email, $size = '96', $default = '', $alt = false )
     $avatar_default = get_option( 'avatar_default' );
     if ( empty( $avatar_default ) ) {
       $default = 'mystery';
-} else {       $default = $avatar_default; }
+    } else {
+      $default = $avatar_default;
+    }
   }
 
   if ( ! empty( $email ) ) {
-    $email_hash = md5( strtolower( trim( $email ) ) ); }
+    $email_hash = md5( strtolower( trim( $email ) ) );
+  }
 
   if ( is_ssl() ) {
     $host = 'https://secure.gravatar.com';
   } else {
     if ( ! empty( $email ) ) {
       $host = sprintf( 'http://%d.gravatar.com', ( hexdec( $email_hash[0] ) % 2 ) );
-} else {       $host = 'http://0.gravatar.com'; }
+    } else {
+      $host = 'http://0.gravatar.com';
+    }
   }
 
   if ( 'mystery' == $default ) {
-    $default = "$host/avatar/ad516503a11cd5ca435acc9bb6523536?s={$size}"; // ad516503a11cd5ca435acc9bb6523536 == md5('unknown@gravatar.com')
-} elseif ( 'blank' == $default )
+    $default = "$host/avatar/ad516503a11cd5ca435acc9bb6523536?s={$size}";
+  } elseif ( 'blank' == $default ) {
     $default = $email ? 'blank' : includes_url( 'images/blank.gif' );
-  elseif ( ! empty( $email ) && 'gravatar_default' == $default )
+  } elseif ( ! empty( $email ) && 'gravatar_default' == $default ) {
     $default = '';
-  elseif ( 'gravatar_default' == $default )
+  } elseif ( 'gravatar_default' == $default ) {
     $default = "$host/avatar/?s={$size}";
-  elseif ( empty( $email ) )
+  } elseif ( empty( $email ) ) {
     $default = "$host/avatar/?d=$default&amp;s={$size}";
-  elseif ( strpos( $default, 'http://' ) === 0 )
+  } elseif ( strpos( $default, 'http://' ) === 0 ) {
     $default = add_query_arg( 's', $size, $default );
+  }
 
   if ( ! empty( $email ) ) {
     $out = "$host/avatar/";
     $out .= $email_hash;
     $out .= '?s='.$size;
     $out .= '&amp;d=' . urlencode( $default );
-
     $rating = get_option( 'avatar_rating' );
+
     if ( ! empty( $rating ) ) {
-      $out .= "&amp;r={$rating}"; }
+      $out .= "&amp;r={$rating}";
+    }
 
     $avatar = "<img alt='{$safe_alt}' src='{$out}' class='avatar avatar-{$size} media-object' height='{$size}' width='{$size}' />";
   } else {
