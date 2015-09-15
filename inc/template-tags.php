@@ -910,6 +910,16 @@ function flint_body_class() {
  * @param string $attr Optional. Query string or array of attributes. Default empty.
  */
 function flint_the_post_thumbnail( $size = 'post-thumbnail', $attr = '' ) {
+  echo flint_get_the_post_thumbnail( $size, $attr );
+}
+
+/**
+ * Retrieve featured image for a post according to theme options
+ *
+ * @param string $size Optional. Registered image size to use. Default 'post-thumbnail'.
+ * @param string $attr Optional. Query string or array of attributes. Default empty.
+ */
+function flint_get_the_post_thumbnail( $size = 'post-thumbnail', $attr = '' ) {
   $options = flint_get_options();
   $type    = get_post_type();
 
@@ -918,7 +928,7 @@ function flint_the_post_thumbnail( $size = 'post-thumbnail', $attr = '' ) {
       if ( 'never' !== $options['post_featured_image'] ) {
         if ( 'archives' !== $options['post_featured_image'] || is_archive() ) {
           if ( has_post_thumbnail() ) {
-            the_post_thumbnail( $size, $attr );
+            return get_the_post_thumbnail( null, $size, $attr );
           }
         }
       }
@@ -928,7 +938,7 @@ function flint_the_post_thumbnail( $size = 'post-thumbnail', $attr = '' ) {
       if ( 'never' !== $options['page_featured_image'] ) {
         if ( 'archives' !== $options['page_featured_image'] || is_archive() ) {
           if ( has_post_thumbnail() ) {
-            the_post_thumbnail( $size, $attr );
+            return get_the_post_thumbnail( null, $size, $attr );
           }
         }
       }
@@ -936,7 +946,7 @@ function flint_the_post_thumbnail( $size = 'post-thumbnail', $attr = '' ) {
 
     default:
       if ( has_post_thumbnail() ) {
-        the_post_thumbnail( $size, $attr );
+        return get_the_post_thumbnail( null, $size, $attr );
       }
       break;
   }
