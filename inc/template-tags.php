@@ -138,7 +138,6 @@ function flint_the_comments() {
   <?php endif;
 }
 
-
 add_action( 'flint_entry_meta_above_post','flint_posted_on' );
 if ( ! function_exists( 'flint_posted_on' ) ) :
 /**
@@ -1007,7 +1006,7 @@ function flint_content_class( $class = '' ) {
 
   $class .= ! empty( $class ) ? ' site-content col-xs-12' : 'site-content col-xs-12';
 
-  if ( is_active_sidebar( 'left' ) | is_active_sidebar( 'right' ) ) {
+  if ( is_active_sidebar( 'left' ) || is_active_sidebar( 'right' ) ) {
     if ( is_active_sidebar( 'left' ) && is_active_sidebar( 'right' ) ) {
       $class .= ' col-md-6 wa-both';
     } else {
