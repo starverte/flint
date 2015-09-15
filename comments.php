@@ -12,7 +12,7 @@ if ( post_password_required() ) {
 ?>
 <div class="row">
   <?php echo flint_post_margin(); ?>
-  <div id="comments" class="comments-area <?php flint_get_template( 'content' ); ?>">
+  <div id="comments" class="comments-area <?php echo flint_post_width_class(); ?>">
 
     <?php if ( have_comments() ) : ?>
       <h2 class="comments-title">
