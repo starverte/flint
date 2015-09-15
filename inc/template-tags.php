@@ -1164,3 +1164,28 @@ function flint_post_width() {
 
   return $post_width;
 }
+
+/**
+ * Retrieves class to achieve post width
+ */
+function flint_post_width_class() {
+  $post_width = flint_post_width();
+
+  switch ( $post_width ) {
+    case 'slim':
+      return 'col-xs-12 col-sm-8 col-md-4';
+      break;
+
+    case 'narrow':
+      return 'col-xs-12 col-sm-8 col-md-6';
+      break;
+
+    case 'full':
+      return 'col-xs-12 col-sm-10 col-md-8';
+      break;
+
+    case 'wide':
+      return 'col-xs-12';
+      break;
+  }
+}
