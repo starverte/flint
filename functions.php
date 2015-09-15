@@ -103,7 +103,7 @@ require( get_template_directory() . '/inc/custom-header.php' );
  * Register widgetized areas and update sidebar with default widgets
  */
 function flint_widgets_init() {
-  $options = flint_get_options();
+  $options = flint_options();
 
   $widget_areas = array();
 
@@ -170,7 +170,7 @@ function flint_enqueue_scripts() {
   /*
    * Load Google Fonts
    */
-  $options = flint_get_options();
+  $options = flint_options();
 
   switch ( $options['font_family_base'] ) {
     case 'Open Sans':

@@ -57,7 +57,7 @@ function flint_options_defaults() {
  *
  * @param string $option Deprecated. The single option to return.
  */
-function flint_get_options( $option = null ) {
+function flint_options( $option = null ) {
   $defaults = flint_options_defaults();
 
   $defaults['body_bg']    = get_theme_mod( 'background_color', $defaults['body_bg'] );
@@ -162,7 +162,7 @@ function flint_get_options( $option = null ) {
  * Get color option values
  */
 function flint_options_colors() {
-  $options = flint_get_options();
+  $options = flint_options();
   $calc = array(
     'link_hover_color' => flint_darken( $options['link_color'], 15 ),
     'blockquote_border_color' => flint_lighten( $options['fill'], 15 ),
@@ -183,7 +183,7 @@ function flint_options_colors() {
  * @return string The address, as filtered
  */
 function flint_get_address( $schema = true, $args = array() ) {
-  $options = flint_get_options();
+  $options = flint_options();
 
   $defaults = array(
     'before' => '<span id="street" itemprop="streetAddress">',

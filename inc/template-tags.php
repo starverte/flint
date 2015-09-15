@@ -681,7 +681,7 @@ function flint_comment_reply_link( $args = array(), $comment = null, $post = nul
  * @param bool   $minimal If true, using the Minimal page template.
  */
 function flint_get_sidebar( $slug, $minimal = false ) {
-  $options = flint_get_options();
+  $options = flint_options();
 
   switch ( $minimal ) {
     case true:
@@ -708,7 +708,7 @@ function flint_get_sidebar( $slug, $minimal = false ) {
  * @return bool true if the sidebar is in use, false otherwise.
  */
 function flint_is_active_sidebar( $slug ) {
-  $options = flint_get_options();
+  $options = flint_options();
 
   if ( $slug == $options['minimal_widget_area'] && is_active_sidebar( $slug ) ) :
     return true;
@@ -731,7 +731,7 @@ function flint_theme_version() {
  * @param string $template The page template.
  */
 function flint_breadcrumbs( $template = 'default' ) {
-  $options = flint_get_options();
+  $options = flint_options();
 
   switch ( $template ) {
     case 'clear':
@@ -757,7 +757,7 @@ function flint_breadcrumbs( $template = 'default' ) {
  * Creates custom footer from theme options
  */
 function flint_custom_footer() {
-  $options = flint_get_options();
+  $options = flint_options();
 
   $footer = stripslashes( $options['footer_content'] );
 
@@ -792,7 +792,7 @@ function flint_custom_footer() {
  * Generate CSS from customization options
  */
 function flint_options_css() {
-  $options = flint_get_options();
+  $options = flint_options();
   $colors = flint_options_colors();
 
   $body = 'body {';
@@ -876,7 +876,7 @@ function flint_options_css() {
  */
 function flint_body_class() {
   global $post;
-  $options = flint_get_options();
+  $options = flint_options();
   if ( ! empty( $post->ID ) ) {
     $template = get_post_meta( $post->ID, '_wp_page_template', true );
 
@@ -919,7 +919,7 @@ function flint_the_post_thumbnail( $size = 'post-thumbnail', $attr = '' ) {
  * @param string $attr Optional. Query string or array of attributes. Default empty.
  */
 function flint_get_the_post_thumbnail( $size = 'post-thumbnail', $attr = '' ) {
-  $options = flint_get_options();
+  $options = flint_options();
   $type    = get_post_type();
 
   switch ( $type ) {
@@ -992,7 +992,7 @@ function flint_has_category( $category = '', $post = null ) {
  * Checks if side widget areas are active and changes
  * width of content accordingly.
  *
- * @uses flint_get_options()
+ * @uses flint_options()
  * @uses is_active_sidebar()
  *
  * @param string $class   Additional class or classes to append to content div.
@@ -1002,7 +1002,7 @@ function flint_has_category( $category = '', $post = null ) {
  */
 function flint_content_class( $class = '' ) {
   global $post;
-  $options = flint_get_options();
+  $options = flint_options();
 
   $class .= ! empty( $class ) ? ' site-content col-xs-12' : 'site-content col-xs-12';
 
@@ -1053,7 +1053,7 @@ function flint_nav_fallback() {
  * Retrieves post width
  */
 function flint_post_width() {
-  $options = flint_get_options();
+  $options = flint_options();
   $type = get_post_type( get_the_ID() );
 
   if ( ! is_active_sidebar( 'left' ) && ! is_active_sidebar( 'right' ) ) {

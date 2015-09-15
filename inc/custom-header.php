@@ -43,7 +43,7 @@ if ( ! function_exists( 'flint_admin_header_style' ) ) :
  * Styles the header image displayed on the Appearance > Header admin panel.
  */
 function flint_admin_header_style() {
-  $options = flint_get_options();
+  $options = flint_options();
   $colors  = flint_options_colors();
 ?>
   <style type="text/css">
