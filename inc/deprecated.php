@@ -399,3 +399,13 @@ function flint_get_colors() {
   flint_deprecated_function( __FUNCTION__, '1.5.0', 'flint_options_colors()' );
   return flint_options_colors();
 }
+
+/**
+ * Get option defaults
+ *
+ * @deprecated 1.5.0 Use flint_options_defaults() instead
+ */
+function flint_get_option_defaults() {
+  flint_deprecated_function( __FUNCTION__, '1.5.0', 'flint_options_defaults()' );
+  return flint_options_defaults();
+}

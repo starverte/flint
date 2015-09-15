@@ -52,7 +52,7 @@ function flint_after_setup_theme() {
 
   add_theme_support( 'title-tag' );
 
-  $defaults = flint_get_option_defaults();
+  $defaults = flint_options_defaults();
 
   /**
    * Implement the Custom Background feature

@@ -10,7 +10,7 @@
 /**
  * Get option defaults
  */
-function flint_get_option_defaults() {
+function flint_options_defaults() {
   $defaults = array(
     'text_color'                 => '#404040',
     'body_bg'                    => '#ffffff',
@@ -58,7 +58,7 @@ function flint_get_option_defaults() {
  * @param string $option Deprecated. The single option to return.
  */
 function flint_get_options( $option = null ) {
-  $defaults = flint_get_option_defaults();
+  $defaults = flint_options_defaults();
 
   $defaults['body_bg']    = get_theme_mod( 'background_color', $defaults['body_bg'] );
   $defaults['fill_color'] = get_theme_mod( 'header_textcolor', $defaults['fill_color'] );
