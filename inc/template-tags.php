@@ -10,8 +10,9 @@ if ( ! function_exists( 'flint_content_nav' ) ) :
 /**
  * Display navigation to next/previous pages when applicable
  *
- * @deprecated 2.0.0
- * @ignore
+ * @param string $nav_id The slug ID of the navigation menu.
+ *
+ * @todo Remove in Flint 2.
  */
 function flint_content_nav( $nav_id ) {
   global $wp_query;
@@ -76,8 +77,11 @@ if ( ! function_exists( 'flint_comment' ) ) :
  *
  * Used as a callback by wp_list_comments() for displaying the comments.
  *
- * @deprecated 2.0.0
- * @ignore
+ * @todo Remove in Flint 2.
+ *
+ * @param object $comment The comment object.
+ * @param array  $args An array of arguments.
+ * @param int    $depth The depth of the current comment.
  */
 function flint_comment( $comment, $args, $depth ) {
   $GLOBALS['comment'] = $comment;
@@ -123,8 +127,9 @@ endif; // flint_comment()
 
 add_action( 'flint_entry_meta_below_post','flint_the_comments', 20 );
 /**
- * @deprecated 2.0.0
- * @ignore
+ * Display comments below post
+ *
+ * @todo Remove in Flint 2.
  */
 function flint_the_comments() {
   if ( ! post_password_required() && ( comments_open() || '0' != get_comments_number() ) ) : ?>
@@ -132,7 +137,6 @@ function flint_the_comments() {
     <span class="comments-link"><?php comments_popup_link( __( 'Leave a comment', 'flint' ), __( '1 Comment', 'flint' ), __( '% Comments', 'flint' ) ); ?></span>
   <?php endif;
 }
-
 
 add_action( 'flint_entry_meta_above_post','flint_posted_on' );
 if ( ! function_exists( 'flint_posted_on' ) ) :
@@ -234,7 +238,7 @@ add_action( 'save_post', 'flint_category_transient_flusher' );
  * Displays page links for paginated posts (i.e. includes the <!--nextpage-->.
  * Quicktag one or more times). This tag must be within The Loop.
  *
- * @param string|array $args
+ * @param string|array $args A string or array of argument(s).
  * @return string Formatted output in HTML.
  */
 function flint_link_pages( $args = '' ) {
@@ -424,7 +428,7 @@ add_filter( 'the_password_form', 'flint_password_form' );
 /**
  * Output a complete commenting form for use within a template, using Twitter Bootstrap styles.
  *
- * @param array       $args
+ * @param array       $args An array of arguments.
  * @param int|WP_Post $post_id Post ID or WP_Post object to generate the form for. Default current post.
  *
  * @todo Remove "Required fields are marked *"
@@ -447,12 +451,9 @@ function flint_comment_form( $args = array(), $post_id = null ) {
   $req = get_option( 'require_name_email' );
   $aria_req = ( $req ? " aria-required='true' required" : '' );
   $fields = array(
-    'author' => '<p class="comment-form-author">' .
-                '<input class="form-control required" id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" ' . $aria_req . ' placeholder="Name*"></p>',
-    'email'  => '<p class="comment-form-email">' .
-                '<input class="form-control" id="email" name="email" type="text" value="' . esc_attr( $commenter['comment_author_email'] ) . '" ' . $aria_req . ' placeholder="Email Address*"></p>',
-    'url'    => '<p class="comment-form-url">' .
-                '<input class="form-control" id="url" name="url" type="text" value="' . esc_attr( $commenter['comment_author_url'] ) . '" placeholder="Website URL" /></p>',
+    'author' => '<p class="comment-form-author"><input class="form-control required" id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" ' . $aria_req . ' placeholder="Name*"></p>',
+    'email'  => '<p class="comment-form-email"><input class="form-control" id="email" name="email" type="text" value="' . esc_attr( $commenter['comment_author_email'] ) . '" ' . $aria_req . ' placeholder="Email Address*"></p>',
+    'url'    => '<p class="comment-form-url"><input class="form-control" id="url" name="url" type="text" value="' . esc_attr( $commenter['comment_author_url'] ) . '" placeholder="Website URL" /></p>',
   );
 
   $required_text = sprintf( ' ' . __( 'Required fields are marked %s', 'flint' ), '<span class="required">*</span>' );
@@ -515,9 +516,19 @@ function flint_comment_form( $args = array(), $post_id = null ) {
 }
 
 /**
- * Retrieve the avatar for a user who provided a user ID or email address.
+ * Retrieve the avatar `<img>` tag for a user, email address, MD5 hash, comment, or post.
  *
- * @ignore
+ * @see get_the_avatar()
+ *
+ * @param mixed  $id_or_email The Gravatar to retrieve. Accepts a user_id,
+ *                            user email, or WP_User object.
+ * @param string $size        Optional. Height and width of the avatar image file in pixels. Default 96.
+ * @param string $default     Optional. URL for the default image or a default type. Accepts
+ *                            'mystery' (The Oyster Man), 'blank' (transparent GIF),
+ *                            or 'gravatar_default' (the Gravatar logo). Default is the value of the
+ *                            'avatar_default' option, with a fallback of 'mystery'.
+ * @param string $alt         Optional. Alternative text to use in &lt;img&gt; tag. Default empty.
+ * @return false|string `<img>` tag for the user's avatar. False on failure.
  */
 function flint_avatar( $id_or_email, $size = '96', $default = '', $alt = false ) {
   if ( ! get_option( 'show_avatars' ) ) {
@@ -605,7 +616,7 @@ function flint_avatar( $id_or_email, $size = '96', $default = '', $alt = false )
 /**
  * Retrieve HTML content for reply to comment link.
  *
- * @param array       $args
+ * @param array       $args An array of arguments.
  * @param int         $comment Comment being replied to. Default current comment.
  * @param int|WP_Post $post    Post ID or WP_Post object the comment is going to be displayed on.
  *                             Default current post.
@@ -667,7 +678,7 @@ function flint_comment_reply_link( $args = array(), $comment = null, $post = nul
  * get_sidebar doesn't make sense for all widget areas, so this replaces that function
  *
  * @param string $slug    The slug of the specialised sidebar.
- * @param bool   $minimal If true, using the Minimal page template
+ * @param bool   $minimal If true, using the Minimal page template.
  */
 function flint_get_sidebar( $slug, $minimal = false ) {
   $options = flint_get_options();
@@ -717,7 +728,7 @@ function flint_theme_version() {
 /**
  * Returns breadcrumbs for pages
  *
- * @param string $template The page template
+ * @param string $template The page template.
  */
 function flint_breadcrumbs( $template = 'default' ) {
   $options = flint_get_options();
@@ -861,78 +872,6 @@ function flint_options_css() {
 }
 
 /**
- * Returns slug or class for #primary based on theme options
- */
-function flint_get_template( $output = 'slug', $template = '', $a = false ) {
-  $options = flint_get_options();
-  $file    = get_post_meta( get_the_ID(), '_wp_page_template', true );
-
-  if ( ! empty( $template ) && $a != true ) { trigger_error( '$template variable in flint_get_template() is deprecated as of Flint 1.2.1. Use get_template() to get a particular file.' );
-unset( $t ); }
-
-  if ( $file == 'templates/clear.php' ) { $slug = $options['clear_width']; } elseif ( $file == 'templates/minimal.php' ) {
-    if ( flint_is_active_sidebar( 'left' ) || flint_is_active_sidebar( 'right' ) ) { $slug = 'wide';
-} else { $slug = $options['minimal_width']; }
-  } else {
-    if ( is_active_sidebar( 'left' ) || is_active_sidebar( 'right' ) ) { $slug = 'wide';
-} else { $slug = $options['page_default_width']; }
-  }
-
-  switch ( $output ) {
-    case 'slug':
-      return $slug;
-      break;
-    case 'content':
-      switch ( $slug ) {
-        case 'slim':
-          echo 'col-xs-12 col-sm-8 col-md-4';
-          break;
-        case 'narrow':
-          echo 'col-xs-12 col-sm-8 col-md-6';
-          break;
-        case 'full':
-          echo 'col-xs-12 col-sm-10 col-md-8';
-          break;
-        case 'wide':
-          echo 'col-xs-12';
-          break;
-      }
-      break;
-    case 'margins':
-      switch ( $slug ) {
-        case 'slim':
-          echo '<div class="hidden-xs col-sm-2 col-md-4"></div>';
-          break;
-        case 'narrow':
-          echo '<div class="hidden-xs col-sm-2 col-md-3"></div>';
-          break;
-        case 'full':
-          echo '<div class="hidden-xs col-sm-1 col-md-2"></div>';
-          break;
-        case 'wide':
-          break;
-      }
-      break;
-  }
-
-}
-
-/**
- * Returns slug or class for .widgets.widgets-footer based on theme options
- */
-function flint_get_sidebar_template( $output, $widget_area = 'footer' ) {
-  $options = flint_get_options();
-  $type    = get_post_type( get_the_ID() );
-
-  switch ( $widget_area ) {
-    case 'footer':
-      if ( $type == 'page' ) { flint_get_template( $output );
-} else { flint_get_template( $output, 'templates/full.php', true ); }
-      break;
-  }
-}
-
-/**
  * Body class is determined by page template
  */
 function flint_body_class() {
@@ -964,45 +903,83 @@ function flint_body_class() {
 }
 
 /**
- * Gets the featured image for a post or page if not specified otherwise in theme options
+ * Display featured image for a post according to theme options
+ *
+ * @param string $size Optional. Registered image size to use. Default 'post-thumbnail'.
+ * @param string $attr Optional. Query string or array of attributes. Default empty.
  */
 function flint_the_post_thumbnail( $size = 'post-thumbnail', $attr = '' ) {
-  $layout = flint_get_options();
-  $type   = get_post_type();
-  $posts_image = ! empty( $layout['posts_image'] ) ? $layout['posts_image'] : 'always';
-  $pages_image = ! empty( $layout['pages_image'] ) ? $layout['pages_image'] : 'always';
+  echo flint_get_the_post_thumbnail( $size, $attr );
+}
+
+/**
+ * Retrieve featured image for a post according to theme options
+ *
+ * @param string $size Optional. Registered image size to use. Default 'post-thumbnail'.
+ * @param string $attr Optional. Query string or array of attributes. Default empty.
+ */
+function flint_get_the_post_thumbnail( $size = 'post-thumbnail', $attr = '' ) {
+  $options = flint_get_options();
+  $type    = get_post_type();
+
   switch ( $type ) {
     case 'post':
-      if ( $posts_image == 'always' ) {if ( has_post_thumbnail() ) { the_post_thumbnail( $size, $attr ); }
-} elseif ( $posts_image == 'archives' && is_archive() ) {if ( has_post_thumbnail() ) { the_post_thumbnail( $size, $attr ); }
-}
+      if ( 'never' !== $options['post_featured_image'] ) {
+        if ( 'archives' !== $options['post_featured_image'] || is_archive() ) {
+          if ( has_post_thumbnail() ) {
+            return get_the_post_thumbnail( null, $size, $attr );
+          }
+        }
+      }
       break;
+
     case 'page':
-      if ( $pages_image == 'always' ) {if ( has_post_thumbnail() ) { the_post_thumbnail( $size, $attr ); }
-} elseif ( $pages_image == 'archives' && is_archive() ) {if ( has_post_thumbnail() ) { the_post_thumbnail( $size, $attr ); }
-}
+      if ( 'never' !== $options['page_featured_image'] ) {
+        if ( 'archives' !== $options['page_featured_image'] || is_archive() ) {
+          if ( has_post_thumbnail() ) {
+            return get_the_post_thumbnail( null, $size, $attr );
+          }
+        }
+      }
       break;
+
     default:
-      if ( has_post_thumbnail() ) { the_post_thumbnail( $size, $attr ); }
+      if ( has_post_thumbnail() ) {
+        return get_the_post_thumbnail( null, $size, $attr );
+      }
       break;
   }
 }
 
 /**
- * Similar to WordPress has_category()
- * Ignores "Uncategorized"
+ * Check if the current post has any of given category
+ *
+ * Also checks for any non-Uncategorized category if no category specified.
+ *
+ * @see has_category()
+ *
+ * @param string|int|array $category Optional. The category name/term_id/slug or array of them to check for.
+ * @param int|object       $post     Optional. Post to check instead of the current post.
+ *
+ * @return bool True if the current post has any of the given categories (or any category, if no category specified).
  */
 function flint_has_category( $category = '', $post = null ) {
   if ( has_term( $category, 'category', $post ) ) {
     $cats = '';
+
     foreach ( get_the_category() as $cat ) {
       if ( $cat->cat_name != 'Uncategorized' ) {
         $cats .= $cat->cat_name;
       }
     }
+
     $output = trim( $cats, ' ' );
-    if ( ! empty( $output ) ) { return true;
-} else { return false; }
+
+    if ( ! empty( $output ) ) {
+      return true;
+    } else {
+      return false;
+    }
   } else {
     return false;
   }
@@ -1018,7 +995,7 @@ function flint_has_category( $category = '', $post = null ) {
  * @uses flint_get_options()
  * @uses is_active_sidebar()
  *
- * @param string $class   Additional class or classes to append to content div
+ * @param string $class   Additional class or classes to append to content div.
  * @var   array  $options The options array
  *
  * @todo Allow array input for $class
@@ -1029,7 +1006,7 @@ function flint_content_class( $class = '' ) {
 
   $class .= ! empty( $class ) ? ' site-content col-xs-12' : 'site-content col-xs-12';
 
-  if ( is_active_sidebar( 'left' ) | is_active_sidebar( 'right' ) ) {
+  if ( is_active_sidebar( 'left' ) || is_active_sidebar( 'right' ) ) {
     if ( is_active_sidebar( 'left' ) && is_active_sidebar( 'right' ) ) {
       $class .= ' col-md-6 wa-both';
     } else {
@@ -1049,199 +1026,20 @@ function flint_content_class( $class = '' ) {
  *
  * Retrieves and displays the classes for the post div. If
  *
- * @uses flint_get_options()
- * @uses get_post_format()
- * @uses is_active_sidebar()
+ * @uses flint_post_width_class()
  * @uses post_class()
- *
- * @var array  $options       The options array
- * @var string $format        The format, if any, of the post
- * @var string $options['default_width'] The default width, as set in options, of a post
- * @var string $width         The width of the post, which determines the col-* classes
  *
  * @todo Add parameter to append additional classes that accepts both string and array input
  */
 function flint_post_class() {
-  global $post;
-  $options = flint_get_options();
-  $format  = get_post_format( $post->ID );
-
-  switch ( $format ) {
-    case 'aside':
-      $width = 'wide';
-      break;
-    case 'link':
-      $width = 'wide';
-      break;
-    case 'status':
-      $width = 'wide';
-      break;
-    default:
-      $width = $options['post_default_width'];
-      break;
-  }
-
-  if ( ! is_active_sidebar( 'left' ) && ! is_active_sidebar( 'right' ) ) {
-    switch ( $width ) {
-      case 'slim':
-        post_class( 'col-xs-12 col-sm-8 col-md-4' );
-        break;
-      case 'narrow':
-        post_class( 'col-xs-12 col-sm-8 col-md-6' );
-        break;
-      case 'full':
-        post_class( 'col-xs-12 col-sm-8 col-md-8' );
-        break;
-      case 'wide':
-        post_class( 'col-xs-12' );
-        break;
-      default:
-        post_class( 'col-xs-12 col-sm-8 col-md-8' );
-        break;
-    }
-  } else {
-    post_class( 'col-xs-12' );
-  }
+  post_class( flint_post_width_class() );
 }
 
 /**
- * Get content spacer
+ * Navigation fallback
  *
- * Retrieve and display content spacers based on default post width,
- * post format, and if side widget areas are active.
- *
- * @uses flint_the_post_thumbnail()
- * @uses flint_get_options()
- * @uses get_post_format()
- * @uses is_active_sidebar()
- * @uses is_single()
- * @uses is_singular()
- *
- * @param string $side Left or right. Required.
- * @var array $options The options array
- * @var string $format The format, if any, of the post
- * @var string $width The actual post width
- *
- * @todo Convert to return instead of displaying results
+ * If the menu doesn't exist, display search instead.
  */
-function flint_get_spacer( $side ) {
-  global $post;
-  $options = flint_get_options();
-  $format  = get_post_format( $post->ID );
-
-  switch ( $format ) {
-    case 'aside':
-      $width = 'wide';
-      break;
-    case 'link':
-      $width = 'wide';
-      break;
-    case 'status':
-      $width = 'wide';
-      break;
-    default:
-      $width = $options['post_default_width'];
-      break;
-  }
-
-  if ( ! is_active_sidebar( 'left' ) && ! is_active_sidebar( 'right' ) ) {
-    if ( $side == 'left' ) {
-      switch ( $width ) {
-        case 'slim':
-          echo '<div class="hidden-xs hidden-sm col-md-2"></div>';
-          echo '<div class="col-xs-12 col-sm-2 col-md-2">';
-
-          flint_the_post_thumbnail();
-
-          if ( ! is_single() && $format == 'gallery' ) {
-            echo '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
-          }
-
-          echo '</div>';
-          break;
-
-        case 'narrow':
-          echo '<div class="hidden-xs hidden-sm col-md-1"></div>';
-          echo '<div class="col-xs-12 col-sm-2 col-md-2">';
-
-          flint_the_post_thumbnail();
-
-          if ( ! is_single() && $format == 'gallery' ) {
-            echo '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
-          }
-
-          echo '</div>';
-          break;
-
-        case 'full':
-          echo '<div class="col-xs-12 col-sm-2 col-md-2">';
-
-          flint_the_post_thumbnail();
-
-          if ( ! is_single() && $format == 'gallery' ) {
-            echo '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
-          }
-
-          echo '</div>';
-          break;
-
-        case 'wide':
-          echo '<div class="col-xs-12 col-sm-12 hidden-md hidden-lg">';
-
-          flint_the_post_thumbnail();
-
-          if ( ! is_single() && $format == 'gallery' ) {
-            echo '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
-          }
-
-          echo '</div>';
-          break;
-
-        default:
-          echo '<div class="col-xs-12 col-sm-2 col-md-2">';
-
-          flint_the_post_thumbnail();
-
-          if ( ! is_single() && $format == 'gallery' ) {
-            echo '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
-          }
-
-          echo '</div>';
-          break;
-      }
-    } elseif ( $side == 'right' ) {
-      switch ( $width ) {
-        case 'slim':
-          $output = '<div class="hidden-xs col-sm-2 col-md-4"></div>';
-          break;
-        case 'narrow':
-          $output = '<div class="hidden-xs col-sm-2 col-md-3"></div>';
-          break;
-        case 'full':
-          $output = '<div class="hidden-xs col-sm-2 col-md-2"></div>';
-          break;
-        case 'wide':
-          $output = null;
-          break;
-        default:
-          $output = '<div class="hidden-xs col-sm-2 col-md-2"></div>';
-          break;
-      }
-      echo $output;
-    }
-  } else {
-    if ( $side == 'left' ) {
-      echo '<div class="col-xs-12 col-sm-12 hidden-md hidden-lg">';
-
-      flint_the_post_thumbnail();
-
-      echo '</div>';
-    } else {
-      return;
-    }
-  }
-}
-
 function flint_nav_fallback() {
   ?>
   <form method="get" class="navbar-form navbar-right" action="<?php echo esc_url( home_url( '/' ) ); ?>" role="search">
@@ -1251,3 +1049,167 @@ function flint_nav_fallback() {
   </form> <?php
 }
 
+/**
+ * Retrieves post width
+ */
+function flint_post_width() {
+  $options = flint_get_options();
+  $type = get_post_type( get_the_ID() );
+
+  if ( ! is_active_sidebar( 'left' ) && ! is_active_sidebar( 'right' ) ) {
+    if ( 'page' === $type ) {
+      $template = get_post_meta( get_the_ID(), '_wp_page_template', true );
+
+      switch ( $template ) {
+        case 'templates/clear.php':
+          $post_width = $options['clear_width'];
+          break;
+
+        case 'templates/minimal.php':
+          $post_width = $options['minimal_width'];
+          break;
+
+        case 'templates/slim.php':
+          $post_width = 'slim';
+          break;
+
+        case 'templates/narrow.php':
+          $post_width = 'narrow';
+          break;
+
+        case 'templates/full.php':
+          $post_width = 'full';
+          break;
+
+        case 'templates/wide.php':
+          $post_width = 'wide';
+          break;
+
+        default:
+          $post_width = $options['page_default_width'];
+      }
+    } elseif ( 'page' === $type ) {
+      $format = get_post_format( $post->ID );
+
+      switch ( $format ) {
+        case 'aside':
+          $post_width = 'wide';
+          break;
+
+        case 'link':
+          $post_width = 'wide';
+          break;
+
+        case 'status':
+          $post_width = 'wide';
+          break;
+
+        default:
+          $post_width = $options['post_default_width'];
+          break;
+      }
+    } else {
+      $post_width = $options['post_default_width'];
+    }
+  } else {
+    $post_width = 'wide';
+  }
+
+  return $post_width;
+}
+
+/**
+ * Retrieves class to achieve post width
+ */
+function flint_post_width_class() {
+  $post_width = flint_post_width();
+
+  switch ( $post_width ) {
+    case 'slim':
+      return 'col-xs-12 col-sm-8 col-md-4';
+      break;
+
+    case 'narrow':
+      return 'col-xs-12 col-sm-8 col-md-6';
+      break;
+
+    case 'full':
+      return 'col-xs-12 col-sm-10 col-md-8';
+      break;
+
+    case 'wide':
+      return 'col-xs-12';
+      break;
+  }
+}
+
+/**
+ * Retrieves margin for post, and post thumbnail if needed
+ *
+ * @param bool $thumbnail Optional. Whether to display the post thumbnail in margin. Default false.
+ */
+function flint_post_margin( $thumbnail = false ) {
+  $post_width = flint_post_width();
+  $output     = '';
+
+  if ( true === $thumbnail && ! is_active_sidebar( 'left' ) && ! is_active_sidebar( 'right' ) ) {
+    switch ( $post_width ) {
+      case 'slim':
+        $output .= '<div class="hidden-xs hidden-sm col-md-2"></div>';
+        $output .= '<div class="col-xs-12 col-sm-2 col-md-2">';
+        $output .= flint_get_the_post_thumbnail();
+        if ( ! is_single() && $format == 'gallery' ) {
+          $output .= '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
+        }
+        $output .= '</div>';
+        break;
+
+      case 'narrow':
+        $output .= '<div class="hidden-xs hidden-sm col-md-1"></div>';
+        $output .= '<div class="col-xs-12 col-sm-2 col-md-2">';
+        $output .= flint_get_the_post_thumbnail();
+        if ( ! is_single() && $format == 'gallery' ) {
+          $output .= '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
+        }
+        $output .= '</div>';
+        break;
+
+      case 'wide':
+        $output .= '<div class="col-xs-12 col-sm-12 hidden-md hidden-lg">';
+        $output .= flint_get_the_post_thumbnail();
+        if ( ! is_single() && $format == 'gallery' ) {
+          $output .= '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
+        }
+        $output .= '</div>';
+        break;
+
+      default:
+        $output .= '<div class="col-xs-12 col-sm-2 col-md-2">';
+        $output .= flint_get_the_post_thumbnail();
+        if ( ! is_single() && $format == 'gallery' ) {
+          $output .= '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
+        }
+        $output .= '</div>';
+        break;
+    }
+
+    return $output;
+  } else {
+    switch ( $post_width ) {
+      case 'slim':
+        return '<div class="hidden-xs col-sm-2 col-md-4"></div>';
+        break;
+
+      case 'narrow':
+        return '<div class="hidden-xs col-sm-2 col-md-3"></div>';
+        break;
+
+      case 'wide':
+        break;
+
+      default:
+        return '<div class="hidden-xs col-sm-1 col-md-2"></div>';
+        break;
+    }
+  }
+}

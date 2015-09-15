@@ -11,8 +11,8 @@ if ( post_password_required() ) {
 }
 ?>
 <div class="row">
-  <?php flint_get_template( 'margins' ); ?>
-  <div id="comments" class="comments-area <?php flint_get_template( 'content' ); ?>">
+  <?php echo flint_post_margin(); ?>
+  <div id="comments" class="comments-area <?php echo flint_post_width_class(); ?>">
 
     <?php if ( have_comments() ) : ?>
       <h2 class="comments-title">
@@ -51,5 +51,5 @@ if ( post_password_required() ) {
     <?php flint_comment_form(); ?>
 
   </div><!-- #comments -->
-  <?php flint_get_template( 'margins' ); ?>
+  <?php echo flint_post_margin(); ?>
 </div>

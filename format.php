@@ -11,7 +11,7 @@
 ?>
 
   <div class="row">
-    <?php flint_get_spacer( 'left' ); ?>
+    <?php echo flint_post_margin( true ); ?>
     <article id="post-<?php the_ID(); ?>" <?php flint_post_class(); ?>>
       <header class="entry-header">
         <?php $type = get_post_type(); ?>
@@ -48,5 +48,5 @@
         <?php do_action( 'flint_entry_meta_below_post' ); ?>
       </footer><!-- .entry-meta -->
     </article><!-- #post-<?php the_ID(); ?> -->
-    <?php flint_get_spacer( 'right' ); ?>
+    <?php echo flint_post_margin(); ?>
   </div><!-- .row -->

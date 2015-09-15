@@ -22,7 +22,7 @@ class Flint_Walker_Nav_Menu_Navbar extends Walker_Nav_Menu {
    *
    * @param string $output Passed by reference. Used to append additional content.
    * @param int    $depth  Depth of menu item. Used for padding.
-   * @param array  $args   An array of arguments. @see wp_nav_menu()
+   * @param array  $args   An array of arguments.
    */
   function start_lvl( &$output, $depth = 0, $args = array() ) {
 
@@ -41,7 +41,7 @@ class Flint_Walker_Nav_Menu_Navbar extends Walker_Nav_Menu {
    * @param string $output Passed by reference. Used to append additional content.
    * @param object $item   Menu item data object.
    * @param int    $depth  Depth of menu item. Used for padding.
-   * @param array  $args   An array of arguments. @see wp_nav_menu()
+   * @param array  $args   An array of arguments.
    * @param int    $id     Current item ID.
    */
   function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
@@ -100,7 +100,7 @@ class Flint_Walker_Nav_Menu_Navbar extends Walker_Nav_Menu {
    * @param array  $children_elements Array of menu item data object that are children of $element.
    * @param int    $max_depth         Maximum depth of menu item.
    * @param int    $depth             Depth of menu item.
-   * @param array  $args              An array of arguments. @see wp_nav_menu()
+   * @param array  $args              An array of arguments.
    * @param string $output            Passed by reference. Used to append additional content.
    */
   function display_element( $element, &$children_elements, $max_depth, $depth = 0, $args, &$output ) {

@@ -13,13 +13,13 @@ $type = get_post_type();
   <div class="fill-light widgets widgets-footer" role="complementary">
     <div class="container">
       <div class="row">
-        <?php flint_get_sidebar_template( 'margins', 'footer' ); ?>
-        <div class="widget-area <?php flint_get_sidebar_template( 'content', 'footer' ); ?>" >
+        <?php echo flint_post_margin(); ?>
+        <div class="widget-area <?php echo flint_post_width_class(); ?>" >
           <?php do_action( 'before_sidebar' ); ?>
           <?php do_action( 'flint_widget_area_footer_'.$type ); ?>
           <?php dynamic_sidebar( 'footer' ); ?>
         </div><!-- .widget-area -->
-        <?php flint_get_sidebar_template( 'margins', 'footer' ); ?>
+        <?php echo flint_post_margin(); ?>
       </div><!-- .row -->
     </div><!-- .container -->
   </div><!-- .widgets.widgets-footer -->
