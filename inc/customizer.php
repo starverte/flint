@@ -15,7 +15,7 @@ function flint_customize_register( $wp_customize ) {
 
   require( get_template_directory() . '/inc/class-customize-control-textarea.php' );
 
-  $defaults = flint_get_option_defaults();
+  $defaults = flint_options_defaults();
 
   $fonts = array(
     'Open Sans'         => 'Open Sans',

@@ -52,7 +52,7 @@ function flint_after_setup_theme() {
 
   add_theme_support( 'title-tag' );
 
-  $defaults = flint_get_option_defaults();
+  $defaults = flint_options_defaults();
 
   /**
    * Implement the Custom Background feature
@@ -103,7 +103,7 @@ require( get_template_directory() . '/inc/custom-header.php' );
  * Register widgetized areas and update sidebar with default widgets
  */
 function flint_widgets_init() {
-  $options = flint_get_options();
+  $options = flint_options();
 
   $widget_areas = array();
 
@@ -170,7 +170,7 @@ function flint_enqueue_scripts() {
   /*
    * Load Google Fonts
    */
-  $options = flint_get_options();
+  $options = flint_options();
 
   switch ( $options['font_family_base'] ) {
     case 'Open Sans':

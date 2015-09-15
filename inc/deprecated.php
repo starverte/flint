@@ -29,10 +29,11 @@ function flint_deprecated_function( $function, $version, $replacement = null ) {
    * @param bool $trigger Whether to trigger the error for deprecated functions. Default true.
    */
   if ( true === WP_DEBUG ) {
+    $debug = debug_backtrace();
     if ( ! is_null( $replacement ) ) {
-      trigger_error( sprintf( __( '%1$s is <strong>deprecated</strong> since Flint version %2$s! Use %3$s instead.', 'flint' ), $function, $version, $replacement ) );
+      trigger_error( sprintf( __( '%1$s is deprecated since Flint version %2$s! Use %3$s instead in file %4$s on line %5$s. Triggered', 'flint' ), $function, $version, $replacement, $debug[1]['file'], $debug[1]['line'] ), E_USER_NOTICE );
     } else {
-      trigger_error( sprintf( __( '%1$s is <strong>deprecated</strong> since Flint version %2$s with no alternative available.', 'flint' ), $function, $version ) );
+      trigger_error( sprintf( __( '%1$s is deprecated since Flint version %2$s with no alternative available in file %3$s on line %4$s. Triggered', 'flint' ), $function, $version, $debug[1]['file'], $debug[1]['line'] ), E_USER_NOTICE );
     }
   }
 }
@@ -91,7 +92,6 @@ function flint_post_thumbnail( $type = 'post', $loc = 'single' ) {
  * @param int         $comment Comment being replied to. Default current comment.
  * @param int|WP_Post $post    Post ID or WP_Post object the comment is going to be displayed on.
  *                             Default current post.
- * @return mixed Link to show comment form, if successful. False, if comments are closed.
  */
 function flint_reply_link( $args = array(), $comment = null, $post = null ) {
   flint_deprecated_function( __FUNCTION__, '1.4.0', 'flint_comment_reply_link()' );
@@ -107,7 +107,6 @@ function flint_reply_link( $args = array(), $comment = null, $post = null ) {
  * @param int         $comment Comment being replied to. Default current comment.
  * @param int|WP_Post $post    Post ID or WP_Post object the comment is going to be displayed on.
  *                             Default current post.
- * @return void|false|string Link to show comment form, if successful. False, if comments are closed.
  */
 function get_flint_reply_link( $args = array(), $comment = null, $post = null ) {
   flint_deprecated_function( __FUNCTION__, '1.4.0', 'flint_get_comment_reply_link()' );
@@ -156,7 +155,7 @@ function flint_get_widgets_template( $output, $widget_area = 'footer' ) {
  */
 function flint_is_active_widgets( $slug ) {
   flint_deprecated_function( __FUNCTION__, '1.4.0', 'flint_is_active_sidebar()' );
-  flint_get_sidebar( $slug );
+  return flint_is_active_sidebar( $slug );
 }
 
 /**
@@ -387,4 +386,34 @@ function flint_get_sidebar_template( $output, $widget_area = 'footer' ) {
       echo flint_post_margin();
       break;
   }
+}
+
+/**
+ * Get color option values
+ *
+ * @deprecated 1.5.0 Use flint_options_colors() instead
+ */
+function flint_get_colors() {
+  flint_deprecated_function( __FUNCTION__, '1.5.0', 'flint_options_colors()' );
+  return flint_options_colors();
+}
+
+/**
+ * Get option defaults
+ *
+ * @deprecated 1.5.0 Use flint_options_defaults() instead
+ */
+function flint_get_option_defaults() {
+  flint_deprecated_function( __FUNCTION__, '1.5.0', 'flint_options_defaults()' );
+  return flint_options_defaults();
+}
+
+/**
+ * Get option values
+ *
+ * @deprecated 1.5.0 Use flint_options() instead
+ */
+function flint_get_options() {
+  flint_deprecated_function( __FUNCTION__, '1.5.0', 'flint_options()' );
+  return flint_options();
 }

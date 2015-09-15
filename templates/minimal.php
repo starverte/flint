@@ -8,7 +8,7 @@
 
 get_header( 'head' );
 
-$options = flint_get_options();
+$options = flint_options();
 if ( empty( $options['minimal_nav'] ) || 'navbar' === $options['minimal_nav'] ) {
   get_header( 'nav' );
 }

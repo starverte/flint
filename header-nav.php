@@ -11,8 +11,8 @@
 ?>
 
   <nav class="fill navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <h1 class="screen-reader-text"><?php _e( 'Menu', 'flint' ); ?></h1>
-    <div class="screen-reader-text skip-link"><a href="#content" title="<?php esc_attr_e( 'Skip to content', 'flint' ); ?>"><?php _e( 'Skip to content', 'flint' ); ?></a></div>
+    <h1 class="screen-reader-text"><?php esc_html_e( 'Menu', 'flint' ); ?></h1>
+    <div class="screen-reader-text skip-link"><a href="#content" title="<?php esc_attr_e( 'Skip to content', 'flint' ); ?>"><?php esc_html_e( 'Skip to content', 'flint' ); ?></a></div>
     <div class="container">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
@@ -22,7 +22,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="<?php echo esc_url( home_url() ); ?>"><?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?></a>
+        <a class="navbar-brand" href="<?php echo esc_url( home_url() ); ?>"><?php esc_attr_e( get_bloginfo( 'name', 'display' ) ); ?></a>
       </div><!-- .navbar-header -->
 
       <!-- Collect the nav links, forms, and other content for toggling -->

@@ -10,7 +10,7 @@
 /**
  * Get option defaults
  */
-function flint_get_option_defaults() {
+function flint_options_defaults() {
   $defaults = array(
     'text_color'                 => '#404040',
     'body_bg'                    => '#ffffff',
@@ -57,8 +57,8 @@ function flint_get_option_defaults() {
  *
  * @param string $option Deprecated. The single option to return.
  */
-function flint_get_options( $option = null ) {
-  $defaults = flint_get_option_defaults();
+function flint_options( $option = null ) {
+  $defaults = flint_options_defaults();
 
   $defaults['body_bg']    = get_theme_mod( 'background_color', $defaults['body_bg'] );
   $defaults['fill_color'] = get_theme_mod( 'header_textcolor', $defaults['fill_color'] );
@@ -161,8 +161,8 @@ function flint_get_options( $option = null ) {
 /**
  * Get color option values
  */
-function flint_get_colors() {
-  $options = flint_get_options();
+function flint_options_colors() {
+  $options = flint_options();
   $calc = array(
     'link_hover_color' => flint_darken( $options['link_color'], 15 ),
     'blockquote_border_color' => flint_lighten( $options['fill'], 15 ),
@@ -179,11 +179,9 @@ function flint_get_colors() {
  *
  * @param bool  $schema If true, return address with schema.org microdata.
  * @param array $args Array of address return arguments.
- *
- * @return string The address, as filtered
  */
 function flint_get_address( $schema = true, $args = array() ) {
-  $options = flint_get_options();
+  $options = flint_options();
 
   $defaults = array(
     'before' => '<span id="street" itemprop="streetAddress">',
