@@ -371,16 +371,20 @@ function flint_get_spacer( $side = null ) {
  * @param string $widget_area The widget area: header, footer, left, or right.
  */
 function flint_get_sidebar_template( $output, $widget_area = 'footer' ) {
-  $options = flint_get_options();
-  $type    = get_post_type( get_the_ID() );
+  switch ( $output ) {
+    case 'slug':
+      flint_deprecated_function( __FUNCTION__, '1.5.0', 'flint_post_width()' );
+      return flint_post_width();
+      break;
 
-  switch ( $widget_area ) {
-    case 'footer':
-      if ( $type == 'page' ) {
-        flint_get_template( $output );
-      } else {
-        flint_get_template( $output, 'templates/full.php', true );
-      }
+    case 'content':
+      flint_deprecated_function( __FUNCTION__, '1.5.0', 'flint_post_width_class()' );
+      echo flint_post_width_class();
+      break;
+
+    case 'margins':
+      flint_deprecated_function( __FUNCTION__, '1.5.0', 'flint_post_margin()' );
+      echo flint_post_margin();
       break;
   }
 }
