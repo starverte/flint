@@ -44,7 +44,7 @@ if ( ! function_exists( 'flint_admin_header_style' ) ) :
  */
 function flint_admin_header_style() {
   $options = flint_get_options();
-  $colors  = flint_get_colors();
+  $colors  = flint_options_colors();
 ?>
   <style type="text/css">
     @import url("//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700");

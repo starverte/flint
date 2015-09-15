@@ -161,7 +161,7 @@ function flint_get_options( $option = null ) {
 /**
  * Get color option values
  */
-function flint_get_colors() {
+function flint_options_colors() {
   $options = flint_get_options();
   $calc = array(
     'link_hover_color' => flint_darken( $options['link_color'], 15 ),

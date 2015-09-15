@@ -793,7 +793,7 @@ function flint_custom_footer() {
  */
 function flint_options_css() {
   $options = flint_get_options();
-  $colors = flint_get_colors();
+  $colors = flint_options_colors();
 
   $body = 'body {';
   $body .= 'background-color: #' . $colors['body_bg'] . '; font-family: ';

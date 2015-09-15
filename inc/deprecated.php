@@ -29,10 +29,11 @@ function flint_deprecated_function( $function, $version, $replacement = null ) {
    * @param bool $trigger Whether to trigger the error for deprecated functions. Default true.
    */
   if ( true === WP_DEBUG ) {
+    $debug = debug_backtrace();
     if ( ! is_null( $replacement ) ) {
-      trigger_error( sprintf( __( '%1$s is <strong>deprecated</strong> since Flint version %2$s! Use %3$s instead.', 'flint' ), $function, $version, $replacement ) );
+      trigger_error( sprintf( __( '%1$s is deprecated since Flint version %2$s! Use %3$s instead in file %4$s on line %5$s. Triggered', 'flint' ), $function, $version, $replacement, $debug[1]['file'], $debug[1]['line'] ), E_USER_NOTICE );
     } else {
-      trigger_error( sprintf( __( '%1$s is <strong>deprecated</strong> since Flint version %2$s with no alternative available.', 'flint' ), $function, $version ) );
+      trigger_error( sprintf( __( '%1$s is deprecated since Flint version %2$s with no alternative available in file %3$s on line %4$s. Triggered', 'flint' ), $function, $version, $debug[1]['file'], $debug[1]['line'] ), E_USER_NOTICE );
     }
   }
 }
@@ -387,4 +388,14 @@ function flint_get_sidebar_template( $output, $widget_area = 'footer' ) {
       echo flint_post_margin();
       break;
   }
+}
+
+/**
+ * Get color option values
+ *
+ * @deprecated 1.5.0 Use flint_options_colors() instead
+ */
+function flint_get_colors() {
+  flint_deprecated_function( __FUNCTION__, '1.5.0', 'flint_options_colors()' );
+  return flint_options_colors();
 }
