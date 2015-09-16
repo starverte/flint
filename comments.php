@@ -30,7 +30,7 @@ if ( post_password_required() ) {
       <?php endif; ?>
 
       <ol class="comment-list">
-        <?php wp_list_comments( array( 'callback' => 'flint_comment' ) ); ?>
+        <?php wp_list_comments( array( 'avatar_size' => 96, 'walker' => new Flint_Walker_Comment ) ); ?>
       </ol><!-- .comment-list -->
 
       <?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : ?>

@@ -18,6 +18,8 @@ if ( ! function_exists( 'flint_after_setup_theme' ) ) :
  */
 function flint_after_setup_theme() {
 
+  require( get_template_directory() . '/inc/class-walker-comment.php' );
+
   require( get_template_directory() . '/inc/class-walker-nav-menu-navbar.php' );
 
   require( get_template_directory() . '/inc/template-tags.php' );
