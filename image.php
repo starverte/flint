@@ -60,7 +60,7 @@ get_header();
                     'orderby'        => 'menu_order ID',
                   ) ) );
                   foreach ( $attachments as $k => $attachment ) {
-                    if ( $attachment->ID == $post->ID ) {
+                    if ( $attachment->ID === $post->ID ) {
                       break; }
                   }
                   $k++;

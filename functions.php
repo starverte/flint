@@ -109,7 +109,7 @@ function flint_widgets_init() {
 
   $widget_areas = array();
 
-  if ( '3' === $options['widget_areas_above'] ) {
+  if ( '3' == $options['widget_areas_above'] ) {
     array_push( $widget_areas, 'Header Left', 'Header Center', 'Header Right' );
   } else {
     array_push( $widget_areas, 'Header' );
@@ -119,7 +119,7 @@ function flint_widgets_init() {
 
   array_push( $widget_areas, 'Right' );
 
-  if ( '3' === $options['widget_areas_below'] ) {
+  if ( '3' == $options['widget_areas_below'] ) {
     array_push( $widget_areas, 'Footer Left', 'Footer Center', 'Footer Right' );
   } else {
     array_push( $widget_areas, 'Footer' );

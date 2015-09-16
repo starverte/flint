@@ -154,7 +154,7 @@ endif;
  * Returns true if a blog has more than 1 category
  */
 function flint_categorized_blog() {
-  if ( false === ( $all_the_cool_cats = get_transient( 'all_the_cool_cats' ) ) ) {
+  if ( false == ( $all_the_cool_cats = get_transient( 'all_the_cool_cats' ) ) ) {
 
     // Create an array of all the categories that are attached to posts.
     $all_the_cool_cats = get_categories( array( 'hide_empty' => 1 ) );
@@ -211,7 +211,7 @@ function flint_link_pages( $args = '' ) {
 
   $output = '';
   if ( $multipage ) {
-    if ( 'number' == $next_or_number ) {
+    if ( 'number' === $next_or_number ) {
       $output .= $before;
       for ( $i = 1; $i < ($numpages + 1); $i = $i + 1 ) {
         $j = str_replace( '%',$i,$pagelink );
@@ -263,7 +263,7 @@ function flint_link_page( $i ) {
   } else {
     if ( '' == get_option( 'permalink_structure' ) || in_array( $thing->post_status, array( 'draft', 'pending' ) ) ) {
       $url = add_query_arg( 'page', $i, get_permalink() );
-    } elseif ( 'page' == get_option( 'show_on_front' ) && get_option( 'page_on_front' ) == $thing->ID ) {
+    } elseif ( 'page' === get_option( 'show_on_front' ) && get_option( 'page_on_front' ) === $thing->ID ) {
       $url = trailingslashit( get_permalink() ) . user_trailingslashit( "$wp_rewrite->pagination_base/" . $i, 'single_paged' );
     } else {
       $url = trailingslashit( get_permalink() ) . user_trailingslashit( $i, 'single_paged' );
@@ -502,7 +502,7 @@ function flint_avatar( $id_or_email, $size = '96', $default = '', $alt = false )
     return false;
   }
 
-  if ( false === $alt ) {
+  if ( false == $alt ) {
     $safe_alt = '';
   } else {
     $safe_alt = esc_attr( $alt );
@@ -567,17 +567,17 @@ function flint_avatar( $id_or_email, $size = '96', $default = '', $alt = false )
     }
   }
 
-  if ( 'mystery' == $default ) {
+  if ( 'mystery' === $default ) {
     $default = "$host/avatar/ad516503a11cd5ca435acc9bb6523536?s={$size}";
-  } elseif ( 'blank' == $default ) {
+  } elseif ( 'blank' === $default ) {
     $default = $email ? 'blank' : includes_url( 'images/blank.gif' );
-  } elseif ( ! empty( $email ) && 'gravatar_default' == $default ) {
+  } elseif ( ! empty( $email ) && 'gravatar_default' === $default ) {
     $default = '';
-  } elseif ( 'gravatar_default' == $default ) {
+  } elseif ( 'gravatar_default' === $default ) {
     $default = "$host/avatar/?s={$size}";
   } elseif ( empty( $email ) ) {
     $default = "$host/avatar/?d=$default&amp;s={$size}";
-  } elseif ( strpos( $default, 'http://' ) === 0 ) {
+  } elseif ( strpos( $default, 'http://' ) == 0 ) {
     $default = add_query_arg( 's', $size, $default );
   }
 
@@ -709,7 +709,7 @@ function flint_get_sidebar( $slug, $minimal = false ) {
 
   switch ( $minimal ) {
     case true:
-      if ( $slug == $options['minimal_widget_area'] ) { flint_get_sidebar( $slug, false ); }
+      if ( $slug === $options['minimal_widget_area'] ) { flint_get_sidebar( $slug, false ); }
       break;
     case false:
       do_action( 'get_sidebar', $slug );
@@ -734,7 +734,7 @@ function flint_get_sidebar( $slug, $minimal = false ) {
 function flint_is_active_sidebar( $slug ) {
   $options = flint_options();
 
-  if ( $slug == $options['minimal_widget_area'] && is_active_sidebar( $slug ) ) :
+  if ( $slug === $options['minimal_widget_area'] && is_active_sidebar( $slug ) ) :
     return true;
   else :
     return false;

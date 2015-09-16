@@ -26,7 +26,7 @@ class Flint_Walker_Comment extends Walker_Comment {
 	 * @param array  $args    An array of arguments.
 	 */
 	protected function ping( $comment, $depth, $args ) {
-		$tag = ( 'div' == $args['style'] ) ? 'div' : 'li';
+		$tag = ( 'div' === $args['style'] ) ? 'div' : 'li';
 ?>
 		<<?php echo $tag; ?> id="comment-<?php comment_ID(); ?>" <?php comment_class(); ?>>
 			<div class="comment-body">
@@ -47,7 +47,7 @@ class Flint_Walker_Comment extends Walker_Comment {
 	 * @param array  $args    An array of arguments.
 	 */
 	protected function comment( $comment, $depth, $args ) {
-		if ( 'div' == $args['style'] ) {
+		if ( 'div' === $args['style'] ) {
 			$tag = 'div';
 			$add_below = 'comment';
 		} else {

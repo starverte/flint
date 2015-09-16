@@ -12,12 +12,12 @@ if ( ! function_exists( 'flint_header_style' ) ) :
  */
 function flint_header_style() {
 
-  if ( HEADER_TEXTCOLOR == get_header_textcolor() ) {
+  if ( HEADER_TEXTCOLOR === get_header_textcolor() ) {
     return; }
   ?>
   <style type="text/css">
   <?php
-    if ( 'blank' == get_header_textcolor() ) :
+    if ( 'blank' === get_header_textcolor() ) :
   ?>
     .site-title,
     .site-description {
@@ -113,7 +113,7 @@ function flint_admin_header_image() {
  ?>
   <div id="heading" class="row">
     <?php
-    if ( 'blank' == get_header_textcolor() || '' == get_header_textcolor() ) {
+    if ( 'blank' === get_header_textcolor() || '' == get_header_textcolor() ) {
       $style = ' style="display:none;"';
 } else {       $style = ' style="color:#' . get_header_textcolor() . ';"'; }
     ?>

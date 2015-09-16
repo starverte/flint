@@ -207,7 +207,7 @@ function flint_get_address( $schema = true, $args = array() ) {
     'close'  => '',
   );
 
-  $args = true === $schema ? wp_parse_args( $args, $defaults ) : wp_parse_args( $args, $alts );
+  $args = true == $schema ? wp_parse_args( $args, $defaults ) : wp_parse_args( $args, $alts );
   $output = $args['open'] . $args['before'] . $args['item1'] . $args['sep1'] . $args['item2'] . $args['sep2'] . $args['item3'] . $args['after'] . $args['close'];
   echo $output;
 }
