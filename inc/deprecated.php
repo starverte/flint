@@ -417,3 +417,13 @@ function flint_get_options() {
   flint_deprecated_function( __FUNCTION__, '1.5.0', 'flint_options()' );
   return flint_options();
 }
+
+/**
+ * Display comment
+ *
+ * @deprecated 1.5.0 Use flint_options() instead
+ */
+function flint_comment() {
+  flint_deprecated_function( __FUNCTION__, '1.5.0', 'Flint_Walker_Comment' );
+  return;
+}
