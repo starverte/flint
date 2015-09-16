@@ -72,57 +72,6 @@ function flint_content_nav( $nav_id ) {
 <?php
 }
 
-/**
- * Template for comments and pingbacks.
- *
- * Used as a callback by wp_list_comments() for displaying the comments.
- *
- * @todo Remove in Flint 2.
- *
- * @param object $comment The comment object.
- * @param array  $args An array of arguments.
- * @param int    $depth The depth of the current comment.
- */
-function flint_comment( $comment, $args, $depth ) {
-  $GLOBALS['comment'] = $comment;
-  switch ( $comment->comment_type ) :
-  case 'pingback' :
-  case 'trackback' :
-  ?>
-  <li class="post pingback">
-    <p><?php esc_html_e( 'Pingback:', 'flint' ); ?> <?php comment_author_link(); ?></p>
-    <?php
-      break;
-    default :
-    ?>
-  <li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
-    <article id="comment-<?php comment_ID(); ?>" class="comment media row">
-      <div class="col-xs-3 col-sm-2">
-        <?php echo flint_avatar( $comment ); ?>
-      </div>
-      <div class="media-body col-xs-5 col-sm-7">
-        <h4 class="media-heading"><?php printf( __( '%s <span class="says">says:</span>', 'flint' ), sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?></h4>
-        <?php if ( $comment->comment_approved == '0' ) : ?>
-        <em><?php esc_html_e( 'Your comment is awaiting moderation.', 'flint' ); ?></em>
-        <br>
-        <?php endif; ?>
-        <?php comment_text(); ?>
-
-      </div>
-      <div class="col-xs-4 col-sm-3">
-        <p><a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>"><time datetime="<?php comment_time( 'c' ); ?>">
-        <?php printf( _x( '%1$s <br> %2$s', '1: date, 2: time', 'flint' ), get_comment_date( 'M j, Y' ), get_comment_time( 'g:i a' ) ); ?>
-        </time></a></p>
-        <?php flint_comment_reply_link( array_merge( $args, array( 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
-        <?php if ( current_user_can( 'moderate_comments' ) ) { ?><a class="btn btn-default btn-sm" href="<?php echo get_edit_comment_link(); ?>" >Edit</a><?php } ?>
-      </div>
-    </article>
-
-  <?php
-    break;
-  endswitch;
-}
-
 add_action( 'flint_entry_meta_below_post','flint_the_comments', 20 );
 /**
  * Display comments below post
@@ -205,7 +154,7 @@ endif;
  * Returns true if a blog has more than 1 category
  */
 function flint_categorized_blog() {
-  if ( false === ( $all_the_cool_cats = get_transient( 'all_the_cool_cats' ) ) ) {
+  if ( false == ( $all_the_cool_cats = get_transient( 'all_the_cool_cats' ) ) ) {
 
     // Create an array of all the categories that are attached to posts.
     $all_the_cool_cats = get_categories( array( 'hide_empty' => 1 ) );
@@ -262,12 +211,12 @@ function flint_link_pages( $args = '' ) {
 
   $output = '';
   if ( $multipage ) {
-    if ( 'number' == $next_or_number ) {
+    if ( 'number' === $next_or_number ) {
       $output .= $before;
       for ( $i = 1; $i < ($numpages + 1); $i = $i + 1 ) {
         $j = str_replace( '%',$i,$pagelink );
         $output .= ' ';
-        if ( ($i != $page) || (( ! $more) && ($page == 1)) ) {
+        if ( ( $i != $page ) || ( ( ! $more ) && ( 1 == $page ) ) ) {
           $output .= flint_link_page( $i );
         } else {
           $output .= '<li class="active"><a>';
@@ -307,15 +256,18 @@ function flint_link_pages( $args = '' ) {
  */
 function flint_link_page( $i ) {
   global $wp_rewrite;
-  $post = get_post();
+  $thing = get_post();
 
   if ( 1 == $i ) {
     $url = get_permalink();
   } else {
-    if ( '' == get_option( 'permalink_structure' ) || in_array( $post->post_status, array( 'draft', 'pending' ) ) ) {
-      $url = add_query_arg( 'page', $i, get_permalink() ); } elseif ( 'page' == get_option( 'show_on_front' ) && get_option( 'page_on_front' ) == $post->ID )
+    if ( '' == get_option( 'permalink_structure' ) || in_array( $thing->post_status, array( 'draft', 'pending' ) ) ) {
+      $url = add_query_arg( 'page', $i, get_permalink() );
+    } elseif ( 'page' === get_option( 'show_on_front' ) && get_option( 'page_on_front' ) === $thing->ID ) {
       $url = trailingslashit( get_permalink() ) . user_trailingslashit( "$wp_rewrite->pagination_base/" . $i, 'single_paged' );
-    else {       $url = trailingslashit( get_permalink() ) . user_trailingslashit( $i, 'single_paged' ); }
+    } else {
+      $url = trailingslashit( get_permalink() ) . user_trailingslashit( $i, 'single_paged' );
+    }
   }
 
   return '<li><a href="' . esc_url( $url ) . '">';
@@ -356,8 +308,7 @@ function flint_the_content( $more_link_text = 'Read more', $strip_teaser = false
  */
 function flint_get_the_content( $more_link_text = 'Read more', $strip_teaser = false, $args = array() ) {
   global $more, $page, $pages, $multipage, $preview;
-
-  $post = get_post();
+  $thing = get_post();
 
   $defaults = array(
     'more_class'  => 'btn btn-primary',
@@ -368,48 +319,65 @@ function flint_get_the_content( $more_link_text = 'Read more', $strip_teaser = f
   $args = wp_parse_args( $args, $defaults );
 
   if ( null === $more_link_text ) {
-    $more_link_text = __( '(more...)', 'flint' ); }
+    $more_link_text = __( '(more...)', 'flint' );
+  }
 
   $output = '';
   $hasTeaser = false;
 
   if ( post_password_required() ) {
-    return get_the_password_form(); }
+    return get_the_password_form();
+  }
 
   if ( $page > count( $pages ) ) {
-    $page = count( $pages ); }
+    $count = count( $pages );
+  } else {
+    $count = $page;
+  }
 
-  $content = $pages[ $page -1 ];
+  $content = $pages[ $count -1 ];
+
   if ( preg_match( '/<!--more(.*?)?-->/', $content, $matches ) ) {
     $content = explode( $matches[0], $content, 2 );
     if ( ! empty( $matches[1] ) && ! empty( $more_link_text ) ) {
-      $more_link_text = strip_tags( wp_kses_no_null( trim( $matches[1] ) ) ); }
+      $more_link_text = strip_tags( wp_kses_no_null( trim( $matches[1] ) ) );
+    }
 
     $hasTeaser = true;
   } else {
     $content = array( $content );
   }
-  if ( (false !== strpos( $post->post_content, '<!--noteaser-->' ) && (( ! $multipage) || ($page == 1))) ) {
-    $strip_teaser = true; }
+
+  if ( ( false !== strpos( $thing->post_content,'<!--noteaser-->' ) && ( ( ! $multipage ) || ( 1 == $count ) ) ) ) {
+    $strip_teaser = true;
+  }
+
   $teaser = $content[0];
+
   if ( $more && $strip_teaser && $hasTeaser ) {
-    $teaser = ''; }
+    $teaser = '';
+  }
+
   $output .= $teaser;
+
   if ( count( $content ) > 1 ) {
     if ( $more ) {
-      $output .= '<span id="more-' . $post->ID . '"></span>' . $content[1];
+      $output .= '<span id="more-' . $thing->ID . '"></span>' . $content[1];
     } else {
       if ( ! empty( $more_link_text ) ) {
-        $output .= apply_filters( 'the_content_more_link', $args['more_before'] . get_permalink() . "#more-{$post->ID}\"" . 'class="more-link ' . $args['more_class'] . '">' . $more_link_text . $args['more_after'] ); }
+        $output .= apply_filters( 'the_content_more_link', $args['more_before'] . get_permalink() . "#more-{$thing->ID}\"" . 'class="more-link ' . $args['more_class'] . '">' . $more_link_text . $args['more_after'] );
+      }
+
       $output = force_balance_tags( $output );
     }
-}
+  }
+
   if ( $preview ) {
-    $output = preg_replace_callback( '/\%u([0-9A-F]{4})/', '_convert_urlencoded_to_entities', $output ); }
+    $output = preg_replace_callback( '/\%u([0-9A-F]{4})/', '_convert_urlencoded_to_entities', $output );
+  }
 
   return $output;
 }
-
 
 /**
  * Modifies password form to use bootstrap styles
@@ -429,7 +397,7 @@ add_filter( 'the_password_form', 'flint_password_form' );
  * Output a complete commenting form for use within a template, using Twitter Bootstrap styles.
  *
  * @param array       $args An array of arguments.
- * @param int|WP_Post $post_id Post ID or WP_Post object to generate the form for. Default current post.
+ * @param int|WP_Post $thing_id Post ID or WP_Post object to generate the form for. Default current post.
  *
  * @todo Remove "Required fields are marked *"
  * @todo Fix width of inputs
@@ -437,19 +405,18 @@ add_filter( 'the_password_form', 'flint_password_form' );
  * @todo Check required fields before allowing submit
  * @todo Fix approved tags width
  */
-function flint_comment_form( $args = array(), $post_id = null ) {
-  global $id;
+function flint_comment_form( $args = array(), $thing_id = null ) {
 
-  if ( null === $post_id ) {
-    $post_id = $id;
-} else {     $id = $post_id; }
+  if ( null === $thing_id ) {
+    $thing_id = get_the_ID();
+  }
 
   $commenter = wp_get_current_commenter();
   $user = wp_get_current_user();
   $user_identity = $user->exists() ? $user->display_name : '';
-
   $req = get_option( 'require_name_email' );
   $aria_req = ( $req ? " aria-required='true' required" : '' );
+
   $fields = array(
     'author' => '<p class="comment-form-author"><input class="form-control required" id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" ' . $aria_req . ' placeholder="Name*"></p>',
     'email'  => '<p class="comment-form-email"><input class="form-control" id="email" name="email" type="text" value="' . esc_attr( $commenter['comment_author_email'] ) . '" ' . $aria_req . ' placeholder="Email Address*"></p>',
@@ -457,11 +424,12 @@ function flint_comment_form( $args = array(), $post_id = null ) {
   );
 
   $required_text = sprintf( ' ' . __( 'Required fields are marked %s', 'flint' ), '<span class="required">*</span>' );
+
   $defaults = array(
     'fields'               => apply_filters( 'comment_form_default_fields', $fields ),
     'comment_field'        => '<p class="comment-form-comment"><label for="comment">' . _x( 'Comment*', 'noun', 'flint' ) . '</label><textarea class="form-control" id="comment" name="comment" cols="45" rows="8" aria-required="true" required></textarea></p>',
-    'must_log_in'          => '<p class="must-log-in">' . sprintf( __( 'You must be <a href="%s">logged in</a> to post a comment.', 'flint' ), wp_login_url( apply_filters( 'the_permalink', get_permalink( $post_id ) ) ) ) . '</p>',
-    'logged_in_as'         => '<p class="logged-in-as">' . sprintf( __( 'Logged in as <a href="%1$s">%2$s</a>. <a href="%3$s" title="Log out of this account">Log out?</a>', 'flint' ), get_edit_user_link(), $user_identity, wp_logout_url( apply_filters( 'the_permalink', get_permalink( $post_id ) ) ) ) . '</p>',
+    'must_log_in'          => '<p class="must-log-in">' . sprintf( __( 'You must be <a href="%s">logged in</a> to post a comment.', 'flint' ), wp_login_url( apply_filters( 'the_permalink', get_permalink( $thing_id ) ) ) ) . '</p>',
+    'logged_in_as'         => '<p class="logged-in-as">' . sprintf( __( 'Logged in as <a href="%1$s">%2$s</a>. <a href="%3$s" title="Log out of this account">Log out?</a>', 'flint' ), get_edit_user_link(), $user_identity, wp_logout_url( apply_filters( 'the_permalink', get_permalink( $thing_id ) ) ) ) . '</p>',
     'comment_notes_before' => '<p class="comment-notes">' . __( 'Your email address will not be published.', 'flint' ) . ( $req ? $required_text : '' ) . '</p>',
     'comment_notes_after'  => '<p class="form-allowed-tags">' . sprintf( __( 'You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: %s', 'flint' ), ' <code style="white-space:normal;">' . allowed_tags() . '</code>' ) . '</p>',
     'id_form'              => 'commentform',
@@ -474,45 +442,44 @@ function flint_comment_form( $args = array(), $post_id = null ) {
 
   $args = wp_parse_args( $args, apply_filters( 'comment_form_defaults', $defaults ) );
 
-  ?>
-    <?php if ( comments_open( $post_id ) ) : ?>
-      <?php do_action( 'comment_form_before' ); ?>
+  if ( comments_open( $thing_id ) ) :
+    do_action( 'comment_form_before' ); ?>
     <div id="respond">
-      <h3 id="reply-title"><?php comment_form_title( $args['title_reply'], $args['title_reply_to'] ); ?> <small><?php cancel_comment_reply_link( $args['cancel_reply_link'] ); ?></small></h3>
-      <?php if ( get_option( 'comment_registration' ) && ! is_user_logged_in() ) : ?>
-        <?php echo $args['must_log_in']; ?>
-        <?php do_action( 'comment_form_must_log_in_after' ); ?>
-      <?php else : ?>
-        <form class="form-horizontal" action="<?php echo site_url( '/wp-comments-post.php' ); ?>" method="post" id="<?php esc_attr_e( $args['id_form'] ); ?>">
-          <?php do_action( 'comment_form_top' ); ?>
-          <?php if ( current_user_can( 'moderate_comments' ) ) : ?>
-            <?php echo apply_filters( 'comment_form_logged_in', $args['logged_in_as'], $commenter, $user_identity ); ?>
-            <?php do_action( 'comment_form_logged_in_after', $commenter, $user_identity ); ?>
-          <?php else : ?>
-            <?php echo $args['comment_notes_before']; ?>
-            <?php
-              do_action( 'comment_form_before_fields' );
-              foreach ( (array) $args['fields'] as $name => $field ) {
-                echo apply_filters( "comment_form_field_{$name}", $field ) . "\n";
-              }
-              do_action( 'comment_form_after_fields' );
-              ?>
-          <?php endif; ?>
-          <?php echo apply_filters( 'comment_form_field_comment', $args['comment_field'] ); ?>
-          <?php echo $args['comment_notes_after']; ?>
-          <p class="form-submit">
-            <button class="btn btn-default" name="submit" type="submit" id="<?php esc_attr_e( $args['id_submit'] ); ?>"><?php esc_attr_e( $args['label_submit'] ); ?></button>
-            <?php comment_id_fields( $post_id ); ?>
-          </p>
-          <?php do_action( 'comment_form', $post_id ); ?>
-        </form>
-      <?php endif; ?>
-      </div><!-- #respond -->
-      <?php do_action( 'comment_form_after' ); ?>
-    <?php else : ?>
-      <?php do_action( 'comment_form_comments_closed' ); ?>
+    <h3 id="reply-title"><?php comment_form_title( $args['title_reply'], $args['title_reply_to'] ); ?> <small><?php cancel_comment_reply_link( $args['cancel_reply_link'] ); ?></small></h3>
+
+    <?php if ( get_option( 'comment_registration' ) && ! is_user_logged_in() ) :
+      echo $args['must_log_in'];
+      do_action( 'comment_form_must_log_in_after' );
+    else : ?>
+      <form class="form-horizontal" action="<?php echo site_url( '/wp-comments-post.php' ); ?>" method="post" id="<?php esc_attr_e( $args['id_form'] ); ?>">
+      <?php do_action( 'comment_form_top' );
+      if ( current_user_can( 'moderate_comments' ) ) :
+        echo apply_filters( 'comment_form_logged_in', $args['logged_in_as'], $commenter, $user_identity );
+        do_action( 'comment_form_logged_in_after', $commenter, $user_identity );
+      else :
+        echo $args['comment_notes_before'];
+        do_action( 'comment_form_before_fields' );
+        foreach ( (array) $args['fields'] as $name => $field ) {
+        echo apply_filters( "comment_form_field_{$name}", $field ) . "\n";
+        }
+        do_action( 'comment_form_after_fields' );
+      endif;
+
+      echo apply_filters( 'comment_form_field_comment', $args['comment_field'] );
+      echo $args['comment_notes_after']; ?>
+      <p class="form-submit">
+      <button class="btn btn-default" name="submit" type="submit" id="<?php esc_attr_e( $args['id_submit'] ); ?>"><?php esc_attr_e( $args['label_submit'] ); ?></button>
+      <?php comment_id_fields( $thing_id ); ?>
+      </p>
+      <?php do_action( 'comment_form', $thing_id ); ?>
+      </form>
     <?php endif; ?>
-  <?php
+
+    </div><!-- #respond -->
+    <?php do_action( 'comment_form_after' );
+  else :
+    do_action( 'comment_form_comments_closed' );
+  endif;
 }
 
 /**
@@ -535,7 +502,7 @@ function flint_avatar( $id_or_email, $size = '96', $default = '', $alt = false )
     return false;
   }
 
-  if ( false === $alt ) {
+  if ( false == $alt ) {
     $safe_alt = '';
   } else {
     $safe_alt = esc_attr( $alt );
@@ -548,8 +515,8 @@ function flint_avatar( $id_or_email, $size = '96', $default = '', $alt = false )
   $email = '';
 
   if ( is_numeric( $id_or_email ) ) {
-    $id = (int) $id_or_email;
-    $user = get_userdata( $id );
+    $the_id = (int) $id_or_email;
+    $user = get_userdata( $the_id );
 
     if ( $user ) {
       $email = $user->user_email;
@@ -564,8 +531,8 @@ function flint_avatar( $id_or_email, $size = '96', $default = '', $alt = false )
     }
 
     if ( ! empty( $id_or_email->user_id ) ) {
-      $id = (int) $id_or_email->user_id;
-      $user = get_userdata( $id );
+      $the_id = (int) $id_or_email->user_id;
+      $user = get_userdata( $the_id );
 
       if ( $user ) {
         $email = $user->user_email;
@@ -600,17 +567,17 @@ function flint_avatar( $id_or_email, $size = '96', $default = '', $alt = false )
     }
   }
 
-  if ( 'mystery' == $default ) {
+  if ( 'mystery' === $default ) {
     $default = "$host/avatar/ad516503a11cd5ca435acc9bb6523536?s={$size}";
-  } elseif ( 'blank' == $default ) {
+  } elseif ( 'blank' === $default ) {
     $default = $email ? 'blank' : includes_url( 'images/blank.gif' );
-  } elseif ( ! empty( $email ) && 'gravatar_default' == $default ) {
+  } elseif ( ! empty( $email ) && 'gravatar_default' === $default ) {
     $default = '';
-  } elseif ( 'gravatar_default' == $default ) {
+  } elseif ( 'gravatar_default' === $default ) {
     $default = "$host/avatar/?s={$size}";
   } elseif ( empty( $email ) ) {
     $default = "$host/avatar/?d=$default&amp;s={$size}";
-  } elseif ( strpos( $default, 'http://' ) === 0 ) {
+  } elseif ( strpos( $default, 'http://' ) == 0 ) {
     $default = add_query_arg( 's', $size, $default );
   }
 
@@ -636,58 +603,96 @@ function flint_avatar( $id_or_email, $size = '96', $default = '', $alt = false )
 /**
  * Retrieve HTML content for reply to comment link.
  *
- * @param array       $args An array of arguments.
- * @param int         $comment Comment being replied to. Default current comment.
- * @param int|WP_Post $post    Post ID or WP_Post object the comment is going to be displayed on.
- *                             Default current post.
+ * @see WordPress 4.3.1 get_comment_reply_link()
+ *
+ * @param array       $args     Comment reply link arguments. See {@see get_comment_reply_link()}
+ *                              for more information on accepted arguments.
+ * @param int         $_comment Comment being replied to. Default current comment.
+ * @param int|WP_Post $thing    Post ID or WP_Post object the comment is going to be displayed on.
+ *                              Default current post.
  * @return void|false|string Link to show comment form, if successful. False, if comments are closed.
  */
-function flint_get_comment_reply_link( $args = array(), $comment = null, $post = null ) {
-  global $user_ID;
+function flint_get_comment_reply_link( $args = array(), $_comment = null, $thing = null ) {
+	$defaults = array(
+		'add_below'     => 'comment',
+		'respond_id'    => 'respond',
+		'reply_text'    => __( 'Reply' ),
+		'reply_to_text' => __( 'Reply to %s' ),
+		'login_text'    => __( 'Log in to Reply' ),
+		'depth'         => 0,
+		'before'        => '',
+		'after'         => '',
+	);
 
-  $defaults = array(
-'add_below' => 'comment',
-'respond_id' => 'respond',
-'reply_text' => __( 'Reply', 'flint' ),
-    'login_text' => __( 'Log in to Reply', 'flint' ),
-'depth' => 0,
-'before' => '',
-'after' => '',
-);
+	$args = wp_parse_args( $args, $defaults );
 
-  $args = wp_parse_args( $args, $defaults );
+	if ( 0 == $args['depth'] || $args['max_depth'] <= $args['depth'] ) {
+		return;
+	}
 
-  if ( 0 == $args['depth'] || $args['max_depth'] <= $args['depth'] ) {
-    return; }
+	$_comment = get_comment( $_comment );
 
-  extract( $args, EXTR_SKIP );
+	if ( empty( $thing ) ) {
+		$thing = $_comment->comment_post_ID;
+	}
 
-  $comment = get_comment( $comment );
-  if ( empty( $post ) ) {
-    $post = $comment->comment_post_ID; }
-  $post = get_post( $post );
+	$thing = get_post( $thing );
 
-  if ( ! comments_open( $post->ID ) ) {
-    return false; }
+	if ( ! comments_open( $thing->ID ) ) {
+		return false;
+	}
 
-  $link = '';
+	/**
+	 * Filter the comment reply link arguments.
+	 *
+	 * @param array   $args     Comment reply link arguments. See {@see get_comment_reply_link()}
+	 *                          for more information on accepted arguments.
+	 * @param object  $_comment The object of the comment being replied to.
+	 * @param WP_Post $thing    The {@see WP_Post} object.
+	 */
+	$args = apply_filters( 'comment_reply_link_args', $args, $_comment, $thing );
 
-  if ( get_option( 'comment_registration' ) && ! $user_ID ) {
-    $link = '<a rel="nofollow" class="comment-reply-login btn btn-primary btn-sm" href="' . esc_url( wp_login_url( get_permalink() ) ) . '">' . $login_text . '</a>';
-} else {     $link = "<a class='comment-reply-link btn btn-primary btn-sm' href='" . esc_url( add_query_arg( 'replytocom', $comment->comment_ID ) ) . '#' . $respond_id . "' onclick='return addComment.moveForm(\"$add_below-$comment->comment_ID\", \"$comment->comment_ID\", \"$respond_id\", \"$post->ID\")'>$reply_text</a>"; }
-  return apply_filters( 'comment_reply_link', $before . $link . $after, $args, $comment, $post );
+	if ( get_option( 'comment_registration' ) && ! is_user_logged_in() ) {
+		$link = sprintf( '<a rel="nofollow" class="comment-reply-login" href="%s">%s</a>',
+			esc_url( wp_login_url( get_permalink() ) ),
+			$args['login_text']
+		);
+	} else {
+		$onclick = sprintf( 'return addComment.moveForm( "%1$s-%2$s", "%2$s", "%3$s", "%4$s" )',
+			$args['add_below'], $_comment->comment_ID, $args['respond_id'], $thing->ID
+		);
+
+		$link = sprintf( "<a rel='nofollow' class='comment-reply-link btn btn-primary btn-sm' href='%s' onclick='%s' aria-label='%s'>%s</a>",
+			esc_url( add_query_arg( 'replytocom', $_comment->comment_ID, get_permalink( $thing->ID ) ) ) . '#' . $args['respond_id'],
+			$onclick,
+			esc_attr( sprintf( $args['reply_to_text'], $_comment->comment_author ) ),
+			$args['reply_text']
+		);
+	}
+	/**
+	 * Filter the comment reply link.
+	 *
+	 * @param string  $link     The HTML markup for the comment reply link.
+	 * @param array   $args     An array of arguments overriding the defaults.
+	 * @param object  $_comment The object of the comment being replied.
+	 * @param WP_Post $thing    The WP_Post object.
+	 */
+	return apply_filters( 'comment_reply_link', $args['before'] . $link . $args['after'], $args, $_comment, $thing );
 }
 
 /**
  * Displays the HTML content for reply to comment link.
  *
- * @param array       $args    Optional. Override default options.
- * @param int         $comment Comment being replied to. Default current comment.
- * @param int|WP_Post $post    Post ID or WP_Post object the comment is going to be displayed on.
- *                             Default current post.
+ * @see WordPress 4.3.1 comment_reply_link()
+ * @see flint_get_comment_reply_link()
+ *
+ * @param array       $args     Optional. Override default options.
+ * @param int         $_comment Comment being replied to. Default current comment.
+ * @param int|WP_Post $thing    Post ID or WP_Post object the comment is going to be displayed on.
+ *                              Default current post.
  */
-function flint_comment_reply_link( $args = array(), $comment = null, $post = null ) {
-  echo flint_get_comment_reply_link( $args, $comment, $post );
+function flint_comment_reply_link( $args = array(), $_comment = null, $thing = null ) {
+	echo flint_get_comment_reply_link( $args, $_comment, $thing );
 }
 
 /**
@@ -704,7 +709,7 @@ function flint_get_sidebar( $slug, $minimal = false ) {
 
   switch ( $minimal ) {
     case true:
-      if ( $slug == $options['minimal_widget_area'] ) { flint_get_sidebar( $slug, false ); }
+      if ( $slug === $options['minimal_widget_area'] ) { flint_get_sidebar( $slug, false ); }
       break;
     case false:
       do_action( 'get_sidebar', $slug );
@@ -729,7 +734,7 @@ function flint_get_sidebar( $slug, $minimal = false ) {
 function flint_is_active_sidebar( $slug ) {
   $options = flint_options();
 
-  if ( $slug == $options['minimal_widget_area'] && is_active_sidebar( $slug ) ) :
+  if ( $slug === $options['minimal_widget_area'] && is_active_sidebar( $slug ) ) :
     return true;
   else :
     return false;
@@ -754,10 +759,10 @@ function flint_breadcrumbs( $template = 'default' ) {
 
   switch ( $template ) {
     case 'clear':
-      if ( $options['clear_nav'] == 'breadcrumbs' ) { flint_breadcrumbs(); }
+      if ( 'breadcrumbs' === $options['clear_nav'] ) { flint_breadcrumbs(); }
       break;
     case 'minimal':
-      if ( $options['minimal_nav'] == 'breadcrumbs' ) { flint_breadcrumbs(); }
+      if ( 'breadcrumbs' === $options['minimal_nav'] ) { flint_breadcrumbs(); }
       break;
     default:
       global $post;
@@ -899,7 +904,7 @@ function flint_body_class() {
   if ( ! empty( $post->ID ) ) {
     $template = get_post_meta( $post->ID, '_wp_page_template', true );
 
-    if ( $template == 'templates/clear.php' ) {
+    if ( 'templates/clear.php' === $template ) {
       switch ( $options['clear_nav'] ) {
         case 'navbar':
           body_class( 'clear clear-nav' );
@@ -908,7 +913,7 @@ function flint_body_class() {
           body_class( 'clear clear-breadcrumbs' );
           break;
       }
-    } elseif ( $template == 'templates/minimal.php' ) {
+    } elseif ( 'templates/minimal.php' === $template ) {
       switch ( $options['minimal_nav'] ) {
         case 'navbar':
           body_class( 'clear clear-nav' );
@@ -978,12 +983,16 @@ function flint_get_the_post_thumbnail( $size = 'post-thumbnail', $attr = '' ) {
  * @see has_category()
  *
  * @param string|int|array $category Optional. The category name/term_id/slug or array of them to check for.
- * @param int|object       $post     Optional. Post to check instead of the current post.
+ * @param int|object       $thing    Optional. Post to check instead of the current post.
  *
  * @return bool True if the current post has any of the given categories (or any category, if no category specified).
  */
-function flint_has_category( $category = '', $post = null ) {
-  if ( has_term( $category, 'category', $post ) ) {
+function flint_has_category( $category = '', $thing = null ) {
+  if ( ! $thing ) {
+    $thing = $post;
+  }
+
+  if ( has_term( $category, 'category', $thing ) ) {
     $cats = '';
 
     foreach ( get_the_category() as $cat ) {
@@ -1177,7 +1186,7 @@ function flint_post_margin( $thumbnail = false ) {
         $output .= '<div class="hidden-xs hidden-sm col-md-2"></div>';
         $output .= '<div class="col-xs-12 col-sm-2 col-md-2">';
         $output .= flint_get_the_post_thumbnail();
-        if ( ! is_single() && $format == 'gallery' ) {
+        if ( ! is_single() && 'gallery' === $format ) {
           $output .= '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
         }
         $output .= '</div>';
@@ -1187,7 +1196,7 @@ function flint_post_margin( $thumbnail = false ) {
         $output .= '<div class="hidden-xs hidden-sm col-md-1"></div>';
         $output .= '<div class="col-xs-12 col-sm-2 col-md-2">';
         $output .= flint_get_the_post_thumbnail();
-        if ( ! is_single() && $format == 'gallery' ) {
+        if ( ! is_single() && 'gallery' === $format ) {
           $output .= '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
         }
         $output .= '</div>';
@@ -1196,7 +1205,7 @@ function flint_post_margin( $thumbnail = false ) {
       case 'wide':
         $output .= '<div class="col-xs-12 col-sm-12 hidden-md hidden-lg">';
         $output .= flint_get_the_post_thumbnail();
-        if ( ! is_single() && $format == 'gallery' ) {
+        if ( ! is_single() && 'gallery' === $format ) {
           $output .= '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
         }
         $output .= '</div>';
@@ -1205,7 +1214,7 @@ function flint_post_margin( $thumbnail = false ) {
       default:
         $output .= '<div class="col-xs-12 col-sm-2 col-md-2">';
         $output .= flint_get_the_post_thumbnail();
-        if ( ! is_single() && $format == 'gallery' ) {
+        if ( ! is_single() && 'gallery' === $format ) {
           $output .= '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
         }
         $output .= '</div>';
@@ -1231,4 +1240,38 @@ function flint_post_margin( $thumbnail = false ) {
         break;
     }
   }
+}
+
+/**
+ * Display edit comment link with formatting.
+ *
+ * @see WordPress 4.3.1 edit_comment_link()
+ *
+ * @global object $comment
+ *
+ * @param string $text   Optional. Anchor text.
+ * @param string $before Optional. Display before edit link.
+ * @param string $after  Optional. Display after edit link.
+ */
+function flint_edit_comment_link( $text = null, $before = '', $after = '' ) {
+	global $comment;
+
+	if ( ! current_user_can( 'edit_comment', $comment->comment_ID ) ) {
+		return;
+	}
+
+	if ( null === $text ) {
+		$text = __( 'Edit This' );
+	}
+
+	$link = '<a class="comment-edit-link btn btn-default btn-sm" href="' . get_edit_comment_link( $comment->comment_ID ) . '">' . $text . '</a>';
+
+	/**
+	 * Filter the comment edit link anchor tag.
+	 *
+	 * @param string $link       Anchor tag for the edit link.
+	 * @param int    $comment_id Comment ID.
+	 * @param string $text       Anchor text.
+	 */
+	echo $before . apply_filters( 'edit_comment_link', $link, $comment->comment_ID, $text ) . $after;
 }
