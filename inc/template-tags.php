@@ -216,7 +216,7 @@ function flint_link_pages( $args = '' ) {
       for ( $i = 1; $i < ($numpages + 1); $i = $i + 1 ) {
         $j = str_replace( '%',$i,$pagelink );
         $output .= ' ';
-        if ( ($i != $page) || (( ! $more) && ($page == 1)) ) {
+        if ( ( $i != $page ) || ( ( ! $more ) && ( 1 == $page ) ) ) {
           $output .= flint_link_page( $i );
         } else {
           $output .= '<li class="active"><a>';
@@ -348,7 +348,7 @@ function flint_get_the_content( $more_link_text = 'Read more', $strip_teaser = f
     $content = array( $content );
   }
 
-  if ( (false !== strpos( $thing->post_content, '<!--noteaser-->' ) && (( ! $multipage) || ($count == 1))) ) {
+  if ( ( false !== strpos( $thing->post_content,'<!--noteaser-->' ) && ( ( ! $multipage ) || ( 1 == $count ) ) ) ) {
     $strip_teaser = true;
   }
 
@@ -759,10 +759,10 @@ function flint_breadcrumbs( $template = 'default' ) {
 
   switch ( $template ) {
     case 'clear':
-      if ( $options['clear_nav'] == 'breadcrumbs' ) { flint_breadcrumbs(); }
+      if ( 'breadcrumbs' === $options['clear_nav'] ) { flint_breadcrumbs(); }
       break;
     case 'minimal':
-      if ( $options['minimal_nav'] == 'breadcrumbs' ) { flint_breadcrumbs(); }
+      if ( 'breadcrumbs' === $options['minimal_nav'] ) { flint_breadcrumbs(); }
       break;
     default:
       global $post;
@@ -904,7 +904,7 @@ function flint_body_class() {
   if ( ! empty( $post->ID ) ) {
     $template = get_post_meta( $post->ID, '_wp_page_template', true );
 
-    if ( $template == 'templates/clear.php' ) {
+    if ( 'templates/clear.php' === $template ) {
       switch ( $options['clear_nav'] ) {
         case 'navbar':
           body_class( 'clear clear-nav' );
@@ -913,7 +913,7 @@ function flint_body_class() {
           body_class( 'clear clear-breadcrumbs' );
           break;
       }
-    } elseif ( $template == 'templates/minimal.php' ) {
+    } elseif ( 'templates/minimal.php' === $template ) {
       switch ( $options['minimal_nav'] ) {
         case 'navbar':
           body_class( 'clear clear-nav' );
@@ -1186,7 +1186,7 @@ function flint_post_margin( $thumbnail = false ) {
         $output .= '<div class="hidden-xs hidden-sm col-md-2"></div>';
         $output .= '<div class="col-xs-12 col-sm-2 col-md-2">';
         $output .= flint_get_the_post_thumbnail();
-        if ( ! is_single() && $format == 'gallery' ) {
+        if ( ! is_single() && 'gallery' === $format ) {
           $output .= '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
         }
         $output .= '</div>';
@@ -1196,7 +1196,7 @@ function flint_post_margin( $thumbnail = false ) {
         $output .= '<div class="hidden-xs hidden-sm col-md-1"></div>';
         $output .= '<div class="col-xs-12 col-sm-2 col-md-2">';
         $output .= flint_get_the_post_thumbnail();
-        if ( ! is_single() && $format == 'gallery' ) {
+        if ( ! is_single() && 'gallery' === $format ) {
           $output .= '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
         }
         $output .= '</div>';
@@ -1205,7 +1205,7 @@ function flint_post_margin( $thumbnail = false ) {
       case 'wide':
         $output .= '<div class="col-xs-12 col-sm-12 hidden-md hidden-lg">';
         $output .= flint_get_the_post_thumbnail();
-        if ( ! is_single() && $format == 'gallery' ) {
+        if ( ! is_single() && 'gallery' === $format ) {
           $output .= '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
         }
         $output .= '</div>';
@@ -1214,7 +1214,7 @@ function flint_post_margin( $thumbnail = false ) {
       default:
         $output .= '<div class="col-xs-12 col-sm-2 col-md-2">';
         $output .= flint_get_the_post_thumbnail();
-        if ( ! is_single() && $format == 'gallery' ) {
+        if ( ! is_single() && 'gallery' === $format ) {
           $output .= '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
         }
         $output .= '</div>';
