@@ -636,46 +636,72 @@ function flint_avatar( $id_or_email, $size = '96', $default = '', $alt = false )
 /**
  * Retrieve HTML content for reply to comment link.
  *
- * @param array       $args An array of arguments.
- * @param int         $comment Comment being replied to. Default current comment.
- * @param int|WP_Post $post    Post ID or WP_Post object the comment is going to be displayed on.
- *                             Default current post.
+ * @see WordPress 4.3.1 get_comment_reply_link()
+ *
+ * @param array       $args     Comment reply link arguments. See {@see get_comment_reply_link()}
+ *                              for more information on accepted arguments.
+ * @param int         $_comment Comment being replied to. Default current comment.
+ * @param int|WP_Post $thing    Post ID or WP_Post object the comment is going to be displayed on.
+ *                              Default current post.
  * @return void|false|string Link to show comment form, if successful. False, if comments are closed.
  */
-function flint_get_comment_reply_link( $args = array(), $comment = null, $post = null ) {
-  global $user_ID;
-
-  $defaults = array(
-'add_below' => 'comment',
-'respond_id' => 'respond',
-'reply_text' => __( 'Reply', 'flint' ),
-    'login_text' => __( 'Log in to Reply', 'flint' ),
-'depth' => 0,
-'before' => '',
-'after' => '',
-);
-
-  $args = wp_parse_args( $args, $defaults );
-
-  if ( 0 == $args['depth'] || $args['max_depth'] <= $args['depth'] ) {
-    return; }
-
-  extract( $args, EXTR_SKIP );
-
-  $comment = get_comment( $comment );
-  if ( empty( $post ) ) {
-    $post = $comment->comment_post_ID; }
-  $post = get_post( $post );
-
-  if ( ! comments_open( $post->ID ) ) {
-    return false; }
-
-  $link = '';
-
-  if ( get_option( 'comment_registration' ) && ! $user_ID ) {
-    $link = '<a rel="nofollow" class="comment-reply-login btn btn-primary btn-sm" href="' . esc_url( wp_login_url( get_permalink() ) ) . '">' . $login_text . '</a>';
-} else {     $link = "<a class='comment-reply-link btn btn-primary btn-sm' href='" . esc_url( add_query_arg( 'replytocom', $comment->comment_ID ) ) . '#' . $respond_id . "' onclick='return addComment.moveForm(\"$add_below-$comment->comment_ID\", \"$comment->comment_ID\", \"$respond_id\", \"$post->ID\")'>$reply_text</a>"; }
-  return apply_filters( 'comment_reply_link', $before . $link . $after, $args, $comment, $post );
+function flint_get_comment_reply_link( $args = array(), $_comment = null, $thing = null ) {
+	$defaults = array(
+		'add_below'     => 'comment',
+		'respond_id'    => 'respond',
+		'reply_text'    => __( 'Reply' ),
+		'reply_to_text' => __( 'Reply to %s' ),
+		'login_text'    => __( 'Log in to Reply' ),
+		'depth'         => 0,
+		'before'        => '',
+		'after'         => '',
+	);
+	$args = wp_parse_args( $args, $defaults );
+	if ( 0 == $args['depth'] || $args['max_depth'] <= $args['depth'] ) {
+		return;
+	}
+	$_comment = get_comment( $_comment );
+	if ( empty( $thing ) ) {
+		$thing = $_comment->comment_post_ID;
+	}
+	$thing = get_post( $thing );
+	if ( ! comments_open( $thing->ID ) ) {
+		return false;
+	}
+	/**
+	 * Filter the comment reply link arguments.
+	 *
+	 * @param array   $args     Comment reply link arguments. See {@see get_comment_reply_link()}
+	 *                          for more information on accepted arguments.
+	 * @param object  $_comment The object of the comment being replied to.
+	 * @param WP_Post $thing    The {@see WP_Post} object.
+	 */
+	$args = apply_filters( 'comment_reply_link_args', $args, $_comment, $thing );
+	if ( get_option( 'comment_registration' ) && ! is_user_logged_in() ) {
+		$link = sprintf( '<a rel="nofollow" class="comment-reply-login" href="%s">%s</a>',
+			esc_url( wp_login_url( get_permalink() ) ),
+			$args['login_text']
+		);
+	} else {
+		$onclick = sprintf( 'return addComment.moveForm( "%1$s-%2$s", "%2$s", "%3$s", "%4$s" )',
+			$args['add_below'], $_comment->comment_ID, $args['respond_id'], $thing->ID
+		);
+		$link = sprintf( "<a rel='nofollow' class='comment-reply-link btn btn-primary btn-sm' href='%s' onclick='%s' aria-label='%s'>%s</a>",
+			esc_url( add_query_arg( 'replytocom', $_comment->comment_ID, get_permalink( $thing->ID ) ) ) . '#' . $args['respond_id'],
+			$onclick,
+			esc_attr( sprintf( $args['reply_to_text'], $_comment->comment_author ) ),
+			$args['reply_text']
+		);
+	}
+	/**
+	 * Filter the comment reply link.
+	 *
+	 * @param string  $link     The HTML markup for the comment reply link.
+	 * @param array   $args     An array of arguments overriding the defaults.
+	 * @param object  $_comment The object of the comment being replied.
+	 * @param WP_Post $thing    The WP_Post object.
+	 */
+	return apply_filters( 'comment_reply_link', $args['before'] . $link . $args['after'], $args, $_comment, $thing );
 }
 
 /**
