@@ -108,10 +108,29 @@ class Flint_Walker_Comment extends Walker_Comment {
 	 */
 	protected function html5_comment( $comment, $depth, $args ) {
 		$tag = ( 'div' === $args['style'] ) ? 'div' : 'li';
+    $comment_class = 'comment media';
+    switch ( $depth ) {
+      case 1:
+        $comment_class .= ' row';
+        break;
+      case 2:
+        $comment_class .= ' col-xs-11 col-xs-offset-1 col-md-10 col-md-offset-2';
+        break;
+      case 3:
+        $comment_class .= ' col-xs-11 col-xs-offset-1 col-xs-12 col-sm-10 col-sm-offset-2 col-md-9 col-md-offset-3';
+        break;
+      case 4:
+        $comment_class .= ' col-xs-11 col-xs-offset-1 col-xs-12 col-sm-10 col-sm-offset-2 col-md-8 col-md-offset-4';
+        break;
+      default:
+        $comment_class .= ' col-xs-11 col-xs-offset-1 col-xs-12 col-sm-10 col-sm-offset-2 col-md-7 col-md-offset-5';
+        break;
+
+    }
 ?>
 		<<?php echo $tag; ?> id="comment-<?php comment_ID(); ?>" <?php comment_class( $this->has_children ? 'parent' : '' ); ?>>
-			<article id="div-comment-<?php comment_ID(); ?>" class="comment media row">
-        <div class="comment-author vcard col-xs-3 col-sm-2">
+			<article id="div-comment-<?php comment_ID(); ?>" class="<?php esc_attr_e( $comment_class ) ?>">
+        <div class="comment-author vcard hidden-xs col-sm-3 col-md-2">
           <?php
           if ( 0 != $args['avatar_size'] ) {
             echo get_avatar( $comment, $args['avatar_size'], '', get_comment_author(), array( 'class' => 'media-object' ) );
@@ -119,33 +138,76 @@ class Flint_Walker_Comment extends Walker_Comment {
           ?>
         </div><!-- .comment-author -->
 
-				<div class="comment-content col-xs-5 col-sm-7">
+				<div class="comment-content hidden-xs col-sm-5 col-md-7">
           <?php printf( __( '<h4>%s <span class="says">says:</span></h4>' ), sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?>
 					<?php comment_text(); ?>
 				</div><!-- .comment-content -->
 
-				<footer class="comment-meta col-xs-4 col-sm-3">
+				<footer class="comment-meta hidden-xs col-sm-4 col-md-3">
 					<div class="comment-metadata">
 						<p><a href="<?php echo esc_url( get_comment_link( $comment->comment_ID, $args ) ); ?>">
 							<time datetime="<?php comment_time( 'c' ); ?>">
 								<?php printf( _x( '%1$s<br> %2$s', '1: date, 2: time' ), get_comment_date(), get_comment_time() ); ?>
 							</time>
 						</a></p>
-						<?php
-            flint_edit_comment_link( __( 'Edit' ), '', '' );
-
-            flint_comment_reply_link( array_merge( $args, array(
-              'add_below' => 'div-comment',
-              'depth'     => $depth,
-              'max_depth' => $args['max_depth'],
-            ) ) );
-            ?>
 					</div><!-- .comment-metadata -->
+
+          <?php
+          flint_edit_comment_link( __( 'Edit' ), '', '' );
+
+          flint_comment_reply_link( array_merge( $args, array(
+            'add_below' => 'div-comment',
+            'depth'     => $depth,
+            'max_depth' => $args['max_depth'],
+            'before'    => ' ',
+          ) ) );
+          ?>
 
 					<?php if ( '0' == $comment->comment_approved ) : ?>
 					<p class="comment-awaiting-moderation"><?php esc_html_e( 'Your comment is awaiting moderation.', 'flint' ); ?></p>
 					<?php endif; ?>
 				</footer><!-- .comment-meta -->
+
+        <!-- For smaller screens -->
+
+				<div class="comment-meta col-xs-3 hidden-sm hidden-md hidden-lg">
+          <div class="comment-author vcard">
+            <?php
+            if ( 0 != $args['avatar_size'] ) {
+              echo get_avatar( $comment, $args['avatar_size'], '', get_comment_author(), array( 'class' => 'media-object' ) );
+            }
+            ?>
+          </div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<p><a href="<?php echo esc_url( get_comment_link( $comment->comment_ID, $args ) ); ?>">
+							<time datetime="<?php comment_time( 'c' ); ?>">
+								<?php printf( _x( '%1$s<br> %2$s', '1: date, 2: time' ), get_comment_date( 'n/j/y' ), get_comment_time() ); ?>
+							</time>
+						</a></p>
+					</div><!-- .comment-metadata -->
+
+          <?php
+          flint_edit_comment_link( __( 'Edit' ), '', '' );
+
+          flint_comment_reply_link( array_merge( $args, array(
+            'add_below' => 'div-comment',
+            'depth'     => $depth,
+            'max_depth' => $args['max_depth'],
+            'before'    => ' ',
+          ) ) );
+          ?>
+
+					<?php if ( '0' == $comment->comment_approved ) : ?>
+					<p class="comment-awaiting-moderation"><?php esc_html_e( 'Your comment is awaiting moderation.', 'flint' ); ?></p>
+					<?php endif; ?>
+				</div><!-- .comment-meta -->
+
+				<div class="comment-content col-xs-9 hidden-sm hidden-md hidden-lg">
+          <?php printf( __( '<h4>%s <span class="says">says:</span></h4>' ), sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?>
+					<?php comment_text(); ?>
+				</div><!-- .comment-content -->
+
 			</article><!-- .comment-body -->
 <?php
 	}
