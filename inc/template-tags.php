@@ -1232,3 +1232,34 @@ function flint_post_margin( $thumbnail = false ) {
     }
   }
 }
+
+
+/**
+ * Display edit comment link with formatting.
+ *
+ * @see WordPress 4.3.1 edit_comment_link()
+ *
+ * @global object $comment
+ *
+ * @param string $text   Optional. Anchor text.
+ * @param string $before Optional. Display before edit link.
+ * @param string $after  Optional. Display after edit link.
+ */
+function flint_edit_comment_link( $text = null, $before = '', $after = '' ) {
+	global $comment;
+	if ( ! current_user_can( 'edit_comment', $comment->comment_ID ) ) {
+		return;
+	}
+	if ( null === $text ) {
+		$text = __( 'Edit This' );
+	}
+	$link = '<a class="comment-edit-link btn btn-default btn-sm" href="' . get_edit_comment_link( $comment->comment_ID ) . '">' . $text . '</a>';
+	/**
+	 * Filter the comment edit link anchor tag.
+	 *
+	 * @param string $link       Anchor tag for the edit link.
+	 * @param int    $comment_id Comment ID.
+	 * @param string $text       Anchor text.
+	 */
+	echo $before . apply_filters( 'edit_comment_link', $link, $comment->comment_ID, $text ) . $after;
+}
