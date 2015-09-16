@@ -72,57 +72,6 @@ function flint_content_nav( $nav_id ) {
 <?php
 }
 
-/**
- * Template for comments and pingbacks.
- *
- * Used as a callback by wp_list_comments() for displaying the comments.
- *
- * @todo Remove in Flint 2.
- *
- * @param object $comment The comment object.
- * @param array  $args An array of arguments.
- * @param int    $depth The depth of the current comment.
- */
-function flint_comment( $comment, $args, $depth ) {
-  $GLOBALS['comment'] = $comment;
-  switch ( $comment->comment_type ) :
-  case 'pingback' :
-  case 'trackback' :
-  ?>
-  <li class="post pingback">
-    <p><?php esc_html_e( 'Pingback:', 'flint' ); ?> <?php comment_author_link(); ?></p>
-    <?php
-      break;
-    default :
-    ?>
-  <li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
-    <article id="comment-<?php comment_ID(); ?>" class="comment media row">
-      <div class="col-xs-3 col-sm-2">
-        <?php echo flint_avatar( $comment ); ?>
-      </div>
-      <div class="media-body col-xs-5 col-sm-7">
-        <h4 class="media-heading"><?php printf( __( '%s <span class="says">says:</span>', 'flint' ), sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?></h4>
-        <?php if ( $comment->comment_approved == '0' ) : ?>
-        <em><?php esc_html_e( 'Your comment is awaiting moderation.', 'flint' ); ?></em>
-        <br>
-        <?php endif; ?>
-        <?php comment_text(); ?>
-
-      </div>
-      <div class="col-xs-4 col-sm-3">
-        <p><a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>"><time datetime="<?php comment_time( 'c' ); ?>">
-        <?php printf( _x( '%1$s <br> %2$s', '1: date, 2: time', 'flint' ), get_comment_date( 'M j, Y' ), get_comment_time( 'g:i a' ) ); ?>
-        </time></a></p>
-        <?php flint_comment_reply_link( array_merge( $args, array( 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
-        <?php if ( current_user_can( 'moderate_comments' ) ) { ?><a class="btn btn-default btn-sm" href="<?php echo get_edit_comment_link(); ?>" >Edit</a><?php } ?>
-      </div>
-    </article>
-
-  <?php
-    break;
-  endswitch;
-}
-
 add_action( 'flint_entry_meta_below_post','flint_the_comments', 20 );
 /**
  * Display comments below post
