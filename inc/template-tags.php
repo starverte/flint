@@ -707,13 +707,16 @@ function flint_get_comment_reply_link( $args = array(), $_comment = null, $thing
 /**
  * Displays the HTML content for reply to comment link.
  *
- * @param array       $args    Optional. Override default options.
- * @param int         $comment Comment being replied to. Default current comment.
- * @param int|WP_Post $post    Post ID or WP_Post object the comment is going to be displayed on.
- *                             Default current post.
+ * @see WordPress 4.3.1 comment_reply_link()
+ * @see flint_get_comment_reply_link()
+ *
+ * @param array       $args     Optional. Override default options.
+ * @param int         $_comment Comment being replied to. Default current comment.
+ * @param int|WP_Post $thing    Post ID or WP_Post object the comment is going to be displayed on.
+ *                              Default current post.
  */
-function flint_comment_reply_link( $args = array(), $comment = null, $post = null ) {
-  echo flint_get_comment_reply_link( $args, $comment, $post );
+function flint_comment_reply_link( $args = array(), $_comment = null, $thing = null ) {
+	echo flint_get_comment_reply_link( $args, $_comment, $thing );
 }
 
 /**
