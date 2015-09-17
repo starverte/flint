@@ -445,5 +445,5 @@ function flint_comment() {
  */
 function flint_avatar( $id_or_email, $size = '96', $default = '', $alt = false ) {
   flint_deprecated_function( __FUNCTION__, '1.5.0', 'get_the_avatar()' );
-  return get_the_avatar( $id_or_email, $size, $default, $alt )
+  return get_the_avatar( $id_or_email, $size, $default, $alt );
 }
