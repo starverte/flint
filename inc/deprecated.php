@@ -427,3 +427,23 @@ function flint_comment() {
   flint_deprecated_function( __FUNCTION__, '1.5.0', 'Flint_Walker_Comment' );
   return;
 }
+
+/**
+ * Retrieve the avatar `<img>` tag for a user, email address, MD5 hash, comment, or post.
+ *
+ * @deprecated 1.5.0 Use get_the_avatar() instead
+ *
+ * @param mixed  $id_or_email The Gravatar to retrieve. Accepts a user_id,
+ *                            user email, or WP_User object.
+ * @param string $size        Optional. Height and width of the avatar image file in pixels. Default 96.
+ * @param string $default     Optional. URL for the default image or a default type. Accepts
+ *                            'mystery' (The Oyster Man), 'blank' (transparent GIF),
+ *                            or 'gravatar_default' (the Gravatar logo). Default is the value of the
+ *                            'avatar_default' option, with a fallback of 'mystery'.
+ * @param string $alt         Optional. Alternative text to use in &lt;img&gt; tag. Default empty.
+ * @return false|string `<img>` tag for the user's avatar. False on failure.
+ */
+function flint_avatar( $id_or_email, $size = '96', $default = '', $alt = false ) {
+  flint_deprecated_function( __FUNCTION__, '1.5.0', 'get_the_avatar()' );
+  return get_the_avatar( $id_or_email, $size, $default, $alt );
+}

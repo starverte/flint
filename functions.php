@@ -97,11 +97,6 @@ endif;
 add_action( 'after_setup_theme', 'flint_after_setup_theme' );
 
 /**
- * Implement the Custom Header feature
- */
-require( get_template_directory() . '/inc/custom-header.php' );
-
-/**
  * Register widgetized areas and update sidebar with default widgets
  */
 function flint_widgets_init() {
