@@ -107,25 +107,30 @@ class Flint_Walker_Comment extends Walker_Comment {
 	 * @param array  $args    An array of arguments.
 	 */
 	protected function html5_comment( $comment, $depth, $args ) {
+    $post_width = flint_post_width();
 		$tag = ( 'div' === $args['style'] ) ? 'div' : 'li';
     $comment_class = 'comment media';
-    switch ( $depth ) {
-      case 1:
-        $comment_class .= ' row';
-        break;
-      case 2:
-        $comment_class .= ' col-xs-11 col-xs-offset-1 col-md-10 col-md-offset-2';
-        break;
-      case 3:
-        $comment_class .= ' col-xs-11 col-xs-offset-1 col-xs-12 col-sm-10 col-sm-offset-2 col-md-9 col-md-offset-3';
-        break;
-      case 4:
-        $comment_class .= ' col-xs-11 col-xs-offset-1 col-xs-12 col-sm-10 col-sm-offset-2 col-md-8 col-md-offset-4';
-        break;
-      default:
-        $comment_class .= ' col-xs-11 col-xs-offset-1 col-xs-12 col-sm-10 col-sm-offset-2 col-md-7 col-md-offset-5';
-        break;
 
+    if ( 'wide' === $post_width && ! is_active_sidebar( 'left' ) && ! is_active_sidebar( 'right' ) ) {
+      switch ( $depth ) {
+        case 1:
+          $comment_class .= ' row';
+          break;
+        case 2:
+          $comment_class .= ' col-xs-11 col-xs-offset-1 col-md-10 col-md-offset-2';
+          break;
+        case 3:
+          $comment_class .= ' col-xs-11 col-xs-offset-1 col-xs-12 col-sm-10 col-sm-offset-2 col-md-9 col-md-offset-3';
+          break;
+        case 4:
+          $comment_class .= ' col-xs-11 col-xs-offset-1 col-xs-12 col-sm-10 col-sm-offset-2 col-md-8 col-md-offset-4';
+          break;
+        default:
+          $comment_class .= ' col-xs-11 col-xs-offset-1 col-xs-12 col-sm-10 col-sm-offset-2 col-md-7 col-md-offset-5';
+          break;
+      }
+    } else {
+      $comment_class .= ' row';
     }
 ?>
 		<<?php echo $tag; ?> id="comment-<?php comment_ID(); ?>" <?php comment_class( $this->has_children ? 'parent' : '' ); ?>>
