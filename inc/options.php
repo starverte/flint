@@ -164,11 +164,11 @@ function flint_options( $option = null ) {
 function flint_options_colors() {
   $options = flint_options();
   $calc = array(
-    'link_hover_color' => flint_darken( $options['link_color'], 15 ),
-    'blockquote_border_color' => flint_lighten( $options['fill'], 15 ),
-    'fill_darker' => flint_darken( $options['fill'], 20 ),
-    'fill_light' => flint_lighten( $options['fill'], 15 ),
-    'fill_link_color' => flint_darken( $options['fill_color'], 15 ),
+    'link_hover_color' => flint_color_darken( $options['link_color'], 15 ),
+    'blockquote_border_color' => flint_color_lighten( $options['fill'], 15 ),
+    'fill_darker' => flint_color_darken( $options['fill'], 20 ),
+    'fill_light' => flint_color_lighten( $options['fill'], 15 ),
+    'fill_link_color' => flint_color_darken( $options['fill_color'], 15 ),
     'fill_link_hover_color' => $options['fill_color'],
   );
   return wp_parse_args( $options, $calc );
