@@ -39,7 +39,7 @@ function flint_content_nav( $nav_id ) {
   $nav_class = ( is_single() ) ? 'navigation-post' : 'navigation-paging';
 
   ?>
-  <nav role="navigation" id="<?php esc_attr_e( $nav_id ); ?>" class="<?php echo $nav_class; ?>">
+  <nav role="navigation" id="<?php echo esc_attr( $nav_id ); ?>" class="<?php echo esc_attr( $nav_class ); ?>">
     <h1 class="screen-reader-text"><?php esc_html_e( 'Post navigation', 'flint' ); ?></h1>
 
   <?php if ( is_single() ) : ?>
@@ -451,7 +451,7 @@ function flint_comment_form( $args = array(), $thing_id = null ) {
       echo $args['must_log_in'];
       do_action( 'comment_form_must_log_in_after' );
     else : ?>
-      <form class="form-horizontal" action="<?php echo site_url( '/wp-comments-post.php' ); ?>" method="post" id="<?php esc_attr_e( $args['id_form'] ); ?>">
+      <form class="form-horizontal" action="<?php echo site_url( '/wp-comments-post.php' ); ?>" method="post" id="<?php echo esc_attr( $args['id_form'] ); ?>">
       <?php do_action( 'comment_form_top' );
       if ( current_user_can( 'moderate_comments' ) ) :
         echo apply_filters( 'comment_form_logged_in', $args['logged_in_as'], $commenter, $user_identity );
@@ -468,7 +468,7 @@ function flint_comment_form( $args = array(), $thing_id = null ) {
       echo apply_filters( 'comment_form_field_comment', $args['comment_field'] );
       echo $args['comment_notes_after']; ?>
       <p class="form-submit">
-      <button class="btn btn-default" name="submit" type="submit" id="<?php esc_attr_e( $args['id_submit'] ); ?>"><?php esc_attr_e( $args['label_submit'] ); ?></button>
+      <button class="btn btn-default" name="submit" type="submit" id="<?php echo esc_attr( $args['id_submit'] ); ?>"><?php echo esc_html( $args['label_submit'] ); ?></button>
       <?php comment_id_fields( $thing_id ); ?>
       </p>
       <?php do_action( 'comment_form', $thing_id ); ?>
@@ -616,9 +616,9 @@ function flint_get_comment_reply_link( $args = array(), $_comment = null, $thing
 	$defaults = array(
 		'add_below'     => 'comment',
 		'respond_id'    => 'respond',
-		'reply_text'    => __( 'Reply' ),
-		'reply_to_text' => __( 'Reply to %s' ),
-		'login_text'    => __( 'Log in to Reply' ),
+		'reply_text'    => __( 'Reply', 'flint' ),
+		'reply_to_text' => __( 'Reply to %s', 'flint' ),
+		'login_text'    => __( 'Log in to Reply', 'flint' ),
 		'depth'         => 0,
 		'before'        => '',
 		'after'         => '',
@@ -1072,7 +1072,7 @@ function flint_nav_fallback() {
   ?>
   <form method="get" class="navbar-form navbar-right" action="<?php echo esc_url( home_url( '/' ) ); ?>" role="search">
     <div class="form-group">
-      <input type="text" class="form-control" name="s" value="<?php esc_attr_e( get_search_query() ); ?>" placeholder="Search" style="width: 200px;">
+      <input type="text" class="form-control" name="s" value="<?php echo esc_attr( get_search_query() ); ?>" placeholder="Search" style="width: 200px;">
     </div>
   </form> <?php
 }
@@ -1261,7 +1261,7 @@ function flint_edit_comment_link( $text = null, $before = '', $after = '' ) {
 	}
 
 	if ( null === $text ) {
-		$text = __( 'Edit This' );
+		$text = __( 'Edit This', 'flint' );
 	}
 
 	$link = '<a class="comment-edit-link btn btn-default btn-sm" href="' . get_edit_comment_link( $comment->comment_ID ) . '">' . $text . '</a>';
