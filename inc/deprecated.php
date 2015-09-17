@@ -447,3 +447,63 @@ function flint_avatar( $id_or_email, $size = '96', $default = '', $alt = false )
   flint_deprecated_function( __FUNCTION__, '1.5.0', 'get_the_avatar()' );
   return get_the_avatar( $id_or_email, $size, $default, $alt );
 }
+
+/**
+ * Converts Hex to HSL
+ *
+ * @deprecated 1.5.0 Use flint_color_hsl() instead.
+ *
+ * @param string $color_hex A color, in hexadecimal i.e. 'ffffff'.
+ *
+ * @return array Hue, saturation, and luminance of the color
+ */
+function flint_hex_hsl( $color_hex ) {
+  flint_deprecated_function( __FUNCTION__, '1.5.0', 'flint_color_hsl()' );
+  return flint_color_hsl( $color_hex );
+}
+
+/**
+ * Converts HSL to Hex (or RGB array)
+ *
+ * @deprecated 1.5.0 Use flint_color_hex() instead.
+ *
+ * @param double $hue The hue of the color.
+ * @param double $sat The saturation of the hue.
+ * @param double $lum The brightness of the hue.
+ *
+ * @return string A color, in hexadecimal i.e. 'ffffff'
+ */
+function flint_hsl_hex( $hue = 0, $sat = 0, $lum = 0 ) {
+  flint_deprecated_function( __FUNCTION__, '1.5.0', 'flint_color_hex()' );
+  return flint_color_hex( $hue = 0, $sat = 0, $lum = 0 );
+}
+
+/**
+ * Darkens Hex color by defined percentage
+ *
+ * @deprecated 1.5.0 Use flint_color_darken() instead.
+ *
+ * @param string $color_hex A color, in hexadecimal i.e. 'ffffff'.
+ * @param double $percent The percentage to darken the color.
+ *
+ * @return string A hexadecimal color, a darker color than $color_hex
+ */
+function flint_darken( $color_hex, $percent ) {
+  flint_deprecated_function( __FUNCTION__, '1.5.0', 'flint_color_darken()' );
+  return flint_color_darken( $color_hex, $percent );
+}
+
+/**
+ * Lightens Hex color by defined percentage
+ *
+ * @deprecated 1.5.0 Use flint_color_lighten() instead.
+ *
+ * @param string $color_hex A color, in hexadecimal i.e. 'ffffff'.
+ * @param double $percent The percentage to lighten the color.
+ *
+ * @return string A hexadecimal color, a lighter color than $color_hex
+ */
+function flint_lighten( $color_hex, $percent ) {
+  flint_deprecated_function( __FUNCTION__, '1.5.0', 'flint_color_lighten()' );
+  return flint_color_lighten( $color_hex, $percent );
+}
