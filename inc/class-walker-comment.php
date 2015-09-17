@@ -30,7 +30,7 @@ class Flint_Walker_Comment extends Walker_Comment {
 ?>
 		<<?php echo $tag; ?> id="comment-<?php comment_ID(); ?>" <?php comment_class(); ?>>
 			<div class="comment-body">
-				<?php esc_html_e( 'Pingback:', 'flint' ); ?> <?php comment_author_link(); ?> <?php flint_edit_comment_link( __( 'Edit' ), '<span class="edit-link">', '</span>' ); ?>
+				<?php esc_html_e( 'Pingback:', 'flint' ); ?> <?php comment_author_link(); ?> <?php flint_edit_comment_link( __( 'Edit', 'flint' ), '<span class="edit-link">', '</span>' ); ?>
 			</div>
 <?php
 	}
@@ -63,7 +63,7 @@ class Flint_Walker_Comment extends Walker_Comment {
 			<?php if ( 0 != $args['avatar_size'] ) {
         echo get_avatar( $comment, $args['avatar_size'] );
       }
-			printf( __( '<cite class="fn">%s</cite> <span class="says">says:</span>' ), get_comment_author_link() ); ?>
+			printf( __( '<cite class="fn">%s</cite> <span class="says">says:</span>', 'flint' ), get_comment_author_link() ); ?>
 		</div>
 		<?php if ( '0' == $comment->comment_approved ) : ?>
 		<em class="comment-awaiting-moderation"><?php esc_html_e( 'Your comment is awaiting moderation.', 'flint' ) ?></em>
@@ -73,7 +73,7 @@ class Flint_Walker_Comment extends Walker_Comment {
 		<div class="comment-meta commentmetadata"><a href="<?php echo esc_url( get_comment_link( $comment->comment_ID, $args ) ); ?>">
 			<?php
 				/* translators: 1: date, 2: time */
-				printf( __( '%1$s at %2$s' ), get_comment_date(),  get_comment_time() ); ?></a><?php flint_edit_comment_link( __( '(Edit)' ), '&nbsp;&nbsp;', '' );
+				printf( __( '%1$s at %2$s', 'flint' ), get_comment_date(),  get_comment_time() ); ?></a><?php flint_edit_comment_link( __( 'Edit', 'flint' ), '&nbsp;&nbsp;', '' );
 			?>
 		</div>
 
@@ -129,7 +129,7 @@ class Flint_Walker_Comment extends Walker_Comment {
     }
 ?>
 		<<?php echo $tag; ?> id="comment-<?php comment_ID(); ?>" <?php comment_class( $this->has_children ? 'parent' : '' ); ?>>
-			<article id="div-comment-<?php comment_ID(); ?>" class="<?php esc_attr_e( $comment_class ) ?>">
+			<article id="div-comment-<?php comment_ID(); ?>" class="<?php echo esc_attr( $comment_class ) ?>">
         <div class="comment-author vcard hidden-xs col-sm-3 col-md-2">
           <?php
           if ( 0 != $args['avatar_size'] ) {
@@ -139,7 +139,7 @@ class Flint_Walker_Comment extends Walker_Comment {
         </div><!-- .comment-author -->
 
 				<div class="comment-content hidden-xs col-sm-5 col-md-7">
-          <?php printf( __( '<h4>%s <span class="says">says:</span></h4>' ), sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?>
+          <?php printf( __( '<h4>%s <span class="says">says:</span></h4>', 'flint' ), sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?>
 					<?php comment_text(); ?>
 				</div><!-- .comment-content -->
 
@@ -147,13 +147,13 @@ class Flint_Walker_Comment extends Walker_Comment {
 					<div class="comment-metadata">
 						<p><a href="<?php echo esc_url( get_comment_link( $comment->comment_ID, $args ) ); ?>">
 							<time datetime="<?php comment_time( 'c' ); ?>">
-								<?php printf( _x( '%1$s<br> %2$s', '1: date, 2: time' ), get_comment_date(), get_comment_time() ); ?>
+								<?php printf( _x( '%1$s<br> %2$s', '1: date, 2: time', 'flint' ), get_comment_date(), get_comment_time() ); ?>
 							</time>
 						</a></p>
 					</div><!-- .comment-metadata -->
 
           <?php
-          flint_edit_comment_link( __( 'Edit' ), '', '' );
+          flint_edit_comment_link( __( 'Edit', 'flint' ), '', '' );
 
           flint_comment_reply_link( array_merge( $args, array(
             'add_below' => 'div-comment',
@@ -182,13 +182,13 @@ class Flint_Walker_Comment extends Walker_Comment {
 					<div class="comment-metadata">
 						<p><a href="<?php echo esc_url( get_comment_link( $comment->comment_ID, $args ) ); ?>">
 							<time datetime="<?php comment_time( 'c' ); ?>">
-								<?php printf( _x( '%1$s<br> %2$s', '1: date, 2: time' ), get_comment_date( 'n/j/y' ), get_comment_time() ); ?>
+								<?php printf( _x( '%1$s<br> %2$s', '1: date, 2: time', 'flint' ), get_comment_date( 'n/j/y' ), get_comment_time() ); ?>
 							</time>
 						</a></p>
 					</div><!-- .comment-metadata -->
 
           <?php
-          flint_edit_comment_link( __( 'Edit' ), '', '' );
+          flint_edit_comment_link( __( 'Edit', 'flint' ), '', '' );
 
           flint_comment_reply_link( array_merge( $args, array(
             'add_below' => 'div-comment',
@@ -204,7 +204,7 @@ class Flint_Walker_Comment extends Walker_Comment {
 				</div><!-- .comment-meta -->
 
 				<div class="comment-content col-xs-9 hidden-sm hidden-md hidden-lg">
-          <?php printf( __( '<h4>%s <span class="says">says:</span></h4>' ), sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?>
+          <?php printf( __( '<h4>%s <span class="says">says:</span></h4>', 'flint' ), sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?>
 					<?php comment_text(); ?>
 				</div><!-- .comment-content -->
 
