@@ -9,8 +9,14 @@
 /**
  * HTML comment list class.
  *
- * @uses Walker_Comment
+ * Style comments with two-column layout.
+ * Left column includes avatar, comment meta, and reply/edit buttons.
+ * Right column contains comment text.
+ *
+ * @since 1.5.0
  * @see WordPress 4.3.1 Walker_Comment
+ *
+ * @uses Walker_Comment
  */
 class Flint_Walker_Comment extends Walker_Comment {
 

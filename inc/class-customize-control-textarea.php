@@ -7,7 +7,14 @@
  */
 
 /**
- * Customize TextArea Control class.
+ * Customize Textarea Control class.
+ *
+ * Customize control for textarea tag.
+ *
+ * @since 1.5.0
+ * @see WordPress 4.3.1 WP_Customize_Control
+ *
+ * @uses WP_Customize_Control
  */
 class Flint_Customize_Control_Textarea extends WP_Customize_Control {
 
