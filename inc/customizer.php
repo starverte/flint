@@ -3,11 +3,13 @@
  * Flint Theme Customizer
  *
  * @package Flint
- * @since 1.4.0
+ * @since 1.0.1
  */
 
 /**
  * Register customization options for Flint
+ *
+ * @since 1.0.1
  *
  * @param object $wp_customize An instance of the WP_Customize_Manager class.
  */
@@ -647,6 +649,8 @@ add_action( 'customize_register', 'flint_customize_register' );
 
 /**
  * Load styles and scripts for customization options
+ *
+ * @since 1.2.0
  */
 function flint_customize_preview_init() {
   wp_enqueue_script( 'flint_customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview' ), flint_theme_version(), true );
@@ -664,6 +668,8 @@ add_action( 'customize_preview_init', 'flint_customize_preview_init' );
 
 /**
  * Sanitize font options
+ *
+ * @since 1.3.0
  *
  * @param string $input The input value to sanitize.
  */
@@ -689,6 +695,8 @@ function flint_sanitize_font( $input ) {
 /**
  * Sanitize width options
  *
+ * @since 1.3.0
+ *
  * @param string $input The input value to sanitize.
  */
 function flint_sanitize_width( $input ) {
@@ -709,6 +717,8 @@ function flint_sanitize_width( $input ) {
 /**
  * Sanitize navigation options for Clear template
  *
+ * @since 1.3.0
+ *
  * @param string $input The input value to sanitize.
  */
 function flint_sanitize_clear_nav( $input ) {
@@ -727,6 +737,8 @@ function flint_sanitize_clear_nav( $input ) {
 /**
  * Sanitize navigation options for Minimal template
  *
+ * @since 1.3.0
+ *
  * @param string $input The input value to sanitize.
  */
 function flint_sanitize_minimal_nav( $input ) {
@@ -744,6 +756,8 @@ function flint_sanitize_minimal_nav( $input ) {
 
 /**
  * Sanitize widget area options for Minimal template
+ *
+ * @since 1.3.0
  *
  * @param string $input The input value to sanitize.
  */
@@ -766,6 +780,8 @@ function flint_sanitize_minimal_widget_area( $input ) {
 /**
  * Sanitize featured image options
  *
+ * @since 1.3.0
+ *
  * @param string $input The input value to sanitize.
  */
 function flint_sanitize_featured_image( $input ) {
@@ -784,6 +800,8 @@ function flint_sanitize_featured_image( $input ) {
 
 /**
  * Sanitize widget column options
+ *
+ * @since 1.3.0
  *
  * @param string $input The input value to sanitize.
  */

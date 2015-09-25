@@ -4,11 +4,13 @@
  * WordPress Options API
  *
  * @package Flint
- * @since 1.4.0
+ * @since 1.3.0
  */
 
 /**
  * Get option defaults
+ *
+ * @since 1.5.0
  */
 function flint_options_defaults() {
   $defaults = array(
@@ -54,6 +56,8 @@ function flint_options_defaults() {
 /**
  * Gets array of theme options
  * For backwards compatibility, can also get single value
+ *
+ * @since 1.5.0
  *
  * @param string $option Deprecated. The single option to return.
  */
@@ -160,6 +164,8 @@ function flint_options( $option = null ) {
 
 /**
  * Get color option values
+ *
+ * @since 1.5.0
  */
 function flint_options_colors() {
   $options = flint_options();
@@ -176,6 +182,8 @@ function flint_options_colors() {
 
 /**
  * Get address from options
+ *
+ * @since 1.3.0
  *
  * @param bool  $schema If true, return address with schema.org microdata.
  * @param array $args Array of address return arguments.

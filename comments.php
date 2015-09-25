@@ -3,7 +3,7 @@
  * The template for displaying Comments
  *
  * @package Flint
- * @since 1.3.9.1
+ * @since 1.0.1
  */
 
 if ( post_password_required() ) {

@@ -3,22 +3,22 @@
  * Flint_Walker_Nav_Menu_Navbar class
  *
  * @package Flint
- * @since 1.4.0
+ * @since 1.5.0
  */
 
 /**
- * Extended Walker class for use with the
- * Twitter Bootstrap toolkit Dropdown menus in Wordpress.
- * Edited to support n-levels submenu.
- * @author johnmegahan https://gist.github.com/1597994, Emanuele 'Tex' Tessore https://gist.github.com/3765640
+ * Bootstrap dropdown navigation menu
+ *
+ * @since 1.5.0
+ * @see WordPress 4.1.0 Walker_Nav_Menu
+ *
+ * @uses Walker_Nav_Menu
  */
 class Flint_Walker_Nav_Menu_Navbar extends Walker_Nav_Menu {
   /**
    * Starts the list before the elements are added.
    *
    * @see Walker_Nav_Menu::start_lvl()
-   *
-   * @since 1.3.0
    *
    * @param string $output Passed by reference. Used to append additional content.
    * @param int    $depth  Depth of menu item. Used for padding.
@@ -35,8 +35,6 @@ class Flint_Walker_Nav_Menu_Navbar extends Walker_Nav_Menu {
 
   /**
    * Start the element output.
-   *
-   * @since 1.3.0
    *
    * @param string $output Passed by reference. Used to append additional content.
    * @param object $item   Menu item data object.

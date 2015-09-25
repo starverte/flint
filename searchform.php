@@ -3,7 +3,7 @@
  * The template for displaying search forms in Flint
  *
  * @package Flint
- * @since 1.0.0
+ * @since 1.0.1
  */
 
 ?>

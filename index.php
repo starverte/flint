@@ -3,7 +3,7 @@
  * The main template file used to display a page when nothing more specific matches a query.
  *
  * @package Flint
- * @since 1.4.0
+ * @since 1.0.1
  */
 
 get_header();
