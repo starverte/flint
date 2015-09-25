@@ -17,6 +17,8 @@
  *
  * This function is to be used in every function that is deprecated.
  *
+ * @since 1.4.0
+ *
  * @param string $function    The function that was called.
  * @param string $version     The version of Flint that deprecated the function.
  * @param string $replacement Optional. The function that should have been called. Default null.
@@ -39,15 +41,9 @@ function flint_deprecated_function( $function, $version, $replacement = null ) {
 }
 
 /**
- * Mark a function as deprecated and inform when it has been used.
+ * Mark a parameter as deprecated and inform when it has been used.
  *
- * There is a hook deprecated_function_run that will be called that can be used
- * to get the backtrace up to what file and function called the deprecated
- * function.
- *
- * The current behavior is to trigger a user error if WP_DEBUG is true.
- *
- * This function is to be used in every function that is deprecated.
+ * @since 1.5.0
  *
  * @param string $function    The function that was called.
  * @param string $parameter   The parameter that was defined.
@@ -73,7 +69,9 @@ function flint_deprecated_parameter( $function, $parameter, $version, $replaceme
 /**
  * Gets the featured image for a post or page if not specified otherwise in theme options
  *
- * @deprecated 1.3.9 Use flint_the_post_thumbnail
+ * @since 1.1.0
+ * @deprecated 1.3.9 Use flint_the_post_thumbnail() instead
+ * @see flint_the_post_thumbnail()
  *
  * @param string $type The post type.
  * @param string $loc The current template.
@@ -86,7 +84,9 @@ function flint_post_thumbnail( $type = 'post', $loc = 'single' ) {
 /**
  * Displays the HTML content for reply to comment link.
  *
- * @deprecated 1.4.0 Use flint_comment_reply_link instead.
+ * @since 1.0.1
+ * @deprecated 1.4.0 Use flint_comment_reply_link() instead.
+ * @see flint_comment_reply_link()
  *
  * @param array       $args    Optional. Override default options.
  * @param int         $comment Comment being replied to. Default current comment.
@@ -101,7 +101,9 @@ function flint_reply_link( $args = array(), $comment = null, $post = null ) {
 /**
  * Retrieve HTML content for reply to comment link.
  *
- * @deprecated 1.4.0 Use flint_get_comment_reply_link instead.
+ * @since 1.0.1
+ * @deprecated 1.4.0 Use flint_get_comment_reply_link() instead.
+ * @see flint_get_comment_reply_link()
  *
  * @param array       $args    Optional. Override default options.
  * @param int         $comment Comment being replied to. Default current comment.
@@ -116,7 +118,9 @@ function get_flint_reply_link( $args = array(), $comment = null, $post = null ) 
 /**
  * Load sidebar template.
  *
- * @deprecated 1.4.0 Use flint_get_sidebar instead.
+ * @since 1.1.0
+ * @deprecated 1.4.0 Use flint_get_sidebar() instead.
+ * @see flint_get_sidebar()
  *
  * Modeled after get_template_part and get_sidebar
  * get_sidebar doesn't make sense for all widget areas, so this replaces that function
@@ -132,7 +136,9 @@ function flint_get_widgets( $slug, $minimal = false ) {
 /**
  * Returns slug or class for .widgets.widgets-footer based on theme options
  *
- * @deprecated 1.4.0 Use flint_get_sidebar_template instead.
+ * @since 1.1.0
+ * @deprecated 1.4.0 Use flint_get_sidebar_template() instead.
+ * @see flint_get_sidebar_template()
  *
  * @param string $output The return type: slug, content, or margins.
  * @param string $widget_area The widget area: header, footer, left, or right.
@@ -145,8 +151,9 @@ function flint_get_widgets_template( $output, $widget_area = 'footer' ) {
 /**
  * Whether a sidebar is in use on the Minimal page template
  *
- * @deprecated 1.4.0 Use flint_is_active_sidebar instead.
- *
+ * @since 1.2.0
+ * @deprecated 1.4.0 Use flint_is_active_sidebar() instead.
+ * @see flint_is_active_sidebar()
  * @see is_active_sidebar() for other page templates
  *
  * @param string $slug Sidebar name, id or number to check.
@@ -163,6 +170,8 @@ function flint_is_active_widgets( $slug ) {
  * Twitter Bootstrap toolkit Dropdown menus in Wordpress.
  * Edited to support n-levels submenu.
  *
+ * @since 1.3.0
+ *
  * @author johnmegahan https://gist.github.com/1597994, Emanuele 'Tex' Tessore https://gist.github.com/3765640
  *
  * @deprecated 1.5.0 Use Flint_Walker_Nav_Menu_Navbar instead.
@@ -172,8 +181,6 @@ class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
    * Starts the list before the elements are added.
    *
    * @see Walker_Nav_Menu::start_lvl()
-   *
-   * @since 1.3.0
    *
    * @param string $output Passed by reference. Used to append additional content.
    * @param int    $depth  Depth of menu item. Used for padding.
@@ -191,8 +198,6 @@ class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
 
   /**
    * Start the element output.
-   *
-   * @since 1.3.0
    *
    * @param string $output Passed by reference. Used to append additional content.
    * @param object $item   Menu item data object.
@@ -314,6 +319,7 @@ class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
 /**
  * Returns slug or class for #primary based on theme options
  *
+ * @since 1.1.0
  * @deprecated 1.5.0
  *
  * @param string $output   The return type: slug, content, or margins.
@@ -345,7 +351,9 @@ function flint_get_template( $output = 'slug', $template = '', $a = false ) {
  * Retrieve and display content spacers based on default post width,
  * post format, and if side widget areas are active.
  *
+ * @since 1.3.0
  * @deprecated 1.5.0 Use flint_post_margin() instead.
+ * @see flint_post_margin()
  *
  * @param string $side Optional. Left or right. Default null.
  */
@@ -364,6 +372,7 @@ function flint_get_spacer( $side = null ) {
 /**
  * Returns slug or class for .widgets.widgets-footer based on theme options
  *
+ * @since 1.4.0
  * @deprecated 1.5.0
  *
  * @param string $output The return type: slug, content, or margins.
@@ -391,7 +400,9 @@ function flint_get_sidebar_template( $output, $widget_area = 'footer' ) {
 /**
  * Get color option values
  *
+ * @since 1.3.0
  * @deprecated 1.5.0 Use flint_options_colors() instead
+ * @see flint_options_colors()
  */
 function flint_get_colors() {
   flint_deprecated_function( __FUNCTION__, '1.5.0', 'flint_options_colors()' );
@@ -401,7 +412,9 @@ function flint_get_colors() {
 /**
  * Get option defaults
  *
+ * @since 1.3.0
  * @deprecated 1.5.0 Use flint_options_defaults() instead
+ * @see flint_options_defaults()
  */
 function flint_get_option_defaults() {
   flint_deprecated_function( __FUNCTION__, '1.5.0', 'flint_options_defaults()' );
@@ -411,7 +424,9 @@ function flint_get_option_defaults() {
 /**
  * Get option values
  *
+ * @since 1.3.0
  * @deprecated 1.5.0 Use flint_options() instead
+ * @see flint_options()
  */
 function flint_get_options() {
   flint_deprecated_function( __FUNCTION__, '1.5.0', 'flint_options()' );
@@ -421,7 +436,9 @@ function flint_get_options() {
 /**
  * Display comment
  *
- * @deprecated 1.5.0 Use flint_options() instead
+ * @since 1.0.1
+ * @deprecated 1.5.0 Use Flint_Walker_Comment instead
+ * @see Flint_Walker_Comment
  */
 function flint_comment() {
   flint_deprecated_function( __FUNCTION__, '1.5.0', 'Flint_Walker_Comment' );
@@ -431,7 +448,9 @@ function flint_comment() {
 /**
  * Retrieve the avatar `<img>` tag for a user, email address, MD5 hash, comment, or post.
  *
+ * @since 1.0.1
  * @deprecated 1.5.0 Use get_the_avatar() instead
+ * @see WordPress get_the_avatar()
  *
  * @param mixed  $id_or_email The Gravatar to retrieve. Accepts a user_id,
  *                            user email, or WP_User object.
@@ -451,7 +470,9 @@ function flint_avatar( $id_or_email, $size = '96', $default = '', $alt = false )
 /**
  * Converts Hex to HSL
  *
+ * @since 1.1.0
  * @deprecated 1.5.0 Use flint_color_hsl() instead.
+ * @see flint_color_hsl()
  *
  * @param string $color_hex A color, in hexadecimal i.e. 'ffffff'.
  *
@@ -465,7 +486,9 @@ function flint_hex_hsl( $color_hex ) {
 /**
  * Converts HSL to Hex (or RGB array)
  *
+ * @since 1.1.0
  * @deprecated 1.5.0 Use flint_color_hex() instead.
+ * @see flint_color_hex()
  *
  * @param double $hue The hue of the color.
  * @param double $sat The saturation of the hue.
@@ -481,7 +504,9 @@ function flint_hsl_hex( $hue = 0, $sat = 0, $lum = 0 ) {
 /**
  * Darkens Hex color by defined percentage
  *
+ * @since 1.3.0
  * @deprecated 1.5.0 Use flint_color_darken() instead.
+ * @see flint_color_darken()
  *
  * @param string $color_hex A color, in hexadecimal i.e. 'ffffff'.
  * @param double $percent The percentage to darken the color.
@@ -496,7 +521,9 @@ function flint_darken( $color_hex, $percent ) {
 /**
  * Lightens Hex color by defined percentage
  *
+ * @since 1.3.0
  * @deprecated 1.5.0 Use flint_color_lighten() instead.
+ * @see flint_color_lighten()
  *
  * @param string $color_hex A color, in hexadecimal i.e. 'ffffff'.
  * @param double $percent The percentage to lighten the color.

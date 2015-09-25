@@ -9,6 +9,8 @@
 /**
  * Converts Hex to HSL
  *
+ * @since 1.5.0
+ *
  * @param string $color_hex A color, in hexadecimal i.e. 'ffffff'.
  *
  * @return array Hue, saturation, and luminance of the color
@@ -81,6 +83,8 @@ function flint_color_hsl( $color_hex ) {
 
 /**
  * Converts HSL to Hex (or RGB array)
+ *
+ * @since 1.5.0
  *
  * @param double $hue The hue of the color.
  * @param double $sat The saturation of the hue.
@@ -162,6 +166,8 @@ function flint_color_hex( $hue = 0, $sat = 0, $lum = 0 ) {
 /**
  * Darkens Hex color by defined percentage
  *
+ * @since 1.5.0
+ *
  * @param string $color_hex A color, in hexadecimal i.e. 'ffffff'.
  * @param double $percent The percentage to darken the color.
  *
@@ -177,6 +183,8 @@ function flint_color_darken( $color_hex, $percent ) {
 
 /**
  * Lightens Hex color by defined percentage
+ *
+ * @since 1.5.0
  *
  * @param string $color_hex A color, in hexadecimal i.e. 'ffffff'.
  * @param double $percent The percentage to lighten the color.

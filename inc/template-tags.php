@@ -9,6 +9,8 @@
 /**
  * Display navigation to next/previous pages when applicable
  *
+ * @since 1.0.1
+ *
  * @param string $nav_id The slug ID of the navigation menu.
  *
  * @todo Remove in Flint 2.
@@ -72,9 +74,10 @@ function flint_content_nav( $nav_id ) {
 <?php
 }
 
-add_action( 'flint_entry_meta_below_post','flint_the_comments', 20 );
 /**
  * Display comments below post
+ *
+ * @since 1.1.1
  *
  * @todo Remove in Flint 2.
  */
@@ -84,11 +87,13 @@ function flint_the_comments() {
     <span class="comments-link"><?php comments_popup_link( __( 'Leave a comment', 'flint' ), __( '1 Comment', 'flint' ), __( '% Comments', 'flint' ) ); ?></span>
   <?php endif;
 }
+add_action( 'flint_entry_meta_below_post', 'flint_the_comments', 20 );
 
-add_action( 'flint_entry_meta_above_post','flint_posted_on' );
 if ( ! function_exists( 'flint_posted_on' ) ) :
 /**
  * Prints HTML with meta information for the current post-date/time and author.
+ *
+ * @since 1.0.1
  */
 function flint_posted_on() {
   if ( get_the_date( 'Y' ) != date( 'Y' ) ) :
@@ -106,12 +111,13 @@ function flint_posted_on() {
   );
 }
 endif;
+add_action( 'flint_entry_meta_above_post', 'flint_posted_on' );
 
-
-add_action( 'flint_entry_meta_below_post','flint_posted_in', 10 );
 if ( ! function_exists( 'flint_posted_in' ) ) :
 /**
  * Prints HTML with the categories and tags that the post is in.
+ *
+ * @since 1.1.1
  */
 function flint_posted_in() {
   $categories = get_the_category();
@@ -148,10 +154,12 @@ function flint_posted_in() {
   } //endif has_tag()
 }
 endif;
-
+add_action( 'flint_entry_meta_below_post', 'flint_posted_in', 10 );
 
 /**
  * Returns true if a blog has more than 1 category
+ *
+ * @since 1.0.1
  */
 function flint_categorized_blog() {
   if ( false == ( $all_the_cool_cats = get_transient( 'all_the_cool_cats' ) ) ) {
@@ -174,6 +182,8 @@ function flint_categorized_blog() {
 
 /**
  * Flush out the transients used in flint_categorized_blog
+ *
+ * @since 1.0.1
  */
 function flint_category_transient_flusher() {
   delete_transient( 'all_the_cool_cats' );
@@ -186,6 +196,8 @@ add_action( 'save_post', 'flint_category_transient_flusher' );
  *
  * Displays page links for paginated posts (i.e. includes the <!--nextpage-->.
  * Quicktag one or more times). This tag must be within The Loop.
+ *
+ * @since 1.0.1
  *
  * @param string|array $args A string or array of argument(s).
  * @return string Formatted output in HTML.
@@ -251,6 +263,8 @@ function flint_link_pages( $args = '' ) {
 /**
  * Helper function for flint_link_pages().
  *
+ * @since 1.0.1
+ *
  * @param int $i Page number.
  * @return string Link.
  */
@@ -277,6 +291,8 @@ function flint_link_page( $i ) {
 /**
  * Display the post content, with Twitter Bootstrap "More" button.
  *
+ * @since 1.0.1
+ *
  * @param string $more_link_text Optional. Content for when there is more text.
  * @param bool   $strip_teaser   Optional. Strip teaser content before the more text. Default is false.
  * @param array  $args           Optional. An array of arguments for displaying the more button.
@@ -300,6 +316,8 @@ function flint_the_content( $more_link_text = 'Read more', $strip_teaser = false
 
 /**
  * Retrieve the post content, with Twitter Bootstrap "More" button.
+ *
+ * @since 1.0.1
  *
  * @param string $more_link_text Optional. Content for when there is more text.
  * @param bool   $strip_teaser   Optional. Strip teaser content before the more text. Default is false.
@@ -381,6 +399,8 @@ function flint_get_the_content( $more_link_text = 'Read more', $strip_teaser = f
 
 /**
  * Modifies password form to use bootstrap styles
+ *
+ * @since 1.0.1
  */
 function flint_password_form() {
     global $post;
@@ -395,6 +415,8 @@ add_filter( 'the_password_form', 'flint_password_form' );
 
 /**
  * Output a complete commenting form for use within a template, using Twitter Bootstrap styles.
+ *
+ * @since 1.0.1
  *
  * @param array       $args An array of arguments.
  * @param int|WP_Post $thing_id Post ID or WP_Post object to generate the form for. Default current post.
@@ -485,6 +507,7 @@ function flint_comment_form( $args = array(), $thing_id = null ) {
 /**
  * Retrieve HTML content for reply to comment link.
  *
+ * @since 1.4.0
  * @see WordPress 4.3.1 get_comment_reply_link()
  *
  * @param array       $args     Comment reply link arguments. See {@see get_comment_reply_link()}
@@ -565,6 +588,7 @@ function flint_get_comment_reply_link( $args = array(), $_comment = null, $thing
 /**
  * Displays the HTML content for reply to comment link.
  *
+ * @since 1.4.0
  * @see WordPress 4.3.1 comment_reply_link()
  * @see flint_get_comment_reply_link()
  *
@@ -582,6 +606,8 @@ function flint_comment_reply_link( $args = array(), $_comment = null, $thing = n
  *
  * Modeled after get_template_part and get_sidebar
  * get_sidebar doesn't make sense for all widget areas, so this replaces that function
+ *
+ * @since 1.4.0
  *
  * @param string $slug    The slug of the specialised sidebar.
  * @param bool   $minimal If true, using the Minimal page template.
@@ -607,6 +633,7 @@ function flint_get_sidebar( $slug, $minimal = false ) {
 /**
  * Whether a sidebar is in use on the Minimal page template
  *
+ * @since 1.4.0
  * @see is_active_sidebar() for other page templates
  *
  * @param string $slug Sidebar name, id or number to check.
@@ -625,6 +652,8 @@ function flint_is_active_sidebar( $slug ) {
 
 /**
  * Returns current theme version.
+ *
+ * @since 1.1.0
  */
 function flint_theme_version() {
   $theme = wp_get_theme();
@@ -633,6 +662,8 @@ function flint_theme_version() {
 
 /**
  * Returns breadcrumbs for pages
+ *
+ * @since 1.1.0
  *
  * @param string $template The page template.
  */
@@ -661,6 +692,8 @@ function flint_breadcrumbs( $template = 'default' ) {
 
 /**
  * Creates custom footer from theme options
+ *
+ * @since 1.1.0
  */
 function flint_custom_footer() {
   $options = flint_options();
@@ -696,6 +729,8 @@ function flint_custom_footer() {
 
 /**
  * Generate CSS from customization options
+ *
+ * @since 1.1.0
  */
 function flint_options_css() {
   $options = flint_options();
@@ -778,7 +813,16 @@ function flint_options_css() {
 }
 
 /**
+ * Retrieve the classes for the body element as an array.
+ *
  * Body class is determined by page template
+ *
+ * @since 1.1.0
+ * @see WordPress body_class()
+ *
+ * @return array Array of classes.
+ *
+ * @uses body_class()
  */
 function flint_body_class() {
   global $post;
@@ -811,6 +855,8 @@ function flint_body_class() {
 /**
  * Display featured image for a post according to theme options
  *
+ * @since 1.3.0
+ *
  * @param string $size Optional. Registered image size to use. Default 'post-thumbnail'.
  * @param string $attr Optional. Query string or array of attributes. Default empty.
  */
@@ -820,6 +866,8 @@ function flint_the_post_thumbnail( $size = 'post-thumbnail', $attr = '' ) {
 
 /**
  * Retrieve featured image for a post according to theme options
+ *
+ * @since 1.5.0
  *
  * @param string $size Optional. Registered image size to use. Default 'post-thumbnail'.
  * @param string $attr Optional. Query string or array of attributes. Default empty.
@@ -862,6 +910,7 @@ function flint_get_the_post_thumbnail( $size = 'post-thumbnail', $attr = '' ) {
  *
  * Also checks for any non-Uncategorized category if no category specified.
  *
+ * @since 1.1.1
  * @see has_category()
  *
  * @param string|int|array $category Optional. The category name/term_id/slug or array of them to check for.
@@ -902,6 +951,8 @@ function flint_has_category( $category = '', $thing = null ) {
  * Checks if side widget areas are active and changes
  * width of content accordingly.
  *
+ * @since 1.3.0
+ *
  * @uses flint_options()
  * @uses is_active_sidebar()
  *
@@ -934,7 +985,9 @@ function flint_content_class( $class = '' ) {
 /**
  * Post class
  *
- * Retrieves and displays the classes for the post div. If
+ * Retrieves and displays the classes for the post div.
+ *
+ * @since 1.3.0
  *
  * @uses flint_post_width_class()
  * @uses post_class()
@@ -949,6 +1002,8 @@ function flint_post_class() {
  * Navigation fallback
  *
  * If the menu doesn't exist, display search instead.
+ *
+ * @since 1.3.0
  */
 function flint_nav_fallback() {
   ?>
@@ -961,6 +1016,8 @@ function flint_nav_fallback() {
 
 /**
  * Retrieves post width
+ *
+ * @since 1.5.0
  */
 function flint_post_width() {
   $options = flint_options();
@@ -1030,6 +1087,8 @@ function flint_post_width() {
 
 /**
  * Retrieves class to achieve post width
+ *
+ * @since 1.5.0
  */
 function flint_post_width_class() {
   $post_width = flint_post_width();
@@ -1055,6 +1114,8 @@ function flint_post_width_class() {
 
 /**
  * Retrieves margin for post, and post thumbnail if needed
+ *
+ * @since 1.5.0
  *
  * @param bool $thumbnail Optional. Whether to display the post thumbnail in margin. Default false.
  */
@@ -1127,6 +1188,7 @@ function flint_post_margin( $thumbnail = false ) {
 /**
  * Display edit comment link with formatting.
  *
+ * @since 1.5.0
  * @see WordPress 4.3.1 edit_comment_link()
  *
  * @global object $comment
