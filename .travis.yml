@@ -121,3 +121,7 @@ script:
 # @link http://docs.travis-ci.com/user/notifications/#Email-notifications
 notifications:
   email: false
+
+# Use container-based infrastructure
+# @link http://docs.travis-ci.com/user/migrating-from-legacy/
+sudo: false
