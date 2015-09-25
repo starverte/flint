@@ -3,7 +3,7 @@
  * Displays content for the single posts
  *
  * @package Flint
- * @since 1.4.1
+ * @since 1.0.1
  */
 
 ?>

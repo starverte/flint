@@ -4,7 +4,7 @@
  * WordPress Options API
  *
  * @package Flint
- * @since 1.4.0
+ * @since 1.3.0
  */
 
 /**

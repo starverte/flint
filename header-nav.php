@@ -5,7 +5,7 @@
  * Displays the navigation menu
  *
  * @package Flint
- * @since 1.3.3
+ * @since 1.1.0
  */
 
 ?>

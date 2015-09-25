@@ -3,7 +3,7 @@
  * Functions related to changing colors
  *
  * @package Flint
- * @since 1.4.0
+ * @since 1.1.0
  */
 
 /**

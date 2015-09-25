@@ -3,7 +3,7 @@
  * The template for displaying Archive pages
  *
  * @package Flint
- * @since 1.4.1
+ * @since 1.0.1
  */
 
 get_header();

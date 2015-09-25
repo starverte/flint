@@ -3,7 +3,7 @@
  * Flint_Walker_Nav_Menu_Navbar class
  *
  * @package Flint
- * @since 1.4.0
+ * @since 1.5.0
  */
 
 /**

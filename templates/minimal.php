@@ -3,7 +3,7 @@
  * Template Name: Minimal
  *
  * @package Flint
- * @since 1.4.0
+ * @since 1.1.0
  */
 
 get_header( 'head' );

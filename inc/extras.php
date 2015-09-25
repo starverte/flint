@@ -5,7 +5,7 @@
  * Eventually, some of the functionality here could be replaced by core features
  *
  * @package Flint
- * @since 1.4.0
+ * @since 1.0.1
  */
 
 /**
