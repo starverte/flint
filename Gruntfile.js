@@ -24,7 +24,7 @@ module.exports = function(grunt) {
         command: "bash tests/syntax.sh >> tests/results"
       },
       phpcs_tests: {
-        command: 'tests/php-codesniffer/scripts/phpcs -p -s -v -n . --standard=./codesniffer.ruleset.xml --extensions=php --ignore=tests/*,node_modules/* >> tests/results'
+        command: 'tests/php-codesniffer/scripts/phpcs -p -s -v -n . --standard=./.phpcs.rules.xml --extensions=php --ignore=tests/*,node_modules/* >> tests/results'
       }
     }
   });
