@@ -189,7 +189,7 @@ function flint_customize_register( $wp_customize ) {
      */
     $wp_customize->add_section( 'flint_footer' , array(
       'title'       => __( 'Custom Footer', 'flint' ),
-      'description' => 'Customize the footer using template tags. <a href="http://sparks.starverte.com/flint/customize/#custom_footer" target="_blank">Learn more</a>',
+      'description' => 'Customize the footer using template tags. <a href="http://matchstix.io/flint/customize/#custom_footer" target="_blank">Learn more</a>',
       'priority'    => 60,
       'panel'       => 'flint_site_info',
     ));
