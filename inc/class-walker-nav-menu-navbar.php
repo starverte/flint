@@ -20,8 +20,6 @@ class Flint_Walker_Nav_Menu_Navbar extends Walker_Nav_Menu {
    *
    * @see Walker_Nav_Menu::start_lvl()
    *
-   * @since 1.3.0
-   *
    * @param string $output Passed by reference. Used to append additional content.
    * @param int    $depth  Depth of menu item. Used for padding.
    * @param array  $args   An array of arguments.
@@ -37,8 +35,6 @@ class Flint_Walker_Nav_Menu_Navbar extends Walker_Nav_Menu {
 
   /**
    * Start the element output.
-   *
-   * @since 1.3.0
    *
    * @param string $output Passed by reference. Used to append additional content.
    * @param object $item   Menu item data object.

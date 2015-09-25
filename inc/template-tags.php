@@ -820,8 +820,6 @@ function flint_options_css() {
  * @since 1.1.0
  * @see WordPress body_class()
  *
- * @return array Array of classes.
- *
  * @uses body_class()
  */
 function flint_body_class() {
@@ -848,8 +846,12 @@ function flint_body_class() {
           body_class( 'clear clear-breadcrumbs' );
           break;
       }
-    } else { body_class(); }
-  } else { body_class(); }
+    } else {
+      body_class();
+    }
+  } else {
+    body_class();
+  }
 }
 
 /**
