@@ -921,6 +921,7 @@ function flint_get_the_post_thumbnail( $size = 'post-thumbnail', $attr = '' ) {
  * @return bool True if the current post has any of the given categories (or any category, if no category specified).
  */
 function flint_has_category( $category = '', $thing = null ) {
+  global $post;
   if ( ! $thing ) {
     $thing = $post;
   }
@@ -1123,6 +1124,7 @@ function flint_post_width_class() {
  */
 function flint_post_margin( $thumbnail = false ) {
   $post_width = flint_post_width();
+  $format = get_post_format();
   $output     = '';
 
   if ( true === $thumbnail && ! is_active_sidebar( 'left' ) && ! is_active_sidebar( 'right' ) ) {

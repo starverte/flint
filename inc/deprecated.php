@@ -31,11 +31,10 @@ function flint_deprecated_function( $function, $version, $replacement = null ) {
    * @param bool $trigger Whether to trigger the error for deprecated functions. Default true.
    */
   if ( true === WP_DEBUG ) {
-    $debug = debug_backtrace();
     if ( ! is_null( $replacement ) ) {
-      trigger_error( sprintf( __( '%1$s is deprecated since Flint version %2$s! Use %3$s instead in file %4$s on line %5$s. Triggered', 'flint' ), $function, $version, $replacement, $debug[1]['file'], $debug[1]['line'] ), E_USER_NOTICE );
+      trigger_error( sprintf( __( '%1$s is deprecated since Flint version %2$s! Use %3$s instead. Triggered', 'flint' ), $function, $version, $replacement ), E_USER_NOTICE );
     } else {
-      trigger_error( sprintf( __( '%1$s is deprecated since Flint version %2$s with no alternative available in file %3$s on line %4$s. Triggered', 'flint' ), $function, $version, $debug[1]['file'], $debug[1]['line'] ), E_USER_NOTICE );
+      trigger_error( sprintf( __( '%1$s is deprecated since Flint version %2$s with no alternative available. Triggered', 'flint' ), $function, $version ), E_USER_NOTICE );
     }
   }
 }
