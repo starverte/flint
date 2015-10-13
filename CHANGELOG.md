@@ -1,3 +1,19 @@
+###Flint 1.5.0
+For complete diff, check out [Pull Request](https://github.com/starverte/flint/pull/213)
+- Prepared Flint for [Matchstix] (http://matchstix.io/the-future-of-sparks/)
+- Improved comments
+ - Simplified code and layout
+ - Better display on small devices
+ - Better nesting (Wide template only)
+ - Better media display
+- Improved inline code documentation
+- Improved translation support
+- Improved security
+- Improved code quality
+- New classes: `Flint_Customize_Control_Textarea`, `Flint_Walker_Comment`, `Flint_Walker_Nav_Menu_Navbar`
+- New functions: `flint_color_darken`, `flint_color_hex`, `flint_color_hsl`, `flint_color_lighten`, `flint_deprecated_parameter`, `flint_edit_comment_link`, `flint_get_the_post_thumbnail`, `flint_options`, `flint_options_colors`, `flint_options_defaults`, `flint_post_margin`, `flint_post_width`, `flint_post_width_class`
+- Deprecated: `flint_admin_header_image`, `flint_admin_header_style`, `flint_avatar`, `flint_comment`, `flint_darken`, `flint_header_style`, `flint_get_colors`, `flint_get_option_defaults`, `flint_get_options`, `flint_get_sidebar_template`, `flint_get_spacer`, `flint_get_template`, `flint_hex_hsl`,``flint_hsl_hex`, `flint_lighten`
+
 ###Flint 1.4.3
 - Replace `flint_trigger_error` with `flint_deprecated_function`
 

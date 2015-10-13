@@ -5,12 +5,13 @@
  * Displays the branding header element
  *
  * @package Flint
- * @since 1.3.0
+ * @since 1.1.0
  */
+
 ?>
 
   <div id="masthead" class="fill site-header" role="banner">
-    <?php if (current_theme_supports('custom-header')) { ?>
+    <?php if ( current_theme_supports( 'custom-header' ) ) { ?>
       <div class="container hidden-xs">
         <div class="row">
           <?php $header_image = get_header_image();

@@ -3,13 +3,14 @@
  * Template Name: Clear
  *
  * @package Flint
- * @since 1.3.9.1
+ * @since 1.1.0
  */
-get_header('head');
 
-$options = flint_get_options();
+get_header( 'head' );
+
+$options = flint_options();
 if ( 'navbar' === $options['clear_nav'] ) {
-  get_header('nav');
+  get_header( 'nav' );
 }
 ?>
 
@@ -19,9 +20,9 @@ if ( 'navbar' === $options['clear_nav'] ) {
 
         <?php while ( have_posts() ) : the_post(); ?>
 
-          <?php flint_breadcrumbs('clear'); ?>
+          <?php flint_breadcrumbs( 'clear' ); ?>
 
-          <?php get_template_part( 'templates/' . flint_get_template(), 'content' ); ?>
+          <?php get_template_part( 'templates/' . flint_post_width(), 'content' ); ?>
 
           <?php if ( comments_open() || '0' != get_comments_number() ) { comments_template(); } ?>
 
@@ -32,4 +33,4 @@ if ( 'navbar' === $options['clear_nav'] ) {
   </div><!-- #primary -->
 </div><!-- #page -->
 
-<?php get_footer('close'); ?>
+<?php get_footer( 'close' ); ?>

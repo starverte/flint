@@ -5,13 +5,14 @@
  * Displays the navigation menu
  *
  * @package Flint
- * @since 1.3.3
+ * @since 1.1.0
  */
+
 ?>
 
   <nav class="fill navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <h1 class="screen-reader-text"><?php _e( 'Menu', 'flint' ); ?></h1>
-    <div class="screen-reader-text skip-link"><a href="#content" title="<?php esc_attr_e( 'Skip to content', 'flint' ); ?>"><?php _e( 'Skip to content', 'flint' ); ?></a></div>
+    <h1 class="screen-reader-text"><?php esc_html_e( 'Menu', 'flint' ); ?></h1>
+    <div class="screen-reader-text skip-link"><a href="#content" title="<?php esc_attr_e( 'Skip to content', 'flint' ); ?>"><?php esc_html_e( 'Skip to content', 'flint' ); ?></a></div>
     <div class="container">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
@@ -26,7 +27,7 @@
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse navbar-primary">
-        <?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_class' => 'nav navbar-nav', 'fallback_cb' => 'flint_nav_fallback', 'walker' => new Flint_Bootstrap_Menu ) ); ?>
+        <?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_class' => 'nav navbar-nav', 'fallback_cb' => 'flint_nav_fallback', 'walker' => new Flint_Walker_Nav_Menu_Navbar ) ); ?>
       </div><!-- .navbar-collapse -->
     </div><!-- .container -->
   </nav><!-- .navbar -->

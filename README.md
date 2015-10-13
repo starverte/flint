@@ -1,13 +1,11 @@
-Flint 1.4.3
+Flint 1.5.0 [![Build Status](https://travis-ci.org/starverte/flint.svg?branch=master)](https://travis-ci.org/starverte/flint)
 =====
-A responsive, minimalist theme built on Twitter's Bootstrap 3 and based on Automattic's _s theme. Make it your own with a custom background, custom header, custom menus, custom colors and more.
 
-Learn more at http://sparks.starverte.com/flint.
+A clean, responsive theme built on Matchstix with Bootstrap 3. Make it your own with various customization options. No programming required.
 
-A spark sets a fire ablaze, and similarly the Sparks Framework is made up of 'sparks' that help initiate
-the creative process of website development within WordPress. Often times to start a fire, a person uses flint and steel.
-With the Sparks Framework it is the same way. 'Flint' (the core theme) and 'Steel' (the core plugin) makeup the foundation
-of the framework. Then, additional child themes and plugins extend the functionality and user experience.
+Learn more at http://matchstix.io/flint.
+
+To start a fire, you might use some matches, or you might use some flint and steel. To start a WordPress website, you might use [Matchstix] (http://matchstix.io), or you might use the theme [Flint] (http://matchstix.io/flint) and the plugin [Steel] (http://matchstix.io/steel).
 
 ```
 Flint is based on Underscores http://underscores.me/

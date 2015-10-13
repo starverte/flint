@@ -3,17 +3,18 @@
  * The main template file used to display a page when nothing more specific matches a query.
  *
  * @package Flint
- * @since 1.4.0
+ * @since 1.0.1
  */
+
 get_header();
-flint_get_sidebar('header');
+flint_get_sidebar( 'header' );
 ?>
 
   <div id="primary" class="content-area container">
 
     <div class="row">
 
-      <?php flint_get_sidebar('left'); ?>
+      <?php flint_get_sidebar( 'left' ); ?>
 
       <div id="content" role="main" <?php flint_content_class(); ?>>
 
@@ -23,7 +24,7 @@ flint_get_sidebar('header');
 
           <?php
             $type = get_post_type();
-            if ($type == 'post') :
+            if ( 'post' === $type ) :
               get_template_part( 'format', get_post_format() );
             else :
               get_template_part( 'type', $type );
@@ -42,7 +43,7 @@ flint_get_sidebar('header');
 
       </div><!-- #content -->
 
-      <?php flint_get_sidebar('right'); ?>
+      <?php flint_get_sidebar( 'right' ); ?>
 
     </div><!-- .row -->
 
@@ -50,5 +51,5 @@ flint_get_sidebar('header');
 
 </div><!-- #page -->
 
-<?php flint_get_sidebar('footer'); ?>
+<?php flint_get_sidebar( 'footer' ); ?>
 <?php get_footer(); ?>
