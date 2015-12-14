@@ -4,7 +4,7 @@
   "description": "A responsive, minimalist theme built on Twitter's Bootstrap 3 and based on Automattic's _s theme. Make it your own with a custom background, custom header, custom menus, custom colors and more.",
   "main": "style.css",
   "scripts": {
-    "test": "grunt test"
+    "test": "snyk test && grunt test"
   },
   "repository": {
     "type": "git",
@@ -20,5 +20,8 @@
     "grunt": "^0.4.5",
     "grunt-phpdocumentor": "^0.4.1",
     "grunt-shell": "^1.1.2"
+  },
+  "dependencies": {
+    "snyk": "^1.6.1"
   }
 }
