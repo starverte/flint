@@ -341,7 +341,7 @@ function flint_get_the_content( $more_link_text = 'Read more', $strip_teaser = f
   }
 
   $output = '';
-  $hasTeaser = false;
+  $has_teaser = false;
 
   if ( post_password_required() ) {
     return get_the_password_form();
@@ -361,7 +361,7 @@ function flint_get_the_content( $more_link_text = 'Read more', $strip_teaser = f
       $more_link_text = strip_tags( wp_kses_no_null( trim( $matches[1] ) ) );
     }
 
-    $hasTeaser = true;
+    $has_teaser = true;
   } else {
     $content = array( $content );
   }
@@ -372,7 +372,7 @@ function flint_get_the_content( $more_link_text = 'Read more', $strip_teaser = f
 
   $teaser = $content[0];
 
-  if ( $more && $strip_teaser && $hasTeaser ) {
+  if ( $more && $strip_teaser && $has_teaser ) {
     $teaser = '';
   }
 
@@ -657,7 +657,9 @@ function flint_is_active_sidebar( $slug ) {
  */
 function flint_theme_version() {
   $theme = wp_get_theme();
+  // @codingStandardsIgnoreStart
   return $theme->Version;
+  // @codingStandardsIgnoreEnd
 }
 
 /**
