@@ -932,7 +932,7 @@ function flint_has_category( $category = '', $thing = null ) {
     $cats = '';
 
     foreach ( get_the_category() as $cat ) {
-      if ( $cat->cat_name != 'Uncategorized' ) {
+      if ( 'Uncategorized' != $cat->cat_name ) {
         $cats .= $cat->cat_name;
       }
     }
