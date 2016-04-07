@@ -22,21 +22,21 @@ function flint_content_nav( $nav_id ) {
   $type = get_post_type( $post_id );
 
   if ( is_single() ) {
-    $previous = ( is_attachment() ) ? get_post( $post->post_parent ) : get_adjacent_post( false, '', true );
-    $next = get_adjacent_post( false, '', false );
+		$previous = ( is_attachment() ) ? get_post( $post->post_parent ) : get_adjacent_post( false, '', true );
+		$next = get_adjacent_post( false, '', false );
 
-    if ( ! $next && ! $previous ) {
-      return;
-    }
+		if ( ! $next && ! $previous ) {
+			return;
+			}
 
-    // Hide bottom navigation for products.
-    if ( $type = 'steel_product' ) {
-      return;
-    }
+		// Hide bottom navigation for products.
+		if ( $type = 'steel_product' ) {
+			return;
+			}
   }
 
   if ( $wp_query->max_num_pages < 2 && ( is_home() || is_archive() || is_search() ) ) {
-    return; }
+		return; }
 
   $nav_class = ( is_single() ) ? 'navigation-post' : 'navigation-paging';
 
@@ -83,9 +83,9 @@ function flint_content_nav( $nav_id ) {
  */
 function flint_the_comments() {
   if ( ! post_password_required() && ( comments_open() || '0' != get_comments_number() ) ) : ?>
-    <span class="sep"> | </span>
-    <span class="comments-link"><?php comments_popup_link( __( 'Leave a comment', 'flint' ), __( '1 Comment', 'flint' ), __( '% Comments', 'flint' ) ); ?></span>
-  <?php endif;
+																								<span class="sep"> | </span>
+																								<span class="comments-link"><?php comments_popup_link( __( 'Leave a comment', 'flint' ), __( '1 Comment', 'flint' ), __( '% Comments', 'flint' ) ); ?></span>
+																								<?php endif;
 }
 add_action( 'flint_entry_meta_below_post', 'flint_the_comments', 20 );
 
@@ -96,19 +96,19 @@ if ( ! function_exists( 'flint_posted_on' ) ) :
  * @since 1.0.1
  */
 function flint_posted_on() {
-  if ( get_the_date( 'Y' ) != date( 'Y' ) ) :
-    $postdate = esc_html( get_the_date( 'F j, Y' ) );
-  else :
-    $postdate = esc_html( get_the_date( 'F j' ) );
-  endif;
-  printf( __( 'Posted on <a href="%1$s" rel="bookmark"><time class="entry-date" datetime="%2$s">%3$s</time></a><span class="byline"> by <span class="author vcard"><a class="url fn n" href="%4$s" title="%5$s" rel="author">%6$s</a></span></span>', 'flint' ),
-    esc_url( get_permalink() ),
-    esc_attr( get_the_date( 'c' ) ),
-    $postdate,
-    esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
-    esc_attr( sprintf( __( 'View all posts by %s', 'flint' ), get_the_author() ) ),
-    get_the_author()
-  );
+		  if ( get_the_date( 'Y' ) != date( 'Y' ) ) :
+			$postdate = esc_html( get_the_date( 'F j, Y' ) );
+			  else :
+				$postdate = esc_html( get_the_date( 'F j' ) );
+					  endif;
+				  printf( __( 'Posted on <a href="%1$s" rel="bookmark"><time class="entry-date" datetime="%2$s">%3$s</time></a><span class="byline"> by <span class="author vcard"><a class="url fn n" href="%4$s" title="%5$s" rel="author">%6$s</a></span></span>', 'flint' ),
+				esc_url( get_permalink() ),
+				esc_attr( get_the_date( 'c' ) ),
+				$postdate,
+				esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
+				esc_attr( sprintf( __( 'View all posts by %s', 'flint' ), get_the_author() ) ),
+				get_the_author()
+				  );
 }
 endif;
 add_action( 'flint_entry_meta_above_post', 'flint_posted_on' );
@@ -120,19 +120,19 @@ if ( ! function_exists( 'flint_posted_in' ) ) :
  * @since 1.1.1
  */
 function flint_posted_in() {
-  $categories = get_the_category();
-  $tags = get_the_tags();
-  $separator = ' '; ?>
+		  $categories = get_the_category();
+		  $tags = get_the_tags();
+		  $separator = ' '; ?>
 
-  <?php if ( flint_has_category() ) { ?>
+							  <?php if ( flint_has_category() ) { ?>
 
     <span class="cat-links">
 
       <?php $output = '';
       foreach ( $categories as $category ) {
-        if ( $category->cat_name != 'Uncategorized' ) {
-          $output .= '<a class="label label-default" href="'.get_category_link( $category->term_id ).'" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $category->name ) ) . '">'.$category->cat_name.'</a>'.$separator;
-        }
+			if ( 'Uncategorized' != $category->cat_name ) {
+				$output .= '<a class="label label-default" href="' . get_category_link( $category->term_id ) . '" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $category->name ) ) . '">' . $category->cat_name . '</a>' . $separator;
+				}
       }
       $output = trim( $output, $separator );
       echo 'Posted in ' . $output; ?>
@@ -147,11 +147,11 @@ function flint_posted_in() {
     <span class="tags-links">
       Tagged
       <?php $output = '';
-      foreach ( $tags as $tag ) {$output .= '<a class="label label-info" href="'.get_tag_link( $tag->term_id ).'" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $tag->name ) ) . '">'.$tag->name.'</a>'.$separator; }
+      foreach ( $tags as $tag ) {$output .= '<a class="label label-info" href="' . get_tag_link( $tag->term_id ) . '" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $tag->name ) ) . '">' . $tag->name . '</a>' . $separator; }
       echo trim( $output, $separator ); ?>
     </span><!-- .tags-links --><?php
 
-  } //endif has_tag()
+	  } //endif has_tag()
 }
 endif;
 add_action( 'flint_entry_meta_below_post', 'flint_posted_in', 10 );
@@ -164,19 +164,19 @@ add_action( 'flint_entry_meta_below_post', 'flint_posted_in', 10 );
 function flint_categorized_blog() {
   if ( false == ( $all_the_cool_cats = get_transient( 'all_the_cool_cats' ) ) ) {
 
-    // Create an array of all the categories that are attached to posts.
-    $all_the_cool_cats = get_categories( array( 'hide_empty' => 1 ) );
+		// Create an array of all the categories that are attached to posts.
+		$all_the_cool_cats = get_categories( array( 'hide_empty' => 1 ) );
 
-    // Count the number of categories that are attached to the posts.
-    $all_the_cool_cats = count( $all_the_cool_cats );
+		// Count the number of categories that are attached to the posts.
+		$all_the_cool_cats = count( $all_the_cool_cats );
 
-    set_transient( 'all_the_cool_cats', $all_the_cool_cats );
+		set_transient( 'all_the_cool_cats', $all_the_cool_cats );
   }
 
   if ( '1' != $all_the_cool_cats ) {
-    return true; // This blog has more than 1 category.
+		return true; // This blog has more than 1 category.
   } else {
-    return false; // This blog has only 1 category.
+		return false; // This blog has only 1 category.
   }
 }
 
@@ -223,39 +223,39 @@ function flint_link_pages( $args = '' ) {
 
   $output = '';
   if ( $multipage ) {
-    if ( 'number' === $next_or_number ) {
-      $output .= $before;
-      for ( $i = 1; $i < ($numpages + 1); $i = $i + 1 ) {
-        $j = str_replace( '%',$i,$pagelink );
-        $output .= ' ';
-        if ( ( $i != $page ) || ( ( ! $more ) && ( 1 == $page ) ) ) {
-          $output .= flint_link_page( $i );
-        } else {
-          $output .= '<li class="active"><a>';
-        }
-        $output .= $link_before . $j . $link_after . '</a></li>';
-      }
-      $output .= $after;
-    } else {
-      if ( $more ) {
-        $output .= $before;
-        $i = $page - 1;
-        if ( $i && $more ) {
-          $output .= _wp_link_page( $i );
-          $output .= $link_before. $previouspagelink . $link_after . '</a>';
-        }
-        $i = $page + 1;
-        if ( $i <= $numpages && $more ) {
-          $output .= _wp_link_page( $i );
-          $output .= $link_before. $nextpagelink . $link_after . '</a>';
-        }
-        $output .= $after;
-      }
-    }
+		if ( 'number' === $next_or_number ) {
+			$output .= $before;
+			for ( $i = 1; $i < ($numpages + 1); $i = $i + 1 ) {
+				$j = str_replace( '%',$i,$pagelink );
+				$output .= ' ';
+				if ( ( $i != $page ) || ( ( ! $more ) && ( 1 == $page ) ) ) {
+					$output .= flint_link_page( $i );
+				} else {
+					$output .= '<li class="active"><a>';
+				}
+				$output .= $link_before . $j . $link_after . '</a></li>';
+			}
+			$output .= $after;
+			} else {
+			if ( $more ) {
+				$output .= $before;
+				$i = $page - 1;
+				if ( $i && $more ) {
+					$output .= _wp_link_page( $i );
+					$output .= $link_before . $previouspagelink . $link_after . '</a>';
+				}
+				$i = $page + 1;
+				if ( $i <= $numpages && $more ) {
+					$output .= _wp_link_page( $i );
+					$output .= $link_before . $nextpagelink . $link_after . '</a>';
+				}
+				$output .= $after;
+			  }
+			}
   }
 
   if ( $echo ) {
-    echo $output; }
+		echo $output; }
 
   return $output;
 }
@@ -273,15 +273,15 @@ function flint_link_page( $i ) {
   $thing = get_post();
 
   if ( 1 == $i ) {
-    $url = get_permalink();
+		$url = get_permalink();
   } else {
-    if ( '' == get_option( 'permalink_structure' ) || in_array( $thing->post_status, array( 'draft', 'pending' ) ) ) {
-      $url = add_query_arg( 'page', $i, get_permalink() );
-    } elseif ( 'page' === get_option( 'show_on_front' ) && get_option( 'page_on_front' ) === $thing->ID ) {
-      $url = trailingslashit( get_permalink() ) . user_trailingslashit( "$wp_rewrite->pagination_base/" . $i, 'single_paged' );
-    } else {
-      $url = trailingslashit( get_permalink() ) . user_trailingslashit( $i, 'single_paged' );
-    }
+		if ( '' == get_option( 'permalink_structure' ) || in_array( $thing->post_status, array( 'draft', 'pending' ) ) ) {
+			$url = add_query_arg( 'page', $i, get_permalink() );
+			} elseif ( 'page' === get_option( 'show_on_front' ) && get_option( 'page_on_front' ) === $thing->ID ) {
+			$url = trailingslashit( get_permalink() ) . user_trailingslashit( "$wp_rewrite->pagination_base/" . $i, 'single_paged' );
+			} else {
+		  $url = trailingslashit( get_permalink() ) . user_trailingslashit( $i, 'single_paged' );
+			}
   }
 
   return '<li><a href="' . esc_url( $url ) . '">';
@@ -337,61 +337,61 @@ function flint_get_the_content( $more_link_text = 'Read more', $strip_teaser = f
   $args = wp_parse_args( $args, $defaults );
 
   if ( null === $more_link_text ) {
-    $more_link_text = __( '(more...)', 'flint' );
+		$more_link_text = __( '(more...)', 'flint' );
   }
 
   $output = '';
-  $hasTeaser = false;
+  $has_teaser = false;
 
   if ( post_password_required() ) {
-    return get_the_password_form();
+		return get_the_password_form();
   }
 
   if ( $page > count( $pages ) ) {
-    $count = count( $pages );
+		$count = count( $pages );
   } else {
-    $count = $page;
+		$count = $page;
   }
 
   $content = $pages[ $count -1 ];
 
   if ( preg_match( '/<!--more(.*?)?-->/', $content, $matches ) ) {
-    $content = explode( $matches[0], $content, 2 );
-    if ( ! empty( $matches[1] ) && ! empty( $more_link_text ) ) {
-      $more_link_text = strip_tags( wp_kses_no_null( trim( $matches[1] ) ) );
-    }
+		$content = explode( $matches[0], $content, 2 );
+		if ( ! empty( $matches[1] ) && ! empty( $more_link_text ) ) {
+			$more_link_text = strip_tags( wp_kses_no_null( trim( $matches[1] ) ) );
+			}
 
-    $hasTeaser = true;
+		$has_teaser = true;
   } else {
-    $content = array( $content );
+		$content = array( $content );
   }
 
   if ( ( false !== strpos( $thing->post_content,'<!--noteaser-->' ) && ( ( ! $multipage ) || ( 1 == $count ) ) ) ) {
-    $strip_teaser = true;
+		$strip_teaser = true;
   }
 
   $teaser = $content[0];
 
-  if ( $more && $strip_teaser && $hasTeaser ) {
-    $teaser = '';
+  if ( $more && $strip_teaser && $has_teaser ) {
+		$teaser = '';
   }
 
   $output .= $teaser;
 
   if ( count( $content ) > 1 ) {
-    if ( $more ) {
-      $output .= '<span id="more-' . $thing->ID . '"></span>' . $content[1];
-    } else {
-      if ( ! empty( $more_link_text ) ) {
-        $output .= apply_filters( 'the_content_more_link', $args['more_before'] . get_permalink() . "#more-{$thing->ID}\"" . 'class="more-link ' . $args['more_class'] . '">' . $more_link_text . $args['more_after'] );
-      }
+		if ( $more ) {
+			$output .= '<span id="more-' . $thing->ID . '"></span>' . $content[1];
+			} else {
+			if ( ! empty( $more_link_text ) ) {
+				$output .= apply_filters( 'the_content_more_link', $args['more_before'] . get_permalink() . "#more-{$thing->ID}\"" . 'class="more-link ' . $args['more_class'] . '">' . $more_link_text . $args['more_after'] );
+			  }
 
-      $output = force_balance_tags( $output );
-    }
+			$output = force_balance_tags( $output );
+			}
   }
 
   if ( $preview ) {
-    $output = preg_replace_callback( '/\%u([0-9A-F]{4})/', '_convert_urlencoded_to_entities', $output );
+		$output = preg_replace_callback( '/\%u([0-9A-F]{4})/', '_convert_urlencoded_to_entities', $output );
   }
 
   return $output;
@@ -404,7 +404,7 @@ function flint_get_the_content( $more_link_text = 'Read more', $strip_teaser = f
  */
 function flint_password_form() {
     global $post;
-    $label = 'pwbox-'.( empty( $post->ID ) ? rand() : $post->ID );
+    $label = 'pwbox-' . ( empty( $post->ID ) ? rand() : $post->ID );
     $o = __( 'To view this protected post, enter the password below:', 'flint' ) . '
     <form action="' . esc_url( site_url( 'wp-login.php?action=postpass', 'login_post' ) ) . '" method="post" class="form-inline"><input class="form-control pw ' . $label . '" name="post_password" type="password" placeholder="Password"><button class="btn btn-default" type="submit" name="Submit">Submit</button>
     </form>
@@ -430,7 +430,7 @@ add_filter( 'the_password_form', 'flint_password_form' );
 function flint_comment_form( $args = array(), $thing_id = null ) {
 
   if ( null === $thing_id ) {
-    $thing_id = get_the_ID();
+		$thing_id = get_the_ID();
   }
 
   $commenter = wp_get_current_commenter();
@@ -465,40 +465,40 @@ function flint_comment_form( $args = array(), $thing_id = null ) {
   $args = wp_parse_args( $args, apply_filters( 'comment_form_defaults', $defaults ) );
 
   if ( comments_open( $thing_id ) ) :
-    do_action( 'comment_form_before' ); ?>
-    <div id="respond">
-    <h3 id="reply-title"><?php comment_form_title( $args['title_reply'], $args['title_reply_to'] ); ?> <small><?php cancel_comment_reply_link( $args['cancel_reply_link'] ); ?></small></h3>
+		do_action( 'comment_form_before' ); ?>
+											<div id="respond">
+											<h3 id="reply-title"><?php comment_form_title( $args['title_reply'], $args['title_reply_to'] ); ?> <small><?php cancel_comment_reply_link( $args['cancel_reply_link'] ); ?></small></h3>
 
-    <?php if ( get_option( 'comment_registration' ) && ! is_user_logged_in() ) :
+											<?php if ( get_option( 'comment_registration' ) && ! is_user_logged_in() ) :
       echo $args['must_log_in'];
       do_action( 'comment_form_must_log_in_after' );
-    else : ?>
-      <form class="form-horizontal" action="<?php echo site_url( '/wp-comments-post.php' ); ?>" method="post" id="<?php echo esc_attr( $args['id_form'] ); ?>">
-      <?php do_action( 'comment_form_top' );
-      if ( current_user_can( 'moderate_comments' ) ) :
-        echo apply_filters( 'comment_form_logged_in', $args['logged_in_as'], $commenter, $user_identity );
-        do_action( 'comment_form_logged_in_after', $commenter, $user_identity );
-      else :
-        echo $args['comment_notes_before'];
-        do_action( 'comment_form_before_fields' );
-        foreach ( (array) $args['fields'] as $name => $field ) {
-        echo apply_filters( "comment_form_field_{$name}", $field ) . "\n";
-        }
-        do_action( 'comment_form_after_fields' );
-      endif;
+												else : ?>
+												  <form class="form-horizontal" action="<?php echo site_url( '/wp-comments-post.php' ); ?>" method="post" id="<?php echo esc_attr( $args['id_form'] ); ?>">
+												  <?php do_action( 'comment_form_top' );
+												  if ( current_user_can( 'moderate_comments' ) ) :
+														echo apply_filters( 'comment_form_logged_in', $args['logged_in_as'], $commenter, $user_identity );
+														do_action( 'comment_form_logged_in_after', $commenter, $user_identity );
+												  else :
+													echo $args['comment_notes_before'];
+													do_action( 'comment_form_before_fields' );
+													foreach ( (array) $args['fields'] as $name => $field ) {
+																echo apply_filters( "comment_form_field_{$name}", $field ) . "\n";
+													}
+													do_action( 'comment_form_after_fields' );
+												  endif;
 
-      echo apply_filters( 'comment_form_field_comment', $args['comment_field'] );
-      echo $args['comment_notes_after']; ?>
-      <p class="form-submit">
-      <button class="btn btn-default" name="submit" type="submit" id="<?php echo esc_attr( $args['id_submit'] ); ?>"><?php echo esc_html( $args['label_submit'] ); ?></button>
-      <?php comment_id_fields( $thing_id ); ?>
-      </p>
-      <?php do_action( 'comment_form', $thing_id ); ?>
-      </form>
-    <?php endif; ?>
+												  echo apply_filters( 'comment_form_field_comment', $args['comment_field'] );
+												  echo $args['comment_notes_after']; ?>
+												  <p class="form-submit">
+												  <button class="btn btn-default" name="submit" type="submit" id="<?php echo esc_attr( $args['id_submit'] ); ?>"><?php echo esc_html( $args['label_submit'] ); ?></button>
+												  <?php comment_id_fields( $thing_id ); ?>
+												  </p>
+												  <?php do_action( 'comment_form', $thing_id ); ?>
+												  </form>
+												<?php endif; ?>
 
-    </div><!-- #respond -->
-    <?php do_action( 'comment_form_after' );
+																						</div><!-- #respond -->
+																						<?php do_action( 'comment_form_after' );
   else :
     do_action( 'comment_form_comments_closed' );
   endif;
@@ -616,17 +616,17 @@ function flint_get_sidebar( $slug, $minimal = false ) {
   $options = flint_options();
 
   switch ( $minimal ) {
-    case true:
-      if ( $slug === $options['minimal_widget_area'] ) { flint_get_sidebar( $slug, false ); }
-      break;
-    case false:
-      do_action( 'get_sidebar', $slug );
+		case true:
+			if ( $slug === $options['minimal_widget_area'] ) { flint_get_sidebar( $slug, false ); }
+			break;
+		case false:
+			do_action( 'get_sidebar', $slug );
 
-      $templates   = array();
-      $templates[] = "widgets/area-{$slug}.php";
+			$templates   = array();
+			$templates[] = "widgets/area-{$slug}.php";
 
-      locate_template( $templates, true, false );
-      break;
+			locate_template( $templates, true, false );
+			break;
   }
 }
 
@@ -644,7 +644,7 @@ function flint_is_active_sidebar( $slug ) {
   $options = flint_options();
 
   if ( $slug === $options['minimal_widget_area'] && is_active_sidebar( $slug ) ) :
-    return true;
+		return true;
   else :
     return false;
   endif;
@@ -657,7 +657,9 @@ function flint_is_active_sidebar( $slug ) {
  */
 function flint_theme_version() {
   $theme = wp_get_theme();
+  // @codingStandardsIgnoreStart
   return $theme->Version;
+  // @codingStandardsIgnoreEnd
 }
 
 /**
@@ -671,22 +673,22 @@ function flint_breadcrumbs( $template = 'default' ) {
   $options = flint_options();
 
   switch ( $template ) {
-    case 'clear':
-      if ( 'breadcrumbs' === $options['clear_nav'] ) { flint_breadcrumbs(); }
-      break;
-    case 'minimal':
-      if ( 'breadcrumbs' === $options['minimal_nav'] ) { flint_breadcrumbs(); }
-      break;
-    default:
-      global $post;
-      $anc = get_post_ancestors( $post->ID );
-      $anc = array_reverse( $anc );
-      echo '<ol class="breadcrumb">';
-      echo '<li><a href="' . get_home_url() . '">Home</a></li>';
-      foreach ( $anc as $ancestor ) { echo '<li><a href="' . get_permalink( $ancestor ) . '">' . get_the_title( $ancestor ) . '</a></li>'; }
-      echo '<li class="active">' . get_the_title() . '</li>';
-      echo '</ol>';
-      break;
+		case 'clear':
+			if ( 'breadcrumbs' === $options['clear_nav'] ) { flint_breadcrumbs(); }
+			break;
+		case 'minimal':
+			if ( 'breadcrumbs' === $options['minimal_nav'] ) { flint_breadcrumbs(); }
+			break;
+		default:
+			global $post;
+			$anc = get_post_ancestors( $post->ID );
+			$anc = array_reverse( $anc );
+			echo '<ol class="breadcrumb">';
+			echo '<li><a href="' . get_home_url() . '">Home</a></li>';
+			foreach ( $anc as $ancestor ) { echo '<li><a href="' . get_permalink( $ancestor ) . '">' . get_the_title( $ancestor ) . '</a></li>'; }
+			echo '<li class="active">' . get_the_title() . '</li>';
+			echo '</ol>';
+			break;
   }
 }
 
@@ -714,10 +716,10 @@ function flint_custom_footer() {
     get_bloginfo( 'name' ),
     get_bloginfo( 'description' ),
     date( 'Y' ),
-    '<span itemprop="name">'      . $options['org'] . '</span>',
-    '<span itemprop="telephone">' . $options['org_tel']     . '</span>',
-    '<span itemprop="email">'     . $options['org_email']   . '</span>',
-    '<span itemprop="faxNumber">' . $options['org_fax']     . '</span>',
+    '<span itemprop="name">' . $options['org'] . '</span>',
+    '<span itemprop="telephone">' . $options['org_tel'] . '</span>',
+    '<span itemprop="email">' . $options['org_email'] . '</span>',
+    '<span itemprop="faxNumber">' . $options['org_fax'] . '</span>',
     '<span id="address" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><span id="street" itemprop="streetAddress">' . $options['org_address'] . '</span><span class="comma">, </span><span id="locality" itemprop="addressLocality">' . $options['org_locality'] . '</span> <span id="postal-code" itemprop="postalCode">' . $options['org_postal_code'] . '</span></span>',
   );
 
@@ -740,59 +742,59 @@ function flint_options_css() {
   $body .= 'background-color: #' . $colors['body_bg'] . '; font-family: ';
 
   switch ( $options['font_family_base'] ) {
-    case 'Open Sans':
-      $body .= '"Open Sans",         sans-serif; font-weight: 300; }';
-      break;
-    case 'Oswald':
-      $body .= '"Oswald",            sans-serif; font-weight: 300; }';
-      break;
-    case 'Roboto':
-      $body .= '"Roboto",            sans-serif; font-weight: 300; }';
-      break;
-    case 'Droid Sans':
-      $body .= '"Droid Sans",        sans-serif; font-weight: 400; }';
-      break;
-    case 'Lato':
-      $body .= '"Lato",              sans-serif; font-weight: 300; }';
-      break;
-    case 'Nova Square':
-      $body .= '"Nova Square",       sans-serif; font-weight: 400; }';
-      break;
-    case 'Strait':
-      $body .= '"Strait",            sans-serif; font-weight: 400; }';
-      break;
-    case 'Yanone Kaffeesatz':
-      $body .= '"Yanone Kaffeesatz", sans-serif; font-weight: 300; }';
-      break;
+		case 'Open Sans':
+			$body .= '"Open Sans",         sans-serif; font-weight: 300; }';
+			break;
+		case 'Oswald':
+			$body .= '"Oswald",            sans-serif; font-weight: 300; }';
+			break;
+		case 'Roboto':
+			$body .= '"Roboto",            sans-serif; font-weight: 300; }';
+			break;
+		case 'Droid Sans':
+			$body .= '"Droid Sans",        sans-serif; font-weight: 400; }';
+			break;
+		case 'Lato':
+			$body .= '"Lato",              sans-serif; font-weight: 300; }';
+			break;
+		case 'Nova Square':
+			$body .= '"Nova Square",       sans-serif; font-weight: 400; }';
+			break;
+		case 'Strait':
+			$body .= '"Strait",            sans-serif; font-weight: 400; }';
+			break;
+		case 'Yanone Kaffeesatz':
+			$body .= '"Yanone Kaffeesatz", sans-serif; font-weight: 300; }';
+			break;
   }
 
   $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .navbar-brand { font-family: ';
 
   switch ( $options['headings_font_family'] ) {
-    case 'Open Sans':
-      $headings .= '"Open Sans",         sans-serif; font-weight: 400;}';
-      break;
-    case 'Oswald':
-      $headings .= '"Oswald",            sans-serif; font-weight: 400;}';
-      break;
-    case 'Roboto':
-      $headings .= '"Roboto",            sans-serif; font-weight: 400;}';
-      break;
-    case 'Droid Sans':
-      $headings .= '"Droid Sans",        sans-serif; font-weight: 400;}';
-      break;
-    case 'Lato':
-      $headings .= '"Lato",              sans-serif; font-weight: 400;}';
-      break;
-    case 'Nova Square':
-      $headings .= '"Nova Square",       sans-serif; font-weight: 400; }';
-      break;
-    case 'Strait':
-      $headings .= '"Strait",            sans-serif; font-weight: 400;}';
-      break;
-    case 'Yanone Kaffeesatz':
-      $headings .= '"Yanone Kaffeesatz", sans-serif; font-weight: 400;}';
-      break;
+		case 'Open Sans':
+			$headings .= '"Open Sans",         sans-serif; font-weight: 400;}';
+			break;
+		case 'Oswald':
+			$headings .= '"Oswald",            sans-serif; font-weight: 400;}';
+			break;
+		case 'Roboto':
+			$headings .= '"Roboto",            sans-serif; font-weight: 400;}';
+			break;
+		case 'Droid Sans':
+			$headings .= '"Droid Sans",        sans-serif; font-weight: 400;}';
+			break;
+		case 'Lato':
+			$headings .= '"Lato",              sans-serif; font-weight: 400;}';
+			break;
+		case 'Nova Square':
+			$headings .= '"Nova Square",       sans-serif; font-weight: 400; }';
+			break;
+		case 'Strait':
+			$headings .= '"Strait",            sans-serif; font-weight: 400;}';
+			break;
+		case 'Yanone Kaffeesatz':
+			$headings .= '"Yanone Kaffeesatz", sans-serif; font-weight: 400;}';
+			break;
   }
   echo '<style type="text/css">';
   echo $body;
@@ -826,31 +828,31 @@ function flint_body_class() {
   global $post;
   $options = flint_options();
   if ( ! empty( $post->ID ) ) {
-    $template = get_post_meta( $post->ID, '_wp_page_template', true );
+		$template = get_post_meta( $post->ID, '_wp_page_template', true );
 
-    if ( 'templates/clear.php' === $template ) {
-      switch ( $options['clear_nav'] ) {
-        case 'navbar':
-          body_class( 'clear clear-nav' );
-          break;
-        case 'breadcrumbs':
-          body_class( 'clear clear-breadcrumbs' );
-          break;
-      }
-    } elseif ( 'templates/minimal.php' === $template ) {
-      switch ( $options['minimal_nav'] ) {
-        case 'navbar':
-          body_class( 'clear clear-nav' );
-          break;
-        case 'breadcrumbs':
-          body_class( 'clear clear-breadcrumbs' );
-          break;
-      }
-    } else {
-      body_class();
-    }
+		if ( 'templates/clear.php' === $template ) {
+			switch ( $options['clear_nav'] ) {
+				case 'navbar':
+					body_class( 'clear clear-nav' );
+				  break;
+				case 'breadcrumbs':
+					body_class( 'clear clear-breadcrumbs' );
+				  break;
+			}
+			} elseif ( 'templates/minimal.php' === $template ) {
+			switch ( $options['minimal_nav'] ) {
+				case 'navbar':
+					body_class( 'clear clear-nav' );
+				  break;
+				case 'breadcrumbs':
+					body_class( 'clear clear-breadcrumbs' );
+				  break;
+			  }
+			} else {
+		  body_class();
+			}
   } else {
-    body_class();
+		body_class();
   }
 }
 
@@ -879,31 +881,31 @@ function flint_get_the_post_thumbnail( $size = 'post-thumbnail', $attr = '' ) {
   $type    = get_post_type();
 
   switch ( $type ) {
-    case 'post':
-      if ( 'never' !== $options['post_featured_image'] ) {
-        if ( 'archives' !== $options['post_featured_image'] || is_archive() ) {
-          if ( has_post_thumbnail() ) {
-            return get_the_post_thumbnail( null, $size, $attr );
-          }
-        }
-      }
-      break;
+		case 'post':
+			if ( 'never' !== $options['post_featured_image'] ) {
+				if ( 'archives' !== $options['post_featured_image'] || is_archive() ) {
+					if ( has_post_thumbnail() ) {
+						return get_the_post_thumbnail( null, $size, $attr );
+					}
+				}
+			}
+			break;
 
-    case 'page':
-      if ( 'never' !== $options['page_featured_image'] ) {
-        if ( 'archives' !== $options['page_featured_image'] || is_archive() ) {
-          if ( has_post_thumbnail() ) {
-            return get_the_post_thumbnail( null, $size, $attr );
-          }
-        }
-      }
-      break;
+		case 'page':
+			if ( 'never' !== $options['page_featured_image'] ) {
+				if ( 'archives' !== $options['page_featured_image'] || is_archive() ) {
+					if ( has_post_thumbnail() ) {
+						return get_the_post_thumbnail( null, $size, $attr );
+					}
+				}
+			}
+			break;
 
-    default:
-      if ( has_post_thumbnail() ) {
-        return get_the_post_thumbnail( null, $size, $attr );
-      }
-      break;
+		default:
+			if ( has_post_thumbnail() ) {
+				return get_the_post_thumbnail( null, $size, $attr );
+			}
+			break;
   }
 }
 
@@ -923,27 +925,27 @@ function flint_get_the_post_thumbnail( $size = 'post-thumbnail', $attr = '' ) {
 function flint_has_category( $category = '', $thing = null ) {
   global $post;
   if ( ! $thing ) {
-    $thing = $post;
+		$thing = $post;
   }
 
   if ( has_term( $category, 'category', $thing ) ) {
-    $cats = '';
+		$cats = '';
 
-    foreach ( get_the_category() as $cat ) {
-      if ( $cat->cat_name != 'Uncategorized' ) {
-        $cats .= $cat->cat_name;
-      }
-    }
+		foreach ( get_the_category() as $cat ) {
+			if ( 'Uncategorized' != $cat->cat_name ) {
+				$cats .= $cat->cat_name;
+			}
+			}
 
-    $output = trim( $cats, ' ' );
+		$output = trim( $cats, ' ' );
 
-    if ( ! empty( $output ) ) {
-      return true;
-    } else {
-      return false;
-    }
+		if ( ! empty( $output ) ) {
+			return true;
+			} else {
+			return false;
+			}
   } else {
-    return false;
+		return false;
   }
 }
 
@@ -971,15 +973,15 @@ function flint_content_class( $class = '' ) {
   $class .= ! empty( $class ) ? ' site-content col-xs-12' : 'site-content col-xs-12';
 
   if ( is_active_sidebar( 'left' ) || is_active_sidebar( 'right' ) ) {
-    if ( is_active_sidebar( 'left' ) && is_active_sidebar( 'right' ) ) {
-      $class .= ' col-md-6 wa-both';
-    } else {
-      if ( is_active_sidebar( 'left' ) ) {
-        $class .= ' col-md-9 wa-left';
-      } elseif ( is_active_sidebar( 'right' ) ) {
-        $class .= ' col-md-9 wa-right';
-      }
-    }
+		if ( is_active_sidebar( 'left' ) && is_active_sidebar( 'right' ) ) {
+			$class .= ' col-md-6 wa-both';
+			} else {
+			if ( is_active_sidebar( 'left' ) ) {
+				$class .= ' col-md-9 wa-left';
+			  } elseif ( is_active_sidebar( 'right' ) ) {
+				$class .= ' col-md-9 wa-right';
+			  }
+			}
   }
 
   echo 'class="' . $class . '"';
@@ -1027,62 +1029,62 @@ function flint_post_width() {
   $type = get_post_type( get_the_ID() );
 
   if ( ! is_active_sidebar( 'left' ) && ! is_active_sidebar( 'right' ) ) {
-    if ( 'page' === $type ) {
-      $template = get_post_meta( get_the_ID(), '_wp_page_template', true );
+		if ( 'page' === $type ) {
+			$template = get_post_meta( get_the_ID(), '_wp_page_template', true );
 
-      switch ( $template ) {
-        case 'templates/clear.php':
-          $post_width = $options['clear_width'];
-          break;
+			switch ( $template ) {
+				case 'templates/clear.php':
+					$post_width = $options['clear_width'];
+				  break;
 
-        case 'templates/minimal.php':
-          $post_width = $options['minimal_width'];
-          break;
+				case 'templates/minimal.php':
+					$post_width = $options['minimal_width'];
+				  break;
 
-        case 'templates/slim.php':
-          $post_width = 'slim';
-          break;
+				case 'templates/slim.php':
+					$post_width = 'slim';
+				  break;
 
-        case 'templates/narrow.php':
-          $post_width = 'narrow';
-          break;
+				case 'templates/narrow.php':
+					$post_width = 'narrow';
+				  break;
 
-        case 'templates/full.php':
-          $post_width = 'full';
-          break;
+				case 'templates/full.php':
+					$post_width = 'full';
+				  break;
 
-        case 'templates/wide.php':
-          $post_width = 'wide';
-          break;
+				case 'templates/wide.php':
+					$post_width = 'wide';
+				  break;
 
-        default:
-          $post_width = $options['page_default_width'];
-      }
-    } elseif ( 'page' === $type ) {
-      $format = get_post_format( $post->ID );
+				default:
+					$post_width = $options['page_default_width'];
+			}
+			} elseif ( 'page' === $type ) {
+			$format = get_post_format( $post->ID );
 
-      switch ( $format ) {
-        case 'aside':
-          $post_width = 'wide';
-          break;
+			switch ( $format ) {
+				case 'aside':
+					$post_width = 'wide';
+				  break;
 
-        case 'link':
-          $post_width = 'wide';
-          break;
+				case 'link':
+					$post_width = 'wide';
+				  break;
 
-        case 'status':
-          $post_width = 'wide';
-          break;
+				case 'status':
+					$post_width = 'wide';
+				  break;
 
-        default:
-          $post_width = $options['post_default_width'];
-          break;
-      }
-    } else {
-      $post_width = $options['post_default_width'];
-    }
+				default:
+					$post_width = $options['post_default_width'];
+				  break;
+			  }
+			} else {
+		  $post_width = $options['post_default_width'];
+			}
   } else {
-    $post_width = 'wide';
+		$post_width = 'wide';
   }
 
   return $post_width;
@@ -1097,21 +1099,21 @@ function flint_post_width_class() {
   $post_width = flint_post_width();
 
   switch ( $post_width ) {
-    case 'slim':
-      return 'col-xs-12 col-sm-8 col-md-4';
-      break;
+		case 'slim':
+			return 'col-xs-12 col-sm-8 col-md-4';
+		break;
 
-    case 'narrow':
-      return 'col-xs-12 col-sm-8 col-md-6';
-      break;
+		case 'narrow':
+			return 'col-xs-12 col-sm-8 col-md-6';
+		break;
 
-    case 'full':
-      return 'col-xs-12 col-sm-10 col-md-8';
-      break;
+		case 'full':
+			return 'col-xs-12 col-sm-10 col-md-8';
+		break;
 
-    case 'wide':
-      return 'col-xs-12';
-      break;
+		case 'wide':
+			return 'col-xs-12';
+		break;
   }
 }
 
@@ -1128,64 +1130,64 @@ function flint_post_margin( $thumbnail = false ) {
   $output     = '';
 
   if ( true === $thumbnail && ! is_active_sidebar( 'left' ) && ! is_active_sidebar( 'right' ) ) {
-    switch ( $post_width ) {
-      case 'slim':
-        $output .= '<div class="hidden-xs hidden-sm col-md-2"></div>';
-        $output .= '<div class="col-xs-12 col-sm-2 col-md-2">';
-        $output .= flint_get_the_post_thumbnail();
-        if ( ! is_single() && 'gallery' === $format ) {
-          $output .= '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
-        }
-        $output .= '</div>';
-        break;
+		switch ( $post_width ) {
+			case 'slim':
+				$output .= '<div class="hidden-xs hidden-sm col-md-2"></div>';
+				$output .= '<div class="col-xs-12 col-sm-2 col-md-2">';
+				$output .= flint_get_the_post_thumbnail();
+				if ( ! is_single() && 'gallery' === $format ) {
+					$output .= '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
+				}
+				$output .= '</div>';
+			  break;
 
-      case 'narrow':
-        $output .= '<div class="hidden-xs hidden-sm col-md-1"></div>';
-        $output .= '<div class="col-xs-12 col-sm-2 col-md-2">';
-        $output .= flint_get_the_post_thumbnail();
-        if ( ! is_single() && 'gallery' === $format ) {
-          $output .= '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
-        }
-        $output .= '</div>';
-        break;
+			case 'narrow':
+				$output .= '<div class="hidden-xs hidden-sm col-md-1"></div>';
+				$output .= '<div class="col-xs-12 col-sm-2 col-md-2">';
+				$output .= flint_get_the_post_thumbnail();
+				if ( ! is_single() && 'gallery' === $format ) {
+					$output .= '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
+				}
+				$output .= '</div>';
+			  break;
 
-      case 'wide':
-        $output .= '<div class="col-xs-12 col-sm-12 hidden-md hidden-lg">';
-        $output .= flint_get_the_post_thumbnail();
-        if ( ! is_single() && 'gallery' === $format ) {
-          $output .= '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
-        }
-        $output .= '</div>';
-        break;
+			case 'wide':
+				$output .= '<div class="col-xs-12 col-sm-12 hidden-md hidden-lg">';
+				$output .= flint_get_the_post_thumbnail();
+				if ( ! is_single() && 'gallery' === $format ) {
+					$output .= '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
+				}
+				$output .= '</div>';
+			  break;
 
-      default:
-        $output .= '<div class="col-xs-12 col-sm-2 col-md-2">';
-        $output .= flint_get_the_post_thumbnail();
-        if ( ! is_single() && 'gallery' === $format ) {
-          $output .= '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
-        }
-        $output .= '</div>';
-        break;
-    }
+			default:
+				$output .= '<div class="col-xs-12 col-sm-2 col-md-2">';
+				$output .= flint_get_the_post_thumbnail();
+				if ( ! is_single() && 'gallery' === $format ) {
+					$output .= '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
+				}
+				$output .= '</div>';
+			  break;
+			}
 
-    return $output;
+		return $output;
   } else {
-    switch ( $post_width ) {
-      case 'slim':
-        return '<div class="hidden-xs col-sm-2 col-md-4"></div>';
-        break;
+		switch ( $post_width ) {
+			case 'slim':
+			  return '<div class="hidden-xs col-sm-2 col-md-4"></div>';
+			break;
 
-      case 'narrow':
-        return '<div class="hidden-xs col-sm-2 col-md-3"></div>';
-        break;
+			case 'narrow':
+			  return '<div class="hidden-xs col-sm-2 col-md-3"></div>';
+			break;
 
-      case 'wide':
-        break;
+			case 'wide':
+			  break;
 
-      default:
-        return '<div class="hidden-xs col-sm-1 col-md-2"></div>';
-        break;
-    }
+			default:
+			  return '<div class="hidden-xs col-sm-1 col-md-2"></div>';
+			break;
+			}
   }
 }
 
