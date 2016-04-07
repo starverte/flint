@@ -130,7 +130,7 @@ function flint_posted_in() {
 
       <?php $output = '';
       foreach ( $categories as $category ) {
-        if ( $category->cat_name != 'Uncategorized' ) {
+        if ( 'Uncategorized' != $category->cat_name ) {
           $output .= '<a class="label label-default" href="'.get_category_link( $category->term_id ).'" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $category->name ) ) . '">'.$category->cat_name.'</a>'.$separator;
         }
       }
