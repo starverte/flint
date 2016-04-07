@@ -16,7 +16,7 @@ $type = get_post_type();
         <?php echo flint_post_margin(); ?>
         <div class="widget-area <?php echo flint_post_width_class(); ?>" >
           <?php do_action( 'before_sidebar' ); ?>
-          <?php do_action( 'flint_widget_area_footer_'.$type ); ?>
+          <?php do_action( 'flint_widget_area_footer_' . $type ); ?>
           <?php dynamic_sidebar( 'footer' ); ?>
         </div><!-- .widget-area -->
         <?php echo flint_post_margin(); ?>
@@ -30,17 +30,17 @@ $type = get_post_type();
       <div class="row">
         <div class="widget-area col-md-4" >
           <?php do_action( 'before_sidebar' ); ?>
-          <?php do_action( 'flint_widget_area_footer_left_'.$type ); ?>
+          <?php do_action( 'flint_widget_area_footer_left_' . $type ); ?>
           <?php dynamic_sidebar( 'footer_left' ); ?>
         </div><!-- .widget-area -->
         <div class="widget-area col-md-4" >
           <?php do_action( 'before_sidebar' ); ?>
-          <?php do_action( 'flint_widget_area_footer_center_'.$type ); ?>
+          <?php do_action( 'flint_widget_area_footer_center_' . $type ); ?>
           <?php dynamic_sidebar( 'footer_center' ); ?>
         </div><!-- .widget-area -->
         <div class="widget-area col-md-4" >
           <?php do_action( 'before_sidebar' ); ?>
-          <?php do_action( 'flint_widget_area_footer_right_'.$type ); ?>
+          <?php do_action( 'flint_widget_area_footer_right_' . $type ); ?>
           <?php dynamic_sidebar( 'footer_right' ); ?>
         </div><!-- .widget-area -->
       </div><!-- .row -->
