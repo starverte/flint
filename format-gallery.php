@@ -14,9 +14,13 @@
     <?php echo flint_post_margin( true ); ?>
     <article id="post-<?php the_ID(); ?>" <?php flint_post_class(); ?>>
       <header class="entry-header">
-        <h1 class="entry-title"><?php if ( is_single() ) { echo the_title();
-} else { echo '<a href="' . get_permalink() . '" rel="bookmark">' . get_the_title() . '</a>'; } ?></h1>
-        <?php if ( current_user_can( 'edit_posts' ) ) { ?><a class="btn btn-default btn-sm btn-edit hidden-xs" href="<?php echo get_edit_post_link(); ?>">Edit Gallery</a><?php } ?>
+        <h1 class="entry-title"><?php
+          if ( is_single() ) {
+            echo the_title();
+          } else {
+            echo '<a href="' . get_permalink() . '" rel="bookmark">' . get_the_title() . '</a>';
+          } ?></h1>
+        <?php edit_post_link( __( 'Edit Gallery', 'flint' ), '', '', 0, 'btn btn-default btn-sm btn-edit hidden-xs' ); ?>
         <?php if ( ! is_single() ) { ?><a class="btn btn-info btn-block visible-xs-block" href="<?php echo get_permalink(); ?>">View gallery</a><?php } ?>
         <div class="entry-meta">
           <?php do_action( 'flint_entry_meta_above_post' ); ?>

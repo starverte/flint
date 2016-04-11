@@ -36,7 +36,7 @@ class Flint_Walker_Comment extends Walker_Comment {
 ?>
 		<<?php echo $tag; ?> id="comment-<?php comment_ID(); ?>" <?php comment_class(); ?>>
 			<div class="comment-body">
-				<?php esc_html_e( 'Pingback:', 'flint' ); ?> <?php comment_author_link(); ?> <?php flint_edit_comment_link( __( 'Edit', 'flint' ), '<span class="edit-link">', '</span>' ); ?>
+				<?php esc_html_e( 'Pingback:', 'flint' ); ?> <?php comment_author_link(); ?> <?php flint_edit_comment_link( __( 'Edit Pingback', 'flint' ), '<span class="edit-link">', '</span>' ); ?>
 			</div>
 <?php
 	}
@@ -79,7 +79,7 @@ class Flint_Walker_Comment extends Walker_Comment {
 		<div class="comment-meta commentmetadata"><a href="<?php echo esc_url( get_comment_link( $comment->comment_ID, $args ) ); ?>">
 			<?php
 				/* translators: 1: date, 2: time */
-				printf( __( '%1$s at %2$s', 'flint' ), get_comment_date(),  get_comment_time() ); ?></a><?php flint_edit_comment_link( __( 'Edit', 'flint' ), '&nbsp;&nbsp;', '' );
+				printf( __( '%1$s at %2$s', 'flint' ), get_comment_date(),  get_comment_time() ); ?></a><?php flint_edit_comment_link( __( 'Edit Comment', 'flint' ), '&nbsp;&nbsp;', '' );
 			?>
 		</div>
 

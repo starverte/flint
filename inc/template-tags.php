@@ -1211,7 +1211,7 @@ function flint_edit_comment_link( $text = null, $before = '', $after = '' ) {
 	}
 
 	if ( null === $text ) {
-		$text = __( 'Edit This', 'flint' );
+		$text = __( 'Edit Comment', 'flint' );
 	}
 
 	$link = '<a class="comment-edit-link btn btn-default btn-sm" href="' . get_edit_comment_link( $comment->comment_ID ) . '">' . $text . '</a>';

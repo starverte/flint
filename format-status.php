@@ -12,7 +12,7 @@
     <article id="post-<?php the_ID(); ?>" <?php post_class( 'col-xs-12' ); ?>>
       <div class="entry-content">
         <h4><?php flint_the_content(); ?></h4>
-        <?php if ( current_user_can( 'edit_posts' ) ) { ?><a class="btn btn-default btn-sm btn-edit hidden-xs" href="<?php echo get_edit_post_link(); ?>">Edit Status</a><?php } ?>
+        <?php edit_post_link( __( 'Edit Status', 'flint' ), '', '', 0, 'btn btn-default btn-sm btn-edit hidden-xs' ); ?>
       </div><!-- .entry-content -->
 
       <footer class="entry-meta clearfix">
