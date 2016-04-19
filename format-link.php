@@ -15,7 +15,7 @@
     <article id="post-<?php the_ID(); ?>" <?php flint_post_class(); ?>>
       <div class="entry-content">
         <h3><?php flint_the_content(); ?></h3>
-        <?php if ( current_user_can( 'edit_posts' ) ) { ?><a class="btn btn-default btn-sm btn-edit hidden-xs" href="<?php echo get_edit_post_link(); ?>">Edit Link</a><?php } ?>
+        <?php edit_post_link( __( 'Edit Link', 'flint' ), '', '', 0, 'btn btn-default btn-sm btn-edit hidden-xs' ); ?>
       </div><!-- .entry-content -->
 
       <footer class="entry-meta clearfix">

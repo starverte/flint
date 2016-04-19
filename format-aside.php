@@ -11,7 +11,7 @@
   <div class="row">
     <article id="post-<?php the_ID(); ?>" <?php post_class( 'col-xs-12' ); ?>>
       <div class="entry-content">
-        <?php if ( current_user_can( 'edit_posts' ) ) { ?><a class="btn btn-default btn-sm btn-edit hidden-xs" href="<?php echo get_edit_post_link(); ?>">Edit Aside</a><?php } ?>
+        <?php edit_post_link( __( 'Edit Aside', 'flint' ), '', '', 0, 'btn btn-default btn-sm btn-edit hidden-xs' ); ?>
         <blockquote><?php flint_the_content(); ?></blockquote>
       </div><!-- .entry-content -->
 
