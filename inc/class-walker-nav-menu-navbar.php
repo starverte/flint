@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Flint_Walker_Nav_Menu_Navbar class
  *

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Functions related to changing colors
  *
