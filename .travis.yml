@@ -24,20 +24,20 @@ env:
   # @link https://github.com/WordPress/WordPress
   - WP_VERSION=master WP_MULTISITE=0
   - WP_VERSION=master WP_MULTISITE=1
+  # WordPress 4.5
+  # @link https://github.com/WordPress/WordPress/tree/4.5-branch
+  - WP_VERSION=4.4
   # WordPress 4.4
   # @link https://github.com/WordPress/WordPress/tree/4.4-branch
   - WP_VERSION=4.4
   # WordPress 4.3
   # @link https://github.com/WordPress/WordPress/tree/4.3-branch
   - WP_VERSION=4.3
-  # WordPress 4.2
-  # @link https://github.com/WordPress/WordPress/tree/4.2-branch
-  - WP_VERSION=4.2
 
 matrix:
   allow_failures:
-    - env: WP_VERSION=4.2
     - env: WP_VERSION=4.3
+    - env: WP_VERSION=4.4
   fast_finish: true
 
 # Use this to prepare the system to install prerequisites or dependencies.
