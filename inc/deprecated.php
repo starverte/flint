@@ -31,11 +31,11 @@ function flint_deprecated_function( $function, $version, $replacement = null ) {
    * @param bool $trigger Whether to trigger the error for deprecated functions. Default true.
    */
   if ( true === WP_DEBUG ) {
-		if ( ! is_null( $replacement ) ) {
-			trigger_error( sprintf( __( '%1$s is deprecated since Flint version %2$s! Use %3$s instead. Triggered', 'flint' ), $function, $version, $replacement ), E_USER_NOTICE );
-			} else {
-			trigger_error( sprintf( __( '%1$s is deprecated since Flint version %2$s with no alternative available. Triggered', 'flint' ), $function, $version ), E_USER_NOTICE );
-			}
+    if ( ! is_null( $replacement ) ) {
+      trigger_error( sprintf( __( '%1$s is deprecated since Flint version %2$s! Use %3$s instead. Triggered', 'flint' ), $function, $version, $replacement ), E_USER_NOTICE );
+    } else {
+      trigger_error( sprintf( __( '%1$s is deprecated since Flint version %2$s with no alternative available. Triggered', 'flint' ), $function, $version ), E_USER_NOTICE );
+    }
   }
 }
 
@@ -57,11 +57,11 @@ function flint_deprecated_parameter( $function, $parameter, $version, $replaceme
    * @param bool $trigger Whether to trigger the error for deprecated functions. Default true.
    */
   if ( true === WP_DEBUG ) {
-		if ( ! is_null( $replacement ) ) {
-			trigger_error( sprintf( __( 'The %2$s parameter for %1$s is <strong>deprecated</strong> since Flint version %3$s! Use %4$s instead.', 'flint' ), $function, $parameter, $version, $replacement ) );
-			} else {
-			trigger_error( sprintf( __( 'The %2$s parameter for %1$s is <strong>deprecated</strong> since Flint version %3$s with no alternative available.', 'flint' ), $function, $parameter, $version ) );
-			}
+    if ( ! is_null( $replacement ) ) {
+      trigger_error( sprintf( __( 'The %2$s parameter for %1$s is <strong>deprecated</strong> since Flint version %3$s! Use %4$s instead.', 'flint' ), $function, $parameter, $version, $replacement ) );
+    } else {
+      trigger_error( sprintf( __( 'The %2$s parameter for %1$s is <strong>deprecated</strong> since Flint version %3$s with no alternative available.', 'flint' ), $function, $parameter, $version ) );
+    }
   }
 }
 
@@ -157,7 +157,7 @@ function flint_get_widgets_template( $output, $widget_area = 'footer' ) {
  *
  * @param string $slug Sidebar name, id or number to check.
  *
- * @return bool true if the sidebar is in use, false otherwise.
+ * @return bool True if the sidebar is in use, false otherwise.
  */
 function flint_is_active_widgets( $slug ) {
   flint_deprecated_function( __FUNCTION__, '1.4.0', 'flint_is_active_sidebar()' );
@@ -176,6 +176,7 @@ function flint_is_active_widgets( $slug ) {
  * @deprecated 1.5.0 Use Flint_Walker_Nav_Menu_Navbar instead.
  */
 class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
+
   /**
    * Starts the list before the elements are added.
    *
@@ -186,12 +187,10 @@ class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
    * @param array  $args   An array of arguments.
    */
   function start_lvl( &$output, $depth = 0, $args = array() ) {
-		flint_deprecated_function( __CLASS__, '1.5.0', 'Flint_Walker_Nav_Menu_Navbar' );
-
-		$indent = str_repeat( "\t", $depth );
-		$submenu = ($depth > 0) ? ' sub-menu' : '';
-		$output     .= "\n$indent<ul class=\"dropdown-menu$submenu depth_$depth\">\n";
-
+    flint_deprecated_function( __CLASS__, '1.5.0', 'Flint_Walker_Nav_Menu_Navbar' );
+    $indent = str_repeat( "\t", $depth );
+    $submenu = ($depth > 0) ? ' sub-menu' : '';
+    $output .= "\n$indent<ul class=\"dropdown-menu$submenu depth_$depth\">\n";
   }
 
 
@@ -205,53 +204,52 @@ class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
    * @param int    $id     Current item ID.
    */
   function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
-		flint_deprecated_function( __CLASS__, '1.5.0', 'Flint_Walker_Nav_Menu_Navbar' );
+    flint_deprecated_function( __CLASS__, '1.5.0', 'Flint_Walker_Nav_Menu_Navbar' );
+    $indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
+    $li_attributes = '';
+    $class_names = $value = '';
+    $classes = empty( $item->classes ) ? array() : (array) $item->classes;
 
-		$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
-
-		$li_attributes = '';
-		$class_names = $value = '';
-
-		$classes = empty( $item->classes ) ? array() : (array) $item->classes;
-
-		/**
+    /**
      * Managing Divider
      * Add divider class to an element to get a divider before it.
      */
-		$divider_class_position = array_search( 'divider', $classes );
-		if ( false !== $divider_class_position ) {
-			$output .= "<li class=\"divider\"></li>\n";
-			unset( $classes[ $divider_class_position ] );
-			}
+    $divider_class_position = array_search( 'divider', $classes );
 
-		$classes[] = ($args->has_children) ? 'dropdown' : '';
-		$classes[] = ($item->current || $item->current_item_ancestor) ? 'active' : '';
-		$classes[] = 'menu-item-' . $item->ID;
-		if ( $depth && $args->has_children ) {
-			$classes[] = 'dropdown-submenu';
-			}
+    if ( false !== $divider_class_position ) {
+      $output .= "<li class=\"divider\"></li>\n";
+      unset( $classes[ $divider_class_position ] );
+    }
 
-		$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
-		$class_names = ' class="' . esc_attr( $class_names ) . '"';
+    $classes[] = ($args->has_children) ? 'dropdown' : '';
+    $classes[] = ($item->current || $item->current_item_ancestor) ? 'active' : '';
+    $classes[] = 'menu-item-' . $item->ID;
 
-		$id = apply_filters( 'nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args );
-		$id = strlen( $id ) ? ' id="' . esc_attr( $id ) . '"' : '';
+    if ( $depth && $args->has_children ) {
+      $classes[] = 'dropdown-submenu';
+    }
 
-		$output .= $indent . '<li' . $id . $value . $class_names . $li_attributes . '>';
+    $class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
+    $class_names = ' class="' . esc_attr( $class_names ) . '"';
 
-		$attributes  = ! empty( $item->attr_title )         ? ' title="' . esc_attr( $item->attr_title ) . '"' : '';
-		$attributes .= ! empty( $item->target )             ? ' target="' . esc_attr( $item->target ) . '"' : '';
-		$attributes .= ! empty( $item->xfn )                ? ' rel="' . esc_attr( $item->xfn ) . '"' : '';
-		$attributes .= ! empty( $item->url )                ? ' href="' . esc_attr( $item->url ) . '"' : '';
-		$attributes .= ( 0 == $depth && $args->has_children )  ? ' class="dropdown-toggle" data-toggle="dropdown"' : '';
+    $id = apply_filters( 'nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args );
+    $id = strlen( $id ) ? ' id="' . esc_attr( $id ) . '"' : '';
 
-		$item_output = $args->before;
-		$item_output .= '<a' . $attributes . '>';
-		$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
-		$item_output .= ( 0 == $depth && $args->has_children ) ? ' <b class="caret"></b></a>' : '</a>';
-		$item_output .= $args->after;
+    $output .= $indent . '<li' . $id . $value . $class_names . $li_attributes . '>';
 
-		$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
+    $attributes = ! empty( $item->attr_title ) ? ' title="' . esc_attr( $item->attr_title ) . '"' : '';
+    $attributes .= ! empty( $item->target ) ? ' target="' . esc_attr( $item->target ) . '"' : '';
+    $attributes .= ! empty( $item->xfn ) ? ' rel="' . esc_attr( $item->xfn ) . '"' : '';
+    $attributes .= ! empty( $item->url ) ? ' href="' . esc_attr( $item->url ) . '"' : '';
+    $attributes .= ( 0 == $depth && $args->has_children ) ? ' class="dropdown-toggle" data-toggle="dropdown"' : '';
+
+    $item_output = $args->before;
+    $item_output .= '<a' . $attributes . '>';
+    $item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
+    $item_output .= ( 0 == $depth && $args->has_children ) ? ' <b class="caret"></b></a>' : '</a>';
+    $item_output .= $args->after;
+
+    $output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
   }
 
   /**
@@ -265,53 +263,59 @@ class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
    * @param string $output            Passed by reference. Used to append additional content.
    */
   function display_element( $element, &$children_elements, $max_depth, $depth = 0, $args, &$output ) {
-		flint_deprecated_function( __CLASS__, '1.5.0', 'Flint_Walker_Nav_Menu_Navbar' );
-		if ( ! $element ) {
-			return; }
+    flint_deprecated_function( __CLASS__, '1.5.0', 'Flint_Walker_Nav_Menu_Navbar' );
 
-		$id_field = $this->db_fields['id'];
+    if ( ! $element ) {
+    return;
+    }
 
-		if ( is_array( $args[0] ) ) {
-			$args[0]['has_children'] = ! empty( $children_elements[ $element->$id_field ] ); } else if ( is_object( $args[0] ) ) {
-			$args[0]->has_children = ! empty( $children_elements[ $element->$id_field ] ); }
-			$cb_args = array_merge( array( &$output, $element, $depth ), $args );
-			call_user_func_array( array( &$this, 'start_el' ), $cb_args );
+    $id_field = $this->db_fields['id'];
 
-			$id = $element->$id_field;
+    if ( is_array( $args[0] ) ) {
+      $args[0]['has_children'] = ! empty( $children_elements[ $element->$id_field ] );
+    } elseif ( is_object( $args[0] ) ) {
+      $args[0]->has_children = ! empty( $children_elements[ $element->$id_field ] );
+    }
 
-			/**
+    $cb_args = array_merge( array( &$output, $element, $depth ), $args );
+    call_user_func_array( array( &$this, 'start_el' ), $cb_args );
+    $id = $element->$id_field;
+
+    /**
      * Title
      * descend only when the depth is right and there are childrens for this element
      */
-			if ( ( 0 == $max_depth || $max_depth > $depth + 1 ) && isset( $children_elements[ $id ] ) ) {
+    if ( ( 0 == $max_depth || $max_depth > $depth + 1 ) && isset( $children_elements[ $id ] ) ) {
+      foreach ( $children_elements[ $id ] as $child ) {
 
-					foreach ( $children_elements[ $id ] as $child ) {
-					/**
+        /**
          * Start the child delimiter
          */
-					if ( ! isset( $newlevel ) ) {
-						$newlevel = true;
-						$cb_args = array_merge( array( &$output, $depth ), $args );
-						call_user_func_array( array( &$this, 'start_lvl' ), $cb_args );
-					}
-					$this->display_element( $child, $children_elements, $max_depth, $depth + 1, $args, $output );
-					}
-					unset( $children_elements[ $id ] );
-				}
-			/**
+        if ( ! isset( $newlevel ) ) {
+          $newlevel = true;
+          $cb_args = array_merge( array( &$output, $depth ), $args );
+          call_user_func_array( array( &$this, 'start_lvl' ), $cb_args );
+        }
+
+        $this->display_element( $child, $children_elements, $max_depth, $depth + 1, $args, $output );
+      }
+
+      unset( $children_elements[ $id ] );
+    }
+
+    /**
      * End the child delimiter
      */
-			if ( isset( $newlevel ) && $newlevel ) {
-					$cb_args = array_merge( array( &$output, $depth ), $args );
-					call_user_func_array( array( &$this, 'end_lvl' ), $cb_args );
-				}
+    if ( isset( $newlevel ) && $newlevel ) {
+      $cb_args = array_merge( array( &$output, $depth ), $args );
+      call_user_func_array( array( &$this, 'end_lvl' ), $cb_args );
+    }
 
-			/**
+    /**
      * End this element
      */
-			$cb_args = array_merge( array( &$output, $element, $depth ), $args );
-			call_user_func_array( array( &$this, 'end_el' ), $cb_args );
-
+    $cb_args = array_merge( array( &$output, $element, $depth ), $args );
+    call_user_func_array( array( &$this, 'end_el' ), $cb_args );
   }
 }
 
@@ -327,20 +331,18 @@ class Flint_Bootstrap_Menu extends Walker_Nav_Menu {
  */
 function flint_get_template( $output = 'slug', $template = '', $a = false ) {
   switch ( $output ) {
-		case 'slug':
-			flint_deprecated_function( __FUNCTION__, '1.5.0', 'flint_post_width()' );
-			return flint_post_width();
-		break;
-
-		case 'content':
-			flint_deprecated_function( __FUNCTION__, '1.5.0', 'flint_post_width_class()' );
-			echo flint_post_width_class();
-			break;
-
-		case 'margins':
-			flint_deprecated_function( __FUNCTION__, '1.5.0', 'flint_post_margin()' );
-			echo flint_post_margin();
-			break;
+    case 'slug':
+      flint_deprecated_function( __FUNCTION__, '1.5.0', 'flint_post_width()' );
+      return flint_post_width();
+      break;
+    case 'content':
+      flint_deprecated_function( __FUNCTION__, '1.5.0', 'flint_post_width_class()' );
+      echo flint_post_width_class();
+      break;
+    case 'margins':
+      flint_deprecated_function( __FUNCTION__, '1.5.0', 'flint_post_margin()' );
+      echo flint_post_margin();
+      break;
   }
 }
 
@@ -359,12 +361,11 @@ function flint_get_template( $output = 'slug', $template = '', $a = false ) {
 function flint_get_spacer( $side = null ) {
   flint_deprecated_function( __FUNCTION__, '1.5.0', 'flint_post_margin()' );
   switch ( $side ) {
-		case 'left':
-			return flint_post_margin( true );
-		break;
-
-		default:
-			return flint_post_margin();
+    case 'left':
+      return flint_post_margin( true );
+      break;
+    default:
+      return flint_post_margin();
   }
 }
 
@@ -379,20 +380,18 @@ function flint_get_spacer( $side = null ) {
  */
 function flint_get_sidebar_template( $output, $widget_area = 'footer' ) {
   switch ( $output ) {
-		case 'slug':
-			flint_deprecated_function( __FUNCTION__, '1.5.0', 'flint_post_width()' );
-			return flint_post_width();
-		break;
-
-		case 'content':
-			flint_deprecated_function( __FUNCTION__, '1.5.0', 'flint_post_width_class()' );
-			echo flint_post_width_class();
-			break;
-
-		case 'margins':
-			flint_deprecated_function( __FUNCTION__, '1.5.0', 'flint_post_margin()' );
-			echo flint_post_margin();
-			break;
+    case 'slug':
+      flint_deprecated_function( __FUNCTION__, '1.5.0', 'flint_post_width()' );
+      return flint_post_width();
+      break;
+    case 'content':
+      flint_deprecated_function( __FUNCTION__, '1.5.0', 'flint_post_width_class()' );
+      echo flint_post_width_class();
+      break;
+    case 'margins':
+      flint_deprecated_function( __FUNCTION__, '1.5.0', 'flint_post_margin()' );
+      echo flint_post_margin();
+      break;
   }
 }
 
