@@ -319,13 +319,6 @@ body.minimal.minimal-breadcrumbs #top-pad {
   border-radius: 4px;
   box-shadow: 2px 2px 2px #ddd;
 }
-.byline {
-  display: none;
-}
-.single .byline,
-.group-blog .byline {
-  display: inline;
-}
 .entry-content,
 .entry-summary {
   margin: 1.5em 0 0;
