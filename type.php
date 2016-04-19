@@ -9,7 +9,6 @@
 global $wp_post_types;
 $type = get_post_type();
 $_type = $wp_post_types[ $type ];
-
 ?>
 
   <div class="row">
