@@ -131,16 +131,6 @@ function flint_widgets_init() {
 }
 add_action( 'widgets_init', 'flint_widgets_init' );
 
-add_filter( 'jetpack_implode_frontend_css', '__return_false' );
-
-/**
- * Deregister the default styles for Jetpack forms.
- */
-function flint_print_styles() {
-  wp_deregister_style( 'grunion.css' );
-}
-add_action( 'wp_print_styles','flint_print_styles' );
-
 /**
  * Enqueue scripts and styles
  */
@@ -162,7 +152,12 @@ function flint_enqueue_scripts() {
     wp_enqueue_script( 'flint-keyboard-image-navigation', get_template_directory_uri() . '/js/keyboard-image-navigation.js', array( 'jquery' ), '4c99b2a' );
   }
 
-  /*
+  /**
+   * Load Genericons
+   */
+  wp_enqueue_style( 'genericons' );
+
+  /**
    * Load Google Fonts
    */
   $options = flint_options();
