@@ -22,6 +22,8 @@ function flint_after_setup_theme() {
 
   require( get_template_directory() . '/inc/class-walker-nav-menu-navbar.php' );
 
+  require( get_template_directory() . '/inc/filters.php' );
+
   require( get_template_directory() . '/inc/template-tags.php' );
 
   require( get_template_directory() . '/inc/colors.php' );
@@ -223,6 +225,3 @@ function flint_enqueue_scripts() {
   wp_enqueue_style( 'flint-style', get_stylesheet_uri(), array(), flint_theme_version() );
 }
 add_action( 'wp_enqueue_scripts', 'flint_enqueue_scripts' );
-
-add_filter( 'use_default_gallery_style', '__return_false' );
-

@@ -66,47 +66,6 @@ function flint_options( $option = null ) {
 
   $defaults['body_bg']    = get_theme_mod( 'background_color', $defaults['body_bg'] );
   $defaults['fill_color'] = get_theme_mod( 'header_textcolor', $defaults['fill_color'] );
-
-  // Backwards compatability begins here. Remove in 1.5+.
-  $colors    = get_option( 'flint_colors' );
-  $fonts     = get_option( 'flint_fonts' );
-  $general   = get_option( 'flint_general' );
-  $layout    = get_option( 'flint_layout' );
-  $templates = get_option( 'flint_templates' );
-  $wa        = get_option( 'flint_wa' );
-
-  $defaults['fill']                 = ! empty( $colors['canvas'] )                 ? $colors['canvas']                 : $defaults['fill'];
-  $defaults['link_color']           = ! empty( $colors['link'] )                   ? $colors['link']                   : $defaults['link_color'];
-
-  $defaults['font_family_base']     = ! empty( $fonts['body_font'] )               ? $fonts['body_font']               : $defaults['font_family_base'];
-  $defaults['headings_font_family'] = ! empty( $fonts['heading_font'] )            ? $fonts['heading_font']            : $defaults['headings_font_family'];
-
-  $defaults['org']                  = ! empty( $general['company'] )               ? $general['company']               : $defaults['org'];
-  $defaults['org_address']          = ! empty( $general['address'] )               ? $general['address']               : $defaults['org_address'];
-  $defaults['org_locality']         = ! empty( $general['locality'] )              ? $general['locality']              : $defaults['org_locality'];
-  $defaults['org_postal_code']      = ! empty( $general['postal_code'] )           ? $general['postal_code']           : $defaults['org_postal_code'];
-  $defaults['org_tel']              = ! empty( $general['tel'] )                   ? $general['tel']                   : $defaults['org_tel'];
-  $defaults['org_fax']              = ! empty( $general['fax'] )                   ? $general['fax']                   : $defaults['org_fax'];
-  $defaults['org_email']            = ! empty( $general['email'] )                 ? $general['email']                 : $defaults['org_email'];
-
-  $defaults['clear_nav']            = ! empty( $templates['clear_nav'] )           ? $templates['clear_nav']           : $defaults['clear_nav'];
-  $defaults['clear_width']          = ! empty( $templates['clear_width'] )         ? $templates['clear_width']         : $defaults['clear_width'];
-
-  $defaults['footer_content']       = ! empty( $general['text'] )                  ? $general['text']                  : $defaults['footer_content'];
-
-  $defaults['page_featured_image']  = ! empty( $layout['pages_image'] )            ? $layout['pages_image']            : $defaults['page_featured_image'];
-  $defaults['page_default_width']   = ! empty( $templates['default_width'] )       ? $templates['default_width']       : $defaults['page_default_width'];
-
-  $defaults['post_featured_image']  = ! empty( $layout['posts_image'] )            ? $layout['posts_image']            : $defaults['post_featured_image'];
-  $defaults['post_default_width']   = ! empty( $templates['default_post_width'] )  ? $templates['default_post_width']  : $defaults['post_default_width'];
-
-  $defaults['minimal_nav']          = ! empty( $templates['minimal_nav'] )         ? $templates['minimal_nav']         : $defaults['minimal_nav'];
-  $defaults['minimal_widget_area']  = ! empty( $templates['minimal_widget_area'] ) ? $templates['minimal_widget_area'] : $defaults['minimal_widget_area'];
-  $defaults['minimal_width']        = ! empty( $templates['minimal_width'] )       ? $templates['minimal_width']       : $defaults['minimal_width'];
-
-  $defaults['widget_areas_above']   = ! empty( $wa['header'] )                     ? $wa['header']                     : $defaults['widget_areas_above'];
-  $defaults['widget_areas_below']   = ! empty( $wa['footer'] )                     ? $wa['footer']                     : $defaults['widget_areas_below'];
-  // Backwards compatability ends here. Remove in 1.5+.
   $flint_options = wp_parse_args( get_option( 'flint_options' ), $defaults );
 
   if ( ! empty( $option ) ) {

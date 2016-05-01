@@ -66,21 +66,6 @@ function flint_deprecated_parameter( $function, $parameter, $version, $replaceme
 }
 
 /**
- * Gets the featured image for a post or page if not specified otherwise in theme options
- *
- * @since 1.1.0
- * @deprecated 1.3.9 Use flint_the_post_thumbnail() instead
- * @see flint_the_post_thumbnail()
- *
- * @param string $type The post type.
- * @param string $loc The current template.
- */
-function flint_post_thumbnail( $type = 'post', $loc = 'single' ) {
-  flint_deprecated_function( __FUNCTION__, '1.3.9', 'flint_the_post_thumbnail()' );
-  flint_the_post_thumbnail();
-}
-
-/**
  * Displays the HTML content for reply to comment link.
  *
  * @since 1.0.1
