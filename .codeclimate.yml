@@ -27,3 +27,8 @@ ratings:
   - "**.py"
   - "**.rb"
 exclude_paths: []
+- "css/bootstrap.css"
+- "css/bootstrap.min.css"
+- "inc/deprecated.php"
+- "js/bootstrap.js"
+- "js/bootstrap.min.js"
