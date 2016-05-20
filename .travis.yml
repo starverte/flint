@@ -14,10 +14,13 @@ matrix:
   - env: WP_VERSION=4.3
   - env: WP_VERSION=4.4
   fast_finish: true
+install:
+- npm install
+- composer install
+- grunt init
 before_script:
 - export WP_DEVELOP_DIR=/tmp/wordpress/
 - mkdir -p $WP_DEVELOP_DIR
-- git clone --depth=1 --branch="$WP_VERSION" git://develop.git.wordpress.org/ $WP_DEVELOP_DIR
 - theme_slug=$(basename $(pwd))
 - theme_dir=$WP_DEVELOP_DIR/src/wp-content/themes/$theme_slug
 - cd ..
@@ -29,17 +32,11 @@ before_script:
 - sed -i "s/yourusernamehere/root/" wp-tests-config.php
 - sed -i "s/yourpasswordhere//" wp-tests-config.php
 - mysql -e 'CREATE DATABASE wordpress_test;' -uroot
-- git clone https://github.com/squizlabs/PHP_CodeSniffer.git php-codesniffer
-- git clone https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards.git
-  wordpress-coding-standards
-- cd php-codesniffer
-- scripts/phpcs --config-set installed_paths ../wordpress-coding-standards
 - cd $theme_dir
 - phpenv rehash
 script:
 - find . \( -name '*.php' \) -exec php -lf {} \;
-- "$WP_DEVELOP_DIR/php-codesniffer/scripts/phpcs -p -s -v -n . --standard=./.phpcs.rules.xml
-  --extensions=php"
+- npm test
 notifications:
   email: false
   slack:
