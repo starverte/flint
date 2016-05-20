@@ -1,3 +1,4 @@
+
 language: php
 php:
 - '7'
@@ -17,6 +18,10 @@ install:
 - npm install
 - composer install
 - grunt init
+cache:
+  directories:
+    - node_modules
+    - vendor
 before_script:
 - mkdir -p /tmp/wordpress
 - git clone --depth=1 --branch="$WP_VERSION" git://develop.git.wordpress.org/ /tmp/wordpress/
@@ -34,7 +39,6 @@ before_script:
 - cd $theme_dir
 - phpenv rehash
 script:
-- find . \( -name '*.php' \) -exec php -lf {} \;
 - npm test
 notifications:
   email: false
