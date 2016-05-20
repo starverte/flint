@@ -1,6 +1,7 @@
 # Numerous always-ignore extensions
 *.diff
 *.err
+*.lock
 *.log
 *.orig
 *.rej
