@@ -7,7 +7,6 @@ env:
 - WP_VERSION=master WP_MULTISITE=0
 - WP_VERSION=master WP_MULTISITE=1
 - WP_VERSION=4.4
-- WP_VERSION=4.4
 - WP_VERSION=4.3
 matrix:
   allow_failures:
@@ -20,6 +19,7 @@ install:
 - grunt init
 before_script:
 - mkdir -p /tmp/wordpress
+- git clone --depth=1 --branch="$WP_VERSION" git://develop.git.wordpress.org/ $WP_DEVELOP_DIR
 - theme_slug=$(basename $(pwd))
 - theme_dir=/tmp/wordpress/src/wp-content/themes/$theme_slug
 - cd ..
