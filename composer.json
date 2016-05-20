@@ -1,0 +1,14 @@
+{
+  "name": "starverte/flint",
+  "version": "1.5.0",
+  "description": "A clean, responsive theme built on Matchstix with Bootstrap 3. Make it your own with various customization options. No programming required.",
+  "authors": [
+    {
+      "name": "Star Verte LLC",
+      "email": "dev@starverte.com"
+    }
+  ],
+  "require-dev": {
+    "squizlabs/php_codesniffer": "2.*"
+  }
+}

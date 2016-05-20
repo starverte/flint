@@ -17,4 +17,5 @@
 # Folders to ignore
 node_modules
 tests
+vendor
 
