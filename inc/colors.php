@@ -95,7 +95,7 @@ function flint_color_hex( $hue = 0, $sat = 0, $lum = 0 ) {
   $color_rgb = array( 'red' => 0, 'green' => 0, 'blue' => 0 );
 
   foreach ( $color_hsl as $name => $value ) {
-    if ( is_string( $value ) && strpos( $value, '%' ) !== false ) {
+    if ( is_string( $value ) && false !== strpos( $value, '%' ) ) {
       $value = round( round( (int) str_replace( '%', '', $value ) / 100, 2 ) * 255, 0 );
     } elseif ( is_float( $value ) ) {
       $value = round( $value * 255, 0 );
