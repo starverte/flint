@@ -738,19 +738,19 @@ function flint_options_css() {
 
   switch ( $options['font_family_base'] ) {
     case 'Open Sans':
-      $body .= '"Open Sans", sans-serif; font-weight: 300; }';
+      $body .= '"Open Sans", sans-serif; font-weight: 400; }';
       break;
     case 'Oswald':
-      $body .= '"Oswald", sans-serif; font-weight: 300; }';
+      $body .= '"Oswald", sans-serif; font-weight: 400; }';
       break;
     case 'Roboto':
-      $body .= '"Roboto", sans-serif; font-weight: 300; }';
+      $body .= '"Roboto", sans-serif; font-weight: 400; }';
       break;
     case 'Droid Sans':
       $body .= '"Droid Sans", sans-serif; font-weight: 400; }';
       break;
     case 'Lato':
-      $body .= '"Lato", sans-serif; font-weight: 300; }';
+      $body .= '"Lato", sans-serif; font-weight: 400; }';
       break;
     case 'Nova Square':
       $body .= '"Nova Square", sans-serif; font-weight: 400; }';
@@ -759,7 +759,7 @@ function flint_options_css() {
       $body .= '"Strait", sans-serif; font-weight: 400; }';
       break;
     case 'Yanone Kaffeesatz':
-      $body .= '"Yanone Kaffeesatz", sans-serif; font-weight: 300; }';
+      $body .= '"Yanone Kaffeesatz", sans-serif; font-weight: 400; }';
       break;
   }
 
