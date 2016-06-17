@@ -13,7 +13,6 @@ Text Domain: flint
 To start a fire, you might use some matches, or you might use some flint and steel. To start a WordPress website, you might use Matchstix (http://matchstix.io), or you might use the theme Flint (http://matchstix.io/flint) and the plugin Steel (http://matchstix.io/steel).
 
     Copyright 2013-2015 Star Verte LLC (email : dev@starverte.com)
-
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -27,6 +26,7 @@ To start a fire, you might use some matches, or you might use some flint and ste
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+
 
 /* =Global
 ----------------------------------------------- */
@@ -127,7 +127,7 @@ hr {
 .screen-reader-text:focus {
   top: 5px;
   left: 5px;
-  z-index: 100000; /* Above WP toolbar */
+  z-index: 100000; 
   display: block;
   width: auto;
   height: auto;
@@ -263,7 +263,7 @@ table > tfoot > tr.warning > th {
 .admin-bar .navbar-fixed-top {
   top: 32px;
 }
-0.404 #top-pad {
+.404 #top-pad {
   padding-top: 0;
 }
 body.clear.clear-breadcrumbs #top-pad,
@@ -286,8 +286,6 @@ body.minimal.minimal-breadcrumbs #top-pad {
 
 /* =Content
 ----------------------------------------------- */
-
-
 
 .entry-title {
   font-size: 32px;
@@ -484,7 +482,6 @@ a.more-link {
 .site-content .gallery {
   margin-bottom: 1.5em;
 }
-
 .site-content .gallery a img {
   padding: 4px;
   line-height: 1.428571429;
@@ -497,8 +494,6 @@ a.more-link {
 .site-content .gallery dd {
   margin: 0;
 }
-
-
 
 /* Make sure embeds and iframes fit their containers */
 embed,
@@ -610,8 +605,6 @@ li.comment.depth-5 {
 /* =Footer
 ----------------------------------------------- */
 
-
-
 .site-info {
   padding: 1em;
 }
@@ -678,7 +671,6 @@ li.comment.depth-5 {
 .contact-form textarea {
   height: auto;
 }
-
 .contact-form .radio,
 .contact-form .checkbox {
   position: relative;
@@ -765,3 +757,4 @@ li.comment.depth-5 {
 .infinity-end.neverending .site-footer {
   display: block;
 }
+
