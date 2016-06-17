@@ -73,7 +73,7 @@ function flint_after_setup_theme() {
    */
   $header = array(
     'default-image'          => '',
-    'default-text-color'     => $defaults['fill_color'],
+    'default-text-color'     => '#ffffff',
     'width'                  => 300,
     'height'                 => 300,
     'flex-height'            => true,
