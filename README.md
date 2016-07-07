@@ -1,4 +1,4 @@
-Flint 1.5.0 [![Build Status](https://travis-ci.org/starverte/flint.svg?branch=master)](https://travis-ci.org/starverte/flint)
+Flint 1.5.0 [![Build Status](https://travis-ci.org/starverte/flint.svg?branch=master)](https://travis-ci.org/starverte/flint) [![Known Vulnerabilities](https://snyk.io/test/github/starverte/flint/badge.svg)](https://snyk.io/test/github/starverte/flint)
 =====
 
 A clean, responsive theme built on Matchstix with Bootstrap 3. Make it your own with various customization options. No programming required.
