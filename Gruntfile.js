@@ -1,6 +1,26 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    copy: {
+      bootstrap_css: {
+        expand: true,
+        flatten: true,
+        src: 'node_modules/bootstrap/dist/css/*',
+        dest: 'css/',
+      },
+      bootstrap_fonts: {
+        expand: true,
+        flatten: true,
+        src: 'node_modules/bootstrap/dist/fonts/*',
+        dest: 'fonts/',
+      },
+      bootstrap_js: {
+        expand: true,
+        flatten: true,
+        src: 'node_modules/bootstrap/dist/js/*',
+        dest: 'js/',
+      },
+    },
     csscomb: {
       main: {
         options: {
@@ -24,9 +44,10 @@ module.exports = function(grunt) {
     }
   });
 
+  grunt.loadNpmTasks( 'grunt-contrib-copy' );
   grunt.loadNpmTasks( 'grunt-shell' );
   grunt.loadNpmTasks( 'grunt-csscomb' );
   grunt.registerTask( 'init', ['shell:phpcs_config'] );
-  grunt.registerTask( 'build', ['csscomb'] );
+  grunt.registerTask( 'build', ['csscomb', 'copy'] );
   grunt.registerTask( 'test', ['shell:syntax_tests', 'shell:phpcs_tests'] );
 }
