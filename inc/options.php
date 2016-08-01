@@ -20,8 +20,8 @@ function flint_options_defaults() {
     'fill'                       => '#222222',
     'link_color'                 => '#428bca',
 
-    'font_family_base'           => 'Open Sans',
-    'headings_font_family'       => 'Open Sans',
+    'font_family_base'           => 'Native',
+    'headings_font_family'       => 'Native',
 
     'org'                        => '',
     'org_address'                => '',
