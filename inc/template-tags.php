@@ -737,6 +737,10 @@ function flint_options_css() {
   $body .= 'background-color: #' . $colors['body_bg'] . '; font-family: ';
 
   switch ( $options['font_family_base'] ) {
+    case 'Native':
+      $body .= '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, ';
+      $body .= 'Cantarell, "Helvetica Neue", sans-serif; font-weight: normal; }';
+      break;
     case 'Open Sans':
       $body .= '"Open Sans", sans-serif; font-weight: 400; }';
       break;
@@ -766,6 +770,10 @@ function flint_options_css() {
   $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .navbar-brand { font-family: ';
 
   switch ( $options['headings_font_family'] ) {
+    case 'Native':
+      $headings .= '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, ';
+      $headings .= 'Cantarell, "Helvetica Neue", sans-serif; font-weight: 600; }';
+      break;
     case 'Open Sans':
       $headings .= '"Open Sans", sans-serif; font-weight: 400;}';
       break;

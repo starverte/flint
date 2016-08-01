@@ -165,6 +165,8 @@ function flint_enqueue_scripts() {
   $options = flint_options();
 
   switch ( $options['font_family_base'] ) {
+    case 'Native':
+      break;
     case 'Open Sans':
       wp_enqueue_style( 'open-sans', '//fonts.googleapis.com/css?family=Open+Sans:300,600,300,700,300italic,600italic,700italic', array(), flint_theme_version() );
       break;
@@ -192,6 +194,8 @@ function flint_enqueue_scripts() {
   }
   if ( $options['headings_font_family'] != $options['font_family_base'] ) {
     switch ( $options['headings_font_family'] ) {
+      case 'Native':
+        break;
       case 'Open Sans':
         wp_enqueue_style( 'open-sans', '//fonts.googleapis.com/css?family=Open+Sans:300,600,300,700,300italic,600italic,700italic', array(), flint_theme_version() );
         break;

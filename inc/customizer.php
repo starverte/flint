@@ -20,6 +20,7 @@ function flint_customize_register( $wp_customize ) {
   $defaults = flint_options_defaults();
 
   $fonts = array(
+    'Native'            => 'Native',
     'Open Sans'         => 'Open Sans',
     'Oswald'            => 'Oswald',
     'Roboto'            => 'Roboto',
@@ -658,6 +659,7 @@ add_action( 'customize_preview_init', 'flint_customize_preview_init' );
  */
 function flint_sanitize_font( $input ) {
   $valid = array(
+    'Native'            => 'Native',
     'Open Sans'         => 'Open Sans',
     'Oswald'            => 'Oswald',
     'Roboto'            => 'Roboto',
