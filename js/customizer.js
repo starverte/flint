@@ -48,12 +48,21 @@
   // Fonts
   wp.customize( 'flint_options[headings_font_family]', function( value ) {
     value.bind( function( to ) {
-      $( 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6' ).css( 'font-family', to );
+      if ( 'Native' == to  ) {
+        $( 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6' ).css( 'font-family', '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif' );
+      } else {
+        $( 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6' ).css( 'font-family', to );
+      }
     } );
   } );
   wp.customize( 'flint_options[font_family_base]', function( value ) {
     value.bind( function( to ) {
-      $( 'body' ).css( 'font-family', to );
+      if ( 'Native' == to  ) {
+        $( 'body' ).css( 'font-family', '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif' );
+      } else {
+        $( 'body' ).css( 'font-family', to );
+      }
     } );
   } );
 } )( jQuery );
+
