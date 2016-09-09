@@ -1,7 +1,7 @@
-###Flint 1.6.0
+###Flint 1.6.1
 For complete diff, check out [Pull Request](https://github.com/starverte/flint/pull/230)
 - Improved Typography
- - Bold navigation bar links
+ - Bold and translucent navigation bar links
  - Darker body text is more readable
  - New: 'Native' font family (default)
 - Upgraded to Bootstrap 3.3.7
