@@ -18,23 +18,22 @@
 function flint_color_hsl( $color_hex ) {
   $color_hex = str_replace( '#', '', $color_hex );
 
-  if ( strlen( $color_hex ) < 3 ) { str_pad( $color_hex, 3 - strlen( $color_hex ), '0' ); }
+  if ( strlen( $color_hex ) < 3 ) {
+    str_pad( $color_hex, 3 - strlen( $color_hex ), '0' );
+  }
 
-  $bound  = strlen( $color_hex ) == 6 ? 2 : 1;
+  $bound = strlen( $color_hex ) == 6 ? 2 : 1;
   $addend = 0;
   $factor = 1 == $bound ? ( $addend = 16 - 1 ) + 1 : 1;
 
-  $red   = round( ( hexdec( substr( $color_hex, 0, $bound ) ) * $factor + $addend ) / 255, 6 );
+  $red = round( ( hexdec( substr( $color_hex, 0, $bound ) ) * $factor + $addend ) / 255, 6 );
   $green = round( ( hexdec( substr( $color_hex, $bound, $bound ) ) * $factor + $addend ) / 255, 6 );
-  $blue  = round( ( hexdec( substr( $color_hex, ( $bound + $bound ) , $bound ) ) * $factor + $addend ) / 255, 6 );
+  $blue = round( ( hexdec( substr( $color_hex, ( $bound + $bound ) , $bound ) ) * $factor + $addend ) / 255, 6 );
 
   $color_hsl = array( 'hue' => 0, 'sat' => 0, 'lum' => 0 );
-
   $min = min( $red, $green, $blue );
   $max = max( $red, $green, $blue );
-
   $range = $max - $min;
-
   $color_hsl['lum'] = ( $min + $max ) / 2;
 
   if ( 0 == $range ) {
@@ -60,7 +59,7 @@ function flint_color_hsl( $color_hex ) {
     } else {
       $color_hsl['hue'] = ( $green - $blue ) / $chroma;
     }
-  } else if ( $max == $green ) {
+  } elseif ( $max == $green ) {
     if ( $red > $blue ) {
       $color_hsl['hue'] = abs( 1 - ( 4 / 3 ) + ( abs( $blue - $red ) / $chroma ) );
     } else {
@@ -77,7 +76,6 @@ function flint_color_hsl( $color_hex ) {
   $color_hsl['hue'] = round( $color_hsl['hue'], 3 );
   $color_hsl['sat'] = round( $color_hsl['sat'], 3 );
   $color_hsl['lum'] = round( $color_hsl['lum'], 3 );
-
   return $color_hsl;
 }
 
@@ -93,20 +91,19 @@ function flint_color_hsl( $color_hex ) {
  * @return string A color, in hexadecimal i.e. 'ffffff'
  */
 function flint_color_hex( $hue = 0, $sat = 0, $lum = 0 ) {
-
   $color_hsl = array( 'hue' => $hue, 'sat' => $sat, 'lum' => $lum );
   $color_rgb = array( 'red' => 0, 'green' => 0, 'blue' => 0 );
 
   foreach ( $color_hsl as $name => $value ) {
-    if ( is_string( $value ) && strpos( $value, '%' ) !== false ) {
+    if ( is_string( $value ) && false !== strpos( $value, '%' ) ) {
       $value = round( round( (int) str_replace( '%', '', $value ) / 100, 2 ) * 255, 0 );
-    } else if ( is_float( $value ) ) {
+    } elseif ( is_float( $value ) ) {
       $value = round( $value * 255, 0 );
     }
 
     $value = (int) $value * 1;
     $value = $value > 255 ? 255 : ( $value < 0 ? 0 : $value );
-    ${'v'.$name} = round( $value / 255, 6 );
+    ${'v' . $name} = round( $value / 255, 6 );
   }
 
   $color_rgb['red'] = $vlum;
@@ -128,19 +125,19 @@ function flint_color_hex( $hue = 0, $sat = 0, $lum = 0 ) {
       $color_rgb['red'] = $delta;
       $color_rgb['green'] = $wheel;
       $color_rgb['blue'] = $alpha;
-    } else if ( 2 == $pivot ) {
+    } elseif ( 2 == $pivot ) {
       $color_rgb['red'] = $alpha;
       $color_rgb['green'] = $wheel;
       $color_rgb['blue'] = $gamma;
-    } else if ( 3 == $pivot ) {
+    } elseif ( 3 == $pivot ) {
       $color_rgb['red'] = $alpha;
       $color_rgb['green'] = $delta;
       $color_rgb['blue'] = $wheel;
-    } else if ( 4 == $pivot ) {
+    } elseif ( 4 == $pivot ) {
       $color_rgb['red'] = $gamma;
       $color_rgb['green'] = $alpha;
       $color_rgb['blue'] = $wheel;
-    } else if ( 5 == $pivot ) {
+    } elseif ( 5 == $pivot ) {
       $color_rgb['red'] = $wheel;
       $color_rgb['green'] = $alpha;
       $color_rgb['blue'] = $delta;
@@ -159,7 +156,6 @@ function flint_color_hex( $hue = 0, $sat = 0, $lum = 0 ) {
   $color_hex .= $color_rgb['red'] < 15 ? '0' . dechex( $color_rgb['red'] ) : dechex( $color_rgb['red'] );
   $color_hex .= $color_rgb['green'] < 15 ? '0' . dechex( $color_rgb['green'] ) : dechex( $color_rgb['green'] );
   $color_hex .= $color_rgb['blue'] < 15 ? '0' . dechex( $color_rgb['blue'] ) : dechex( $color_rgb['blue'] );
-
   return $color_hex;
 }
 

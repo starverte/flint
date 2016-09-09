@@ -1,6 +1,7 @@
 # Numerous always-ignore extensions
 *.diff
 *.err
+*.lock
 *.log
 *.orig
 *.rej
@@ -17,4 +18,11 @@
 # Folders to ignore
 node_modules
 tests
+vendor
+
+# Bootstrap
+css/bootstrap*
+fonts/glyphicons*
+js/bootstrap*
+js/npm.js
 

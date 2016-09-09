@@ -20,6 +20,7 @@ function flint_customize_register( $wp_customize ) {
   $defaults = flint_options_defaults();
 
   $fonts = array(
+    'Native'            => 'Native',
     'Open Sans'         => 'Open Sans',
     'Oswald'            => 'Oswald',
     'Roboto'            => 'Roboto',
@@ -295,23 +296,6 @@ function flint_customize_register( $wp_customize ) {
       'section'  => 'colors',
       'settings' => 'flint_options[fill]',
       'priority' => 70,
-    )));
-
-    /**
-     * Fill text color setting
-     */
-    $wp_customize->add_setting('flint_options[fill_color]', array(
-      'default'           => $defaults['fill_color'],
-      'sanitize_callback' => 'sanitize_hex_color',
-      'capability'        => 'edit_theme_options',
-      'type'              => 'option',
-      'transport'         => 'postMessage',
-    ));
-    $wp_customize->add_control( new WP_Customize_Color_Control($wp_customize, 'fill_color', array(
-      'label'    => __( 'Fill Text', 'flint' ),
-      'section'  => 'colors',
-      'settings' => 'flint_options[fill_color]',
-      'priority' => 80,
     )));
 
   /**
@@ -675,6 +659,7 @@ add_action( 'customize_preview_init', 'flint_customize_preview_init' );
  */
 function flint_sanitize_font( $input ) {
   $valid = array(
+    'Native'            => 'Native',
     'Open Sans'         => 'Open Sans',
     'Oswald'            => 'Oswald',
     'Roboto'            => 'Roboto',

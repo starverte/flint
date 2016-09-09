@@ -1,3 +1,15 @@
+###Flint 1.6.1
+For complete diff, check out [Pull Request](https://github.com/starverte/flint/pull/230)
+- Improved Typography
+ - Bold and translucent navigation bar links
+ - Darker body text is more readable
+ - New: 'Native' font family (default)
+- Upgraded to Bootstrap 3.3.7
+- New: `snyk` integration
+- New: CodeClimate integration
+- Improved code quality 
+- Improve file organization
+
 ###Flint 1.5.0
 For complete diff, check out [Pull Request](https://github.com/starverte/flint/pull/213)
 - Prepared Flint for [Matchstix] (http://matchstix.io/the-future-of-sparks/)

@@ -36,42 +36,32 @@ function flint_content_nav( $nav_id ) {
   }
 
   if ( $wp_query->max_num_pages < 2 && ( is_home() || is_archive() || is_search() ) ) {
-    return; }
-
+    return;
+  }
   $nav_class = ( is_single() ) ? 'navigation-post' : 'navigation-paging';
-
-  ?>
-  <nav role="navigation" id="<?php echo esc_attr( $nav_id ); ?>" class="<?php echo esc_attr( $nav_class ); ?>">
-    <h1 class="screen-reader-text"><?php esc_html_e( 'Post navigation', 'flint' ); ?></h1>
+  ?><nav role="navigation" id="<?php echo esc_attr( $nav_id ); ?>" class="<?php echo esc_attr( $nav_class ); ?>">
+  <h1 class="screen-reader-text"><?php esc_html_e( 'Post navigation', 'flint' ); ?></h1>
 
   <?php if ( is_single() ) : ?>
-
-  <ul class="pager">
-
-    <?php previous_post_link( '<li class="previous">%link</li>' ); ?>
-    <?php next_post_link( '<li class="next">%link</li>' ); ?>
-
-  </ul>
-
+    <ul class="pager">
+      <?php previous_post_link( '<li class="previous">%link</li>' ); ?>
+      <?php next_post_link( '<li class="next">%link</li>' ); ?>
+    </ul>
   <?php elseif ( $wp_query->max_num_pages > 1 && ( is_home() || is_archive() || is_search() ) ) : ?>
+    <ul class="pager">
+      <?php if ( get_next_posts_link() ) : ?>
+        <li class="previous"><?php next_posts_link( __( 'Older posts', 'flint' ) ); ?></li>
+      <?php endif; ?>
 
-  <ul class="pager">
-
-    <?php if ( get_next_posts_link() ) : ?>
-    <li class="previous"><?php next_posts_link( __( 'Older posts', 'flint' ) ); ?></li>
-    <?php endif; ?>
-
-    <?php if ( get_previous_posts_link() ) : ?>
-    <li class="next"><?php previous_posts_link( __( 'Newer posts', 'flint' ) ); ?></li>
-    <?php endif; ?>
-
-  </ul>
-
+      <?php if ( get_previous_posts_link() ) : ?>
+        <li class="next"><?php previous_posts_link( __( 'Newer posts', 'flint' ) ); ?></li>
+      <?php endif; ?>
+    </ul>
   <?php endif; ?>
 
   </nav>
   <!-- #<?php echo esc_html( $nav_id ); ?> -->
-<?php
+  <?php
 }
 
 /**
@@ -90,69 +80,70 @@ function flint_the_comments() {
 add_action( 'flint_entry_meta_below_post', 'flint_the_comments', 20 );
 
 if ( ! function_exists( 'flint_posted_on' ) ) :
-/**
- * Prints HTML with meta information for the current post-date/time and author.
- *
- * @since 1.0.1
- */
-function flint_posted_on() {
-  if ( get_the_date( 'Y' ) != date( 'Y' ) ) :
-    $postdate = esc_html( get_the_date( 'F j, Y' ) );
-  else :
-    $postdate = esc_html( get_the_date( 'F j' ) );
-  endif;
-  printf( __( 'Posted on <a href="%1$s" rel="bookmark"><time class="entry-date" datetime="%2$s">%3$s</time></a><span class="byline"> by <span class="author vcard"><a class="url fn n" href="%4$s" title="%5$s" rel="author">%6$s</a></span></span>', 'flint' ),
-    esc_url( get_permalink() ),
-    esc_attr( get_the_date( 'c' ) ),
-    $postdate,
-    esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
-    esc_attr( sprintf( __( 'View all posts by %s', 'flint' ), get_the_author() ) ),
-    get_the_author()
-  );
-}
+  /**
+   * Prints HTML with meta information for the current post-date/time and author.
+   *
+   * @since 1.0.1
+   */
+  function flint_posted_on() {
+    if ( get_the_date( 'Y' ) != date( 'Y' ) ) :
+      $postdate = esc_html( get_the_date( 'F j, Y' ) );
+    else :
+      $postdate = esc_html( get_the_date( 'F j' ) );
+    endif;
+
+    printf(
+      __( 'Posted on <a href="%1$s" rel="bookmark"><time class="entry-date" datetime="%2$s">%3$s</time></a><span class="byline"> by <span class="author vcard"><a class="url fn n" href="%4$s" title="%5$s" rel="author">%6$s</a></span></span>', 'flint' ),
+      esc_url( get_permalink() ),
+      esc_attr( get_the_date( 'c' ) ),
+      $postdate,
+      esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
+      esc_attr( sprintf( __( 'View all posts by %s', 'flint' ), get_the_author() ) ),
+      get_the_author()
+    );
+  }
 endif;
 add_action( 'flint_entry_meta_above_post', 'flint_posted_on' );
 
 if ( ! function_exists( 'flint_posted_in' ) ) :
-/**
- * Prints HTML with the categories and tags that the post is in.
- *
- * @since 1.1.1
- */
-function flint_posted_in() {
-  $categories = get_the_category();
-  $tags = get_the_tags();
-  $separator = ' '; ?>
+  /**
+   * Prints HTML with the categories and tags that the post is in.
+   *
+   * @since 1.1.1
+   */
+  function flint_posted_in() {
+    $categories = get_the_category();
+    $tags = get_the_tags();
+    $separator = ' ';
 
-  <?php if ( flint_has_category() ) { ?>
-
-    <span class="cat-links">
-
-      <?php $output = '';
-      foreach ( $categories as $category ) {
-        if ( $category->cat_name != 'Uncategorized' ) {
-          $output .= '<a class="label label-default" href="'.get_category_link( $category->term_id ).'" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $category->name ) ) . '">'.$category->cat_name.'</a>'.$separator;
+    if ( flint_has_category() ) { ?>
+      <span class="cat-links">
+        <?php $output = '';
+        foreach ( $categories as $category ) {
+          if ( 'Uncategorized' != $category->cat_name ) {
+            $output .= '<a class="label label-default" href="' . get_category_link( $category->term_id ) . '" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $category->name ) ) . '">' . $category->cat_name . '</a>' . $separator;
+          }
         }
-      }
-      $output = trim( $output, $separator );
-      echo 'Posted in ' . $output; ?>
-    </span><!-- .cat-links -->
+        $output = trim( $output, $separator );
+        echo 'Posted in ' . $output; ?>
+      </span><!-- .cat-links -->
+    <?php } // End flint_has_category.
 
-    <?php } //endif flint_has_category()
+    if ( has_tag() ) {
+      if ( flint_has_category() ) { ?>
+        <span class="sep"> | </span><?php
+      } ?><span class="tags-links">
+        Tagged
+        <?php $output = '';
 
-  if ( has_tag() ) {
+        foreach ( $tags as $tag ) {
+          $output .= '<a class="label label-info" href="' . get_tag_link( $tag->term_id ) . '" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $tag->name ) ) . '">' . $tag->name . '</a>' . $separator;
+        }
 
-    if ( flint_has_category() ) { ?><span class="sep"> | </span><?php } ?>
-
-    <span class="tags-links">
-      Tagged
-      <?php $output = '';
-      foreach ( $tags as $tag ) {$output .= '<a class="label label-info" href="'.get_tag_link( $tag->term_id ).'" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'flint' ), $tag->name ) ) . '">'.$tag->name.'</a>'.$separator; }
-      echo trim( $output, $separator ); ?>
-    </span><!-- .tags-links --><?php
-
-  } //endif has_tag()
-}
+        echo trim( $output, $separator ); ?>
+      </span><!-- .tags-links --><?php
+    } // End has_tag.
+  }
 endif;
 add_action( 'flint_entry_meta_below_post', 'flint_posted_in', 10 );
 
@@ -163,13 +154,11 @@ add_action( 'flint_entry_meta_below_post', 'flint_posted_in', 10 );
  */
 function flint_categorized_blog() {
   if ( false == ( $all_the_cool_cats = get_transient( 'all_the_cool_cats' ) ) ) {
-
     // Create an array of all the categories that are attached to posts.
     $all_the_cool_cats = get_categories( array( 'hide_empty' => 1 ) );
 
     // Count the number of categories that are attached to the posts.
     $all_the_cool_cats = count( $all_the_cool_cats );
-
     set_transient( 'all_the_cool_cats', $all_the_cool_cats );
   }
 
@@ -203,59 +192,67 @@ add_action( 'save_post', 'flint_category_transient_flusher' );
  * @return string Formatted output in HTML.
  */
 function flint_link_pages( $args = '' ) {
+  global $page, $numpages, $multipage, $more, $pagenow;
+
   $defaults = array(
-    'before'           => '<p>',
-    'after'            => '</p>',
-    'link_before'      => '',
-    'link_after'       => '',
-    'next_or_number'   => 'number',
-    'nextpagelink'     => __( 'Next page', 'flint' ),
+    'before' => '<p>',
+    'after' => '</p>',
+    'link_before' => '',
+    'link_after' => '',
+    'next_or_number' => 'number',
+    'nextpagelink' => __( 'Next page', 'flint' ),
     'previouspagelink' => __( 'Previous page', 'flint' ),
-    'pagelink'         => '%',
-    'echo'             => 1,
+    'pagelink' => '%',
+    'echo' => 1,
   );
 
   $r = wp_parse_args( $args, $defaults );
   $r = apply_filters( 'wp_link_pages_args', $r );
-  extract( $r, EXTR_SKIP );
-
-  global $page, $numpages, $multipage, $more, $pagenow;
-
   $output = '';
+
   if ( $multipage ) {
-    if ( 'number' === $next_or_number ) {
-      $output .= $before;
+    if ( 'number' === $r['next_or_number'] ) {
+      $output .= $r['before'];
+
       for ( $i = 1; $i < ($numpages + 1); $i = $i + 1 ) {
-        $j = str_replace( '%',$i,$pagelink );
+        $j = str_replace( '%',$i,$r['pagelink'] );
         $output .= ' ';
+
         if ( ( $i != $page ) || ( ( ! $more ) && ( 1 == $page ) ) ) {
           $output .= flint_link_page( $i );
         } else {
           $output .= '<li class="active"><a>';
         }
-        $output .= $link_before . $j . $link_after . '</a></li>';
+
+        $output .= $r['link_before'] . $j . $r['link_after'] . '</a></li>';
       }
-      $output .= $after;
+
+      $output .= $r['after'];
     } else {
       if ( $more ) {
-        $output .= $before;
+        $output .= $r['before'];
         $i = $page - 1;
+
         if ( $i && $more ) {
           $output .= _wp_link_page( $i );
-          $output .= $link_before. $previouspagelink . $link_after . '</a>';
+          $output .= $r['link_before'] . $r['previouspagelink'] . $r['link_after'] . '</a>';
         }
+
         $i = $page + 1;
+
         if ( $i <= $numpages && $more ) {
           $output .= _wp_link_page( $i );
-          $output .= $link_before. $nextpagelink . $link_after . '</a>';
+          $output .= $r['link_before'] . $r['nextpagelink'] . $r['link_after'] . '</a>';
         }
-        $output .= $after;
+
+        $output .= $r['after'];
       }
     }
   }
 
-  if ( $echo ) {
-    echo $output; }
+  if ( $r['echo'] ) {
+    echo $output;
+  }
 
   return $output;
 }
@@ -298,15 +295,13 @@ function flint_link_page( $i ) {
  * @param array  $args           Optional. An array of arguments for displaying the more button.
  */
 function flint_the_content( $more_link_text = 'Read more', $strip_teaser = false, $args = array() ) {
-
   $defaults = array(
-    'more_class'  => 'btn btn-primary',
+    'more_class' => 'btn btn-primary',
     'more_before' => '<div style="float:right;"><a href="',
-    'more_after'  => '</a></div>',
+    'more_after' => '</a></div>',
   );
 
   $args = wp_parse_args( $args, $defaults );
-
   $content = flint_get_the_content( $more_link_text, $strip_teaser, $args );
   $content = apply_filters( 'the_content', $content );
   $content = str_replace( ']]>', ']]&gt;', $content );
@@ -327,11 +322,10 @@ function flint_the_content( $more_link_text = 'Read more', $strip_teaser = false
 function flint_get_the_content( $more_link_text = 'Read more', $strip_teaser = false, $args = array() ) {
   global $more, $page, $pages, $multipage, $preview;
   $thing = get_post();
-
   $defaults = array(
-    'more_class'  => 'btn btn-primary',
+    'more_class' => 'btn btn-primary',
     'more_before' => '<div style="float:right;"><a href="',
-    'more_after'  => '</a></div>',
+    'more_after' => '</a></div>',
   );
 
   $args = wp_parse_args( $args, $defaults );
@@ -341,7 +335,7 @@ function flint_get_the_content( $more_link_text = 'Read more', $strip_teaser = f
   }
 
   $output = '';
-  $hasTeaser = false;
+  $has_teaser = false;
 
   if ( post_password_required() ) {
     return get_the_password_form();
@@ -357,11 +351,12 @@ function flint_get_the_content( $more_link_text = 'Read more', $strip_teaser = f
 
   if ( preg_match( '/<!--more(.*?)?-->/', $content, $matches ) ) {
     $content = explode( $matches[0], $content, 2 );
+
     if ( ! empty( $matches[1] ) && ! empty( $more_link_text ) ) {
       $more_link_text = strip_tags( wp_kses_no_null( trim( $matches[1] ) ) );
     }
 
-    $hasTeaser = true;
+    $has_teaser = true;
   } else {
     $content = array( $content );
   }
@@ -372,7 +367,7 @@ function flint_get_the_content( $more_link_text = 'Read more', $strip_teaser = f
 
   $teaser = $content[0];
 
-  if ( $more && $strip_teaser && $hasTeaser ) {
+  if ( $more && $strip_teaser && $has_teaser ) {
     $teaser = '';
   }
 
@@ -398,22 +393,6 @@ function flint_get_the_content( $more_link_text = 'Read more', $strip_teaser = f
 }
 
 /**
- * Modifies password form to use bootstrap styles
- *
- * @since 1.0.1
- */
-function flint_password_form() {
-    global $post;
-    $label = 'pwbox-'.( empty( $post->ID ) ? rand() : $post->ID );
-    $o = __( 'To view this protected post, enter the password below:', 'flint' ) . '
-    <form action="' . esc_url( site_url( 'wp-login.php?action=postpass', 'login_post' ) ) . '" method="post" class="form-inline"><input class="form-control pw ' . $label . '" name="post_password" type="password" placeholder="Password"><button class="btn btn-default" type="submit" name="Submit">Submit</button>
-    </form>
-    ';
-    return $o;
-}
-add_filter( 'the_password_form', 'flint_password_form' );
-
-/**
  * Output a complete commenting form for use within a template, using Twitter Bootstrap styles.
  *
  * @since 1.0.1
@@ -428,7 +407,6 @@ add_filter( 'the_password_form', 'flint_password_form' );
  * @todo Fix approved tags width
  */
 function flint_comment_form( $args = array(), $thing_id = null ) {
-
   if ( null === $thing_id ) {
     $thing_id = get_the_ID();
   }
@@ -441,25 +419,25 @@ function flint_comment_form( $args = array(), $thing_id = null ) {
 
   $fields = array(
     'author' => '<p class="comment-form-author"><input class="form-control required" id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" ' . $aria_req . ' placeholder="Name*"></p>',
-    'email'  => '<p class="comment-form-email"><input class="form-control" id="email" name="email" type="text" value="' . esc_attr( $commenter['comment_author_email'] ) . '" ' . $aria_req . ' placeholder="Email Address*"></p>',
-    'url'    => '<p class="comment-form-url"><input class="form-control" id="url" name="url" type="text" value="' . esc_attr( $commenter['comment_author_url'] ) . '" placeholder="Website URL" /></p>',
+    'email' => '<p class="comment-form-email"><input class="form-control" id="email" name="email" type="text" value="' . esc_attr( $commenter['comment_author_email'] ) . '" ' . $aria_req . ' placeholder="Email Address*"></p>',
+    'url' => '<p class="comment-form-url"><input class="form-control" id="url" name="url" type="text" value="' . esc_attr( $commenter['comment_author_url'] ) . '" placeholder="Website URL" /></p>',
   );
 
   $required_text = sprintf( ' ' . __( 'Required fields are marked %s', 'flint' ), '<span class="required">*</span>' );
 
   $defaults = array(
-    'fields'               => apply_filters( 'comment_form_default_fields', $fields ),
-    'comment_field'        => '<p class="comment-form-comment"><label for="comment">' . _x( 'Comment*', 'noun', 'flint' ) . '</label><textarea class="form-control" id="comment" name="comment" cols="45" rows="8" aria-required="true" required></textarea></p>',
-    'must_log_in'          => '<p class="must-log-in">' . sprintf( __( 'You must be <a href="%s">logged in</a> to post a comment.', 'flint' ), wp_login_url( apply_filters( 'the_permalink', get_permalink( $thing_id ) ) ) ) . '</p>',
-    'logged_in_as'         => '<p class="logged-in-as">' . sprintf( __( 'Logged in as <a href="%1$s">%2$s</a>. <a href="%3$s" title="Log out of this account">Log out?</a>', 'flint' ), get_edit_user_link(), $user_identity, wp_logout_url( apply_filters( 'the_permalink', get_permalink( $thing_id ) ) ) ) . '</p>',
+    'fields' => apply_filters( 'comment_form_default_fields', $fields ),
+    'comment_field' => '<p class="comment-form-comment"><label for="comment">' . _x( 'Comment*', 'noun', 'flint' ) . '</label><textarea class="form-control" id="comment" name="comment" cols="45" rows="8" aria-required="true" required></textarea></p>',
+    'must_log_in' => '<p class="must-log-in">' . sprintf( __( 'You must be <a href="%s">logged in</a> to post a comment.', 'flint' ), wp_login_url( apply_filters( 'the_permalink', get_permalink( $thing_id ) ) ) ) . '</p>',
+    'logged_in_as' => '<p class="logged-in-as">' . sprintf( __( 'Logged in as <a href="%1$s">%2$s</a>. <a href="%3$s" title="Log out of this account">Log out?</a>', 'flint' ), get_edit_user_link(), $user_identity, wp_logout_url( apply_filters( 'the_permalink', get_permalink( $thing_id ) ) ) ) . '</p>',
     'comment_notes_before' => '<p class="comment-notes">' . __( 'Your email address will not be published.', 'flint' ) . ( $req ? $required_text : '' ) . '</p>',
-    'comment_notes_after'  => '<p class="form-allowed-tags">' . sprintf( __( 'You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: %s', 'flint' ), ' <code style="white-space:normal;">' . allowed_tags() . '</code>' ) . '</p>',
-    'id_form'              => 'commentform',
-    'id_submit'            => 'submit',
-    'title_reply'          => __( 'Leave a Reply', 'flint' ),
-    'title_reply_to'       => __( 'Leave a Reply to %s', 'flint' ),
-    'cancel_reply_link'    => __( 'Cancel reply', 'flint' ),
-    'label_submit'         => __( 'Post Comment', 'flint' ),
+    'comment_notes_after' => '<p class="form-allowed-tags">' . sprintf( __( 'You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: %s', 'flint' ), ' <code style="white-space:normal;">' . allowed_tags() . '</code>' ) . '</p>',
+    'id_form' => 'commentform',
+    'id_submit' => 'submit',
+    'title_reply' => __( 'Leave a Reply', 'flint' ),
+    'title_reply_to' => __( 'Leave a Reply to %s', 'flint' ),
+    'cancel_reply_link' => __( 'Cancel reply', 'flint' ),
+    'label_submit' => __( 'Post Comment', 'flint' ),
   );
 
   $args = wp_parse_args( $args, apply_filters( 'comment_form_defaults', $defaults ) );
@@ -467,35 +445,41 @@ function flint_comment_form( $args = array(), $thing_id = null ) {
   if ( comments_open( $thing_id ) ) :
     do_action( 'comment_form_before' ); ?>
     <div id="respond">
-    <h3 id="reply-title"><?php comment_form_title( $args['title_reply'], $args['title_reply_to'] ); ?> <small><?php cancel_comment_reply_link( $args['cancel_reply_link'] ); ?></small></h3>
+      <h3 id="reply-title"><?php comment_form_title( $args['title_reply'], $args['title_reply_to'] ); ?> <small><?php cancel_comment_reply_link( $args['cancel_reply_link'] ); ?></small></h3>
 
-    <?php if ( get_option( 'comment_registration' ) && ! is_user_logged_in() ) :
-      echo $args['must_log_in'];
-      do_action( 'comment_form_must_log_in_after' );
-    else : ?>
-      <form class="form-horizontal" action="<?php echo site_url( '/wp-comments-post.php' ); ?>" method="post" id="<?php echo esc_attr( $args['id_form'] ); ?>">
-      <?php do_action( 'comment_form_top' );
-      if ( current_user_can( 'moderate_comments' ) ) :
-        echo apply_filters( 'comment_form_logged_in', $args['logged_in_as'], $commenter, $user_identity );
-        do_action( 'comment_form_logged_in_after', $commenter, $user_identity );
-      else :
-        echo $args['comment_notes_before'];
-        do_action( 'comment_form_before_fields' );
-        foreach ( (array) $args['fields'] as $name => $field ) {
-        echo apply_filters( "comment_form_field_{$name}", $field ) . "\n";
-        }
-        do_action( 'comment_form_after_fields' );
-      endif;
+      <?php
+      if ( get_option( 'comment_registration' ) && ! is_user_logged_in() ) :
+        echo $args['must_log_in'];
+        do_action( 'comment_form_must_log_in_after' );
+      else : ?>
+        <form class="form-horizontal" action="<?php echo site_url( '/wp-comments-post.php' ); ?>" method="post" id="<?php echo esc_attr( $args['id_form'] ); ?>">
+          <?php do_action( 'comment_form_top' );
 
-      echo apply_filters( 'comment_form_field_comment', $args['comment_field'] );
-      echo $args['comment_notes_after']; ?>
-      <p class="form-submit">
-      <button class="btn btn-default" name="submit" type="submit" id="<?php echo esc_attr( $args['id_submit'] ); ?>"><?php echo esc_html( $args['label_submit'] ); ?></button>
-      <?php comment_id_fields( $thing_id ); ?>
-      </p>
-      <?php do_action( 'comment_form', $thing_id ); ?>
-      </form>
-    <?php endif; ?>
+          if ( current_user_can( 'moderate_comments' ) ) :
+            echo apply_filters( 'comment_form_logged_in', $args['logged_in_as'], $commenter, $user_identity );
+            do_action( 'comment_form_logged_in_after', $commenter, $user_identity );
+          else :
+            echo $args['comment_notes_before'];
+            do_action( 'comment_form_before_fields' );
+
+            foreach ( (array) $args['fields'] as $name => $field ) {
+              echo apply_filters( "comment_form_field_{$name}", $field ) . "\n";
+            }
+
+            do_action( 'comment_form_after_fields' );
+          endif;
+
+          echo apply_filters( 'comment_form_field_comment', $args['comment_field'] );
+          echo $args['comment_notes_after']; ?>
+
+          <p class="form-submit">
+            <button class="btn btn-default" name="submit" type="submit" id="<?php echo esc_attr( $args['id_submit'] ); ?>"><?php echo esc_html( $args['label_submit'] ); ?></button>
+            <?php comment_id_fields( $thing_id ); ?>
+          </p>
+
+          <?php do_action( 'comment_form', $thing_id ); ?>
+        </form>
+      <?php endif; ?>
 
     </div><!-- #respond -->
     <?php do_action( 'comment_form_after' );
@@ -518,71 +502,75 @@ function flint_comment_form( $args = array(), $thing_id = null ) {
  * @return void|false|string Link to show comment form, if successful. False, if comments are closed.
  */
 function flint_get_comment_reply_link( $args = array(), $_comment = null, $thing = null ) {
-	$defaults = array(
-		'add_below'     => 'comment',
-		'respond_id'    => 'respond',
-		'reply_text'    => __( 'Reply', 'flint' ),
-		'reply_to_text' => __( 'Reply to %s', 'flint' ),
-		'login_text'    => __( 'Log in to Reply', 'flint' ),
-		'depth'         => 0,
-		'before'        => '',
-		'after'         => '',
-	);
+  $defaults = array(
+    'add_below' => 'comment',
+    'respond_id' => 'respond',
+    'reply_text' => __( 'Reply', 'flint' ),
+    'reply_to_text' => __( 'Reply to %s', 'flint' ),
+    'login_text' => __( 'Log in to Reply', 'flint' ),
+    'depth' => 0,
+    'before' => '',
+    'after' => '',
+  );
 
-	$args = wp_parse_args( $args, $defaults );
+  $args = wp_parse_args( $args, $defaults );
 
-	if ( 0 == $args['depth'] || $args['max_depth'] <= $args['depth'] ) {
-		return;
-	}
+  if ( 0 == $args['depth'] || $args['max_depth'] <= $args['depth'] ) {
+    return;
+  }
 
-	$_comment = get_comment( $_comment );
+  $_comment = get_comment( $_comment );
 
-	if ( empty( $thing ) ) {
-		$thing = $_comment->comment_post_ID;
-	}
+  if ( empty( $thing ) ) {
+    $thing = $_comment->comment_post_ID;
+  }
 
-	$thing = get_post( $thing );
+  $thing = get_post( $thing );
 
-	if ( ! comments_open( $thing->ID ) ) {
-		return false;
-	}
+  if ( ! comments_open( $thing->ID ) ) {
+    return false;
+  }
 
-	/**
-	 * Filter the comment reply link arguments.
-	 *
-	 * @param array   $args     Comment reply link arguments. See {@see get_comment_reply_link()}
-	 *                          for more information on accepted arguments.
-	 * @param object  $_comment The object of the comment being replied to.
-	 * @param WP_Post $thing    The {@see WP_Post} object.
-	 */
-	$args = apply_filters( 'comment_reply_link_args', $args, $_comment, $thing );
+  /**
+   * Filter the comment reply link arguments.
+   *
+   * @param array   $args     Comment reply link arguments. See {@see get_comment_reply_link()}
+   *                          for more information on accepted arguments.
+   * @param object  $_comment The object of the comment being replied to.
+   * @param WP_Post $thing    The {@see WP_Post} object.
+   */
+  $args = apply_filters( 'comment_reply_link_args', $args, $_comment, $thing );
 
-	if ( get_option( 'comment_registration' ) && ! is_user_logged_in() ) {
-		$link = sprintf( '<a rel="nofollow" class="comment-reply-login" href="%s">%s</a>',
-			esc_url( wp_login_url( get_permalink() ) ),
-			$args['login_text']
-		);
-	} else {
-		$onclick = sprintf( 'return addComment.moveForm( "%1$s-%2$s", "%2$s", "%3$s", "%4$s" )',
-			$args['add_below'], $_comment->comment_ID, $args['respond_id'], $thing->ID
-		);
+  if ( get_option( 'comment_registration' ) && ! is_user_logged_in() ) {
+    $link = sprintf(
+      '<a rel="nofollow" class="comment-reply-login" href="%s">%s</a>',
+      esc_url( wp_login_url( get_permalink() ) ),
+      $args['login_text']
+    );
+  } else {
+    $onclick = sprintf(
+      'return addComment.moveForm( "%1$s-%2$s", "%2$s", "%3$s", "%4$s" )',
+      $args['add_below'], $_comment->comment_ID, $args['respond_id'], $thing->ID
+    );
 
-		$link = sprintf( "<a rel='nofollow' class='comment-reply-link btn btn-primary btn-sm' href='%s' onclick='%s' aria-label='%s'>%s</a>",
-			esc_url( add_query_arg( 'replytocom', $_comment->comment_ID, get_permalink( $thing->ID ) ) ) . '#' . $args['respond_id'],
-			$onclick,
-			esc_attr( sprintf( $args['reply_to_text'], $_comment->comment_author ) ),
-			$args['reply_text']
-		);
-	}
-	/**
-	 * Filter the comment reply link.
-	 *
-	 * @param string  $link     The HTML markup for the comment reply link.
-	 * @param array   $args     An array of arguments overriding the defaults.
-	 * @param object  $_comment The object of the comment being replied.
-	 * @param WP_Post $thing    The WP_Post object.
-	 */
-	return apply_filters( 'comment_reply_link', $args['before'] . $link . $args['after'], $args, $_comment, $thing );
+    $link = sprintf(
+      "<a rel='nofollow' class='comment-reply-link btn btn-primary btn-sm' href='%s' onclick='%s' aria-label='%s'>%s</a>",
+      esc_url( add_query_arg( 'replytocom', $_comment->comment_ID, get_permalink( $thing->ID ) ) ) . '#' . $args['respond_id'],
+      $onclick,
+      esc_attr( sprintf( $args['reply_to_text'], $_comment->comment_author ) ),
+      $args['reply_text']
+    );
+  }
+
+  /**
+   * Filter the comment reply link.
+   *
+   * @param string  $link     The HTML markup for the comment reply link.
+   * @param array   $args     An array of arguments overriding the defaults.
+   * @param object  $_comment The object of the comment being replied.
+   * @param WP_Post $thing    The WP_Post object.
+   */
+  return apply_filters( 'comment_reply_link', $args['before'] . $link . $args['after'], $args, $_comment, $thing );
 }
 
 /**
@@ -598,7 +586,7 @@ function flint_get_comment_reply_link( $args = array(), $_comment = null, $thing
  *                              Default current post.
  */
 function flint_comment_reply_link( $args = array(), $_comment = null, $thing = null ) {
-	echo flint_get_comment_reply_link( $args, $_comment, $thing );
+  echo flint_get_comment_reply_link( $args, $_comment, $thing );
 }
 
 /**
@@ -617,14 +605,14 @@ function flint_get_sidebar( $slug, $minimal = false ) {
 
   switch ( $minimal ) {
     case true:
-      if ( $slug === $options['minimal_widget_area'] ) { flint_get_sidebar( $slug, false ); }
+      if ( $slug === $options['minimal_widget_area'] ) {
+        flint_get_sidebar( $slug, false );
+      }
       break;
     case false:
       do_action( 'get_sidebar', $slug );
-
-      $templates   = array();
+      $templates = array();
       $templates[] = "widgets/area-{$slug}.php";
-
       locate_template( $templates, true, false );
       break;
   }
@@ -638,7 +626,8 @@ function flint_get_sidebar( $slug, $minimal = false ) {
  *
  * @param string $slug Sidebar name, id or number to check.
  *
- * @return bool true if the sidebar is in use, false otherwise.
+ * @return bool true
+if the sidebar is in use, false otherwise.
  */
 function flint_is_active_sidebar( $slug ) {
   $options = flint_options();
@@ -657,7 +646,9 @@ function flint_is_active_sidebar( $slug ) {
  */
 function flint_theme_version() {
   $theme = wp_get_theme();
+  // @codingStandardsIgnoreStart
   return $theme->Version;
+  // @codingStandardsIgnoreEnd
 }
 
 /**
@@ -669,13 +660,16 @@ function flint_theme_version() {
  */
 function flint_breadcrumbs( $template = 'default' ) {
   $options = flint_options();
-
   switch ( $template ) {
     case 'clear':
-      if ( 'breadcrumbs' === $options['clear_nav'] ) { flint_breadcrumbs(); }
+      if ( 'breadcrumbs' === $options['clear_nav'] ) {
+        flint_breadcrumbs();
+      }
       break;
     case 'minimal':
-      if ( 'breadcrumbs' === $options['minimal_nav'] ) { flint_breadcrumbs(); }
+      if ( 'breadcrumbs' === $options['minimal_nav'] ) {
+        flint_breadcrumbs();
+      }
       break;
     default:
       global $post;
@@ -683,7 +677,11 @@ function flint_breadcrumbs( $template = 'default' ) {
       $anc = array_reverse( $anc );
       echo '<ol class="breadcrumb">';
       echo '<li><a href="' . get_home_url() . '">Home</a></li>';
-      foreach ( $anc as $ancestor ) { echo '<li><a href="' . get_permalink( $ancestor ) . '">' . get_the_title( $ancestor ) . '</a></li>'; }
+
+      foreach ( $anc as $ancestor ) {
+        echo '<li><a href="' . get_permalink( $ancestor ) . '">' . get_the_title( $ancestor ) . '</a></li>';
+      }
+
       echo '<li class="active">' . get_the_title() . '</li>';
       echo '</ol>';
       break;
@@ -697,7 +695,6 @@ function flint_breadcrumbs( $template = 'default' ) {
  */
 function flint_custom_footer() {
   $options = flint_options();
-
   $footer = stripslashes( $options['footer_content'] );
 
   $patterns = array(
@@ -710,14 +707,15 @@ function flint_custom_footer() {
     '/{fax}/',
     '/{address}/',
   );
+
   $replacements = array(
     get_bloginfo( 'name' ),
     get_bloginfo( 'description' ),
     date( 'Y' ),
-    '<span itemprop="name">'      . $options['org'] . '</span>',
-    '<span itemprop="telephone">' . $options['org_tel']     . '</span>',
-    '<span itemprop="email">'     . $options['org_email']   . '</span>',
-    '<span itemprop="faxNumber">' . $options['org_fax']     . '</span>',
+    '<span itemprop="name">' . $options['org'] . '</span>',
+    '<span itemprop="telephone">' . $options['org_tel'] . '</span>',
+    '<span itemprop="email">' . $options['org_email'] . '</span>',
+    '<span itemprop="faxNumber">' . $options['org_fax'] . '</span>',
     '<span id="address" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><span id="street" itemprop="streetAddress">' . $options['org_address'] . '</span><span class="comma">, </span><span id="locality" itemprop="addressLocality">' . $options['org_locality'] . '</span> <span id="postal-code" itemprop="postalCode">' . $options['org_postal_code'] . '</span></span>',
   );
 
@@ -735,80 +733,83 @@ function flint_custom_footer() {
 function flint_options_css() {
   $options = flint_options();
   $colors = flint_options_colors();
-
   $body = 'body {';
   $body .= 'background-color: #' . $colors['body_bg'] . '; font-family: ';
 
   switch ( $options['font_family_base'] ) {
+    case 'Native':
+      $body .= '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, ';
+      $body .= 'Cantarell, "Helvetica Neue", sans-serif; font-weight: normal; }';
+      break;
     case 'Open Sans':
-      $body .= '"Open Sans",         sans-serif; font-weight: 300; }';
+      $body .= '"Open Sans", sans-serif; font-weight: 400; }';
       break;
     case 'Oswald':
-      $body .= '"Oswald",            sans-serif; font-weight: 300; }';
+      $body .= '"Oswald", sans-serif; font-weight: 400; }';
       break;
     case 'Roboto':
-      $body .= '"Roboto",            sans-serif; font-weight: 300; }';
+      $body .= '"Roboto", sans-serif; font-weight: 400; }';
       break;
     case 'Droid Sans':
-      $body .= '"Droid Sans",        sans-serif; font-weight: 400; }';
+      $body .= '"Droid Sans", sans-serif; font-weight: 400; }';
       break;
     case 'Lato':
-      $body .= '"Lato",              sans-serif; font-weight: 300; }';
+      $body .= '"Lato", sans-serif; font-weight: 400; }';
       break;
     case 'Nova Square':
-      $body .= '"Nova Square",       sans-serif; font-weight: 400; }';
+      $body .= '"Nova Square", sans-serif; font-weight: 400; }';
       break;
     case 'Strait':
-      $body .= '"Strait",            sans-serif; font-weight: 400; }';
+      $body .= '"Strait", sans-serif; font-weight: 400; }';
       break;
     case 'Yanone Kaffeesatz':
-      $body .= '"Yanone Kaffeesatz", sans-serif; font-weight: 300; }';
+      $body .= '"Yanone Kaffeesatz", sans-serif; font-weight: 400; }';
       break;
   }
 
   $headings = 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .navbar-brand { font-family: ';
 
   switch ( $options['headings_font_family'] ) {
+    case 'Native':
+      $headings .= '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, ';
+      $headings .= 'Cantarell, "Helvetica Neue", sans-serif; font-weight: 600; }';
+      break;
     case 'Open Sans':
-      $headings .= '"Open Sans",         sans-serif; font-weight: 400;}';
+      $headings .= '"Open Sans", sans-serif; font-weight: 400;}';
       break;
     case 'Oswald':
-      $headings .= '"Oswald",            sans-serif; font-weight: 400;}';
+      $headings .= '"Oswald", sans-serif; font-weight: 400;}';
       break;
     case 'Roboto':
-      $headings .= '"Roboto",            sans-serif; font-weight: 400;}';
+      $headings .= '"Roboto", sans-serif; font-weight: 400;}';
       break;
     case 'Droid Sans':
-      $headings .= '"Droid Sans",        sans-serif; font-weight: 400;}';
+      $headings .= '"Droid Sans", sans-serif; font-weight: 400;}';
       break;
     case 'Lato':
-      $headings .= '"Lato",              sans-serif; font-weight: 400;}';
+      $headings .= '"Lato", sans-serif; font-weight: 400;}';
       break;
     case 'Nova Square':
-      $headings .= '"Nova Square",       sans-serif; font-weight: 400; }';
+      $headings .= '"Nova Square", sans-serif; font-weight: 400; }';
       break;
     case 'Strait':
-      $headings .= '"Strait",            sans-serif; font-weight: 400;}';
+      $headings .= '"Strait", sans-serif; font-weight: 400;}';
       break;
     case 'Yanone Kaffeesatz':
       $headings .= '"Yanone Kaffeesatz", sans-serif; font-weight: 400;}';
       break;
   }
+
   echo '<style type="text/css">';
   echo $body;
   echo $headings;
   echo 'a {color:' . $colors['link_color'] . ';}';
   echo 'a:hover, a:focus {color:' . $colors['link_hover_color'] . ';}';
   echo 'blockquote {border-left-color: ' . $colors['blockquote_border_color'] . ';}';
-  echo '.fill { background-color: ' . $colors['fill'] . '; border-color: ' . $colors['fill_darker'] . '; color: ' . $colors['fill_color'] . '; }';
-  echo '.navbar-inverse .navbar-nav > li > a, .fill a, .fill-light a { color: ' . $colors['fill_link_color'] . '; }';
-  echo '.fill a:hover, .fill-light a:hover { color: ' . $colors['fill_color'] . '; }';
-  echo '.site-branding a, .site-branding a:hover { color: ' . $colors['fill_color'] . '; }';
-  echo '.navbar-inverse .navbar-nav > .dropdown > a .caret { border-top-color: ' . $colors['fill_link_color'] . '; border-bottom-color: ' . $colors['fill_link_color'] . '; }';
-  echo '.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus { color: ' . $colors['fill_color'] . '; background-color: ' . $colors['fill_darker'] . ';
-}';
-  echo '.navbar-brand { color: ' . $colors['fill_color'] . '!important; }';
-  echo '.fill-light { background: ' . $colors['fill_light'] . '; color: ' . $colors['fill_color'] . '; }';
+  echo '.fill { background-color: ' . $colors['fill'] . '; border-color: ' . $colors['fill_darker'] . '; }';
+  echo '.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus { background-color: ' . $colors['fill_darker'] . ';
+  }';
+  echo '.fill-light { background: ' . $colors['fill_light'] . '; }';
   echo '</style>';
 }
 
@@ -825,6 +826,7 @@ function flint_options_css() {
 function flint_body_class() {
   global $post;
   $options = flint_options();
+
   if ( ! empty( $post->ID ) ) {
     $template = get_post_meta( $post->ID, '_wp_page_template', true );
 
@@ -876,7 +878,7 @@ function flint_the_post_thumbnail( $size = 'post-thumbnail', $attr = '' ) {
  */
 function flint_get_the_post_thumbnail( $size = 'post-thumbnail', $attr = '' ) {
   $options = flint_options();
-  $type    = get_post_type();
+  $type = get_post_type();
 
   switch ( $type ) {
     case 'post':
@@ -888,7 +890,6 @@ function flint_get_the_post_thumbnail( $size = 'post-thumbnail', $attr = '' ) {
         }
       }
       break;
-
     case 'page':
       if ( 'never' !== $options['page_featured_image'] ) {
         if ( 'archives' !== $options['page_featured_image'] || is_archive() ) {
@@ -898,7 +899,6 @@ function flint_get_the_post_thumbnail( $size = 'post-thumbnail', $attr = '' ) {
         }
       }
       break;
-
     default:
       if ( has_post_thumbnail() ) {
         return get_the_post_thumbnail( null, $size, $attr );
@@ -922,6 +922,7 @@ function flint_get_the_post_thumbnail( $size = 'post-thumbnail', $attr = '' ) {
  */
 function flint_has_category( $category = '', $thing = null ) {
   global $post;
+
   if ( ! $thing ) {
     $thing = $post;
   }
@@ -930,7 +931,7 @@ function flint_has_category( $category = '', $thing = null ) {
     $cats = '';
 
     foreach ( get_the_category() as $cat ) {
-      if ( $cat->cat_name != 'Uncategorized' ) {
+      if ( 'Uncategorized' != $cat->cat_name ) {
         $cats .= $cat->cat_name;
       }
     }
@@ -967,7 +968,6 @@ function flint_has_category( $category = '', $thing = null ) {
 function flint_content_class( $class = '' ) {
   global $post;
   $options = flint_options();
-
   $class .= ! empty( $class ) ? ' site-content col-xs-12' : 'site-content col-xs-12';
 
   if ( is_active_sidebar( 'left' ) || is_active_sidebar( 'right' ) ) {
@@ -1034,27 +1034,21 @@ function flint_post_width() {
         case 'templates/clear.php':
           $post_width = $options['clear_width'];
           break;
-
         case 'templates/minimal.php':
           $post_width = $options['minimal_width'];
           break;
-
         case 'templates/slim.php':
           $post_width = 'slim';
           break;
-
         case 'templates/narrow.php':
           $post_width = 'narrow';
           break;
-
         case 'templates/full.php':
           $post_width = 'full';
           break;
-
         case 'templates/wide.php':
           $post_width = 'wide';
           break;
-
         default:
           $post_width = $options['page_default_width'];
       }
@@ -1065,15 +1059,12 @@ function flint_post_width() {
         case 'aside':
           $post_width = 'wide';
           break;
-
         case 'link':
           $post_width = 'wide';
           break;
-
         case 'status':
           $post_width = 'wide';
           break;
-
         default:
           $post_width = $options['post_default_width'];
           break;
@@ -1100,15 +1091,12 @@ function flint_post_width_class() {
     case 'slim':
       return 'col-xs-12 col-sm-8 col-md-4';
       break;
-
     case 'narrow':
       return 'col-xs-12 col-sm-8 col-md-6';
       break;
-
     case 'full':
       return 'col-xs-12 col-sm-10 col-md-8';
       break;
-
     case 'wide':
       return 'col-xs-12';
       break;
@@ -1125,7 +1113,7 @@ function flint_post_width_class() {
 function flint_post_margin( $thumbnail = false ) {
   $post_width = flint_post_width();
   $format = get_post_format();
-  $output     = '';
+  $output = '';
 
   if ( true === $thumbnail && ! is_active_sidebar( 'left' ) && ! is_active_sidebar( 'right' ) ) {
     switch ( $post_width ) {
@@ -1133,37 +1121,42 @@ function flint_post_margin( $thumbnail = false ) {
         $output .= '<div class="hidden-xs hidden-sm col-md-2"></div>';
         $output .= '<div class="col-xs-12 col-sm-2 col-md-2">';
         $output .= flint_get_the_post_thumbnail();
+
         if ( ! is_single() && 'gallery' === $format ) {
           $output .= '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
         }
+
         $output .= '</div>';
         break;
-
       case 'narrow':
         $output .= '<div class="hidden-xs hidden-sm col-md-1"></div>';
         $output .= '<div class="col-xs-12 col-sm-2 col-md-2">';
         $output .= flint_get_the_post_thumbnail();
+
         if ( ! is_single() && 'gallery' === $format ) {
           $output .= '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
         }
+
         $output .= '</div>';
         break;
-
       case 'wide':
         $output .= '<div class="col-xs-12 col-sm-12 hidden-md hidden-lg">';
         $output .= flint_get_the_post_thumbnail();
+
         if ( ! is_single() && 'gallery' === $format ) {
           $output .= '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
         }
+
         $output .= '</div>';
         break;
-
       default:
         $output .= '<div class="col-xs-12 col-sm-2 col-md-2">';
         $output .= flint_get_the_post_thumbnail();
+
         if ( ! is_single() && 'gallery' === $format ) {
           $output .= '<a class="btn btn-info btn-block hidden-xs" href="' . get_permalink() . '">View gallery</a>';
         }
+
         $output .= '</div>';
         break;
     }
@@ -1174,14 +1167,11 @@ function flint_post_margin( $thumbnail = false ) {
       case 'slim':
         return '<div class="hidden-xs col-sm-2 col-md-4"></div>';
         break;
-
       case 'narrow':
         return '<div class="hidden-xs col-sm-2 col-md-3"></div>';
         break;
-
       case 'wide':
         break;
-
       default:
         return '<div class="hidden-xs col-sm-1 col-md-2"></div>';
         break;
@@ -1202,24 +1192,24 @@ function flint_post_margin( $thumbnail = false ) {
  * @param string $after  Optional. Display after edit link.
  */
 function flint_edit_comment_link( $text = null, $before = '', $after = '' ) {
-	global $comment;
+  global $comment;
 
-	if ( ! current_user_can( 'edit_comment', $comment->comment_ID ) ) {
-		return;
-	}
+  if ( ! current_user_can( 'edit_comment', $comment->comment_ID ) ) {
+    return;
+  }
 
-	if ( null === $text ) {
-		$text = __( 'Edit This', 'flint' );
-	}
+  if ( null === $text ) {
+    $text = __( 'Edit Comment', 'flint' );
+  }
 
-	$link = '<a class="comment-edit-link btn btn-default btn-sm" href="' . get_edit_comment_link( $comment->comment_ID ) . '">' . $text . '</a>';
+  $link = '<a class="comment-edit-link btn btn-default btn-sm" href="' . get_edit_comment_link( $comment->comment_ID ) . '">' . $text . '</a>';
 
-	/**
-	 * Filter the comment edit link anchor tag.
-	 *
-	 * @param string $link       Anchor tag for the edit link.
-	 * @param int    $comment_id Comment ID.
-	 * @param string $text       Anchor text.
-	 */
-	echo $before . apply_filters( 'edit_comment_link', $link, $comment->comment_ID, $text ) . $after;
+  /**
+   * Filter the comment edit link anchor tag.
+   *
+   * @param string $link       Anchor tag for the edit link.
+   * @param int    $comment_id Comment ID.
+   * @param string $text       Anchor text.
+   */
+  echo $before . apply_filters( 'edit_comment_link', $link, $comment->comment_ID, $text ) . $after;
 }

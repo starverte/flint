@@ -6,6 +6,9 @@
  * @since 1.1.0
  */
 
+global $wp_post_types;
+$type = get_post_type();
+$_type = $wp_post_types[ $type ];
 ?>
 
   <div class="row">
@@ -14,18 +17,27 @@
     </div>
     <article id="post-<?php the_ID(); ?>" <?php post_class( 'col-xs-12 col-sm-10 col-md-8' ); ?>>
       <header class="entry-header">
-        <?php $type = get_post_type(); ?>
-        <?php do_action( 'flint_open_entry_header_'.$type ); ?>
+        <?php do_action( 'flint_open_entry_header_' . $type ); ?>
 
-        <h1 class="entry-title"><?php if ( is_singular() ) { echo the_title();
-} else { echo '<a href="' . get_permalink() .'" rel="bookmark">' . get_the_title() . '</a>'; } ?></h1>
-        <?php if ( current_user_can( 'edit_posts' ) ) { ?><a class="btn btn-default btn-sm btn-edit hidden-xs" href="<?php echo get_edit_post_link(); ?>">Edit</a><?php } ?>
+        <h1 class="entry-title"><?php
+          if ( is_singular() ) {
+            echo the_title();
+          } else {
+            echo '<a href="' . get_permalink() . '" rel="bookmark">' . get_the_title() . '</a>';
+          } ?></h1>
+        <?php edit_post_link(
+            sprintf( __( 'Edit %s', 'flint' ),  $_type->labels->singular_name ),
+            '',
+            '',
+            0,
+            'btn btn-default btn-sm btn-edit hidden-xs'
+          ); ?>
 
         <div class="entry-meta">
-          <?php do_action( 'flint_entry_meta_above_'.$type ); ?>
+          <?php do_action( 'flint_entry_meta_above_' . $type ); ?>
         </div><!-- .entry-meta -->
 
-        <?php do_action( 'flint_close_entry_header_'.$type ); ?>
+        <?php do_action( 'flint_close_entry_header_' . $type ); ?>
 
       </header><!-- .entry-header -->
 
