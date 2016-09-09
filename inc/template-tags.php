@@ -192,6 +192,8 @@ add_action( 'save_post', 'flint_category_transient_flusher' );
  * @return string Formatted output in HTML.
  */
 function flint_link_pages( $args = '' ) {
+  global $page, $numpages, $multipage, $more, $pagenow;
+
   $defaults = array(
     'before' => '<p>',
     'after' => '</p>',
@@ -206,16 +208,14 @@ function flint_link_pages( $args = '' ) {
 
   $r = wp_parse_args( $args, $defaults );
   $r = apply_filters( 'wp_link_pages_args', $r );
-  extract( $r, EXTR_SKIP );
-  global $page, $numpages, $multipage, $more, $pagenow;
   $output = '';
 
   if ( $multipage ) {
-    if ( 'number' === $next_or_number ) {
-      $output .= $before;
+    if ( 'number' === $r['next_or_number'] ) {
+      $output .= $r['before'];
 
       for ( $i = 1; $i < ($numpages + 1); $i = $i + 1 ) {
-        $j = str_replace( '%',$i,$pagelink );
+        $j = str_replace( '%',$i,$r['pagelink'] );
         $output .= ' ';
 
         if ( ( $i != $page ) || ( ( ! $more ) && ( 1 == $page ) ) ) {
@@ -224,33 +224,33 @@ function flint_link_pages( $args = '' ) {
           $output .= '<li class="active"><a>';
         }
 
-        $output .= $link_before . $j . $link_after . '</a></li>';
+        $output .= $r['link_before'] . $j . $r['link_after'] . '</a></li>';
       }
 
-      $output .= $after;
+      $output .= $r['after'];
     } else {
       if ( $more ) {
-        $output .= $before;
+        $output .= $r['before'];
         $i = $page - 1;
 
         if ( $i && $more ) {
           $output .= _wp_link_page( $i );
-          $output .= $link_before . $previouspagelink . $link_after . '</a>';
+          $output .= $r['link_before'] . $r['previouspagelink'] . $r['link_after'] . '</a>';
         }
 
         $i = $page + 1;
 
         if ( $i <= $numpages && $more ) {
           $output .= _wp_link_page( $i );
-          $output .= $link_before . $nextpagelink . $link_after . '</a>';
+          $output .= $r['link_before'] . $r['nextpagelink'] . $r['link_after'] . '</a>';
         }
 
-        $output .= $after;
+        $output .= $r['after'];
       }
     }
   }
 
-  if ( $echo ) {
+  if ( $r['echo'] ) {
     echo $output;
   }
 
