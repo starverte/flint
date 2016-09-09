@@ -43,3 +43,6 @@ notifications:
   slack:
     secure: mS0AtQDBMEP2FaA67SxNkLetpcdnyJNKfW9OFT8Zn6Q+fW7k26+e2lYbzPLRugNjU/4ERskQVvfMmlOFzxP3mMZNQVGpSiloYwRwMdjw8duxCDa32mu//q2rP6nKoBR/tWu9SiX0YD39BmBBaXf8XA/mQp0oQXEPYtK7U8p2sFs=
 sudo: false
+addons:
+  code_climate:
+    repo_token: ddb48cd255e12e3bc1325b5b70d0e8ada05cbc41ea22b64359fe2ce0b3e9d76f
