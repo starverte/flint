@@ -807,7 +807,6 @@ function flint_options_css() {
   echo 'a:hover, a:focus {color:' . $colors['link_hover_color'] . ';}';
   echo 'blockquote {border-left-color: ' . $colors['blockquote_border_color'] . ';}';
   echo '.fill { background-color: ' . $colors['fill'] . '; border-color: ' . $colors['fill_darker'] . '; }';
-  echo '.navbar-inverse .navbar-nav > .dropdown > a .caret { border-top-color: ' . $colors['fill_darker'] . '; border-bottom-color: ' . $colors['fill_darker'] . '; }';
   echo '.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus { background-color: ' . $colors['fill_darker'] . ';
   }';
   echo '.fill-light { background: ' . $colors['fill_light'] . '; }';

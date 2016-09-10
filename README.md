@@ -1,4 +1,4 @@
-Flint 1.5.0 [![Build Status](https://travis-ci.org/starverte/flint.svg?branch=master)](https://travis-ci.org/starverte/flint) [![Known Vulnerabilities](https://snyk.io/test/github/starverte/flint/badge.svg)](https://snyk.io/test/github/starverte/flint)
+Flint 1.6.1 [![Build Status](https://travis-ci.org/starverte/flint.svg?branch=master)](https://travis-ci.org/starverte/flint) [![Known Vulnerabilities](https://snyk.io/test/github/starverte/flint/badge.svg)](https://snyk.io/test/github/starverte/flint)
 =====
 
 A clean, responsive theme built on Matchstix with Bootstrap 3. Make it your own with various customization options. No programming required.
@@ -14,13 +14,19 @@ Licensed under the GNU General Public License v2.0, http://www.gnu.org/licenses/
 ```
 
 ```
+Flint uses Matchstix https://matchstix.io
+(C) 2015-2016 Star Verte LLC
+Licensed under the GNU General Public License v3.0, http://www.gnu.org/licenses/gpl.html
+```
+
+```
 Flint uses Bootstrap http://getbootstrap.com/
-(C) 2011-2015 Twitter, Inc
+(C) 2011-2016 Twitter, Inc
 Licensed under the MIT License, http://opensource.org/licenses/MIT
 ```
 
 ```
-Flint Copyright 2013-2015 Star Verte LLC (email : dev@starverte.com)
+Flint Copyright 2013-2016 Star Verte LLC (email : dev@starverte.com)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
