@@ -1,0 +1,49 @@
+# Enforce Unix newlines
+*.css   text eol=lf
+*.html  text eol=lf
+*.js    text eol=lf
+*.json  text eol=lf
+*.less  text eol=lf
+*.md    text eol=lf
+*.svg   text eol=lf
+*.yml   text eol=lf
+# Don't diff or textually merge source maps
+*.map   binary
+
+# Files to exclude when creating archive.
+*.git export-ignore
+*.gitignore export-ignore
+*.gitattributes export-ignore
+.codeclimate.yml export-ignore
+.csscomb.json export-ignore
+.csslintrc export-ignore
+.editorconfig export-ignore
+.eslintignore export-ignore
+.eslintrc export-ignore
+.phpcs.rules.xml export-ignore
+.snyk export-ignore
+.travis.yml export-ignore
+#CHANGELOG.md export-ignore
+Gruntfile.js export-ignore
+#LICENSE.md export-ignore
+#README.md export-ignore
+composer.json export-ignore
+package.json export-ignore
+
+# Don't diff Bootstrap files
+css/bootstrap-theme.css binary
+css/bootstrap-theme.css.map binary
+css/bootstrap-theme.min.css binary
+css/bootstrap-theme.min.css.map binary
+css/bootstrap.css binary
+css/bootstrap.css.map binary
+css/bootstrap.min.css binary
+css/bootstrap.min.css.map binary
+fonts/glyphicons-halflings-regular.eot binary
+fonts/glyphicons-halflings-regular.svg binary
+fonts/glyphicons-halflings-regular.ttf binary
+fonts/glyphicons-halflings-regular.woff binary
+fonts/glyphicons-halflings-regular.woff2 binary
+js/bootstrap.js binary
+js/bootstrap.min.js binary
+
