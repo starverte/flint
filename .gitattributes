@@ -30,3 +30,20 @@ Gruntfile.js export-ignore
 composer.json export-ignore
 package.json export-ignore
 
+# Don't diff Bootstrap files
+css/bootstrap-theme.css binary
+css/bootstrap-theme.css.map binary
+css/bootstrap-theme.min.css binary
+css/bootstrap-theme.min.css.map binary
+css/bootstrap.css binary
+css/bootstrap.css.map binary
+css/bootstrap.min.css binary
+css/bootstrap.min.css.map binary
+fonts/glyphicons-halflings-regular.eot binary
+fonts/glyphicons-halflings-regular.svg binary
+fonts/glyphicons-halflings-regular.ttf binary
+fonts/glyphicons-halflings-regular.woff binary
+fonts/glyphicons-halflings-regular.woff2 binary
+js/bootstrap.js binary
+js/bootstrap.min.js binary
+

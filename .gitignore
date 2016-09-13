@@ -20,9 +20,6 @@ node_modules
 tests
 vendor
 
-# Bootstrap
-css/bootstrap*
-fonts/glyphicons*
-js/bootstrap*
+# Files to ignore
 js/npm.js
 
