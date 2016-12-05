@@ -10,7 +10,7 @@
 
 ?>
 
-<footer id="colophon" class="fill site-footer" role="contentinfo">
+<footer id="colophon" class="fill site-footer">
   <div class="site-info container">
     <div class="row">
       <div id="custom-footer" class="col-xs-12 col-md-6">
