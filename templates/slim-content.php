@@ -20,12 +20,12 @@ $_type = $wp_post_types[ $type ];
       <header class="entry-header">
         <?php do_action( 'flint_open_entry_header_' . $type ); ?>
 
-        <h1 class="entry-title"><?php
+        <h2 class="entry-title"><?php
           if ( is_singular() ) {
             echo the_title();
           } else {
             echo '<a href="' . get_permalink() . '" rel="bookmark">' . get_the_title() . '</a>';
-          } ?></h1>
+          } ?></h2>
         <?php edit_post_link(
             sprintf( __( 'Edit %s', 'flint' ),  $_type->labels->singular_name ),
             '',

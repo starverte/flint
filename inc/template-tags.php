@@ -40,7 +40,7 @@ function flint_content_nav( $nav_id ) {
   }
   $nav_class = ( is_single() ) ? 'navigation-post' : 'navigation-paging';
   ?><nav id="<?php echo esc_attr( $nav_id ); ?>" class="<?php echo esc_attr( $nav_class ); ?>">
-  <h1 class="screen-reader-text"><?php esc_html_e( 'Post navigation', 'flint' ); ?></h1>
+  <h2 class="screen-reader-text"><?php esc_html_e( 'Post navigation', 'flint' ); ?></h2>
 
   <?php if ( is_single() ) : ?>
     <ul class="pager">
