@@ -39,8 +39,8 @@ function flint_content_nav( $nav_id ) {
     return;
   }
   $nav_class = ( is_single() ) ? 'navigation-post' : 'navigation-paging';
-  ?><nav role="navigation" id="<?php echo esc_attr( $nav_id ); ?>" class="<?php echo esc_attr( $nav_class ); ?>">
-  <h1 class="screen-reader-text"><?php esc_html_e( 'Post navigation', 'flint' ); ?></h1>
+  ?><nav id="<?php echo esc_attr( $nav_id ); ?>" class="<?php echo esc_attr( $nav_class ); ?>">
+  <h2 class="screen-reader-text"><?php esc_html_e( 'Post navigation', 'flint' ); ?></h2>
 
   <?php if ( is_single() ) : ?>
     <ul class="pager">
@@ -378,7 +378,7 @@ function flint_get_the_content( $more_link_text = 'Read more', $strip_teaser = f
       $output .= '<span id="more-' . $thing->ID . '"></span>' . $content[1];
     } else {
       if ( ! empty( $more_link_text ) ) {
-        $output .= apply_filters( 'the_content_more_link', $args['more_before'] . get_permalink() . "#more-{$thing->ID}\"" . 'class="more-link ' . $args['more_class'] . '">' . $more_link_text . $args['more_after'] );
+        $output .= apply_filters( 'the_content_more_link', $args['more_before'] . get_permalink() . "#more-{$thing->ID}\" " . 'class="more-link ' . $args['more_class'] . '">' . $more_link_text . $args['more_after'] );
       }
 
       $output = force_balance_tags( $output );
@@ -415,7 +415,7 @@ function flint_comment_form( $args = array(), $thing_id = null ) {
   $user = wp_get_current_user();
   $user_identity = $user->exists() ? $user->display_name : '';
   $req = get_option( 'require_name_email' );
-  $aria_req = ( $req ? " aria-required='true' required" : '' );
+  $aria_req = ( $req ? ' required' : '' );
 
   $fields = array(
     'author' => '<p class="comment-form-author"><input class="form-control required" id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" ' . $aria_req . ' placeholder="Name*"></p>',

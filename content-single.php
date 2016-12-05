@@ -17,7 +17,7 @@
       <?php $type = get_post_type(); ?>
       <?php do_action( 'flint_open_entry_header_' . $type ); ?>
 
-      <h1 class="entry-title"><?php the_title(); ?></h1>
+      <h2 class="entry-title"><?php the_title(); ?></h2>
 
       <div class="entry-meta">
         <?php do_action( 'flint_entry_meta_above_' . $type ); ?>

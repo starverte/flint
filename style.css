@@ -271,10 +271,10 @@ body.minimal.minimal-breadcrumbs #top-pad {
   padding-top: 0;
   padding-bottom: 20px;
 }
-.site-branding h1 a {
+.site-title a {
   font-size: 56px;
 }
-.site-branding h2 {
+.site-description {
   font-size: 18px;
 }
 @media (min-width: 768px) {
@@ -346,10 +346,10 @@ a.more-link {
 .page-header {
   margin: 0;
 }
-.page-header h1 {
+.page-title {
   margin-top: 0;
 }
-.archive .page-header h1 {
+.archive .page-title {
   margin-top: 20px;
 }
 .pager a {
