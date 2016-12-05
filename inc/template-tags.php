@@ -415,7 +415,7 @@ function flint_comment_form( $args = array(), $thing_id = null ) {
   $user = wp_get_current_user();
   $user_identity = $user->exists() ? $user->display_name : '';
   $req = get_option( 'require_name_email' );
-  $aria_req = ( $req ? " required" : '' );
+  $aria_req = ( $req ? ' required' : '' );
 
   $fields = array(
     'author' => '<p class="comment-form-author"><input class="form-control required" id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" ' . $aria_req . ' placeholder="Name*"></p>',
