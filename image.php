@@ -36,7 +36,7 @@ get_header();
               <?php edit_post_link( __( 'Edit Post', 'flint' ), '<span class="sep"> | </span> <span class="edit-link">', '</span>' ); ?>
             </div><!-- .entry-meta -->
 
-            <nav role="navigation" id="image-navigation" class="navigation-image">
+            <nav id="image-navigation" class="navigation-image">
               <div class="nav-previous"><?php previous_image_link( false, __( '<span class="meta-nav">&larr;</span> Previous', 'flint' ) ); ?></div>
               <div class="nav-next"><?php next_image_link( false, __( 'Next <span class="meta-nav">&rarr;</span>', 'flint' ) ); ?></div>
             </nav><!-- #image-navigation -->

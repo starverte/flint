@@ -10,7 +10,7 @@
 
 ?>
 
-  <nav class="fill navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <nav class="fill navbar navbar-inverse navbar-fixed-top">
     <h1 class="screen-reader-text"><?php esc_html_e( 'Menu', 'flint' ); ?></h1>
     <div class="screen-reader-text skip-link"><a href="#content" title="<?php esc_attr_e( 'Skip to content', 'flint' ); ?>"><?php esc_html_e( 'Skip to content', 'flint' ); ?></a></div>
     <div class="container">
