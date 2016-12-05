@@ -378,7 +378,7 @@ function flint_get_the_content( $more_link_text = 'Read more', $strip_teaser = f
       $output .= '<span id="more-' . $thing->ID . '"></span>' . $content[1];
     } else {
       if ( ! empty( $more_link_text ) ) {
-        $output .= apply_filters( 'the_content_more_link', $args['more_before'] . get_permalink() . "#more-{$thing->ID}\"" . 'class="more-link ' . $args['more_class'] . '">' . $more_link_text . $args['more_after'] );
+        $output .= apply_filters( 'the_content_more_link', $args['more_before'] . get_permalink() . "#more-{$thing->ID}\" " . 'class="more-link ' . $args['more_class'] . '">' . $more_link_text . $args['more_after'] );
       }
 
       $output = force_balance_tags( $output );
